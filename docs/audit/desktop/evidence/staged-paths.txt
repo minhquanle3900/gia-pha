@@ -110,12 +110,13 @@ docs/audit/desktop/evidence/pwa-origin-outage-reload.txt
 docs/audit/desktop/evidence/pwa-origin-stopped.txt
 docs/audit/desktop/evidence/qr-payload.txt
 docs/audit/desktop/evidence/relationship-create.txt
-"docs/audit/desktop/evidence/rites-Nghi th\341\273\251c chu\341\272\251n b\341\273\213.txt"
-"docs/audit/desktop/evidence/rites-Phong t\341\273\245c 3 Mi\341\273\201n.txt"
-"docs/audit/desktop/evidence/rites-S\341\273\225 v\304\203n kh\341\272\245n.txt"
+docs/audit/desktop/evidence/rites-Nghi thức chuẩn bị.txt
+docs/audit/desktop/evidence/rites-Phong tục 3 Miền.txt
+docs/audit/desktop/evidence/rites-Sổ văn khấn.txt
 docs/audit/desktop/evidence/run-metadata.json
 docs/audit/desktop/evidence/settled-captures.json
 docs/audit/desktop/evidence/source-inventory.json
+docs/audit/desktop/evidence/staged-paths.txt
 docs/audit/desktop/evidence/static-control-inventory.json
 docs/audit/desktop/evidence/stats-overflow.json
 docs/audit/desktop/evidence/svg-download-path.txt
