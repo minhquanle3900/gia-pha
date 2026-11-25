@@ -54,6 +54,44 @@
   font-variant-numeric: tabular-nums;
 }
 
+.app-header-layout {
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+}
+
+.app-pwa-status:empty {
+  display: none;
+}
+
+.app-bottom-nav {
+  padding-inline: max(0.5rem, env(safe-area-inset-left, 0px)) max(0.5rem, env(safe-area-inset-right, 0px));
+  padding-bottom: max(0.375rem, env(safe-area-inset-bottom, 0px));
+}
+
+.app-main {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.app-content {
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+}
+
+.app-content > * {
+  min-inline-size: 0;
+}
+
+@media (min-width: 640px) {
+  .app-header-layout,
+  .app-content {
+    padding-inline: max(1.5rem, env(safe-area-inset-left, 0px)) max(1.5rem, env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-main {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 /* High readability Evening Dark Mode Adjustments */
 html.dark {
   /* Surfaces & Backgrounds */

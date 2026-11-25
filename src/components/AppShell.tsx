@@ -116,31 +116,32 @@ export const AppShell: React.FC<AppShellProps> = ({
   const activeExtendedItem = EXTENDED_NAV_ITEMS.find((item) => item.key === activeTab);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#241C15]">
+    <div className="app-shell min-h-screen min-w-0 flex flex-col bg-[#FAF7F2] text-[#241C15]">
       {/* Top Header - Strict 3-Zone Contract */}
       <header className="print:hidden sticky top-0 z-30 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E7DFD4] transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+        <div className="app-header-layout max-w-7xl mx-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 py-2">
           {/* Zone 1: Brand Wordmark (Single clean element) */}
-          <div
-            className="flex items-center gap-2.5 cursor-pointer group shrink-0 select-none"
+          <button
+            type="button"
+            className="flex min-w-0 items-center gap-2 text-left group select-none"
             onClick={() => onSelectTab('dashboard')}
             title="Về trang tổng quan"
           >
             <div className="w-9 h-9 rounded-xl bg-[#1B3B2B] text-[#DBC599] flex items-center justify-center font-serif text-base font-bold shadow-xs border border-[#2B4B3A] shrink-0">
               源
             </div>
-            <div className="flex flex-col">
-              <span className="font-serif font-bold text-sm sm:text-base text-[#1B3B2B] tracking-tight group-hover:text-[#28503C] transition-colors whitespace-nowrap truncate max-w-[150px] sm:max-w-[200px]">
+            <div className="flex min-w-0 flex-col">
+              <span className="font-serif font-bold text-sm sm:text-base text-[#1B3B2B] tracking-tight group-hover:text-[#28503C] transition-colors truncate">
                 {settings.clanName || 'Gia Phả Việt'}
               </span>
               <span className="text-[10px] text-[#947432] font-semibold tracking-wider uppercase hidden sm:block">
                 Cội Nguồn Dòng Họ
               </span>
             </div>
-          </div>
+          </button>
 
           {/* Zone 2: Navigation Links (Core 5 Tabs + Tools Menu) */}
-          <nav className="hidden lg:flex items-center gap-1 bg-[#F1EBE1]/75 p-1 rounded-2xl border border-[#E3D9CC]">
+          <nav aria-label="Điều hướng chính trên máy tính" className="order-3 col-span-2 hidden min-w-0 lg:flex flex-wrap items-center justify-center gap-1 bg-[#F1EBE1]/75 p-1 rounded-2xl border border-[#E3D9CC]">
             {CORE_NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.key;
@@ -178,7 +179,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               </button>
 
               {desktopToolsOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-[#FFFDF9] dark:bg-[#17231B] rounded-2xl border border-[#E7DFD4] dark:border-[#2C3E33] shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+                <div className="absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] max-h-[70dvh] overflow-y-auto bg-[#FFFDF9] dark:bg-[#17231B] rounded-2xl border border-[#E7DFD4] dark:border-[#2C3E33] shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
                   <div className="text-[10px] uppercase font-bold text-stone-400 px-2.5 py-1 tracking-wider">
                     Phân Tích & Tư Liệu
                   </div>
@@ -244,15 +245,13 @@ export const AppShell: React.FC<AppShellProps> = ({
           </nav>
 
           {/* Zone 3: Actions & Search (High-intent controls) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="app-header-actions flex min-w-0 items-center justify-end gap-1 sm:gap-2">
             {/* Global Search */}
             <GlobalSearch
               onSelectPerson={onSelectPerson}
               onFocusInTree={onFocusInTree}
               placeholder="Tìm nhanh (Ctrl+K)..."
             />
-
-            <PWAWidgets />
 
             {/* Dark Mode Theme Toggle */}
             <button
@@ -325,16 +324,19 @@ export const AppShell: React.FC<AppShellProps> = ({
               <span className="hidden sm:inline">Thêm người</span>
             </button>
           </div>
+          <div className="app-pwa-status order-4 col-span-2 min-w-0">
+            <PWAWidgets />
+          </div>
         </div>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-24 lg:pb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6">{children}</div>
+      <main className="app-main min-w-0 flex-1 pb-24 lg:pb-8">
+        <div className="app-content min-w-0 max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6">{children}</div>
       </main>
 
       {/* Mobile Bottom Navigation Bar */}
-      <nav className="print:hidden lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFFDF9]/95 backdrop-blur-md border-t border-[#E7DFD4] px-2 py-1.5 pb-safe shadow-lg">
+      <nav aria-label="Điều hướng chính" className="app-bottom-nav print:hidden lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFFDF9]/95 backdrop-blur-md border-t border-[#E7DFD4] px-2 py-1.5 shadow-lg">
         <div className="grid grid-cols-5 gap-1">
           {[
             { key: 'dashboard', label: 'Tổng quan', icon: Compass },
