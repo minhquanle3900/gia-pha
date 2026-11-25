@@ -10,10 +10,8 @@ import {
 } from 'lucide-react';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
-import { Person } from '../../models/genealogy';
 import {
   DuplicatePair,
-  executeMergeRecords,
   findPotentialDuplicates,
 } from '../../services/duplicateMergeService';
 import { formatLifespan } from '../../utils/dateUtils';
@@ -24,24 +22,12 @@ interface DuplicateMergeModalProps {
 }
 
 export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, onClose }) => {
-  const {
-    people,
-    relationships,
-    unions,
-    lifeEvents,
-    media,
-    savePerson,
-    deletePerson,
-    saveRelationship,
-    deleteRelationship,
-    saveUnion,
-    deleteUnion,
-    saveMedia,
-  } = useGenealogy();
+  const { people, relationships, unions, mergePeople } = useGenealogy();
 
   const [selectedPairIndex, setSelectedPairIndex] = useState<number>(0);
   const [mergeTargetId, setMergeTargetId] = useState<string>('');
   const [successMessage, setSuccessMessage] = useState<string | null>(null);
+  const [errorMessage, setErrorMessage] = useState<string | null>(null);
   const [isMerging, setIsMerging] = useState(false);
 
   // Scan duplicates
@@ -55,61 +41,35 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
   React.useEffect(() => {
     if (activePair) {
       setMergeTargetId(activePair.personA.id);
-      setSuccessMessage(null);
     }
   }, [activePair]);
+
+  React.useEffect(() => {
+    if (!open) {
+      setSuccessMessage(null);
+      setErrorMessage(null);
+    }
+  }, [open]);
 
   if (!open) return null;
 
   const handleExecuteMerge = async () => {
-    if (!activePair) return;
+    if (!activePair || isMerging) return;
     setIsMerging(true);
+    setErrorMessage(null);
 
     try {
       const target = mergeTargetId === activePair.personA.id ? activePair.personA : activePair.personB;
       const source = mergeTargetId === activePair.personA.id ? activePair.personB : activePair.personA;
 
-      const mergeResult = executeMergeRecords({
-        targetPerson: target,
-        sourcePerson: source,
-        relationships,
-        unions,
-        lifeEvents,
-        media,
-      });
-
-      // 1. Save merged target person
-      await savePerson(mergeResult.mergedPerson);
-
-      // 2. Update relationships
-      for (const r of mergeResult.updatedRelationships) {
-        await saveRelationship(r);
-      }
-      for (const rId of mergeResult.deletedRelationshipIds) {
-        await deleteRelationship(rId);
-      }
-
-      // 3. Update unions
-      for (const u of mergeResult.updatedUnions) {
-        await saveUnion(u);
-      }
-      for (const uId of mergeResult.deletedUnionIds) {
-        await deleteUnion(uId);
-      }
-
-      // 4. Update media
-      for (const m of mergeResult.updatedMedia) {
-        await saveMedia(m);
-      }
-
-      // 5. Delete source person
-      await deletePerson(mergeResult.deletedPersonId);
+      await mergePeople(target.id, source.id);
 
       setSuccessMessage(
         `Đã sáp nhập thành công hồ sơ "${source.fullName}" vào "${target.fullName}". Toàn bộ quan hệ huyết thống và tư liệu đã được bảo toàn nguyên vẹn.`
       );
-    } catch {
-      // Handled
+    } catch (error) {
+      const detail = error instanceof Error ? error.message : 'Vui lòng thử lại.';
+      setErrorMessage(`Không thể hoàn tất sáp nhập. ${detail}`);
     } finally {
       setIsMerging(false);
     }
@@ -143,11 +103,16 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
           <button
             type="button"
             onClick={onClose}
+            disabled={isMerging}
             className="p-1 rounded-lg text-stone-400 hover:text-stone-700"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
+
+        {errorMessage && (
+          <p role="alert" className="rounded-lg bg-red-50 p-3 text-xs text-red-800">{errorMessage}</p>
+        )}
 
         {successMessage ? (
           <div className="p-6 rounded-2xl bg-emerald-50 border border-emerald-200 text-center space-y-3">
@@ -183,7 +148,11 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
                   <button
                     key={idx}
                     type="button"
-                    onClick={() => setSelectedPairIndex(idx)}
+                    disabled={isMerging}
+                    onClick={() => {
+                      setSelectedPairIndex(idx);
+                      setErrorMessage(null);
+                    }}
                     className={`w-6 h-6 rounded-lg text-xs font-semibold ${
                       selectedPairIndex === idx
                         ? 'bg-[#1B3B2B] text-white'
@@ -223,6 +192,7 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
                     <input
                       type="radio"
                       name="mergeTarget"
+                      disabled={isMerging}
                       checked={mergeTargetId === activePair.personA.id}
                       onChange={() => setMergeTargetId(activePair.personA.id)}
                       className="mt-1 accent-[#1B3B2B]"
@@ -268,6 +238,7 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
                     <input
                       type="radio"
                       name="mergeTarget"
+                      disabled={isMerging}
                       checked={mergeTargetId === activePair.personB.id}
                       onChange={() => setMergeTargetId(activePair.personB.id)}
                       className="mt-1 accent-[#1B3B2B]"

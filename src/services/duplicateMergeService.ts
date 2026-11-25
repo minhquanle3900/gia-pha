@@ -6,6 +6,7 @@ import {
   Union,
 } from '../models/genealogy';
 import { normalizeVietnameseText } from '../utils/dateUtils';
+import { hasAncestryCycleThrough } from './validationService';
 
 export interface DuplicatePair {
   personA: Person;
@@ -19,7 +20,6 @@ export interface MergeResult {
   updatedRelationships: Relationship[];
   deletedRelationshipIds: string[];
   updatedUnions: Union[];
-  deletedUnionIds: string[];
   updatedLifeEvents: LifeEvent[];
   updatedMedia: Media[];
   deletedPersonId: string;
@@ -154,8 +154,35 @@ export function findPotentialDuplicates(
   return duplicates;
 }
 
+function mergeDuplicateRelationship(
+  retained: Relationship,
+  incoming: Relationship,
+  updatedAt: string
+): Relationship {
+  const incompatibleLineage = retained.lineageType !== 'unknown' && incoming.lineageType !== 'unknown'
+    && retained.lineageType !== incoming.lineageType;
+  const incompatibleUnions = retained.unionId && incoming.unionId && retained.unionId !== incoming.unionId;
+  const incompatibleBirthOrder = retained.birthOrder !== undefined && incoming.birthOrder !== undefined
+    && retained.birthOrder !== incoming.birthOrder;
+
+  if (incompatibleLineage || incompatibleUnions || incompatibleBirthOrder) {
+    throw new Error('Không thể sáp nhập vì hai liên kết cha mẹ/con cái có thông tin mâu thuẫn.');
+  }
+
+  return {
+    ...retained,
+    lineageType: retained.lineageType === 'unknown' ? incoming.lineageType : retained.lineageType,
+    unionId: retained.unionId || incoming.unionId,
+    birthOrder: retained.birthOrder ?? incoming.birthOrder,
+    notes: retained.notes && incoming.notes && retained.notes !== incoming.notes
+      ? `${retained.notes}\n\n${incoming.notes}`
+      : retained.notes || incoming.notes,
+    updatedAt,
+  };
+}
+
 /**
- * Executes a clean merge of Person Source into Person Target without losing any links
+ * Plans a merge against the supplied records. The caller owns the transaction.
  */
 export function executeMergeRecords(params: {
   targetPerson: Person;
@@ -166,14 +193,33 @@ export function executeMergeRecords(params: {
   media: Media[];
 }): MergeResult {
   const { targetPerson, sourcePerson, relationships, unions, lifeEvents, media } = params;
+  const { id: targetId } = targetPerson;
+  const { id: sourceId } = sourcePerson;
+  const updatedAt = new Date().toISOString();
+
+  if (targetId === sourceId) {
+    throw new Error('Hãy chọn hai hồ sơ khác nhau để sáp nhập.');
+  }
+
+  const branchId = targetPerson.branchId || sourcePerson.branchId;
+  const otherBranches = new Set([
+    ...(targetPerson.secondaryBranchIds ?? []),
+    ...(sourcePerson.secondaryBranchIds ?? []),
+  ]);
+  if (sourcePerson.branchId && sourcePerson.branchId !== branchId) {
+    otherBranches.add(sourcePerson.branchId);
+  }
+  if (branchId) otherBranches.delete(branchId);
+
+  const portrait = targetPerson.portraitUrl || targetPerson.portraitMediaId ? targetPerson : sourcePerson;
 
   // 1. Combine Profile fields (Target takes precedence, Source fills blanks)
   const mergedPerson: Person = {
     ...targetPerson,
     fullName: targetPerson.fullName || sourcePerson.fullName,
     gender: targetPerson.gender !== 'unknown' ? targetPerson.gender : sourcePerson.gender,
-    portraitUrl: targetPerson.portraitUrl || sourcePerson.portraitUrl,
-    portraitMediaId: targetPerson.portraitMediaId || sourcePerson.portraitMediaId,
+    portraitUrl: portrait.portraitUrl,
+    portraitMediaId: portrait.portraitMediaId,
     commonName: targetPerson.commonName || sourcePerson.commonName,
     tabooName: targetPerson.tabooName || sourcePerson.tabooName,
     courtesyName: targetPerson.courtesyName || sourcePerson.courtesyName,
@@ -197,106 +243,90 @@ export function executeMergeRecords(params: {
         : targetPerson.notes || sourcePerson.notes,
 
     generation: targetPerson.generation || sourcePerson.generation,
-    branchId: targetPerson.branchId || sourcePerson.branchId,
+    branchId,
+    secondaryBranchIds: otherBranches.size ? [...otherBranches] : undefined,
     subBranch: targetPerson.subBranch || sourcePerson.subBranch,
     clanRole: targetPerson.clanRole || sourcePerson.clanRole,
     deathAnniversaryLunar: targetPerson.deathAnniversaryLunar || sourcePerson.deathAnniversaryLunar,
     burialPlace: targetPerson.burialPlace || sourcePerson.burialPlace,
     merits: targetPerson.merits || sourcePerson.merits,
 
-    updatedAt: new Date().toISOString(),
+    updatedAt,
   };
 
-  // 2. Re-point relationships (Parents & Children)
-  const updatedRelationships: Relationship[] = [];
-  const deletedRelationshipIds: string[] = [];
-  const seenRelPairs = new Set<string>();
-
-  for (const r of relationships) {
-    let pId = r.parentId;
-    let cId = r.childId;
-
-    if (pId === sourcePerson.id) pId = targetPerson.id;
-    if (cId === sourcePerson.id) cId = targetPerson.id;
-
-    // Prevent self-loop
-    if (pId === cId) {
-      deletedRelationshipIds.push(r.id);
-      continue;
-    }
-
-    const pairKey = `${pId}:::${cId}`;
-    if (seenRelPairs.has(pairKey)) {
-      deletedRelationshipIds.push(r.id);
-      continue;
-    }
-    seenRelPairs.add(pairKey);
-
-    if (pId !== r.parentId || cId !== r.childId) {
-      updatedRelationships.push({
-        ...r,
-        parentId: pId,
-        childId: cId,
-        updatedAt: new Date().toISOString(),
-      });
-    }
+  // Index existing target edges first so a collision retains their IDs.
+  const targetEdges = new Map<string, Relationship>();
+  const relationshipKey = (parentId: string, childId: string) => JSON.stringify([parentId, childId]);
+  for (const rel of relationships) {
+    if (rel.parentId !== targetId && rel.childId !== targetId) continue;
+    const key = relationshipKey(rel.parentId, rel.childId);
+    if (!targetEdges.has(key)) targetEdges.set(key, rel);
   }
 
-  // 3. Re-point unions (Spouses)
+  const updatedRelationships = new Map<string, Relationship>();
+  const deletedRelationshipIds = new Set<string>();
+  for (const rel of relationships) {
+    if (rel.parentId !== sourceId && rel.childId !== sourceId) continue;
+    const parentId = rel.parentId === sourceId ? targetId : rel.parentId;
+    const childId = rel.childId === sourceId ? targetId : rel.childId;
+    if (parentId === childId) {
+      throw new Error('Không thể sáp nhập vì sẽ tạo quan hệ cha mẹ/con cái với chính mình.');
+    }
+
+    const key = relationshipKey(parentId, childId);
+    const retained = targetEdges.get(key);
+    const next = retained
+      ? mergeDuplicateRelationship(retained, rel, updatedAt)
+      : { ...rel, parentId, childId, updatedAt };
+    if (retained) deletedRelationshipIds.add(rel.id);
+
+    targetEdges.set(key, next);
+    updatedRelationships.set(next.id, next);
+  }
+
+  // A new cycle from coalescing two people must pass through the retained person.
+  const mergedGraph = relationships
+    .filter((rel) => !deletedRelationshipIds.has(rel.id))
+    .map((rel) => updatedRelationships.get(rel.id) ?? rel);
+  if (hasAncestryCycleThrough(targetId, mergedGraph)) {
+    throw new Error('Không thể sáp nhập vì đồ thị tổ tiên sau sáp nhập có vòng lặp.');
+  }
+
   const updatedUnions: Union[] = [];
-  const deletedUnionIds: string[] = [];
-
-  for (const u of unions) {
-    if (!u.partnerIds.includes(sourcePerson.id)) continue;
-
-    const newPartners = Array.from(
-      new Set(u.partnerIds.map((id) => (id === sourcePerson.id ? targetPerson.id : id)))
-    );
-
-    // If both partners ended up being the same person (e.g. source married target)
-    if (newPartners.length < 2) {
-      deletedUnionIds.push(u.id);
-      continue;
+  for (const union of unions) {
+    if (!union.partnerIds.includes(sourceId)) continue;
+    if (union.partnerIds.includes(targetId)) {
+      throw new Error('Không thể sáp nhập hai hồ sơ đang có quan hệ hôn phối với nhau.');
     }
-
     updatedUnions.push({
-      ...u,
-      partnerIds: newPartners,
-      updatedAt: new Date().toISOString(),
+      ...union,
+      partnerIds: [...new Set(union.partnerIds.map((id) => id === sourceId ? targetId : id))],
+      updatedAt,
     });
   }
 
-  // 4. Re-point lifeEvents
   const updatedLifeEvents = lifeEvents
-    .filter((e) => e.personId === sourcePerson.id)
-    .map((e) => ({
-      ...e,
-      personId: targetPerson.id,
-      updatedAt: new Date().toISOString(),
-    }));
+    .filter((event) => event.personId === sourceId)
+    .map((event) => ({ ...event, personId: targetId, updatedAt }));
 
-  // 5. Re-point media
   const updatedMedia = media
-    .filter((m) => m.personIds.includes(sourcePerson.id))
-    .map((m) => {
-      const newPIds = Array.from(
-        new Set(m.personIds.map((id) => (id === sourcePerson.id ? targetPerson.id : id)))
-      );
-      return {
-        ...m,
-        personIds: newPIds,
-        updatedAt: new Date().toISOString(),
-      };
-    });
+    .filter((item) =>
+      item.personIds.includes(sourceId) ||
+      (item.id === sourcePerson.portraitMediaId && !item.personIds.includes(targetId))
+    )
+    .map((item) => ({
+      ...item,
+      personIds: [...new Set([...item.personIds.map((id) => id === sourceId ? targetId : id), targetId])],
+      updatedAt,
+    }));
 
   return {
     mergedPerson,
-    updatedRelationships,
-    deletedRelationshipIds,
+    updatedRelationships: [...updatedRelationships.values()],
+    deletedRelationshipIds: [...deletedRelationshipIds],
     updatedUnions,
-    deletedUnionIds,
     updatedLifeEvents,
     updatedMedia,
-    deletedPersonId: sourcePerson.id,
+    deletedPersonId: sourceId,
   };
 }

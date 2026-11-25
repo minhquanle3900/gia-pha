@@ -10,6 +10,7 @@ import {
   initializeDatabaseIfEmpty,
   loadFullSnapshot,
   mergeDatabaseSnapshot,
+  mergePersonRecords,
   replaceEntireDatabase,
   resetToDemoDataset,
   saveBranchRecord,
@@ -65,6 +66,7 @@ export interface GenealogyContextType {
   // CRUD
   savePerson: (person: Person) => Promise<void>;
   deletePerson: (personId: string) => Promise<void>;
+  mergePeople: (targetId: string, sourceId: string) => Promise<void>;
   saveRelationship: (rel: Relationship) => Promise<void>;
   deleteRelationship: (relId: string) => Promise<void>;
   saveUnion: (union: Union) => Promise<void>;
@@ -256,6 +258,11 @@ export const GenealogyProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     await reloadData();
   };
 
+  const handleMergePeople = async (targetId: string, sourceId: string) => {
+    await mergePersonRecords(targetId, sourceId);
+    await reloadData();
+  };
+
   const handleSaveRelationship = async (rel: Relationship) => {
     await saveRelationshipRecord(rel);
     await reloadData();
@@ -355,6 +362,7 @@ export const GenealogyProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     refresh: reloadData,
     savePerson: handleSavePerson,
     deletePerson: handleDeletePerson,
+    mergePeople: handleMergePeople,
     saveRelationship: handleSaveRelationship,
     deleteRelationship: handleDeleteRelationship,
     saveUnion: handleSaveUnion,

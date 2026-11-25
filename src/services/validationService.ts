@@ -21,6 +21,36 @@ export interface PersonDeletionImpact {
   linkedStoriesCount: number;
 }
 
+function indexChildren(relationships: Relationship[], ignoreRelationshipId?: string): Map<string, string[]> {
+  const childrenByParent = new Map<string, string[]>();
+  for (const rel of relationships) {
+    if (ignoreRelationshipId && rel.id === ignoreRelationshipId) continue;
+    const children = childrenByParent.get(rel.parentId) ?? [];
+    children.push(rel.childId);
+    childrenByParent.set(rel.parentId, children);
+  }
+  return childrenByParent;
+}
+
+function canReachPerson(
+  personId: string,
+  startIds: string[],
+  childrenByParent: Map<string, string[]>
+): boolean {
+  const visited = new Set<string>();
+  const stack = [...startIds];
+  while (stack.length > 0) {
+    const current = stack.pop()!;
+    if (current === personId) return true;
+    if (visited.has(current)) continue;
+    visited.add(current);
+    for (const child of childrenByParent.get(current) ?? []) {
+      if (!visited.has(child)) stack.push(child);
+    }
+  }
+  return false;
+}
+
 export function wouldCreateAncestryCycle(
   parentId: string,
   childId: string,
@@ -28,33 +58,12 @@ export function wouldCreateAncestryCycle(
   ignoreRelationshipId?: string
 ): boolean {
   if (parentId === childId) return true;
+  return canReachPerson(parentId, [childId], indexChildren(relationships, ignoreRelationshipId));
+}
 
-  const childrenByParent = new Map<string, string[]>();
-  for (const rel of relationships) {
-    if (ignoreRelationshipId && rel.id === ignoreRelationshipId) continue;
-    const list = childrenByParent.get(rel.parentId) ?? [];
-    list.push(rel.childId);
-    childrenByParent.set(rel.parentId, list);
-  }
-
-  const visited = new Set<string>();
-  const stack: string[] = [childId];
-
-  while (stack.length > 0) {
-    const current = stack.pop()!;
-    if (current === parentId) return true;
-    if (visited.has(current)) continue;
-    visited.add(current);
-
-    const children = childrenByParent.get(current) ?? [];
-    for (const nextChild of children) {
-      if (!visited.has(nextChild)) {
-        stack.push(nextChild);
-      }
-    }
-  }
-
-  return false;
+export function hasAncestryCycleThrough(personId: string, relationships: Relationship[]): boolean {
+  const childrenByParent = indexChildren(relationships);
+  return canReachPerson(personId, childrenByParent.get(personId) ?? [], childrenByParent);
 }
 
 export function validatePersonInput(person: Partial<Person>): ValidationResult {

@@ -10,6 +10,7 @@ import {
   Relationship,
   Union,
 } from '../models/genealogy';
+import { executeMergeRecords } from '../services/duplicateMergeService';
 import { createSeedSnapshot } from './seedData';
 
 export const DB_NAME = 'gia-pha-viet-coi-nguon-db';
@@ -272,6 +273,97 @@ export async function savePersonRecord(person: Person): Promise<void> {
     ...person,
     updatedAt: new Date().toISOString(),
   });
+}
+
+export async function mergePersonRecords(targetId: string, sourceId: string): Promise<void> {
+  const db = await getDatabase();
+  const tx = db.transaction(
+    ['people', 'unions', 'relationships', 'lifeEvents', 'media', 'stories', 'branches', 'settings'],
+    'readwrite'
+  );
+
+  const done = tx.done;
+  // A failed request can reject both its own promise and the transaction.
+  void done.catch(() => {});
+
+  try {
+    const peopleStore = tx.objectStore('people');
+    const [targetPerson, sourcePerson] = await Promise.all([peopleStore.get(targetId), peopleStore.get(sourceId)]);
+    if (!targetPerson || !sourcePerson) {
+      throw new Error('Một hồ sơ đã thay đổi hoặc không còn tồn tại. Hãy tải lại danh sách rồi thử lại.');
+    }
+
+    const [relationships, unions, lifeEvents, media, stories, branches, settings] = await Promise.all([
+      tx.objectStore('relationships').getAll(),
+      tx.objectStore('unions').getAll(),
+      tx.objectStore('lifeEvents').index('by-person').getAll(sourceId),
+      tx.objectStore('media').getAll(),
+      tx.objectStore('stories').getAll(),
+      tx.objectStore('branches').getAll(),
+      tx.objectStore('settings').getAll(),
+    ]);
+    const plan = executeMergeRecords({ targetPerson, sourcePerson, relationships, unions, lifeEvents, media });
+    const { mergedPerson } = plan;
+
+    // Unrelated legacy references are outside the merge. Check the references
+    // this plan would newly attach to retained records.
+    const currentBranchIds = new Set([targetPerson.branchId, ...(targetPerson.secondaryBranchIds ?? [])]);
+    const branchIds = new Set(branches.map((branch) => branch.id));
+    for (const id of [mergedPerson.branchId, ...(mergedPerson.secondaryBranchIds ?? [])]) {
+      if (id && !currentBranchIds.has(id) && !branchIds.has(id)) {
+        throw new Error('Không thể sáp nhập vì hồ sơ nguồn tham chiếu đến chi họ không tồn tại.');
+      }
+    }
+    if (
+      mergedPerson.portraitMediaId && mergedPerson.portraitMediaId !== targetPerson.portraitMediaId &&
+      !media.some((item) => item.id === mergedPerson.portraitMediaId)
+    ) {
+      throw new Error('Không thể sáp nhập vì ảnh chân dung được tham chiếu không tồn tại.');
+    }
+    const originalRelationships = new Map(relationships.map((rel) => [rel.id, rel]));
+    const unionIds = new Set(unions.map((union) => union.id));
+    for (const rel of plan.updatedRelationships) {
+      if (rel.unionId && rel.unionId !== originalRelationships.get(rel.id)?.unionId && !unionIds.has(rel.unionId)) {
+        throw new Error('Không thể sáp nhập vì liên kết cha mẹ/con cái tham chiếu đến hôn phối không tồn tại.');
+      }
+    }
+
+    await peopleStore.put(mergedPerson);
+    for (const rel of plan.updatedRelationships) await tx.objectStore('relationships').put(rel);
+    for (const id of plan.deletedRelationshipIds) await tx.objectStore('relationships').delete(id);
+    for (const union of plan.updatedUnions) await tx.objectStore('unions').put(union);
+    for (const event of plan.updatedLifeEvents) await tx.objectStore('lifeEvents').put(event);
+    for (const item of plan.updatedMedia) await tx.objectStore('media').put(item);
+
+    const { updatedAt } = mergedPerson;
+    for (const story of stories) {
+      if (!story.personIds.includes(sourceId)) continue;
+      await tx.objectStore('stories').put({
+        ...story,
+        personIds: [...new Set(story.personIds.map((id) => id === sourceId ? targetId : id))],
+        updatedAt,
+      });
+    }
+    for (const branch of branches) {
+      if (branch.founderId !== sourceId) continue;
+      await tx.objectStore('branches').put({ ...branch, founderId: targetId, updatedAt });
+    }
+    for (const setting of settings) {
+      if (setting.rootPersonId !== sourceId) continue;
+      await tx.objectStore('settings').put({ ...setting, rootPersonId: targetId, updatedAt });
+    }
+    await peopleStore.delete(plan.deletedPersonId);
+    await done;
+  } catch (error) {
+    // Synchronous exceptions do not abort IndexedDB automatically.
+    try {
+      tx.abort();
+    } catch {
+      // An asynchronous request failure may have already aborted it.
+    }
+    await done.catch(() => {});
+    throw error;
+  }
 }
 
 export async function deletePersonSafely(personId: string): Promise<void> {
