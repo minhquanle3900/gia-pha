@@ -1,0 +1,218 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - generic: Cội Nguồn Gia Tộc
+  - generic: ·
+  - generic: Lưu giữ qua 5 thế hệ phả hệ
+  - heading "Dòng họ Trần – Đông Ngạc" [level=2]
+  - paragraph: "\"Tiên tổ phương danh lưu vạn đại · Tử tôn hiếu thảo kế thiên thu\""
+  - generic: "Từ đường: Làng cổ Đông Ngạc, Bắc Từ Liêm, Hà Nội"
+  - button "Khám phá Cây gia phả":
+    - generic: Khám phá Cây gia phả
+  - button "Thêm thành viên":
+    - generic: Thêm thành viên
+  - button "Nhật ký dòng họ":
+    - generic: Nhật ký dòng họ
+  - button "Dashboard Thống kê":
+    - generic: Dashboard Thống kê
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - heading "Tra Cứu Nhanh Thành Viên Toàn Gia Phả" [level=3]
+  - paragraph: Tìm kiếm trực tiếp theo họ tên, tên tự, tên húy, năm sinh hoặc đời thứ
+  - generic: 32 thành viên trong dữ liệu
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: "Nhập tên thành viên (ví dụ: Trần Văn, Khang, Bá Thông, 1954, đời 2)..."
+  - generic: ⌘K
+  - generic: 保
+  - heading "Nhắc nhở sao lưu dữ liệu gia phả định kỳ" [level=4]
+  - generic: Chưa từng sao lưu
+  - paragraph: Dữ liệu phả hệ của dòng họ hiện được lưu trữ an toàn trong bộ nhớ cục bộ của trình duyệt. Để phòng ngừa việc vô tình xóa lịch sử duyệt web hoặc đổi thiết bị, quý vị nên tải bản sao lưu định kỳ về máy.
+  - paragraph:
+    - text: "Lần sao lưu gần nhất:"
+    - strong: Chưa từng sao lưu
+  - button "Sao lưu JSON ngay":
+    - generic: Sao lưu JSON ngay
+  - button "Quản lý dữ liệu":
+    - generic: Quản lý dữ liệu
+  - button "Nhắc lại sau 7 ngày":
+  - heading "Nhắc Nhở Ngày Giỗ & Tiết Kỵ Sắp Tới" [level=3]
+  - generic: · 3 lễ giỗ
+  - paragraph: Tự động quy đổi âm dương lịch và nhắc nhở con cháu chuẩn bị lễ vật, cáo giỗ Tiên Thường và Chính Kỵ
+  - button "Trong 30 ngày tới"
+  - button "Tất cả trong năm"
+  - combobox:
+    - option "Tất cả chi họ" [selected]
+    - option "Chi Ất (Chi Thứ)"
+    - option "Chi Bính (Chi Nam Tiến)"
+    - option "Đại Tôn Họ Trần Đông Ngạc"
+    - option "Chi Giáp (Chi Trưởng)"
+  - button "Cài đặt chuông báo":
+    - generic: Cài đặt chuông báo
+  - generic "Trần Văn Phúc":
+    - generic: TP
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - generic: Chi Ất (Chi Thứ)
+  - heading "Trần Văn Phúc" [level=4]
+  - paragraph: Trưởng Chi Ất
+  - generic: Còn 2 ngày
+  - generic: "Ngày Âm lịch:"
+  - generic: 2 tháng 11 Âm lịch
+  - generic: "Dương lịch năm nay:"
+  - generic: Thứ 6, 27/11/2026
+  - paragraph: "\"Giỗ Trưởng Chi Ất\""
+  - generic: "Phần mộ: Nghĩa trang Văn Điển, Hà Nội"
+  - button "Xem hồ sơ"
+  - button "Phát thông báo nhắc nhở ngày giỗ tới trình duyệt":
+  - button "Văn khấn":
+    - generic: Văn khấn
+  - generic "Trần Văn Nghị":
+    - generic: TN
+    - generic "Đã tạ thế"
+  - generic: Đời 3
+  - generic: Chi Giáp (Chi Trưởng)
+  - heading "Trần Văn Nghị" [level=4]
+  - paragraph: Trưởng tộc đời thứ 3
+  - generic: Còn 4 ngày
+  - generic: "Ngày Âm lịch:"
+  - generic: 4 tháng 11 Âm lịch
+  - generic: "Dương lịch năm nay:"
+  - generic: CN, 29/11/2026
+  - paragraph: "\"Giỗ Ông Trưởng Nghị\""
+  - generic: "Phần mộ: Nghĩa trang dòng họ Trần, Đông Ngạc"
+  - button "Xem hồ sơ"
+  - button "Phát thông báo nhắc nhở ngày giỗ tới trình duyệt":
+  - button "Văn khấn":
+    - generic: Văn khấn
+  - generic "Nguyễn Thị Kim":
+    - img "Nguyễn Thị Kim"
+    - generic "Đã tạ thế"
+  - generic: Đời 1
+  - generic: Đại Tôn Họ Trần Đông Ngạc
+  - heading "Nguyễn Thị Kim" [level=4]
+  - paragraph: Tổ mẫu Đại Tôn
+  - generic: Còn 14 ngày
+  - generic: "Ngày Âm lịch:"
+  - generic: 14 tháng 11 Âm lịch
+  - generic: "Dương lịch năm nay:"
+  - generic: Thứ 4, 09/12/2026
+  - paragraph: "\"Giỗ Tổ Mẫu\""
+  - generic: "Phần mộ: Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc"
+  - button "Xem hồ sơ"
+  - button "Phát thông báo nhắc nhở ngày giỗ tới trình duyệt":
+  - button "Văn khấn":
+    - generic: Văn khấn
+  - strong: "Phong tục cúng giỗ gia tiên cổ truyền:"
+  - paragraph:
+    - text: Chiều hôm trước ngày giỗ cử hành
+    - strong: Lễ Tiên Thường
+    - text: (lễ cáo giỗ, thỉnh rước chư vị tiên tổ về ngự). Sáng ngày hôm sau là
+    - strong: Lễ Chính Kỵ
+    - text: (dâng mâm cỗ cúng, đọc bài văn khấn và sum họp con cháu nội ngoại).
+  - generic: Thành viên
+  - generic: "32"
+  - generic: người
+  - paragraph: 19 còn sống • 13 đã mất
+  - generic "Bấm để mở trang Thống kê phả hệ chi tiết":
+    - generic: Thế hệ phả hệ
+    - generic: "5"
+    - generic: đời
+    - paragraph:
+      - generic: Từ đời Thủy tổ đến nay
+      - generic: Xem biểu đồ →
+  - generic: Chi họ / Nhánh
+  - generic: "4"
+  - generic: chi họ
+  - paragraph: Bao gồm Đại Tôn và các Chi
+  - generic: Kho kỷ vật
+  - generic: "5"
+  - generic: tư liệu
+  - paragraph: Ảnh lịch sử, sắc phong, gia phả
+  - heading "Ký Ức & Nhật Ký Dòng Họ" [level=3]
+  - button "Xem tất cả (3)":
+    - generic: Xem tất cả (3)
+    - generic: →
+  - heading "Chiếc tráp gỗ sơn son và hành trình giữ Gia phả năm 1946" [level=4]
+  - generic: 1946 – 1954
+  - paragraph: "\"Câu chuyện ông Cả Trần Văn Khải gùi hòm gia phả vượt sông Hồng trong đêm đông tản cư.\""
+  - paragraph: "Cuối tháng Chạp năm 1946, khi tiếng đại bác vang rền phía nội thành Hà Nội, cụ Đồ Lộc tuổi đã cao liền gọi trưởng nam là ông Trần Văn Khải đến bên án thư. Cụ trao chiếc tráp gỗ lim sơn phủ cánh gián, bên trong bọc vải điều giữ cuốn Gia phả giấy dó và năm đạo sắc phong cổ, dặn rằng: \"Nhà cửa có thể dựng lại, ruộng vườn còn đất còn người, nhưng mất chữ của tổ tiên là con cháu lạc mất cội nguồn.\" Suốt tám năm tản cư nơi đồi cọ Thanh Ba (Phú Thọ), bà Hai Đặng Thị Nguyệt cứ mỗi mùa mưa ngâu lại đem tráp ra hong nắng sớm cùng lá long não để chống mối mọt. Nhờ tấm lòng thành kính ấy, ngày trở về làng Đông Ngạc mùa thu năm 1954, từng trang giấy dó vẫn còn nguyên nét mực tàu sắc sảo."
+  - generic: Đọc tiếp trong nhật ký →
+  - heading "Tấm lòng người mẹ kế Đặng Thị Nguyệt và nếp nhà hòa thuận" [level=4]
+  - generic: 1934 – 1986
+  - paragraph: "\"Sự gắn kết máu thịt giữa hai dòng con trong gia đình ông Cả Khải.\""
+  - paragraph: Khi bà Nguyễn Thị Lan lâm bệnh qua đời sớm năm 1932, bác Nghị mới 9 tuổi, cô Mai mới lên 4. Hai năm sau, bà Đặng Thị Nguyệt về làm kế thất. Ngày bước chân qua bậc cửa gỗ nhà họ Trần, việc đầu tiên bà làm là tự tay thắp hương trước bàn thờ người vợ trước của chồng và xin nhận hai con nhỏ làm con đẻ trong lòng. Những năm đói kém 1945, phần cơm trắng ít ỏi trong nồi đất bao giờ bà cũng xới cho anh Nghị đang tuổi ăn học và bé Tín nhỏ nhất nhà, còn mình ăn độn khoai sắn không một lời than vãn. Bởi thế trong họ Trần Đông Ngạc không bao giờ tồn tại hai tiếng "con chung – con riêng", mà chỉ có một nghĩa tình anh em ruột thịt vẹn tròn.
+  - generic: Đọc tiếp trong nhật ký →
+  - heading "Nhịp cầu Bắc – Nam của Chi Bính sau bốn mươi năm đoàn tụ" [level=4]
+  - generic: 1955 – 1995
+  - paragraph: "\"Chuyến trở về Từ đường Đông Ngạc xúc động của ông Trần Hữu Đạt mùa thu năm 1995.\""
+  - paragraph: Rời phố Hàng Đào vào Sài Gòn lập nghiệp năm 26 tuổi, ông Trần Hữu Đạt luôn đặt trên bàn thờ gia tiên tại Phú Nhuận một nắm đất nhỏ lấy từ gốc cây đại trước cổng làng Đông Ngạc. Hằng năm đúng ngày 22 tháng Mười Âm lịch, dù ở cách xa gần hai nghìn cây số, gia đình Chi Bính đều bày mâm cỗ hướng về phương Bắc vọng bái tổ tiên. Mùa thu năm 1995, khi dẫn các con cháu miền Nam lần đầu bước qua cổng tam quan Từ đường, ông Đạt chạm tay vào hàng cột gỗ lim do chính cha mình là ông Hai Phúc cung tiến năm xưa mà rưng rưng nước mắt. Từ chuyến đi ấy, Quỹ Khuyến học họ Trần ba miền chính thức ra đời và duy trì bền bỉ đến tận hôm nay.
+  - generic: Đọc tiếp trong nhật ký →
+  - heading "Các Bậc Trưởng Bối Tiền Nhân" [level=3]
+  - paragraph: Khởi thủy và các thế hệ rường cột
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+    - generic "Đã tạ thế"
+  - generic: Đời 1
+  - generic: ·
+  - generic: Thủy tổ chi phái cận đại
+  - paragraph: Trần Văn Lộc
+  - paragraph: 1872 – 1948
+  - generic "Nguyễn Thị Kim":
+    - img "Nguyễn Thị Kim"
+    - generic "Đã tạ thế"
+  - generic: Đời 1
+  - generic: ·
+  - generic: Tổ mẫu Đại Tôn
+  - paragraph: Nguyễn Thị Kim
+  - paragraph: 1876 – 1954
+  - generic "Trần Văn Khải":
+    - generic: TK
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - generic: ·
+  - generic: Trưởng tộc đời thứ 2 · Trưởng Chi Giáp
+  - paragraph: Trần Văn Khải
+  - paragraph: 1897 – 1974
+  - generic "Nguyễn Thị Lan":
+    - generic: NL
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - generic: ·
+  - generic: Chính thất Trưởng chi Giáp
+  - paragraph: Nguyễn Thị Lan
+  - paragraph: 1899 – 1932
+  - generic "Đặng Thị Nguyệt":
+    - generic: ĐN
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - generic: ·
+  - generic: Kế thất Trưởng chi Giáp
+  - paragraph: Đặng Thị Nguyệt
+  - paragraph: 1908 – 1986
+  - button "Xem toàn bộ tộc nhân →"

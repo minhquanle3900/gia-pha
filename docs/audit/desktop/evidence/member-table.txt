@@ -1,0 +1,137 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - heading "Danh Sách Thành Viên Gia Tộc" [level=2]
+  - paragraph:
+    - text: "Tổng số:"
+    - strong: "31"
+    - text: "thành viên • Đang hiển thị:"
+    - strong: "2"
+    - text: người
+  - button "Lọc trùng lặp":
+    - generic: Lọc trùng lặp
+  - button "Thêm thành viên":
+    - generic: Thêm thành viên
+  - generic: "Đời thứ:"
+  - button "Tất cả (31)"
+  - button "Đời 1 (2)"
+  - button "Đời 2 (6)"
+  - button "Đời 3 (9)"
+  - button "Đời 4 (8)"
+  - button "Đời 5 (6)"
+  - textbox "Tìm theo tên, tên húy, bí danh, quê quán, nơi an táng, vai vế (không dấu hoặc có dấu)..."
+  - button "Dạng lưới thẻ":
+  - button "Dạng danh sách bảng" [active]:
+  - combobox:
+    - 'option "Sắp xếp: Theo đời thứ" [selected]'
+    - 'option "Sắp xếp: Tên A-Z (Chữ cái)"'
+    - 'option "Sắp xếp: Năm sinh tăng dần"'
+  - generic: Chi họ
+  - combobox:
+    - option "Mọi chi họ (31)" [selected]
+    - option "Đại Tôn Họ Trần Đông Ngạc (3)"
+    - option "Chi Giáp (Chi Trưởng) (17)"
+    - option "Chi Ất (Chi Thứ) (6)"
+    - option "Chi Bính (Chi Nam Tiến) (6)"
+  - generic: Đời thứ
+  - combobox:
+    - option "Mọi thế hệ (31)"
+    - option "Đời thứ 1 (2)" [selected]
+    - option "Đời thứ 2 (6)"
+    - option "Đời thứ 3 (9)"
+    - option "Đời thứ 4 (8)"
+    - option "Đời thứ 5 (6)"
+  - generic: Trạng thái sinh thời
+  - combobox:
+    - option "Tất cả (31)" [selected]
+    - option "Hiện tiền (Còn sống) (18)"
+    - option "Đã tạ thế (13)"
+    - option "Có ngày giỗ Âm lịch (12)"
+  - generic: Giới tính
+  - combobox:
+    - option "Tất cả giới tính (31)" [selected]
+    - option "Nam giới (15)"
+    - option "Nữ giới (16)"
+  - generic: "Phái trực thuộc:"
+  - button "Tất cả phái"
+  - button "Gốc Tổ Đông Ngạc"
+  - button "Phái Bắc"
+  - button "Phái Đoài"
+  - button "Phái Đông"
+  - button "Phái Sài Gòn"
+  - generic: "Bộ lọc đang áp dụng:"
+  - generic: "Đời thứ: 1"
+  - button:
+  - button "Xóa bộ lọc":
+    - generic: Xóa bộ lọc
+  - table:
+    - rowgroup:
+      - row "Thành viên Đời thứ Chi họ & Phái Sinh thời Vai vế Trạng thái Hành động":
+        - columnheader "Thành viên"
+        - columnheader "Đời thứ"
+        - columnheader "Chi họ & Phái"
+        - columnheader "Sinh thời"
+        - columnheader "Vai vế"
+        - columnheader "Trạng thái"
+        - columnheader "Hành động"
+    - rowgroup:
+      - row "Trần Văn Lộc Đã tạ thế Trần Văn Lộc (Cụ Đồ Lộc) Đời 1 Đại Tôn Họ Trần Đông Ngạc Gốc Tổ Đông Ngạc 1872 – 1948 Thủy tổ chi phái cận đại Đã tạ thế":
+        - cell "Trần Văn Lộc Đã tạ thế Trần Văn Lộc (Cụ Đồ Lộc)":
+          - generic "Trần Văn Lộc":
+            - img "Trần Văn Lộc"
+            - generic "Đã tạ thế"
+          - paragraph: Trần Văn Lộc
+          - paragraph: (Cụ Đồ Lộc)
+        - cell "Đời 1"
+        - cell "Đại Tôn Họ Trần Đông Ngạc Gốc Tổ Đông Ngạc":
+          - text: Đại Tôn Họ Trần Đông Ngạc
+          - generic: Gốc Tổ Đông Ngạc
+        - cell "1872 – 1948"
+        - cell "Thủy tổ chi phái cận đại"
+        - cell "Đã tạ thế":
+          - generic: Đã tạ thế
+        - cell:
+          - button "Xuất bản in & PDF hồ sơ cá nhân":
+          - button "Xem trên cây":
+      - row "Nguyễn Thị Kim Đã tạ thế Nguyễn Thị Kim (Cụ Bà Đồ Lộc) Đời 1 Đại Tôn Họ Trần Đông Ngạc 1876 – 1954 Tổ mẫu Đại Tôn Đã tạ thế":
+        - cell "Nguyễn Thị Kim Đã tạ thế Nguyễn Thị Kim (Cụ Bà Đồ Lộc)":
+          - generic "Nguyễn Thị Kim":
+            - img "Nguyễn Thị Kim"
+            - generic "Đã tạ thế"
+          - paragraph: Nguyễn Thị Kim
+          - paragraph: (Cụ Bà Đồ Lộc)
+        - cell "Đời 1"
+        - cell "Đại Tôn Họ Trần Đông Ngạc"
+        - cell "1876 – 1954"
+        - cell "Tổ mẫu Đại Tôn"
+        - cell "Đã tạ thế":
+          - generic: Đã tạ thế
+        - cell:
+          - button "Xuất bản in & PDF hồ sơ cá nhân":
+          - button "Xem trên cây":

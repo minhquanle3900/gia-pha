@@ -1,0 +1,58 @@
+
+> react-example@0.0.0 dev
+> tsx server.ts
+
+◇ injected env (0) from .env // tip: ◈ secrets for agents [www.dotenvx.com]
+API key should be set when using the Gemini API.
+API key should be set when using the Gemini API.
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:89:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+`server.hmr.protocol/host/port/path/clientPort/timeout/server` is deprecated. Use `server.ws.*` instead. Note that this option may be set by a plugin. Set VITE_DEPRECATION_TRACE=1 to see where it is called.
+Server running on http://0.0.0.0:3000
+16:17:31 [vite] (client) [optimizer] bundling dependencies...
+16:17:32 [vite] (client) dependency optimized: workbox-window
+
+PWA v2.0.0
+mode      generateSW
+precache  1 entries (0.00 KiB)
+files generated
+  dev-dist/sw.js
+  dev-dist/workbox-afac4cd2.js
+warnings
+  One of the glob patterns doesn't match any files. Please remove or fix the following: {
+  "globDirectory": "D:/LMQ_My mine/Gia-pha/dev-dist",
+  "globPattern": "**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2}",
+  "globIgnores": [
+    "**/node_modules/**/*",
+    "sw.js",
+    "workbox-*.js"
+  ]
+}
+
+16:18:10 [vite] (client) [console.error] Cannot update a component (`AppShell`) while rendering a different component (`FamilyTreePage`). To locate the bad setState() call inside `FamilyTreePage`, follow the stack trace as described in https://react.dev/link/setstate-in-render
+file watcher error: EBUSY: resource busy or locked, watch 'D:\LMQ_My mine\Gia-pha\docs\audit\desktop\evidence\benchmark-retry.log'
+16:24:24 [vite] (client) [console.error] Lỗi xuất PDF: Error: Attempting to parse an unsupported color function "oklab"
+    at Object.parse (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:1519:54)
+    at parse (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:3255:35)
+    at new CSSParsedDeclaration (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:3144:27)
+    at ElementContainer (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:3288:19)
+    at createContainer (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:4053:11)
+    at parseNodeTree (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:4029:23)
+    at parseTree (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:4058:4)
+    at http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:6687:15
+    at step (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:150:16)
+    at Object.next (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:99:13)
+16:31:22 [vite] (client) [console.warn] AI biography generation error: Chưa phát hiện GEMINI_API_KEY trên môi trường máy chủ. Vui lòng kiểm tra khóa trong bảng điều khiển Cài đặt > Secrets.
+16:36:08 [vite] (client) page reload docs/audit/desktop/evidence/literal-name-report.html
+16:36:38 [vite] (client) [console.error] Lỗi xuất PDF: Error: Attempting to parse an unsupported color function "oklab"
+    at Object.parse (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:1519:54)
+    at parse (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:3255:35)
+    at new CSSParsedDeclaration (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:3144:27)
+    at new ElementContainer (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:3288:19)
+    at createContainer (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:4053:11)
+    at parseNodeTree (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:4029:23)
+    at parseTree (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:4058:4)
+    at http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:6687:15
+    at step (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:150:16)
+    at Object.next (http://localhost:3000/node_modules/.vite/deps/html2canvas.js?v=af4758b1:99:13)

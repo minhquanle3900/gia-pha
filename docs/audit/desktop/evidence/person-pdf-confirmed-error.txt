@@ -1,0 +1,660 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - heading "Danh Sách Thành Viên Gia Tộc" [level=2]
+  - paragraph:
+    - text: "Tổng số:"
+    - strong: "32"
+    - text: "thành viên • Đang hiển thị:"
+    - strong: "32"
+    - text: người
+  - button "Lọc trùng lặp":
+    - generic: Lọc trùng lặp
+  - button "Thêm thành viên":
+    - generic: Thêm thành viên
+  - generic: "Đời thứ:"
+  - button "Tất cả (32)"
+  - button "Đời 1 (2)"
+  - button "Đời 2 (6)"
+  - button "Đời 3 (9)"
+  - button "Đời 4 (8)"
+  - button "Đời 5 (6)"
+  - textbox "Tìm theo tên, tên húy, bí danh, quê quán, nơi an táng, vai vế (không dấu hoặc có dấu)..."
+  - button "Dạng lưới thẻ":
+  - button "Dạng danh sách bảng":
+  - combobox:
+    - 'option "Sắp xếp: Theo đời thứ" [selected]'
+    - 'option "Sắp xếp: Tên A-Z (Chữ cái)"'
+    - 'option "Sắp xếp: Năm sinh tăng dần"'
+  - generic: Chi họ
+  - combobox:
+    - option "Mọi chi họ (32)" [selected]
+    - option "Chi Ất (Chi Thứ) (7)"
+    - option "Chi Bính (Chi Nam Tiến) (6)"
+    - option "Đại Tôn Họ Trần Đông Ngạc (3)"
+    - option "Chi Giáp (Chi Trưởng) (17)"
+  - generic: Đời thứ
+  - combobox:
+    - option "Mọi thế hệ (32)" [selected]
+    - option "Đời thứ 1 (2)"
+    - option "Đời thứ 2 (6)"
+    - option "Đời thứ 3 (9)"
+    - option "Đời thứ 4 (8)"
+    - option "Đời thứ 5 (6)"
+  - generic: Trạng thái sinh thời
+  - combobox:
+    - option "Tất cả (32)" [selected]
+    - option "Hiện tiền (Còn sống) (19)"
+    - option "Đã tạ thế (13)"
+    - option "Có ngày giỗ Âm lịch (12)"
+  - generic: Giới tính
+  - combobox:
+    - option "Tất cả giới tính (32)" [selected]
+    - option "Nam giới (16)"
+    - option "Nữ giới (16)"
+  - generic: "Phái trực thuộc:"
+  - button "Tất cả phái"
+  - button "Gốc Tổ Đông Ngạc"
+  - button "Phái Bắc"
+  - button "Phái Đoài"
+  - button "Phái Đông"
+  - button "Phái Sài Gòn"
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+    - generic "Đã tạ thế"
+  - generic: Đời 1
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Văn Lộc" [level=3]
+  - paragraph: 1872 – 1948
+  - paragraph: Thủy tổ chi phái cận đại
+  - paragraph:
+    - generic: "Thường gọi: Cụ Đồ Lộc"
+    - generic: "• Húy: Trọng Lộc"
+  - generic: Đại Tôn Họ Trần Đông Ngạc
+  - generic: Đã tạ thế
+  - generic "Nguyễn Thị Kim":
+    - img "Nguyễn Thị Kim"
+    - generic "Đã tạ thế"
+  - generic: Đời 1
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Nguyễn Thị Kim" [level=3]
+  - paragraph: 1876 – 1954
+  - paragraph: Tổ mẫu Đại Tôn
+  - paragraph:
+    - generic: "Thường gọi: Cụ Bà Đồ Lộc"
+    - generic: "• Húy: Thị Kim"
+  - generic: Đại Tôn Họ Trần Đông Ngạc
+  - generic: Đã tạ thế
+  - generic "Trần Văn Khải":
+    - generic: TK
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Văn Khải" [level=3]
+  - paragraph: 1897 – 1974
+  - paragraph: Trưởng tộc đời thứ 2 · Trưởng Chi Giáp
+  - paragraph:
+    - generic: "Thường gọi: Ông Cả Khải"
+    - generic: "• Húy: Minh Khải"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Đã tạ thế
+  - generic "Nguyễn Thị Lan":
+    - generic: NL
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Nguyễn Thị Lan" [level=3]
+  - paragraph: 1899 – 1932
+  - paragraph: Chính thất Trưởng chi Giáp
+  - paragraph:
+    - generic: "Thường gọi: Bà Cả Lan"
+    - generic: "• Húy: Ngọc Lan"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Đã tạ thế
+  - generic "Trần Văn Phúc":
+    - generic: TP
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Văn Phúc" [level=3]
+  - paragraph: 1900 – 1981
+  - paragraph: Trưởng Chi Ất
+  - paragraph:
+    - generic: "Thường gọi: Ông Hai Phúc"
+    - generic: "• Húy: Hồng Phúc"
+  - generic: Chi Ất (Chi Thứ)
+  - generic: Đã tạ thế
+  - generic "Trần Thị Hạnh":
+    - generic: TH
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Thị Hạnh" [level=3]
+  - paragraph: ~1903 – Khoảng thập niên 1970
+  - paragraph: Cô họ Đời thứ 2
+  - paragraph:
+    - generic: "Thường gọi: Bà Cô Ba Hạnh"
+  - generic: Đại Tôn Họ Trần Đông Ngạc
+  - generic: Đã tạ thế
+  - generic "Lê Thị Thanh":
+    - generic: LT
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Lê Thị Thanh" [level=3]
+  - paragraph: 1904 – 1989
+  - paragraph: Nội tướng Chi Ất
+  - paragraph:
+    - generic: "Thường gọi: Bà Hai Hàng Đào"
+  - generic: Chi Ất (Chi Thứ)
+  - generic: Đã tạ thế
+  - generic "Đặng Thị Nguyệt":
+    - generic: ĐN
+    - generic "Đã tạ thế"
+  - generic: Đời 2
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Đặng Thị Nguyệt" [level=3]
+  - paragraph: 1908 – 1986
+  - paragraph: Kế thất Trưởng chi Giáp
+  - paragraph:
+    - generic: "Thường gọi: Bà Hai Nguyệt"
+    - generic: "• Húy: Thu Nguyệt"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Đã tạ thế
+  - generic "Trần Văn Nghị":
+    - generic: TN
+    - generic "Đã tạ thế"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Văn Nghị" [level=3]
+  - paragraph: 1923 – 2004
+  - paragraph: Trưởng tộc đời thứ 3
+  - paragraph:
+    - generic: "Thường gọi: Ông Trưởng Nghị"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Đã tạ thế
+  - generic "Phạm Thị Hiền":
+    - generic: PH
+    - generic "Đã tạ thế"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Phạm Thị Hiền" [level=3]
+  - paragraph: 1927 – 2016
+  - paragraph:
+    - generic: "Thường gọi: Bà Giáo Hiền"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Đã tạ thế
+  - generic "Trần Thị Mai":
+    - generic: TM
+    - generic "Đã tạ thế"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Thị Mai" [level=3]
+  - paragraph: 1928 – 2012
+  - paragraph:
+    - generic: "Thường gọi: Bà Cô Mai"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Đã tạ thế
+  - generic "Trần Hữu Đạt":
+    - generic: TĐ
+    - generic "Đã tạ thế"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Hữu Đạt" [level=3]
+  - paragraph: 1929 – 2015
+  - paragraph: Trưởng Chi Bính (Nam Tiến)
+  - paragraph:
+    - generic: "Thường gọi: Ông Cả Đạt Sài Gòn"
+  - generic: Chi Bính (Chi Nam Tiến)
+  - generic: Đã tạ thế
+  - generic "Trần Hữu Kiên":
+    - generic: TK
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Hữu Kiên" [level=3]
+  - paragraph: Sinh 1934 · Còn sống
+  - paragraph: Trưởng Chi Ất đương nhiệm
+  - paragraph:
+    - generic: "Thường gọi: Ông Kiên Hàng Đào"
+  - generic: Chi Ất (Chi Thứ)
+  - generic: Còn sống
+  - generic "Võ Thị Ngọc Mai":
+    - generic: VM
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Võ Thị Ngọc Mai" [level=3]
+  - paragraph: Sinh 1935 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Bà Đạt"
+  - generic: Chi Bính (Chi Nam Tiến)
+  - generic: Còn sống
+  - generic "Trần Văn Minh":
+    - generic: TM
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Văn Minh" [level=3]
+  - paragraph: Sinh 1938 · Còn sống
+  - paragraph: Cố vấn Hội đồng Gia tộc · Trưởng Phái Đoài
+  - paragraph:
+    - generic: "Thường gọi: Ông Minh Kiến Trúc"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Hoàng Thị Bích":
+    - generic: HB
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Hoàng Thị Bích" [level=3]
+  - paragraph: Sinh 1942 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Bà Bích"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Trần Văn Tín":
+    - generic: TT
+    - generic "Đã tạ thế"
+  - generic: Đời 3
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Văn Tín" [level=3]
+  - paragraph: 1944 – 1971
+  - paragraph: Liệt sĩ dòng họ
+  - paragraph:
+    - generic: "Thường gọi: Chú Út Tín"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Đã tạ thế
+  - generic "Trần Quốc Tuấn":
+    - generic: TT
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 4
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Quốc Tuấn" [level=3]
+  - paragraph: Sinh 1954 · Còn sống
+  - paragraph: Trưởng tộc đương nhiệm
+  - paragraph:
+    - generic: "Thường gọi: Ông Tuấn Trưởng Tộc"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Ngô Thị Phương Thảo":
+    - generic: NT
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 4
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Ngô Thị Phương Thảo" [level=3]
+  - paragraph: Sinh 1958 · Còn sống
+  - paragraph: Thủ quỹ Quỹ Khuyến học dòng họ
+  - paragraph:
+    - generic: "Thường gọi: Bà Thảo"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Trần Thị Thu Thủy":
+    - generic: TT
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 4
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Thị Thu Thủy" [level=3]
+  - paragraph: Sinh 1959 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Cô Thủy"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Trần Gia Hưng":
+    - generic: TH
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 4
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Gia Hưng" [level=3]
+  - paragraph: Sinh 1963 · Còn sống
+  - paragraph: Trưởng Ban liên lạc Chi Bính
+  - paragraph:
+    - generic: "Thường gọi: Anh Hưng Sài Gòn"
+  - generic: Chi Bính (Chi Nam Tiến)
+  - generic: Còn sống
+  - generic "Trần Hữu Khôi":
+    - generic: TK
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 4
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Hữu Khôi" [level=3]
+  - paragraph: Sinh 1965 · Còn sống
+  - paragraph: Thư ký Hội đồng Gia tộc · Phụ trách biên khảo phả hệ
+  - paragraph:
+    - generic: "Thường gọi: Anh Khôi"
+  - generic: Chi Ất (Chi Thứ)
+  - generic: Còn sống
+  - generic "Lâm Mỹ Dung":
+    - generic: LD
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 4
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Lâm Mỹ Dung" [level=3]
+  - paragraph: Sinh 1966 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Chị Dung"
+  - generic: Chi Bính (Chi Nam Tiến)
+  - generic: Còn sống
+  - generic "Trần Thị Thu Hà":
+    - generic: TH
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 4
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Thị Thu Hà" [level=3]
+  - paragraph: Sinh 1968 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Cô Hà Kiến Trúc"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Trần Đức Bảo":
+    - generic: TB
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 4
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Đức Bảo" [level=3]
+  - paragraph: Sinh ~1972 · Còn sống
+  - paragraph: Thành viên Ban Nghi lễ Từ đường
+  - paragraph:
+    - generic: "Thường gọi: Chú Bảo"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Trần Minh Quân":
+    - generic: TQ
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 5
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Minh Quân" [level=3]
+  - paragraph: Sinh 1985 · Còn sống
+  - paragraph: Trưởng tôn Đời thứ 5 · Quản trị gia phả số
+  - paragraph:
+    - generic: "Thường gọi: Minh Quân"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Đỗ Ngọc Lan Anh":
+    - generic: ĐA
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 5
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Đỗ Ngọc Lan Anh" [level=3]
+  - paragraph: Sinh 1988 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Lan Anh"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Trần Minh Châu":
+    - generic: TC
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 5
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Minh Châu" [level=3]
+  - paragraph: Sinh 1991 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Minh Châu"
+  - generic: Chi Giáp (Chi Trưởng)
+  - generic: Còn sống
+  - generic "Trần Bảo Nam":
+    - generic: TN
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 5
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Bảo Nam" [level=3]
+  - paragraph: Sinh 1995 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Bảo Nam"
+  - generic: Chi Bính (Chi Nam Tiến)
+  - generic: Còn sống
+  - generic "Trần Khôi Nguyên":
+    - generic: TN
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 5
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Khôi Nguyên" [level=3]
+  - paragraph: Sinh 1998 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Khôi Nguyên"
+  - generic: Chi Ất (Chi Thứ)
+  - generic: Còn sống
+  - generic "Trần Ngọc Khánh Linh":
+    - generic: TL
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 5
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "Trần Ngọc Khánh Linh" [level=3]
+  - paragraph: Sinh 2001 · Còn sống
+  - paragraph:
+    - generic: "Thường gọi: Khánh Linh"
+  - generic: Chi Bính (Chi Nam Tiến)
+  - generic: Còn sống
+  - generic "M0 <b>Thử</b> & An":
+    - generic: MA
+    - generic "Hiện tiền (còn sống)"
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "M0 <b>Thử</b> & An" [level=3]
+  - paragraph: Còn sống
+  - generic: Chi Ất (Chi Thứ)
+  - generic: Còn sống
+  - generic: 源
+  - generic: Trích lục Phả Ký
+  - generic: ·
+  - generic: GPV-P01
+  - 'heading "Bản In Hồ Sơ: Trần Văn Lộc" [level=2]'
+  - button "Tùy biến bản in":
+    - generic: Tùy biến bản in
+  - button "Sao chép chữ":
+    - generic: Sao chép chữ
+  - button "File HTML":
+    - generic: File HTML
+  - button "Tải PDF (.pdf)":
+    - generic: Tải PDF (.pdf)
+  - button "In / Lưu PDF":
+    - generic: In / Lưu PDF
+  - button "Đóng cửa sổ":
+  - generic: Có lỗi khi tạo tệp PDF, quý vị có thể dùng nút "In / Lưu PDF" bên cạnh.
+  - button "Đóng"
+  - generic: ✦
+  - generic: ✦
+  - generic: ✦
+  - generic: ✦
+  - generic: VIỆT NAM DÒNG TỘC · PHẢ KÝ TRÍCH LỤC
+  - paragraph: "Gia Phả Dòng Họ: DÒNG HỌ TRẦN – ĐÔNG NGẠC"
+  - heading "TRÍCH LỤC TIỂU SỬ PHẢ KÝ CÁ NHÂN" [level=1]
+  - text: "Mã số:"
+  - strong: GPV-P01
+  - generic: ·
+  - generic: "Trích lục ngày: 25/11/2026"
+  - generic: ·
+  - generic: Đại Tôn Họ Trần Đông Ngạc
+  - paragraph: "\"Tiên tổ phương danh lưu vạn đại · Tử tôn hiếu thảo kế thiên thu\""
+  - heading "I. Thông Tin Cá Nhân & Thế Thứ Dòng Tộc" [level=2]
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+    - generic "Đã tạ thế"
+  - paragraph: Di ảnh tiền nhân
+  - generic: "Họ và tên chính:"
+  - generic: Trần Văn Lộc
+  - generic: "Giới tính:"
+  - generic: Nam giới
+  - generic: "Đời thứ trong họ:"
+  - generic: Thế hệ thứ 1
+  - generic: "Chi họ / Phái:"
+  - generic: Đại Tôn Họ Trần Đông Ngạc · Phái Gốc Tổ Đông Ngạc
+  - generic: "Vai vế dòng họ:"
+  - generic: Thủy tổ chi phái cận đại
+  - generic: "Trạng thái:"
+  - generic: Đã tạ thế
+  - text: "Tên Húy (Tế tự):"
+  - strong: Trọng Lộc
+  - text: "Tên Tự / Hiệu:"
+  - strong: Đức Hiên
+  - text: "Tên thường gọi:"
+  - strong: Cụ Đồ Lộc
+  - generic: "Ngày sinh:"
+  - generic: 14/03/1872
+  - generic: "Nơi sinh:"
+  - generic: Làng Đông Ngạc, phủ Hoài Đức, Hà Nội
+  - generic: "Ngày mất:"
+  - generic: 22/11/1948
+  - generic: "Thọ mệnh:"
+  - generic: 1872 – 1948
+  - generic: "Nguyên quán:"
+  - generic: Làng Đông Ngạc, Hà Nội
+  - generic: "Trú quán sinh thời:"
+  - generic: Nhà cổ 3 gian Xóm Chùa, Đông Ngạc
+  - generic: "Nghề nghiệp / Chức vụ:"
+  - generic: Nhà nho, Thầy đồ dạy chữ Hán và Quốc ngữ
+  - generic: "Lễ Giỗ Âm Lịch (Kỵ Nhật):"
+  - paragraph: 22/10 Âm lịch (Giỗ Tổ Đại Tôn tại Từ đường Đông Ngạc)
+  - generic: "Nơi An Táng / Mộ Phần:"
+  - paragraph: Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc
+  - heading "II. Công Đức & Tiểu Sử Hành Trạng" [level=2]
+  - heading "Công Đức & Đóng Góp Cho Dòng Họ:" [level=3]
+  - paragraph: Đứng ra trùng tu nhà thờ họ năm 1924, chép lại cuốn Gia phả chữ Hán sang Quốc ngữ năm 1930 và lập quỹ khuyến học cho con cháu trong làng.
+  - heading "Tiểu Sử Sinh Thời:" [level=3]
+  - paragraph: Cụ Trần Văn Lộc sinh trưởng trong một gia đình nho học lâu đời ven sông Hồng. Năm 1898 cụ mở lớp dạy học miễn phí cho trẻ nghèo trong vùng, đồng thời kết hợp truyền dạy cả chữ Hán Nôm lẫn chữ Quốc ngữ buổi giao thời. Cụ nổi tiếng cương trực, điềm đạm, để lại bản Gia huấn 12 điều răn dạy con cháu lấy chữ Hiếu và sự học làm gốc.
+  - heading "Các Mốc Biến Cố Quan Trọng:" [level=4]
+  - generic: Mở lớp nghĩa thục tại làng Đông Ngạc
+  - generic: "1898"
+  - paragraph: "Địa điểm: Xóm Chùa, Đông Ngạc, Hà Nội"
+  - paragraph: Dạy chữ Hán Nôm và đạo lý làm người miễn phí cho thanh thiếu niên trong vùng.
+  - generic: Chủ trì đại trùng tu Từ đường họ Trần
+  - generic: 15/10/1924
+  - paragraph: "Địa điểm: Từ đường họ Trần, Đông Ngạc"
+  - paragraph: Dựng lại 3 gian tiền tế bằng gỗ lim và khắc bức hoành phi Thế Đức Truyền Gia.
+  - generic: Phiên âm và biên tập bộ Gia phả chữ Quốc ngữ đầu tiên
+  - generic: "1930"
+  - paragraph: "Địa điểm: Đông Ngạc, Hà Nội"
+  - paragraph: Chuyển dịch phả ký cổ sang Quốc ngữ để các thế hệ hậu sinh dễ dàng tra cứu.
+  - heading "III. Tiền Nhân / Thân Phụ & Thân Mẫu" [level=2]
+  - paragraph: Chưa ghi nhận thông tin thân phụ mẫu trong phả bản.
+  - heading "IV. Hôn Phối / Bạn Đời" [level=2]
+  - table:
+    - rowgroup:
+      - row "Thứ bậc hôn phối Họ và tên bạn đời Năm sinh – mất Tình trạng":
+        - columnheader "Thứ bậc hôn phối"
+        - columnheader "Họ và tên bạn đời"
+        - columnheader "Năm sinh – mất"
+        - columnheader "Tình trạng"
+    - rowgroup:
+      - row "Chính thất (Lần 1) Nguyễn Thị Kim Nguyễn Thị Kim 1876 – 1954 Đã tạ thế":
+        - cell "Chính thất (Lần 1)"
+        - cell "Nguyễn Thị Kim Nguyễn Thị Kim":
+          - generic "Nguyễn Thị Kim":
+            - img "Nguyễn Thị Kim"
+          - generic: Nguyễn Thị Kim
+        - cell "1876 – 1954"
+        - cell "Đã tạ thế"
+  - heading "V. Hậu Duệ Tiếp Nối (3 người con)" [level=2]
+  - generic: Thế hệ con cháu kế thừa
+  - table:
+    - rowgroup:
+      - row "Thứ tự Họ và tên con Giới tính Năm sinh – mất Đời thứ Ghi chú":
+        - columnheader "Thứ tự"
+        - columnheader "Họ và tên con"
+        - columnheader "Giới tính"
+        - columnheader "Năm sinh – mất"
+        - columnheader "Đời thứ"
+        - columnheader "Ghi chú"
+    - rowgroup:
+      - row "1 TK Trần Văn Khải Con trai 1897 – 1974 Đời thứ 2 Trưởng tộc đời thứ 2 · Trưởng Chi Giáp":
+        - cell "1"
+        - cell "TK Trần Văn Khải":
+          - generic "Trần Văn Khải":
+            - generic: TK
+          - generic: Trần Văn Khải
+        - cell "Con trai":
+          - generic: Con trai
+        - cell "1897 – 1974"
+        - cell "Đời thứ 2"
+        - cell "Trưởng tộc đời thứ 2 · Trưởng Chi Giáp"
+      - row "2 TP Trần Văn Phúc Con trai 1900 – 1981 Đời thứ 2 Trưởng Chi Ất":
+        - cell "2"
+        - cell "TP Trần Văn Phúc":
+          - generic "Trần Văn Phúc":
+            - generic: TP
+          - generic: Trần Văn Phúc
+        - cell "Con trai":
+          - generic: Con trai
+        - cell "1900 – 1981"
+        - cell "Đời thứ 2"
+        - cell "Trưởng Chi Ất"
+      - row "3 TH Trần Thị Hạnh Con gái ~1903 – Khoảng thập niên 1970 Đời thứ 2 Cô họ Đời thứ 2":
+        - cell "3"
+        - cell "TH Trần Thị Hạnh":
+          - generic "Trần Thị Hạnh":
+            - generic: TH
+          - generic: Trần Thị Hạnh
+        - cell "Con gái":
+          - generic: Con gái
+        - cell "~1903 – Khoảng thập niên 1970"
+        - cell "Đời thứ 2"
+        - cell "Cô họ Đời thứ 2"
+  - paragraph: "\"Hồ sơ được trích lục chính thức từ bộ Phả bản Dòng họ Dòng họ Trần – Đông Ngạc, lưu trữ an toàn trên hệ thống Gia Phả Việt. Dùng để đối chiếu, lưu niệm gia đình và truyền nối hậu thế.\""
+  - paragraph: NGƯỜI TRÍCH LỤC PHẢ KÝ
+  - paragraph: (Ký tên và ghi rõ họ tên)
+  - generic: Ban Quản Trị Phả Ký
+  - paragraph: Ban Trị Sự Tông Tộc
+  - paragraph: TRƯỞNG TỘC CHỨNG NHẬN
+  - paragraph: (Ký tên và thị thực dấu dòng họ)
+  - generic: TỘC ẤN
+  - generic: THỊ THỰC
+  - paragraph: Hội Đồng Tộc Biểu
+  - generic: Gia Phả Việt – Cội Nguồn (Dòng họ Trần – Đông Ngạc)
+  - generic: Khổ in A4 · Lưu truyền vạn đại

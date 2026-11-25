@@ -1,0 +1,8 @@
+{
+  "observedAfterNpmTest": [
+    "Ho_So_Gia_Pha_Trần_Văn_Khang.pdf",
+    "Sach_Pha_Ky_Dòng_họ_Trần__Đông_Ngạc.pdf"
+  ],
+  "action": "Restored both tracked PDFs to baseline with git restore -- *.pdf",
+  "cloudIssue": "GP-CLOUD-012"
+}

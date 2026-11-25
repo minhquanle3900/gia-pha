@@ -1,0 +1,96 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả" [active]:
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - button "Hậu duệ"
+  - button "Tổ tiên"
+  - button "Toàn cảnh"
+  - button "Khác":
+    - generic: Khác
+  - combobox:
+    - option "Tất cả chi" [selected]
+    - option "Chi Ất (Chi Thứ)"
+    - option "Chi Bính (Chi Nam Tiến)"
+    - option "Đại Tôn Họ Trần Đông Ngạc"
+    - option "Chi Giáp (Chi Trưởng)"
+  - textbox "Tìm thành viên..."
+  - button "Công cụ bổ trợ":
+  - generic: Hồ sơ nhanh thành viên
+  - button "Căn giữa vào người này":
+  - button "Đóng bảng tin":
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+    - generic "Đã tạ thế"
+  - generic: Đời thứ 1
+  - generic: ·
+  - generic: Đại Tôn Họ Trần Đông Ngạc
+  - heading "Trần Văn Lộc" [level=3]
+  - paragraph: 1872 – 1948
+  - paragraph: Thủy tổ chi phái cận đại
+  - paragraph:
+    - text: "Tên thường gọi:"
+    - strong: Cụ Đồ Lộc
+  - paragraph:
+    - text: "Tên húy:"
+    - strong: Trọng Lộc
+  - generic: "Ngày giỗ Âm lịch hàng năm:"
+  - paragraph: 22/10 Âm lịch (Giỗ Tổ Đại Tôn tại Từ đường Đông Ngạc)
+  - heading "Hôn phối (1)" [level=4]:
+    - generic: Hôn phối (1)
+  - generic "Nguyễn Thị Kim":
+    - img "Nguyễn Thị Kim"
+  - paragraph: Nguyễn Thị Kim
+  - paragraph: Chính thất
+  - heading "Thân sinh (Cha Mẹ)" [level=4]
+  - paragraph: Chưa ghi nhận cha mẹ.
+  - heading "Hậu duệ trực hệ (3)" [level=4]
+  - generic "Trần Văn Khải":
+    - generic: TK
+  - generic: Trần Văn Khải
+  - generic: Trai
+  - generic "Trần Văn Phúc":
+    - generic: TP
+  - generic: Trần Văn Phúc
+  - generic: Trai
+  - generic "Trần Thị Hạnh":
+    - generic: TH
+  - generic: Trần Thị Hạnh
+  - generic: Gái
+  - button "Xem hồ sơ đầy đủ & Tiểu sử":
+    - generic: Xem hồ sơ đầy đủ & Tiểu sử
+  - button "Sửa hồ sơ":
+    - generic: Sửa hồ sơ
+  - button "Quan hệ":
+    - generic: Quan hệ
+  - button "Tâm điểm cây"
+  - button "Tra xưng hô"
+  - button "Phóng to (Phím +)":
+  - button "25%"
+  - button "Thu nhỏ (Phím -)":
+  - button "Căn vừa màn hình (Phím 0)":
+  - button "Về cội nguồn / Thủy tổ":

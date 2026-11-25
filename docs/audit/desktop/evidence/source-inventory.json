@@ -1,0 +1,487 @@
+[
+  {
+    "file": ".env.example",
+    "lines": 10,
+    "bytes": 445
+  },
+  {
+    "file": ".gitignore",
+    "lines": 10,
+    "bytes": 80
+  },
+  {
+    "file": "bun.lock",
+    "lines": 1584,
+    "bytes": 192481
+  },
+  {
+    "file": "CHANGELOG.md",
+    "lines": 82,
+    "bytes": 5880
+  },
+  {
+    "file": "DATA_MODEL.md",
+    "lines": 506,
+    "bytes": 17300
+  },
+  {
+    "file": "GEDCOM_SUPPORT.md",
+    "lines": 182,
+    "bytes": 8987
+  },
+  {
+    "file": "IMPORT_EXPORT.md",
+    "lines": 78,
+    "bytes": 3859
+  },
+  {
+    "file": "index.html",
+    "lines": 28,
+    "bytes": 1955
+  },
+  {
+    "file": "metadata.json",
+    "lines": 8,
+    "bytes": 316
+  },
+  {
+    "file": "package.json",
+    "lines": 51,
+    "bytes": 1253
+  },
+  {
+    "file": "public\\icon.svg",
+    "lines": 43,
+    "bytes": 2155
+  },
+  {
+    "file": "README.md",
+    "lines": 126,
+    "bytes": 8820
+  },
+  {
+    "file": "server.ts",
+    "lines": 163,
+    "bytes": 6322
+  },
+  {
+    "file": "src\\App.tsx",
+    "lines": 270,
+    "bytes": 8938
+  },
+  {
+    "file": "src\\components\\AppShell.tsx",
+    "lines": 584,
+    "bytes": 24496
+  },
+  {
+    "file": "src\\components\\ConfirmDialog.tsx",
+    "lines": 83,
+    "bytes": 2530
+  },
+  {
+    "file": "src\\components\\FlexibleDateInput.tsx",
+    "lines": 163,
+    "bytes": 6018
+  },
+  {
+    "file": "src\\components\\GlobalSearch.tsx",
+    "lines": 550,
+    "bytes": 22669
+  },
+  {
+    "file": "src\\components\\HeritageAvatar.tsx",
+    "lines": 82,
+    "bytes": 2310
+  },
+  {
+    "file": "src\\components\\OnboardingTour.tsx",
+    "lines": 381,
+    "bytes": 15282
+  },
+  {
+    "file": "src\\components\\PrivacyPinModal.tsx",
+    "lines": 200,
+    "bytes": 7497
+  },
+  {
+    "file": "src\\components\\PWAWidgets.tsx",
+    "lines": 34,
+    "bytes": 1280
+  },
+  {
+    "file": "src\\context\\GenealogyContext.tsx",
+    "lines": 391,
+    "bytes": 11438
+  },
+  {
+    "file": "src\\database\\db.ts",
+    "lines": 478,
+    "bytes": 14450
+  },
+  {
+    "file": "src\\database\\seedData.ts",
+    "lines": 1276,
+    "bytes": 56599
+  },
+  {
+    "file": "src\\features\\backup\\BackupReminderBanner.tsx",
+    "lines": 151,
+    "bytes": 5762
+  },
+  {
+    "file": "src\\features\\book-print\\FamilyBookPage.tsx",
+    "lines": 900,
+    "bytes": 39506
+  },
+  {
+    "file": "src\\features\\family-tree\\FamilyTreePage.tsx",
+    "lines": 1389,
+    "bytes": 56996
+  },
+  {
+    "file": "src\\features\\family-tree\\FanChartLayout.tsx",
+    "lines": 566,
+    "bytes": 20044
+  },
+  {
+    "file": "src\\features\\family-tree\\treeLayout.ts",
+    "lines": 488,
+    "bytes": 15185
+  },
+  {
+    "file": "src\\features\\gallery\\AudioRecorderModal.tsx",
+    "lines": 457,
+    "bytes": 16840
+  },
+  {
+    "file": "src\\features\\gallery\\GalleryPage.tsx",
+    "lines": 645,
+    "bytes": 27601
+  },
+  {
+    "file": "src\\features\\history\\ClanHistorySection.tsx",
+    "lines": 906,
+    "bytes": 36730
+  },
+  {
+    "file": "src\\features\\history\\ClanInteractiveTimeline.tsx",
+    "lines": 471,
+    "bytes": 18862
+  },
+  {
+    "file": "src\\features\\history\\ClanMilestoneModal.tsx",
+    "lines": 327,
+    "bytes": 12832
+  },
+  {
+    "file": "src\\features\\history\\FamilyYearTimeline.tsx",
+    "lines": 958,
+    "bytes": 42955
+  },
+  {
+    "file": "src\\features\\history\\NotificationSettingsModal.tsx",
+    "lines": 353,
+    "bytes": 15381
+  },
+  {
+    "file": "src\\features\\import-export\\DataManagementPage.tsx",
+    "lines": 1090,
+    "bytes": 45689
+  },
+  {
+    "file": "src\\features\\journal\\ClanJournalModal.tsx",
+    "lines": 492,
+    "bytes": 19884
+  },
+  {
+    "file": "src\\features\\journal\\ClanJournalPage.tsx",
+    "lines": 677,
+    "bytes": 29032
+  },
+  {
+    "file": "src\\features\\kinship\\KinshipCalculatorModal.tsx",
+    "lines": 254,
+    "bytes": 11090
+  },
+  {
+    "file": "src\\features\\migration\\MigrationMapPage.tsx",
+    "lines": 280,
+    "bytes": 12113
+  },
+  {
+    "file": "src\\features\\people\\BiographySpeechPlayer.tsx",
+    "lines": 415,
+    "bytes": 16024
+  },
+  {
+    "file": "src\\features\\people\\DuplicateMergeModal.tsx",
+    "lines": 325,
+    "bytes": 12996
+  },
+  {
+    "file": "src\\features\\people\\MembersPage.tsx",
+    "lines": 799,
+    "bytes": 33189
+  },
+  {
+    "file": "src\\features\\people\\PersonFormModal.tsx",
+    "lines": 916,
+    "bytes": 39261
+  },
+  {
+    "file": "src\\features\\people\\PersonProfileView.tsx",
+    "lines": 881,
+    "bytes": 37350
+  },
+  {
+    "file": "src\\features\\people\\PersonReportModal.tsx",
+    "lines": 1179,
+    "bytes": 57778
+  },
+  {
+    "file": "src\\features\\relationships\\RelationshipEditorModal.tsx",
+    "lines": 464,
+    "bytes": 18759
+  },
+  {
+    "file": "src\\features\\rites\\RitesAssistantPage.tsx",
+    "lines": 596,
+    "bytes": 28799
+  },
+  {
+    "file": "src\\features\\rites\\UpcomingAnniversariesWidget.tsx",
+    "lines": 439,
+    "bytes": 19290
+  },
+  {
+    "file": "src\\features\\sharing\\QRShareModal.tsx",
+    "lines": 178,
+    "bytes": 6353
+  },
+  {
+    "file": "src\\features\\statistics\\FamilyLegacyScore.tsx",
+    "lines": 330,
+    "bytes": 14486
+  },
+  {
+    "file": "src\\features\\statistics\\FamilyStats.tsx",
+    "lines": 558,
+    "bytes": 20791
+  },
+  {
+    "file": "src\\features\\statistics\\legacyScoreUtils.ts",
+    "lines": 323,
+    "bytes": 11595
+  },
+  {
+    "file": "src\\features\\statistics\\LifespanDistributionChart.tsx",
+    "lines": 807,
+    "bytes": 30745
+  },
+  {
+    "file": "src\\features\\statistics\\lifespanUtils.ts",
+    "lines": 259,
+    "bytes": 6592
+  },
+  {
+    "file": "src\\hooks\\useAnniversaryNotifications.ts",
+    "lines": 135,
+    "bytes": 4355
+  },
+  {
+    "file": "src\\hooks\\usePreferences.ts",
+    "lines": 109,
+    "bytes": 3158
+  },
+  {
+    "file": "src\\hooks\\usePrivacyShield.ts",
+    "lines": 82,
+    "bytes": 2587
+  },
+  {
+    "file": "src\\hooks\\usePWAInstall.ts",
+    "lines": 74,
+    "bytes": 2226
+  },
+  {
+    "file": "src\\hooks\\useSpeechReader.ts",
+    "lines": 245,
+    "bytes": 7185
+  },
+  {
+    "file": "src\\index.css",
+    "lines": 300,
+    "bytes": 6635
+  },
+  {
+    "file": "src\\main.tsx",
+    "lines": 15,
+    "bytes": 364
+  },
+  {
+    "file": "src\\models\\genealogy.ts",
+    "lines": 215,
+    "bytes": 4563
+  },
+  {
+    "file": "src\\pages\\DashboardPage.tsx",
+    "lines": 400,
+    "bytes": 18288
+  },
+  {
+    "file": "src\\pages\\StatsDashboardPage.tsx",
+    "lines": 890,
+    "bytes": 36958
+  },
+  {
+    "file": "src\\services\\aiBiographyService.ts",
+    "lines": 93,
+    "bytes": 2717
+  },
+  {
+    "file": "src\\services\\backupReminderService.ts",
+    "lines": 134,
+    "bytes": 3568
+  },
+  {
+    "file": "src\\services\\csvImportService.ts",
+    "lines": 453,
+    "bytes": 11713
+  },
+  {
+    "file": "src\\services\\duplicateMergeService.ts",
+    "lines": 303,
+    "bytes": 9497
+  },
+  {
+    "file": "src\\services\\familyBookPdfService.ts",
+    "lines": 887,
+    "bytes": 28861
+  },
+  {
+    "file": "src\\services\\familyYearTimelineService.ts",
+    "lines": 452,
+    "bytes": 16770
+  },
+  {
+    "file": "src\\services\\gedcomService.ts",
+    "lines": 958,
+    "bytes": 28885
+  },
+  {
+    "file": "src\\services\\jsonBackupService.ts",
+    "lines": 285,
+    "bytes": 8700
+  },
+  {
+    "file": "src\\services\\kinshipService.ts",
+    "lines": 450,
+    "bytes": 15462
+  },
+  {
+    "file": "src\\services\\lunarCalendarService.ts",
+    "lines": 419,
+    "bytes": 19009
+  },
+  {
+    "file": "src\\services\\notificationService.ts",
+    "lines": 221,
+    "bytes": 7426
+  },
+  {
+    "file": "src\\services\\personPdfReportService.ts",
+    "lines": 591,
+    "bytes": 23135
+  },
+  {
+    "file": "src\\services\\searchService.ts",
+    "lines": 218,
+    "bytes": 7828
+  },
+  {
+    "file": "src\\services\\speechSynthesisService.ts",
+    "lines": 238,
+    "bytes": 8436
+  },
+  {
+    "file": "src\\services\\validationService.ts",
+    "lines": 266,
+    "bytes": 8893
+  },
+  {
+    "file": "src\\utils\\dateUtils.ts",
+    "lines": 150,
+    "bytes": 4669
+  },
+  {
+    "file": "src\\utils\\imageUtils.ts",
+    "lines": 91,
+    "bytes": 2862
+  },
+  {
+    "file": "src\\__tests__\\clanJournal.test.ts",
+    "lines": 116,
+    "bytes": 4360
+  },
+  {
+    "file": "src\\__tests__\\familyBookPdf.test.ts",
+    "lines": 85,
+    "bytes": 2984
+  },
+  {
+    "file": "src\\__tests__\\familyYearTimeline.test.ts",
+    "lines": 105,
+    "bytes": 4090
+  },
+  {
+    "file": "src\\__tests__\\genealogy.test.ts",
+    "lines": 951,
+    "bytes": 35194
+  },
+  {
+    "file": "src\\__tests__\\independentVerification.test.ts",
+    "lines": 477,
+    "bytes": 19712
+  },
+  {
+    "file": "src\\__tests__\\newFeatures.test.ts",
+    "lines": 148,
+    "bytes": 4732
+  },
+  {
+    "file": "src\\__tests__\\performanceBenchmark.ts",
+    "lines": 268,
+    "bytes": 9683
+  },
+  {
+    "file": "src\\__tests__\\personReport.test.ts",
+    "lines": 236,
+    "bytes": 7491
+  },
+  {
+    "file": "src\\__tests__\\statsAndAnniversary.test.ts",
+    "lines": 103,
+    "bytes": 4141
+  },
+  {
+    "file": "src\\__tests__\\treeUXAndPerformance.test.ts",
+    "lines": 135,
+    "bytes": 5696
+  },
+  {
+    "file": "tsconfig.json",
+    "lines": 29,
+    "bytes": 587
+  },
+  {
+    "file": "USER_GUIDE.md",
+    "lines": 262,
+    "bytes": 18131
+  },
+  {
+    "file": "vite.config.ts",
+    "lines": 101,
+    "bytes": 3189
+  }
+]

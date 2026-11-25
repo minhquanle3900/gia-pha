@@ -1,0 +1,39 @@
+{
+  "before": {
+    "branches": 1,
+    "people": 3,
+    "unions": 0,
+    "relationships": 2,
+    "lifeEvents": 1,
+    "media": 1,
+    "stories": 1
+  },
+  "after": {
+    "branches": 1,
+    "people": 2,
+    "unions": 0,
+    "relationships": 1,
+    "lifeEvents": 0,
+    "media": 1,
+    "stories": 1
+  },
+  "retained": [
+    "m0_parent",
+    "m0_target"
+  ],
+  "event": [],
+  "stories": [
+    {
+      "id": "m0_story",
+      "personIds": []
+    }
+  ],
+  "media": [
+    {
+      "id": "m0_image",
+      "personIds": [
+        "m0_target"
+      ]
+    }
+  ]
+}

@@ -1,0 +1,131 @@
+{
+  "app": "Gia Phả Việt – Cội Nguồn",
+  "schemaVersion": 1,
+  "exportedAt": "2026-11-25T00:00:00.000Z",
+  "settings": {
+    "id": "default",
+    "clanName": "M0 DEMO Desktop",
+    "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+    "ancestralHallLocation": "Địa điểm giả M0",
+    "rootPersonId": "m0_source",
+    "schemaVersion": 1,
+    "updatedAt": "2026-11-25T00:00:00.000Z"
+  },
+  "branches": [
+    {
+      "id": "m0_branch",
+      "name": "Chi M0 Demo",
+      "code": "M0",
+      "founderId": "m0_source",
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    }
+  ],
+  "people": [
+    {
+      "id": "m0_target",
+      "fullName": "M0 Nguyễn Trùng Tên",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "year",
+        "year": 1980
+      },
+      "branchId": "m0_branch",
+      "generation": 2,
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    },
+    {
+      "id": "m0_source",
+      "fullName": "M0 Nguyễn Trùng Tên",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "year",
+        "year": 1980
+      },
+      "branchId": "m0_branch",
+      "generation": 2,
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    },
+    {
+      "id": "m0_parent",
+      "fullName": "M0 Nguyễn Cha Mẫu",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "year",
+        "year": 1950
+      },
+      "branchId": "m0_branch",
+      "generation": 1,
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    }
+  ],
+  "unions": [],
+  "relationships": [
+    {
+      "id": "m0_rel_0",
+      "parentId": "m0_parent",
+      "childId": "m0_target",
+      "lineageType": "biological",
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    },
+    {
+      "id": "m0_rel_1",
+      "parentId": "m0_parent",
+      "childId": "m0_source",
+      "lineageType": "biological",
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    }
+  ],
+  "lifeEvents": [
+    {
+      "id": "m0_event_unique",
+      "personId": "m0_source",
+      "title": "M0 MỐC DUY NHẤT CẦN GIỮ",
+      "type": "other",
+      "date": {
+        "precision": "year",
+        "year": 2000
+      },
+      "description": "Chỉ có ở hồ sơ nguồn trước gộp",
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    }
+  ],
+  "media": [
+    {
+      "id": "m0_image",
+      "title": "Ảnh hình học tổng hợp M0",
+      "category": "document",
+      "mimeType": "image/svg+xml",
+      "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+      "personIds": [
+        "m0_source"
+      ],
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    }
+  ],
+  "stories": [
+    {
+      "id": "m0_story",
+      "title": "M0 Nhật ký kiểm thử",
+      "content": "Ghi chép tổng hợp, không có người thật",
+      "personIds": [
+        "m0_source"
+      ],
+      "mediaIds": [
+        "m0_image"
+      ],
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    }
+  ]
+}

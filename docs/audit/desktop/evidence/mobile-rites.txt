@@ -1,0 +1,151 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+  - button "Mở tìm kiếm thành viên":
+  - button "Chuyển đổi giao diện sáng tối":
+  - 'button "Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay."':
+  - button "Thêm thành viên mới vào gia phả":
+- main:
+  - heading "Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch" [level=2]:
+    - generic: Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch
+  - paragraph: Tự động tính ngày dương tương ứng, sổ văn khấn cổ truyền và danh mục chuẩn bị lễ giỗ họ.
+  - button "Lịch giỗ tiền nhân":
+    - generic: Lịch giỗ tiền nhân
+  - button "Sổ văn khấn":
+    - generic: Sổ văn khấn
+  - button "Phong tục 3 Miền":
+    - generic: Phong tục 3 Miền
+  - button "Nghi thức chuẩn bị":
+    - generic: Nghi thức chuẩn bị
+  - text: "Năm hiện tại:"
+  - strong: "2026"
+  - text: "(Can Chi:"
+  - strong: Bính Ngọ
+  - text: ). Con cháu nên lên kế hoạch cúng giỗ trước 1–2 tuần.
+  - button "Cài đặt thông báo":
+    - generic: Cài đặt thông báo
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+    - generic "Đã tạ thế"
+  - generic: Đã qua
+  - heading "Trần Văn Lộc" [level=3]
+  - paragraph: Ngày 22 tháng 10 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 18/11/2026"
+  - paragraph: "Vai vế: Thủy tổ chi phái cận đại"
+  - paragraph: Giỗ Tổ Đại Tôn tại Từ đường Đông Ngạc
+  - generic: Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc
+  - generic "Trần Văn Phúc":
+    - generic: TP
+    - generic "Đã tạ thế"
+  - generic: Còn 2 ngày
+  - heading "Trần Văn Phúc" [level=3]
+  - paragraph: Ngày 2 tháng 11 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 27/11/2026"
+  - paragraph: "Vai vế: Trưởng Chi Ất"
+  - paragraph: Giỗ Trưởng Chi Ất
+  - generic: Nghĩa trang Văn Điển, Hà Nội
+  - generic "Trần Văn Nghị":
+    - generic: TN
+    - generic "Đã tạ thế"
+  - generic: Còn 4 ngày
+  - heading "Trần Văn Nghị" [level=3]
+  - paragraph: Ngày 4 tháng 11 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 29/11/2026"
+  - paragraph: "Vai vế: Trưởng tộc đời thứ 3"
+  - paragraph: Giỗ Ông Trưởng Nghị
+  - generic: Nghĩa trang dòng họ Trần, Đông Ngạc
+  - generic "Nguyễn Thị Kim":
+    - img "Nguyễn Thị Kim"
+    - generic "Đã tạ thế"
+  - generic: Còn 14 ngày
+  - heading "Nguyễn Thị Kim" [level=3]
+  - paragraph: Ngày 14 tháng 11 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 9/12/2026"
+  - paragraph: "Vai vế: Tổ mẫu Đại Tôn"
+  - paragraph: Giỗ Tổ Mẫu
+  - generic: Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc
+  - generic "Phạm Thị Hiền":
+    - generic: PH
+    - generic "Đã tạ thế"
+  - generic: Còn 42 ngày
+  - heading "Phạm Thị Hiền" [level=3]
+  - paragraph: Ngày 12 tháng 12 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 6/1/2027"
+  - generic "Đặng Thị Nguyệt":
+    - generic: ĐN
+    - generic "Đã tạ thế"
+  - generic: Còn 125 ngày
+  - heading "Đặng Thị Nguyệt" [level=3]
+  - paragraph: Ngày 25 tháng 2 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 30/3/2027"
+  - paragraph: "Vai vế: Kế thất Trưởng chi Giáp"
+  - generic: Nghĩa trang dòng họ Trần, Đông Ngạc
+  - generic "Trần Thị Mai":
+    - generic: TM
+    - generic "Đã tạ thế"
+  - generic: Còn 265 ngày
+  - heading "Trần Thị Mai" [level=3]
+  - paragraph: Ngày 18 tháng 7 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 17/8/2027"
+  - generic "Nguyễn Thị Lan":
+    - generic: NL
+    - generic "Đã tạ thế"
+  - generic: Còn 289 ngày
+  - heading "Nguyễn Thị Lan" [level=3]
+  - paragraph: Ngày 12 tháng 8 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 10/9/2027"
+  - paragraph: "Vai vế: Chính thất Trưởng chi Giáp"
+  - paragraph: Giỗ mùa thu rằm tháng Tám
+  - generic: Nghĩa trang dòng họ Trần, Đông Ngạc
+  - generic "Trần Văn Tín":
+    - generic: TT
+    - generic "Đã tạ thế"
+  - generic: Còn 318 ngày
+  - heading "Trần Văn Tín" [level=3]
+  - paragraph: Ngày 12 tháng 9 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 9/10/2027"
+  - paragraph: "Vai vế: Liệt sĩ dòng họ"
+  - paragraph: Giỗ Liệt sĩ Trần Văn Tín
+  - generic: Nghĩa trang Liệt sĩ Trường Sơn, Quảng Trị
+  - generic "Lê Thị Thanh":
+    - generic: LT
+    - generic "Đã tạ thế"
+  - generic: Còn 325 ngày
+  - heading "Lê Thị Thanh" [level=3]
+  - paragraph: Ngày 19 tháng 9 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 16/10/2027"
+  - paragraph: "Vai vế: Nội tướng Chi Ất"
+  - paragraph: Giỗ cuối thu
+  - generic: Nghĩa trang Văn Điển, Hà Nội
+  - generic "Trần Hữu Đạt":
+    - generic: TĐ
+    - generic "Đã tạ thế"
+  - generic: Còn 334 ngày
+  - heading "Trần Hữu Đạt" [level=3]
+  - paragraph: Ngày 28 tháng 9 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 25/10/2027"
+  - paragraph: "Vai vế: Trưởng Chi Bính (Nam Tiến)"
+  - paragraph: Giỗ Trưởng Chi Bính
+  - generic: Hoa viên Nghĩa trang Bình Dương
+  - generic "Trần Văn Khải":
+    - generic: TK
+    - generic "Đã tạ thế"
+  - generic: Còn 342 ngày
+  - heading "Trần Văn Khải" [level=3]
+  - paragraph: Ngày 6 tháng 10 (Âm lịch)
+  - paragraph: "Dương lịch ước tính: 2/11/2027"
+  - paragraph: "Vai vế: Trưởng tộc đời thứ 2 · Trưởng Chi Giáp"
+  - paragraph: Giỗ Ông Cả tại nhà thờ Chi Giáp
+  - generic: Nghĩa trang dòng họ Trần, Đông Ngạc
+- navigation:
+  - button "Tổng quan":
+    - generic: Tổng quan
+  - button "Cây phả hệ":
+    - generic: Cây phả hệ
+  - button "Thành viên":
+    - generic: Thành viên
+  - button "Lễ giỗ" [active]:
+    - generic: Lễ giỗ
+  - button "Thêm...":
+    - generic: Thêm...

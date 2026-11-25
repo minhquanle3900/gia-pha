@@ -1,0 +1,102 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - heading "Danh Sách Thành Viên Gia Tộc" [level=2]
+  - paragraph:
+    - text: "Tổng số:"
+    - strong: "32"
+    - text: "thành viên • Đang hiển thị:"
+    - strong: "1"
+    - text: người
+  - button "Lọc trùng lặp":
+    - generic: Lọc trùng lặp
+  - button "Thêm thành viên":
+    - generic: Thêm thành viên
+  - generic: "Đời thứ:"
+  - button "Tất cả (32)"
+  - button "Đời 1 (2)"
+  - button "Đời 2 (6)"
+  - button "Đời 3 (9)"
+  - button "Đời 4 (8)"
+  - button "Đời 5 (6)"
+  - textbox "Tìm theo tên, tên húy, bí danh, quê quán, nơi an táng, vai vế (không dấu hoặc có dấu)..." [active]: M0 PWA
+  - button:
+  - button "Dạng lưới thẻ":
+  - button "Dạng danh sách bảng":
+  - combobox:
+    - 'option "Sắp xếp: Theo đời thứ" [selected]'
+    - 'option "Sắp xếp: Tên A-Z (Chữ cái)"'
+    - 'option "Sắp xếp: Năm sinh tăng dần"'
+  - generic: Chi họ
+  - combobox:
+    - option "Mọi chi họ (32)" [selected]
+    - option "Chi Ất (Chi Thứ) (7)"
+    - option "Chi Bính (Chi Nam Tiến) (6)"
+    - option "Đại Tôn Họ Trần Đông Ngạc (3)"
+    - option "Chi Giáp (Chi Trưởng) (17)"
+  - generic: Đời thứ
+  - combobox:
+    - option "Mọi thế hệ (32)" [selected]
+    - option "Đời thứ 1 (2)"
+    - option "Đời thứ 2 (6)"
+    - option "Đời thứ 3 (9)"
+    - option "Đời thứ 4 (8)"
+    - option "Đời thứ 5 (6)"
+  - generic: Trạng thái sinh thời
+  - combobox:
+    - option "Tất cả (32)" [selected]
+    - option "Hiện tiền (Còn sống) (19)"
+    - option "Đã tạ thế (13)"
+    - option "Có ngày giỗ Âm lịch (12)"
+  - generic: Giới tính
+  - combobox:
+    - option "Tất cả giới tính (32)" [selected]
+    - option "Nam giới (16)"
+    - option "Nữ giới (16)"
+  - generic: "Phái trực thuộc:"
+  - button "Tất cả phái"
+  - button "Gốc Tổ Đông Ngạc"
+  - button "Phái Bắc"
+  - button "Phái Đoài"
+  - button "Phái Đông"
+  - button "Phái Sài Gòn"
+  - generic: "Bộ lọc đang áp dụng:"
+  - generic: "Tìm: \"M0 PWA\""
+  - button:
+  - button "Xóa bộ lọc":
+    - generic: Xóa bộ lọc
+  - generic "M0 PWA DEMO Ngoại Tuyến":
+    - generic: MT
+    - generic "Hiện tiền (còn sống)"
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "M0 PWA DEMO Ngoại Tuyến" [level=3]
+  - paragraph: Còn sống
+  - generic: Chi Ất (Chi Thứ)
+  - generic: Còn sống

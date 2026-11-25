@@ -1,0 +1,18 @@
+# Bàn giao M0 Cloud → Codex Desktop
+
+Baseline `1cec38dc77ea46260fa0608c931b22e0b508d531`. Làm việc trên nhánh Desktop riêng, đối chiếu nhận xét qua GitHub và dùng profile trình duyệt với dữ liệu tự tạo. Danh mục F01–F33 xem [Feature Matrix](02_FEATURE_MATRIX.md). ID lỗi và nơi sửa xem [backlog](08_REMEDIATION_BACKLOG.md). Yêu cầu Windows, Chrome và Edge stable, viewport desktop 1366×768, mobile 320–390 px và zoom 200% ở các kiểm tra keyboard. Ghi SHA, browser version, build/dev, profile mới/cũ và số liệu fixture. Các hành vi cloud chưa đo được mang trạng thái Desktop pending.
+
+| Case | Feature / Issue | Thao tác và kết quả mong đợi | Bằng chứng |
+|---|---|---|---|
+| D01 | F05, F11–F13 · GP-CLOUD-001/002 | Tạo hai hồ sơ cùng tên/năm, thêm mốc duy nhất vào hồ sơ nguồn trên timeline, gộp vào đích và reload. Đích giữ mốc, nguồn biến mất, các link story/media hợp lệ. So JSON trước/sau từ fixture. Với test fault injection riêng, một lỗi bảo toàn toàn bộ dữ liệu ban đầu. | Preview gộp, timeline trước/sau, số record |
+| D02 | F02, F04, F06–F10 · GP-CLOUD-004 | Lập ba đời, hai hôn phối độc lập, con sinh học và con nuôi/con riêng. Kiểm kê cặp vợ/chồng khi mở từ cả hai đầu, chu trình bị ngăn, cây và tra vai vế vẫn nhất quán. Xóa một người mẫu, kiểm người còn lại và liên kết tư liệu. | Cây, hồ sơ, cảnh báo quan hệ |
+| D03 | F14, F21–F24 · GP-CLOUD-003/007 | Xuất JSON fixture có ảnh/âm thanh, đổi origin/profile, khôi phục, so ID, quan hệ, mốc và phát lại. Kiểm import CSV/GEDCOM mẫu tiếng Việt, preview/hủy/confirm và kết quả đúng; hủy form sau chọn ảnh giữ nguyên kho. | Số record 8 store, preview, ảnh và trạng thái phát |
+| D04 | F04, F19, F26, F29 · GP-CLOUD-005/008/013 | Tạo hồ sơ mẫu có dấu tiếng Việt và ký tự văn bản thông thường như ampersand, khóa/mở PIN khi hồ sơ hiện, đổi tab và reload. So trường chủ sản phẩm cam kết che. Xuất PDF, kiểm ký tự giữ nguyên, tải/quét QR và đối chiếu trường chia sẻ. | Trước/sau PIN, PDF, mã QR mẫu |
+| D05 | F30 · GP-CLOUD-006/010/011 | Chạy production ở localhost, kiểm manifest và network icon có đúng MIME, cài PWA, mở một lần online, đóng app và mở lại offline. Mở cây, hồ sơ và kho. Lặp với bản cập nhật ở profile test. | Manifest/icons, install, app offline, timing |
+| D06 | F27–F28 · GP-CLOUD-009 | Dùng API mock local. So bản xem trước các trường sẽ gửi, mở draft phản hồi có dữ kiện thiếu, thử lỗi mock, xác nhận chỉ lưu khi duyệt. Đọc bằng voice Việt và thử tạm dừng/dừng/chuyển hồ sơ. | UI opt-in/draft/lỗi, voice và log mock đã rút gọn |
+| D07 | F01, F03, F25, F31–F32 | Dùng cả bàn phím và touch: lần đầu tour, menu mobile, tìm kiếm tiếng Việt, chọn kết quả, quay lại, đóng modal bằng Escape, kiểm vòng Tab và vị trí focus; đối chiếu theme. | Light/dark, 320 px và zoom 200%, focus |
+| D08 | F15–F17, F33 | Cài fixture ngày giỗ cận 30 ngày và mốc âm lịch nhuận, đổi quyền thông báo allowed/denied, đối chiếu thống kê. Kiểm bản đồ với địa chỉ giả và link tạo đúng. | Timeline và thông báo, thống kê, bản đồ |
+| D09 | F02, F18–F20 · GP-CLOUD-010/012 | So sách, báo cáo và SVG trên màn hình và trong trình xem độc lập; kiểm tiếng Việt, hình ảnh, ngắt trang. Đo pan/zoom và mount cây ở 500/2.000/5.000 node. | PDF/SVG mẫu, trace render và FPS |
+| D10 | F14, F24, F30 | Bật/từ chối mic, thử input kích cỡ thực tế và luồng quota với profile test, đóng rồi mở lại. Xác nhận lỗi cụ thể và khả năng nhập lại từ backup. | Hộp thoại quyền, kho tư liệu và kết quả phục hồi |
+
+Báo trạng thái PASS/FAIL/BLOCKED theo case. Với FAIL, ghi GP-CLOUD nếu đã có, thứ tự thao tác, expected/actual, tần suất, SHA, console/network đã loại bỏ dữ liệu nhạy cảm và ảnh chụp tương ứng. Nếu có lỗi mới, báo điều phối viên để gán mã. Ưu tiên D01, D03, D04, D05 và D06 trước khi xét RC.

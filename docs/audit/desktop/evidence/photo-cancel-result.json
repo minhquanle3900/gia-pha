@@ -1,0 +1,20 @@
+{
+  "before": {
+    "branches": 1,
+    "people": 2,
+    "unions": 0,
+    "relationships": 1,
+    "lifeEvents": 0,
+    "media": 1,
+    "stories": 1
+  },
+  "after": {
+    "branches": 1,
+    "people": 2,
+    "unions": 0,
+    "relationships": 1,
+    "lifeEvents": 0,
+    "media": 2,
+    "stories": 1
+  }
+}

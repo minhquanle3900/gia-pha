@@ -1,0 +1,193 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+  - button "Mở tìm kiếm thành viên":
+  - button "Chuyển đổi giao diện sáng tối":
+  - 'button "Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay."':
+  - button "Thêm thành viên mới vào gia phả":
+- main:
+  - heading "Dashboard Thống Kê Phả Hệ & Nhân Khẩu" [level=2]
+  - paragraph:
+    - text: Trực quan hóa đa chiều cơ cấu thế hệ, tỷ lệ nam nữ và tuổi thọ gia tộc họ
+    - strong: Dòng họ Trần – Đông Ngạc
+    - text: bằng biểu đồ Recharts.
+  - button "Trang Tổng quan":
+    - generic: Trang Tổng quan
+  - button "Xem Cây gia phả":
+    - generic: Xem Cây gia phả
+  - button "In trang thống kê này":
+  - generic: "Lọc dữ liệu:"
+  - combobox:
+    - option "Tất cả chi họ (31)" [selected]
+    - option "Chi Ất (Chi Thứ)"
+    - option "Chi Bính (Chi Nam Tiến)"
+    - option "Đại Tôn Họ Trần Đông Ngạc"
+    - option "Chi Giáp (Chi Trưởng)"
+  - button "Tất cả (31)"
+  - button "Còn sống"
+  - button "Đã mất"
+  - text: Hiển thị
+  - strong: "31"
+  - text: / 31 thành viên
+  - generic: Tổng nhân khẩu
+  - generic: "31"
+  - generic: người
+  - paragraph: 18 còn sống · 13 đã mất
+  - generic: Tỷ lệ Nam / Nữ
+  - generic: 48%
+  - generic: /
+  - generic: 52%
+  - paragraph: 15 Nam · 16 Nữ
+  - generic: Số thế hệ phả hệ
+  - generic: "5"
+  - generic: đời
+  - paragraph: "Đời đông nhất: Đời 3 (9 vị)"
+  - generic: Độ tuổi bình quân
+  - generic: "64.4"
+  - generic: tuổi
+  - paragraph: Tính trên hồ sơ có dữ liệu năm sinh
+  - heading "Biểu Đồ Số Lượng Thành Viên Theo Thế Hệ" [level=3]
+  - paragraph: Phân bố số lượng Nam và Nữ trong dòng tộc qua từng đời thứ (dùng Recharts)
+  - button "Cột đôi (Grouped)"
+  - button "Xếp chồng (Stacked)"
+  - list:
+    - img "female legend icon"
+    - generic: Nữ giới
+    - img "male legend icon"
+    - generic: Nam giới
+  - application:
+    - generic: Đời 1
+    - generic: Đời 2
+    - generic: Đời 3
+    - generic: Đời 4
+    - generic: Đời 5
+    - generic: 0 ng
+    - generic: 2 ng
+    - generic: 4 ng
+    - generic: 6 ng
+    - generic: 8 ng
+  - paragraph: "* Nhấp vào cột bất kỳ để xem danh sách thành viên chi tiết của thế hệ tương ứng bên dưới."
+  - heading "Tỷ Lệ Nam / Nữ Trong Dòng Họ" [level=3]
+  - paragraph: Cơ cấu cân bằng giới tính nội ngoại trong gia phả
+  - application
+  - generic: 48%
+  - generic: Nam giới
+  - generic: Nam giới
+  - generic: 15 người
+  - generic: (48%)
+  - generic: Nữ giới
+  - generic: 16 người
+  - generic: (52%)
+  - heading "Phân Bổ Nhân Khẩu Theo Chi Họ" [level=3]
+  - paragraph: Quy mô các chi phái trong toàn thể dòng họ
+  - generic: 4 chi phái
+  - application:
+    - generic: "0"
+    - generic: "5"
+    - generic: "10"
+    - generic: "15"
+    - generic: "20"
+    - generic: Chi Giáp(Chi Trưởng)
+    - generic: Chi Bính(Chi NamTiến)
+    - generic: Chi Ất (ChiThứ)
+    - generic: Đại Tôn HọTrần ĐôngNgạc
+  - heading "Độ Tuổi Bình Quân Qua Các Thế Hệ" [level=3]
+  - paragraph: Xu hướng biến thiên tuổi thọ và độ tuổi từng đời
+  - generic: "Trung bình: 64.4 tuổi"
+  - application:
+    - generic: Đời 1
+    - generic: Đời 2
+    - generic: Đời 3
+    - generic: Đời 4
+    - generic: Đời 5
+    - generic: 0t
+    - generic: 25t
+    - generic: 50t
+    - generic: 75t
+    - generic: 100t
+    - generic: "TB: 64.4t"
+  - heading "Bảng Tổng Hợp Số Liệu Nhân Khẩu Từng Thế Hệ" [level=3]
+  - paragraph: Chi tiết số lượng nam, nữ, trạng thái và tỷ lệ nhân khẩu qua các đời
+  - text: "Tổng:"
+  - strong: "31"
+  - text: thành viên
+  - table:
+    - rowgroup:
+      - row "Thế hệ Nam Nữ Tỷ lệ Nam / Nữ Còn sống Đã mất Tổng số % Toàn dòng họ":
+        - columnheader "Thế hệ"
+        - columnheader "Nam"
+        - columnheader "Nữ"
+        - columnheader "Tỷ lệ Nam / Nữ"
+        - columnheader "Còn sống"
+        - columnheader "Đã mất"
+        - columnheader "Tổng số"
+        - columnheader "% Toàn dòng họ"
+    - rowgroup:
+      - row "Đời 1 1 1 50% / 50% 0 2 2 6%":
+        - cell "Đời 1":
+          - generic: Đời 1
+        - cell "1"
+        - cell "1"
+        - cell "50% / 50%"
+        - cell "0"
+        - cell "2"
+        - cell "2"
+        - cell "6%":
+          - generic: 6%
+      - row "Đời 2 2 4 33% / 67% 0 6 6 19%":
+        - cell "Đời 2":
+          - generic: Đời 2
+        - cell "2"
+        - cell "4"
+        - cell "33% / 67%"
+        - cell "0"
+        - cell "6"
+        - cell "6"
+        - cell "19%":
+          - generic: 19%
+      - row "Đời 3 5 4 56% / 44% 4 5 9 29%":
+        - cell "Đời 3":
+          - generic: Đời 3
+        - cell "5"
+        - cell "4"
+        - cell "56% / 44%"
+        - cell "4"
+        - cell "5"
+        - cell "9"
+        - cell "29%":
+          - generic: 29%
+      - row "Đời 4 4 4 50% / 50% 8 0 8 26%":
+        - cell "Đời 4":
+          - generic: Đời 4
+        - cell "4"
+        - cell "4"
+        - cell "50% / 50%"
+        - cell "8"
+        - cell "0"
+        - cell "8"
+        - cell "26%":
+          - generic: 26%
+      - row "Đời 5 3 3 50% / 50% 6 0 6 19%":
+        - cell "Đời 5":
+          - generic: Đời 5
+        - cell "3"
+        - cell "3"
+        - cell "50% / 50%"
+        - cell "6"
+        - cell "0"
+        - cell "6"
+        - cell "19%":
+          - generic: 19%
+- navigation:
+  - button "Tổng quan":
+    - generic: Tổng quan
+  - button "Cây phả hệ":
+    - generic: Cây phả hệ
+  - button "Thành viên":
+    - generic: Thành viên
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm...":
+    - generic: Thêm...
+- generic: "25"

@@ -1,0 +1,88 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: M0 DEMO Desktop
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Quản lý dữ liệu":
+      - generic: Quản lý dữ liệu
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - heading "Quản Lý Dữ Liệu & Sao Lưu" [level=2]
+  - paragraph: Dữ liệu gia phả được lưu trữ an toàn trong IndexedDB của trình duyệt. Hãy thường xuyên xuất bản sao lưu về máy tính hoặc điện thoại.
+  - heading "Thông Tin Chung Về Dòng Tộc" [level=3]
+  - paragraph: Cập nhật tên họ, gia huấn, địa chỉ từ đường và nhân vật khởi thủy.
+  - generic: Tên dòng họ / Gia tộc
+  - textbox: M0 DEMO Desktop
+  - generic: Nhân vật khởi thủy (Gốc cây gia phả)
+  - combobox:
+    - option "-- Tự động chọn đời 1 --" [selected]
+    - option "M0 Nguyễn Cha Mẫu (Đời 1)"
+    - option "M0 Nguyễn Trùng Tên (Đời 2)"
+  - generic: Gia huấn / Câu đối / Tôn chỉ dòng họ
+  - textbox: Dữ liệu tổng hợp phục vụ kiểm thử
+  - generic: Địa chỉ Nhà thờ tổ / Từ đường dòng họ
+  - textbox: Địa điểm giả M0
+  - button "Lưu thông tin":
+    - generic: Lưu thông tin
+  - heading "Quản Lý Chi Họ & Phân Nhánh (1)" [level=3]
+  - paragraph: Tổ chức các chi trưởng, chi thứ hoặc chi di cư để lọc cây gia phả và bản đồ địa lý.
+  - button "Thêm chi họ":
+    - generic: Thêm chi họ
+  - heading "Chi M0 Demo" [level=4]
+  - generic: M0
+  - generic: 2 thành viên
+  - button "Sửa chi họ":
+  - button "Xóa chi họ":
+  - heading "Sao Lưu Toàn Vẹn JSON (Định Dạng Chuẩn)" [level=3]
+  - paragraph: Xuất hoặc nhập tệp sao lưu .json trọn vẹn (bao gồm mọi hồ sơ, quan hệ, chi họ và ảnh tư liệu Base64).
+  - button "Thay thế toàn bộ"
+  - button "Gộp bổ sung"
+  - heading "Xuất bản sao lưu .JSON" [level=4]
+  - paragraph: Tải tệp sao lưu về máy. Bạn có thể chuyển tệp này sang máy khác hoặc gửi cho người thân trong dòng họ.
+  - button "Tải bản sao lưu JSON":
+    - generic: Tải bản sao lưu JSON
+  - heading "Khôi phục từ tệp .JSON" [level=4]
+  - paragraph: Chọn tệp JSON đã lưu trước đó để phục hồi toàn bộ dữ liệu dòng họ vào trình duyệt.
+  - generic: Chọn tệp sao lưu JSON...
+  - heading "Trao Đổi Chuẩn GEDCOM 5.5.1 (Quốc Tế)" [level=3]
+  - paragraph: Tương thích với các ứng dụng phả hệ thế giới (Gramps, MyHeritage, FamilySearch). Hỗ trợ mã hóa UTF-8 tiếng Việt.
+  - heading "Xuất tệp GEDCOM (.ged)" [level=4]
+  - paragraph: Xuất cấu trúc cây gia phả cùng các thẻ bổ sung tiếng Việt (đời thứ, chi họ, tên húy...).
+  - button "Xuất tệp GEDCOM":
+    - generic: Xuất tệp GEDCOM
+  - heading "Nhập tệp GEDCOM (.ged)" [level=4]
+  - paragraph: Nhập phả hệ từ các phần mềm khác để tiếp tục quản lý và vẽ cây trong Gia Phả Việt.
+  - generic: Chọn tệp GEDCOM...
+  - heading "Nhập Dữ Liệu Hàng Loạt Từ Excel / CSV" [level=3]
+  - paragraph: Nhập hàng chục hoặc hàng trăm thành viên cùng lúc. Tự động liên kết quan hệ cha mẹ, vợ chồng và chi họ.
+  - heading "Tải tệp mẫu Excel (.csv)" [level=4]
+  - paragraph: Tệp mẫu tiếng Việt chuẩn UTF-8 có sẵn tiêu đề các cột và 3 dòng ví dụ mẫu mực để bạn dễ dàng điền tiếp.
+  - button "Tải File Mẫu Excel / CSV":
+    - generic: Tải File Mẫu Excel / CSV
+  - heading "Tải lên danh sách thành viên" [level=4]
+  - paragraph: Chọn file CSV đã điền thông tin để xem trước bảng đối chiếu và tự động dựng cây gia phả.
+  - generic: Chọn tệp CSV / Excel...
+  - heading "Khôi Phục Dữ Liệu Mẫu (Demo Reset)" [level=3]
+  - paragraph: Nạp lại bộ dữ liệu phả hệ mẫu mực 5 thế hệ (Dòng họ Trần – Đông Ngạc) với đầy đủ chân dung, chi họ, đa hôn phối, ngày giỗ âm lịch và câu chuyện gia tộc.
+  - button "Nạp lại dữ liệu mẫu":
+    - generic: Nạp lại dữ liệu mẫu

@@ -1,0 +1,38 @@
+[
+  {
+    "url": "/manifest.webmanifest",
+    "status": 200,
+    "type": "application/manifest+json",
+    "bodyPrefix": "{\"name\":\"Gia Phả Việt – Cội Nguồn\",\"short_name\":\"Gia Phả Việt\",\"description\":\"Ứn"
+  },
+  {
+    "url": "/pwa-192x192.png",
+    "status": 200,
+    "type": "text/html",
+    "bodyPrefix": "<!doctype html>\n<html lang=\"vi\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta"
+  },
+  {
+    "url": "/pwa-512x512.png",
+    "status": 200,
+    "type": "text/html",
+    "bodyPrefix": "<!doctype html>\n<html lang=\"vi\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta"
+  },
+  {
+    "url": "/pwa-maskable-512x512.png",
+    "status": 200,
+    "type": "text/html",
+    "bodyPrefix": "<!doctype html>\n<html lang=\"vi\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta"
+  },
+  {
+    "url": "/apple-touch-icon.png",
+    "status": 200,
+    "type": "text/html",
+    "bodyPrefix": "<!doctype html>\n<html lang=\"vi\">\n  <head>\n    <meta charset=\"UTF-8\" />\n    <meta"
+  },
+  {
+    "url": "/sw.js",
+    "status": 200,
+    "type": "text/javascript",
+    "bodyPrefix": "if(!self.define){let e,s={};const n=(n,i)=>(n=new URL(n+\".js\",i).href,s[n]||new "
+  }
+]

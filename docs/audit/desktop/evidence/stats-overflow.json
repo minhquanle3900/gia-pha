@@ -1,0 +1,247 @@
+[
+  {
+    "class": "w-full text-xs text-left",
+    "right": 596.6000003814697,
+    "tag": "TABLE",
+    "text": "Thế hệNamNữTỷ lệ Nam / NữCòn sốngĐã mấtTổng số% Toàn dòng họĐời 11150% / 50%0226%Đời 22433% / 67%066",
+    "width": 579
+  },
+  {
+    "class": "bg-[#FAF7F2] text-[#4A3B2C] uppercase font-bold tracking-wider border-b border-[#E7DFD4]",
+    "right": 596.6000003814697,
+    "tag": "THEAD",
+    "text": "Thế hệNamNữTỷ lệ Nam / NữCòn sốngĐã mấtTổng số% Toàn dòng họ",
+    "width": 579
+  },
+  {
+    "class": "",
+    "right": 596.6000003814697,
+    "tag": "TR",
+    "text": "Thế hệNamNữTỷ lệ Nam / NữCòn sốngĐã mấtTổng số% Toàn dòng họ",
+    "width": 579
+  },
+  {
+    "class": "py-3 px-4 text-center font-bold",
+    "right": 456.5999984741211,
+    "tag": "TH",
+    "text": "Tổng số",
+    "width": 70.0374984741211
+  },
+  {
+    "class": "py-3 px-4 text-right",
+    "right": 596.6000061035156,
+    "tag": "TH",
+    "text": "% Toàn dòng họ",
+    "width": 140
+  },
+  {
+    "class": "divide-y divide-[#F0EAE1]",
+    "right": 596.6000003814697,
+    "tag": "TBODY",
+    "text": "Đời 11150% / 50%0226%Đời 22433% / 67%06619%Đời 35456% / 44%45929%Đời 44450% / 50%80826%Đời 53350% / ",
+    "width": 579
+  },
+  {
+    "class": "cursor-pointer transition-colors hover:bg-stone-50",
+    "right": 596.6000003814697,
+    "tag": "TR",
+    "text": "Đời 11150% / 50%0226%",
+    "width": 579
+  },
+  {
+    "class": "py-3 px-4 text-center font-bold text-[#1F1913]",
+    "right": 456.5999984741211,
+    "tag": "TD",
+    "text": "2",
+    "width": 70.0374984741211
+  },
+  {
+    "class": "py-3 px-4 text-right",
+    "right": 596.6000061035156,
+    "tag": "TD",
+    "text": "6%",
+    "width": 140
+  },
+  {
+    "class": "flex items-center justify-end gap-2",
+    "right": 580.6000061035156,
+    "tag": "DIV",
+    "text": "6%",
+    "width": 108
+  },
+  {
+    "class": "w-16 h-2 rounded-full bg-stone-100 overflow-hidden",
+    "right": 536.6000061035156,
+    "tag": "DIV",
+    "text": "",
+    "width": 64
+  },
+  {
+    "class": "h-full bg-[#1B3B2B] rounded-full",
+    "right": 480.2750062942505,
+    "tag": "DIV",
+    "text": "",
+    "width": 7.675000190734863
+  },
+  {
+    "class": "font-mono text-stone-600 w-9",
+    "right": 580.6000366210938,
+    "tag": "SPAN",
+    "text": "6%",
+    "width": 36
+  },
+  {
+    "class": "cursor-pointer transition-colors hover:bg-stone-50",
+    "right": 596.6000003814697,
+    "tag": "TR",
+    "text": "Đời 22433% / 67%06619%",
+    "width": 579
+  },
+  {
+    "class": "py-3 px-4 text-center font-bold text-[#1F1913]",
+    "right": 456.5999984741211,
+    "tag": "TD",
+    "text": "6",
+    "width": 70.0374984741211
+  },
+  {
+    "class": "py-3 px-4 text-right",
+    "right": 596.6000061035156,
+    "tag": "TD",
+    "text": "19%",
+    "width": 140
+  },
+  {
+    "class": "flex items-center justify-end gap-2",
+    "right": 580.6000061035156,
+    "tag": "DIV",
+    "text": "19%",
+    "width": 108
+  },
+  {
+    "class": "w-16 h-2 rounded-full bg-stone-100 overflow-hidden",
+    "right": 536.6000061035156,
+    "tag": "DIV",
+    "text": "",
+    "width": 64
+  },
+  {
+    "class": "h-full bg-[#1B3B2B] rounded-full",
+    "right": 496.9125061035156,
+    "tag": "DIV",
+    "text": "",
+    "width": 24.3125
+  },
+  {
+    "class": "font-mono text-stone-600 w-9",
+    "right": 580.6000366210938,
+    "tag": "SPAN",
+    "text": "19%",
+    "width": 36
+  },
+  {
+    "class": "cursor-pointer transition-colors hover:bg-stone-50",
+    "right": 596.6000003814697,
+    "tag": "TR",
+    "text": "Đời 35456% / 44%45929%",
+    "width": 579
+  },
+  {
+    "class": "py-3 px-4 text-center font-bold text-[#1F1913]",
+    "right": 456.5999984741211,
+    "tag": "TD",
+    "text": "9",
+    "width": 70.0374984741211
+  },
+  {
+    "class": "py-3 px-4 text-right",
+    "right": 596.6000061035156,
+    "tag": "TD",
+    "text": "29%",
+    "width": 140
+  },
+  {
+    "class": "flex items-center justify-end gap-2",
+    "right": 580.6000061035156,
+    "tag": "DIV",
+    "text": "29%",
+    "width": 108
+  },
+  {
+    "class": "w-16 h-2 rounded-full bg-stone-100 overflow-hidden",
+    "right": 536.6000061035156,
+    "tag": "DIV",
+    "text": "",
+    "width": 64
+  },
+  {
+    "class": "h-full bg-[#1B3B2B] rounded-full",
+    "right": 509.7125053405762,
+    "tag": "DIV",
+    "text": "",
+    "width": 37.11249923706055
+  },
+  {
+    "class": "font-mono text-stone-600 w-9",
+    "right": 580.6000366210938,
+    "tag": "SPAN",
+    "text": "29%",
+    "width": 36
+  },
+  {
+    "class": "cursor-pointer transition-colors hover:bg-stone-50",
+    "right": 596.6000003814697,
+    "tag": "TR",
+    "text": "Đời 44450% / 50%80826%",
+    "width": 579
+  },
+  {
+    "class": "py-3 px-4 text-center font-bold text-[#1F1913]",
+    "right": 456.5999984741211,
+    "tag": "TD",
+    "text": "8",
+    "width": 70.0374984741211
+  },
+  {
+    "class": "py-3 px-4 text-right",
+    "right": 596.6000061035156,
+    "tag": "TD",
+    "text": "26%",
+    "width": 140
+  },
+  {
+    "class": "flex items-center justify-end gap-2",
+    "right": 580.6000061035156,
+    "tag": "DIV",
+    "text": "26%",
+    "width": 108
+  },
+  {
+    "class": "w-16 h-2 rounded-full bg-stone-100 overflow-hidden",
+    "right": 536.6000061035156,
+    "tag": "DIV",
+    "text": "",
+    "width": 64
+  },
+  {
+    "class": "h-full bg-[#1B3B2B] rounded-full",
+    "right": 505.8750076293946,
+    "tag": "DIV",
+    "text": "",
+    "width": 33.275001525878906
+  },
+  {
+    "class": "font-mono text-stone-600 w-9",
+    "right": 580.6000366210938,
+    "tag": "SPAN",
+    "text": "26%",
+    "width": 36
+  },
+  {
+    "class": "cursor-pointer transition-colors hover:bg-stone-50",
+    "right": 596.6000003814697,
+    "tag": "TR",
+    "text": "Đời 53350% / 50%60619%",
+    "width": 579
+  }
+]

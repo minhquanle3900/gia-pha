@@ -1,0 +1,60 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - heading "Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch" [level=2]:
+    - generic: Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch
+  - paragraph: Tự động tính ngày dương tương ứng, sổ văn khấn cổ truyền và danh mục chuẩn bị lễ giỗ họ.
+  - button "Lịch giỗ tiền nhân":
+    - generic: Lịch giỗ tiền nhân
+  - button "Sổ văn khấn" [active]:
+    - generic: Sổ văn khấn
+  - button "Phong tục 3 Miền":
+    - generic: Phong tục 3 Miền
+  - button "Nghi thức chuẩn bị":
+    - generic: Nghi thức chuẩn bị
+  - heading "Chọn Bài Văn Khấn" [level=3]
+  - heading "Văn Khấn Thủy Tổ & Tiên Hiền Dòng Tộc (Đại Lễ Tế Tổ)" [level=4]
+  - paragraph: Dành cho ngày Giỗ Tổ toàn dòng họ, ngày Tế xuân rằm tháng Giêng
+  - heading "Văn Khấn Cúng Giỗ Trưởng Tộc / Trưởng Chi (Miền Bắc)" [level=4]
+  - paragraph: Dành cho ngày giỗ các bậc Trưởng tộc, Trưởng chi rường cột
+  - heading "Văn Khấn Cúng Giỗ Thường Tiền Nhân (Cát Kỵ - Chung 3 Miền)" [level=4]
+  - paragraph: Dành cho ngày giỗ ông bà, cha mẹ tại tư gia hoặc chi họ
+  - heading "Văn Khấn Lễ Tiên Thường (Cúng Chiều Chiều Trước Giỗ - Miền Trung)" [level=4]
+  - paragraph: Dành cho lễ Tiên Thường cúng vào chiều trước ngày giỗ chính tại Huế và Miền Trung
+  - heading "Văn Khấn Đám Giỗ Gia Tiên Nam Bộ (Ấm Tình Hiếu Nghĩa)" [level=4]
+  - paragraph: Dành cho ngày đám giỗ tại miền Nam và đồng bằng sông Cửu Long
+  - heading "Văn Khấn Tiết Thanh Minh & Tảo Mộ Tiên Tộc" [level=4]
+  - paragraph: Dành cho lễ Tảo mộ, dọn dẹp phần mộ tổ tiên tháng 3 Âm lịch
+  - generic: "Người đứng cúng (Tín chủ):"
+  - 'textbox "VD: Trưởng nam Trần Văn Khải"': Trưởng nam / Tộc trưởng
+  - heading "Văn Khấn Thủy Tổ & Tiên Hiền Dòng Tộc (Đại Lễ Tế Tổ)" [level=3]
+  - paragraph: Dành cho Trưởng tộc, Tộc biểu đứng chủ lễ trước Nhà thờ tổ / Từ đường
+  - button "Sao chép văn khấn":
+    - generic: Sao chép văn khấn
+  - generic: "Nam mô A Di Đà Phật! (3 lần, 3 lạy) Con kính lạy chín phương Trời, mười phương Chư Phật, Chư Phật mười phương. Con kính lạy Hoàng thiên Hậu Thổ chư vị Tôn thần. Con kính lạy ngài Bản cảnh Thành hoàng, ngài Bản xứ Thổ địa, ngài Bản gia Táo quân cùng chư vị Tôn thần cai quản nơi này. Con kính lạy Đức Thủy Tổ họ Dòng họ Trần – Đông Ngạc, chư vị Tiên tổ, chư vị Hương linh nội ngoại tôn thân. Hôm nay là ngày Ngày 22 tháng 10 Âm lịch, năm 2026. Tín chủ con là: Trưởng nam / Tộc trưởng. Đại diện cho toàn thể con cháu nội ngoại dòng họ Dòng họ Trần – Đông Ngạc. Hiện ngụ tại: Làng cổ Đông Ngạc, Bắc Từ Liêm, Hà Nội. Nhân tiết ngày Tế tự Thủy tổ Tiên hiền, con cháu ghi nhớ công đức trời biển của các bậc Tiên tổ đã khai sơn lập địa, gây dựng nền móng vẻ vang cho dòng họ. Chúng con kính cẩn sắm sửa hương hoa, trà quả, kim ngân, trầu cau, thanh đơn trà quả, phù tửu phù kê, kính dâng trước án tiền. Kính mời Đức Thủy Tổ, chư vị Tiên linh hiển ứng, giáng phó Từ đường, chứng giám lòng thành, thụ hưởng lễ vật. Cúi xin chư vị Tiên tổ phù hộ độ trì cho toàn thể con cháu họ Dòng họ Trần – Đông Ngạc muôn đời hưng thịnh, trong ấm ngoài êm, thế hệ rạng danh, đỗ đạt thành tài, đoàn kết thương yêu, giữ tròn gia phong lễ nghĩa. Chúng con lễ bạc tâm thành, trước án kính lễ, cúi xin chứng giám soi xét. Nam mô A Di Đà Phật! (3 lần, 3 lạy)"

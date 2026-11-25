@@ -1,0 +1,92 @@
+{
+  "app": "Gia Phả Việt – Cội Nguồn",
+  "schemaVersion": 1,
+  "exportedAt": "2026-11-25T09:30:41.599Z",
+  "settings": {
+    "id": "default",
+    "clanName": "M0 DEMO Desktop",
+    "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+    "ancestralHallLocation": "Địa điểm giả M0",
+    "schemaVersion": 1,
+    "updatedAt": "2026-11-25T09:30:30.536Z",
+    "lastBackupAt": "2026-11-25T09:30:41.599Z"
+  },
+  "branches": [
+    {
+      "id": "m0_branch",
+      "name": "Chi M0 Demo",
+      "code": "M0",
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T09:30:30.535Z"
+    }
+  ],
+  "people": [
+    {
+      "id": "m0_parent",
+      "fullName": "M0 Nguyễn Cha Mẫu",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "year",
+        "year": 1950
+      },
+      "branchId": "m0_branch",
+      "generation": 1,
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    },
+    {
+      "id": "m0_target",
+      "fullName": "M0 Nguyễn Trùng Tên",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "year",
+        "year": 1980
+      },
+      "branchId": "m0_branch",
+      "generation": 2,
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T09:30:30.354Z"
+    }
+  ],
+  "unions": [],
+  "relationships": [
+    {
+      "id": "m0_rel_0",
+      "parentId": "m0_parent",
+      "childId": "m0_target",
+      "lineageType": "biological",
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T00:00:00.000Z"
+    }
+  ],
+  "lifeEvents": [],
+  "media": [
+    {
+      "id": "m0_image",
+      "title": "Ảnh hình học tổng hợp M0",
+      "category": "document",
+      "mimeType": "image/svg+xml",
+      "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+      "personIds": [
+        "m0_target"
+      ],
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T09:30:30.462Z"
+    }
+  ],
+  "stories": [
+    {
+      "id": "m0_story",
+      "title": "M0 Nhật ký kiểm thử",
+      "content": "Ghi chép tổng hợp, không có người thật",
+      "personIds": [],
+      "mediaIds": [
+        "m0_image"
+      ],
+      "createdAt": "2026-11-25T00:00:00.000Z",
+      "updatedAt": "2026-11-25T09:30:30.534Z"
+    }
+  ]
+}

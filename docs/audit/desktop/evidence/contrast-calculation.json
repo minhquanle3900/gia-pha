@@ -1,0 +1,15 @@
+{
+  "foreground": [
+    237,
+    230,
+    220
+  ],
+  "backgroundStop": [
+    250,
+    247,
+    242
+  ],
+  "ratio": 1.159155229237391,
+  "largeBold18pxThreshold": 3,
+  "result": "FAIL"
+}

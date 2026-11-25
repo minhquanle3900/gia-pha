@@ -1,0 +1,128 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: M0 DEMO Desktop
+  - button "Mở tìm kiếm thành viên":
+  - button "Chuyển đổi giao diện sáng tối":
+  - 'button "Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay."':
+  - button "Thêm thành viên mới vào gia phả":
+- main:
+  - button "Quay lại":
+    - generic: Quay lại
+  - button "Sửa hồ sơ":
+    - generic: Sửa hồ sơ
+  - button "Xem trên cây":
+    - generic: Xem trên cây
+  - button "Thao tác khác":
+  - generic "M0 Nguyễn Trùng Tên":
+    - generic: MT
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời thứ 2
+  - generic: ·
+  - generic: Chi M0 Demo
+  - generic: ·
+  - generic: Hiện tiền (Còn sống)
+  - heading "M0 Nguyễn Trùng Tên" [level=2]
+  - paragraph: Sinh 1980 · Còn sống
+  - heading "Đặc tính Gia phả & Tộc hệ" [level=3]:
+    - generic: Đặc tính Gia phả & Tộc hệ
+  - term: Đời thứ trong gia tộc
+  - definition: Đời thứ 2
+  - term: Chi họ trực thuộc
+  - definition: Chi M0 Demo
+  - term: Phái
+  - definition: Chưa rõ
+  - term: Vai vế
+  - definition: Thành viên
+  - heading "Sinh thời & Nơi chốn" [level=3]:
+    - generic: Sinh thời & Nơi chốn
+  - term: Ngày sinh
+  - definition: "1980"
+  - term: Nơi sinh
+  - definition: Chưa rõ
+  - term: Nguyên quán
+  - definition: Chưa rõ
+  - term: Nơi cư trú
+  - definition: Chưa rõ
+  - term: Nghề nghiệp
+  - definition: Chưa rõ
+  - generic: Chưa có văn bản tiểu sử chi tiết.
+  - button "Đọc phả ký tổng hợp":
+    - generic: Đọc phả ký tổng hợp
+  - heading "Ký ức Giọng nói & Lời dặn (0)" [level=4]:
+    - generic: Ký ức Giọng nói & Lời dặn (0)
+  - button "+ Thu âm mới"
+  - paragraph: Chưa có bản ghi âm giọng nói nào.
+  - button "Thu âm giọng nói hoặc lời dặn của người này ngay":
+    - generic: Thu âm giọng nói hoặc lời dặn của người này ngay
+  - heading "Gia đình & Thân tộc" [level=3]:
+    - generic: Gia đình & Thân tộc
+  - button "+ Thêm / Sửa"
+  - heading "Cha & Mẹ" [level=4]
+  - generic "M0 Nguyễn Cha Mẫu":
+    - generic: MM
+  - paragraph: M0 Nguyễn Cha Mẫu
+  - paragraph: Cha • Ruột
+  - heading "Vợ / Chồng" [level=4]
+  - paragraph: Chưa ghi nhận bạn đời.
+  - heading "Con cái (0)" [level=4]
+  - paragraph: Chưa ghi nhận con cái.
+  - dialog:
+    - heading "Hiệu chỉnh thông tin thành viên" [level=3]
+    - paragraph: Các mục không rõ có thể để trống. Dữ liệu được bảo mật trên thiết bị.
+    - button:
+    - button "1. Danh tính & Tên tự"
+    - button "2. Sinh thời & Tiểu sử"
+    - button "3. Tộc hệ & Giỗ chạp"
+    - text: Trạng thái hiện tiền
+    - paragraph: Chọn "Đã tạ thế" để mở thêm các trường ngày mất, ngày giỗ âm lịch, mộ phần
+    - button "Còn sống"
+    - button "Đã tạ thế"
+    - generic: Ngày sinh
+    - radio "Dương" [checked]
+    - text: Dương
+    - generic: /
+    - radio "Âm"
+    - text: Âm
+    - generic: Độ chính xác
+    - combobox:
+      - option "Chính xác (Ngày/Tháng/Năm)"
+      - option "Tháng và Năm"
+      - option "Chỉ biết Năm" [selected]
+      - option "Ước tính khoảng (c.)"
+      - option "Trước năm (av.)"
+      - option "Sau năm (ap.)"
+      - option "Chưa rõ"
+    - generic: Năm
+    - spinbutton: "1980"
+    - 'textbox "Mô tả niên đại cổ (VD: ''Năm Giáp Ngọ'', ''Trước Cách mạng'')"'
+    - paragraph: Hỗ trợ ngày chính xác, khoảng năm ước tính, hoặc chỉ năm sinh.
+    - generic: Nơi sinh
+    - 'textbox "VD: Làng Đông Ngạc, Từ Liêm, Hà Nội"'
+    - generic: Nguyên quán
+    - 'textbox "VD: Quê gốc Đông Ngạc"'
+    - generic: Nơi cư trú
+    - 'textbox "VD: Ba Đình, Hà Nội"'
+    - generic: Nghề nghiệp / Học vị
+    - 'textbox "VD: Nhà giáo / Đốc học / Cử nhân"'
+    - generic: Tiểu sử & Hành trạng
+    - button "Soạn tiểu sử bằng AI":
+      - generic: Soạn tiểu sử bằng AI
+    - paragraph: Chưa phát hiện GEMINI_API_KEY trên môi trường máy chủ. Vui lòng kiểm tra khóa trong bảng điều khiển Cài đặt > Secrets.
+    - paragraph: "Gợi ý: Điền đầy đủ tên, năm sinh/năm mất, nghề nghiệp hoặc công đức để AI có thông tin tổng hợp tốt nhất."
+    - textbox "Ghi lại các mốc lịch sử, sự nghiệp, cống hiến hoặc bấm 'Soạn tiểu sử bằng AI' để tự động tạo..."
+    - button "Quay lại"
+    - button "Tiếp theo →"
+    - button "Hủy"
+    - button "Lưu hồ sơ"
+- navigation:
+  - button "Tổng quan":
+    - generic: Tổng quan
+  - button "Cây phả hệ":
+    - generic: Cây phả hệ
+  - button "Thành viên":
+    - generic: Thành viên
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm...":
+    - generic: Thêm...

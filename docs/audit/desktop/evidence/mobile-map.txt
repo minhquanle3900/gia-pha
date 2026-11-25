@@ -1,0 +1,159 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+  - button "Mở tìm kiếm thành viên":
+  - button "Chuyển đổi giao diện sáng tối":
+  - 'button "Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay."':
+  - button "Thêm thành viên mới vào gia phả":
+- main:
+  - heading "Bản Đồ Di Cư & Địa Lý Dòng Họ" [level=2]:
+    - generic: Bản Đồ Di Cư & Địa Lý Dòng Họ
+  - paragraph: Dấu mốc phát tích từ nguyên quán, lịch sử di cư lập chi mới và tọa độ phần mộ tổ tiên.
+  - button "Tất cả địa điểm"
+  - button "Từ đường"
+  - button "Lăng mộ"
+  - button "Di cư lập chi"
+  - generic: Hành Trình Phát Tích & Thiên Di
+  - heading "Từ Quê Gốc Phát Tích Đến 4 Chi Nhánh" [level=3]
+  - text: 1. Nguyên Quán Gốc
+  - paragraph: Làng cổ Đông Ngạc, Bắc Từ Liêm, Hà Nội
+  - paragraph: Nơi khởi lập từ đường Dòng họ Trần – Đông Ngạc và phụng thờ Đức Thủy Tổ.
+  - generic: 2. Chi Ất (Chi Thứ)
+  - paragraph: Phố Hàng Đào, Hoàn Kiếm, Hà Nội
+  - paragraph: Chi thứ lập nghiệp tại nội thành Hà Nội và Hải Phòng, phát triển nghề thủ công mỹ nghệ, kiến trúc và thương mại.
+  - generic: 3. Chi Bính (Chi Nam Tiến)
+  - paragraph: Quận Phú Nhuận, TP. Hồ Chí Minh
+  - paragraph: Nhánh con cháu vào Nam sinh sống và lập nghiệp từ giữa thế kỷ XX, vẫn đều đặn hướng về giỗ Tổ tháng Chạp hằng năm.
+  - generic: Nhà thờ tổ / Từ đường
+  - generic: Khởi dựng thế kỷ XVIII
+  - heading "Từ Đường Đại Tộc Dòng họ Trần – Đông Ngạc" [level=3]
+  - paragraph:
+    - generic: Làng cổ Đông Ngạc, Bắc Từ Liêm, Hà Nội
+  - paragraph: Nhà thờ tổ phát tích, nơi thờ phụng Đức Thủy Tổ và linh vị các bậc Tiên hiền đời đời truyền nối.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Văn Lộc · Nguyễn Thị Kim · Trần Văn Khải · Nguyễn Thị Lan · Đặng Thị Nguyệt · Trần Văn Phúc · Lê Thị Thanh · Trần Thị Hạnh
+  - generic: Thuộc Đại Tôn
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=21.0898,105.7725
+    - generic: Mở Google Maps chỉ đường
+  - generic: Địa bàn di cư
+  - generic: "1926"
+  - 'heading "Địa Bàn Phát Tích: Chi Ất (Chi Thứ)" [level=3]'
+  - paragraph:
+    - generic: Phố Hàng Đào, Hoàn Kiếm, Hà Nội
+  - paragraph: Chi thứ lập nghiệp tại nội thành Hà Nội và Hải Phòng, phát triển nghề thủ công mỹ nghệ, kiến trúc và thương mại.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Văn Phúc · Lê Thị Thanh · Trần Hữu Kiên
+  - generic: Thuộc Chi Ất (Chi Thứ)
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=Ph%E1%BB%91%20H%C3%A0ng%20%C4%90%C3%A0o%2C%20Ho%C3%A0n%20Ki%E1%BA%BFm%2C%20H%C3%A0%20N%E1%BB%99i
+    - generic: Mở Google Maps chỉ đường
+  - generic: Địa bàn di cư
+  - generic: "1955"
+  - 'heading "Địa Bàn Phát Tích: Chi Bính (Chi Nam Tiến)" [level=3]'
+  - paragraph:
+    - generic: Quận Phú Nhuận, TP. Hồ Chí Minh
+  - paragraph: Nhánh con cháu vào Nam sinh sống và lập nghiệp từ giữa thế kỷ XX, vẫn đều đặn hướng về giỗ Tổ tháng Chạp hằng năm.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Hữu Đạt · Võ Thị Ngọc Mai · Trần Gia Hưng
+  - generic: Thuộc Chi Bính (Chi Nam Tiến)
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=Qu%E1%BA%ADn%20Ph%C3%BA%20Nhu%E1%BA%ADn%2C%20TP.%20H%E1%BB%93%20Ch%C3%AD%20Minh
+    - generic: Mở Google Maps chỉ đường
+  - generic: Địa bàn di cư
+  - generic: Cuối thế kỷ XIX
+  - 'heading "Địa Bàn Phát Tích: Đại Tôn Họ Trần Đông Ngạc" [level=3]'
+  - paragraph:
+    - generic: Làng Đông Ngạc, phủ Hoài Đức, Hà Nội
+  - paragraph: Gốc đại tôn quy tụ các thế hệ khai cơ lập nghiệp tại làng khoa bảng Đông Ngạc bên bờ sông Hồng, gìn giữ từ đường và gia phả gốc.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Văn Lộc · Nguyễn Thị Kim · Trần Thị Hạnh
+  - generic: Thuộc Đại Tôn Họ Trần Đông Ngạc
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=L%C3%A0ng%20%C4%90%C3%B4ng%20Ng%E1%BA%A1c%2C%20ph%E1%BB%A7%20Ho%C3%A0i%20%C4%90%E1%BB%A9c%2C%20H%C3%A0%20N%E1%BB%99i
+    - generic: Mở Google Maps chỉ đường
+  - generic: Địa bàn di cư
+  - generic: "1920"
+  - 'heading "Địa Bàn Phát Tích: Chi Giáp (Chi Trưởng)" [level=3]'
+  - paragraph:
+    - generic: Đông Ngạc, Hà Nội
+  - paragraph: Chi trưởng phụng sự từ đường chính tại Đông Ngạc, nhiều đời theo nghề dạy học, y thuật cổ truyền và nghiên cứu văn hóa.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Văn Khải · Nguyễn Thị Lan · Đặng Thị Nguyệt
+  - generic: Thuộc Chi Giáp (Chi Trưởng)
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=%C4%90%C3%B4ng%20Ng%E1%BA%A1c%2C%20H%C3%A0%20N%E1%BB%99i
+    - generic: Mở Google Maps chỉ đường
+  - generic: Lăng mộ gia tộc
+  - generic: Khu lăng mộ dòng tộc
+  - 'heading "Khu Mộ Phần: Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc" [level=3]'
+  - paragraph:
+    - generic: Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc
+  - paragraph: Nơi an nghỉ thiên thu của 2 vị tiền nhân trong gia tộc.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Văn Lộc · Nguyễn Thị Kim
+  - generic: Gia tộc chung
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=21.092,105.775
+    - generic: Mở Google Maps chỉ đường
+  - generic: Lăng mộ gia tộc
+  - generic: Khu lăng mộ dòng tộc
+  - 'heading "Khu Mộ Phần: Nghĩa trang dòng họ Trần, Đông Ngạc" [level=3]'
+  - paragraph:
+    - generic: Nghĩa trang dòng họ Trần, Đông Ngạc
+  - paragraph: Nơi an nghỉ thiên thu của 4 vị tiền nhân trong gia tộc.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Văn Khải · Nguyễn Thị Lan · Đặng Thị Nguyệt · Trần Văn Nghị
+  - generic: Gia tộc chung
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=21.092,105.775
+    - generic: Mở Google Maps chỉ đường
+  - generic: Lăng mộ gia tộc
+  - generic: Khu lăng mộ dòng tộc
+  - 'heading "Khu Mộ Phần: Nghĩa trang Văn Điển, Hà Nội" [level=3]'
+  - paragraph:
+    - generic: Nghĩa trang Văn Điển, Hà Nội
+  - paragraph: Nơi an nghỉ thiên thu của 2 vị tiền nhân trong gia tộc.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Văn Phúc · Lê Thị Thanh
+  - generic: Gia tộc chung
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=Ngh%C4%A9a%20trang%20V%C4%83n%20%C4%90i%E1%BB%83n%2C%20H%C3%A0%20N%E1%BB%99i
+    - generic: Mở Google Maps chỉ đường
+  - generic: Lăng mộ gia tộc
+  - generic: Khu lăng mộ dòng tộc
+  - 'heading "Khu Mộ Phần: Nghĩa trang Liệt sĩ Trường Sơn, Quảng Trị" [level=3]'
+  - paragraph:
+    - generic: Nghĩa trang Liệt sĩ Trường Sơn, Quảng Trị
+  - paragraph: Nơi an nghỉ thiên thu của 1 vị tiền nhân trong gia tộc.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Văn Tín
+  - generic: Gia tộc chung
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=Ngh%C4%A9a%20trang%20Li%E1%BB%87t%20s%C4%A9%20Tr%C6%B0%E1%BB%9Dng%20S%C6%A1n%2C%20Qu%E1%BA%A3ng%20Tr%E1%BB%8B
+    - generic: Mở Google Maps chỉ đường
+  - generic: Lăng mộ gia tộc
+  - generic: Khu lăng mộ dòng tộc
+  - 'heading "Khu Mộ Phần: Hoa viên Nghĩa trang Bình Dương" [level=3]'
+  - paragraph:
+    - generic: Hoa viên Nghĩa trang Bình Dương
+  - paragraph: Nơi an nghỉ thiên thu của 1 vị tiền nhân trong gia tộc.
+  - generic: "Tiền nhân liên quan:"
+  - paragraph: Trần Hữu Đạt
+  - generic: Gia tộc chung
+  - link "Mở Google Maps chỉ đường":
+    - /url: https://www.google.com/maps/search/?api=1&query=Hoa%20vi%C3%AAn%20Ngh%C4%A9a%20trang%20B%C3%ACnh%20D%C6%B0%C6%A1ng
+    - generic: Mở Google Maps chỉ đường
+- navigation:
+  - button "Tổng quan":
+    - generic: Tổng quan
+  - button "Cây phả hệ":
+    - generic: Cây phả hệ
+  - button "Thành viên":
+    - generic: Thành viên
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm...":
+    - generic: Thêm...
+- generic: "25"

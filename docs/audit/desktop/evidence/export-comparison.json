@@ -1,0 +1,42 @@
+{
+  "files": [],
+  "counts": {
+    "demo-backup.json": {
+      "branches": 4,
+      "people": 31,
+      "unions": 12,
+      "relationships": 40,
+      "lifeEvents": 7,
+      "media": 5,
+      "stories": 3
+    },
+    "after-json-restore.json": {
+      "branches": 4,
+      "people": 31,
+      "unions": 12,
+      "relationships": 40,
+      "lifeEvents": 7,
+      "media": 5,
+      "stories": 3
+    },
+    "after-gedcom-import.json": {
+      "branches": 4,
+      "people": 31,
+      "unions": 12,
+      "relationships": 42,
+      "lifeEvents": 0,
+      "media": 0,
+      "stories": 0
+    },
+    "after-csv-import.json": {
+      "branches": 4,
+      "people": 34,
+      "unions": 13,
+      "relationships": 42,
+      "lifeEvents": 7,
+      "media": 5,
+      "stories": 3
+    }
+  },
+  "jsonRestoreDiffs": []
+}

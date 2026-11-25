@@ -1,0 +1,86 @@
+[
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "18px",
+    "tag": "H3",
+    "weight": "700"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "DIV",
+    "weight": "400"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "DIV",
+    "weight": "400"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "DIV",
+    "weight": "400"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "DIV",
+    "weight": "400"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "DIV",
+    "weight": "400"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "DIV",
+    "weight": "400"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "MAIN",
+    "weight": "400"
+  },
+  {
+    "bg": "rgb(16, 23, 19)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "DIV",
+    "weight": "400"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "DIV",
+    "weight": "400"
+  },
+  {
+    "bg": "rgb(16, 23, 19)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "BODY",
+    "weight": "400"
+  },
+  {
+    "bg": "rgb(16, 23, 19)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "tag": "HTML",
+    "weight": "400"
+  }
+]
