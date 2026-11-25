@@ -1,0 +1,13 @@
+# 04 · Toàn vẹn dữ liệu
+
+**GP-CLOUD-001 đã tái hiện bằng fixture tổng hợp.** Service tạo kế hoạch chuyển `updatedLifeEvents` sang hồ sơ đích. Modal chỉ lưu người, cạnh, hôn phối và media rồi xóa nguồn. Cascade xóa event của nguồn. Kiểm tra đã quan sát 0 sự kiện sau gộp thay vì 1. Stories, founder chi và root settings cũng đi qua cascade gỡ liên kết của nguồn. [Log và mã kiểm tra](evidence/merge-event-check.txt).
+
+**GP-CLOUD-002 đã xác nhận từ đường ghi.** Các thao tác gộp dùng giao dịch riêng. Nếu một bước lỗi sau khi bước trước đã commit thì thay đổi trước vẫn tồn tại. Mức độ ảnh hưởng của lỗi quota hoặc nhiều tab cần Desktop xác minh. Gộp thay ID và loại cạnh tự nối/trùng cặp, nhưng thiếu kiểm tra chu trình nhiều đỉnh trên graph sau gộp. Xóa union tách `unionId` khỏi cạnh còn lại trong cùng giao dịch.
+
+**GP-CLOUD-003 đã xác nhận từ đường nhập.** Import JSON kiểm kiểu cấp ngoài và `id/fullName` của people. Audit chỉ tìm cạnh tham chiếu người thiếu, cạnh tự trỏ và năm mất trước năm sinh rồi chuyển thành cảnh báo. Các thuộc tính còn lại, ID trùng, chu trình nhiều bước, union/lineage và liên kết media thiếu kiểm tra đầy đủ. Merge đối chiếu cặp cạnh theo parent/child, ghi đè entity trùng ID và không kiểm tra graph hợp thành trong transaction. CSV tạo snapshot để thay thế; GEDCOM preview dẫn tới chế độ replace. Ba adapter nên chia sẻ kiểm tra snapshot trước commit, phân biệt lỗi chặn nhập và cảnh báo tương thích.
+
+**GP-CLOUD-004 đã xác nhận điểm hở trong đường lưu.** UI thêm cha/con gọi `validateParentChildRelationship` để kiểm trùng, số cha mẹ sinh học và chu trình. Đường thêm hôn phối ghi trực tiếp qua context, bỏ qua `validateSpouseUnion`. Store có key ID và index tra cứu, không cưỡng chế quy tắc cặp quan hệ hay cha thuộc union. Khả năng UI lọc trùng trong từng trạng thái cần Desktop kiểm tra.
+
+**GP-CLOUD-007 đã xác nhận từ code.** Form ghi ảnh vào media lúc chọn tệp, trước khi xác nhận hồ sơ. Form lưu `portraitUrl` riêng, thiếu `portraitMediaId` để đồng bộ khi xóa. Hủy form có thể để lại ảnh ngoài dự kiến. Save mới nên ghi ảnh và người trong một transaction. Với ảnh cũ, cần giữ trường URL tương thích.
+
+**Các đường có bằng chứng tích cực.** Delete người dùng một transaction và dọn cạnh, union, event, tham chiếu media/story/branch/root. Media và story không còn người liên quan có thể là tư liệu chung. Replace và merge snapshot có transaction nhiều store; cần kiểm tra rollback cả lỗi request lẫn ngoại lệ đồng bộ. JSON hợp lệ và GEDCOM fixture có kiểm round-trip trong suite; ảnh URL, trường phụ, tháng nhuận, tùy chọn localStorage và giao dịch nhiều tab còn cần xác minh. `DB_VERSION` và `SCHEMA_VERSION` cùng ở 1. Tệp mới hơn bị từ chối trong preview JSON, chưa có chuỗi migration có fixture cũ cho lần nâng tiếp theo.

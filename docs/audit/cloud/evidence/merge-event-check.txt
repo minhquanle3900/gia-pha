@@ -1,0 +1,2 @@
+GP-CLOUD-001 reproduced: one synthetic event planned for reassignment, zero events after save + source delete.
+exit=0
