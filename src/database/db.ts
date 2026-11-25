@@ -1,4 +1,4 @@
-import { DBSchema, IDBPDatabase, openDB } from 'idb';
+import { DBSchema, IDBPDatabase, IDBPTransaction, openDB } from 'idb';
 import {
   AppSettings,
   FamilyBranch,
@@ -11,6 +11,8 @@ import {
   Union,
 } from '../models/genealogy';
 import { executeMergeRecords } from '../services/duplicateMergeService';
+import { validateImportSnapshot } from '../services/importValidationService';
+import { planSnapshotMerge, SNAPSHOT_DATA_STORES } from '../services/snapshotMergeService';
 import { createSeedSnapshot } from './seedData';
 
 export const DB_NAME = 'gia-pha-viet-coi-nguon-db';
@@ -124,18 +126,23 @@ export async function initializeDatabaseIfEmpty(): Promise<GenealogyDatabaseSnap
   return loadFullSnapshot();
 }
 
-export async function loadFullSnapshot(): Promise<GenealogyDatabaseSnapshot> {
-  const db = await getDatabase();
+const SNAPSHOT_STORES = ['settings', ...SNAPSHOT_DATA_STORES] as const;
+type SnapshotTransaction<Mode extends 'readonly' | 'readwrite'> =
+  IDBPTransaction<GenealogyDBSchema, typeof SNAPSHOT_STORES, Mode>;
+
+async function readSnapshot<Mode extends 'readonly' | 'readwrite'>(
+  tx: SnapshotTransaction<Mode>
+): Promise<GenealogyDatabaseSnapshot> {
   const [settings, branches, people, unions, relationships, lifeEvents, media, stories] =
     await Promise.all([
-      db.get('settings', 'default'),
-      db.getAll('branches'),
-      db.getAll('people'),
-      db.getAll('unions'),
-      db.getAll('relationships'),
-      db.getAll('lifeEvents'),
-      db.getAll('media'),
-      db.getAll('stories'),
+      tx.objectStore('settings').get('default'),
+      tx.objectStore('branches').getAll(),
+      tx.objectStore('people').getAll(),
+      tx.objectStore('unions').getAll(),
+      tx.objectStore('relationships').getAll(),
+      tx.objectStore('lifeEvents').getAll(),
+      tx.objectStore('media').getAll(),
+      tx.objectStore('stories').getAll(),
     ]);
 
   const fallbackSettings: AppSettings = settings ?? {
@@ -162,103 +169,83 @@ export async function loadFullSnapshot(): Promise<GenealogyDatabaseSnapshot> {
   };
 }
 
-export async function replaceEntireDatabase(snapshot: GenealogyDatabaseSnapshot): Promise<void> {
+export async function loadFullSnapshot(): Promise<GenealogyDatabaseSnapshot> {
   const db = await getDatabase();
-  const tx = db.transaction(
-    ['settings', 'branches', 'people', 'unions', 'relationships', 'lifeEvents', 'media', 'stories'],
-    'readwrite'
-  );
-
-  await Promise.all([
-    tx.objectStore('settings').clear(),
-    tx.objectStore('branches').clear(),
-    tx.objectStore('people').clear(),
-    tx.objectStore('unions').clear(),
-    tx.objectStore('relationships').clear(),
-    tx.objectStore('lifeEvents').clear(),
-    tx.objectStore('media').clear(),
-    tx.objectStore('stories').clear(),
-  ]);
-
-  await tx.objectStore('settings').put({
-    ...snapshot.settings,
-    id: 'default',
-    schemaVersion: SCHEMA_VERSION,
-  });
-
-  for (const b of snapshot.branches) await tx.objectStore('branches').put(b);
-  for (const p of snapshot.people) await tx.objectStore('people').put(p);
-  for (const u of snapshot.unions) await tx.objectStore('unions').put(u);
-  for (const r of snapshot.relationships) await tx.objectStore('relationships').put(r);
-  for (const e of snapshot.lifeEvents) await tx.objectStore('lifeEvents').put(e);
-  for (const m of snapshot.media) await tx.objectStore('media').put(m);
-  for (const s of snapshot.stories) await tx.objectStore('stories').put(s);
-
-  await tx.done;
+  const tx = db.transaction(SNAPSHOT_STORES, 'readonly');
+  const [snapshot] = await Promise.all([readSnapshot(tx), tx.done]);
+  return snapshot;
 }
 
-export async function mergeDatabaseSnapshot(snapshot: GenealogyDatabaseSnapshot): Promise<{
+async function writeSnapshotTransaction<T>(
+  write: (tx: SnapshotTransaction<'readwrite'>) => Promise<T>
+): Promise<T> {
+  const db = await getDatabase();
+  const tx = db.transaction(SNAPSHOT_STORES, 'readwrite');
+  const done = tx.done;
+  void done.catch(() => {});
+
+  try {
+    const result = await write(tx);
+    await done;
+    return result;
+  } catch (error) {
+    try {
+      tx.abort();
+    } catch {
+      // A failed request may have already aborted the transaction.
+    }
+    await done.catch(() => {});
+    throw error;
+  }
+}
+
+// Low-level replacement for trusted demo data and test setup.
+export async function replaceEntireDatabase(snapshot: GenealogyDatabaseSnapshot): Promise<void> {
+  await writeSnapshotTransaction(async (tx) => {
+    for (const store of SNAPSHOT_STORES) await tx.objectStore(store).clear();
+
+    await tx.objectStore('settings').put({
+      ...snapshot.settings,
+      id: 'default',
+      schemaVersion: SCHEMA_VERSION,
+    });
+    for (const store of SNAPSHOT_DATA_STORES) {
+      for (const record of snapshot[store]) await tx.objectStore(store).put(record);
+    }
+  });
+}
+
+export async function restoreDatabaseSnapshot(snapshot: GenealogyDatabaseSnapshot): Promise<void> {
+  const candidate = structuredClone(snapshot);
+  const { errors } = validateImportSnapshot(candidate);
+  if (errors.length > 0) throw new Error(errors.join(' · '));
+  await replaceEntireDatabase(candidate);
+}
+
+export interface SnapshotMergeStats {
   addedPeople: number;
-  updatedPeople: number;
   addedRelationships: number;
   addedMedia: number;
-}> {
-  const db = await getDatabase();
-  const tx = db.transaction(
-    ['settings', 'branches', 'people', 'unions', 'relationships', 'lifeEvents', 'media', 'stories'],
-    'readwrite'
-  );
+}
 
-  let addedPeople = 0;
-  let updatedPeople = 0;
-  let addedRelationships = 0;
-  let addedMedia = 0;
+export async function mergeDatabaseSnapshot(snapshot: GenealogyDatabaseSnapshot): Promise<SnapshotMergeStats> {
+  const incoming = structuredClone(snapshot);
+  return writeSnapshotTransaction(async (tx) => {
+    const existing = await readSnapshot(tx);
+    const plan = planSnapshotMerge(existing, incoming);
+    if (!plan.additions) throw new Error(plan.errors.join(' · '));
 
-  for (const b of snapshot.branches) {
-    await tx.objectStore('branches').put(b);
-  }
-
-  for (const p of snapshot.people) {
-    const existing = await tx.objectStore('people').get(p.id);
-    if (existing) {
-      updatedPeople++;
-    } else {
-      addedPeople++;
+    const { additions } = plan;
+    for (const store of SNAPSHOT_DATA_STORES) {
+      for (const record of additions[store]) await tx.objectStore(store).add(record);
     }
-    await tx.objectStore('people').put(p);
-  }
 
-  for (const u of snapshot.unions) {
-    await tx.objectStore('unions').put(u);
-  }
-
-  const existingRels = await tx.objectStore('relationships').getAll();
-  const relPairs = new Set(existingRels.map((r) => `${r.parentId}::${r.childId}`));
-  for (const r of snapshot.relationships) {
-    const key = `${r.parentId}::${r.childId}`;
-    if (!relPairs.has(key)) {
-      addedRelationships++;
-      relPairs.add(key);
-      await tx.objectStore('relationships').put(r);
-    }
-  }
-
-  for (const e of snapshot.lifeEvents) {
-    await tx.objectStore('lifeEvents').put(e);
-  }
-
-  for (const m of snapshot.media) {
-    const existingM = await tx.objectStore('media').get(m.id);
-    if (!existingM) addedMedia++;
-    await tx.objectStore('media').put(m);
-  }
-
-  for (const s of snapshot.stories) {
-    await tx.objectStore('stories').put(s);
-  }
-
-  await tx.done;
-  return { addedPeople, updatedPeople, addedRelationships, addedMedia };
+    return {
+      addedPeople: additions.people.length,
+      addedRelationships: additions.relationships.length,
+      addedMedia: additions.media.length,
+    };
+  });
 }
 
 export async function resetToDemoDataset(): Promise<GenealogyDatabaseSnapshot> {

@@ -8,6 +8,7 @@ interface ConfirmDialogProps {
   confirmLabel?: string;
   cancelLabel?: string;
   danger?: boolean;
+  busy?: boolean;
   onConfirm: () => void;
   onCancel: () => void;
 }
@@ -19,6 +20,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
   confirmLabel = 'Xác nhận',
   cancelLabel = 'Hủy bỏ',
   danger = false,
+  busy = false,
   onConfirm,
   onCancel,
 }) => {
@@ -48,6 +50,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           <button
             type="button"
             onClick={onCancel}
+            disabled={busy}
             className="p-1 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100 transition-colors"
           >
             <X className="w-5 h-5" />
@@ -60,6 +63,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           <button
             type="button"
             onClick={onCancel}
+            disabled={busy}
             className="min-h-[42px] px-4 py-2 text-sm font-medium text-[#4A3F35] bg-stone-100 hover:bg-stone-200 rounded-xl transition-colors"
           >
             {cancelLabel}
@@ -67,6 +71,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
           <button
             type="button"
             onClick={onConfirm}
+            disabled={busy}
             className={`min-h-[42px] px-4 py-2 text-sm font-medium text-white rounded-xl shadow-xs transition-colors ${
               danger
                 ? 'bg-red-700 hover:bg-red-800'
