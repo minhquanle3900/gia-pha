@@ -96,7 +96,7 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
                 Kiểm Tra & Hợp Nhất Hồ Sơ Trùng Lặp
               </h3>
               <p className="text-xs text-stone-500">
-                Tự động rà soát họ tên, năm sinh, chi họ và cha mẹ để làm sạch phả hệ.
+                Đối chiếu hồ sơ và quan hệ gia đình trước khi quyết định sáp nhập.
               </p>
             </div>
           </div>
@@ -131,10 +131,10 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
           <div className="p-12 text-center bg-[#FAF8F5] rounded-2xl border border-[#E7DFD4] space-y-3">
             <ShieldCheck className="w-12 h-12 text-emerald-600 mx-auto" />
             <h4 className="font-serif font-bold text-base text-[#1F1913]">
-              Dữ Liệu Gia Tộc Hoàn Toàn Trong Sạch
+              Chưa phát hiện hồ sơ nghi trùng
             </h4>
             <p className="text-xs text-stone-500 max-w-md mx-auto">
-              Không phát hiện bất kỳ cặp hồ sơ nào có dấu hiệu trùng lặp trong cơ sở dữ liệu hiện tại.
+              Kết quả dựa trên họ tên, năm sinh và các liên kết gia đình đã ghi nhận.
             </p>
           </div>
         ) : (
@@ -169,7 +169,7 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
               <div className="p-4 rounded-2xl border border-amber-300 bg-amber-50/40 space-y-4">
                 <div className="flex items-center justify-between">
                   <span className="text-xs font-bold text-amber-900">
-                    Độ tương đồng: {activePair.matchScore}%
+                    Điểm tương đồng: {activePair.matchScore}%
                   </span>
                   <div className="flex items-center gap-1.5 text-[11px] text-amber-800">
                     {activePair.reasons.map((r, i) => (
