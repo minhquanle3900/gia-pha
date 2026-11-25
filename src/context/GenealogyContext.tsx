@@ -11,7 +11,8 @@ import {
   loadFullSnapshot,
   mergeDatabaseSnapshot,
   mergePersonRecords,
-  replaceEntireDatabase,
+  restoreDatabaseSnapshot,
+  type SnapshotMergeStats,
   resetToDemoDataset,
   saveBranchRecord,
   saveLifeEventRecord,
@@ -86,7 +87,7 @@ export interface GenealogyContextType {
   importSnapshot: (
     snapshot: GenealogyDatabaseSnapshot,
     mode: 'replace' | 'merge'
-  ) => Promise<{ addedPeople: number; updatedPeople: number; addedRelationships: number; addedMedia: number } | void>;
+  ) => Promise<SnapshotMergeStats | void>;
 
   // Graph Traversal Helpers
   getPersonById: (id: string) => Person | undefined;
@@ -338,7 +339,7 @@ export const GenealogyProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     mode: 'replace' | 'merge'
   ) => {
     if (mode === 'replace') {
-      await replaceEntireDatabase(newSnapshot);
+      await restoreDatabaseSnapshot(newSnapshot);
       await reloadData();
     } else {
       const stats = await mergeDatabaseSnapshot(newSnapshot);

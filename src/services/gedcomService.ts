@@ -80,58 +80,21 @@ function formatGedcomDate(date?: FlexibleDate): string | null {
   }
 }
 
-function parseGedcomDate(raw: string): FlexibleDate {
+function parseGedcomDate(raw: string, label: string, warnings: string[]): FlexibleDate {
   const cleaned = raw.trim();
-  if (!cleaned) return { precision: 'unknown' };
-
-  const upper = cleaned.toUpperCase();
-  let precision: FlexibleDate['precision'] = 'exact';
-  let body = upper;
-
-  if (upper.startsWith('ABT ') || upper.startsWith('EST ') || upper.startsWith('CAL ')) {
-    precision = 'approx';
-    body = upper.slice(4).trim();
-  } else if (upper.startsWith('BEF ')) {
-    precision = 'before';
-    body = upper.slice(4).trim();
-  } else if (upper.startsWith('AFT ')) {
-    precision = 'after';
-    body = upper.slice(4).trim();
-  }
-
-  const tokens = body.split(/\s+/).filter(Boolean);
-  let day: number | undefined;
-  let month: number | undefined;
-  let year: number | undefined;
-
-  for (const tok of tokens) {
-    const mIdx = GEDCOM_MONTHS.indexOf(tok);
-    if (mIdx !== -1) {
-      month = mIdx + 1;
-    } else if (/^\d{4}$/.test(tok)) {
-      year = parseInt(tok, 10);
-    } else if (/^\d{1,2}$/.test(tok) && day === undefined) {
-      day = parseInt(tok, 10);
-    }
-  }
-
-  if (!year) {
+  const body = cleaned.replace(/^@#DGREGORIAN@\s+/i, '').toUpperCase();
+  const match = body.match(/^(?:(ABT|EST|CAL|BEF|AFT)\s+)?(?:(?:(\d{1,2})\s+)?([A-Z]{3})\s+)?(\d{1,4})$/);
+  const month = match?.[3] ? GEDCOM_MONTHS.indexOf(match[3]) + 1 : undefined;
+  if (!match || month === 0) {
+    warnings.push(`${label}: giữ nguyên văn bản ngày GEDCOM vì định dạng không được hỗ trợ.`);
     return { precision: 'unknown', displayText: cleaned };
   }
 
-  if (precision === 'exact') {
-    if (day && month) precision = 'exact';
-    else if (month) precision = 'month';
-    else precision = 'year';
-  }
-
-  return {
-    precision,
-    day,
-    month,
-    year,
-    displayText: cleaned,
-  };
+  const [, qualifier, rawDay, , rawYear] = match;
+  const day = rawDay === undefined ? undefined : Number(rawDay);
+  const precision = qualifier === 'BEF' ? 'before' : qualifier === 'AFT' ? 'after'
+    : qualifier ? 'approx' : day !== undefined ? 'exact' : month ? 'month' : 'year';
+  return { precision, day, month, year: Number(rawYear), displayText: cleaned };
 }
 
 function writeMultilineTag(lines: string[], level: number, tag: string, value?: string) {
@@ -375,6 +338,7 @@ export function exportToGedcom551(snapshot: GenealogyDatabaseSnapshot): string {
 }
 
 interface GedNode {
+  lineNumber: number;
   level: number;
   xref?: string;
   tag: string;
@@ -393,7 +357,6 @@ const SUPPORTED_INDI_TAGS = new Set([
   'NOTE',
   'FAMC',
   'FAMS',
-  'CHAN',
   '_GEN',
   '_BRAN',
   '_SUBB',
@@ -406,7 +369,44 @@ const SUPPORTED_INDI_TAGS = new Set([
   '_MERIT',
 ]);
 
-const SUPPORTED_FAM_TAGS = new Set(['HUSB', 'WIFE', 'CHIL', 'MARR', 'DIV', 'NOTE', 'CHAN']);
+const SUPPORTED_FAM_TAGS = new Set(['HUSB', 'WIFE', 'CHIL', 'MARR', 'DIV', 'NOTE']);
+const TEXT_CONTINUATIONS = ['CONT', 'CONC'];
+const INDI_CHILD_TAGS: Record<string, string[]> = {
+  NAME: ['GIVN', 'SURN', 'NICK'],
+  BIRT: ['DATE', 'PLAC'],
+  DEAT: ['DATE', 'PLAC'],
+  BURI: ['PLAC'],
+  RESI: ['PLAC', 'ADDR'],
+  FAMC: ['PEDI'],
+  OCCU: TEXT_CONTINUATIONS,
+  NOTE: TEXT_CONTINUATIONS,
+  _MERIT: TEXT_CONTINUATIONS,
+};
+
+function noteUnsupportedChildren(
+  node: GedNode,
+  prefix: string,
+  supported: string[],
+  unsupported: Set<string>,
+  warnings: string[]
+): void {
+  const seen = new Set<string>();
+  for (const child of node.children) {
+    if (!supported.includes(child.tag)) {
+      unsupported.add(`${prefix}.${child.tag}`);
+    } else {
+      if (prefix !== 'INDI.RESI' && !TEXT_CONTINUATIONS.includes(child.tag) && seen.has(child.tag)) {
+        warnings.push(`Dòng ${child.lineNumber}: ${prefix} có nhiều thẻ ${child.tag}; chỉ lưu được giá trị đầu.`);
+      }
+      seen.add(child.tag);
+      const continuations = ['PLAC', 'ADDR'].includes(child.tag) ? TEXT_CONTINUATIONS : [];
+      for (const nested of child.children) {
+        if (!continuations.includes(nested.tag)) unsupported.add(`${prefix}.${child.tag}.${nested.tag}`);
+      }
+    }
+  }
+}
+
 
 function extractNodeText(node: GedNode): string {
   let result = node.value;
@@ -437,13 +437,23 @@ function reconstructVietnameseFullName(rawName: string, givn?: string, surn?: st
 
 export function parseAndPreviewGedcom(
   rawGedcom: string,
-  existingSnapshot: GenealogyDatabaseSnapshot
+  existingSnapshot?: GenealogyDatabaseSnapshot
 ): GedcomImportPreview {
   const emptySnapshot: GenealogyDatabaseSnapshot = {
     app: 'Gia Phả Việt – Cội Nguồn',
     schemaVersion: 1,
     exportedAt: new Date().toISOString(),
-    settings: existingSnapshot.settings,
+    settings: {
+      ...(existingSnapshot?.settings ?? {
+        id: 'default',
+        clanName: 'Gia Phả Nhập Từ GEDCOM',
+        clanMotto: 'Uống nước nhớ nguồn',
+        ancestralHallLocation: 'Việt Nam',
+        schemaVersion: 1,
+        updatedAt: new Date().toISOString(),
+      }),
+      rootPersonId: undefined,
+    },
     branches: [],
     people: [],
     unions: [],
@@ -453,72 +463,59 @@ export function parseAndPreviewGedcom(
     stories: [],
   };
 
-  const rawLines = rawGedcom
-    .replace(/^\uFEFF/, '')
-    .replace(/\r\n/g, '\n')
-    .replace(/\r/g, '\n')
-    .split('\n')
-    .map((l) => l.trimEnd())
-    .filter((l) => l.trim().length > 0);
-
-  if (rawLines.length === 0) {
-    return {
-      valid: false,
-      errors: ['Tệp GEDCOM trống.'],
-      warnings: [],
-      unsupportedTags: [],
-      duplicatePeople: [],
-      snapshot: emptySnapshot,
-      stats: { individualsCount: 0, familiesCount: 0, relationshipsCount: 0, branchesCount: 0 },
-    };
-  }
-
+  const rawLines = rawGedcom.replace(/^\uFEFF/, '').replace(/\r\n?/g, '\n').split('\n');
   const rootNodes: GedNode[] = [];
   const stack: GedNode[] = [];
   const errors: string[] = [];
+  const warnings: string[] = [];
+  const xrefs = new Set<string>();
 
-  for (let i = 0; i < rawLines.length; i++) {
-    const line = rawLines[i];
-    const m = line.match(/^(\d+)\s+(?:(@[^@]+@)\s+)?([A-Za-z0-9_]+)(?:\s+(.*))?$/);
-    if (!m) {
-      if (i === 0) {
-        errors.push('Dòng đầu tiên không đúng cú pháp chuẩn GEDCOM (cần bắt đầu bằng "0 HEAD").');
-        break;
-      }
+  for (let index = 0; index < rawLines.length; index++) {
+    const line = rawLines[index].trimEnd();
+    if (!line.trim()) continue;
+    const lineNumber = index + 1;
+    const match = line.match(/^(\d+)\s+(?:(@[^@\s]+@)\s+)?([A-Za-z0-9_]+)(?:\s+(.*))?$/);
+    if (!match) {
+      errors.push(`Dòng GEDCOM ${lineNumber} không đúng cú pháp.`);
       continue;
     }
 
-    const level = parseInt(m[1], 10);
-    const xref = m[2];
-    const tag = m[3].toUpperCase();
-    const value = m[4] ?? '';
-
-    const node: GedNode = { level, xref, tag, value, children: [] };
+    const [, rawLevel, xref, rawTag, value = ''] = match;
+    const level = Number(rawLevel);
+    const tag = rawTag.toUpperCase();
+    const node: GedNode = { lineNumber, level, xref, tag, value, children: [] };
 
     if (level === 0) {
+      if (xref && xrefs.has(xref)) errors.push(`Dòng GEDCOM ${lineNumber}: mã bản ghi ${xref} bị trùng.`);
+      if (xref) xrefs.add(xref);
+      if ((tag === 'INDI' || tag === 'FAM') && !xref) {
+        errors.push(`Dòng GEDCOM ${lineNumber}: bản ghi ${tag} thiếu mã định danh.`);
+      }
       rootNodes.push(node);
       stack.length = 0;
-      stack.push(node);
     } else {
-      while (stack.length > 0 && stack[stack.length - 1].level >= level) {
-        stack.pop();
+      while (stack.length > 0 && stack[stack.length - 1].level >= level) stack.pop();
+      const parent = stack[stack.length - 1];
+      if (!parent || parent.level !== level - 1 || xref) {
+        errors.push(`Dòng GEDCOM ${lineNumber}: cấp lồng nhau hoặc mã định danh không hợp lệ.`);
+        continue;
       }
-      if (stack.length > 0) {
-        stack[stack.length - 1].children.push(node);
-      }
-      stack.push(node);
+      parent.children.push(node);
     }
+    stack.push(node);
   }
 
-  const hasHead = rootNodes.some((n) => n.tag === 'HEAD');
-  if (!hasHead || errors.length > 0) {
+  if (rootNodes[0]?.tag !== 'HEAD' || rootNodes.filter((node) => node.tag === 'HEAD').length !== 1) {
+    errors.push('Tệp GEDCOM phải bắt đầu bằng một thẻ "0 HEAD".');
+  }
+  if (rootNodes.at(-1)?.tag !== 'TRLR' || rootNodes.filter((node) => node.tag === 'TRLR').length !== 1) {
+    errors.push('Tệp GEDCOM phải kết thúc bằng một thẻ "0 TRLR".');
+  }
+  if (errors.length > 0) {
     return {
       valid: false,
-      errors:
-        errors.length > 0
-          ? errors
-          : ['Không tìm thấy thẻ tiêu đề chuẩn "0 HEAD" trong tệp GEDCOM.'],
-      warnings: [],
+      errors,
+      warnings,
       unsupportedTags: [],
       duplicatePeople: [],
       snapshot: emptySnapshot,
@@ -526,14 +523,13 @@ export function parseAndPreviewGedcom(
     };
   }
 
-  const unsupportedSet = new Set<string>();
+  const unsupportedSet = new Set(
+    rootNodes.filter((node) => !['HEAD', 'TRLR', 'INDI', 'FAM'].includes(node.tag)).map((node) => node.tag)
+  );
   const nowIso = new Date().toISOString();
   const xrefToPersonId = new Map<string, string>();
   const branchByName = new Map<string, FamilyBranch>();
-
-  for (const b of existingSnapshot.branches) {
-    branchByName.set(normalizeVietnameseText(b.name), b);
-  }
+  const countWarnings = { approximateStatus: 0, unknownName: 0, inferredGeneration: 0 };
 
   const importedBranches: FamilyBranch[] = [];
   const importedPeople: Person[] = [];
@@ -541,6 +537,7 @@ export function parseAndPreviewGedcom(
 
   const indiNodes = rootNodes.filter((n) => n.tag === 'INDI' && n.xref);
   const famNodes = rootNodes.filter((n) => n.tag === 'FAM' && n.xref);
+  const familiesByXref = new Map(famNodes.map((family) => [family.xref!, family]));
 
   for (const indi of indiNodes) {
     const personId = generateId('p_ged');
@@ -569,11 +566,19 @@ export function parseAndPreviewGedcom(
     let merits: string | undefined;
     let deathAnniversaryLunar: Person['deathAnniversaryLunar'] | undefined;
 
+    const seenTags = new Set<string>();
+    const familyLinks = new Set<string>();
     for (const ch of indi.children) {
       if (!SUPPORTED_INDI_TAGS.has(ch.tag)) {
         unsupportedSet.add(`INDI.${ch.tag}`);
         continue;
       }
+
+      if (!['FAMC', 'FAMS', 'NOTE'].includes(ch.tag) && seenTags.has(ch.tag)) {
+        warnings.push(`Dòng ${ch.lineNumber}: bản ghi ${indi.xref} có nhiều thẻ ${ch.tag}; chỉ lưu được giá trị cuối.`);
+      }
+      seenTags.add(ch.tag);
+      noteUnsupportedChildren(ch, `INDI.${ch.tag}`, INDI_CHILD_TAGS[ch.tag] ?? [], unsupportedSet, warnings);
 
       switch (ch.tag) {
         case 'NAME': {
@@ -586,36 +591,38 @@ export function parseAndPreviewGedcom(
         }
         case 'SEX': {
           const v = ch.value.trim().toUpperCase();
+          if (!['M', 'F', 'U'].includes(v)) errors.push(`Dòng ${ch.lineNumber}: giá trị SEX không hợp lệ.`);
           gender = v === 'M' ? 'male' : v === 'F' ? 'female' : 'unknown';
           break;
         }
         case 'BIRT': {
           const dNode = ch.children.find((c) => c.tag === 'DATE');
           const pNode = ch.children.find((c) => c.tag === 'PLAC');
-          if (dNode) birthDate = parseGedcomDate(dNode.value);
-          if (pNode) birthPlace = pNode.value.trim();
+          if (dNode) birthDate = parseGedcomDate(dNode.value, `Dòng ${dNode.lineNumber}`, warnings);
+          if (pNode) birthPlace = extractNodeText(pNode);
           break;
         }
         case 'DEAT': {
+          if (ch.value.trim().toUpperCase() === 'N' && ch.children.length === 0) break;
           isLiving = false;
           const dNode = ch.children.find((c) => c.tag === 'DATE');
           const pNode = ch.children.find((c) => c.tag === 'PLAC');
-          if (dNode) deathDate = parseGedcomDate(dNode.value);
-          if (pNode) deathPlace = pNode.value.trim();
+          if (dNode) deathDate = parseGedcomDate(dNode.value, `Dòng ${dNode.lineNumber}`, warnings);
+          if (pNode) deathPlace = extractNodeText(pNode);
           break;
         }
         case 'BURI': {
           isLiving = false;
           const pNode = ch.children.find((c) => c.tag === 'PLAC');
-          if (pNode) burialPlace = pNode.value.trim();
+          if (pNode) burialPlace = extractNodeText(pNode);
           break;
         }
         case 'OCCU':
           occupation = extractNodeText(ch);
           break;
         case 'RESI': {
-          const pNode = ch.children.find((c) => c.tag === 'PLAC');
-          residence = pNode ? pNode.value.trim() : ch.value.trim();
+          const places = ch.children.filter((node) => node.tag === 'PLAC' || node.tag === 'ADDR').map(extractNodeText);
+          residence = [ch.value.trim(), ...places].filter(Boolean).join('\n');
           break;
         }
         case 'NOTE': {
@@ -624,14 +631,18 @@ export function parseAndPreviewGedcom(
           break;
         }
         case '_GEN': {
-          const parsedGen = parseInt(ch.value.trim(), 10);
-          if (!Number.isNaN(parsedGen) && parsedGen > 0) generation = parsedGen;
+          const parsedGen = Number(ch.value);
+          if (/^\d+$/.test(ch.value.trim()) && Number.isSafeInteger(parsedGen) && parsedGen > 0) {
+            generation = parsedGen;
+          } else {
+            errors.push(`Dòng ${ch.lineNumber}: giá trị _GEN phải là số nguyên dương.`);
+          }
           break;
         }
         case '_BRAN': {
           const bName = ch.value.trim();
           if (bName) {
-            const norm = normalizeVietnameseText(bName);
+            const norm = bName.toLowerCase();
             let branch = branchByName.get(norm);
             if (!branch) {
               branch = {
@@ -671,33 +682,53 @@ export function parseAndPreviewGedcom(
           merits = extractNodeText(ch);
           break;
         case '_LUNAR_GIO': {
-          const parts = ch.value.split('|').map((s) => s.trim());
-          const dm = parts[0]?.match(/^(\d{1,2})\/(\d{1,2})$/);
+          const dm = ch.value.trim().match(/^(\d{1,2})\/(\d{1,2})(?:\s*(?:\||AL)\s*(.*))?$/i);
           if (dm) {
             deathAnniversaryLunar = {
               day: parseInt(dm[1], 10),
               month: parseInt(dm[2], 10),
-              note: parts[1] || undefined,
+              note: dm[3]?.trim() || undefined,
             };
           } else if (ch.value.trim()) {
             deathAnniversaryLunar = { note: ch.value.trim() };
           }
           break;
         }
-        case 'FAMC': {
+        case 'FAMC':
+        case 'FAMS': {
           const famXref = ch.value.trim();
-          const pedi = ch.children.find((c) => c.tag === 'PEDI')?.value.trim().toLowerCase();
-          let lType: LineageType = 'biological';
-          if (pedi === 'adopted') lType = 'adoptive';
-          else if (pedi === 'foster' || pedi === 'step') lType = 'step';
-          pediByIndiAndFam.set(`${indi.xref!}::${famXref}`, lType);
+          const family = familiesByXref.get(famXref);
+          const reciprocalTags = ch.tag === 'FAMC' ? ['CHIL'] : ['HUSB', 'WIFE'];
+          const linkKey = JSON.stringify([ch.tag, famXref]);
+          if (familyLinks.has(linkKey)) {
+            errors.push(`Dòng ${ch.lineNumber}: liên kết ${ch.tag} ${famXref} bị trùng.`);
+          }
+          familyLinks.add(linkKey);
+          if (!family) {
+            errors.push(`Dòng ${ch.lineNumber}: không tìm thấy gia đình ${famXref}.`);
+          } else if (!family.children.some((node) => reciprocalTags.includes(node.tag) && node.value.trim() === indi.xref)) {
+            errors.push(`Dòng ${ch.lineNumber}: liên kết ${ch.tag} ${famXref} thiếu tham chiếu ngược trong FAM.`);
+          }
+          if (ch.tag === 'FAMC') {
+            const pedi = ch.children.find((node) => node.tag === 'PEDI')?.value.trim().toLowerCase();
+            let lineageType: LineageType = 'biological';
+            if (pedi === 'adopted') lineageType = 'adoptive';
+            else if (pedi === 'foster' || pedi === 'step') lineageType = 'step';
+            else if (pedi && pedi !== 'birth') {
+              lineageType = 'unknown';
+              warnings.push(`Dòng ${ch.lineNumber}: loại phả hệ PEDI "${pedi}" được đánh dấu chưa rõ.`);
+            }
+            pediByIndiAndFam.set(JSON.stringify([indi.xref, famXref]), lineageType);
+          }
           break;
         }
       }
     }
 
+    if (!seenTags.has('NAME')) countWarnings.unknownName++;
     if (isLiving && birthDate?.year && new Date().getFullYear() - birthDate.year > 115) {
       isLiving = false;
+      countWarnings.approximateStatus++;
     }
 
     importedPeople.push({
@@ -734,32 +765,59 @@ export function parseAndPreviewGedcom(
   const marriageOrderCountByPerson = new Map<string, number>();
 
   for (const fam of famNodes) {
-    const husbXref = fam.children.find((c) => c.tag === 'HUSB')?.value.trim();
-    const wifeXref = fam.children.find((c) => c.tag === 'WIFE')?.value.trim();
-    const chilNodes = fam.children.filter((c) => c.tag === 'CHIL');
-
-    for (const ch of fam.children) {
-      if (!SUPPORTED_FAM_TAGS.has(ch.tag)) {
-        unsupportedSet.add(`FAM.${ch.tag}`);
+    const partnerNodes = fam.children.filter((node) => node.tag === 'HUSB' || node.tag === 'WIFE');
+    const childNodes = fam.children.filter((node) => node.tag === 'CHIL');
+    for (const tag of ['HUSB', 'WIFE']) {
+      if (partnerNodes.filter((node) => node.tag === tag).length > 1) {
+        errors.push(`Dòng ${fam.lineNumber}: bản ghi ${fam.xref} có nhiều hơn một thẻ ${tag}.`);
       }
     }
 
-    const partnerIds: string[] = [];
-    if (husbXref && xrefToPersonId.has(husbXref)) partnerIds.push(xrefToPersonId.get(husbXref)!);
-    if (wifeXref && xrefToPersonId.has(wifeXref)) partnerIds.push(xrefToPersonId.get(wifeXref)!);
+    for (const child of fam.children) {
+      if (!SUPPORTED_FAM_TAGS.has(child.tag)) {
+        unsupportedSet.add(`FAM.${child.tag}`);
+      } else {
+        const supportedChildren = child.tag === 'MARR' ? ['DATE', 'PLAC']
+          : child.tag === 'NOTE' ? TEXT_CONTINUATIONS : [];
+        noteUnsupportedChildren(child, `FAM.${child.tag}`, supportedChildren, unsupportedSet, warnings);
+      }
+    }
+
+    function resolvePerson(node: GedNode): string | undefined {
+      const xref = node.value.trim();
+      const personId = xrefToPersonId.get(xref);
+      if (!personId) errors.push(`Dòng ${node.lineNumber}: ${node.tag} không tìm thấy cá nhân "${xref}".`);
+      return personId;
+    }
+
+    const partnerIds = partnerNodes.map(resolvePerson).filter((id): id is string => id !== undefined);
+    if (new Set(partnerIds).size !== partnerIds.length) {
+      errors.push(`Dòng ${fam.lineNumber}: bản ghi ${fam.xref} có hôn phối với chính mình.`);
+    }
+    if (partnerIds.length === 0) {
+      if (fam.children.length > 0) {
+        errors.push(`Dòng ${fam.lineNumber}: bản ghi ${fam.xref} chứa dữ liệu nhưng không có cha/mẹ hay người phối ngẫu.`);
+      } else {
+        warnings.push(`Dòng ${fam.lineNumber}: bản ghi gia đình ${fam.xref} trống và không thể lưu.`);
+      }
+    }
 
     let marriageDate: FlexibleDate | undefined;
     let marriagePlace: string | undefined;
-    const marrNode = fam.children.find((c) => c.tag === 'MARR');
+    const marriageNodes = fam.children.filter((node) => node.tag === 'MARR');
+    if (marriageNodes.length > 1) {
+      warnings.push(`Dòng ${fam.lineNumber}: bản ghi ${fam.xref} có nhiều thẻ MARR; chỉ lưu được sự kiện đầu.`);
+    }
+    const [marrNode] = marriageNodes;
     if (marrNode) {
       const d = marrNode.children.find((c) => c.tag === 'DATE');
       const p = marrNode.children.find((c) => c.tag === 'PLAC');
-      if (d) marriageDate = parseGedcomDate(d.value);
-      if (p) marriagePlace = p.value.trim();
+      if (d) marriageDate = parseGedcomDate(d.value, `Dòng ${d.lineNumber}`, warnings);
+      if (p) marriagePlace = extractNodeText(p);
     }
 
     const isDivorced = fam.children.some((c) => c.tag === 'DIV');
-    const noteNode = fam.children.find((c) => c.tag === 'NOTE');
+    const notes = fam.children.filter((node) => node.tag === 'NOTE').map(extractNodeText).filter(Boolean).join('\n\n');
 
     let unionId: string | undefined;
     if (partnerIds.length > 0) {
@@ -775,18 +833,22 @@ export function parseAndPreviewGedcom(
         marriagePlace,
         status: isDivorced ? 'divorced' : 'married',
         marriageOrder: nextOrder,
-        notes: noteNode ? extractNodeText(noteNode) : undefined,
+        notes: notes || undefined,
         createdAt: nowIso,
         updatedAt: nowIso,
       });
     }
 
-    chilNodes.forEach((cNode, idx) => {
-      const childXref = cNode.value.trim();
-      const childId = xrefToPersonId.get(childXref);
+    const seenChildren = new Set<string>();
+    childNodes.forEach((child, idx) => {
+      const childId = resolvePerson(child);
       if (!childId) return;
-
-      const lineageType = pediByIndiAndFam.get(`${childXref}::${fam.xref!}`) ?? 'biological';
+      if (seenChildren.has(childId)) {
+        errors.push(`Dòng ${child.lineNumber}: trẻ trong bản ghi ${fam.xref} bị trùng.`);
+        return;
+      }
+      seenChildren.add(childId);
+      const lineageType = pediByIndiAndFam.get(JSON.stringify([child.value.trim(), fam.xref])) ?? 'biological';
 
       for (const pid of partnerIds) {
         importedRelationships.push({
@@ -856,6 +918,7 @@ export function parseAndPreviewGedcom(
     for (const p of importedPeople) {
       if (p.generation === undefined && genMap.has(p.id)) {
         p.generation = genMap.get(p.id);
+        countWarnings.inferredGeneration++;
       }
     }
   }
@@ -863,7 +926,7 @@ export function parseAndPreviewGedcom(
   const duplicatePeople: GedcomImportPreview['duplicatePeople'] = [];
   for (const imp of importedPeople) {
     const normImp = normalizeVietnameseText(imp.fullName);
-    const match = existingSnapshot.people.find((ex) => {
+    const match = existingSnapshot?.people.find((ex) => {
       if (normalizeVietnameseText(ex.fullName) !== normImp) return false;
       if (imp.birthDate?.year && ex.birthDate?.year) {
         return imp.birthDate.year === ex.birthDate.year;
@@ -879,10 +942,18 @@ export function parseAndPreviewGedcom(
     }
   }
 
-  const warnings: string[] = [];
+  if (countWarnings.unknownName) {
+    warnings.push(`Đặt tên tạm cho ${countWarnings.unknownName} hồ sơ không có thẻ NAME.`);
+  }
+  if (countWarnings.approximateStatus) {
+    warnings.push(`Ước tính trạng thái đã mất cho ${countWarnings.approximateStatus} hồ sơ sinh hơn 115 năm trước.`);
+  }
+  if (countWarnings.inferredGeneration) {
+    warnings.push(`Suy ra đời thứ cho ${countWarnings.inferredGeneration} hồ sơ từ các liên kết gia đình.`);
+  }
   if (unsupportedSet.size > 0) {
     warnings.push(
-      `Một số thẻ mở rộng không nằm trong phạm vi chuẩn GEDCOM 5.5.1 cơ bản đã được bỏ qua: ${Array.from(
+      `Ứng dụng bỏ qua các thẻ GEDCOM chưa hỗ trợ: ${Array.from(
         unsupportedSet
       ).join(', ')}.`
     );
@@ -898,8 +969,8 @@ export function parseAndPreviewGedcom(
     schemaVersion: 1,
     exportedAt: nowIso,
     settings: {
-      ...existingSnapshot.settings,
-      rootPersonId: importedPeople[0]?.id ?? existingSnapshot.settings.rootPersonId,
+      ...emptySnapshot.settings,
+      rootPersonId: importedPeople[0]?.id,
     },
     branches: importedBranches,
     people: importedPeople,
@@ -911,11 +982,8 @@ export function parseAndPreviewGedcom(
   };
 
   return {
-    valid: importedPeople.length > 0,
-    errors:
-      importedPeople.length === 0
-        ? ['Không tìm thấy bản ghi cá nhân (INDI) nào trong tệp GEDCOM.']
-        : [],
+    valid: errors.length === 0,
+    errors,
     warnings,
     unsupportedTags: Array.from(unsupportedSet),
     duplicatePeople,
@@ -932,26 +1000,7 @@ export function parseAndPreviewGedcom(
 export const exportGedcom551 = exportToGedcom551;
 
 export function parseGedcom551(rawGedcom: string): GenealogyDatabaseSnapshot {
-  const dummySnapshot: GenealogyDatabaseSnapshot = {
-    app: 'Gia Phả Việt – Cội Nguồn',
-    schemaVersion: 1,
-    exportedAt: new Date().toISOString(),
-    settings: {
-      id: 'default',
-      clanName: 'Gia Phả Nhập Từ GEDCOM',
-      clanMotto: 'Uống nước nhớ nguồn',
-      ancestralHallLocation: 'Việt Nam',
-      schemaVersion: 1,
-      updatedAt: new Date().toISOString(),
-    },
-    branches: [],
-    people: [],
-    unions: [],
-    relationships: [],
-    lifeEvents: [],
-    media: [],
-    stories: [],
-  };
-  const preview = parseAndPreviewGedcom(rawGedcom, dummySnapshot);
+  const preview = parseAndPreviewGedcom(rawGedcom);
+  if (!preview.valid) throw new Error(preview.errors.join(' '));
   return preview.snapshot;
 }

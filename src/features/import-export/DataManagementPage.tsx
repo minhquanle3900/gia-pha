@@ -18,10 +18,10 @@ import {
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { FamilyBranch, GenealogyDatabaseSnapshot } from '../../models/genealogy';
-import { exportGedcom551, parseGedcom551 } from '../../services/gedcomService';
+import { exportGedcom551, parseAndPreviewGedcom } from '../../services/gedcomService';
 import {
   exportDatabaseSnapshotJson,
-  parseAndValidateJsonBackup,
+  validateAndPreviewJsonBackup,
 } from '../../services/jsonBackupService';
 import {
   generateCsvTemplate,
@@ -29,6 +29,17 @@ import {
   processCsvImport,
   CsvImportResult,
 } from '../../services/csvImportService';
+import { validateImportSnapshot } from '../../services/importValidationService';
+import { planSnapshotMerge } from '../../services/snapshotMergeService';
+
+function describeDiagnostics(messages: string[]): string {
+  const visible = messages.slice(0, 6).join('\n');
+  return messages.length > 6 ? `${visible}\nCòn ${messages.length - 6} mục khác.` : visible;
+}
+
+function importErrorMessage(error: unknown): string {
+  return error instanceof Error ? error.message : String(error);
+}
 
 export const DataManagementPage: React.FC = () => {
   const {
@@ -92,14 +103,20 @@ export const DataManagementPage: React.FC = () => {
     snapshot: GenealogyDatabaseSnapshot;
     mode: 'replace' | 'merge';
     label: string;
+    warnings: string[];
   } | null>(null);
+
+  const importInProgress = useRef(false);
+  const [isApplyingImport, setIsApplyingImport] = useState(false);
 
   const jsonInputRef = useRef<HTMLInputElement | null>(null);
   const gedcomInputRef = useRef<HTMLInputElement | null>(null);
   const csvInputRef = useRef<HTMLInputElement | null>(null);
 
   // CSV Import State
-  const [csvResult, setCsvResult] = useState<CsvImportResult | null>(null);
+  const [csvResult, setCsvResult] = useState<(CsvImportResult & {
+    candidate: GenealogyDatabaseSnapshot;
+  }) | null>(null);
   const [csvPreviewOpen, setCsvPreviewOpen] = useState(false);
   const [isProcessingCsv, setIsProcessingCsv] = useState(false);
 
@@ -207,15 +224,15 @@ export const DataManagementPage: React.FC = () => {
   // 2. Import JSON Snapshot (with Confirmation)
   const handleJsonFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file || !snapshot) return;
 
     try {
       const text = await file.text();
-      const parsed = parseAndValidateJsonBackup(text);
+      const parsed = validateAndPreviewJsonBackup(text, snapshot, jsonImportMode);
       if (!parsed.valid || !parsed.snapshot) {
         setImportNotice({
           type: 'error',
-          message: `Tệp sao lưu không hợp lệ: ${parsed.errors.join('; ')}`,
+          message: `Không thể nhập bản sao lưu. ${describeDiagnostics(parsed.errors)}`,
         });
         return;
       }
@@ -223,6 +240,7 @@ export const DataManagementPage: React.FC = () => {
       setPendingImport({
         snapshot: parsed.snapshot,
         mode: jsonImportMode,
+        warnings: parsed.warnings,
         label: `JSON "${parsed.snapshot.settings.clanName}" (${parsed.snapshot.people.length} thành viên)`,
       });
     } catch (err: unknown) {
@@ -263,10 +281,21 @@ export const DataManagementPage: React.FC = () => {
 
     try {
       const text = await file.text();
-      const importedSnapshot = parseGedcom551(text);
+      const parsed = parseAndPreviewGedcom(text);
+      if (!parsed.valid) {
+        setImportNotice({ type: 'error', message: describeDiagnostics(parsed.errors) });
+        return;
+      }
+      const importedSnapshot = parsed.snapshot;
+      const validation = validateImportSnapshot(importedSnapshot);
+      if (validation.errors.length > 0) {
+        setImportNotice({ type: 'error', message: describeDiagnostics(validation.errors) });
+        return;
+      }
       setPendingImport({
         snapshot: importedSnapshot,
         mode: 'replace',
+        warnings: [...parsed.warnings, ...validation.warnings],
         label: `GEDCOM (${importedSnapshot.people.length} thành viên, ${importedSnapshot.relationships.length} quan hệ)`,
       });
     } catch (err: unknown) {
@@ -280,23 +309,31 @@ export const DataManagementPage: React.FC = () => {
     }
   };
 
-  const handleConfirmPendingImport = async () => {
-    if (!pendingImport) return;
-    const { snapshot: nextSnap, mode, label } = pendingImport;
-    const stats = await importSnapshot(nextSnap, mode);
-    setPendingImport(null);
-
-    if (mode === 'merge' && stats) {
+  const applyImport = async (candidate: GenealogyDatabaseSnapshot, mode: 'replace' | 'merge', label: string) => {
+    if (importInProgress.current) return;
+    importInProgress.current = true;
+    setIsApplyingImport(true);
+    try {
+      const stats = await importSnapshot(candidate, mode);
       setImportNotice({
         type: 'success',
-        message: `Đã gộp dữ liệu từ ${label}: thêm ${stats.addedPeople} thành viên, cập nhật ${stats.updatedPeople}, thêm ${stats.addedRelationships} liên kết.`,
+        message: stats
+          ? `Đã gộp dữ liệu từ ${label}: thêm ${stats.addedPeople} thành viên và ${stats.addedRelationships} liên kết.`
+          : `Đã khôi phục thành công dữ liệu từ ${label}.`,
       });
-    } else {
-      setImportNotice({
-        type: 'success',
-        message: `Đã khôi phục thành công dữ liệu từ ${label}.`,
-      });
+    } catch (error) {
+      setImportNotice({ type: 'error', message: `Không thể nhập dữ liệu. ${importErrorMessage(error)}` });
+    } finally {
+      setPendingImport(null);
+      setCsvPreviewOpen(false);
+      setCsvResult(null);
+      importInProgress.current = false;
+      setIsApplyingImport(false);
     }
+  };
+
+  const handleConfirmPendingImport = async () => {
+    if (pendingImport) await applyImport(pendingImport.snapshot, pendingImport.mode, pendingImport.label);
   };
 
   // 4b. Download Excel / CSV Template
@@ -314,48 +351,43 @@ export const DataManagementPage: React.FC = () => {
   // 4c. Select CSV file and parse preview
   const handleCsvFileSelected = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
-    if (!file) return;
+    if (!file || !snapshot) return;
 
     try {
       setIsProcessingCsv(true);
       const text = await file.text();
-      const rawLines = parseCsvRows(text);
-      const result = processCsvImport(rawLines, branches);
-      setCsvResult(result);
-      setCsvPreviewOpen(true);
-    } catch (err: unknown) {
-      const msg = err instanceof Error ? err.message : String(err);
-      setImportNotice({
-        type: 'error',
-        message: `Lỗi đọc tệp CSV / Excel: ${msg}`,
+      const result = processCsvImport(parseCsvRows(text), branches, people);
+      const candidate: GenealogyDatabaseSnapshot = {
+        ...snapshot,
+        branches: result.parsedBranches,
+        people: result.parsedPeople,
+        relationships: result.parsedRelationships,
+        unions: result.parsedUnions,
+        lifeEvents: [],
+        media: [],
+        stories: [],
+      };
+      const validation = result.errors.length > 0
+        ? { errors: [], warnings: [] }
+        : planSnapshotMerge(snapshot, candidate);
+      setCsvResult({
+        ...result,
+        candidate,
+        errors: [...result.errors, ...validation.errors],
+        warnings: [...result.warnings, ...validation.warnings],
       });
+      setCsvPreviewOpen(true);
+    } catch (error) {
+      setImportNotice({ type: 'error', message: `Lỗi đọc tệp CSV / Excel: ${importErrorMessage(error)}` });
     } finally {
       setIsProcessingCsv(false);
       if (csvInputRef.current) csvInputRef.current.value = '';
     }
   };
 
-  // 4d. Confirm and apply CSV import
   const handleApplyCsvImport = async () => {
-    if (!csvResult || !snapshot) return;
-
-    try {
-      const updatedSnapshot: typeof snapshot = {
-        ...snapshot,
-        people: [...snapshot.people, ...csvResult.parsedPeople],
-        relationships: [...snapshot.relationships, ...csvResult.parsedRelationships],
-        unions: [...snapshot.unions, ...csvResult.parsedUnions],
-      };
-
-      await importSnapshot(updatedSnapshot, 'replace');
-      setCsvPreviewOpen(false);
-      setImportNotice({
-        type: 'success',
-        message: `Đã nạp thành công ${csvResult.parsedPeople.length} thành viên, ${csvResult.parsedRelationships.length} liên kết cha con và ${csvResult.parsedUnions.length} hôn phối mới vào gia phả.`,
-      });
-      setCsvResult(null);
-    } catch (err) {
-      console.error(err);
+    if (csvResult && csvResult.errors.length === 0) {
+      await applyImport(csvResult.candidate, 'merge', 'CSV');
     }
   };
 
@@ -385,6 +417,7 @@ export const DataManagementPage: React.FC = () => {
       {/* Notification banner */}
       {importNotice && (
         <div
+          role={importNotice.type === 'error' ? 'alert' : 'status'}
           className={`p-4 rounded-2xl border text-xs flex items-center justify-between gap-3 ${
             importNotice.type === 'success'
               ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
@@ -397,7 +430,7 @@ export const DataManagementPage: React.FC = () => {
             ) : (
               <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
             )}
-            <span>{importNotice.message}</span>
+            <span className="whitespace-pre-line break-words">{importNotice.message}</span>
           </div>
           <button
             type="button"
@@ -959,11 +992,19 @@ export const DataManagementPage: React.FC = () => {
             : 'Xác nhận khôi phục & thay thế dữ liệu'
         }
         description={
-          pendingImport?.mode === 'merge'
-            ? `Ứng dụng sẽ gộp dữ liệu từ ${pendingImport.label} vào gia phả hiện có. Bạn có muốn tiếp tục?`
-            : `Thao tác này sẽ thay thế toàn bộ dữ liệu gia phả hiện tại bằng ${pendingImport?.label}. Nên xuất bản sao lưu JSON trước khi tiếp tục.`
+          pendingImport
+            ? [
+              pendingImport.mode === 'merge'
+                ? `Ứng dụng sẽ bổ sung dữ liệu từ ${pendingImport.label} vào gia phả hiện có.`
+                : `Thao tác này sẽ thay thế toàn bộ dữ liệu gia phả hiện tại bằng ${pendingImport.label}. Nên xuất bản sao lưu JSON trước khi tiếp tục.`,
+              pendingImport.warnings.length > 0
+                ? `Cảnh báo:\n${describeDiagnostics(pendingImport.warnings)}`
+                : '',
+            ].filter(Boolean).join('\n\n')
+            : ''
         }
-        confirmLabel={pendingImport?.mode === 'merge' ? 'Gộp dữ liệu' : 'Xác nhận thay thế'}
+        confirmLabel={isApplyingImport ? 'Đang nhập…' : pendingImport?.mode === 'merge' ? 'Gộp dữ liệu' : 'Xác nhận thay thế'}
+        busy={isApplyingImport}
         cancelLabel="Hủy"
         danger={pendingImport?.mode !== 'merge'}
         onConfirm={handleConfirmPendingImport}
@@ -974,7 +1015,7 @@ export const DataManagementPage: React.FC = () => {
       {csvPreviewOpen && csvResult && (
         <div
           className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-in fade-in"
-          onClick={() => setCsvPreviewOpen(false)}
+          onClick={() => { if (!isApplyingImport) setCsvPreviewOpen(false); }}
         >
           <div
             className="w-full max-w-3xl bg-[#FFFDF9] rounded-3xl border border-[#E7DFD4] p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col"
@@ -989,6 +1030,7 @@ export const DataManagementPage: React.FC = () => {
               </div>
               <button
                 type="button"
+                disabled={isApplyingImport}
                 onClick={() => setCsvPreviewOpen(false)}
                 className="p-1 rounded-xl text-stone-400 hover:text-stone-700"
               >
@@ -1017,6 +1059,17 @@ export const DataManagementPage: React.FC = () => {
                 <p className="text-[10px] text-rose-700">Cặp hôn phối (Vợ chồng)</p>
               </div>
             </div>
+
+            {csvResult.errors.length > 0 && (
+              <p role="alert" className="max-h-32 overflow-auto whitespace-pre-line text-xs text-red-800">
+                {describeDiagnostics(csvResult.errors)}
+              </p>
+            )}
+            {csvResult.warnings.length > 0 && (
+              <p className="max-h-24 overflow-auto whitespace-pre-line text-xs text-amber-800">
+                {describeDiagnostics(csvResult.warnings)}
+              </p>
+            )}
 
             {/* Table preview */}
             <div className="flex-1 overflow-y-auto border border-[#E7DFD4] rounded-xl">
@@ -1062,12 +1115,15 @@ export const DataManagementPage: React.FC = () => {
 
             <div className="pt-2 border-t border-stone-200 flex items-center justify-between text-xs">
               <span className="text-stone-500">
-                Dữ liệu sẽ được bổ sung an toàn vào gia phả hiện tại.
+                {csvResult.errors.length > 0
+                  ? 'Sửa các lỗi trong tệp CSV rồi chọn lại tệp.'
+                  : 'Dữ liệu sẽ được bổ sung vào gia phả hiện tại.'}
               </span>
               <div className="flex items-center gap-2">
                 <button
                   type="button"
-                  onClick={() => setCsvPreviewOpen(false)}
+                  disabled={isApplyingImport}
+                onClick={() => setCsvPreviewOpen(false)}
                   className="px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium"
                 >
                   Hủy
@@ -1075,9 +1131,10 @@ export const DataManagementPage: React.FC = () => {
                 <button
                   type="button"
                   onClick={handleApplyCsvImport}
-                  className="px-5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-semibold shadow-xs"
+                  disabled={isApplyingImport || csvResult.errors.length > 0}
+                  className="px-5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-semibold shadow-xs disabled:opacity-50"
                 >
-                  Xác nhận Nhập vào Gia Phả
+                  {isApplyingImport ? 'Đang nhập…' : 'Xác nhận Nhập vào Gia Phả'}
                 </button>
               </div>
             </div>

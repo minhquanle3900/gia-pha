@@ -2,7 +2,8 @@ import { SCHEMA_VERSION } from '../database/db';
 import { GenealogyDatabaseSnapshot, Person } from '../models/genealogy';
 import { normalizeVietnameseText } from '../utils/dateUtils';
 import { ensureBase64DataUrl } from '../utils/imageUtils';
-import { auditDatabaseIntegrity } from './validationService';
+import { validateImportSnapshot } from './importValidationService';
+import { planSnapshotMerge } from './snapshotMergeService';
 
 export interface JsonImportPreview {
   valid: boolean;
@@ -72,7 +73,8 @@ export async function serializeDatabaseBackup(
 
 export function validateAndPreviewJsonBackup(
   rawText: string,
-  existingSnapshot: GenealogyDatabaseSnapshot
+  existingSnapshot: GenealogyDatabaseSnapshot,
+  mode: 'replace' | 'merge' = 'replace'
 ): JsonImportPreview {
   const emptyStats = {
     peopleCount: 0,
@@ -88,7 +90,7 @@ export function validateAndPreviewJsonBackup(
 
   let parsed: unknown;
   try {
-    parsed = JSON.parse(rawText);
+    parsed = JSON.parse(rawText.replace(/^\uFEFF/, ''));
   } catch {
     return {
       valid: false,
@@ -108,64 +110,33 @@ export function validateAndPreviewJsonBackup(
   }
 
   const obj = parsed as Record<string, unknown>;
-  const errors: string[] = [];
   const warnings: string[] = [];
+  const normalized: Record<string, unknown> = { ...obj };
 
-  if (typeof obj.schemaVersion !== 'number') {
-    errors.push('Thiếu thông tin phiên bản cấu trúc dữ liệu (schemaVersion).');
-  } else if (obj.schemaVersion > SCHEMA_VERSION) {
-    errors.push(
-      `Phiên bản tệp sao lưu (v${obj.schemaVersion}) mới hơn phiên bản ứng dụng hiện tại (v${SCHEMA_VERSION}).`
-    );
+  // The original v1 reader allowed these properties to be absent. Only fill
+  // missing fields, and disclose the defaults before replacing a database.
+  if (!('app' in obj)) normalized.app = 'Gia Phả Việt – Cội Nguồn';
+  if (!('exportedAt' in obj)) normalized.exportedAt = new Date().toISOString();
+  if (!('settings' in obj)) {
+    normalized.settings = { ...existingSnapshot.settings, rootPersonId: undefined };
+    warnings.push('Bản sao lưu v1 thiếu settings. Dùng thiết lập mặc định hoặc hiện có, bỏ chỉ định gốc trong bản khôi phục.');
+  }
+  const absentStores = ['branches', 'lifeEvents', 'media', 'stories'].filter((store) => !(store in obj));
+  for (const store of absentStores) normalized[store] = [];
+  if (absentStores.length > 0) {
+    warnings.push(`Bản sao lưu v1 thiếu ${absentStores.join(', ')}. Những danh sách này được đọc là rỗng.`);
   }
 
-  if (!Array.isArray(obj.people)) {
-    errors.push('Thiếu danh sách thành viên (people) trong tệp sao lưu.');
-  }
-  if (!Array.isArray(obj.relationships)) {
-    errors.push('Thiếu danh sách quan hệ huyết thống (relationships) trong tệp sao lưu.');
-  }
-  if (!Array.isArray(obj.unions)) {
-    errors.push('Thiếu danh sách hôn phối (unions) trong tệp sao lưu.');
+  const input = validateImportSnapshot(normalized, { checkReferences: mode === 'replace' });
+  if (input.errors.length > 0) {
+    return { valid: false, errors: input.errors, warnings: [...warnings, ...input.warnings], stats: emptyStats };
   }
 
-  if (errors.length > 0) {
-    return {
-      valid: false,
-      errors,
-      warnings,
-      stats: emptyStats,
-    };
-  }
-
-  const people = (obj.people as Person[]).filter(
-    (p) => p && typeof p.id === 'string' && typeof p.fullName === 'string'
-  );
-  if (people.length !== (obj.people as unknown[]).length) {
-    errors.push('Một số bản ghi thành viên bị thiếu mã định danh (id) hoặc họ tên (fullName).');
-    return { valid: false, errors, warnings, stats: emptyStats };
-  }
-
-  const snapshot: GenealogyDatabaseSnapshot = {
-    app: typeof obj.app === 'string' ? obj.app : 'Gia Phả Việt – Cội Nguồn',
-    schemaVersion: obj.schemaVersion as number,
-    exportedAt: typeof obj.exportedAt === 'string' ? obj.exportedAt : new Date().toISOString(),
-    settings:
-      obj.settings && typeof obj.settings === 'object'
-        ? (obj.settings as GenealogyDatabaseSnapshot['settings'])
-        : existingSnapshot.settings,
-    branches: Array.isArray(obj.branches) ? obj.branches : [],
-    people,
-    unions: Array.isArray(obj.unions) ? obj.unions : [],
-    relationships: Array.isArray(obj.relationships) ? obj.relationships : [],
-    lifeEvents: Array.isArray(obj.lifeEvents) ? obj.lifeEvents : [],
-    media: Array.isArray(obj.media) ? obj.media : [],
-    stories: Array.isArray(obj.stories) ? obj.stories : [],
-  };
-
-  const integrityIssues = auditDatabaseIntegrity(snapshot);
-  if (integrityIssues.length > 0) {
-    warnings.push(...integrityIssues);
+  const snapshot = normalized as unknown as GenealogyDatabaseSnapshot;
+  const result = mode === 'merge' ? planSnapshotMerge(existingSnapshot, snapshot) : input;
+  warnings.push(...result.warnings);
+  if (result.errors.length > 0) {
+    return { valid: false, errors: result.errors, warnings, stats: emptyStats };
   }
 
   const existingIds = new Set(existingSnapshot.people.map((p) => p.id));
@@ -199,9 +170,9 @@ export function validateAndPreviewJsonBackup(
     }
   }
 
-  if (exactIdConflicts > 0) {
+  if (exactIdConflicts > 0 && mode === 'merge') {
     warnings.push(
-      `Phát hiện ${exactIdConflicts} hồ sơ trùng mã định danh với dữ liệu hiện tại trên thiết bị.`
+      `Phát hiện ${exactIdConflicts} hồ sơ giống hệt đã có trên thiết bị.`
     );
   }
   if (potentialNameDuplicates.length > 0) {
@@ -257,14 +228,14 @@ export function parseAndValidateJsonBackup(rawText: string): {
   const preview = validateAndPreviewJsonBackup(rawText, {
     app: 'Gia Phả Việt – Cội Nguồn',
     schemaVersion: SCHEMA_VERSION,
-    exportedAt: '',
+    exportedAt: new Date().toISOString(),
     settings: {
       id: 'default',
       clanName: '',
       clanMotto: '',
       ancestralHallLocation: '',
       schemaVersion: SCHEMA_VERSION,
-      updatedAt: '',
+      updatedAt: new Date().toISOString(),
     },
     branches: [],
     people: [],
