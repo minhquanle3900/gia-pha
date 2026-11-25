@@ -1,0 +1,299 @@
+@import "tailwindcss";
+
+@variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-serif: "Cormorant Garamond", Georgia, Cambria, "Times New Roman", Times, serif;
+  --font-sans: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+
+  --color-ivory-50: #FAF7F2;
+  --color-ivory-100: #F3EFE6;
+  --color-ivory-200: #E6DFD1;
+  --color-ivory-300: #D5CBB8;
+
+  --color-forest-900: #132A1F;
+  --color-forest-800: #1B3B2B;
+  --color-forest-700: #254F3A;
+  --color-forest-600: #31664B;
+  --color-forest-50: #EEF4F0;
+
+  --color-bark-900: #231C16;
+  --color-bark-800: #3A2E25;
+  --color-bark-600: #655A4E;
+  --color-bark-500: #85786A;
+
+  --color-gold-700: #856428;
+  --color-gold-600: #9E7B3B;
+  --color-gold-500: #C5A059;
+  --color-gold-100: #F6EFE0;
+}
+
+@layer base {
+  html {
+    font-family: var(--font-sans);
+    background-color: #FAF7F2;
+    color: #231C16;
+    -webkit-tap-highlight-color: transparent;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+  html.dark {
+    background-color: #101713;
+    color: #EDE6DC;
+    color-scheme: dark;
+  }
+
+  h1, h2, h3, .font-editorial {
+    font-family: var(--font-serif);
+    text-wrap: balance;
+  }
+}
+
+.tabular-nums {
+  font-variant-numeric: tabular-nums;
+}
+
+/* High readability Evening Dark Mode Adjustments */
+html.dark {
+  /* Surfaces & Backgrounds */
+  body {
+    background-color: #101713;
+    color: #EDE6DC;
+  }
+
+  /* Main background overrides */
+  .bg-\[\#FAF7F2\],
+  .bg-\[\#FAF7F2\]\/95,
+  .bg-\[\#FAF7F2\]\/90,
+  .bg-\[\#FAF7F2\]\/80,
+  .bg-\[\#FAF7F2\]\/70,
+  .bg-\[\#FAF7F2\]\/40 {
+    background-color: #101713 !important;
+  }
+
+  /* Pure white cards and panels */
+  .bg-white,
+  .bg-\[\#FFFDF9\],
+  .bg-\[\#FFFDF9\]\/95,
+  .bg-\[\#FFFDF9\]\/90,
+  .bg-\[\#FAF8F5\],
+  .bg-\[\#FAF8F5\]\/90 {
+    background-color: #17241C !important;
+  }
+
+  /* Secondary surface / pill / controls */
+  .bg-\[\#F1EBE1\],
+  .bg-\[\#F1EBE1\]\/70,
+  .bg-white\/80,
+  .bg-white\/60,
+  .bg-stone-100,
+  .bg-stone-50 {
+    background-color: #1F2E25 !important;
+  }
+
+  /* Gentle tinted backgrounds */
+  .bg-amber-50,
+  .bg-amber-50\/80,
+  .bg-amber-50\/60 {
+    background-color: #252014 !important;
+  }
+
+  .bg-emerald-50,
+  .bg-emerald-50\/80,
+  .bg-emerald-50\/60 {
+    background-color: #13271C !important;
+  }
+
+  .bg-rose-50,
+  .bg-rose-50\/80 {
+    background-color: #2A1717 !important;
+  }
+
+  .bg-blue-50,
+  .bg-blue-50\/80 {
+    background-color: #14222E !important;
+  }
+
+  /* Borders */
+  .border-\[\#E7DFD4\],
+  .border-\[\#E3D9CC\],
+  .border-\[\#D5CABE\],
+  .border-\[\#E5DDD2\],
+  .border-\[\#E6DFD1\],
+  .border-stone-200,
+  .border-stone-100,
+  .border-stone-300 {
+    border-color: #2B3C31 !important;
+  }
+
+  .border-amber-200,
+  .border-amber-100 {
+    border-color: #4C3C1B !important;
+  }
+
+  .border-emerald-200,
+  .border-emerald-100 {
+    border-color: #234833 !important;
+  }
+
+  /* High Readability Typography Contrast */
+  .text-\[\#241C15\],
+  .text-\[\#231C16\],
+  .text-\[\#1F1913\],
+  .text-\[\#2C241C\],
+  .text-stone-900,
+  .text-stone-800 {
+    color: #EDE6DC !important;
+  }
+
+  /* Muted text readability */
+  .text-\[\#6C5F51\],
+  .text-\[\#655A4E\],
+  .text-\[\#5C4F42\],
+  .text-\[\#54483C\],
+  .text-stone-600,
+  .text-stone-500 {
+    color: #A89F93 !important;
+  }
+
+  .text-stone-400 {
+    color: #8A8073 !important;
+  }
+
+  /* Headings & Brand Emeralds */
+  .text-\[\#1B3B2B\] {
+    color: #52B788 !important;
+  }
+
+  /* Heritage Golds */
+  .text-\[\#947432\],
+  .text-\[\#856428\],
+  .text-\[\#8C6D32\],
+  .text-\[\#C19B4C\],
+  .text-\[\#A27B38\] {
+    color: #E5BE6C !important;
+  }
+
+  .text-amber-900,
+  .text-amber-800 {
+    color: #F8D588 !important;
+  }
+
+  .text-emerald-900,
+  .text-emerald-800 {
+    color: #72DCA6 !important;
+  }
+
+  .text-rose-900,
+  .text-rose-800 {
+    color: #F87171 !important;
+  }
+
+  /* Inputs, selects and textareas */
+  input:not([type="checkbox"]):not([type="radio"]),
+  select,
+  textarea {
+    background-color: #141E18 !important;
+    border-color: #2D3E33 !important;
+    color: #EDE6DC !important;
+  }
+
+  input::placeholder,
+  textarea::placeholder {
+    color: #796E61 !important;
+  }
+
+  /* Interactive hover highlights */
+  .hover\:bg-stone-50:hover,
+  .hover\:bg-stone-100:hover,
+  .hover\:bg-white\/60:hover {
+    background-color: #24352B !important;
+  }
+
+  /* SVG & D3 Family Tree evening readability */
+  svg rect[fill="#FFFFFF"],
+  svg rect[fill="#FFFDF8"] {
+    fill: #19271E !important;
+  }
+
+  svg text {
+    fill: #EDE6DC !important;
+  }
+
+  /* Recharts evening contrast */
+  .recharts-cartesian-grid-horizontal line,
+  .recharts-cartesian-grid-vertical line {
+    stroke: #223228 !important;
+  }
+
+  .recharts-text {
+    fill: #A89F93 !important;
+  }
+
+  .recharts-default-tooltip {
+    background-color: #17241C !important;
+    border-color: #2B3C31 !important;
+    color: #EDE6DC !important;
+    box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5) !important;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+/* ========================================================================= */
+/* PRINT MEDIA RULES (TRADITIONAL PRINTABLE DOSSIERS & REPORTS) */
+/* ========================================================================= */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm;
+  }
+
+  html, body {
+    background: #FFFFFF !important;
+    color: #1F1913 !important;
+    font-size: 11pt !important;
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  /* When printing individual person report, isolate the report and hide outer app chrome */
+  body.printing-person-report header,
+  body.printing-person-report nav,
+  body.printing-person-report main > *:not(.fixed),
+  body.printing-person-report .print\:hidden {
+    display: none !important;
+  }
+
+  /* Page break rules */
+  .page-break-inside-avoid {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  .page-break-before {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  #printable-person-report {
+    max-width: 100% !important;
+    width: 100% !important;
+    border-width: 2px !important;
+    box-shadow: none !important;
+    margin: 0 auto !important;
+    padding: 12px !important;
+    background-color: #FFFFFF !important;
+  }
+}
+

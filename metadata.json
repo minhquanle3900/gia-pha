@@ -1,0 +1,8 @@
+{
+  "name": "Remix Remix Remix Gia Phả Việt – Cội Nguồn",
+  "description": "Lưu trữ, quản lý cây gia phả và ký ức dòng họ Việt Nam bảo mật, offline ngay trên thiết bị.",
+  "requestFramePermissions": [],
+  "majorCapabilities": [
+    "MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"
+  ]
+}

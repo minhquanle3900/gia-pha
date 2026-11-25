@@ -1,0 +1,42 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1B3B2B" />
+      <stop offset="50%" stop-color="#234A36" />
+      <stop offset="100%" stop-color="#142D20" />
+    </linearGradient>
+    <linearGradient id="gold" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#F2E3C6" />
+      <stop offset="50%" stop-color="#DBC599" />
+      <stop offset="100%" stop-color="#9C824A" />
+    </linearGradient>
+  </defs>
+  
+  <!-- Outer Rounded Rectangle -->
+  <rect width="512" height="512" rx="112" fill="url(#bg)" />
+  
+  <!-- Subtle Ornamental Inner Border -->
+  <rect x="24" y="24" width="464" height="464" rx="92" fill="none" stroke="url(#gold)" stroke-width="6" opacity="0.4" />
+  
+  <!-- Tree of Life / Ancestral Branch Motif -->
+  <g transform="translate(256, 290)">
+    <!-- Roots & Trunk -->
+    <path d="M-12,80 L-6,0 L6,0 L12,80 Z" fill="url(#gold)" opacity="0.9" />
+    <path d="M0,80 Q-40,110 -70,120 M0,80 Q40,110 70,120" fill="none" stroke="url(#gold)" stroke-width="8" stroke-linecap="round" />
+    
+    <!-- Branches -->
+    <path d="M0,0 Q-50,-30 -90,-20 M-50,-30 Q-70,-70 -110,-70" fill="none" stroke="url(#gold)" stroke-width="10" stroke-linecap="round" />
+    <path d="M0,0 Q50,-30 90,-20 M50,-30 Q70,-70 110,-70" fill="none" stroke="url(#gold)" stroke-width="10" stroke-linecap="round" />
+    <path d="M0,0 Q0,-60 -20,-110 M0,0 Q0,-60 20,-110" fill="none" stroke="url(#gold)" stroke-width="10" stroke-linecap="round" />
+    
+    <!-- Blossom Nodes (Family Generations) -->
+    <circle cx="0" cy="-125" r="14" fill="url(#gold)" />
+    <circle cx="-110" cy="-70" r="12" fill="url(#gold)" />
+    <circle cx="110" cy="-70" r="12" fill="url(#gold)" />
+    <circle cx="-90" cy="-20" r="10" fill="url(#gold)" />
+    <circle cx="90" cy="-20" r="10" fill="url(#gold)" />
+  </g>
+  
+  <!-- Heritage Calligraphy Symbol at top -->
+  <text x="256" y="145" text-anchor="middle" font-family="'Cormorant Garamond', serif" font-weight="bold" font-size="78" fill="url(#gold)">源</text>
+</svg>
