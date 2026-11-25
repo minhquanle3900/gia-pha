@@ -1,0 +1,16 @@
+
+> react-example@0.0.0 test
+> vitest run
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:89:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.1.0 D:/LMQ_My mine/Gia-pha
+
+
+ Test Files  9 passed (9)
+      Tests  79 passed (79)
+   Start at  16:16:55
+   Duration  2.44s (transform 49%, import 30%, tests 18%, worker 2%)
+

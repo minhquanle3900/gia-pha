@@ -1,0 +1,84 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - generic: "Kiểu biểu đồ:"
+  - button "Cây phân nhánh"
+  - button "Nan Quạt (Fan Chart)"
+  - button "Xuất sách / In ấn":
+    - generic: Xuất sách / In ấn
+  - button "Hậu duệ tỏa nhánh"
+  - button "Tiền nhân tổ tiên"
+  - button "Bán nguyệt 180°"
+  - button "Cánh quạt 240°"
+  - button "Tròn 360°"
+  - generic: "Số đời:"
+  - combobox:
+    - option "3 đời"
+    - option "4 đời"
+    - option "5 đời" [selected]
+    - option "6 đời"
+  - generic: "Gốc nan quạt:"
+  - combobox:
+    - option "Trần Văn Lộc (Đời 1)" [selected]
+    - option "Nguyễn Thị Kim (Đời 1)"
+    - option "Trần Văn Khải (Đời 2)"
+    - option "Nguyễn Thị Lan (Đời 2)"
+    - option "Đặng Thị Nguyệt (Đời 2)"
+    - option "Trần Văn Phúc (Đời 2)"
+    - option "Lê Thị Thanh (Đời 2)"
+    - option "Trần Thị Hạnh (Đời 2)"
+    - option "Trần Văn Nghị (Đời 3)"
+    - option "Phạm Thị Hiền (Đời 3)"
+    - option "Trần Thị Mai (Đời 3)"
+    - option "Trần Văn Minh (Đời 3)"
+    - option "Hoàng Thị Bích (Đời 3)"
+    - option "Trần Văn Tín (Đời 3)"
+    - option "Trần Hữu Đạt (Đời 3)"
+    - option "Võ Thị Ngọc Mai (Đời 3)"
+    - option "Trần Hữu Kiên (Đời 3)"
+    - option "Trần Quốc Tuấn (Đời 4)"
+    - option "Ngô Thị Phương Thảo (Đời 4)"
+    - option "Trần Thị Thu Thủy (Đời 4)"
+    - option "Trần Thị Thu Hà (Đời 4)"
+    - option "Trần Đức Bảo (Đời 4)"
+    - option "Trần Gia Hưng (Đời 4)"
+    - option "Lâm Mỹ Dung (Đời 4)"
+    - option "Trần Hữu Khôi (Đời 4)"
+    - option "Trần Minh Quân (Đời 5)"
+    - option "Đỗ Ngọc Lan Anh (Đời 5)"
+    - option "Trần Minh Châu (Đời 5)"
+    - option "Trần Bảo Nam (Đời 5)"
+    - option "Trần Ngọc Khánh Linh (Đời 5)"
+    - option "Trần Khôi Nguyên (Đời 5)"
+  - button "Thu nhỏ":
+  - generic: 100%
+  - button "Phóng to":
+  - button "Đặt lại góc nhìn":
+  - button "Xuất SVG" [active]:
+    - generic: Xuất SVG

@@ -1,0 +1,16 @@
+Producer:        jsPDF 4.2.1
+CreationDate:    Wed Nov 25 16:20:44 2026 SE Asia Standard Time
+Custom Metadata: no
+Metadata Stream: no
+Tagged:          no
+UserProperties:  no
+Suspects:        no
+Form:            none
+JavaScript:      no
+Pages:           7
+Encrypted:       no
+Page size:       595.28 x 841.89 pts (A4)
+Page rot:        0
+File size:       2723571 bytes
+Optimized:       no
+PDF version:     1.3

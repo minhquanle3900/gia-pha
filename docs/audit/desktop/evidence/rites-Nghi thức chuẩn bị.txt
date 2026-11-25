@@ -1,0 +1,61 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - heading "Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch" [level=2]:
+    - generic: Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch
+  - paragraph: Tự động tính ngày dương tương ứng, sổ văn khấn cổ truyền và danh mục chuẩn bị lễ giỗ họ.
+  - button "Lịch giỗ tiền nhân":
+    - generic: Lịch giỗ tiền nhân
+  - button "Sổ văn khấn":
+    - generic: Sổ văn khấn
+  - button "Phong tục 3 Miền":
+    - generic: Phong tục 3 Miền
+  - button "Nghi thức chuẩn bị" [active]:
+    - generic: Nghi thức chuẩn bị
+  - heading "Danh Mục Việc Cần Chuẩn Bị Ngày Giỗ Họ" [level=3]:
+    - generic: Danh Mục Việc Cần Chuẩn Bị Ngày Giỗ Họ
+  - paragraph: Phân công việc chu đáo giúp ngày giỗ tổ và giỗ tiền nhân diễn ra trang nghiêm, thuận hòa.
+  - button:
+  - generic: Lễ Vật Hương Hoa
+  - paragraph: Chuẩn bị hương thơm, nến/đèn dầu, hoa tươi (hoa huệ, hoa cúc vàng), đĩa ngũ quả tươi tắn
+  - button:
+  - generic: Lễ Vật Hương Hoa
+  - paragraph: Trầu cau tươi (lá trầu, quả cau nguyên cuống), vàng mã gia tiên, tiền vàng nghi lễ
+  - button:
+  - generic: Mâm Cỗ Cúng
+  - paragraph: "Mâm cỗ mặn truyền thống: Gà trống hoa luộc nguyên con ngậm hoa hồng, xôi gấc/xôi đỗ, giò lụa, nem rán"
+  - button:
+  - generic: Mâm Cỗ Cúng
+  - paragraph: Bát canh bóng thập cẩm/canh măng miến sườn, đĩa xào lòng mề miến, đĩa rau xào
+  - button:
+  - generic: Từ Đường & Khách
+  - paragraph: Bao sái, lau dọn bàn thờ tổ, lư đồng, bát hương gia tiên từ ngày hôm trước
+  - button:
+  - generic: Từ Đường & Khách
+  - paragraph: Liên hệ đón tiếp các bậc cao niên, các chi phái ở xa và thông báo thời gian dâng hương tế lễ

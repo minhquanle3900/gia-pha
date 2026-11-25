@@ -1,0 +1,183 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Quản lý dữ liệu":
+      - generic: Quản lý dữ liệu
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - heading "Quản Lý Dữ Liệu & Sao Lưu" [level=2]
+  - paragraph: Dữ liệu gia phả được lưu trữ an toàn trong IndexedDB của trình duyệt. Hãy thường xuyên xuất bản sao lưu về máy tính hoặc điện thoại.
+  - heading "Thông Tin Chung Về Dòng Tộc" [level=3]
+  - paragraph: Cập nhật tên họ, gia huấn, địa chỉ từ đường và nhân vật khởi thủy.
+  - generic: Tên dòng họ / Gia tộc
+  - textbox: Dòng họ Trần – Đông Ngạc
+  - generic: Nhân vật khởi thủy (Gốc cây gia phả)
+  - combobox:
+    - option "-- Tự động chọn đời 1 --"
+    - option "Trần Văn Lộc (Đời 1)" [selected]
+    - option "Nguyễn Thị Kim (Đời 1)"
+    - option "Trần Văn Khải (Đời 2)"
+    - option "Nguyễn Thị Lan (Đời 2)"
+    - option "Đặng Thị Nguyệt (Đời 2)"
+    - option "Trần Văn Phúc (Đời 2)"
+    - option "Lê Thị Thanh (Đời 2)"
+    - option "Trần Thị Hạnh (Đời 2)"
+    - option "Trần Văn Nghị (Đời 3)"
+    - option "Phạm Thị Hiền (Đời 3)"
+    - option "Trần Thị Mai (Đời 3)"
+    - option "Trần Văn Minh (Đời 3)"
+    - option "Hoàng Thị Bích (Đời 3)"
+    - option "Trần Văn Tín (Đời 3)"
+    - option "Trần Hữu Đạt (Đời 3)"
+    - option "Võ Thị Ngọc Mai (Đời 3)"
+    - option "Trần Hữu Kiên (Đời 3)"
+    - option "Trần Quốc Tuấn (Đời 4)"
+    - option "Ngô Thị Phương Thảo (Đời 4)"
+    - option "Trần Thị Thu Thủy (Đời 4)"
+    - option "Trần Thị Thu Hà (Đời 4)"
+    - option "Trần Đức Bảo (Đời 4)"
+    - option "Trần Gia Hưng (Đời 4)"
+    - option "Lâm Mỹ Dung (Đời 4)"
+    - option "Trần Hữu Khôi (Đời 4)"
+    - option "Trần Minh Quân (Đời 5)"
+    - option "Đỗ Ngọc Lan Anh (Đời 5)"
+    - option "Trần Minh Châu (Đời 5)"
+    - option "Trần Bảo Nam (Đời 5)"
+    - option "Trần Ngọc Khánh Linh (Đời 5)"
+    - option "Trần Khôi Nguyên (Đời 5)"
+  - generic: Gia huấn / Câu đối / Tôn chỉ dòng họ
+  - textbox: Tiên tổ phương danh lưu vạn đại · Tử tôn hiếu thảo kế thiên thu
+  - generic: Địa chỉ Nhà thờ tổ / Từ đường dòng họ
+  - textbox: Làng cổ Đông Ngạc, Bắc Từ Liêm, Hà Nội
+  - button "Lưu thông tin":
+    - generic: Lưu thông tin
+  - heading "Quản Lý Chi Họ & Phân Nhánh (4)" [level=3]
+  - paragraph: Tổ chức các chi trưởng, chi thứ hoặc chi di cư để lọc cây gia phả và bản đồ địa lý.
+  - button "Thêm chi họ":
+    - generic: Thêm chi họ
+  - heading "Đại Tôn Họ Trần Đông Ngạc" [level=4]
+  - generic: DAI-TON
+  - generic: 3 thành viên
+  - generic: ·
+  - generic: Làng Đông Ngạc, phủ Hoài Đức, Hà Nội
+  - generic: ·
+  - generic: Cuối thế kỷ XIX
+  - paragraph: "Phái: Gốc Tổ Đông Ngạc"
+  - paragraph: Gốc đại tôn quy tụ các thế hệ khai cơ lập nghiệp tại làng khoa bảng Đông Ngạc bên bờ sông Hồng, gìn giữ từ đường và gia phả gốc.
+  - button "Sửa chi họ":
+  - button "Xóa chi họ":
+  - heading "Chi Giáp (Chi Trưởng)" [level=4]
+  - generic: CHI-GIAP
+  - generic: 17 thành viên
+  - generic: ·
+  - generic: Đông Ngạc, Hà Nội
+  - generic: ·
+  - generic: "1920"
+  - paragraph: "Phái: Phái Đông, Phái Đoài"
+  - paragraph: Chi trưởng phụng sự từ đường chính tại Đông Ngạc, nhiều đời theo nghề dạy học, y thuật cổ truyền và nghiên cứu văn hóa.
+  - button "Sửa chi họ":
+  - button "Xóa chi họ":
+  - heading "Chi Ất (Chi Thứ)" [level=4]
+  - generic: CHI-AT
+  - generic: 5 thành viên
+  - generic: ·
+  - generic: Phố Hàng Đào, Hoàn Kiếm, Hà Nội
+  - generic: ·
+  - generic: "1926"
+  - paragraph: "Phái: Phái Nam, Phái Bắc"
+  - paragraph: Chi thứ lập nghiệp tại nội thành Hà Nội và Hải Phòng, phát triển nghề thủ công mỹ nghệ, kiến trúc và thương mại.
+  - button "Sửa chi họ":
+  - button "Xóa chi họ":
+  - heading "Chi Bính (Chi Nam Tiến)" [level=4]
+  - generic: CHI-BINH
+  - generic: 6 thành viên
+  - generic: ·
+  - generic: Quận Phú Nhuận, TP. Hồ Chí Minh
+  - generic: ·
+  - generic: "1955"
+  - paragraph: "Phái: Phái Sài Gòn, Phái Đà Lạt"
+  - paragraph: Nhánh con cháu vào Nam sinh sống và lập nghiệp từ giữa thế kỷ XX, vẫn đều đặn hướng về giỗ Tổ tháng Chạp hằng năm.
+  - button "Sửa chi họ":
+  - button "Xóa chi họ":
+  - heading "Sao Lưu Toàn Vẹn JSON (Định Dạng Chuẩn)" [level=3]
+  - paragraph: Xuất hoặc nhập tệp sao lưu .json trọn vẹn (bao gồm mọi hồ sơ, quan hệ, chi họ và ảnh tư liệu Base64).
+  - button "Thay thế toàn bộ"
+  - button "Gộp bổ sung"
+  - heading "Xuất bản sao lưu .JSON" [level=4]
+  - paragraph: Tải tệp sao lưu về máy. Bạn có thể chuyển tệp này sang máy khác hoặc gửi cho người thân trong dòng họ.
+  - button "Tải bản sao lưu JSON":
+    - generic: Tải bản sao lưu JSON
+  - heading "Khôi phục từ tệp .JSON" [level=4]
+  - paragraph: Chọn tệp JSON đã lưu trước đó để phục hồi toàn bộ dữ liệu dòng họ vào trình duyệt.
+  - generic: Chọn tệp sao lưu JSON...
+  - heading "Trao Đổi Chuẩn GEDCOM 5.5.1 (Quốc Tế)" [level=3]
+  - paragraph: Tương thích với các ứng dụng phả hệ thế giới (Gramps, MyHeritage, FamilySearch). Hỗ trợ mã hóa UTF-8 tiếng Việt.
+  - heading "Xuất tệp GEDCOM (.ged)" [level=4]
+  - paragraph: Xuất cấu trúc cây gia phả cùng các thẻ bổ sung tiếng Việt (đời thứ, chi họ, tên húy...).
+  - button "Xuất tệp GEDCOM":
+    - generic: Xuất tệp GEDCOM
+  - heading "Nhập tệp GEDCOM (.ged)" [level=4]
+  - paragraph: Nhập phả hệ từ các phần mềm khác để tiếp tục quản lý và vẽ cây trong Gia Phả Việt.
+  - generic: Chọn tệp GEDCOM...
+  - heading "Nhập Dữ Liệu Hàng Loạt Từ Excel / CSV" [level=3]
+  - paragraph: Nhập hàng chục hoặc hàng trăm thành viên cùng lúc. Tự động liên kết quan hệ cha mẹ, vợ chồng và chi họ.
+  - heading "Tải tệp mẫu Excel (.csv)" [level=4]
+  - paragraph: Tệp mẫu tiếng Việt chuẩn UTF-8 có sẵn tiêu đề các cột và 3 dòng ví dụ mẫu mực để bạn dễ dàng điền tiếp.
+  - button "Tải File Mẫu Excel / CSV":
+    - generic: Tải File Mẫu Excel / CSV
+  - heading "Tải lên danh sách thành viên" [level=4]
+  - paragraph: Chọn file CSV đã điền thông tin để xem trước bảng đối chiếu và tự động dựng cây gia phả.
+  - generic: Chọn tệp CSV / Excel...
+  - heading "Khôi Phục Dữ Liệu Mẫu (Demo Reset)" [level=3]
+  - paragraph: Nạp lại bộ dữ liệu phả hệ mẫu mực 5 thế hệ (Dòng họ Trần – Đông Ngạc) với đầy đủ chân dung, chi họ, đa hôn phối, ngày giỗ âm lịch và câu chuyện gia tộc.
+  - button "Nạp lại dữ liệu mẫu":
+    - generic: Nạp lại dữ liệu mẫu
+  - dialog:
+    - heading "Thêm thành viên mới vào gia phả" [level=3]
+    - paragraph: Các mục không rõ có thể để trống. Dữ liệu được bảo mật trên thiết bị.
+    - button:
+    - button "1. Danh tính & Tên tự"
+    - button "2. Sinh thời & Tiểu sử"
+    - button "3. Tộc hệ & Giỗ chạp"
+    - paragraph: • Vui lòng nhập Họ và tên thành viên (ít nhất 2 ký tự).
+    - generic "M0 DEMO Nguyễn Kiểm Thử":
+      - generic: MT
+    - generic: Đổi ảnh
+    - generic: "Giới tính:"
+    - button "Nam"
+    - button "Nữ"
+    - button "Chưa rõ"
+    - generic: Họ và tên *
+    - 'textbox "VD: Trần Văn Khải"': M0 DEMO Nguyễn Kiểm Thử
+    - generic: Tên thường gọi
+    - 'textbox "VD: Cụ Ba Lộc" [active]': Dữ liệu giả M0 Desktop
+    - generic: Tên húy (Tên tế tự)
+    - 'textbox "VD: Thuần Lộc"'
+    - generic: Tên tự / Bí danh
+    - 'textbox "VD: Tự Trọng Viễn"'
+    - button "Tiếp theo →"
+    - button "Hủy"
+    - button "Lưu hồ sơ"
+- generic: "25"

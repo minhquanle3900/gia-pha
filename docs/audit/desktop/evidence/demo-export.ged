@@ -1,0 +1,778 @@
+0 HEAD
+1 SOUR GIA_PHA_VIET_COI_NGUON
+2 NAME Gia Phả Việt – Cội Nguồn
+2 VERS 1.0.0
+1 DATE 25 NOV 2026
+1 GEDC
+2 VERS 5.5.1
+2 FORM LINEAGE-LINKED
+1 CHAR UTF-8
+1 LANG Vietnamese
+1 NOTE Dòng họ Trần – Đông Ngạc - Tiên tổ phương danh lưu vạn đại · Tử tôn hiếu thảo kế thiên thu
+0 @I1@ INDI
+1 NAME Văn Lộc /Trần/
+2 GIVN Văn Lộc
+2 SURN Trần
+2 NICK Cụ Đồ Lộc
+1 SEX M
+1 BIRT
+2 DATE 14 MAR 1872
+2 PLAC Làng Đông Ngạc, phủ Hoài Đức, Hà Nội
+1 DEAT Y
+2 DATE 22 NOV 1948
+2 PLAC Đông Ngạc, Hà Nội
+1 BURI
+2 PLAC Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc
+1 OCCU Nhà nho, Thầy đồ dạy chữ Hán và Quốc ngữ
+1 RESI
+2 PLAC Nhà cổ 3 gian Xóm Chùa, Đông Ngạc
+1 _GEN 1
+1 _BRAN Đại Tôn Họ Trần Đông Ngạc
+1 _SUBB Gốc Tổ Đông Ngạc
+1 _ROLE Thủy tổ chi phái cận đại
+1 _TABOO Trọng Lộc
+1 _COURTESY Đức Hiên
+1 _ANCESTRAL Làng Đông Ngạc, Hà Nội
+1 _LUNAR_GIO 22/10 | Giỗ Tổ Đại Tôn tại Từ đường Đông Ngạc
+1 _MERIT Đứng ra trùng tu nhà thờ họ năm 1924, chép lại cuốn Gia phả chữ Hán sang Quốc ngữ năm 1930 và lập quỹ khuyến học cho con cháu trong làng.
+1 NOTE Cụ Trần Văn Lộc sinh trưởng trong một gia đình nho học lâu đời ven sông Hồng. Năm 1898 cụ mở lớp dạy học miễn phí cho trẻ nghèo trong vùng, đồng thời kết hợp truyền dạy cả chữ Hán Nôm lẫn chữ Quốc ngữ buổi giao thời. Cụ nổi tiếng cương trực, điềm đạm, để lại bản Gia huấn 12 điều răn dạy con cháu lấy chữ Hiếu và sự học làm gốc.
+1 FAMS @F1@
+0 @I2@ INDI
+1 NAME Thị Kim /Nguyễn/
+2 GIVN Thị Kim
+2 SURN Nguyễn
+2 NICK Cụ Bà Đồ Lộc
+1 SEX F
+1 BIRT
+2 DATE 1876
+2 PLAC Làng Nhật Tân, Hà Nội
+1 DEAT Y
+2 DATE 8 DEC 1954
+2 PLAC Đông Ngạc, Hà Nội
+1 BURI
+2 PLAC Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc
+1 OCCU Nghề dệt lụa và trồng dâu tằm
+1 RESI
+2 PLAC Đông Ngạc, Hà Nội
+1 _GEN 1
+1 _BRAN Đại Tôn Họ Trần Đông Ngạc
+1 _ROLE Tổ mẫu Đại Tôn
+1 _TABOO Thị Kim
+1 _COURTESY Từ Thuận
+1 _ANCESTRAL Nhật Tân, Tây Hồ, Hà Nội
+1 _LUNAR_GIO 14/11 | Giỗ Tổ Mẫu
+1 _MERIT Tần tảo nuôi dạy ba người con trưởng thành qua thời kỳ biến động, quyên góp ruộng hương hỏa 3 mẫu để lo việc tế tự lâu dài.
+1 NOTE Cụ bà Nguyễn Thị Kim vốn dòng dõi gia giáo làng Nhật Tân, nổi tiếng khéo tay nghề tơ lụa. Trong những năm mất mùa đầu thế kỷ XX, cụ mở kho thóc gia đình giúp đỡ bà con lối xóm, được dân làng kính trọng gọi là Cụ Bà Từ Thuận.
+1 FAMS @F1@
+0 @I3@ INDI
+1 NAME Văn Khải /Trần/
+2 GIVN Văn Khải
+2 SURN Trần
+2 NICK Ông Cả Khải
+1 SEX M
+1 BIRT
+2 DATE 5 FEB 1897
+2 PLAC Đông Ngạc, Hà Nội
+1 DEAT Y
+2 DATE 19 NOV 1974
+2 PLAC Đông Ngạc, Hà Nội
+1 BURI
+2 PLAC Nghĩa trang dòng họ Trần, Đông Ngạc
+1 OCCU Lương y Đông y, Giáo viên tiểu học
+1 RESI
+2 PLAC Đông Ngạc, Hà Nội
+1 _GEN 2
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ROLE Trưởng tộc đời thứ 2 · Trưởng Chi Giáp
+1 _TABOO Minh Khải
+1 _COURTESY Kế Quang
+1 _ANCESTRAL Làng Đông Ngạc, Hà Nội
+1 _LUNAR_GIO 6/10 | Giỗ Ông Cả tại nhà thờ Chi Giáp
+1 _MERIT Bảo vệ nguyên vẹn hòm sắc phong và cuốn Gia phả cổ trong những năm chiến tranh tản cư 1946–1954.
+1 NOTE Ông Trần Văn Khải là trưởng nam của cụ Đồ Lộc. Ông nối nghiệp cha dạy học và bốc thuốc Bắc cứu người. Sau khi người vợ đầu là bà Nguyễn Thị Lan qua đời sớm năm 1932, ông tục huyền với bà Đặng Thị Nguyệt để cùng nuôi dạy đàn con nên người.
+1 FAMC @F1@
+2 PEDI birth
+1 FAMS @F2@
+1 FAMS @F3@
+0 @I4@ INDI
+1 NAME Thị Lan /Nguyễn/
+2 GIVN Thị Lan
+2 SURN Nguyễn
+2 NICK Bà Cả Lan
+1 SEX F
+1 BIRT
+2 DATE 1899
+2 PLAC Làng Vẽ, Đông Ngạc, Hà Nội
+1 DEAT Y
+2 DATE 12 SEP 1932
+2 PLAC Đông Ngạc, Hà Nội
+1 BURI
+2 PLAC Nghĩa trang dòng họ Trần, Đông Ngạc
+1 OCCU Nội trợ, làm bánh truyền thống
+1 _GEN 2
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _ROLE Chính thất Trưởng chi Giáp
+1 _TABOO Ngọc Lan
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _LUNAR_GIO 12/8 | Giỗ mùa thu rằm tháng Tám
+1 NOTE Bà Nguyễn Thị Lan là người vợ đầu của ông Trần Văn Khải, tính tình hiền hậu, đảm đang. Bà lâm bệnh qua đời sớm ở tuổi 33, để lại hai người con nhỏ.
+1 FAMS @F2@
+0 @I5@ INDI
+1 NAME Thị Nguyệt /Đặng/
+2 GIVN Thị Nguyệt
+2 SURN Đặng
+2 NICK Bà Hai Nguyệt
+1 SEX F
+1 BIRT
+2 DATE 20 AUG 1908
+2 PLAC Làng Xuân Đỉnh, Hà Nội
+1 DEAT Y
+2 DATE 3 APR 1986
+2 PLAC Hà Nội
+1 BURI
+2 PLAC Nghĩa trang dòng họ Trần, Đông Ngạc
+1 OCCU Bào chế dược liệu Đông y
+1 _GEN 2
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _ROLE Kế thất Trưởng chi Giáp
+1 _TABOO Thu Nguyệt
+1 _ANCESTRAL Xuân Đỉnh, Từ Liêm, Hà Nội
+1 _LUNAR_GIO 25/2
+1 _MERIT Hết lòng thương yêu, nuôi dạy các con riêng của chồng như con ruột, giữ hòa khí đại gia đình qua nhiều thập kỷ.
+1 NOTE Bà Đặng Thị Nguyệt kết hôn với ông Trần Văn Khải năm 1934. Bà phụ giúp chồng bốc thuốc nam và chăm sóc cả đại gia đình trong giai đoạn tản cư lên Phú Thọ.
+1 FAMS @F3@
+0 @I6@ INDI
+1 NAME Văn Phúc /Trần/
+2 GIVN Văn Phúc
+2 SURN Trần
+2 NICK Ông Hai Phúc
+1 SEX M
+1 BIRT
+2 DATE 18 JUN 1900
+2 PLAC Đông Ngạc, Hà Nội
+1 DEAT Y
+2 DATE 27 NOV 1981
+2 PLAC Hoàn Kiếm, Hà Nội
+1 BURI
+2 PLAC Nghĩa trang Văn Điển, Hà Nội
+1 OCCU Thương nhân tơ lụa, Nghệ nhân khảm trai
+1 RESI
+2 PLAC Số 42 Hàng Đào, Hoàn Kiếm, Hà Nội
+1 _GEN 2
+1 _BRAN Chi Ất (Chi Thứ)
+1 _SUBB Phái Bắc
+1 _ROLE Trưởng Chi Ất
+1 _TABOO Hồng Phúc
+1 _COURTESY Tân Dân
+1 _ANCESTRAL Làng Đông Ngạc, Hà Nội
+1 _LUNAR_GIO 2/11 | Giỗ Trưởng Chi Ất
+1 _MERIT Đóng góp toàn bộ gỗ lim trùng tu hậu cung Từ đường năm 1962 và hỗ trợ con cháu các chi ra Hà Nội ăn học.
+1 NOTE Ông Trần Văn Phúc là con trai thứ hai của cụ Đồ Lộc. Năm 1926 ông lập hiệu tơ lụa và đồ gỗ khảm trai tại phố Hàng Đào, mở đầu cho Chi Ất phát triển tại nội thành Hà Nội.
+1 FAMC @F1@
+2 PEDI birth
+1 FAMS @F4@
+0 @I7@ INDI
+1 NAME Thị Thanh /Lê/
+2 GIVN Thị Thanh
+2 SURN Lê
+2 NICK Bà Hai Hàng Đào
+1 SEX F
+1 BIRT
+2 DATE 1904
+2 PLAC Bắc Ninh
+1 DEAT Y
+2 DATE 1989
+2 PLAC Hà Nội
+1 BURI
+2 PLAC Nghĩa trang Văn Điển, Hà Nội
+1 OCCU Buôn bán tơ lụa
+1 RESI
+2 PLAC Hoàn Kiếm, Hà Nội
+1 _GEN 2
+1 _BRAN Chi Ất (Chi Thứ)
+1 _ROLE Nội tướng Chi Ất
+1 _ANCESTRAL Đình Bảng, Từ Sơn, Bắc Ninh
+1 _LUNAR_GIO 19/9 | Giỗ cuối thu
+1 FAMS @F4@
+0 @I8@ INDI
+1 NAME Thị Hạnh /Trần/
+2 GIVN Thị Hạnh
+2 SURN Trần
+2 NICK Bà Cô Ba Hạnh
+1 SEX F
+1 BIRT
+2 DATE ABT 1903
+2 PLAC Đông Ngạc, Hà Nội
+1 DEAT Y
+1 OCCU Làm vườn, dệt vải
+1 RESI
+2 PLAC Sơn Tây, Hà Nội
+1 _GEN 2
+1 _BRAN Đại Tôn Họ Trần Đông Ngạc
+1 _ROLE Cô họ Đời thứ 2
+1 _ANCESTRAL Làng Đông Ngạc, Hà Nội
+1 FAMC @F1@
+2 PEDI birth
+0 @I9@ INDI
+1 NAME Văn Nghị /Trần/
+2 GIVN Văn Nghị
+2 SURN Trần
+2 NICK Ông Trưởng Nghị
+1 SEX M
+1 BIRT
+2 DATE 10 MAY 1923
+2 PLAC Đông Ngạc, Hà Nội
+1 DEAT Y
+2 DATE 15 DEC 2004
+2 PLAC Hà Nội
+1 BURI
+2 PLAC Nghĩa trang dòng họ Trần, Đông Ngạc
+1 OCCU Nhà giáo ưu tú, Hiệu trưởng trường cấp 3
+1 RESI
+2 PLAC Đông Ngạc, Bắc Từ Liêm, Hà Nội
+1 _GEN 3
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ROLE Trưởng tộc đời thứ 3
+1 _ALIAS Việt Sơn
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _LUNAR_GIO 4/11 | Giỗ Ông Trưởng Nghị
+1 _MERIT Chủ trì biên soạn tập Gia phả đánh máy năm 1992 và thành lập Hội đồng Gia tộc họ Trần Đông Ngạc.
+1 NOTE Ông Trần Văn Nghị là con trai trưởng của ông Khải và bà Lan. Tham gia bình dân học vụ từ năm 1945, sau đó cống hiến hơn 40 năm cho ngành giáo dục Thủ đô.
+1 FAMC @F2@
+2 PEDI birth
+1 FAMC @F3@
+2 PEDI foster
+1 FAMS @F5@
+0 @I10@ INDI
+1 NAME Thị Hiền /Phạm/
+2 GIVN Thị Hiền
+2 SURN Phạm
+2 NICK Bà Giáo Hiền
+1 SEX F
+1 BIRT
+2 DATE 2 SEP 1927
+2 PLAC Hà Đông, Hà Nội
+1 DEAT Y
+2 DATE 21 JAN 2016
+2 PLAC Hà Nội
+1 OCCU Giáo viên Văn học
+1 RESI
+2 PLAC Đông Ngạc, Hà Nội
+1 _GEN 3
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ANCESTRAL Làng lụa Vạn Phúc, Hà Đông
+1 _LUNAR_GIO 12/12
+1 FAMS @F5@
+0 @I11@ INDI
+1 NAME Thị Mai /Trần/
+2 GIVN Thị Mai
+2 SURN Trần
+2 NICK Bà Cô Mai
+1 SEX F
+1 BIRT
+2 DATE 1928
+2 PLAC Đông Ngạc, Hà Nội
+1 DEAT Y
+2 DATE 2012
+2 PLAC Hải Phòng
+1 OCCU Y tá bệnh viện đa khoa
+1 RESI
+2 PLAC Lê Chân, Hải Phòng
+1 _GEN 3
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _LUNAR_GIO 18/7
+1 FAMC @F2@
+2 PEDI birth
+1 FAMC @F3@
+2 PEDI foster
+0 @I12@ INDI
+1 NAME Văn Minh /Trần/
+2 GIVN Văn Minh
+2 SURN Trần
+2 NICK Ông Minh Kiến Trúc
+1 SEX M
+1 BIRT
+2 DATE 16 OCT 1938
+2 PLAC Đông Ngạc, Hà Nội
+1 OCCU Kiến trúc sư bảo tồn di sản
+1 RESI
+2 PLAC Quận Ba Đình, Hà Nội
+1 _GEN 3
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đoài
+1 _ROLE Cố vấn Hội đồng Gia tộc · Trưởng Phái Đoài
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _MERIT Thiết kế bản vẽ tu bổ Từ đường năm 2008 giữ nguyên kiến trúc gỗ kẻ truyền Bắc Bộ.
+1 NOTE Ông Trần Văn Minh là con trai của ông Khải và bà Đặng Thị Nguyệt. Tốt nghiệp Đại học Kiến trúc khóa đầu, ông dành trọn sự nghiệp nghiên cứu đình chùa và nhà cổ đồng bằng Bắc Bộ. Hiện ở tuổi gần 90, ông vẫn minh mẫn kể chuyện lịch sử dòng họ cho con cháu.
+1 FAMC @F3@
+2 PEDI birth
+1 FAMS @F6@
+0 @I13@ INDI
+1 NAME Thị Bích /Hoàng/
+2 GIVN Thị Bích
+2 SURN Hoàng
+2 NICK Bà Bích
+1 SEX F
+1 BIRT
+2 DATE 8 MAR 1942
+2 PLAC Nam Định
+1 OCCU Dược sĩ cao cấp (nghỉ hưu)
+1 RESI
+2 PLAC Quận Ba Đình, Hà Nội
+1 _GEN 3
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đoài
+1 _ANCESTRAL Hành Thiện, Xuân Trường, Nam Định
+1 FAMS @F6@
+0 @I14@ INDI
+1 NAME Văn Tín /Trần/
+2 GIVN Văn Tín
+2 SURN Trần
+2 NICK Chú Út Tín
+1 SEX M
+1 BIRT
+2 DATE 1944
+2 PLAC Phú Thọ (nơi tản cư)
+1 DEAT Y
+2 DATE 30 OCT 1971
+2 PLAC Quảng Trị
+1 BURI
+2 PLAC Nghĩa trang Liệt sĩ Trường Sơn, Quảng Trị
+1 OCCU Kỹ sư thông tin quân đội (Liệt sĩ)
+1 _GEN 3
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đoài
+1 _ROLE Liệt sĩ dòng họ
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _LUNAR_GIO 12/9 | Giỗ Liệt sĩ Trần Văn Tín
+1 _MERIT Hy sinh vì độc lập Tổ quốc năm 27 tuổi khi chưa lập gia đình.
+1 NOTE Sinh ra trong những năm gia đình bắt đầu chuẩn bị kháng chiến, Trần Văn Tín là sinh viên xuất sắc ngành vô tuyến điện trước khi nhập ngũ năm 1968. Những bức thư tay từ chiến trường của ông hiện được lưu giữ trang trọng tại phòng truyền thống dòng họ.
+1 FAMC @F3@
+2 PEDI birth
+0 @I15@ INDI
+1 NAME Hữu Đạt /Trần/
+2 GIVN Hữu Đạt
+2 SURN Trần
+2 NICK Ông Cả Đạt Sài Gòn
+1 SEX M
+1 BIRT
+2 DATE 12 APR 1929
+2 PLAC Hàng Đào, Hà Nội
+1 DEAT Y
+2 DATE 9 NOV 2015
+2 PLAC TP. Hồ Chí Minh
+1 BURI
+2 PLAC Hoa viên Nghĩa trang Bình Dương
+1 OCCU Nghệ nhân kim hoàn và đồng hồ cổ
+1 RESI
+2 PLAC Phú Nhuận, TP. Hồ Chí Minh
+1 _GEN 3
+1 _BRAN Chi Bính (Chi Nam Tiến)
+1 _SUBB Phái Sài Gòn
+1 _ROLE Trưởng Chi Bính (Nam Tiến)
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _LUNAR_GIO 28/9 | Giỗ Trưởng Chi Bính
+1 _MERIT Kết nối bà con đồng hương họ Trần tại miền Nam, lập Ban liên lạc họ Trần phía Nam từ năm 1995.
+1 NOTE Con trai trưởng của ông Trần Văn Phúc (Chi Ất). Năm 1955 ông vào Sài Gòn lập nghiệp với nghề chế tác kim hoàn và sửa đồng hồ tinh xảo, gây dựng Chi Bính gắn bó nghĩa tình.
+1 FAMC @F4@
+2 PEDI birth
+1 FAMS @F7@
+0 @I16@ INDI
+1 NAME Thị Ngọc Mai /Võ/
+2 GIVN Thị Ngọc Mai
+2 SURN Võ
+2 NICK Bà Đạt
+1 SEX F
+1 BIRT
+2 DATE 25 JAN 1935
+2 PLAC Gia Định, TP. Hồ Chí Minh
+1 OCCU Giáo viên nữ công gia chánh (nghỉ hưu)
+1 RESI
+2 PLAC Phú Nhuận, TP. Hồ Chí Minh
+1 _GEN 3
+1 _BRAN Chi Bính (Chi Nam Tiến)
+1 _SUBB Phái Sài Gòn
+1 _ANCESTRAL Gò Công, Tiền Giang
+1 FAMS @F7@
+0 @I17@ INDI
+1 NAME Hữu Kiên /Trần/
+2 GIVN Hữu Kiên
+2 SURN Trần
+2 NICK Ông Kiên Hàng Đào
+1 SEX M
+1 BIRT
+2 DATE 3 NOV 1934
+2 PLAC Hoàn Kiếm, Hà Nội
+1 OCCU Kỹ sư cơ khí chế tạo (nghỉ hưu)
+1 RESI
+2 PLAC Hoàn Kiếm, Hà Nội
+1 _GEN 3
+1 _BRAN Chi Ất (Chi Thứ)
+1 _SUBB Phái Bắc
+1 _ROLE Trưởng Chi Ất đương nhiệm
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 FAMC @F4@
+2 PEDI birth
+1 FAMS @F8@
+0 @I18@ INDI
+1 NAME Quốc Tuấn /Trần/
+2 GIVN Quốc Tuấn
+2 SURN Trần
+2 NICK Ông Tuấn Trưởng Tộc
+1 SEX M
+1 BIRT
+2 DATE 19 MAY 1954
+2 PLAC Hà Nội
+1 OCCU Bác sĩ chuyên khoa Nội, Giảng viên Y khoa
+1 RESI
+2 PLAC Đông Ngạc, Bắc Từ Liêm, Hà Nội
+1 _GEN 4
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ROLE Trưởng tộc đương nhiệm
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _MERIT Chủ trì số hóa Gia phả dòng họ Trần Đông Ngạc, tổ chức khám sức khỏe định kỳ cho các bậc cao niên trong họ.
+1 NOTE Là con trưởng của ông Trần Văn Nghị, bác sĩ Trần Quốc Tuấn hiện đảm nhiệm vai trò Trưởng tộc, tận tâm kết nối các thế hệ trẻ trong và ngoài nước hướng về cội nguồn.
+1 FAMC @F5@
+2 PEDI birth
+1 FAMS @F9@
+0 @I19@ INDI
+1 NAME Thị Phương Thảo /Ngô/
+2 GIVN Thị Phương Thảo
+2 SURN Ngô
+2 NICK Bà Thảo
+1 SEX F
+1 BIRT
+2 DATE 12 AUG 1958
+2 PLAC Hà Nội
+1 OCCU Kế toán trưởng (nghỉ hưu)
+1 RESI
+2 PLAC Đông Ngạc, Bắc Từ Liêm, Hà Nội
+1 _GEN 4
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ROLE Thủ quỹ Quỹ Khuyến học dòng họ
+1 _ANCESTRAL Thanh Oai, Hà Nội
+1 FAMS @F9@
+0 @I20@ INDI
+1 NAME Thị Thu Thủy /Trần/
+2 GIVN Thị Thu Thủy
+2 SURN Trần
+2 NICK Cô Thủy
+1 SEX F
+1 BIRT
+2 DATE 4 DEC 1959
+2 PLAC Hà Nội
+1 OCCU Biên tập viên xuất bản văn hóa
+1 RESI
+2 PLAC Cầu Giấy, Hà Nội
+1 _GEN 4
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _MERIT Biên tập cuốn Ký ức Đông Ngạc và sưu tầm tư liệu ảnh gia đình.
+1 FAMC @F5@
+2 PEDI birth
+0 @I21@ INDI
+1 NAME Thị Thu Hà /Trần/
+2 GIVN Thị Thu Hà
+2 SURN Trần
+2 NICK Cô Hà Kiến Trúc
+1 SEX F
+1 BIRT
+2 DATE 22 JUL 1968
+2 PLAC Ba Đình, Hà Nội
+1 OCCU Kiến trúc sư cảnh quan
+1 RESI
+2 PLAC Tây Hồ, Hà Nội
+1 _GEN 4
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đoài
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 FAMC @F6@
+2 PEDI birth
+0 @I22@ INDI
+1 NAME Đức Bảo /Trần/
+2 GIVN Đức Bảo
+2 SURN Trần
+2 NICK Chú Bảo
+1 SEX M
+1 BIRT
+2 DATE ABT 1972
+2 PLAC Quảng Bình
+1 OCCU Nghệ nhân phục chế đồ gỗ cổ
+1 RESI
+2 PLAC Đống Đa, Hà Nội
+1 _GEN 4
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đoài
+1 _ROLE Thành viên Ban Nghi lễ Từ đường
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _MERIT Trực tiếp sơn son thếp vàng và bảo dưỡng hoành phi câu đối tại nhà thờ họ.
+1 NOTE Ông Trần Văn Minh và bà Hoàng Thị Bích nhận nuôi Trần Đức Bảo từ năm 1973 sau chiến tranh. Anh lớn lên trong tình yêu thương trọn vẹn của dòng họ và trở thành nghệ nhân chăm lo nội thất thờ tự của Từ đường.
+1 FAMC @F6@
+2 PEDI adopted
+0 @I23@ INDI
+1 NAME Gia Hưng /Trần/
+2 GIVN Gia Hưng
+2 SURN Trần
+2 NICK Anh Hưng Sài Gòn
+1 SEX M
+1 BIRT
+2 DATE 15 MAR 1963
+2 PLAC Sài Gòn
+1 OCCU Doanh nhân xuất nhập khẩu nông sản
+1 RESI
+2 PLAC Quận 3, TP. Hồ Chí Minh
+1 _GEN 4
+1 _BRAN Chi Bính (Chi Nam Tiến)
+1 _SUBB Phái Sài Gòn
+1 _ROLE Trưởng Ban liên lạc Chi Bính
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _MERIT Tài trợ học bổng khuyến tài hằng năm cho sinh viên xuất sắc toàn dòng họ.
+1 FAMC @F7@
+2 PEDI birth
+1 FAMS @F10@
+0 @I24@ INDI
+1 NAME Mỹ Dung /Lâm/
+2 GIVN Mỹ Dung
+2 SURN Lâm
+2 NICK Chị Dung
+1 SEX F
+1 BIRT
+2 DATE 9 SEP 1966
+2 PLAC Đà Lạt, Lâm Đồng
+1 OCCU Chuyên gia dinh dưỡng
+1 RESI
+2 PLAC Quận 3, TP. Hồ Chí Minh
+1 _GEN 4
+1 _BRAN Chi Bính (Chi Nam Tiến)
+1 _SUBB Phái Sài Gòn
+1 _ANCESTRAL Đà Lạt, Lâm Đồng
+1 FAMS @F10@
+0 @I25@ INDI
+1 NAME Hữu Khôi /Trần/
+2 GIVN Hữu Khôi
+2 SURN Trần
+2 NICK Anh Khôi
+1 SEX M
+1 BIRT
+2 DATE 28 OCT 1965
+2 PLAC Hoàn Kiếm, Hà Nội
+1 OCCU Giảng viên Lịch sử Việt Nam
+1 RESI
+2 PLAC Long Biên, Hà Nội
+1 _GEN 4
+1 _BRAN Chi Ất (Chi Thứ)
+1 _SUBB Phái Bắc
+1 _ROLE Thư ký Hội đồng Gia tộc · Phụ trách biên khảo phả hệ
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 FAMC @F8@
+2 PEDI birth
+1 FAMS @F11@
+0 @I26@ INDI
+1 NAME Minh Quân /Trần/
+2 GIVN Minh Quân
+2 SURN Trần
+2 NICK Minh Quân
+1 SEX M
+1 BIRT
+2 DATE 11 FEB 1985
+2 PLAC Hà Nội
+1 OCCU Kỹ sư phần mềm & Lưu trữ số
+1 RESI
+2 PLAC Nam Từ Liêm, Hà Nội
+1 _GEN 5
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ROLE Trưởng tôn Đời thứ 5 · Quản trị gia phả số
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 _MERIT Xây dựng hệ thống lưu trữ gia phả số ngoại tuyến cho toàn dòng họ.
+1 FAMC @F9@
+2 PEDI birth
+1 FAMS @F12@
+0 @I27@ INDI
+1 NAME Ngọc Lan Anh /Đỗ/
+2 GIVN Ngọc Lan Anh
+2 SURN Đỗ
+2 NICK Lan Anh
+1 SEX F
+1 BIRT
+2 DATE 7 JUN 1988
+2 PLAC Hải Dương
+1 OCCU Bác sĩ Nhi khoa
+1 RESI
+2 PLAC Nam Từ Liêm, Hà Nội
+1 _GEN 5
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ANCESTRAL Chí Linh, Hải Dương
+1 FAMS @F12@
+0 @I28@ INDI
+1 NAME Minh Châu /Trần/
+2 GIVN Minh Châu
+2 SURN Trần
+2 NICK Minh Châu
+1 SEX F
+1 BIRT
+2 DATE 24 SEP 1991
+2 PLAC Hà Nội
+1 OCCU Nhà nghiên cứu mỹ thuật cổ
+1 RESI
+2 PLAC Đông Ngạc, Hà Nội
+1 _GEN 5
+1 _BRAN Chi Giáp (Chi Trưởng)
+1 _SUBB Phái Đông
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 FAMC @F9@
+2 PEDI birth
+0 @I29@ INDI
+1 NAME Bảo Nam /Trần/
+2 GIVN Bảo Nam
+2 SURN Trần
+2 NICK Bảo Nam
+1 SEX M
+1 BIRT
+2 DATE 3 APR 1995
+2 PLAC TP. Hồ Chí Minh
+1 OCCU Chuyên viên Thiết kế Công nghiệp
+1 RESI
+2 PLAC Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh
+1 _GEN 5
+1 _BRAN Chi Bính (Chi Nam Tiến)
+1 _SUBB Phái Sài Gòn
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 FAMC @F10@
+2 PEDI birth
+0 @I30@ INDI
+1 NAME Ngọc Khánh Linh /Trần/
+2 GIVN Ngọc Khánh Linh
+2 SURN Trần
+2 NICK Khánh Linh
+1 SEX F
+1 BIRT
+2 DATE 18 NOV 2001
+2 PLAC TP. Hồ Chí Minh
+1 OCCU Nghiên cứu sinh Văn hóa Đông Nam Á
+1 RESI
+2 PLAC Quận 3, TP. Hồ Chí Minh
+1 _GEN 5
+1 _BRAN Chi Bính (Chi Nam Tiến)
+1 _SUBB Phái Sài Gòn
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 FAMC @F10@
+2 PEDI birth
+0 @I31@ INDI
+1 NAME Khôi Nguyên /Trần/
+2 GIVN Khôi Nguyên
+2 SURN Trần
+2 NICK Khôi Nguyên
+1 SEX M
+1 BIRT
+2 DATE 14 JAN 1998
+2 PLAC Hà Nội
+1 OCCU Kiến trúc sư quy hoạch đô thị
+1 RESI
+2 PLAC Long Biên, Hà Nội
+1 _GEN 5
+1 _BRAN Chi Ất (Chi Thứ)
+1 _SUBB Phái Bắc
+1 _ANCESTRAL Đông Ngạc, Hà Nội
+1 FAMC @F11@
+2 PEDI birth
+0 @F1@ FAM
+1 HUSB @I1@
+1 WIFE @I2@
+1 CHIL @I3@
+1 CHIL @I6@
+1 CHIL @I8@
+1 MARR
+2 DATE 1895
+2 PLAC Đông Ngạc, Hà Nội
+1 NOTE Hôn lễ truyền thống tại làng Đông Ngạc.
+0 @F2@ FAM
+1 HUSB @I3@
+1 WIFE @I4@
+1 CHIL @I9@
+1 CHIL @I11@
+1 MARR
+2 DATE 1920
+2 PLAC Đông Ngạc, Hà Nội
+1 NOTE Chính thất (bà Nguyễn Thị Lan mất sớm năm 1932).
+0 @F3@ FAM
+1 HUSB @I3@
+1 WIFE @I5@
+1 CHIL @I9@
+1 CHIL @I11@
+1 CHIL @I12@
+1 CHIL @I14@
+1 MARR
+2 DATE 1934
+2 PLAC Xuân Đỉnh, Hà Nội
+1 NOTE Tục huyền (kế thất bà Đặng Thị Nguyệt).
+0 @F4@ FAM
+1 HUSB @I6@
+1 WIFE @I7@
+1 CHIL @I15@
+1 CHIL @I17@
+1 MARR
+2 DATE 1925
+2 PLAC Từ Sơn, Bắc Ninh
+0 @F5@ FAM
+1 HUSB @I9@
+1 WIFE @I10@
+1 CHIL @I18@
+1 CHIL @I20@
+1 MARR
+2 DATE 1951
+2 PLAC Hà Nội
+0 @F6@ FAM
+1 HUSB @I12@
+1 WIFE @I13@
+1 CHIL @I21@
+1 CHIL @I22@
+1 MARR
+2 DATE 20 NOV 1965
+2 PLAC Ba Đình, Hà Nội
+0 @F7@ FAM
+1 HUSB @I15@
+1 WIFE @I16@
+1 CHIL @I23@
+1 MARR
+2 DATE 1960
+2 PLAC Gia Định, Sài Gòn
+0 @F8@ FAM
+1 HUSB @I17@
+1 CHIL @I25@
+1 NOTE Thông tin người phối ngẫu đang được con cháu cập nhật bổ sung.
+0 @F9@ FAM
+1 HUSB @I18@
+1 WIFE @I19@
+1 CHIL @I26@
+1 CHIL @I28@
+1 MARR
+2 DATE 16 JAN 1983
+2 PLAC Đông Ngạc, Hà Nội
+0 @F10@ FAM
+1 HUSB @I23@
+1 WIFE @I24@
+1 CHIL @I29@
+1 CHIL @I30@
+1 MARR
+2 DATE 10 DEC 1992
+2 PLAC TP. Hồ Chí Minh
+0 @F11@ FAM
+1 HUSB @I25@
+1 CHIL @I31@
+0 @F12@ FAM
+1 HUSB @I26@
+1 WIFE @I27@
+1 MARR
+2 DATE 22 OCT 2014
+2 PLAC Hà Nội
+0 TRLR

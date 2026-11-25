@@ -1,0 +1,90 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: M0 DEMO Desktop
+  - button "Mở tìm kiếm thành viên":
+  - button "Chuyển đổi giao diện sáng tối":
+  - 'button "Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay."':
+  - button "Thêm thành viên mới vào gia phả":
+- main:
+  - heading "Danh Sách Thành Viên Gia Tộc" [level=2]
+  - paragraph:
+    - text: "Tổng số:"
+    - strong: "2"
+    - text: "thành viên • Đang hiển thị:"
+    - strong: "2"
+    - text: người
+  - button "Lọc trùng lặp":
+    - generic: Lọc trùng lặp
+  - button "Thêm thành viên":
+    - generic: Thêm thành viên
+  - generic: "Đời thứ:"
+  - button "Tất cả (2)"
+  - button "Đời 1 (1)"
+  - button "Đời 2 (1)"
+  - textbox "Tìm theo tên, tên húy, bí danh, quê quán, nơi an táng, vai vế (không dấu hoặc có dấu)..."
+  - button "Dạng lưới thẻ":
+  - button "Dạng danh sách bảng":
+  - combobox:
+    - 'option "Sắp xếp: Theo đời thứ" [selected]'
+    - 'option "Sắp xếp: Tên A-Z (Chữ cái)"'
+    - 'option "Sắp xếp: Năm sinh tăng dần"'
+  - generic: Chi họ
+  - combobox:
+    - option "Mọi chi họ (2)" [selected]
+    - option "Chi M0 Demo (2)"
+  - generic: Đời thứ
+  - combobox:
+    - option "Mọi thế hệ (2)" [selected]
+    - option "Đời thứ 1 (1)"
+    - option "Đời thứ 2 (1)"
+  - generic: Trạng thái sinh thời
+  - combobox:
+    - option "Tất cả (2)" [selected]
+    - option "Hiện tiền (Còn sống) (2)"
+    - option "Đã tạ thế (0)"
+    - option "Có ngày giỗ Âm lịch (0)"
+  - generic: Giới tính
+  - combobox:
+    - option "Tất cả giới tính (2)" [selected]
+    - option "Nam giới (2)"
+    - option "Nữ giới (0)"
+  - generic "M0 Nguyễn Cha Mẫu":
+    - generic: MM
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 1
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "M0 Nguyễn Cha Mẫu" [level=3]
+  - paragraph: Sinh 1950 · Còn sống
+  - generic: Chi M0 Demo
+  - generic: Còn sống
+  - generic "M0 Nguyễn Trùng Tên":
+    - generic: MT
+    - generic "Hiện tiền (còn sống)"
+  - generic: Đời 2
+  - button "Xuất bản in & PDF hồ sơ cá nhân":
+  - button "Xem vị trí trên cây gia phả":
+  - heading "M0 Nguyễn Trùng Tên" [level=3]
+  - paragraph: Sinh 1980 · Còn sống
+  - generic: Chi M0 Demo
+  - generic: Còn sống
+  - dialog:
+    - heading "Kiểm Tra & Hợp Nhất Hồ Sơ Trùng Lặp" [level=3]
+    - paragraph: Tự động rà soát họ tên, năm sinh, chi họ và cha mẹ để làm sạch phả hệ.
+    - button:
+    - heading "Sáp Nhập Thành Công" [level=4]
+    - paragraph: Đã sáp nhập thành công hồ sơ "M0 Nguyễn Trùng Tên" vào "M0 Nguyễn Trùng Tên". Toàn bộ quan hệ huyết thống và tư liệu đã được bảo toàn nguyên vẹn.
+    - button "Hoàn tất"
+- navigation:
+  - button "Tổng quan":
+    - generic: Tổng quan
+  - button "Cây phả hệ":
+    - generic: Cây phả hệ
+  - button "Thành viên":
+    - generic: Thành viên
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm...":
+    - generic: Thêm...
+- generic: "25"

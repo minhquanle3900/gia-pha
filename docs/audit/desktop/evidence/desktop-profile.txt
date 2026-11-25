@@ -1,0 +1,89 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Quản lý dữ liệu":
+      - generic: Quản lý dữ liệu
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - button "Quay lại":
+    - generic: Quay lại
+  - button "Sửa hồ sơ":
+    - generic: Sửa hồ sơ
+  - button "Xem trên cây":
+    - generic: Xem trên cây
+  - button "Khác":
+    - generic: Khác
+  - generic "M0 DEMO Nguyễn Kiểm Thử":
+    - generic: MT
+    - generic "Hiện tiền (còn sống)"
+  - generic: ·
+  - generic: Đại Tôn Họ Trần Đông Ngạc
+  - generic: ·
+  - generic: Hiện tiền (Còn sống)
+  - heading "M0 DEMO Nguyễn Kiểm Thử" [level=2]
+  - paragraph: Còn sống
+  - text: "Tên thường gọi:"
+  - strong: Dữ liệu giả M0 Desktop
+  - heading "Đặc tính Gia phả & Tộc hệ" [level=3]:
+    - generic: Đặc tính Gia phả & Tộc hệ
+  - term: Đời thứ trong gia tộc
+  - definition: Chưa rõ
+  - term: Chi họ trực thuộc
+  - definition: Đại Tôn Họ Trần Đông Ngạc
+  - term: Phái
+  - definition: Chưa rõ
+  - term: Vai vế
+  - definition: Thành viên
+  - heading "Sinh thời & Nơi chốn" [level=3]:
+    - generic: Sinh thời & Nơi chốn
+  - term: Ngày sinh
+  - definition: Không rõ
+  - term: Nơi sinh
+  - definition: Chưa rõ
+  - term: Nguyên quán
+  - definition: Chưa rõ
+  - term: Nơi cư trú
+  - definition: Chưa rõ
+  - term: Nghề nghiệp
+  - definition: Chưa rõ
+  - generic: Chưa có văn bản tiểu sử chi tiết.
+  - button "Đọc phả ký tổng hợp":
+    - generic: Đọc phả ký tổng hợp
+  - heading "Ký ức Giọng nói & Lời dặn (0)" [level=4]:
+    - generic: Ký ức Giọng nói & Lời dặn (0)
+  - button "+ Thu âm mới"
+  - paragraph: Chưa có bản ghi âm giọng nói nào.
+  - button "Thu âm giọng nói hoặc lời dặn của người này ngay":
+    - generic: Thu âm giọng nói hoặc lời dặn của người này ngay
+  - heading "Gia đình & Thân tộc" [level=3]:
+    - generic: Gia đình & Thân tộc
+  - button "+ Thêm / Sửa"
+  - heading "Cha & Mẹ" [level=4]
+  - paragraph: Chưa ghi nhận cha mẹ.
+  - heading "Vợ / Chồng" [level=4]
+  - paragraph: Chưa ghi nhận bạn đời.
+  - heading "Con cái (0)" [level=4]
+  - paragraph: Chưa ghi nhận con cái.
+- generic: "25"

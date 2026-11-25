@@ -1,0 +1,21 @@
+{
+  "baseline": "1cec38dc77ea46260fa0608c931b22e0b508d531",
+  "cloudAudit": "b2b707de6c3ff2207cfbb08f3b93b259460618db",
+  "date": "2026-11-25",
+  "timezone": "Asia/Saigon",
+  "branch": "audit/m0-desktop-runtime",
+  "businessSourceChanged": false,
+  "schemaChanged": false,
+  "mainMerged": false,
+  "deployed": false,
+  "sourceData": "owner-confirmed demo and synthetic M0 fixtures",
+  "runtimeCases": 32,
+  "unitTests": {
+    "files": 9,
+    "passed": 79
+  },
+  "host": "Windows 10.0.19044.2846",
+  "node": "24.22.1",
+  "bun": "1.4.5",
+  "scope": "Desktop runtime; not exhaustive click-through certification"
+}

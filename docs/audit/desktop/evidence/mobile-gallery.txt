@@ -1,0 +1,123 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+  - button "Mở tìm kiếm thành viên":
+  - button "Chuyển đổi giao diện sáng tối":
+  - 'button "Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay."':
+  - button "Thêm thành viên mới vào gia phả":
+- main:
+  - heading "Kho Kỷ Vật & Tư Liệu Gia Tộc" [level=2]
+  - paragraph: Lưu giữ ảnh tư liệu, gia phả giấy dó, sắc phong, thư từ và ký ức lịch sử của dòng họ.
+  - button "Thu âm ký ức":
+    - generic: Thu âm ký ức
+  - button "Thêm kỷ vật":
+    - generic: Thêm kỷ vật
+  - generic: "Phân loại:"
+  - button "Tất cả (5)"
+  - button "Chân dung (2)"
+  - button "Ảnh tư liệu lịch sử (2)"
+  - button "Gia phả giấy dó & Tư liệu (1)"
+  - generic: "Người liên quan:"
+  - combobox:
+    - option "Mọi thành viên" [selected]
+    - option "Trần Văn Lộc"
+    - option "Nguyễn Thị Kim"
+    - option "Trần Văn Khải"
+    - option "Nguyễn Thị Lan"
+    - option "Đặng Thị Nguyệt"
+    - option "Trần Văn Phúc"
+    - option "Lê Thị Thanh"
+    - option "Trần Thị Hạnh"
+    - option "Trần Văn Nghị"
+    - option "Phạm Thị Hiền"
+    - option "Trần Thị Mai"
+    - option "Trần Văn Minh"
+    - option "Hoàng Thị Bích"
+    - option "Trần Văn Tín"
+    - option "Trần Hữu Đạt"
+    - option "Võ Thị Ngọc Mai"
+    - option "Trần Hữu Kiên"
+    - option "Trần Quốc Tuấn"
+    - option "Ngô Thị Phương Thảo"
+    - option "Trần Thị Thu Thủy"
+    - option "Trần Thị Thu Hà"
+    - option "Trần Đức Bảo"
+    - option "Trần Gia Hưng"
+    - option "Lâm Mỹ Dung"
+    - option "Trần Hữu Khôi"
+    - option "Trần Minh Quân"
+    - option "Đỗ Ngọc Lan Anh"
+    - option "Trần Minh Châu"
+    - option "Trần Bảo Nam"
+    - option "Trần Ngọc Khánh Linh"
+    - option "Trần Khôi Nguyên"
+  - img "Chân dung Cụ Tổ Trần Văn Lộc (1926)"
+  - generic: Chân dung
+  - heading "Chân dung Cụ Tổ Trần Văn Lộc (1926)" [level=3]
+  - paragraph:
+    - generic: Năm 1926
+  - paragraph: Bức ảnh chân dung lưu trữ chụp tại hiệu ảnh Lê Văn – Hà Nội khi cụ tròn 54 tuổi.
+  - generic: Gắn với 1 người
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+  - img "Chân dung Tổ mẫu Nguyễn Thị Kim (1935)"
+  - generic: Chân dung
+  - heading "Chân dung Tổ mẫu Nguyễn Thị Kim (1935)" [level=3]
+  - paragraph:
+    - generic: Khoảng năm 1935
+  - paragraph: Ảnh chụp lưu niệm của cụ bà Nguyễn Thị Kim trong trang phục áo dài lụa nâu truyền thống.
+  - generic: Gắn với 1 người
+  - generic "Nguyễn Thị Kim":
+    - img "Nguyễn Thị Kim"
+  - img "Đại gia đình sum họp đầu xuân Ất Tỵ tại Đông Ngạc (1965)"
+  - generic: Ảnh tư liệu lịch sử
+  - heading "Đại gia đình sum họp đầu xuân Ất Tỵ tại Đông Ngạc (1965)" [level=3]
+  - paragraph:
+    - generic: Xuân Ất Tỵ 1965
+  - paragraph: Bức ảnh quý chụp ba thế hệ quây quần trước hiên nhà cổ 5 gian dịp Tết Nguyên đán.
+  - generic: Gắn với 9 người
+  - generic "Trần Văn Khải":
+    - generic: TK
+  - generic "Đặng Thị Nguyệt":
+    - generic: ĐN
+  - generic "Trần Văn Nghị":
+    - generic: TN
+  - img "Bản Gia phả cổ chép tay trên giấy dó"
+  - generic: Gia phả giấy dó & Tư liệu
+  - heading "Bản Gia phả cổ chép tay trên giấy dó" [level=3]
+  - paragraph:
+    - generic: Cuối thế kỷ XIX – 1930
+  - paragraph: Cuốn phả ký gốc chữ Hán Nôm do tiền nhân truyền lại và được cụ Đồ Lộc chú giải năm 1930.
+  - generic: Gắn với 4 người
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+  - generic "Trần Văn Khải":
+    - generic: TK
+  - generic "Trần Văn Nghị":
+    - generic: TN
+  - img "Từ đường họ Trần tại làng cổ Đông Ngạc"
+  - generic: Ảnh tư liệu lịch sử
+  - heading "Từ đường họ Trần tại làng cổ Đông Ngạc" [level=3]
+  - paragraph:
+    - generic: Năm 2024
+  - paragraph: Không gian sân gạch, phương đình và bức hoành phi Thế Đức Truyền Gia vào buổi sớm mùa thu.
+  - generic: Gắn với 4 người
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+  - generic "Trần Văn Minh":
+    - generic: TM
+  - generic "Trần Quốc Tuấn":
+    - generic: TT
+- navigation:
+  - button "Tổng quan":
+    - generic: Tổng quan
+  - button "Cây phả hệ":
+    - generic: Cây phả hệ
+  - button "Thành viên":
+    - generic: Thành viên
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm...":
+    - generic: Thêm...
+- generic: "25"

@@ -1,0 +1,48 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+  - button "Mở tìm kiếm thành viên":
+  - button "Chuyển đổi giao diện sáng tối":
+  - 'button "Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay."':
+  - button "Thêm thành viên mới vào gia phả":
+- main:
+  - button "Hậu duệ"
+  - button "Tổ tiên"
+  - button "Toàn cảnh"
+  - button "Khác":
+    - generic: Khác
+  - combobox:
+    - option "Tất cả chi" [selected]
+    - option "Chi Ất (Chi Thứ)"
+    - option "Chi Bính (Chi Nam Tiến)"
+    - option "Đại Tôn Họ Trần Đông Ngạc"
+    - option "Chi Giáp (Chi Trưởng)"
+  - textbox "Tìm thành viên..."
+  - button "Công cụ bổ trợ":
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+    - generic "Đã tạ thế"
+  - heading "Trần Văn Lộc" [level=3]
+  - paragraph: 1872 – 1948
+  - button "Hồ sơ"
+  - button:
+  - button "Sửa"
+  - button "Quan hệ"
+  - button "Tâm điểm"
+  - button "Phóng to (Phím +)":
+  - button "97%"
+  - button "Thu nhỏ (Phím -)":
+  - button "Căn vừa màn hình (Phím 0)":
+  - button "Về cội nguồn / Thủy tổ":
+- navigation:
+  - button "Tổng quan":
+    - generic: Tổng quan
+  - button "Cây phả hệ" [active]:
+    - generic: Cây phả hệ
+  - button "Thành viên":
+    - generic: Thành viên
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm...":
+    - generic: Thêm...

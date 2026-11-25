@@ -1,0 +1,160 @@
+{
+  "labels": [
+    {
+      "id": "",
+      "labels": [],
+      "name": "Tìm kiếm thành viên trong dòng họ",
+      "placeholder": "Tìm nhanh (Ctrl+K)...",
+      "type": "INPUT"
+    },
+    {
+      "id": "",
+      "labels": [],
+      "name": null,
+      "placeholder": null,
+      "type": "INPUT"
+    },
+    {
+      "id": "",
+      "labels": [],
+      "name": null,
+      "placeholder": null,
+      "type": "SELECT"
+    },
+    {
+      "id": "",
+      "labels": [],
+      "name": null,
+      "placeholder": null,
+      "type": "INPUT"
+    },
+    {
+      "id": "",
+      "labels": [],
+      "name": null,
+      "placeholder": null,
+      "type": "INPUT"
+    }
+  ],
+  "overflow": [
+    {
+      "class": "flex items-center gap-1.5 sm:gap-2 shrink-0",
+      "right": 394.4250030517578,
+      "tag": "DIV",
+      "text": "⌘KĐã mở PINHướng dẫnThêm người"
+    },
+    {
+      "class": "flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-[#1B3B2B] hover:bg-[#254F3A] text-white text-xs font-semibold shadow-xs transition-colors shrink-0",
+      "right": 394.4250183105469,
+      "tag": "BUTTON",
+      "text": "Thêm người"
+    }
+  ],
+  "smallControls": [
+    {
+      "h": 36,
+      "text": "Mở tìm kiếm thành viên",
+      "w": 36
+    },
+    {
+      "h": 36,
+      "text": "Chuyển đổi giao diện sáng tối",
+      "w": 36
+    },
+    {
+      "h": 31.600000381469727,
+      "text": "Đã mở PIN",
+      "w": 35.60000228881836
+    },
+    {
+      "h": 32,
+      "text": "Thêm người",
+      "w": 40
+    },
+    {
+      "h": 31.98750114440918,
+      "text": "Lưu thông tin",
+      "w": 126.8125
+    },
+    {
+      "h": 31.98750114440918,
+      "text": "Thêm chi họ",
+      "w": 116.1125030517578
+    },
+    {
+      "h": 26,
+      "text": "Sửa chi họ",
+      "w": 26
+    },
+    {
+      "h": 26,
+      "text": "Xóa chi họ",
+      "w": 26
+    },
+    {
+      "h": 26,
+      "text": "Sửa chi họ",
+      "w": 26
+    },
+    {
+      "h": 26,
+      "text": "Xóa chi họ",
+      "w": 26
+    },
+    {
+      "h": 26,
+      "text": "Sửa chi họ",
+      "w": 26
+    },
+    {
+      "h": 26,
+      "text": "Xóa chi họ",
+      "w": 26
+    },
+    {
+      "h": 26,
+      "text": "Sửa chi họ",
+      "w": 26
+    },
+    {
+      "h": 26,
+      "text": "Xóa chi họ",
+      "w": 26
+    },
+    {
+      "h": 24.5,
+      "text": "Thay thế toàn bộ",
+      "w": 107.2249984741211
+    },
+    {
+      "h": 24.5,
+      "text": "Gộp bổ sung",
+      "w": 87.63750457763672
+    },
+    {
+      "h": 36,
+      "text": "Tải bản sao lưu JSON",
+      "w": 268
+    },
+    {
+      "h": 36,
+      "text": "Xuất tệp GEDCOM",
+      "w": 268
+    },
+    {
+      "h": 36,
+      "text": "Tải File Mẫu Excel / CSV",
+      "w": 268
+    },
+    {
+      "h": 31.98750114440918,
+      "text": "Nạp lại dữ liệu mẫu",
+      "w": 158.02500915527344
+    }
+  ],
+  "viewport": {
+    "doc": 394,
+    "h": 844,
+    "w": 390
+  }
+}

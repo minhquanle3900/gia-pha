@@ -1,0 +1,4875 @@
+[
+  {
+    "file": ".env.example",
+    "controls": []
+  },
+  {
+    "file": ".gitignore",
+    "controls": []
+  },
+  {
+    "file": "bun.lock",
+    "controls": []
+  },
+  {
+    "file": "CHANGELOG.md",
+    "controls": [
+      {
+        "line": 4,
+        "text": "Tất cả những thay đổi, cải tiến và cập nhật quan trọng của dự án sẽ được ghi chép chi tiết tại tệp này theo định dạng [Keep a Changelog](https://keepachangelog.com/en/1.0.0/) và tuân thủ [Semantic Versioning](https://semver.org/spec/v2.0.0.html)."
+      }
+    ]
+  },
+  {
+    "file": "DATA_MODEL.md",
+    "controls": []
+  },
+  {
+    "file": "GEDCOM_SUPPORT.md",
+    "controls": []
+  },
+  {
+    "file": "IMPORT_EXPORT.md",
+    "controls": []
+  },
+  {
+    "file": "index.html",
+    "controls": [
+      {
+        "line": 19,
+        "text": "<link rel=\"preconnect\" href=\"https://fonts.googleapis.com\" />"
+      },
+      {
+        "line": 20,
+        "text": "<link rel=\"preconnect\" href=\"https://fonts.gstatic.com\" crossorigin />"
+      },
+      {
+        "line": 21,
+        "text": "<link href=\"https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,500;0,600;0,700;1,400;1,600&family=JetBrains+Mono:wght@400;500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap\" rel=\"stylesheet\" />"
+      }
+    ]
+  },
+  {
+    "file": "metadata.json",
+    "controls": []
+  },
+  {
+    "file": "package.json",
+    "controls": []
+  },
+  {
+    "file": "public/icon.svg",
+    "controls": [
+      {
+        "line": 1,
+        "text": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\" width=\"512\" height=\"512\">"
+      }
+    ]
+  },
+  {
+    "file": "README.md",
+    "controls": []
+  },
+  {
+    "file": "server.ts",
+    "controls": [
+      {
+        "line": 155,
+        "text": "console.log(`Server running on http://0.0.0.0:${PORT}`);"
+      }
+    ]
+  },
+  {
+    "file": "src/App.tsx",
+    "controls": [
+      {
+        "line": 117,
+        "text": "<button"
+      },
+      {
+        "line": 119,
+        "text": "onClick={() => refresh()}"
+      }
+    ]
+  },
+  {
+    "file": "src/components/AppShell.tsx",
+    "controls": [
+      {
+        "line": 126,
+        "text": "onClick={() => onSelectTab('dashboard')}"
+      },
+      {
+        "line": 148,
+        "text": "<button"
+      },
+      {
+        "line": 151,
+        "text": "onClick={() => onSelectTab(item.key)}"
+      },
+      {
+        "line": 166,
+        "text": "<button"
+      },
+      {
+        "line": 168,
+        "text": "onClick={() => setDesktopToolsOpen(!desktopToolsOpen)}"
+      },
+      {
+        "line": 189,
+        "text": "<button"
+      },
+      {
+        "line": 192,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 215,
+        "text": "<button"
+      },
+      {
+        "line": 217,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 228,
+        "text": "<button"
+      },
+      {
+        "line": 230,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 252,
+        "text": "placeholder=\"Tìm nhanh (Ctrl+K)...\""
+      },
+      {
+        "line": 258,
+        "text": "<button"
+      },
+      {
+        "line": 260,
+        "text": "onClick={toggleTheme}"
+      },
+      {
+        "line": 267,
+        "text": "aria-label=\"Chuyển đổi giao diện sáng tối\""
+      },
+      {
+        "line": 277,
+        "text": "<button"
+      },
+      {
+        "line": 279,
+        "text": "onClick={handleShieldToggle}"
+      },
+      {
+        "line": 306,
+        "text": "<button"
+      },
+      {
+        "line": 308,
+        "text": "onClick={onOpenTour}"
+      },
+      {
+        "line": 318,
+        "text": "<button"
+      },
+      {
+        "line": 320,
+        "text": "onClick={onQuickAddPerson}"
+      },
+      {
+        "line": 348,
+        "text": "<button"
+      },
+      {
+        "line": 351,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 370,
+        "text": "<button"
+      },
+      {
+        "line": 372,
+        "text": "onClick={() => setMobileMenuOpen(!mobileMenuOpen)}"
+      },
+      {
+        "line": 389,
+        "text": "onClick={() => setMobileMenuOpen(false)}"
+      },
+      {
+        "line": 393,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 399,
+        "text": "<button"
+      },
+      {
+        "line": 401,
+        "text": "onClick={() => setMobileMenuOpen(false)}"
+      },
+      {
+        "line": 410,
+        "text": "<button"
+      },
+      {
+        "line": 412,
+        "text": "onClick={toggleTheme}"
+      },
+      {
+        "line": 430,
+        "text": "<button"
+      },
+      {
+        "line": 432,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 442,
+        "text": "<button"
+      },
+      {
+        "line": 444,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 454,
+        "text": "<button"
+      },
+      {
+        "line": 456,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 466,
+        "text": "<button"
+      },
+      {
+        "line": 468,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 478,
+        "text": "<button"
+      },
+      {
+        "line": 480,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 490,
+        "text": "<button"
+      },
+      {
+        "line": 492,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 505,
+        "text": "<button"
+      },
+      {
+        "line": 507,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 518,
+        "text": "<button"
+      },
+      {
+        "line": 520,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 531,
+        "text": "<button"
+      },
+      {
+        "line": 533,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 544,
+        "text": "<button"
+      },
+      {
+        "line": 546,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 556,
+        "text": "<button"
+      },
+      {
+        "line": 558,
+        "text": "onClick={() => {"
+      }
+    ]
+  },
+  {
+    "file": "src/components/ConfirmDialog.tsx",
+    "controls": [
+      {
+        "line": 30,
+        "text": "role=\"dialog\""
+      },
+      {
+        "line": 35,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 48,
+        "text": "<button"
+      },
+      {
+        "line": 50,
+        "text": "onClick={onCancel}"
+      },
+      {
+        "line": 60,
+        "text": "<button"
+      },
+      {
+        "line": 62,
+        "text": "onClick={onCancel}"
+      },
+      {
+        "line": 67,
+        "text": "<button"
+      },
+      {
+        "line": 69,
+        "text": "onClick={onConfirm}"
+      }
+    ]
+  },
+  {
+    "file": "src/components/FlexibleDateInput.tsx",
+    "controls": [
+      {
+        "line": 56,
+        "text": "<input"
+      },
+      {
+        "line": 60,
+        "text": "onChange={() => updateField({ calendar: 'solar' })}"
+      },
+      {
+        "line": 67,
+        "text": "<input"
+      },
+      {
+        "line": 71,
+        "text": "onChange={() => updateField({ calendar: 'lunar' })}"
+      },
+      {
+        "line": 82,
+        "text": "<select"
+      },
+      {
+        "line": 84,
+        "text": "onChange={(e) => updateField({ precision: e.target.value as DatePrecision })}"
+      },
+      {
+        "line": 100,
+        "text": "<input"
+      },
+      {
+        "line": 104,
+        "text": "placeholder=\"VD: 15\""
+      },
+      {
+        "line": 106,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 117,
+        "text": "<input"
+      },
+      {
+        "line": 121,
+        "text": "placeholder=\"1 - 12\""
+      },
+      {
+        "line": 123,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 134,
+        "text": "<input"
+      },
+      {
+        "line": 138,
+        "text": "placeholder=\"VD: 1945\""
+      },
+      {
+        "line": 140,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 150,
+        "text": "<input"
+      },
+      {
+        "line": 152,
+        "text": "placeholder=\"Mô tả niên đại cổ (VD: 'Năm Giáp Ngọ', 'Trước Cách mạng')\""
+      },
+      {
+        "line": 154,
+        "text": "onChange={(e) => updateField({ displayText: e.target.value || undefined })}"
+      }
+    ]
+  },
+  {
+    "file": "src/components/GlobalSearch.tsx",
+    "controls": [
+      {
+        "line": 195,
+        "text": "onClick={() => handleChoosePerson(p.id)}"
+      },
+      {
+        "line": 250,
+        "text": "<button"
+      },
+      {
+        "line": 252,
+        "text": "onClick={(e) => handleJumpToTree(e, p.id)}"
+      },
+      {
+        "line": 273,
+        "text": "<button"
+      },
+      {
+        "line": 275,
+        "text": "onClick={() => setFilterMode('all')}"
+      },
+      {
+        "line": 287,
+        "text": "<button"
+      },
+      {
+        "line": 290,
+        "text": "onClick={() => setFilterMode(key)}"
+      },
+      {
+        "line": 301,
+        "text": "<button"
+      },
+      {
+        "line": 303,
+        "text": "onClick={() => setFilterMode('living')}"
+      },
+      {
+        "line": 312,
+        "text": "<button"
+      },
+      {
+        "line": 314,
+        "text": "onClick={() => setFilterMode('deceased')}"
+      },
+      {
+        "line": 338,
+        "text": "<input"
+      },
+      {
+        "line": 342,
+        "text": "onChange={(e) => {"
+      },
+      {
+        "line": 348,
+        "text": "placeholder={placeholder}"
+      },
+      {
+        "line": 352,
+        "text": "aria-label=\"Tìm kiếm thành viên trong dòng họ\""
+      },
+      {
+        "line": 356,
+        "text": "<button"
+      },
+      {
+        "line": 358,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 439,
+        "text": "<button"
+      },
+      {
+        "line": 441,
+        "text": "onClick={() => setIsOpen(false)}"
+      },
+      {
+        "line": 454,
+        "text": "<button"
+      },
+      {
+        "line": 456,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 464,
+        "text": "aria-label=\"Mở tìm kiếm thành viên\""
+      },
+      {
+        "line": 478,
+        "text": "<input"
+      },
+      {
+        "line": 482,
+        "text": "onChange={(e) => setQuery(e.target.value)}"
+      },
+      {
+        "line": 484,
+        "text": "placeholder=\"Tìm tên, tên tự, năm sinh, đời thứ...\""
+      },
+      {
+        "line": 488,
+        "text": "<button"
+      },
+      {
+        "line": 490,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 499,
+        "text": "<button"
+      },
+      {
+        "line": 501,
+        "text": "onClick={() => setMobileModalOpen(false)}"
+      }
+    ]
+  },
+  {
+    "file": "src/components/HeritageAvatar.tsx",
+    "controls": []
+  },
+  {
+    "file": "src/components/OnboardingTour.tsx",
+    "controls": [
+      {
+        "line": 126,
+        "text": "<button"
+      },
+      {
+        "line": 128,
+        "text": "onClick={handleDismiss}"
+      },
+      {
+        "line": 190,
+        "text": "<button"
+      },
+      {
+        "line": 192,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 214,
+        "text": "<button"
+      },
+      {
+        "line": 217,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 234,
+        "text": "<button"
+      },
+      {
+        "line": 236,
+        "text": "onClick={handlePrev}"
+      },
+      {
+        "line": 244,
+        "text": "<button"
+      },
+      {
+        "line": 246,
+        "text": "onClick={handleNext}"
+      }
+    ]
+  },
+  {
+    "file": "src/components/PrivacyPinModal.tsx",
+    "controls": [
+      {
+        "line": 78,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 82,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 104,
+        "text": "<button"
+      },
+      {
+        "line": 106,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 120,
+        "text": "<form onSubmit={handleSubmit} className=\"space-y-4 text-xs\">"
+      },
+      {
+        "line": 124,
+        "text": "<input"
+      },
+      {
+        "line": 130,
+        "text": "onChange={(e) => setOldPin(e.target.value.replace(/\\D/g, ''))}"
+      },
+      {
+        "line": 131,
+        "text": "placeholder=\"Nhập mã PIN cũ...\""
+      },
+      {
+        "line": 143,
+        "text": "<input"
+      },
+      {
+        "line": 149,
+        "text": "onChange={(e) => setPinInput(e.target.value.replace(/\\D/g, ''))}"
+      },
+      {
+        "line": 150,
+        "text": "placeholder=\"••••\""
+      },
+      {
+        "line": 154,
+        "text": "<button"
+      },
+      {
+        "line": 156,
+        "text": "onClick={() => setShowPassword((p) => !p)}"
+      },
+      {
+        "line": 167,
+        "text": "<input"
+      },
+      {
+        "line": 173,
+        "text": "onChange={(e) => setConfirmPin(e.target.value.replace(/\\D/g, ''))}"
+      },
+      {
+        "line": 174,
+        "text": "placeholder=\"••••\""
+      },
+      {
+        "line": 181,
+        "text": "<button"
+      },
+      {
+        "line": 183,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 188,
+        "text": "<button"
+      }
+    ]
+  },
+  {
+    "file": "src/components/PWAWidgets.tsx",
+    "controls": [
+      {
+        "line": 21,
+        "text": "<button"
+      },
+      {
+        "line": 23,
+        "text": "onClick={triggerInstall}"
+      }
+    ]
+  },
+  {
+    "file": "src/context/GenealogyContext.tsx",
+    "controls": []
+  },
+  {
+    "file": "src/database/db.ts",
+    "controls": []
+  },
+  {
+    "file": "src/database/seedData.ts",
+    "controls": [
+      {
+        "line": 15,
+        "text": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 1200 675\" width=\"1200\" height=\"675\">"
+      },
+      {
+        "line": 47,
+        "text": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 533\" width=\"400\" height=\"533\">"
+      },
+      {
+        "line": 62,
+        "text": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 400 533\" width=\"400\" height=\"533\">"
+      },
+      {
+        "line": 77,
+        "text": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\" width=\"800\" height=\"600\">"
+      },
+      {
+        "line": 93,
+        "text": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 800 600\" width=\"800\" height=\"600\">"
+      }
+    ]
+  },
+  {
+    "file": "src/features/backup/BackupReminderBanner.tsx",
+    "controls": [
+      {
+        "line": 67,
+        "text": "<button"
+      },
+      {
+        "line": 69,
+        "text": "onClick={() => setDismissedLocally(true)}"
+      },
+      {
+        "line": 118,
+        "text": "<button"
+      },
+      {
+        "line": 120,
+        "text": "onClick={handleQuickDownloadJson}"
+      },
+      {
+        "line": 128,
+        "text": "<button"
+      },
+      {
+        "line": 130,
+        "text": "onClick={() => onNavigate('data')}"
+      },
+      {
+        "line": 138,
+        "text": "<button"
+      },
+      {
+        "line": 140,
+        "text": "onClick={handleSnooze}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/book-print/FamilyBookPage.tsx",
+    "controls": [
+      {
+        "line": 177,
+        "text": "<button"
+      },
+      {
+        "line": 179,
+        "text": "onClick={() => setActiveTab('book')}"
+      },
+      {
+        "line": 190,
+        "text": "<button"
+      },
+      {
+        "line": 192,
+        "text": "onClick={() => setActiveTab('scroll')}"
+      },
+      {
+        "line": 203,
+        "text": "<button"
+      },
+      {
+        "line": 205,
+        "text": "onClick={() => setActiveTab('table')}"
+      },
+      {
+        "line": 216,
+        "text": "<button"
+      },
+      {
+        "line": 218,
+        "text": "onClick={() => setActiveTab('individual')}"
+      },
+      {
+        "line": 235,
+        "text": "<button"
+      },
+      {
+        "line": 238,
+        "text": "onClick={() => setScrollFormat(fmt)}"
+      },
+      {
+        "line": 248,
+        "text": "<button"
+      },
+      {
+        "line": 250,
+        "text": "onClick={handleExportScrollSvg}"
+      },
+      {
+        "line": 260,
+        "text": "<button"
+      },
+      {
+        "line": 262,
+        "text": "onClick={() => setShowPrintOptions((prev) => !prev)}"
+      },
+      {
+        "line": 275,
+        "text": "<button"
+      },
+      {
+        "line": 277,
+        "text": "onClick={handlePrint}"
+      },
+      {
+        "line": 285,
+        "text": "<button"
+      },
+      {
+        "line": 288,
+        "text": "onClick={handleExportPdf}"
+      },
+      {
+        "line": 289,
+        "text": "aria-label=\"In Ấn / Xuất PDF\""
+      },
+      {
+        "line": 317,
+        "text": "<button"
+      },
+      {
+        "line": 320,
+        "text": "onClick={() => setPrintConfig((prev) => ({ ...prev, paperSize: sz }))}"
+      },
+      {
+        "line": 344,
+        "text": "<input"
+      },
+      {
+        "line": 347,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 358,
+        "text": "<button"
+      },
+      {
+        "line": 360,
+        "text": "onClick={handleExportPrintableHtml}"
+      },
+      {
+        "line": 379,
+        "text": "<button"
+      },
+      {
+        "line": 381,
+        "text": "onClick={() => setExportStatus(null)}"
+      },
+      {
+        "line": 383,
+        "text": "aria-label=\"Đóng thông báo\""
+      },
+      {
+        "line": 552,
+        "text": "<button"
+      },
+      {
+        "line": 554,
+        "text": "onClick={() => setSelectedReportPersonId(p.id)}"
+      },
+      {
+        "line": 623,
+        "text": "<button"
+      },
+      {
+        "line": 625,
+        "text": "onClick={handleExportScrollSvg}"
+      },
+      {
+        "line": 635,
+        "text": "xmlns=\"http://www.w3.org/2000/svg\""
+      },
+      {
+        "line": 823,
+        "text": "<input"
+      },
+      {
+        "line": 826,
+        "text": "onChange={(e) => setIndividualSearch(e.target.value)}"
+      },
+      {
+        "line": 827,
+        "text": "placeholder=\"Tìm kiếm thành viên theo họ tên, tên húy, thế hệ...\""
+      },
+      {
+        "line": 876,
+        "text": "<button"
+      },
+      {
+        "line": 878,
+        "text": "onClick={() => setSelectedReportPersonId(p.id)}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/family-tree/FamilyTreePage.tsx",
+    "controls": [
+      {
+        "line": 314,
+        "text": "svgClone.setAttribute('xmlns', 'http://www.w3.org/2000/svg');"
+      },
+      {
+        "line": 410,
+        "text": "<button"
+      },
+      {
+        "line": 412,
+        "text": "onClick={() => setChartType('tree')}"
+      },
+      {
+        "line": 417,
+        "text": "<button"
+      },
+      {
+        "line": 419,
+        "text": "onClick={() => setChartType('fan')}"
+      },
+      {
+        "line": 428,
+        "text": "<button"
+      },
+      {
+        "line": 430,
+        "text": "onClick={onOpenBook}"
+      },
+      {
+        "line": 461,
+        "text": "<button"
+      },
+      {
+        "line": 464,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 480,
+        "text": "<button"
+      },
+      {
+        "line": 482,
+        "text": "onClick={() => setViewModeMenuOpen((prev) => !prev)}"
+      },
+      {
+        "line": 502,
+        "text": "<button"
+      },
+      {
+        "line": 504,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 517,
+        "text": "<button"
+      },
+      {
+        "line": 519,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 533,
+        "text": "<button"
+      },
+      {
+        "line": 535,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 554,
+        "text": "<select"
+      },
+      {
+        "line": 556,
+        "text": "onChange={(e) => setSelectedBranch(e.target.value)}"
+      },
+      {
+        "line": 574,
+        "text": "<input"
+      },
+      {
+        "line": 576,
+        "text": "placeholder=\"Tìm thành viên...\""
+      },
+      {
+        "line": 578,
+        "text": "onChange={(e) => setSearchQuery(e.target.value)}"
+      },
+      {
+        "line": 582,
+        "text": "<button"
+      },
+      {
+        "line": 584,
+        "text": "onClick={() => setSearchQuery('')}"
+      },
+      {
+        "line": 598,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 622,
+        "text": "<button"
+      },
+      {
+        "line": 624,
+        "text": "onClick={() => setMoreMenuOpen((prev) => !prev)}"
+      },
+      {
+        "line": 634,
+        "text": "<button"
+      },
+      {
+        "line": 636,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 647,
+        "text": "<button"
+      },
+      {
+        "line": 649,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 659,
+        "text": "<button"
+      },
+      {
+        "line": 661,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 671,
+        "text": "<button"
+      },
+      {
+        "line": 673,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 702,
+        "text": "<button"
+      },
+      {
+        "line": 704,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 729,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 795,
+        "text": "onClick={(e) => {"
+      },
+      {
+        "line": 898,
+        "text": "onClick={(e) => toggleCollapse(node.id, e as unknown as React.MouseEvent)}"
+      },
+      {
+        "line": 964,
+        "text": "<button"
+      },
+      {
+        "line": 966,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 975,
+        "text": "<button"
+      },
+      {
+        "line": 977,
+        "text": "onClick={() => setInspectedPersonId(null)}"
+      },
+      {
+        "line": 1071,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 1118,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 1155,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 1185,
+        "text": "<button"
+      },
+      {
+        "line": 1187,
+        "text": "onClick={() => onOpenProfile(inspectedPerson.id)}"
+      },
+      {
+        "line": 1196,
+        "text": "<button"
+      },
+      {
+        "line": 1198,
+        "text": "onClick={() => onEditPerson(inspectedPerson)}"
+      },
+      {
+        "line": 1205,
+        "text": "<button"
+      },
+      {
+        "line": 1207,
+        "text": "onClick={() => setRelEditorOpen(true)}"
+      },
+      {
+        "line": 1213,
+        "text": "<button"
+      },
+      {
+        "line": 1215,
+        "text": "onClick={() => setFocusPersonId(inspectedPerson.id)}"
+      },
+      {
+        "line": 1222,
+        "text": "<button"
+      },
+      {
+        "line": 1224,
+        "text": "onClick={onOpenKinship}"
+      },
+      {
+        "line": 1260,
+        "text": "<button"
+      },
+      {
+        "line": 1262,
+        "text": "onClick={() => onOpenProfile(inspectedPerson.id)}"
+      },
+      {
+        "line": 1267,
+        "text": "<button"
+      },
+      {
+        "line": 1269,
+        "text": "onClick={() => setInspectedPersonId(null)}"
+      },
+      {
+        "line": 1279,
+        "text": "<button"
+      },
+      {
+        "line": 1281,
+        "text": "onClick={() => onEditPerson(inspectedPerson)}"
+      },
+      {
+        "line": 1287,
+        "text": "<button"
+      },
+      {
+        "line": 1289,
+        "text": "onClick={() => setRelEditorOpen(true)}"
+      },
+      {
+        "line": 1294,
+        "text": "<button"
+      },
+      {
+        "line": 1296,
+        "text": "onClick={() => setFocusPersonId(inspectedPerson.id)}"
+      },
+      {
+        "line": 1308,
+        "text": "<button"
+      },
+      {
+        "line": 1310,
+        "text": "onClick={zoomIn}"
+      },
+      {
+        "line": 1317,
+        "text": "<button"
+      },
+      {
+        "line": 1319,
+        "text": "onClick={fitToScreen}"
+      },
+      {
+        "line": 1326,
+        "text": "<button"
+      },
+      {
+        "line": 1328,
+        "text": "onClick={zoomOut}"
+      },
+      {
+        "line": 1337,
+        "text": "<button"
+      },
+      {
+        "line": 1339,
+        "text": "onClick={fitToScreen}"
+      },
+      {
+        "line": 1346,
+        "text": "<button"
+      },
+      {
+        "line": 1348,
+        "text": "onClick={resetToRoot}"
+      },
+      {
+        "line": 1367,
+        "text": "<button"
+      },
+      {
+        "line": 1369,
+        "text": "onClick={onAddPerson}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/family-tree/FanChartLayout.tsx",
+    "controls": [
+      {
+        "line": 263,
+        "text": "<button"
+      },
+      {
+        "line": 265,
+        "text": "onClick={() => setFanDirection('descendant')}"
+      },
+      {
+        "line": 274,
+        "text": "<button"
+      },
+      {
+        "line": 276,
+        "text": "onClick={() => setFanDirection('ancestor')}"
+      },
+      {
+        "line": 289,
+        "text": "<button"
+      },
+      {
+        "line": 292,
+        "text": "onClick={() => setFanAngle(ang)}"
+      },
+      {
+        "line": 305,
+        "text": "<select"
+      },
+      {
+        "line": 307,
+        "text": "onChange={(e) => setMaxGenerations(Number(e.target.value))}"
+      },
+      {
+        "line": 322,
+        "text": "<select"
+      },
+      {
+        "line": 324,
+        "text": "onChange={(e) => setCenterPersonId(e.target.value)}"
+      },
+      {
+        "line": 336,
+        "text": "<button"
+      },
+      {
+        "line": 338,
+        "text": "onClick={() => setZoomLevel((z) => Math.max(0.5, z - 0.15))}"
+      },
+      {
+        "line": 347,
+        "text": "<button"
+      },
+      {
+        "line": 349,
+        "text": "onClick={() => setZoomLevel((z) => Math.min(2.5, z + 0.15))}"
+      },
+      {
+        "line": 355,
+        "text": "<button"
+      },
+      {
+        "line": 357,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 368,
+        "text": "<button"
+      },
+      {
+        "line": 370,
+        "text": "onClick={handleExportSvg}"
+      },
+      {
+        "line": 452,
+        "text": "onClick={(e) => {"
+      },
+      {
+        "line": 490,
+        "text": "onClick={() => onOpenProfile(centerNode.person.id)}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/family-tree/treeLayout.ts",
+    "controls": []
+  },
+  {
+    "file": "src/features/gallery/AudioRecorderModal.tsx",
+    "controls": [
+      {
+        "line": 223,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 227,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 244,
+        "text": "<button"
+      },
+      {
+        "line": 246,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 309,
+        "text": "<button"
+      },
+      {
+        "line": 311,
+        "text": "onClick={startRecording}"
+      },
+      {
+        "line": 321,
+        "text": "<button"
+      },
+      {
+        "line": 323,
+        "text": "onClick={pauseRecording}"
+      },
+      {
+        "line": 329,
+        "text": "<button"
+      },
+      {
+        "line": 331,
+        "text": "onClick={stopRecording}"
+      },
+      {
+        "line": 342,
+        "text": "<button"
+      },
+      {
+        "line": 344,
+        "text": "onClick={resumeRecording}"
+      },
+      {
+        "line": 350,
+        "text": "<button"
+      },
+      {
+        "line": 352,
+        "text": "onClick={stopRecording}"
+      },
+      {
+        "line": 362,
+        "text": "<button"
+      },
+      {
+        "line": 364,
+        "text": "onClick={resetRecording}"
+      },
+      {
+        "line": 375,
+        "text": "<form onSubmit={handleSaveAudio} className=\"space-y-3.5 text-xs\">"
+      },
+      {
+        "line": 380,
+        "text": "<input"
+      },
+      {
+        "line": 384,
+        "text": "onChange={(e) => setTitle(e.target.value)}"
+      },
+      {
+        "line": 385,
+        "text": "placeholder=\"Ví dụ: Lời dặn con cháu của Cụ Khang trước khi đi xa...\""
+      },
+      {
+        "line": 395,
+        "text": "<select"
+      },
+      {
+        "line": 397,
+        "text": "onChange={(e) => setSelectedPersonId(e.target.value)}"
+      },
+      {
+        "line": 411,
+        "text": "<input"
+      },
+      {
+        "line": 414,
+        "text": "onChange={(e) => setStoryContext(e.target.value)}"
+      },
+      {
+        "line": 415,
+        "text": "placeholder=\"Ví dụ: Dịp mừng thọ 80 tuổi, tại nhà thờ họ...\""
+      },
+      {
+        "line": 428,
+        "text": "onChange={(e) => setDescription(e.target.value)}"
+      },
+      {
+        "line": 429,
+        "text": "placeholder=\"Ghi chú nội dung chính của đoạn thu âm để con cháu tiện tra cứu...\""
+      },
+      {
+        "line": 436,
+        "text": "<button"
+      },
+      {
+        "line": 438,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 443,
+        "text": "<button"
+      }
+    ]
+  },
+  {
+    "file": "src/features/gallery/GalleryPage.tsx",
+    "controls": [
+      {
+        "line": 147,
+        "text": "<button"
+      },
+      {
+        "line": 149,
+        "text": "onClick={() => setAudioRecorderOpen(true)}"
+      },
+      {
+        "line": 157,
+        "text": "<button"
+      },
+      {
+        "line": 159,
+        "text": "onClick={() => setAddModalOpen(true)}"
+      },
+      {
+        "line": 176,
+        "text": "<button"
+      },
+      {
+        "line": 178,
+        "text": "onClick={() => setSelectedCategory('all')}"
+      },
+      {
+        "line": 192,
+        "text": "<button"
+      },
+      {
+        "line": 195,
+        "text": "onClick={() => setSelectedCategory(cat)}"
+      },
+      {
+        "line": 211,
+        "text": "<select"
+      },
+      {
+        "line": 213,
+        "text": "onChange={(e) => setSelectedPersonFilter(e.target.value)}"
+      },
+      {
+        "line": 234,
+        "text": "<button"
+      },
+      {
+        "line": 236,
+        "text": "onClick={() => setAddModalOpen(true)}"
+      },
+      {
+        "line": 247,
+        "text": "onClick={() => setViewingMedia(item)}"
+      },
+      {
+        "line": 322,
+        "text": "role=\"dialog\""
+      },
+      {
+        "line": 327,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 358,
+        "text": "<button"
+      },
+      {
+        "line": 360,
+        "text": "onClick={() => setViewingMedia(null)}"
+      },
+      {
+        "line": 406,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 430,
+        "text": "<button"
+      },
+      {
+        "line": 432,
+        "text": "onClick={() => setDeleteId(viewingMedia.id)}"
+      },
+      {
+        "line": 438,
+        "text": "<button"
+      },
+      {
+        "line": 440,
+        "text": "onClick={() => setViewingMedia(null)}"
+      },
+      {
+        "line": 455,
+        "text": "role=\"dialog\""
+      },
+      {
+        "line": 460,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 466,
+        "text": "<button"
+      },
+      {
+        "line": 468,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 492,
+        "text": "<button"
+      },
+      {
+        "line": 494,
+        "text": "onClick={() => setNewDataUrl(null)}"
+      },
+      {
+        "line": 505,
+        "text": "<input"
+      },
+      {
+        "line": 508,
+        "text": "onChange={handleFileUpload}"
+      },
+      {
+        "line": 519,
+        "text": "<input"
+      },
+      {
+        "line": 521,
+        "text": "placeholder=\"VD: Sắc phong triều Nguyễn năm 1904 / Ảnh đại gia đình\""
+      },
+      {
+        "line": 523,
+        "text": "onChange={(e) => setNewTitle(e.target.value)}"
+      },
+      {
+        "line": 531,
+        "text": "<select"
+      },
+      {
+        "line": 533,
+        "text": "onChange={(e) => setNewCategory(e.target.value as MediaCategory)}"
+      },
+      {
+        "line": 548,
+        "text": "<input"
+      },
+      {
+        "line": 550,
+        "text": "placeholder=\"VD: Xuân Canh Dần 1950 / Khoảng năm 1930\""
+      },
+      {
+        "line": 552,
+        "text": "onChange={(e) => setNewDateLabel(e.target.value)}"
+      },
+      {
+        "line": 562,
+        "text": "placeholder=\"Mô tả hoàn cảnh, xuất xứ, nơi bảo quản...\""
+      },
+      {
+        "line": 564,
+        "text": "onChange={(e) => setNewDescription(e.target.value)}"
+      },
+      {
+        "line": 582,
+        "text": "<input"
+      },
+      {
+        "line": 585,
+        "text": "onChange={() => {"
+      },
+      {
+        "line": 603,
+        "text": "<button"
+      },
+      {
+        "line": 605,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 613,
+        "text": "<button"
+      },
+      {
+        "line": 615,
+        "text": "onClick={handleSaveNewMedia}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/history/ClanHistorySection.tsx",
+    "controls": [
+      {
+        "line": 434,
+        "text": "<button"
+      },
+      {
+        "line": 436,
+        "text": "onClick={() => setNotifModalOpen(true)}"
+      },
+      {
+        "line": 451,
+        "text": "<button"
+      },
+      {
+        "line": 453,
+        "text": "onClick={() => onNavigate('rites')}"
+      },
+      {
+        "line": 461,
+        "text": "<button"
+      },
+      {
+        "line": 463,
+        "text": "onClick={handleOpenAddMilestone}"
+      },
+      {
+        "line": 479,
+        "text": "<button"
+      },
+      {
+        "line": 481,
+        "text": "onClick={() => setNotifFeedback(null)}"
+      },
+      {
+        "line": 498,
+        "text": "<button"
+      },
+      {
+        "line": 500,
+        "text": "onClick={() => setNotifModalOpen(true)}"
+      },
+      {
+        "line": 553,
+        "text": "<button"
+      },
+      {
+        "line": 555,
+        "text": "onClick={() => setActiveFilterTab('all')}"
+      },
+      {
+        "line": 564,
+        "text": "<button"
+      },
+      {
+        "line": 566,
+        "text": "onClick={() => setActiveFilterTab('anniversaries')}"
+      },
+      {
+        "line": 576,
+        "text": "<button"
+      },
+      {
+        "line": 578,
+        "text": "onClick={() => setActiveFilterTab('milestones')}"
+      },
+      {
+        "line": 588,
+        "text": "<button"
+      },
+      {
+        "line": 590,
+        "text": "onClick={() => setActiveFilterTab('stories')}"
+      },
+      {
+        "line": 603,
+        "text": "<select"
+      },
+      {
+        "line": 605,
+        "text": "onChange={(e) => setSortOrder(e.target.value as SortOrder)}"
+      },
+      {
+        "line": 614,
+        "text": "<select"
+      },
+      {
+        "line": 616,
+        "text": "onChange={(e) => setSelectedBranchId(e.target.value)}"
+      },
+      {
+        "line": 633,
+        "text": "<input"
+      },
+      {
+        "line": 635,
+        "text": "placeholder=\"Tìm theo tên tiền nhân, năm sự kiện, ngày giỗ âm lịch, địa danh (VD: '1948', 'Đông Ngạc', 'Khánh thành', 'Sài Gòn')...\""
+      },
+      {
+        "line": 637,
+        "text": "onChange={(e) => setSearchQuery(e.target.value)}"
+      },
+      {
+        "line": 641,
+        "text": "<button"
+      },
+      {
+        "line": 643,
+        "text": "onClick={() => setSearchQuery('')}"
+      },
+      {
+        "line": 661,
+        "text": "<button"
+      },
+      {
+        "line": 663,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 755,
+        "text": "onClick={() => onSelectPerson(item.person!.id)}"
+      },
+      {
+        "line": 772,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 826,
+        "text": "<button"
+      },
+      {
+        "line": 828,
+        "text": "onClick={async () => {"
+      },
+      {
+        "line": 848,
+        "text": "<button"
+      },
+      {
+        "line": 850,
+        "text": "onClick={() => onNavigate('rites')}"
+      },
+      {
+        "line": 859,
+        "text": "<button"
+      },
+      {
+        "line": 861,
+        "text": "onClick={() => onSelectPerson(item.person!.id)}"
+      },
+      {
+        "line": 869,
+        "text": "<button"
+      },
+      {
+        "line": 871,
+        "text": "onClick={() => handleEditMilestone(item.rawLifeEvent!)}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/history/ClanInteractiveTimeline.tsx",
+    "controls": [
+      {
+        "line": 246,
+        "text": "<button"
+      },
+      {
+        "line": 248,
+        "text": "onClick={() => setMilestoneModalOpen(true)}"
+      },
+      {
+        "line": 261,
+        "text": "<select"
+      },
+      {
+        "line": 263,
+        "text": "onChange={(e) => setFilterType(e.target.value)}"
+      },
+      {
+        "line": 276,
+        "text": "<select"
+      },
+      {
+        "line": 278,
+        "text": "onChange={(e) => setFilterBranch(e.target.value)}"
+      },
+      {
+        "line": 291,
+        "text": "<button"
+      },
+      {
+        "line": 293,
+        "text": "onClick={() => setSortOrder(sortOrder === 'asc' ? 'desc' : 'asc')}"
+      },
+      {
+        "line": 305,
+        "text": "<input"
+      },
+      {
+        "line": 308,
+        "text": "onChange={(e) => setSearchQuery(e.target.value)}"
+      },
+      {
+        "line": 309,
+        "text": "placeholder=\"Tìm sự kiện, địa danh...\""
+      },
+      {
+        "line": 314,
+        "text": "<button"
+      },
+      {
+        "line": 316,
+        "text": "onClick={expandedIds.size > 0 ? collapseAll : expandAll}"
+      },
+      {
+        "line": 426,
+        "text": "<button"
+      },
+      {
+        "line": 428,
+        "text": "onClick={() => onSelectPerson(event.person!.id)}"
+      },
+      {
+        "line": 442,
+        "text": "<button"
+      },
+      {
+        "line": 444,
+        "text": "onClick={() => toggleExpand(event.id)}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/history/ClanMilestoneModal.tsx",
+    "controls": [
+      {
+        "line": 170,
+        "text": "<button"
+      },
+      {
+        "line": 172,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 185,
+        "text": "<form onSubmit={handleSubmit} className=\"space-y-4\">"
+      },
+      {
+        "line": 191,
+        "text": "<input"
+      },
+      {
+        "line": 194,
+        "text": "placeholder=\"VD: Trùng tu hậu cung Từ đường Đông Ngạc, Lập Ban liên lạc phía Nam...\""
+      },
+      {
+        "line": 196,
+        "text": "onChange={(e) => setTitle(e.target.value)}"
+      },
+      {
+        "line": 207,
+        "text": "<select"
+      },
+      {
+        "line": 209,
+        "text": "onChange={(e) => setType(e.target.value as LifeEventType)}"
+      },
+      {
+        "line": 224,
+        "text": "<select"
+      },
+      {
+        "line": 226,
+        "text": "onChange={(e) => setPersonId(e.target.value)}"
+      },
+      {
+        "line": 245,
+        "text": "onChange={setDate}"
+      },
+      {
+        "line": 256,
+        "text": "<input"
+      },
+      {
+        "line": 258,
+        "text": "placeholder=\"VD: Từ đường họ Trần, Xóm Chùa, làng Đông Ngạc, Hà Nội\""
+      },
+      {
+        "line": 260,
+        "text": "onChange={(e) => setLocation(e.target.value)}"
+      },
+      {
+        "line": 272,
+        "text": "placeholder=\"Ghi rõ hoàn cảnh, con cháu tề tựu, công sức đóng góp hoặc bài học truyền đời lưu lại cho hậu thế...\""
+      },
+      {
+        "line": 274,
+        "text": "onChange={(e) => setDescription(e.target.value)}"
+      },
+      {
+        "line": 282,
+        "text": "<button"
+      },
+      {
+        "line": 284,
+        "text": "onClick={() => setConfirmDeleteOpen(true)}"
+      },
+      {
+        "line": 295,
+        "text": "<button"
+      },
+      {
+        "line": 297,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 302,
+        "text": "<button"
+      }
+    ]
+  },
+  {
+    "file": "src/features/history/FamilyYearTimeline.tsx",
+    "controls": [
+      {
+        "line": 290,
+        "text": "<button"
+      },
+      {
+        "line": 292,
+        "text": "onClick={() => setSelectedYear((y) => y - 1)}"
+      },
+      {
+        "line": 295,
+        "text": "aria-label=\"Năm trước\""
+      },
+      {
+        "line": 302,
+        "text": "<button"
+      },
+      {
+        "line": 304,
+        "text": "onClick={() => setSelectedYear((y) => y + 1)}"
+      },
+      {
+        "line": 307,
+        "text": "aria-label=\"Năm tiếp theo\""
+      },
+      {
+        "line": 314,
+        "text": "<button"
+      },
+      {
+        "line": 316,
+        "text": "onClick={() => setSelectedYear(realCurrentYear)}"
+      },
+      {
+        "line": 324,
+        "text": "<button"
+      },
+      {
+        "line": 326,
+        "text": "onClick={handleExportIcs}"
+      },
+      {
+        "line": 340,
+        "text": "<button"
+      },
+      {
+        "line": 342,
+        "text": "onClick={() => setToastMessage(null)}"
+      },
+      {
+        "line": 352,
+        "text": "<button"
+      },
+      {
+        "line": 354,
+        "text": "onClick={() => setActiveFilter('all')}"
+      },
+      {
+        "line": 375,
+        "text": "<button"
+      },
+      {
+        "line": 377,
+        "text": "onClick={() => setActiveFilter('birthday')}"
+      },
+      {
+        "line": 398,
+        "text": "<button"
+      },
+      {
+        "line": 400,
+        "text": "onClick={() => setActiveFilter('death_anniversary')}"
+      },
+      {
+        "line": 421,
+        "text": "<button"
+      },
+      {
+        "line": 423,
+        "text": "onClick={() => setActiveFilter('wedding')}"
+      },
+      {
+        "line": 450,
+        "text": "<input"
+      },
+      {
+        "line": 453,
+        "text": "onChange={(e) => setSearchQuery(e.target.value)}"
+      },
+      {
+        "line": 454,
+        "text": "placeholder=\"Tìm theo tên thành viên, ngày, chi họ...\""
+      },
+      {
+        "line": 462,
+        "text": "<select"
+      },
+      {
+        "line": 464,
+        "text": "onChange={(e) => setSelectedBranch(e.target.value)}"
+      },
+      {
+        "line": 478,
+        "text": "<button"
+      },
+      {
+        "line": 480,
+        "text": "onClick={() => setViewMode('chronological')}"
+      },
+      {
+        "line": 489,
+        "text": "<button"
+      },
+      {
+        "line": 491,
+        "text": "onClick={() => setViewMode('upcoming')}"
+      },
+      {
+        "line": 500,
+        "text": "<button"
+      },
+      {
+        "line": 502,
+        "text": "onClick={() => setViewMode('seasons')}"
+      },
+      {
+        "line": 554,
+        "text": "onClick={() => toggleMonthCollapse(monthNum)}"
+      },
+      {
+        "line": 641,
+        "text": "onClick={() => evt.person && onSelectPerson?.(evt.person.id)}"
+      },
+      {
+        "line": 674,
+        "text": "onClick={() => onSelectPerson?.(evt.person!.id)}"
+      },
+      {
+        "line": 695,
+        "text": "onClick={() => onSelectPerson?.(evt.person2!.id)}"
+      },
+      {
+        "line": 801,
+        "text": "onClick={() => evt.person && onSelectPerson?.(evt.person.id)}"
+      },
+      {
+        "line": 826,
+        "text": "onClick={() => onSelectPerson?.(evt.person!.id)}"
+      },
+      {
+        "line": 899,
+        "text": "onClick={() => evt.person && onSelectPerson?.(evt.person.id)}"
+      },
+      {
+        "line": 946,
+        "text": "<button"
+      },
+      {
+        "line": 948,
+        "text": "onClick={onNavigateToRites}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/history/NotificationSettingsModal.tsx",
+    "controls": [
+      {
+        "line": 111,
+        "text": "<button"
+      },
+      {
+        "line": 113,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 150,
+        "text": "<button"
+      },
+      {
+        "line": 152,
+        "text": "onClick={handleGrantPermission}"
+      },
+      {
+        "line": 166,
+        "text": "<button"
+      },
+      {
+        "line": 168,
+        "text": "onClick={handleSendTest}"
+      },
+      {
+        "line": 195,
+        "text": "<input"
+      },
+      {
+        "line": 198,
+        "text": "onChange={(e) => updateSettings({ enabled: e.target.checked })}"
+      },
+      {
+        "line": 219,
+        "text": "<button"
+      },
+      {
+        "line": 222,
+        "text": "onClick={() => toggleLeadDay(days)}"
+      },
+      {
+        "line": 244,
+        "text": "<button"
+      },
+      {
+        "line": 246,
+        "text": "onClick={() => updateSettings({ allAncestors: true })}"
+      },
+      {
+        "line": 262,
+        "text": "<button"
+      },
+      {
+        "line": 264,
+        "text": "onClick={() => updateSettings({ allAncestors: false })}"
+      },
+      {
+        "line": 291,
+        "text": "onClick={() => togglePersonTracking(person.id)}"
+      },
+      {
+        "line": 308,
+        "text": "<input"
+      },
+      {
+        "line": 311,
+        "text": "onChange={() => {}}"
+      },
+      {
+        "line": 331,
+        "text": "<button"
+      },
+      {
+        "line": 333,
+        "text": "onClick={handleCheckNow}"
+      },
+      {
+        "line": 341,
+        "text": "<button"
+      },
+      {
+        "line": 343,
+        "text": "onClick={onClose}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/import-export/DataManagementPage.tsx",
+    "controls": [
+      {
+        "line": 402,
+        "text": "<button"
+      },
+      {
+        "line": 404,
+        "text": "onClick={() => setImportNotice(null)}"
+      },
+      {
+        "line": 426,
+        "text": "<form onSubmit={handleSaveSettings} className=\"space-y-4\">"
+      },
+      {
+        "line": 432,
+        "text": "<input"
+      },
+      {
+        "line": 435,
+        "text": "onChange={(e) => setClanName(e.target.value)}"
+      },
+      {
+        "line": 444,
+        "text": "<select"
+      },
+      {
+        "line": 446,
+        "text": "onChange={(e) => setRootPersonId(e.target.value)}"
+      },
+      {
+        "line": 463,
+        "text": "<input"
+      },
+      {
+        "line": 466,
+        "text": "onChange={(e) => setClanMotto(e.target.value)}"
+      },
+      {
+        "line": 475,
+        "text": "<input"
+      },
+      {
+        "line": 478,
+        "text": "onChange={(e) => setAncestralHallLocation(e.target.value)}"
+      },
+      {
+        "line": 489,
+        "text": "<button"
+      },
+      {
+        "line": 515,
+        "text": "<button"
+      },
+      {
+        "line": 517,
+        "text": "onClick={openAddBranch}"
+      },
+      {
+        "line": 527,
+        "text": "onSubmit={handleSaveBranchForm}"
+      },
+      {
+        "line": 543,
+        "text": "<input"
+      },
+      {
+        "line": 546,
+        "text": "onChange={(e) => setBranchName(e.target.value)}"
+      },
+      {
+        "line": 547,
+        "text": "placeholder=\"Ví dụ: Chi Ất (Nhánh Hai)\""
+      },
+      {
+        "line": 555,
+        "text": "<input"
+      },
+      {
+        "line": 558,
+        "text": "onChange={(e) => setBranchOrigin(e.target.value)}"
+      },
+      {
+        "line": 559,
+        "text": "placeholder=\"Ví dụ: Nam Định hoặc TP.HCM\""
+      },
+      {
+        "line": 567,
+        "text": "<input"
+      },
+      {
+        "line": 570,
+        "text": "onChange={(e) => setBranchPeriod(e.target.value)}"
+      },
+      {
+        "line": 571,
+        "text": "placeholder=\"Ví dụ: Thế kỷ XIX (Khoảng 1880)\""
+      },
+      {
+        "line": 582,
+        "text": "<input"
+      },
+      {
+        "line": 585,
+        "text": "onChange={(e) => setBranchCode(e.target.value)}"
+      },
+      {
+        "line": 586,
+        "text": "placeholder=\"Ví dụ: CHI_AT\""
+      },
+      {
+        "line": 595,
+        "text": "<input"
+      },
+      {
+        "line": 598,
+        "text": "onChange={(e) => setBranchSubBranches(e.target.value)}"
+      },
+      {
+        "line": 599,
+        "text": "placeholder=\"Ví dụ: Phái Nhất, Phái Nhì\""
+      },
+      {
+        "line": 608,
+        "text": "<input"
+      },
+      {
+        "line": 611,
+        "text": "onChange={(e) => setBranchDesc(e.target.value)}"
+      },
+      {
+        "line": 612,
+        "text": "placeholder=\"Ghi chú nguồn gốc phân chi...\""
+      },
+      {
+        "line": 619,
+        "text": "<button"
+      },
+      {
+        "line": 621,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 629,
+        "text": "<button"
+      },
+      {
+        "line": 689,
+        "text": "<button"
+      },
+      {
+        "line": 691,
+        "text": "onClick={() => openEditBranch(branch)}"
+      },
+      {
+        "line": 697,
+        "text": "<button"
+      },
+      {
+        "line": 699,
+        "text": "onClick={() => setDeletingBranch(branch)}"
+      },
+      {
+        "line": 730,
+        "text": "<button"
+      },
+      {
+        "line": 732,
+        "text": "onClick={() => setJsonImportMode('replace')}"
+      },
+      {
+        "line": 741,
+        "text": "<button"
+      },
+      {
+        "line": 743,
+        "text": "onClick={() => setJsonImportMode('merge')}"
+      },
+      {
+        "line": 763,
+        "text": "<button"
+      },
+      {
+        "line": 765,
+        "text": "onClick={handleExportJson}"
+      },
+      {
+        "line": 787,
+        "text": "<input"
+      },
+      {
+        "line": 791,
+        "text": "onChange={handleJsonFileSelected}"
+      },
+      {
+        "line": 821,
+        "text": "<button"
+      },
+      {
+        "line": 823,
+        "text": "onClick={handleExportGedcom}"
+      },
+      {
+        "line": 841,
+        "text": "<input"
+      },
+      {
+        "line": 845,
+        "text": "onChange={handleGedcomFileSelected}"
+      },
+      {
+        "line": 875,
+        "text": "<button"
+      },
+      {
+        "line": 877,
+        "text": "onClick={handleDownloadCsvTemplate}"
+      },
+      {
+        "line": 895,
+        "text": "<input"
+      },
+      {
+        "line": 899,
+        "text": "onChange={handleCsvFileSelected}"
+      },
+      {
+        "line": 919,
+        "text": "<button"
+      },
+      {
+        "line": 921,
+        "text": "onClick={() => setResetConfirmOpen(true)}"
+      },
+      {
+        "line": 977,
+        "text": "onClick={() => setCsvPreviewOpen(false)}"
+      },
+      {
+        "line": 981,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 990,
+        "text": "<button"
+      },
+      {
+        "line": 992,
+        "text": "onClick={() => setCsvPreviewOpen(false)}"
+      },
+      {
+        "line": 1068,
+        "text": "<button"
+      },
+      {
+        "line": 1070,
+        "text": "onClick={() => setCsvPreviewOpen(false)}"
+      },
+      {
+        "line": 1075,
+        "text": "<button"
+      },
+      {
+        "line": 1077,
+        "text": "onClick={handleApplyCsvImport}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/journal/ClanJournalModal.tsx",
+    "controls": [
+      {
+        "line": 199,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 216,
+        "text": "<button"
+      },
+      {
+        "line": 218,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 226,
+        "text": "<form onSubmit={handleSubmit} className=\"p-5 sm:p-6 space-y-4 sm:space-y-5 overflow-y-auto max-h-[75vh]\">"
+      },
+      {
+        "line": 239,
+        "text": "<input"
+      },
+      {
+        "line": 243,
+        "text": "onChange={(e) => setTitle(e.target.value)}"
+      },
+      {
+        "line": 244,
+        "text": "placeholder=\"Ví dụ: Đại lễ khánh thành Từ đường, Biến cố lũ sông Hồng năm 1971...\""
+      },
+      {
+        "line": 259,
+        "text": "<button"
+      },
+      {
+        "line": 262,
+        "text": "onClick={() => setCategory(cat)}"
+      },
+      {
+        "line": 289,
+        "text": "<input"
+      },
+      {
+        "line": 292,
+        "text": "onChange={(e) => setPeriodLabel(e.target.value)}"
+      },
+      {
+        "line": 293,
+        "text": "placeholder=\"Ví dụ: Mùa xuân 1995, Năm 2024, 1946 – 1954...\""
+      },
+      {
+        "line": 303,
+        "text": "<input"
+      },
+      {
+        "line": 306,
+        "text": "onChange={(e) => setLocation(e.target.value)}"
+      },
+      {
+        "line": 307,
+        "text": "placeholder=\"Ví dụ: Nhà thờ họ Đông Ngạc, Hà Nội...\""
+      },
+      {
+        "line": 320,
+        "text": "<input"
+      },
+      {
+        "line": 323,
+        "text": "onChange={(e) => setRecordedBy(e.target.value)}"
+      },
+      {
+        "line": 324,
+        "text": "placeholder=\"Ví dụ: Ban Trị Sự Dòng Họ, Trưởng tộc...\""
+      },
+      {
+        "line": 334,
+        "text": "<select"
+      },
+      {
+        "line": 336,
+        "text": "onChange={(e) => setBranchId(e.target.value)}"
+      },
+      {
+        "line": 354,
+        "text": "<input"
+      },
+      {
+        "line": 357,
+        "text": "onChange={(e) => setSummary(e.target.value)}"
+      },
+      {
+        "line": 358,
+        "text": "placeholder=\"Tóm tắt ngắn gọn trong 1-2 câu để người đọc nắm nhanh...\""
+      },
+      {
+        "line": 372,
+        "text": "onChange={(e) => setContent(e.target.value)}"
+      },
+      {
+        "line": 373,
+        "text": "placeholder=\"Ghi chép diễn biến chi tiết sự kiện lịch sử, bối cảnh, các nhân vật tham gia, ý nghĩa đối với các thế hệ mai sau...\""
+      },
+      {
+        "line": 383,
+        "text": "<input"
+      },
+      {
+        "line": 386,
+        "text": "onChange={(e) => setIsPinned(e.target.checked)}"
+      },
+      {
+        "line": 397,
+        "text": "<input"
+      },
+      {
+        "line": 400,
+        "text": "onChange={(e) => setTagInput(e.target.value)}"
+      },
+      {
+        "line": 407,
+        "text": "placeholder=\"Thêm thẻ #hashtag...\""
+      },
+      {
+        "line": 410,
+        "text": "<button"
+      },
+      {
+        "line": 412,
+        "text": "onClick={handleAddTag}"
+      },
+      {
+        "line": 429,
+        "text": "<button"
+      },
+      {
+        "line": 431,
+        "text": "onClick={() => handleRemoveTag(tag)}"
+      },
+      {
+        "line": 445,
+        "text": "<button"
+      },
+      {
+        "line": 447,
+        "text": "onClick={() => setConfirmDeleteOpen(true)}"
+      },
+      {
+        "line": 458,
+        "text": "<button"
+      },
+      {
+        "line": 460,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 465,
+        "text": "<button"
+      }
+    ]
+  },
+  {
+    "file": "src/features/journal/ClanJournalPage.tsx",
+    "controls": [
+      {
+        "line": 192,
+        "text": "<button"
+      },
+      {
+        "line": 194,
+        "text": "onClick={handleOpenAdd}"
+      },
+      {
+        "line": 202,
+        "text": "<button"
+      },
+      {
+        "line": 204,
+        "text": "onClick={() => onNavigate('dashboard')}"
+      },
+      {
+        "line": 212,
+        "text": "<button"
+      },
+      {
+        "line": 214,
+        "text": "onClick={() => window.print()}"
+      },
+      {
+        "line": 298,
+        "text": "<input"
+      },
+      {
+        "line": 301,
+        "text": "onChange={(e) => setSearchQuery(e.target.value)}"
+      },
+      {
+        "line": 302,
+        "text": "placeholder=\"Tìm kiếm nhật ký theo tiêu đề, nội dung, người ghi, địa điểm...\""
+      },
+      {
+        "line": 306,
+        "text": "<button"
+      },
+      {
+        "line": 308,
+        "text": "onClick={() => setSearchQuery('')}"
+      },
+      {
+        "line": 319,
+        "text": "<select"
+      },
+      {
+        "line": 321,
+        "text": "onChange={(e) => setSelectedBranchId(e.target.value)}"
+      },
+      {
+        "line": 333,
+        "text": "<select"
+      },
+      {
+        "line": 335,
+        "text": "onChange={(e) => setSortOrder(e.target.value as any)}"
+      },
+      {
+        "line": 345,
+        "text": "<button"
+      },
+      {
+        "line": 347,
+        "text": "onClick={() => setViewMode('card')}"
+      },
+      {
+        "line": 357,
+        "text": "<button"
+      },
+      {
+        "line": 359,
+        "text": "onClick={() => setViewMode('reader')}"
+      },
+      {
+        "line": 375,
+        "text": "<button"
+      },
+      {
+        "line": 377,
+        "text": "onClick={() => setActiveCategory('all')}"
+      },
+      {
+        "line": 386,
+        "text": "<button"
+      },
+      {
+        "line": 388,
+        "text": "onClick={() => setActiveCategory('historical_event')}"
+      },
+      {
+        "line": 397,
+        "text": "<button"
+      },
+      {
+        "line": 399,
+        "text": "onClick={() => setActiveCategory('clan_memory')}"
+      },
+      {
+        "line": 408,
+        "text": "<button"
+      },
+      {
+        "line": 410,
+        "text": "onClick={() => setActiveCategory('renovation_merit')}"
+      },
+      {
+        "line": 419,
+        "text": "<button"
+      },
+      {
+        "line": 421,
+        "text": "onClick={() => setActiveCategory('communal_rule')}"
+      },
+      {
+        "line": 430,
+        "text": "<button"
+      },
+      {
+        "line": 432,
+        "text": "onClick={() => setActiveCategory('general_note')}"
+      },
+      {
+        "line": 460,
+        "text": "<button"
+      },
+      {
+        "line": 462,
+        "text": "onClick={handleOpenAdd}"
+      },
+      {
+        "line": 552,
+        "text": "<button"
+      },
+      {
+        "line": 554,
+        "text": "onClick={() => toggleExpand(story.id)}"
+      },
+      {
+        "line": 587,
+        "text": "<button"
+      },
+      {
+        "line": 589,
+        "text": "onClick={() => handleOpenEdit(story)}"
+      },
+      {
+        "line": 643,
+        "text": "<button"
+      },
+      {
+        "line": 645,
+        "text": "onClick={() => handleOpenEdit(story)}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/kinship/KinshipCalculatorModal.tsx",
+    "controls": [
+      {
+        "line": 52,
+        "text": "role=\"dialog\""
+      },
+      {
+        "line": 57,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 74,
+        "text": "<button"
+      },
+      {
+        "line": 76,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 91,
+        "text": "<select"
+      },
+      {
+        "line": 93,
+        "text": "onChange={(e) => setPersonAId(e.target.value)}"
+      },
+      {
+        "line": 127,
+        "text": "<select"
+      },
+      {
+        "line": 129,
+        "text": "onChange={(e) => setPersonBId(e.target.value)}"
+      },
+      {
+        "line": 213,
+        "text": "onClick={() => onSelectPerson && onSelectPerson(step.person.id)}"
+      },
+      {
+        "line": 242,
+        "text": "<button"
+      },
+      {
+        "line": 244,
+        "text": "onClick={onClose}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/migration/MigrationMapPage.tsx",
+    "controls": [
+      {
+        "line": 121,
+        "text": "<button"
+      },
+      {
+        "line": 124,
+        "text": "onClick={() => setSelectedFilter(item.key as typeof selectedFilter)}"
+      },
+      {
+        "line": 205,
+        "text": "? `https://www.google.com/maps/search/?api=1&query=${site.coordinates.lat},${site.coordinates.lng}`"
+      },
+      {
+        "line": 206,
+        "text": ": `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;"
+      }
+    ]
+  },
+  {
+    "file": "src/features/people/BiographySpeechPlayer.tsx",
+    "controls": [
+      {
+        "line": 113,
+        "text": "<span>Trình duyệt chưa hỗ trợ Web Speech API</span>"
+      },
+      {
+        "line": 115,
+        "text": "<button"
+      },
+      {
+        "line": 117,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 169,
+        "text": "<button"
+      },
+      {
+        "line": 171,
+        "text": "onClick={() => setShowSettings(!showSettings)}"
+      },
+      {
+        "line": 181,
+        "text": "<button"
+      },
+      {
+        "line": 183,
+        "text": "onClick={() => setIsExpanded(!isExpanded)}"
+      },
+      {
+        "line": 189,
+        "text": "<button"
+      },
+      {
+        "line": 191,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 206,
+        "text": "<button"
+      },
+      {
+        "line": 208,
+        "text": "onClick={() => handleModeChange('biography')}"
+      },
+      {
+        "line": 218,
+        "text": "<button"
+      },
+      {
+        "line": 220,
+        "text": "onClick={() => handleModeChange('full_chronicle')}"
+      },
+      {
+        "line": 236,
+        "text": "<button"
+      },
+      {
+        "line": 239,
+        "text": "onClick={() => setRate(s)}"
+      },
+      {
+        "line": 259,
+        "text": "<select"
+      },
+      {
+        "line": 261,
+        "text": "onChange={(e) => {"
+      },
+      {
+        "line": 303,
+        "text": "onClick={() => jumpToSentence(idx)}"
+      },
+      {
+        "line": 351,
+        "text": "<button"
+      },
+      {
+        "line": 353,
+        "text": "onClick={handleRestart}"
+      },
+      {
+        "line": 359,
+        "text": "<button"
+      },
+      {
+        "line": 361,
+        "text": "onClick={skipPrevious}"
+      },
+      {
+        "line": 368,
+        "text": "<button"
+      },
+      {
+        "line": 370,
+        "text": "onClick={skipNext}"
+      },
+      {
+        "line": 382,
+        "text": "<button"
+      },
+      {
+        "line": 384,
+        "text": "onClick={stop}"
+      },
+      {
+        "line": 392,
+        "text": "<button"
+      },
+      {
+        "line": 394,
+        "text": "onClick={handlePlayToggle}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/people/DuplicateMergeModal.tsx",
+    "controls": [
+      {
+        "line": 121,
+        "text": "role=\"dialog\""
+      },
+      {
+        "line": 126,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 143,
+        "text": "<button"
+      },
+      {
+        "line": 145,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 157,
+        "text": "<button"
+      },
+      {
+        "line": 159,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 183,
+        "text": "<button"
+      },
+      {
+        "line": 186,
+        "text": "onClick={() => setSelectedPairIndex(idx)}"
+      },
+      {
+        "line": 223,
+        "text": "<input"
+      },
+      {
+        "line": 227,
+        "text": "onChange={() => setMergeTargetId(activePair.personA.id)}"
+      },
+      {
+        "line": 268,
+        "text": "<input"
+      },
+      {
+        "line": 272,
+        "text": "onChange={() => setMergeTargetId(activePair.personB.id)}"
+      },
+      {
+        "line": 307,
+        "text": "<button"
+      },
+      {
+        "line": 310,
+        "text": "onClick={handleExecuteMerge}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/people/MembersPage.tsx",
+    "controls": [
+      {
+        "line": 255,
+        "text": "<button"
+      },
+      {
+        "line": 257,
+        "text": "onClick={onOpenDuplicateMerge}"
+      },
+      {
+        "line": 266,
+        "text": "<button"
+      },
+      {
+        "line": 268,
+        "text": "onClick={onAddPerson}"
+      },
+      {
+        "line": 282,
+        "text": "<button"
+      },
+      {
+        "line": 284,
+        "text": "onClick={() => setSelectedGeneration('all')}"
+      },
+      {
+        "line": 294,
+        "text": "<button"
+      },
+      {
+        "line": 297,
+        "text": "onClick={() => setSelectedGeneration(String(generation))}"
+      },
+      {
+        "line": 315,
+        "text": "<input"
+      },
+      {
+        "line": 317,
+        "text": "placeholder=\"Tìm theo tên, tên húy, bí danh, quê quán, nơi an táng, vai vế (không dấu hoặc có dấu)...\""
+      },
+      {
+        "line": 319,
+        "text": "onChange={(e) => setSearchQuery(e.target.value)}"
+      },
+      {
+        "line": 323,
+        "text": "<button"
+      },
+      {
+        "line": 325,
+        "text": "onClick={() => setSearchQuery('')}"
+      },
+      {
+        "line": 336,
+        "text": "<button"
+      },
+      {
+        "line": 338,
+        "text": "onClick={() => setViewStyle('grid')}"
+      },
+      {
+        "line": 346,
+        "text": "<button"
+      },
+      {
+        "line": 348,
+        "text": "onClick={() => setViewStyle('table')}"
+      },
+      {
+        "line": 359,
+        "text": "<select"
+      },
+      {
+        "line": 361,
+        "text": "onChange={(e) => setSortBy(e.target.value as 'generation' | 'name' | 'birthYear')}"
+      },
+      {
+        "line": 376,
+        "text": "<select"
+      },
+      {
+        "line": 378,
+        "text": "onChange={(e) => {"
+      },
+      {
+        "line": 399,
+        "text": "<select"
+      },
+      {
+        "line": 401,
+        "text": "onChange={(e) => setSelectedGeneration(e.target.value)}"
+      },
+      {
+        "line": 418,
+        "text": "<select"
+      },
+      {
+        "line": 420,
+        "text": "onChange={(e) => setSelectedLiving(e.target.value)}"
+      },
+      {
+        "line": 433,
+        "text": "<select"
+      },
+      {
+        "line": 435,
+        "text": "onChange={(e) => setSelectedGender(e.target.value)}"
+      },
+      {
+        "line": 452,
+        "text": "<button"
+      },
+      {
+        "line": 454,
+        "text": "onClick={() => setSelectedSubBranch('all')}"
+      },
+      {
+        "line": 464,
+        "text": "<button"
+      },
+      {
+        "line": 467,
+        "text": "onClick={() => setSelectedSubBranch(sub)}"
+      },
+      {
+        "line": 488,
+        "text": "<button"
+      },
+      {
+        "line": 490,
+        "text": "onClick={() => setSelectedBranch('all')}"
+      },
+      {
+        "line": 501,
+        "text": "<button"
+      },
+      {
+        "line": 503,
+        "text": "onClick={() => setSelectedSubBranch('all')}"
+      },
+      {
+        "line": 514,
+        "text": "<button"
+      },
+      {
+        "line": 516,
+        "text": "onClick={() => setSelectedGeneration('all')}"
+      },
+      {
+        "line": 533,
+        "text": "<button"
+      },
+      {
+        "line": 535,
+        "text": "onClick={() => setSelectedLiving('all')}"
+      },
+      {
+        "line": 546,
+        "text": "<button"
+      },
+      {
+        "line": 548,
+        "text": "onClick={() => setSelectedGender('all')}"
+      },
+      {
+        "line": 559,
+        "text": "<button"
+      },
+      {
+        "line": 561,
+        "text": "onClick={() => setSearchQuery('')}"
+      },
+      {
+        "line": 569,
+        "text": "<button"
+      },
+      {
+        "line": 571,
+        "text": "onClick={handleResetFilters}"
+      },
+      {
+        "line": 592,
+        "text": "<button"
+      },
+      {
+        "line": 594,
+        "text": "onClick={handleResetFilters}"
+      },
+      {
+        "line": 609,
+        "text": "onClick={() => onSelectPerson(p.id)}"
+      },
+      {
+        "line": 628,
+        "text": "<button"
+      },
+      {
+        "line": 630,
+        "text": "onClick={(e) => {"
+      },
+      {
+        "line": 639,
+        "text": "<button"
+      },
+      {
+        "line": 641,
+        "text": "onClick={(e) => {"
+      },
+      {
+        "line": 705,
+        "text": "onClick={() => onSelectPerson(p.id)}"
+      },
+      {
+        "line": 753,
+        "text": "<button"
+      },
+      {
+        "line": 755,
+        "text": "onClick={(e) => {"
+      },
+      {
+        "line": 764,
+        "text": "<button"
+      },
+      {
+        "line": 766,
+        "text": "onClick={(e) => {"
+      }
+    ]
+  },
+  {
+    "file": "src/features/people/PersonFormModal.tsx",
+    "controls": [
+      {
+        "line": 295,
+        "text": "role=\"dialog\""
+      },
+      {
+        "line": 300,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 312,
+        "text": "<button"
+      },
+      {
+        "line": 314,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 330,
+        "text": "<button"
+      },
+      {
+        "line": 333,
+        "text": "onClick={() => setActiveSection(tab.key as 'identity' | 'life' | 'genealogy')}"
+      },
+      {
+        "line": 379,
+        "text": "<input"
+      },
+      {
+        "line": 382,
+        "text": "onChange={handleImageUpload}"
+      },
+      {
+        "line": 397,
+        "text": "<button"
+      },
+      {
+        "line": 400,
+        "text": "onClick={() => setGender(item.val as Gender)}"
+      },
+      {
+        "line": 414,
+        "text": "<button"
+      },
+      {
+        "line": 416,
+        "text": "onClick={() => setPortraitUrl(undefined)}"
+      },
+      {
+        "line": 431,
+        "text": "<input"
+      },
+      {
+        "line": 433,
+        "text": "placeholder=\"VD: Trần Văn Khải\""
+      },
+      {
+        "line": 435,
+        "text": "onChange={(e) => setFullName(e.target.value)}"
+      },
+      {
+        "line": 446,
+        "text": "<input"
+      },
+      {
+        "line": 448,
+        "text": "placeholder=\"VD: Cụ Ba Lộc\""
+      },
+      {
+        "line": 450,
+        "text": "onChange={(e) => setCommonName(e.target.value)}"
+      },
+      {
+        "line": 459,
+        "text": "<input"
+      },
+      {
+        "line": 461,
+        "text": "placeholder=\"VD: Thuần Lộc\""
+      },
+      {
+        "line": 463,
+        "text": "onChange={(e) => setTabooName(e.target.value)}"
+      },
+      {
+        "line": 472,
+        "text": "<input"
+      },
+      {
+        "line": 474,
+        "text": "placeholder=\"VD: Tự Trọng Viễn\""
+      },
+      {
+        "line": 476,
+        "text": "onChange={(e) => {"
+      },
+      {
+        "line": 499,
+        "text": "<button"
+      },
+      {
+        "line": 501,
+        "text": "onClick={() => setIsLiving(true)}"
+      },
+      {
+        "line": 510,
+        "text": "<button"
+      },
+      {
+        "line": 512,
+        "text": "onClick={() => setIsLiving(false)}"
+      },
+      {
+        "line": 528,
+        "text": "onChange={setBirthDate}"
+      },
+      {
+        "line": 535,
+        "text": "<input"
+      },
+      {
+        "line": 537,
+        "text": "placeholder=\"VD: Làng Đông Ngạc, Từ Liêm, Hà Nội\""
+      },
+      {
+        "line": 539,
+        "text": "onChange={(e) => setBirthPlace(e.target.value)}"
+      },
+      {
+        "line": 545,
+        "text": "<input"
+      },
+      {
+        "line": 547,
+        "text": "placeholder=\"VD: Quê gốc Đông Ngạc\""
+      },
+      {
+        "line": 549,
+        "text": "onChange={(e) => setAncestralHome(e.target.value)}"
+      },
+      {
+        "line": 560,
+        "text": "onChange={setDeathDate}"
+      },
+      {
+        "line": 564,
+        "text": "<input"
+      },
+      {
+        "line": 566,
+        "text": "placeholder=\"VD: Hà Nội\""
+      },
+      {
+        "line": 568,
+        "text": "onChange={(e) => setDeathPlace(e.target.value)}"
+      },
+      {
+        "line": 578,
+        "text": "<input"
+      },
+      {
+        "line": 580,
+        "text": "placeholder=\"VD: Ba Đình, Hà Nội\""
+      },
+      {
+        "line": 582,
+        "text": "onChange={(e) => setResidence(e.target.value)}"
+      },
+      {
+        "line": 588,
+        "text": "<input"
+      },
+      {
+        "line": 590,
+        "text": "placeholder=\"VD: Nhà giáo / Đốc học / Cử nhân\""
+      },
+      {
+        "line": 592,
+        "text": "onChange={(e) => setOccupation(e.target.value)}"
+      },
+      {
+        "line": 603,
+        "text": "<button"
+      },
+      {
+        "line": 605,
+        "text": "onClick={handleGenerateBiography}"
+      },
+      {
+        "line": 627,
+        "text": "<button"
+      },
+      {
+        "line": 629,
+        "text": "onClick={() => setAiBioSuccess(null)}"
+      },
+      {
+        "line": 654,
+        "text": "<button"
+      },
+      {
+        "line": 656,
+        "text": "onClick={() => setAiGeneratedBio(null)}"
+      },
+      {
+        "line": 668,
+        "text": "<button"
+      },
+      {
+        "line": 670,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 681,
+        "text": "<button"
+      },
+      {
+        "line": 683,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 696,
+        "text": "<button"
+      },
+      {
+        "line": 698,
+        "text": "onClick={() => setAiGeneratedBio(null)}"
+      },
+      {
+        "line": 709,
+        "text": "placeholder=\"Ghi lại các mốc lịch sử, sự nghiệp, cống hiến hoặc bấm 'Soạn tiểu sử bằng AI' để tự động tạo...\""
+      },
+      {
+        "line": 711,
+        "text": "onChange={(e) => setBiography(e.target.value)}"
+      },
+      {
+        "line": 726,
+        "text": "<input"
+      },
+      {
+        "line": 730,
+        "text": "placeholder=\"VD: 1, 2, 3...\""
+      },
+      {
+        "line": 732,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 743,
+        "text": "<select"
+      },
+      {
+        "line": 745,
+        "text": "onChange={(e) => setBranchId(e.target.value || undefined)}"
+      },
+      {
+        "line": 761,
+        "text": "<input"
+      },
+      {
+        "line": 763,
+        "text": "placeholder=\"VD: Phái Đông / Phái Nhất\""
+      },
+      {
+        "line": 765,
+        "text": "onChange={(e) => setSubBranch(e.target.value)}"
+      },
+      {
+        "line": 775,
+        "text": "<input"
+      },
+      {
+        "line": 777,
+        "text": "placeholder=\"VD: Thủy tổ, Trưởng tộc, Trưởng chi, Trưởng tôn, Dâu trưởng...\""
+      },
+      {
+        "line": 779,
+        "text": "onChange={(e) => setClanRole(e.target.value)}"
+      },
+      {
+        "line": 794,
+        "text": "<input"
+      },
+      {
+        "line": 798,
+        "text": "placeholder=\"1 - 30\""
+      },
+      {
+        "line": 800,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 808,
+        "text": "<input"
+      },
+      {
+        "line": 812,
+        "text": "placeholder=\"1 - 12\""
+      },
+      {
+        "line": 814,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 826,
+        "text": "<input"
+      },
+      {
+        "line": 828,
+        "text": "placeholder=\"VD: Cúng giỗ tại Từ đường Chi Giáp\""
+      },
+      {
+        "line": 830,
+        "text": "onChange={(e) => setLunarNote(e.target.value)}"
+      },
+      {
+        "line": 840,
+        "text": "<input"
+      },
+      {
+        "line": 842,
+        "text": "placeholder=\"VD: Nghĩa trang dòng họ tại Đông Ngạc, Mộ số 04\""
+      },
+      {
+        "line": 844,
+        "text": "onChange={(e) => setBurialPlace(e.target.value)}"
+      },
+      {
+        "line": 857,
+        "text": "placeholder=\"VD: Cung tiến đất nhà thờ tổ, chủ trì biên soạn gia phả, khuyến học...\""
+      },
+      {
+        "line": 859,
+        "text": "onChange={(e) => setMerits(e.target.value)}"
+      },
+      {
+        "line": 871,
+        "text": "<button"
+      },
+      {
+        "line": 873,
+        "text": "onClick={() =>"
+      },
+      {
+        "line": 882,
+        "text": "<button"
+      },
+      {
+        "line": 884,
+        "text": "onClick={() =>"
+      },
+      {
+        "line": 895,
+        "text": "<button"
+      },
+      {
+        "line": 897,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 902,
+        "text": "<button"
+      },
+      {
+        "line": 905,
+        "text": "onClick={handleSave}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/people/PersonProfileView.tsx",
+    "controls": [
+      {
+        "line": 105,
+        "text": "<button"
+      },
+      {
+        "line": 107,
+        "text": "onClick={onBack}"
+      },
+      {
+        "line": 170,
+        "text": "<button"
+      },
+      {
+        "line": 172,
+        "text": "onClick={onBack}"
+      },
+      {
+        "line": 181,
+        "text": "<button"
+      },
+      {
+        "line": 183,
+        "text": "onClick={() => onEditPerson(person)}"
+      },
+      {
+        "line": 190,
+        "text": "<button"
+      },
+      {
+        "line": 192,
+        "text": "onClick={() => onFocusInTree(person.id)}"
+      },
+      {
+        "line": 201,
+        "text": "<button"
+      },
+      {
+        "line": 203,
+        "text": "onClick={() => setProfileMenuOpen((prev) => !prev)}"
+      },
+      {
+        "line": 221,
+        "text": "<button"
+      },
+      {
+        "line": 223,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 237,
+        "text": "<button"
+      },
+      {
+        "line": 239,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 250,
+        "text": "<button"
+      },
+      {
+        "line": 252,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 271,
+        "text": "<button"
+      },
+      {
+        "line": 273,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 285,
+        "text": "<button"
+      },
+      {
+        "line": 287,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 298,
+        "text": "<button"
+      },
+      {
+        "line": 300,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 310,
+        "text": "<button"
+      },
+      {
+        "line": 312,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 325,
+        "text": "<button"
+      },
+      {
+        "line": 327,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 359,
+        "text": "<button"
+      },
+      {
+        "line": 361,
+        "text": "onClick={() => setDirectPdfToast(null)}"
+      },
+      {
+        "line": 548,
+        "text": "<button"
+      },
+      {
+        "line": 550,
+        "text": "onClick={() => setPinModalOpen(true)}"
+      },
+      {
+        "line": 567,
+        "text": "<button"
+      },
+      {
+        "line": 569,
+        "text": "onClick={() => setPinModalOpen(true)}"
+      },
+      {
+        "line": 587,
+        "text": "<button"
+      },
+      {
+        "line": 589,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 607,
+        "text": "<button"
+      },
+      {
+        "line": 609,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 629,
+        "text": "<button"
+      },
+      {
+        "line": 631,
+        "text": "onClick={() => setAudioModalOpen(true)}"
+      },
+      {
+        "line": 641,
+        "text": "<button"
+      },
+      {
+        "line": 643,
+        "text": "onClick={() => setAudioModalOpen(true)}"
+      },
+      {
+        "line": 685,
+        "text": "<button"
+      },
+      {
+        "line": 687,
+        "text": "onClick={() => setRelModalOpen(true)}"
+      },
+      {
+        "line": 704,
+        "text": "onClick={() => onSelectPerson(parent.id)}"
+      },
+      {
+        "line": 738,
+        "text": "onClick={() => spouse && onSelectPerson(spouse.id)}"
+      },
+      {
+        "line": 782,
+        "text": "onClick={() => onSelectPerson(child.id)}"
+      },
+      {
+        "line": 814,
+        "text": "onClick={() => onSelectPerson(sib.id)}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/people/PersonReportModal.tsx",
+    "controls": [
+      {
+        "line": 200,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 204,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 228,
+        "text": "<button"
+      },
+      {
+        "line": 230,
+        "text": "onClick={() => setShowConfigPanel((prev) => !prev)}"
+      },
+      {
+        "line": 243,
+        "text": "<button"
+      },
+      {
+        "line": 245,
+        "text": "onClick={handleCopyText}"
+      },
+      {
+        "line": 263,
+        "text": "<button"
+      },
+      {
+        "line": 265,
+        "text": "onClick={handleDownloadHtml}"
+      },
+      {
+        "line": 274,
+        "text": "<button"
+      },
+      {
+        "line": 277,
+        "text": "onClick={handleDownloadPdf}"
+      },
+      {
+        "line": 286,
+        "text": "<button"
+      },
+      {
+        "line": 288,
+        "text": "onClick={handleNativePrint}"
+      },
+      {
+        "line": 297,
+        "text": "<button"
+      },
+      {
+        "line": 299,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 301,
+        "text": "aria-label=\"Đóng cửa sổ\""
+      },
+      {
+        "line": 312,
+        "text": "<button"
+      },
+      {
+        "line": 314,
+        "text": "onClick={() => setExportMessage(null)}"
+      },
+      {
+        "line": 329,
+        "text": "<select"
+      },
+      {
+        "line": 331,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 349,
+        "text": "<button"
+      },
+      {
+        "line": 351,
+        "text": "onClick={() => setConfig((prev) => ({ ...prev, paperSize: 'a4' }))}"
+      },
+      {
+        "line": 360,
+        "text": "<button"
+      },
+      {
+        "line": 362,
+        "text": "onClick={() => setConfig((prev) => ({ ...prev, paperSize: 'letter' }))}"
+      },
+      {
+        "line": 378,
+        "text": "<button"
+      },
+      {
+        "line": 380,
+        "text": "onClick={() => setConfig((prev) => ({ ...prev, density: 'complete' }))}"
+      },
+      {
+        "line": 389,
+        "text": "<button"
+      },
+      {
+        "line": 391,
+        "text": "onClick={() => setConfig((prev) => ({ ...prev, density: 'compact' }))}"
+      },
+      {
+        "line": 405,
+        "text": "<button"
+      },
+      {
+        "line": 407,
+        "text": "onClick={() => setConfig(DEFAULT_REPORT_CONFIG)}"
+      },
+      {
+        "line": 423,
+        "text": "<input"
+      },
+      {
+        "line": 426,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 434,
+        "text": "<input"
+      },
+      {
+        "line": 437,
+        "text": "onChange={(e) =>"
+      },
+      {
+        "line": 445,
+        "text": "<input"
+      },
+      {
+        "line": 448,
+        "text": "onChange={(e) => setConfig((prev) => ({ ...prev, showBio: e.target.checked }))}"
+      },
+      {
+        "line": 454,
+        "text": "<input"
+      },
+      {
+        "line": 457,
+        "text": "onChange={(e) => setConfig((prev) => ({ ...prev, showMerits: e.target.checked }))}"
+      },
+      {
+        "line": 463,
+        "text": "<input"
+      },
+      {
+        "line": 466,
+        "text": "onChange={(e) => setConfig((prev) => ({ ...prev, showParents: e.target.checked }))}"
+      },
+      {
+        "line": 472,
+        "text": "<input"
+      },
+      {
+        "line": 475,
+        "text": "onChange={(e) => setConfig((prev) => ({ ...prev, showSpouses: e.target.checked }))}"
+      },
+      {
+        "line": 481,
+        "text": "<input"
+      },
+      {
+        "line": 484,
+        "text": "onChange={(e) => setConfig((prev) => ({ ...prev, showChildren: e.target.checked }))}"
+      },
+      {
+        "line": 490,
+        "text": "<input"
+      },
+      {
+        "line": 493,
+        "text": "onChange={(e) => setConfig((prev) => ({ ...prev, showSiblings: e.target.checked }))}"
+      },
+      {
+        "line": 499,
+        "text": "<input"
+      },
+      {
+        "line": 502,
+        "text": "onChange={(e) => setConfig((prev) => ({ ...prev, showAncestral: e.target.checked }))}"
+      },
+      {
+        "line": 508,
+        "text": "<input"
+      },
+      {
+        "line": 511,
+        "text": "onChange={(e) => setConfig((prev) => ({ ...prev, showSignatures: e.target.checked }))}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/relationships/RelationshipEditorModal.tsx",
+    "controls": [
+      {
+        "line": 140,
+        "text": "role=\"dialog\""
+      },
+      {
+        "line": 145,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 165,
+        "text": "<button"
+      },
+      {
+        "line": 167,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 184,
+        "text": "<button"
+      },
+      {
+        "line": 187,
+        "text": "onClick={() => {"
+      },
+      {
+        "line": 225,
+        "text": "<input"
+      },
+      {
+        "line": 228,
+        "text": "onChange={(e) => {"
+      },
+      {
+        "line": 232,
+        "text": "placeholder=\"Lọc nhanh theo họ tên hoặc tên thường gọi...\""
+      },
+      {
+        "line": 236,
+        "text": "<button"
+      },
+      {
+        "line": 238,
+        "text": "onClick={() => setMemberSearch('')}"
+      },
+      {
+        "line": 248,
+        "text": "<select"
+      },
+      {
+        "line": 250,
+        "text": "onChange={(e) => setSelectedPersonId(e.target.value)}"
+      },
+      {
+        "line": 267,
+        "text": "<select"
+      },
+      {
+        "line": 269,
+        "text": "onChange={(e) => setSelectedLineageType(e.target.value as LineageType)}"
+      },
+      {
+        "line": 280,
+        "text": "<select"
+      },
+      {
+        "line": 282,
+        "text": "onChange={(e) => setSelectedSpouseStatus(e.target.value as UnionStatus)}"
+      },
+      {
+        "line": 294,
+        "text": "<button"
+      },
+      {
+        "line": 297,
+        "text": "onClick={"
+      },
+      {
+        "line": 345,
+        "text": "<button"
+      },
+      {
+        "line": 347,
+        "text": "onClick={() => deleteRelationship(relationship.id)}"
+      },
+      {
+        "line": 389,
+        "text": "<button"
+      },
+      {
+        "line": 391,
+        "text": "onClick={() => deleteRelationship(relationship.id)}"
+      },
+      {
+        "line": 434,
+        "text": "<button"
+      },
+      {
+        "line": 436,
+        "text": "onClick={() => deleteUnion(union.id)}"
+      },
+      {
+        "line": 452,
+        "text": "<button"
+      },
+      {
+        "line": 454,
+        "text": "onClick={onClose}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/rites/RitesAssistantPage.tsx",
+    "controls": [
+      {
+        "line": 130,
+        "text": "<button"
+      },
+      {
+        "line": 133,
+        "text": "onClick={() => setActiveTab(tab.key as 'calendar' | 'prayers' | 'regional' | 'checklist')}"
+      },
+      {
+        "line": 162,
+        "text": "<button"
+      },
+      {
+        "line": 164,
+        "text": "onClick={() => setNotifModalOpen(true)}"
+      },
+      {
+        "line": 194,
+        "text": "onClick={() => onSelectPerson(p.id)}"
+      },
+      {
+        "line": 283,
+        "text": "onClick={() => setSelectedPrayer(prayer)}"
+      },
+      {
+        "line": 307,
+        "text": "<input"
+      },
+      {
+        "line": 310,
+        "text": "onChange={(e) => setRepresentativeName(e.target.value)}"
+      },
+      {
+        "line": 311,
+        "text": "placeholder=\"VD: Trưởng nam Trần Văn Khải\""
+      },
+      {
+        "line": 328,
+        "text": "<button"
+      },
+      {
+        "line": 330,
+        "text": "onClick={handleCopyPrayer}"
+      },
+      {
+        "line": 371,
+        "text": "onClick={() => toggleTask(item.id)}"
+      },
+      {
+        "line": 378,
+        "text": "<button type=\"button\" className=\"mt-0.5\">"
+      },
+      {
+        "line": 426,
+        "text": "<button"
+      },
+      {
+        "line": 429,
+        "text": "onClick={() => setSelectedRegion(r.id as VietnameseRegion)}"
+      },
+      {
+        "line": 561,
+        "text": "<button"
+      },
+      {
+        "line": 563,
+        "text": "onClick={() => {"
+      }
+    ]
+  },
+  {
+    "file": "src/features/rites/UpcomingAnniversariesWidget.tsx",
+    "controls": [
+      {
+        "line": 120,
+        "text": "<button"
+      },
+      {
+        "line": 122,
+        "text": "onClick={() => setScope('30days')}"
+      },
+      {
+        "line": 131,
+        "text": "<button"
+      },
+      {
+        "line": 133,
+        "text": "onClick={() => setScope('all')}"
+      },
+      {
+        "line": 146,
+        "text": "<select"
+      },
+      {
+        "line": 148,
+        "text": "onChange={(e) => setSelectedBranch(e.target.value)}"
+      },
+      {
+        "line": 161,
+        "text": "<button"
+      },
+      {
+        "line": 163,
+        "text": "onClick={() => setNotifModalOpen(true)}"
+      },
+      {
+        "line": 180,
+        "text": "<button"
+      },
+      {
+        "line": 182,
+        "text": "onClick={() => setToastMessage(null)}"
+      },
+      {
+        "line": 232,
+        "text": "<button"
+      },
+      {
+        "line": 234,
+        "text": "onClick={() => onSelectPerson(nextSingleAnniversary.person.id)}"
+      },
+      {
+        "line": 244,
+        "text": "<button"
+      },
+      {
+        "line": 246,
+        "text": "onClick={() => setScope('all')}"
+      },
+      {
+        "line": 298,
+        "text": "onClick={() => onSelectPerson(item.person.id)}"
+      },
+      {
+        "line": 378,
+        "text": "<button"
+      },
+      {
+        "line": 380,
+        "text": "onClick={() => onSelectPerson(item.person.id)}"
+      },
+      {
+        "line": 388,
+        "text": "<button"
+      },
+      {
+        "line": 390,
+        "text": "onClick={() => handleSendReminder(item.person)}"
+      },
+      {
+        "line": 398,
+        "text": "<button"
+      },
+      {
+        "line": 400,
+        "text": "onClick={() => onNavigate('rites')}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/sharing/QRShareModal.tsx",
+    "controls": [
+      {
+        "line": 95,
+        "text": "role=\"dialog\""
+      },
+      {
+        "line": 100,
+        "text": "onClick={(e) => e.stopPropagation()}"
+      },
+      {
+        "line": 109,
+        "text": "<button"
+      },
+      {
+        "line": 111,
+        "text": "onClick={onClose}"
+      },
+      {
+        "line": 123,
+        "text": "<select"
+      },
+      {
+        "line": 125,
+        "text": "onChange={(e) => setSelectedPersonId(e.target.value)}"
+      },
+      {
+        "line": 152,
+        "text": "<button"
+      },
+      {
+        "line": 154,
+        "text": "onClick={handleDownloadQr}"
+      },
+      {
+        "line": 161,
+        "text": "<button"
+      },
+      {
+        "line": 163,
+        "text": "onClick={handleCopyText}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/statistics/FamilyLegacyScore.tsx",
+    "controls": [
+      {
+        "line": 82,
+        "text": "<button"
+      },
+      {
+        "line": 84,
+        "text": "onClick={() => setShowExplanation(!showExplanation)}"
+      },
+      {
+        "line": 209,
+        "text": "onClick={() => togglePillar(pillar.id)}"
+      },
+      {
+        "line": 308,
+        "text": "<button"
+      },
+      {
+        "line": 310,
+        "text": "onClick={() => {"
+      }
+    ]
+  },
+  {
+    "file": "src/features/statistics/FamilyStats.tsx",
+    "controls": [
+      {
+        "line": 201,
+        "text": "<button"
+      },
+      {
+        "line": 203,
+        "text": "onClick={() => onNavigate('stats')}"
+      },
+      {
+        "line": 212,
+        "text": "<select"
+      },
+      {
+        "line": 214,
+        "text": "onChange={(e) => setSelectedBranch(e.target.value)}"
+      },
+      {
+        "line": 227,
+        "text": "<button"
+      },
+      {
+        "line": 229,
+        "text": "onClick={() => setActiveTab('all')}"
+      },
+      {
+        "line": 238,
+        "text": "<button"
+      },
+      {
+        "line": 240,
+        "text": "onClick={() => setActiveTab('generation')}"
+      },
+      {
+        "line": 249,
+        "text": "<button"
+      },
+      {
+        "line": 251,
+        "text": "onClick={() => setActiveTab('age')}"
+      },
+      {
+        "line": 260,
+        "text": "<button"
+      },
+      {
+        "line": 262,
+        "text": "onClick={() => setActiveTab('gender')}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/statistics/legacyScoreUtils.ts",
+    "controls": []
+  },
+  {
+    "file": "src/features/statistics/LifespanDistributionChart.tsx",
+    "controls": [
+      {
+        "line": 493,
+        "text": "<button"
+      },
+      {
+        "line": 495,
+        "text": "onClick={() => setActiveTab('generation')}"
+      },
+      {
+        "line": 505,
+        "text": "<button"
+      },
+      {
+        "line": 507,
+        "text": "onClick={() => setActiveTab('brackets')}"
+      },
+      {
+        "line": 558,
+        "text": "onClick={() => summary.oldestAncestor && onSelectPerson(summary.oldestAncestor.person.id)}"
+      },
+      {
+        "line": 580,
+        "text": "onClick={() => summary.oldestLiving && onSelectPerson(summary.oldestLiving.person.id)}"
+      },
+      {
+        "line": 610,
+        "text": "<select"
+      },
+      {
+        "line": 612,
+        "text": "onChange={(e) => setSelectedBranch(e.target.value)}"
+      },
+      {
+        "line": 624,
+        "text": "<select"
+      },
+      {
+        "line": 626,
+        "text": "onChange={(e) => setStatusFilter(e.target.value as any)}"
+      },
+      {
+        "line": 635,
+        "text": "<select"
+      },
+      {
+        "line": 637,
+        "text": "onChange={(e) => setGenderFilter(e.target.value as any)}"
+      },
+      {
+        "line": 767,
+        "text": "<button"
+      },
+      {
+        "line": 769,
+        "text": "onClick={() => setSelectedBracketKey(null)}"
+      },
+      {
+        "line": 780,
+        "text": "onClick={() => onSelectPerson(m.person.id)}"
+      }
+    ]
+  },
+  {
+    "file": "src/features/statistics/lifespanUtils.ts",
+    "controls": []
+  },
+  {
+    "file": "src/hooks/useAnniversaryNotifications.ts",
+    "controls": []
+  },
+  {
+    "file": "src/hooks/usePreferences.ts",
+    "controls": []
+  },
+  {
+    "file": "src/hooks/usePrivacyShield.ts",
+    "controls": []
+  },
+  {
+    "file": "src/hooks/usePWAInstall.ts",
+    "controls": []
+  },
+  {
+    "file": "src/hooks/useSpeechReader.ts",
+    "controls": []
+  },
+  {
+    "file": "src/index.css",
+    "controls": []
+  },
+  {
+    "file": "src/main.tsx",
+    "controls": []
+  },
+  {
+    "file": "src/models/genealogy.ts",
+    "controls": []
+  },
+  {
+    "file": "src/pages/DashboardPage.tsx",
+    "controls": [
+      {
+        "line": 88,
+        "text": "<button"
+      },
+      {
+        "line": 90,
+        "text": "onClick={() => onNavigate('tree')}"
+      },
+      {
+        "line": 96,
+        "text": "<button"
+      },
+      {
+        "line": 98,
+        "text": "onClick={onAddPerson}"
+      },
+      {
+        "line": 104,
+        "text": "<button"
+      },
+      {
+        "line": 106,
+        "text": "onClick={() => onNavigate('journal')}"
+      },
+      {
+        "line": 113,
+        "text": "<button"
+      },
+      {
+        "line": 115,
+        "text": "onClick={() => onNavigate('stats')}"
+      },
+      {
+        "line": 123,
+        "text": "<button"
+      },
+      {
+        "line": 125,
+        "text": "onClick={onOpenTour}"
+      },
+      {
+        "line": 168,
+        "text": "placeholder=\"Nhập tên thành viên (ví dụ: Trần Văn, Khang, Bá Thông, 1954, đời 2)...\""
+      },
+      {
+        "line": 181,
+        "text": "onClick={() => onNavigate('members')}"
+      },
+      {
+        "line": 202,
+        "text": "onClick={() => onNavigate('stats')}"
+      },
+      {
+        "line": 225,
+        "text": "onClick={() => onNavigate('members')}"
+      },
+      {
+        "line": 244,
+        "text": "onClick={() => onNavigate('gallery')}"
+      },
+      {
+        "line": 277,
+        "text": "<button"
+      },
+      {
+        "line": 279,
+        "text": "onClick={() => onNavigate('journal')}"
+      },
+      {
+        "line": 290,
+        "text": "<button"
+      },
+      {
+        "line": 292,
+        "text": "onClick={() => onNavigate('journal')}"
+      },
+      {
+        "line": 304,
+        "text": "onClick={() => onNavigate('journal')}"
+      },
+      {
+        "line": 352,
+        "text": "onClick={() => onSelectPerson(elder.id)}"
+      },
+      {
+        "line": 387,
+        "text": "<button"
+      },
+      {
+        "line": 389,
+        "text": "onClick={() => onNavigate('members')}"
+      }
+    ]
+  },
+  {
+    "file": "src/pages/StatsDashboardPage.tsx",
+    "controls": [
+      {
+        "line": 255,
+        "text": "<button"
+      },
+      {
+        "line": 257,
+        "text": "onClick={() => onNavigate('dashboard')}"
+      },
+      {
+        "line": 264,
+        "text": "<button"
+      },
+      {
+        "line": 266,
+        "text": "onClick={() => onNavigate('tree')}"
+      },
+      {
+        "line": 273,
+        "text": "<button"
+      },
+      {
+        "line": 275,
+        "text": "onClick={() => window.print()}"
+      },
+      {
+        "line": 294,
+        "text": "<select"
+      },
+      {
+        "line": 296,
+        "text": "onChange={(e) => setSelectedBranch(e.target.value)}"
+      },
+      {
+        "line": 309,
+        "text": "<button"
+      },
+      {
+        "line": 311,
+        "text": "onClick={() => setStatusFilter('all')}"
+      },
+      {
+        "line": 320,
+        "text": "<button"
+      },
+      {
+        "line": 322,
+        "text": "onClick={() => setStatusFilter('living')}"
+      },
+      {
+        "line": 331,
+        "text": "<button"
+      },
+      {
+        "line": 333,
+        "text": "onClick={() => setStatusFilter('deceased')}"
+      },
+      {
+        "line": 442,
+        "text": "<button"
+      },
+      {
+        "line": 444,
+        "text": "onClick={() => setChartType('grouped')}"
+      },
+      {
+        "line": 453,
+        "text": "<button"
+      },
+      {
+        "line": 455,
+        "text": "onClick={() => setChartType('stacked')}"
+      },
+      {
+        "line": 472,
+        "text": "onClick={(e: any) => {"
+      },
+      {
+        "line": 755,
+        "text": "<button"
+      },
+      {
+        "line": 757,
+        "text": "onClick={() => setSelectedGenForInspect(null)}"
+      },
+      {
+        "line": 768,
+        "text": "onClick={() => onSelectPerson(person.id)}"
+      },
+      {
+        "line": 834,
+        "text": "onClick={() =>"
+      }
+    ]
+  },
+  {
+    "file": "src/services/aiBiographyService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/backupReminderService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/csvImportService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/duplicateMergeService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/familyBookPdfService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/familyYearTimelineService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/gedcomService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/jsonBackupService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/kinshipService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/lunarCalendarService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/notificationService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/personPdfReportService.ts",
+    "controls": [
+      {
+        "line": 353,
+        "text": "<button onclick=\"window.print()\" style=\"padding: 8px 16px; background: ${primaryColor}; color: white; border: none; border-radius: 6px; cursor: pointer; font-weight: bold;\">In tài liệu / Lưu PDF</button>"
+      }
+    ]
+  },
+  {
+    "file": "src/services/searchService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/speechSynthesisService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/services/validationService.ts",
+    "controls": []
+  },
+  {
+    "file": "src/utils/dateUtils.ts",
+    "controls": []
+  },
+  {
+    "file": "src/utils/imageUtils.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/clanJournal.test.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/familyBookPdf.test.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/familyYearTimeline.test.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/genealogy.test.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/independentVerification.test.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/newFeatures.test.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/performanceBenchmark.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/personReport.test.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/statsAndAnniversary.test.ts",
+    "controls": []
+  },
+  {
+    "file": "src/__tests__/treeUXAndPerformance.test.ts",
+    "controls": []
+  },
+  {
+    "file": "tsconfig.json",
+    "controls": []
+  },
+  {
+    "file": "USER_GUIDE.md",
+    "controls": []
+  },
+  {
+    "file": "vite.config.ts",
+    "controls": []
+  }
+]

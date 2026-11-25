@@ -1,0 +1,86 @@
+[
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "18px",
+    "image": "none",
+    "tag": "H3"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "DIV"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "DIV"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "DIV"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "linear-gradient(to right bottom in oklab, rgb(255, 253, 249) 0%, rgb(250, 247, 242) 50%, rgb(250, 244, 235) 100%)",
+    "tag": "DIV"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "DIV"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "DIV"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "MAIN"
+  },
+  {
+    "bg": "rgb(16, 23, 19)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "DIV"
+  },
+  {
+    "bg": "rgba(0, 0, 0, 0)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "DIV"
+  },
+  {
+    "bg": "rgb(16, 23, 19)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "BODY"
+  },
+  {
+    "bg": "rgb(16, 23, 19)",
+    "color": "rgb(237, 230, 220)",
+    "font": "16px",
+    "image": "none",
+    "tag": "HTML"
+  }
+]

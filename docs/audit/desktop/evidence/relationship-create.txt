@@ -1,0 +1,164 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - button "Quay lại":
+    - generic: Quay lại
+  - button "Sửa hồ sơ":
+    - generic: Sửa hồ sơ
+  - button "Xem trên cây":
+    - generic: Xem trên cây
+  - button "Khác":
+    - generic: Khác
+  - generic "M0 DEMO Nguyễn Kiểm Thử":
+    - generic: MT
+    - generic "Hiện tiền (còn sống)"
+  - generic: ·
+  - generic: Đại Tôn Họ Trần Đông Ngạc
+  - generic: ·
+  - generic: Hiện tiền (Còn sống)
+  - heading "M0 DEMO Nguyễn Kiểm Thử" [level=2]
+  - paragraph: Còn sống
+  - text: "Tên thường gọi:"
+  - strong: Đã sửa M0 Desktop
+  - heading "Đặc tính Gia phả & Tộc hệ" [level=3]:
+    - generic: Đặc tính Gia phả & Tộc hệ
+  - term: Đời thứ trong gia tộc
+  - definition: Chưa rõ
+  - term: Chi họ trực thuộc
+  - definition: Đại Tôn Họ Trần Đông Ngạc
+  - term: Phái
+  - definition: Chưa rõ
+  - term: Vai vế
+  - definition: Thành viên
+  - heading "Sinh thời & Nơi chốn" [level=3]:
+    - generic: Sinh thời & Nơi chốn
+  - term: Ngày sinh
+  - definition: Không rõ
+  - term: Nơi sinh
+  - definition: Chưa rõ
+  - term: Nguyên quán
+  - definition: Chưa rõ
+  - term: Nơi cư trú
+  - definition: Chưa rõ
+  - term: Nghề nghiệp
+  - definition: Chưa rõ
+  - generic: Chưa có văn bản tiểu sử chi tiết.
+  - button "Đọc phả ký tổng hợp":
+    - generic: Đọc phả ký tổng hợp
+  - heading "Ký ức Giọng nói & Lời dặn (0)" [level=4]:
+    - generic: Ký ức Giọng nói & Lời dặn (0)
+  - button "+ Thu âm mới"
+  - paragraph: Chưa có bản ghi âm giọng nói nào.
+  - button "Thu âm giọng nói hoặc lời dặn của người này ngay":
+    - generic: Thu âm giọng nói hoặc lời dặn của người này ngay
+  - heading "Gia đình & Thân tộc" [level=3]:
+    - generic: Gia đình & Thân tộc
+  - button "+ Thêm / Sửa"
+  - heading "Cha & Mẹ" [level=4]
+  - generic "Trần Văn Lộc":
+    - img "Trần Văn Lộc"
+  - paragraph: Trần Văn Lộc
+  - paragraph: Cha • Ruột
+  - heading "Vợ / Chồng" [level=4]
+  - paragraph: Chưa ghi nhận bạn đời.
+  - heading "Con cái (0)" [level=4]
+  - paragraph: Chưa ghi nhận con cái.
+  - heading "Anh chị em (3)" [level=4]
+  - generic "Trần Văn Khải":
+    - generic: TK
+  - paragraph: Trần Văn Khải
+  - paragraph: Anh/Em trai
+  - generic "Trần Văn Phúc":
+    - generic: TP
+  - paragraph: Trần Văn Phúc
+  - paragraph: Anh/Em trai
+  - generic "Trần Thị Hạnh":
+    - generic: TH
+  - paragraph: Trần Thị Hạnh
+  - paragraph: Chị/Em gái
+  - dialog:
+    - generic "M0 DEMO Nguyễn Kiểm Thử":
+      - generic: MT
+    - 'heading "Quan hệ gia đình: M0 DEMO Nguyễn Kiểm Thử" [level=3]'
+    - paragraph: Thêm, sửa và kiểm tra liên kết huyết thống, phụ mẫu và hôn phối
+    - button:
+    - button "Cha & Mẹ (1)":
+      - generic: Cha & Mẹ (1)
+    - button "Vợ / Chồng (0)":
+      - generic: Vợ / Chồng (0)
+    - button "Con cái (0)":
+      - generic: Con cái (0)
+    - heading "Thêm Cha hoặc Mẹ" [level=4]
+    - textbox "Lọc nhanh theo họ tên hoặc tên thường gọi..."
+    - combobox:
+      - option "-- Chọn thành viên (30 khả dụng) --" [selected]
+      - option "Nguyễn Thị Kim (Đời 1) - Nữ"
+      - option "Trần Văn Khải (Đời 2) - Nam"
+      - option "Nguyễn Thị Lan (Đời 2) - Nữ"
+      - option "Đặng Thị Nguyệt (Đời 2) - Nữ"
+      - option "Trần Văn Phúc (Đời 2) - Nam"
+      - option "Lê Thị Thanh (Đời 2) - Nữ"
+      - option "Trần Thị Hạnh (Đời 2) - Nữ"
+      - option "Trần Văn Nghị (Đời 3) - Nam"
+      - option "Phạm Thị Hiền (Đời 3) - Nữ"
+      - option "Trần Thị Mai (Đời 3) - Nữ"
+      - option "Trần Văn Minh (Đời 3) - Nam"
+      - option "Hoàng Thị Bích (Đời 3) - Nữ"
+      - option "Trần Văn Tín (Đời 3) - Nam"
+      - option "Trần Hữu Đạt (Đời 3) - Nam"
+      - option "Võ Thị Ngọc Mai (Đời 3) - Nữ"
+      - option "Trần Hữu Kiên (Đời 3) - Nam"
+      - option "Trần Quốc Tuấn (Đời 4) - Nam"
+      - option "Ngô Thị Phương Thảo (Đời 4) - Nữ"
+      - option "Trần Thị Thu Thủy (Đời 4) - Nữ"
+      - option "Trần Thị Thu Hà (Đời 4) - Nữ"
+      - option "Trần Đức Bảo (Đời 4) - Nam"
+      - option "Trần Gia Hưng (Đời 4) - Nam"
+      - option "Lâm Mỹ Dung (Đời 4) - Nữ"
+      - option "Trần Hữu Khôi (Đời 4) - Nam"
+      - option "Trần Minh Quân (Đời 5) - Nam"
+      - option "Đỗ Ngọc Lan Anh (Đời 5) - Nữ"
+      - option "Trần Minh Châu (Đời 5) - Nữ"
+      - option "Trần Bảo Nam (Đời 5) - Nam"
+      - option "Trần Ngọc Khánh Linh (Đời 5) - Nữ"
+      - option "Trần Khôi Nguyên (Đời 5) - Nam"
+    - combobox:
+      - option "Con ruột (Huyết thống)" [selected]
+      - option "Con nuôi (Dưỡng tử/nữ)"
+      - option "Con riêng (Kế tử)"
+      - option "Chưa rõ"
+    - button "Thêm liên kết" [disabled] [active]:
+      - generic: Thêm liên kết
+    - heading "Danh sách hiện tại" [level=4]
+    - generic "Trần Văn Lộc":
+      - img "Trần Văn Lộc"
+    - paragraph: Trần Văn Lộc
+    - paragraph: Cha • Huyết thống
+    - button "Xóa liên kết này (không xóa hồ sơ thành viên)":
+    - button "Đóng"

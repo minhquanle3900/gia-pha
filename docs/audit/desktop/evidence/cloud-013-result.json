@@ -1,0 +1,5 @@
+{
+  "input": "M0 <b>Thử</b> & An",
+  "containsRawMarkup": true,
+  "containsEscapedLiteral": false
+}

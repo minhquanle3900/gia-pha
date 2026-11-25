@@ -1,0 +1,111 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+  - button "Mở tìm kiếm thành viên":
+  - button "Chuyển đổi giao diện sáng tối":
+  - 'button "Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay."':
+  - button "Thêm thành viên mới vào gia phả":
+- main:
+  - generic: 誌
+  - generic: Biên Niên Ký Tộc Phả
+  - generic: ·
+  - generic: Dòng họ Dòng họ Trần – Đông Ngạc · 3 bài ghi chép
+  - heading "Nhật Ký Dòng Họ & Kỷ Niệm Chung" [level=2]
+  - paragraph: Nơi ghi chép các sự kiện lịch sử chung, hương ước gia quy, công đức trùng tu từ đường và những kỷ niệm đáng nhớ của đại gia đình không thuộc riêng về bất kỳ cá nhân nào.
+  - button "Viết nhật ký mới":
+    - generic: Viết nhật ký mới
+  - button "Về Tổng quan":
+    - generic: Về Tổng quan
+  - button "In bản nhật ký dòng họ":
+  - generic: Tổng số bài viết
+  - generic: "3"
+  - generic: mục nhật ký
+  - paragraph: 0 bài viết được ghim ưu tiên
+  - generic: Sự kiện lịch sử
+  - generic: "3"
+  - generic: sự kiện
+  - paragraph: Dấu mốc biến cố & truyền thống gia tộc
+  - generic: Kỷ niệm đáng nhớ
+  - generic: "0"
+  - generic: kỷ niệm
+  - paragraph: Đoàn tụ, ngày hội làng, lễ tạ ơn tổ tiên
+  - generic: Hương ước & Công đức
+  - generic: "0"
+  - generic: điều lệ & trùng tu
+  - paragraph: Gia quy dòng họ & tôn tạo nhà thờ
+  - textbox "Tìm kiếm nhật ký theo tiêu đề, nội dung, người ghi, địa điểm..."
+  - combobox:
+    - option "Tất cả chi họ" [selected]
+    - option "Chi Ất (Chi Thứ)"
+    - option "Chi Bính (Chi Nam Tiến)"
+    - option "Đại Tôn Họ Trần Đông Ngạc"
+    - option "Chi Giáp (Chi Trưởng)"
+  - combobox:
+    - option "Ghi chép mới nhất" [selected]
+    - option "Ghi chép cũ nhất"
+    - option "Tiêu đề (A-Z)"
+  - button "Chế độ xem Thẻ Niên Biểu":
+  - button "Chế độ xem Sổ Ký Sự Phả Học":
+  - button "Tất cả (3)"
+  - button "Sự kiện lịch sử (3)"
+  - button "Kỷ niệm chung (0)"
+  - button "Trùng tu & Công đức (0)"
+  - button "Hương ước & Quy ước (0)"
+  - button "Ghi chú chung"
+  - generic: Sự kiện lịch sử chung
+  - generic: ·
+  - generic: 1946 – 1954
+  - generic: ·
+  - generic: Chi Giáp (Chi Trưởng)
+  - heading "Chiếc tráp gỗ sơn son và hành trình giữ Gia phả năm 1946" [level=3]
+  - text: "Ghi chép:"
+  - strong: Trần Hữu Khôi (ghi theo lời kể của KTS Trần Văn Minh)
+  - generic: “Câu chuyện ông Cả Trần Văn Khải gùi hòm gia phả vượt sông Hồng trong đêm đông tản cư.”
+  - generic: Cuối tháng Chạp năm 1946, khi tiếng đại bác vang rền phía nội thành Hà Nội, cụ Đồ Lộc tuổi đã cao liền gọi trưởng nam là ông Trần Văn Khải đến bên án thư. Cụ trao chiếc tráp gỗ lim sơn phủ cánh gián, bên trong bọc vải điều giữ cuốn Gia phả giấy dó và...
+  - button "Đọc toàn văn nhật ký":
+    - generic: Đọc toàn văn nhật ký
+  - generic: "Cập nhật: 15/10/2026"
+  - button "Sửa bài":
+    - generic: Sửa bài
+  - generic: Sự kiện lịch sử chung
+  - generic: ·
+  - generic: 1934 – 1986
+  - generic: ·
+  - generic: Chi Giáp (Chi Trưởng)
+  - heading "Tấm lòng người mẹ kế Đặng Thị Nguyệt và nếp nhà hòa thuận" [level=3]
+  - text: "Ghi chép:"
+  - strong: Trần Thị Thu Thủy
+  - generic: “Sự gắn kết máu thịt giữa hai dòng con trong gia đình ông Cả Khải.”
+  - generic: Khi bà Nguyễn Thị Lan lâm bệnh qua đời sớm năm 1932, bác Nghị mới 9 tuổi, cô Mai mới lên 4. Hai năm sau, bà Đặng Thị Nguyệt về làm kế thất. Ngày bước chân qua bậc cửa gỗ nhà họ Trần, việc đầu tiên bà làm là tự tay thắp hương trước bàn thờ người vợ tr...
+  - button "Đọc toàn văn nhật ký":
+    - generic: Đọc toàn văn nhật ký
+  - generic: "Cập nhật: 15/10/2026"
+  - button "Sửa bài":
+    - generic: Sửa bài
+  - generic: Sự kiện lịch sử chung
+  - generic: ·
+  - generic: 1955 – 1995
+  - generic: ·
+  - generic: Chi Bính (Chi Nam Tiến)
+  - heading "Nhịp cầu Bắc – Nam của Chi Bính sau bốn mươi năm đoàn tụ" [level=3]
+  - text: "Ghi chép:"
+  - strong: Trần Gia Hưng
+  - generic: “Chuyến trở về Từ đường Đông Ngạc xúc động của ông Trần Hữu Đạt mùa thu năm 1995.”
+  - generic: Rời phố Hàng Đào vào Sài Gòn lập nghiệp năm 26 tuổi, ông Trần Hữu Đạt luôn đặt trên bàn thờ gia tiên tại Phú Nhuận một nắm đất nhỏ lấy từ gốc cây đại trước cổng làng Đông Ngạc. Hằng năm đúng ngày 22 tháng Mười Âm lịch, dù ở cách xa gần hai nghìn cây ...
+  - button "Đọc toàn văn nhật ký":
+    - generic: Đọc toàn văn nhật ký
+  - generic: "Cập nhật: 15/10/2026"
+  - button "Sửa bài":
+    - generic: Sửa bài
+- navigation:
+  - button "Tổng quan":
+    - generic: Tổng quan
+  - button "Cây phả hệ":
+    - generic: Cây phả hệ
+  - button "Thành viên":
+    - generic: Thành viên
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm...":
+    - generic: Thêm...

@@ -1,0 +1,97 @@
+- banner:
+  - generic "Về trang tổng quan":
+    - generic: 源
+    - generic: Dòng họ Trần – Đông Ngạc
+    - generic: Cội Nguồn Dòng Họ
+  - navigation:
+    - button "Tổng quan":
+      - generic: Tổng quan
+    - button "Cây gia phả":
+      - generic: Cây gia phả
+    - button "Thành viên":
+      - generic: Thành viên
+    - button "Nhật ký dòng họ":
+      - generic: Nhật ký dòng họ
+    - button "Lễ giỗ & Tiết kỵ":
+      - generic: Lễ giỗ & Tiết kỵ
+    - button "Tiện ích mở rộng":
+      - generic: Tiện ích mở rộng
+  - textbox "Tìm kiếm thành viên trong dòng họ":
+    - /placeholder: Tìm nhanh (Ctrl+K)...
+  - generic: ⌘K
+  - button "Chuyển đổi giao diện sáng tối":
+  - button "Đã mở PIN":
+    - generic: Đã mở PIN
+  - button "Hướng dẫn":
+    - generic: Hướng dẫn
+  - button "Thêm người":
+    - generic: Thêm người
+- main:
+  - heading "Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch" [level=2]:
+    - generic: Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch
+  - paragraph: Tự động tính ngày dương tương ứng, sổ văn khấn cổ truyền và danh mục chuẩn bị lễ giỗ họ.
+  - button "Lịch giỗ tiền nhân":
+    - generic: Lịch giỗ tiền nhân
+  - button "Sổ văn khấn":
+    - generic: Sổ văn khấn
+  - button "Phong tục 3 Miền" [active]:
+    - generic: Phong tục 3 Miền
+  - button "Nghi thức chuẩn bị":
+    - generic: Nghi thức chuẩn bị
+  - heading "Không Gian Văn Hóa & Lễ Tục" [level=3]
+  - paragraph: Nghi Lễ Gia Tiên Theo 3 Miền Đất Nước
+  - button "Miền Bắc"
+  - button "Miền Trung"
+  - button "Miền Nam"
+  - generic: Miền Bắc (Đồng Bằng Bắc Bộ & Kinh Kỳ)
+  - generic: ·
+  - generic: Nghi thức Nho giáo trang trọng, chuẩn mực tứ trụ gia phong
+  - heading "Đặc trưng nghi lễ & chuẩn mực phong tục thờ cúng" [level=4]
+  - heading "Mâm Cỗ Cúng Giỗ Truyền Thống" [level=4]
+  - list:
+    - generic: "1"
+    - generic: Gà trống hoa thiến luộc nguyên con ngậm bông hoa hồng đỏ thắm
+    - generic: "2"
+    - generic: Xôi gấc đỏ son tượng trưng cho may mắn, thịnh vượng bền lâu
+    - generic: "3"
+    - generic: Giò lụa truyền thống thái hoa chanh hoặc chả quế thơm lừng
+    - generic: "4"
+    - generic: Nem rán giòn rụm nhân thịt nấm mộc nhĩ hương vị Hà Thành
+    - generic: "5"
+    - generic: Bát canh bóng bì thập cẩm hoa lơ, nấm hương, đậu Hà Lan
+    - generic: "6"
+    - generic: Bát miến dong nấu lòng mề gà hoặc canh măng mực Bát Tràng
+  - heading "Xưng Hô Thân Tộc Theo Phương Ngữ" [level=4]
+  - generic: Cha / Bố
+  - text: Cha / Thầy
+  - generic: Mẹ / Má
+  - text: Mẹ / U / Bu
+  - generic: Ông Nội / Cố
+  - text: Ông nội / Ông ngoại
+  - generic: Bà Nội / Mệ
+  - text: Bà nội / Bà ngoại
+  - generic: Anh Trưởng / Anh Hai
+  - text: Anh cả / Anh trưởng
+  - generic: Bác / Chú / Cậu
+  - text: Bác / Chú
+  - heading "Tập quán cúng tế & Nghi lễ cốt lõi" [level=5]:
+    - generic: Tập quán cúng tế & Nghi lễ cốt lõi
+  - list:
+    - generic: •
+    - generic: Trưởng nam hoặc Tộc trưởng chủ trì toàn bộ nghi thức dâng hương khai sắc
+    - generic: •
+    - generic: "Phân định rạch ròi: Giỗ đầu (Tiểu tường - 1 năm), Giỗ hết (Đại tường - 2 năm), Giỗ thường (Cát kỵ - hàng năm)"
+    - generic: •
+    - generic: Lễ yết kiến gia tiên từ tinh mơ sáng, dâng hương 3 tuần rượu, 1 tuần trà
+    - generic: •
+    - generic: Đọc văn khấn theo tứ thời tiết lệnh, con cháu trang nghiêm đứng sau chủ lễ
+  - heading "Lưu Ý Bài Trí Hương Án & Bàn Thờ Gia Tiên" [level=4]
+  - generic: Quy tắc 1
+  - text: Nguyên tắc "Đông bình Tây quả" (Bình hoa hướng Đông, mâm ngũ quả hướng Tây)
+  - generic: Quy tắc 2
+  - text: Bát hương tổ ở chính giữa cao nhất, hai bên đặt đèn nến hoặc đôi hạc đồng chầu
+  - generic: Quy tắc 3
+  - text: Mâm cỗ mặn đặt ở bàn phụ phía dưới, trên hương án chính chỉ dâng hoa tươi quả ngọt và vàng mã
+  - paragraph: Văn khấn cổ truyền phù hợp cho Miền Bắc (Đồng Bằng Bắc Bộ & Kinh Kỳ)
+  - paragraph: Xem và tự động điền tên tiền nhân, tộc trưởng vào bài văn cúng theo đúng phong tục vùng miền.
+  - button "Mở bài văn khấn vùng này →"
