@@ -1,0 +1,14 @@
+# 05 · Bảo mật và quyền riêng tư
+
+| Ranh giới | Kết quả và trạng thái |
+|---|---|
+| PIN và IndexedDB | **GP-CLOUD-005**, `usePrivacyShield.ts:12–65` giữ hash SHA-256 và cờ trong localStorage; DB lưu dữ liệu đọc được theo quyền origin. Hồ sơ chỉ che một số trường ở `PersonProfileView.tsx:547–574`. Hook được AppShell và hồ sơ khởi tạo riêng. Xác minh đồng bộ thao tác khóa/mở trên cùng trang và giữa tab. Chức năng hiện phù hợp với mục đích che màn hình. |
+| Gemini | **GP-CLOUD-009**, `aiBiographyService.ts:35–74` gửi họ tên, địa chỉ, ghi chú, mốc và bản thảo. `server.ts:18–67,114–131` đọc key ở server, chỉ kiểm tên và giới hạn body 10 MB ở Express. Chưa thấy auth, rate limit hay giới hạn nghiệp vụ theo trường tại route. Cần kiểm tra cấu hình triển khai riêng để biết có lớp bảo vệ bổ sung hay không. Dùng mô phỏng cục bộ để kiểm hợp đồng, tối thiểu hóa payload và xác nhận cho phép gửi trước khi gọi. |
+| Tính chính xác AI | Prompt yêu cầu soạn văn nhưng thiếu ràng buộc chỉ dùng dữ kiện đã cung cấp. `gender` khác female được diễn giải là Nam. Đo với output giả lập chứa chi tiết ngoài đầu vào và yêu cầu người dùng duyệt bản thảo. Chưa xác nhận model/SDK bằng Gemini thực. |
+| Repository công khai | Seed và hai PDF mẫu được track. `.env.example` chứa placeholder. Chưa xác định nguồn gốc dữ liệu trong seed/PDF hoặc quét lịch sử ngoài baseline. Chủ dữ liệu cần xác nhận quyền công bố – báo cáo tránh chép lại nội dung hồ sơ. |
+| QR, Maps và media | **GP-CLOUD-008**, QR tạo local nhưng nội dung là thẻ văn bản chứa tên, sinh thời và các trường địa điểm khi có; tệp/clipboard cho phép đọc lại. `MigrationMapPage.tsx:205–206` tạo Maps URL chứa tọa độ hoặc địa chỉ. `imageUtils.ts:73–89` có thể fetch URL khi đóng gói backup; cần quy định URL/nguồn được phép đối với dữ liệu nhập. |
+| Import và HTML | `jsonBackupService.ts:138–168` nhận nhiều trường nested bằng cast. `familyBookPdfService.ts:42,467,740` và `personPdfReportService.ts:546` có dựng HTML. **GP-CLOUD-013**, family book có helper escape; báo cáo cá nhân đưa họ tên và tiểu sử vào HTML dưới dạng chuỗi chưa escape, sau đó gán HTML vào DOM. Đã xác nhận đường render thiếu escaping từ source. Chưa kiểm tra thực thi mã trong trình duyệt. Dùng fixture văn bản vô hại để kiểm chứng bản sửa. |
+| SW, PWA và dữ liệu cục bộ | `vite.config.ts:46–78` precache tài nguyên build, cache runtime Google Fonts; không có rule cache POST Gemini. IndexedDB tồn tại theo origin sau khi offline hoặc khóa UI. Kiểm tra update, cold offline và cơ chế dọn dữ liệu qua trình duyệt. |
+| Dependency | `bun audit` báo 2 advisory mức moderate trong chuỗi build của Workbox. Xem GP-CLOUD-011 và [log](evidence/audit.txt). Chưa xác nhận tác động tới production runtime. |
+
+Kiểm tra Cloud không gọi Gemini, không cần API key và không gửi dữ liệu gia phả thật ra ngoài.
