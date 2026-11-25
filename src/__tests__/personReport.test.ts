@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import fs from 'node:fs';
+import { describe, expect, it, vi } from 'vitest';
 import { createSeedSnapshot } from '../database/seedData';
 import {
   buildTextDossierSummary,
@@ -228,8 +229,17 @@ describe('Individual Formatted PDF Report Service', () => {
     expect(html).not.toContain('TRƯỞNG TỘC CHỨNG NHẬN');
   });
 
-  it('exportPersonReportToPdfDirect executes successfully with jsPDF', async () => {
-    // In Node.js testing environment, it uses the jsPDF direct instance without throwing
-    await expect(exportPersonReportToPdfDirect(mockReportData)).resolves.not.toThrow();
+  it('produces individual report PDF bytes without writing a file', async () => {
+    const write = vi.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+    try {
+      await exportPersonReportToPdfDirect({
+        ...mockReportData,
+        person: { ...mockReportData.person, fullName: 'Ho so mau' },
+      });
+      expect(write).toHaveBeenCalledExactlyOnceWith('Ho_So_Gia_Pha_Ho_so_mau.pdf', expect.any(Buffer));
+      expect(write.mock.calls[0][1].toString()).toMatch(/^%PDF-[\s\S]+%%EOF\s*$/);
+    } finally {
+      write.mockRestore();
+    }
   });
 });

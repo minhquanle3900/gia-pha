@@ -1,4 +1,5 @@
-import { describe, expect, it } from 'vitest';
+import fs from 'node:fs';
+import { describe, expect, it, vi } from 'vitest';
 import { createSeedSnapshot } from '../database/seedData';
 import {
   buildFamilyBookBlocks,
@@ -68,17 +69,24 @@ describe('Family Book Printable & PDF Export Service', () => {
     expect(html).toContain('PHẢ LỤC CHI TIẾT CÁC THẾ HỆ');
   });
 
-  it('builds readable text fallback and executes exportFamilyBookToPdf without throwing', async () => {
+  it('builds readable text fallback and produces PDF bytes without writing a file', async () => {
     const text = buildFamilyBookTextFallback(exportData);
     expect(text).toContain(seed.settings.clanName);
     expect(text).toContain('DOI THU 1');
 
-    let progress = 0;
-    await expect(
-      exportFamilyBookToPdf(exportData, DEFAULT_FAMILY_BOOK_CONFIG, (p) => {
-        progress = p;
-      })
-    ).resolves.not.toThrow();
-    expect(progress).toBe(100);
+    const write = vi.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
+    try {
+      let progress = 0;
+      await exportFamilyBookToPdf(
+        { ...exportData, settings: { ...exportData.settings, clanName: 'Dong ho mau' } },
+        DEFAULT_FAMILY_BOOK_CONFIG,
+        (value) => { progress = value; }
+      );
+      expect(progress).toBe(100);
+      expect(write).toHaveBeenCalledExactlyOnceWith('Sach_Pha_Ky_Dong_ho_mau.pdf', expect.any(Buffer));
+      expect(write.mock.calls[0][1].toString()).toMatch(/^%PDF-[\s\S]+%%EOF\s*$/);
+    } finally {
+      write.mockRestore();
+    }
   });
 });
