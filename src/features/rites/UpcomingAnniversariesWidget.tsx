@@ -143,10 +143,12 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
 
           {/* Branch filter if multiple branches */}
           {branches.length > 1 && (
+            <label className="flex min-w-0 items-center gap-2 text-xs text-stone-600">
+              <span className="shrink-0">Chi họ</span>
             <select
               value={selectedBranch}
               onChange={(e) => setSelectedBranch(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl border border-[#D5CABE] bg-white text-xs font-semibold text-[#3D3126]"
+              className="min-h-11 min-w-0 max-w-full px-2.5 py-1.5 rounded-xl border border-[#D5CABE] bg-white text-xs font-semibold text-[#3D3126]"
             >
               <option value="all">Tất cả chi họ</option>
               {branches.map((b) => (
@@ -155,6 +157,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                 </option>
               ))}
             </select>
+            </label>
           )}
 
           {/* Notification settings modal trigger */}
