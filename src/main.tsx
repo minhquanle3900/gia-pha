@@ -4,8 +4,12 @@ import { registerSW } from 'virtual:pwa-register';
 import App from './App.tsx';
 import './index.css';
 
-// Register offline-first PWA service worker
-registerSW({ immediate: true });
+registerSW({
+  immediate: true,
+  onNeedReload: () => {
+    // Leave drafts and saves in the current window intact on a controller change.
+  },
+});
 
 createRoot(document.getElementById('root')!).render(
   <StrictMode>

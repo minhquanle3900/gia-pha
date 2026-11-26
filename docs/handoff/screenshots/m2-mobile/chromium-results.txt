@@ -1,0 +1,13 @@
+Chrome/156.0.8078.79 Linux headless, 390×844 viewport. Local synthetic fixtures only.
+Manifest and Chromium installability: PASS, start=/ scope=/ id=/ display=standalone, 0 errors
+Chromium CDP PWA.install unavailable: 'PWA.install' wasn't found
+Static precache only: /apple-touch-icon.png, /assets/index-CfYR3dyO.css, /assets/index-CmpsVnDH.js, /assets/index.es-DqEFERgB.js, /assets/purify.es-Dqk5qvad.js, /assets/workbox-window.prod.es5-Bd17z0YL.js, /icon.svg, /index.html, /manifest.webmanifest, /pwa-192x192.png, /pwa-512x512.png, /pwa-maskable-512x512.png
+Cold launch uses a fresh Chromium page with persisted profile
+Offline cold launch after browser restart with server unreachable and HTTP disk cache disabled: PASS
+Offline create/read/update and another offline reopen preserve the exact IndexedDB ID
+Update installed/waiting with dirty form; 0 controller changes or reloads; draft and committed record unchanged
+With the update waiting, the UI entered a real IndexedDB-blocked write, then saved after the lock cleared; no controller changes/reload
+Worker still waiting after first tab closes while a second old client remains
+After closing all app clients, V2 controls next open and both IndexedDB record IDs are retained
+Offline delete, reopen after update, and persisted deletion: PASS
+Browser runtime exceptions: []
