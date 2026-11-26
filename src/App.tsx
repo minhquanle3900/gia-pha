@@ -201,7 +201,9 @@ const MainWorkspace: React.FC = () => {
             />
           )}
 
-          {activeTab === 'gallery' && <GalleryPage onSelectPerson={handleOpenProfile} />}
+          {activeTab === 'gallery' && (
+            <GalleryPage onNavigate={handleSelectTab} onSelectPerson={handleOpenProfile} />
+          )}
 
           {activeTab === 'rites' && <RitesAssistantPage onSelectPerson={handleOpenProfile} />}
 

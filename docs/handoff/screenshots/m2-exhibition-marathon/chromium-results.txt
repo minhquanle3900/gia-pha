@@ -1,0 +1,19 @@
+Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)
+320-light seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":18,"ink":"#213128","paper":"#fffcf6","fullscreenEdges":[320,308.8125],"content":[320,320],"shell":[320,400]}
+320-dark seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":18,"ink":"#f5ede0","paper":"#18261e","fullscreenEdges":[320,308.8125],"content":[320,320],"shell":[320,400]}
+390-light seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":24,"ink":"#213128","paper":"#fffcf6","fullscreenEdges":[390,378.3125],"content":[390,390],"shell":[390,400]}
+390-light live branch collection, existing person profile and original artifact viewer PASS
+390-dark seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":20,"ink":"#f5ede0","paper":"#18261e","fullscreenEdges":[390,378.3125],"content":[390,390],"shell":[390,400]}
+430-light seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":18,"ink":"#213128","paper":"#fffcf6","fullscreenEdges":[430,417.109375],"content":[430,430],"shell":[430,430]}
+430-dark seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":18,"ink":"#f5ede0","paper":"#18261e","fullscreenEdges":[430,417.109375],"content":[430,430],"shell":[430,430]}
+768-light seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":18,"ink":"#213128","paper":"#fffcf6","fullscreenEdges":[768,744.96875],"content":[768,768],"shell":[768,768]}
+768-dark seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":18,"ink":"#f5ede0","paper":"#18261e","fullscreenEdges":[768,744.96875],"content":[768,768],"shell":[768,768]}
+1440-light seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":0,"ink":"#213128","paper":"#fffcf6","fullscreenEdges":[1440,1412],"content":[1280,1280],"shell":[1425,1873]}
+1440-dark seven rooms, keyboard fullscreen/Escape and focus PASS {"touchEvents":0,"ink":"#f5ede0","paper":"#18261e","fullscreenEdges":[1440,1412],"content":[1280,1280],"shell":[1425,1873]}
+Runtime exceptions: 0
+390-light empty valid dataset: 2 clearly marked reference couplets, all other rooms and collections are empty, archive blank state PASS
+Runtime exceptions: 0
+First Museum visit offline after Dashboard online, including lazy-loaded hero/artifact/fullscreen PASS ["/assets/ExhibitionHall-sZ3tebCY.js","/assets/ExhibitionHall-QPhlj-mk.css"]
+Runtime exceptions: 0
+390-dark reduced motion: detail, artwork layout and native dialog animationName none; Escape PASS
+Runtime exceptions: 0
