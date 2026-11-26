@@ -1,0 +1,23 @@
+{
+  "time": "2026-11-25 Asia/Saigon",
+  "testedPR2": "6e2ba3c7a8896a0027d8d7f8198e4d5b3ab2d44e",
+  "testedPR3": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+  "profile": "D:/LMQ_My mine/Gia-pha/.worktrees/browser-profiles/chrome-m1-qa",
+  "chromeVersion": "158.0.8127.37",
+  "stage": "Native Chrome window binding / navigation before any test assertions",
+  "reason": "Windows browser automation safety gate could not determine the current browser URL with enough confidence to enforce policy; Computer Use stopped for this turn.",
+  "scope": "No subsequent browser/native UI automation attempted. All 14 handoff browser cases remain BLOCKED; Windows CLI results are separate.",
+  "phaseBCondition": "User authorized Phase B after environment blockers are recorded; implementation can proceed, runtime visual/mobile gate stays blocked.",
+  "resumption": {
+    "date": "2026-11-26",
+    "nativeWindows": "BLOCKED: no stable Chrome/Edge automation recovered",
+    "iab": "Available in new turn; native IndexedDB adapter checks executed. Separate origins, shared IAB profile; not stable Chrome.",
+    "viewportApi": "Resolved: viewport capability works on tabs created via documented browser.tabs.new(). CUA wrapper-created tabs stayed1280x720. Final evidence records measured innerWidth/innerHeight; no iframe fallback used."
+  },
+  "sessionLifecycle": {
+    "id": "B-DESK-SESSION-02",
+    "reason": "Tool/session refresh cleared browser bindings and terminated earlier CLI-owned server processes. Background child launcher also required a live supervisor session to retain servers.",
+    "resolution": "Server supervisor session retained; incomplete empty restore capture rerun and exported.",
+    "classification": "Environment interruption, not application/data-loss failure"
+  }
+}

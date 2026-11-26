@@ -1,0 +1,13 @@
+{
+  "date": "2026-11-26",
+  "markdownFilesChecked": 10,
+  "brokenLocalLinks": [],
+  "sourceDiffWhitespaceCheck": {
+    "exitCode": 0,
+    "scope": "src changes vs base"
+  },
+  "stagedWhitespaceCheck": {
+    "exitCode": 2,
+    "reason": "Original CLI logs include trailing whitespace/blank EOF; captured DOM snippet ends with a space. Raw evidence retained unchanged. No source whitespace errors."
+  }
+}

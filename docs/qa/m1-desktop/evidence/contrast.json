@@ -1,0 +1,69 @@
+{
+  "testedCodeSha": "0e51835552741a81ed69d31080d900bf7cc726f0",
+  "method": "WCAG relative sRGB luminance. Pairs sampled from changed UI tokens; main menu RGB was observed in computed styles. This is not whole-app or composited-gradient AA certification.",
+  "pairs": [
+    {
+      "name": "Light muted",
+      "foreground": "#655A4E",
+      "background": "#FAF7F2",
+      "ratio": 6.29,
+      "normalTextAA": true
+    },
+    {
+      "name": "Dark main/menu (computed)",
+      "foreground": "#EDE6DC",
+      "background": "#17241C",
+      "ratio": 12.99,
+      "normalTextAA": true
+    },
+    {
+      "name": "Dark muted",
+      "foreground": "#B9AEA0",
+      "background": "#17241C",
+      "ratio": 7.37,
+      "normalTextAA": true
+    },
+    {
+      "name": "Dark placeholder",
+      "foreground": "#A89F93",
+      "background": "#141E18",
+      "ratio": 6.55,
+      "normalTextAA": true
+    },
+    {
+      "name": "Dark Kinship accent",
+      "foreground": "#F0B6A5",
+      "background": "#17241C",
+      "ratio": 9.15,
+      "normalTextAA": true
+    },
+    {
+      "name": "Gold button text",
+      "foreground": "#2E241E",
+      "background": "#C5A059",
+      "ratio": 6.16,
+      "normalTextAA": true
+    },
+    {
+      "name": "Dark green label",
+      "foreground": "#52B788",
+      "background": "#17241C",
+      "ratio": 6.5,
+      "normalTextAA": true
+    },
+    {
+      "name": "Dark dashboard CTA (computed)",
+      "foreground": "#2E241E",
+      "background": "#DBC599",
+      "ratio": 8.98,
+      "normalTextAA": true
+    },
+    {
+      "name": "Dark quick-search secondary (computed foreground)",
+      "foreground": "#A89F93",
+      "background": "#17241C",
+      "ratio": 6.16,
+      "normalTextAA": true
+    }
+  ]
+}

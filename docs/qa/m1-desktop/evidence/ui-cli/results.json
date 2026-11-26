@@ -1,0 +1,65 @@
+{
+  "startedAt": "2026-11-26T02:11:42.945644+00:00",
+  "repo": "D:\\LMQ_My mine\\Gia-pha\\.worktrees\\m1-desktop-ui",
+  "head": {
+    "exitCode": 0,
+    "output": "0e51835552741a81ed69d31080d900bf7cc726f0\n",
+    "stderr": ""
+  },
+  "trackedBefore": {
+    "exitCode": 0,
+    "output": "",
+    "stderr": ""
+  },
+  "statusBefore": {
+    "exitCode": 0,
+    "output": "?? dev-dist/\n?? docs/handoff/M1_DESKTOP_TO_CLOUD.md\n?? docs/handoff/MOBILE_READINESS_PLAN.md\n?? docs/qa/\n",
+    "stderr": ""
+  },
+  "changedVsBase": {
+    "exitCode": 0,
+    "output": "src/components/AppShell.tsx\nsrc/components/GlobalSearch.tsx\nsrc/components/OnboardingTour.tsx\nsrc/components/PWAWidgets.tsx\nsrc/components/PrivacyPinModal.tsx\nsrc/features/kinship/KinshipCalculatorModal.tsx\nsrc/features/rites/UpcomingAnniversariesWidget.tsx\nsrc/features/sharing/QRShareModal.tsx\nsrc/hooks/useModalAccessibility.ts\nsrc/index.css\n",
+    "stderr": ""
+  },
+  "commands": [
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedSeconds": 1.375,
+      "log": "lint.txt"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedSeconds": 4.094,
+      "log": "build.txt"
+    },
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "elapsedSeconds": 2.063,
+      "log": "regression.txt"
+    }
+  ],
+  "headAfter": {
+    "exitCode": 0,
+    "output": "0e51835552741a81ed69d31080d900bf7cc726f0\n",
+    "stderr": ""
+  },
+  "trackedAfter": {
+    "exitCode": 0,
+    "output": "",
+    "stderr": ""
+  },
+  "statusAfter": {
+    "exitCode": 0,
+    "output": "?? dev-dist/\n?? docs/handoff/M1_DESKTOP_TO_CLOUD.md\n?? docs/handoff/MOBILE_READINESS_PLAN.md\n?? docs/qa/\n",
+    "stderr": ""
+  },
+  "lockAndSchemaDiff": {
+    "exitCode": 0,
+    "output": "",
+    "stderr": ""
+  },
+  "completedAt": "2026-11-26T02:11:50.709474+00:00"
+}

@@ -1,0 +1,22 @@
+
+> react-example@0.0.0 dev
+> tsx server.ts
+
+◇ injected env (0) from .env // tip: ⌘ suppress logs { quiet: true }
+API key should be set when using the Gemini API.
+API key should be set when using the Gemini API.
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:89:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+`server.hmr.protocol/host/port/path/clientPort/timeout/server` is deprecated. Use `server.ws.*` instead. Note that this option may be set by a plugin. Set VITE_DEPRECATION_TRACE=1 to see where it is called.
+Server running on http://0.0.0.0:3213
+
+PWA v2.0.0
+mode      generateSW
+precache  2 entries (0.12 KiB)
+files generated
+  dev-dist/sw.js
+  dev-dist/workbox-afac4cd2.js
+08:32:54 [vite] (client) dependency optimized: workbox-window
+08:34:20 [vite] (client) page reload docs/qa/m1-desktop/evidence/responsive-frame.html
+08:40:59 [vite] (client) page reload docs/qa/m1-desktop/evidence/responsive-frame.html
