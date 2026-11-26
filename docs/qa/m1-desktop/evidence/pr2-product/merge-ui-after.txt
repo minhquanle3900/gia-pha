@@ -1,0 +1,110 @@
+源
+M0 DEMO Desktop
+CỘI NGUỒN DÒNG HỌ
+Tổng quan
+Cây gia phả
+Thành viên
+Nhật ký dòng họ
+Lễ giỗ & Tiết kỵ
+Tiện ích mở rộng
+⌘K
+Đã mở PIN
+Hướng dẫn
+Thêm người
+Danh Sách Thành Viên Gia Tộc
+
+Tổng số: 7 thành viên • Đang hiển thị: 7 người
+
+Lọc trùng lặp
+Thêm thành viên
+ĐỜI THỨ:
+Tất cả (7)
+Đời 1 (1)
+Đời 2 (1)
+Đời 3 (3)
+Đời 4 (2)
+Sắp xếp: Theo đời thứ
+Sắp xếp: Tên A-Z (Chữ cái)
+Sắp xếp: Năm sinh tăng dần
+Chi họ
+Mọi chi họ (7)
+Chi M0 Demo (7)
+Đời thứ
+Mọi thế hệ (7)
+Đời thứ 1 (1)
+Đời thứ 2 (1)
+Đời thứ 3 (3)
+Đời thứ 4 (2)
+Trạng thái sinh thời
+Tất cả (7)
+Hiện tiền (Còn sống) (7)
+Đã tạ thế (0)
+Có ngày giỗ Âm lịch (0)
+Giới tính
+Tất cả giới tính (7)
+Nam giới (5)
+Nữ giới (2)
+MM
+Đời 1
+M0 Ông Mẫu
+
+Sinh 1920 · Còn sống
+
+Chi M0 Demo
+Còn sống
+MM
+Đời 2
+M0 Cha Mẫu
+
+Sinh 1950 · Còn sống
+
+Chi M0 Demo
+Còn sống
+MA
+Đời 3
+M0 Phối Ngẫu A
+
+Sinh 1980 · Còn sống
+
+Chi M0 Demo
+Còn sống
+MB
+Đời 3
+M0 Phối Ngẫu B
+
+Sinh 1980 · Còn sống
+
+Chi M0 Demo
+Còn sống
+Đời 3
+M0 Nguyễn Trùng Tên
+
+Sinh 1980 · Còn sống
+
+Chi M0 Demo
+Còn sống
+MM
+Đời 4
+M0 Con Mẫu
+
+Sinh 2000 · Còn sống
+
+Chi M0 Demo
+Còn sống
+MM
+Đời 4
+M0 Con Riêng Mẫu
+
+Sinh 2002 · Còn sống
+
+Chi M0 Demo
+Còn sống
+Kiểm Tra & Hợp Nhất Hồ Sơ Trùng Lặp
+
+Tự động rà soát họ tên, năm sinh, chi họ và cha mẹ để làm sạch phả hệ.
+
+Sáp Nhập Thành Công
+
+Đã sáp nhập thành công hồ sơ "M0 Nguyễn Trùng Tên" vào "M0 Nguyễn Trùng Tên". Toàn bộ quan hệ huyết thống và tư liệu đã được bảo toàn nguyên vẹn.
+
+Hoàn tất

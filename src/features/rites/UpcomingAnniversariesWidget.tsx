@@ -77,7 +77,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
   };
 
   return (
-    <section aria-labelledby={titleId} className="min-w-0 space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 shadow-xs dark:border-[#374A3D] sm:p-5">
+    <section aria-labelledby={titleId} className="heritage-anniversaries min-w-0 space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 shadow-xs dark:border-[#374A3D] sm:p-5">
       <div className="flex flex-col gap-3 border-b border-ivory-200 pb-4 dark:border-[#374A3D] lg:flex-row lg:items-start lg:justify-between">
         <div className="flex min-w-0 flex-wrap items-center gap-2.5">
           <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-gold-100 text-gold-700 dark:bg-[#342D20] dark:text-amber-200">
@@ -123,6 +123,8 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
 
           {/* Branch filter if multiple branches */}
           {branches.length > 1 && (
+            <label className="flex min-w-0 items-center gap-2 text-sm text-bark-600 dark:text-stone-300">
+              <span className="shrink-0">Chi họ</span>
             <select
               aria-label="Chi họ"
               value={selectedBranch}
@@ -136,6 +138,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                 </option>
               ))}
             </select>
+            </label>
           )}
 
           {/* Notification settings modal trigger */}

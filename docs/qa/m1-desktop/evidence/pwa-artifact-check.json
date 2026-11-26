@@ -1,0 +1,24 @@
+{
+  "testedCodeSha": "0e51835552741a81ed69d31080d900bf7cc726f0",
+  "display": "standalone",
+  "start_url": "/",
+  "icons": [
+    {
+      "src": "/pwa-192x192.png",
+      "sizes": "192x192",
+      "existsInBuiltDist": false
+    },
+    {
+      "src": "/pwa-512x512.png",
+      "sizes": "512x512",
+      "existsInBuiltDist": false
+    },
+    {
+      "src": "/pwa-maskable-512x512.png",
+      "sizes": "512x512",
+      "existsInBuiltDist": false
+    }
+  ],
+  "indexViewport": "<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, viewport-fit=cover\" />",
+  "scope": "Build artifact inspection only. Installed standalone, physical safe-area and cold offline NOT RUN."
+}

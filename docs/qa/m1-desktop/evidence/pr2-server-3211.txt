@@ -1,0 +1,33 @@
+
+> react-example@0.0.0 dev
+> tsx server.ts
+
+◇ injected env (0) from .env // tip: ⌁ auth for agents [www.vestauth.com]
+API key should be set when using the Gemini API.
+API key should be set when using the Gemini API.
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:89:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+`server.hmr.protocol/host/port/path/clientPort/timeout/server` is deprecated. Use `server.ws.*` instead. Note that this option may be set by a plugin. Set VITE_DEPRECATION_TRACE=1 to see where it is called.
+Server running on http://0.0.0.0:3211
+08:25:58 [vite] (client) [optimizer] bundling dependencies...
+08:25:58 [vite] (client) dependency optimized: workbox-window
+
+PWA v2.0.0
+mode      generateSW
+precache  1 entries (0.00 KiB)
+files generated
+  dev-dist/sw.js
+  dev-dist/workbox-afac4cd2.js
+warnings
+  One of the glob patterns doesn't match any files. Please remove or fix the following: {
+  "globDirectory": "D:/LMQ_My mine/Gia-pha/.worktrees/m1-pr2-qa/dev-dist",
+  "globPattern": "**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2}",
+  "globIgnores": [
+    "**/node_modules/**/*",
+    "sw.js",
+    "workbox-*.js"
+  ]
+}
+
+08:31:27 [vite] (client) page reload docs/qa/m1-desktop/evidence/runtime-harness/index.html

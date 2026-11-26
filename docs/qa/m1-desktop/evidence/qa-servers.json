@@ -1,0 +1,17 @@
+[
+  {
+    "port": 3211,
+    "pid": 2520,
+    "cwd": "D:\\LMQ_My mine\\Gia-pha\\.worktrees\\m1-pr2-qa"
+  },
+  {
+    "port": 3212,
+    "pid": 20340,
+    "cwd": "D:\\LMQ_My mine\\Gia-pha\\.worktrees\\m1-desktop-ui"
+  },
+  {
+    "port": 3213,
+    "pid": 14740,
+    "cwd": "D:\\LMQ_My mine\\Gia-pha\\.worktrees\\m1-pr3-qa"
+  }
+]

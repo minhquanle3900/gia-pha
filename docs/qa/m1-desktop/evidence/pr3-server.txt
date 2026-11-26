@@ -1,0 +1,81 @@
+
+> react-example@0.0.0 dev
+> tsx server.ts
+
+◇ injected env (0) from .env // tip: ⌘ enable debugging { debug: true }
+API key should be set when using the Gemini API.
+API key should be set when using the Gemini API.
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:89:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+`server.hmr.protocol/host/port/path/clientPort/timeout/server` is deprecated. Use `server.ws.*` instead. Note that this option may be set by a plugin. Set VITE_DEPRECATION_TRACE=1 to see where it is called.
+Server running on http://0.0.0.0:3212
+08:27:12 [vite] (client) [optimizer] bundling dependencies...
+08:27:13 [vite] (client) dependency optimized: workbox-window
+
+PWA v2.0.0
+mode      generateSW
+precache  1 entries (0.00 KiB)
+files generated
+  dev-dist/sw.js
+  dev-dist/workbox-afac4cd2.js
+warnings
+  One of the glob patterns doesn't match any files. Please remove or fix the following: {
+  "globDirectory": "D:/LMQ_My mine/Gia-pha/.worktrees/m1-desktop-ui/dev-dist",
+  "globPattern": "**/*.{js,css,html,ico,png,svg,jpg,jpeg,woff,woff2}",
+  "globIgnores": [
+    "**/node_modules/**/*",
+    "sw.js",
+    "workbox-*.js"
+  ]
+}
+
+08:28:17 [vite] (client) hmr update /src/index.css, /src/features/kinship/KinshipCalculatorModal.tsx, /src/features/sharing/QRShareModal.tsx, /src/components/OnboardingTour.tsx, /src/components/PrivacyPinModal.tsx
+08:28:17 [vite] (client) hmr update /src/index.css
+08:28:17 [vite] (client) hmr invalidate /src/components/OnboardingTour.tsx Could not Fast Refresh ("TOUR_STEPS" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+08:28:17 [vite] (client) hmr update /src/App.tsx
+08:28:17 [vite] (client) hmr update /src/index.css, /src/components/GlobalSearch.tsx
+08:28:17 [vite] (client) hmr update /src/index.css
+08:28:17 [vite] (client) hmr update /src/index.css
+08:28:17 [vite] (client) hmr update /src/index.css
+08:29:13 [vite] (client) hmr update /src/components/AppShell.tsx, /src/index.css
+08:29:13 [vite] (client) hmr update /src/index.css
+08:29:13 [vite] (client) hmr update /src/index.css
+08:29:13 [vite] (client) hmr update /src/index.css, /src/components/GlobalSearch.tsx
+08:29:13 [vite] (client) hmr update /src/index.css
+08:29:13 [vite] (client) hmr update /src/components/OnboardingTour.tsx, /src/index.css
+08:29:13 [vite] (client) hmr update /src/index.css
+08:29:13 [vite] (client) hmr invalidate /src/components/OnboardingTour.tsx Could not Fast Refresh ("TOUR_STEPS" export is incompatible). Learn more at https://github.com/vitejs/vite-plugin-react/tree/main/packages/plugin-react#consistent-components-exports
+08:29:13 [vite] (client) hmr update /src/App.tsx
+08:29:45 [vite] (client) hmr update /src/index.css
+08:29:46 [vite] (client) hmr update /src/index.css
+08:31:44 [vite] (client) hmr update /src/index.css
+08:31:44 [vite] (client) hmr update /src/index.css
+08:31:44 [vite] (client) hmr update /src/index.css
+08:34:20 [vite] (client) page reload docs/qa/m1-desktop/evidence/responsive-frame.html
+08:34:20 [vite] (client) hmr update /src/index.css
+08:34:20 [vite] (client) hmr update /src/index.css
+08:39:23 [vite] (client) hmr update /src/components/AppShell.tsx, /src/index.css
+08:39:23 [vite] (client) hmr update /src/index.css
+08:39:23 [vite] (client) hmr update /src/index.css
+08:39:24 [vite] (client) hmr update /src/index.css
+08:39:24 [vite] (client) hmr update /src/index.css
+08:39:24 [vite] (client) hmr update /src/index.css, /src/components/GlobalSearch.tsx
+08:39:24 [vite] (client) hmr update /src/index.css
+08:39:24 [vite] (client) hmr update /src/index.css
+08:39:24 [vite] (client) hmr update /src/index.css
+08:39:24 [vite] (client) hmr update /src/index.css
+08:39:25 [vite] (client) hmr update /src/index.css
+08:39:25 [vite] (client) hmr update /src/index.css
+08:39:25 [vite] (client) hmr update /src/index.css
+08:39:25 [vite] (client) hmr update /src/index.css
+08:40:51 [vite] (client) hmr update /src/features/kinship/KinshipCalculatorModal.tsx, /src/index.css
+08:40:51 [vite] (client) hmr update /src/index.css
+08:40:51 [vite] (client) hmr update /src/index.css
+08:40:51 [vite] (client) hmr update /src/index.css, /src/components/PrivacyPinModal.tsx
+08:40:51 [vite] (client) hmr update /src/index.css
+08:40:51 [vite] (client) hmr update /src/index.css
+08:40:51 [vite] (client) hmr update /src/index.css
+08:40:59 [vite] (client) hmr update /src/index.css
+08:40:59 [vite] (client) hmr update /src/index.css
+08:40:59 [vite] (client) page reload docs/qa/m1-desktop/evidence/responsive-frame.html

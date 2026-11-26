@@ -1,0 +1,534 @@
+{
+  "sourceTestedHead": "0e51835552741a81ed69d31080d900bf7cc726f0",
+  "method": "SHA256 of staged Git blobs (text already Git-normalized LF, binary exact); excludes this manifest",
+  "files": [
+    {
+      "path": "docs/handoff/M1_DESKTOP_TO_CLOUD.md",
+      "gitBlob": "d5bd9800e82e532e0c5c72cbc3110b46dc047605",
+      "bytes": 4917,
+      "sha256": "ec0fca83230197dc9dc9a3079836958d96867bfd7bf8d7b94091d3e345862d3b"
+    },
+    {
+      "path": "docs/handoff/MOBILE_READINESS_PLAN.md",
+      "gitBlob": "66ef5fe5f3ba0b786214189de5ea4d94e3a8e5c9",
+      "bytes": 25027,
+      "sha256": "ca9939e00f2e3bd964393cfedb28563f175290c819e6b86c7fc394300a53c3dc"
+    },
+    {
+      "path": "docs/qa/m1-desktop/CORE_INTEGRATION_GATE.md",
+      "gitBlob": "d143f75ad04bb9709305f74166e969cc3f261535",
+      "bytes": 5680,
+      "sha256": "59c3a17dee8872d739e373a17b70db095580e6c253ee505917aa64e38bc8448e"
+    },
+    {
+      "path": "docs/qa/m1-desktop/M1_1_INDEPENDENT_REVIEW.md",
+      "gitBlob": "79d1bc952b02cb9a0e47a7cd25e9ef7db190a54f",
+      "bytes": 4690,
+      "sha256": "31f1f93cd1ccba839514dd76cf22162f7ffebf1ce6bb8686ee599c456b318312"
+    },
+    {
+      "path": "docs/qa/m1-desktop/M1_2A_INDEPENDENT_REVIEW.md",
+      "gitBlob": "192d9e08de89fbd4619cf1184429a2b0460bc6c4",
+      "bytes": 5433,
+      "sha256": "ed812f4c1a61335268caeccfc9bbc3d207fa0cc0c3b26c948d0463f88190b131"
+    },
+    {
+      "path": "docs/qa/m1-desktop/M1_DESKTOP_UI_FOUNDATION.md",
+      "gitBlob": "4e719cd1734aa61826ecb7f86516c114ed9cef0b",
+      "bytes": 8788,
+      "sha256": "14a803567f85a3d0c115e4b4bceb0ca01ae1ee0f1bc9450daf4791c4a04e7a3d"
+    },
+    {
+      "path": "docs/qa/m1-desktop/README.md",
+      "gitBlob": "af75c7c7f9a59630dd339517741d28c58fa08cd7",
+      "bytes": 835,
+      "sha256": "efca7ae806e71ab57822ddd5044b226bc32e2b1acc08bd21987f9172c49a4752"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/BROWSER_AUTOMATION_BLOCKER.json",
+      "gitBlob": "8fbd72bf7b8861287bc0bbe49c0194b5914b390c",
+      "bytes": 1781,
+      "sha256": "a3a1a175c66a5e78feaa98f54ca13643d416c462f06fb89709662095919bf524"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/baseline-layout.json",
+      "gitBlob": "23d44309a87b6661197b35d0277b7e49933a6129",
+      "bytes": 889,
+      "sha256": "158bd8df922273b800e52432fe8e8b97a6741f219063d723e7b8ad8de81d1776"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/capture_revisions.py",
+      "gitBlob": "ee28898833769649bc942a07aef42f01f93bb989",
+      "bytes": 1002,
+      "sha256": "d5dda6fd30e51f8e9ba2021168d790de5b58cc78912ee680b39edb414782dafe"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/chrome-profile.json",
+      "gitBlob": "2c0111f0feb0147c442abb963811afa39c47f41c",
+      "bytes": 300,
+      "sha256": "1a6a4dc298a62544c707924a116b5fe053b66c122aa3f59b89f3a80eec1c11c1"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/contrast.json",
+      "gitBlob": "423d65c010d2113db50e1bdb241fab9032abda26",
+      "bytes": 1735,
+      "sha256": "c2503156457bda5c70143b439c8fcd0ee5f8e2d96c8bbf5b0a2217191c668a11"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/document-validation.json",
+      "gitBlob": "7bd4a12767b98650d5ace6acbf0da803decded1a",
+      "bytes": 402,
+      "sha256": "79e7b08dd3d6c8022535127753246ad1bfe276dfc45387543fe675aaaea1dca1"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/launch_browser.py",
+      "gitBlob": "511974f72b4e1ca4acc887cf1412c23ecccbe966",
+      "bytes": 1460,
+      "sha256": "becaa395104335975990a10c1aff68a5a3175fa738ac4643d69ffd7868b683d9"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/m11-native-iab.json",
+      "gitBlob": "2742d4f0fd760b03e815ce4c676a05c5f716976e",
+      "bytes": 189440,
+      "sha256": "8c27b59ca26a399da8ae2becd48beed5a32e4c5d456fff30a6f7dbbd71f2b5cc"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/m12a-native-iab.json",
+      "gitBlob": "42eae274fc9c25ad7615d3c6e17e329b0032f739",
+      "bytes": 1908543,
+      "sha256": "49d23fba123b3a15c8f841cf63c8231f24a96b1a73c2b2744b87f0a493c5bf9b"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/CLI_VERIFICATION.md",
+      "gitBlob": "c3ba49a41472626e039720bd3afd840013656fe3",
+      "bytes": 5584,
+      "sha256": "64c2a15d5501895d1383ef126a25988bc025c5e0909b6d86416d7c53e2db0e6c"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/cli-results.json",
+      "gitBlob": "8d04f38c2b3d3a3d32885ec9895a7428b21361c5",
+      "bytes": 2906,
+      "sha256": "e2e4c97c73a167f323058cc3cf69f313a861a3ac3256548766ca95fa2e3377ed"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/integrity-after.json",
+      "gitBlob": "7eb602209aea460ef7d4c6bf4890f62d5802b354",
+      "bytes": 1267,
+      "sha256": "43a64d836238e56f6d95e4156757d90f0cb28e78b5364c5899c71008cc2be58b"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr2-build.txt",
+      "gitBlob": "6b883293ff6dd35fa7194fcf886a71e7078e9321",
+      "bytes": 1867,
+      "sha256": "94ff118c05e89787bd3c500679a53e95778a94f4f628be638410d161428675c3"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr2-focused.txt",
+      "gitBlob": "c38cdd42b8045846e464ad71b19e33ede45b5be2",
+      "bytes": 663,
+      "sha256": "2454a9aa3efd54d827d24ce7ff840431bec459e0aeae1dd40d77a9ad4d8e6136"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr2-install.txt",
+      "gitBlob": "455d846e13703a763fd64e37335e685f16958024",
+      "bytes": 732,
+      "sha256": "c80962af418ac324151ced0a10ddc4130b3619e6129f0359817079c9686d3ca1"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr2-lint.txt",
+      "gitBlob": "ef52469e57239445b5d2531489b07eeac9db61fc",
+      "bytes": 44,
+      "sha256": "a6b21efd55cdba93c857a8b986c6aa67f41a33d644c5aa05f06a0a0ec4bcb73d"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr2-regression.txt",
+      "gitBlob": "2155d4403b06c0dd712b4e4e586a22168e8a9995",
+      "bytes": 756,
+      "sha256": "ae9f1a472fb8b5675c4628b85d4dab2fda3d937a31ec57a9f9eaac43dee9e8d5"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr2-status-after.txt",
+      "gitBlob": "e69de29bb2d1d6434b8b29ae775ad8c2e48c5391",
+      "bytes": 0,
+      "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr3-build.txt",
+      "gitBlob": "03e14dca83ed2af51e33a831e27edafdc6c7b56c",
+      "bytes": 1867,
+      "sha256": "e3702a7326c29d483c36f42e8941c3d35eec60c08e40f9da7ddcc3cf3ead130b"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr3-focused.txt",
+      "gitBlob": "63f6fdb3b5abe4dc413cbdb3542a9ca9aa548761",
+      "bytes": 742,
+      "sha256": "8302f08b4ba096e5506ad0ffc13618693fae1e667ff16594539d9dd5a48015f6"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr3-install.txt",
+      "gitBlob": "b5cbaf4159b984f9e7f742e145dcbe7d5d53b9a4",
+      "bytes": 732,
+      "sha256": "10545b950eb7620f848cc69e9e647da3638ffdf4d8d045d7257c6c48290f8e06"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr3-lint.txt",
+      "gitBlob": "ef52469e57239445b5d2531489b07eeac9db61fc",
+      "bytes": 44,
+      "sha256": "a6b21efd55cdba93c857a8b986c6aa67f41a33d644c5aa05f06a0a0ec4bcb73d"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr3-regression.txt",
+      "gitBlob": "d2c46769a5dc8c3c0cc9af0c479397424175611e",
+      "bytes": 760,
+      "sha256": "62285835694998c45da17903ffbe13b4dc0312bb18296c943aea301b7a54a46d"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/phase-a-cli/pr3-status-after.txt",
+      "gitBlob": "8b7a9fb34ac79ac136d57de502aa50519e63a401",
+      "bytes": 814,
+      "sha256": "fdaf9e46a1d17a7f3329f096faa23a80025db2da947a98a008265f3595604ab0"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr2-product/before-ui-merge.json",
+      "gitBlob": "adcb5e57b0a0574eb47c78bdbbd980d47742ed55",
+      "bytes": 8352,
+      "sha256": "d0d5367d1e5ea990706e433575fb2d33b5708907ddefe1629a6f13235c0a757b"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr2-product/merge-ui-after.txt",
+      "gitBlob": "6a99e01410d8db7fdae16d55b542e4fd6dacc7df",
+      "bytes": 1809,
+      "sha256": "c55c61eb2408468b5e5fc838221e68ede5982d41325bed684023ffaae9b857b5"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr2-product/prepared-fixture.json",
+      "gitBlob": "8139787b658706ea895e7390f584819f98881b40",
+      "bytes": 14,
+      "sha256": "752edcfbfb9821161bbe8d289d46fbceeeac3eab5747464ed6d71523d01a7c4a"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr2-product/story-after.txt",
+      "gitBlob": "d1bd6f7141f0c43a0f956c27ec2d31077f9509f2",
+      "bytes": 1178,
+      "sha256": "aef5e55fda0dcb3fd1aaa9a2df4c1f4c0900645dab25ccea178feed7d2d2be96"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr2-product/target-profile-after.txt",
+      "gitBlob": "fa76ff58740dda387d0e1764e4385a827bee7845",
+      "bytes": 1040,
+      "sha256": "b18dc7ebbf74e751b5de52416d3c4aa08c06ced2e61e384b8788e117f3f4f5fe"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr2-server-3211.txt",
+      "gitBlob": "41c87c5b1f401d871ab6446f2c3cb339ed070953",
+      "bytes": 1444,
+      "sha256": "9eacbac444da33d59ae4188f3f7ee46d03d264cdfa185e246349b4edb73ace8a"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr2-server.txt",
+      "gitBlob": "2b310a119dffcf3777154f33756c4a328c63d925",
+      "bytes": 863,
+      "sha256": "0db77e1e1b839e1dd3dc6ccba75ae0529bd98be597801cd3e8f2320e0852fcbc"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-product/after-roundtrip.json",
+      "gitBlob": "4dbe9b283062e08d4469c2acd083ca4a1dc8bd09",
+      "bytes": 76861,
+      "sha256": "12eb2bd498a0bcfd7dafef1699ab784051197b4fb313d78be6e230990129531f"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-product/before-roundtrip.json",
+      "gitBlob": "ada26eade2041d804243d8f4f042dc1085a831ab",
+      "bytes": 76861,
+      "sha256": "bcd90e57ae51e694558517fdd2188aa37a16eefb3db0df3e2d9ae79a6268c425"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-product/duplicate-id-ui.txt",
+      "gitBlob": "aeab1dcb1711dbf7e6239f8db73d3af683b2203c",
+      "bytes": 3627,
+      "sha256": "71ffe49959274ab94312ab6b99713557225b8b9c0300dd2464cafc2287d45ba5"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-product/empty-after-ui-reload.json",
+      "gitBlob": "dded1ba3adbafa3e77c890561ce1a6e11f4ed6b9",
+      "bytes": 559,
+      "sha256": "d75f316fb40e5abacf5087aca7cbb5a3c313ddd7a21bd44f74f524a83801e2a9"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-product/empty-v1-from-native-fixture.json",
+      "gitBlob": "3b84141dec5b19d9f1157b7d9e4d08809530d3f5",
+      "bytes": 511,
+      "sha256": "0ffb9ba27079e2aedb04ea85ceb4c6c691e4c44303e6e4556fc10a9f9c248977"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-product/invalid-duplicate-id.json",
+      "gitBlob": "46e4c72ed67dee8a8da8108f3d21ccb38f899179",
+      "bytes": 65855,
+      "sha256": "5b853d38797305b0b173d140b8e401c69e997eb7d76e7fa03d1aec75e4925197"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-product/roundtrip-result.json",
+      "gitBlob": "08e88d7877f10f73dd11efd31d65f8bbdc30adff",
+      "bytes": 1084,
+      "sha256": "4bc70d71762de8a8925050242dbaf125349364463d7d87c54cbf4c1ba5a1957f"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-qa-dependency-install.txt",
+      "gitBlob": "6c5102efa4955af6b3adca4f7b66e1469ec9e534",
+      "bytes": 731,
+      "sha256": "e33024e0ceb948847e86853b118f668b1dbb00f70b43eba98de75d0ff8328063"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-qa-server.txt",
+      "gitBlob": "a666f62df24937e3a179d9b4449c2aa7e65e3b7a",
+      "bytes": 1128,
+      "sha256": "86795ee3cfde7dbc405544dfe90706212edb32561e0ccc67d0145595525f5c55"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pr3-server.txt",
+      "gitBlob": "4a89a4f3320ff027876edcf831239a9a4d59532e",
+      "bytes": 4781,
+      "sha256": "1ca83ccba37cb18142f6c88e2a2e380350594a92a96db24c41fdb9a85b04c4a2"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/pwa-artifact-check.json",
+      "gitBlob": "f8c079196e7cdb70372f41012f4b7a7b8cee464f",
+      "bytes": 685,
+      "sha256": "0b4ad1af98c52d78c9682b5f1df27fdf48098dee23bbfaa3c2f8160eeaee1013"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/qa-servers.json",
+      "gitBlob": "270d026130dfcf7e5a01aadd97300b8604ce5bad",
+      "bytes": 323,
+      "sha256": "d82434cac5c5a12aeb3a9c21b9785c372c5d3300a613dc0174f00b7646116448"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/runtime-harness/README.md",
+      "gitBlob": "97c718acc6f7336cfc269b2ac95f51a059a8c039",
+      "bytes": 2700,
+      "sha256": "6bf42a898c824acb38e73ee7a9561a182034b349269393cc1e70071923986703"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/runtime-harness/harness.mjs",
+      "gitBlob": "46de56b175b92c50e236ff64a45706c85300de97",
+      "bytes": 29840,
+      "sha256": "d075b5d62fe5fb2002733058bbb13da0bfc7713937387aaf3c5b9e43c48006b6"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/runtime-harness/index.html",
+      "gitBlob": "2f5918f612162a02fcecbcad485e704551fa2cc9",
+      "bytes": 1960,
+      "sha256": "c68aefccade1ead434f1053d8155531737820ce01661f522de22aaa56d926dfb"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/runtime-revisions.json",
+      "gitBlob": "5f4931fccdcc5f883cf63d054416b1575adfc71e",
+      "bytes": 819,
+      "sha256": "c785fd47f69e3baa2abfbc26a0e3328f08d588aaab6c31b04dba359669064c7a"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/start_qa_servers.py",
+      "gitBlob": "5e9bd896e38de09cd88a7573dcf563282340125c",
+      "bytes": 1122,
+      "sha256": "579d1bed38781bf0d4d2c557291e746563540444bf41ae4322ed0f15a599b0e0"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/ui-cli/CLI_VERIFICATION.md",
+      "gitBlob": "f25057e580851db4be505a8b2de9627935c0e118",
+      "bytes": 733,
+      "sha256": "7d26f43d69bcda3775e49b996be8aa5306d725ea8e52cef9f352aa92643ae3ee"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/ui-cli/build.txt",
+      "gitBlob": "2499dc6c9d3cf87d0b3d9839659814ab2ac6e709",
+      "bytes": 1875,
+      "sha256": "3346c3f63d9579257f162944801fd43c52b75b02e5d9a96025de6d02442a6216"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/ui-cli/lint.txt",
+      "gitBlob": "316ff24ecef78ad1b45de9969e4b6ca3f4385ee3",
+      "bytes": 52,
+      "sha256": "8dcef344651fc3ba957542f1201d6f52c463c5dd574fa9f761f97065e42ad12e"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/ui-cli/regression.txt",
+      "gitBlob": "d57a76147c0f6c172a32d167f4c9d5604330773e",
+      "bytes": 568,
+      "sha256": "54980013ace114224fa30ecb4aaa0c3ba8ed94f8a5017121b93dabe2cd1b7405"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/ui-cli/results.json",
+      "gitBlob": "ae14f80d79035922bf2555bbd6dab8dd5d64d434",
+      "bytes": 1845,
+      "sha256": "d95723eb3f42bab280218805ebf62fc764a28dfefe32bf58beebe64e4a2857fd"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/ui-cli/run_checks.py",
+      "gitBlob": "41a0377286a8e95cb352b380a672dd2edffe8277",
+      "bytes": 1707,
+      "sha256": "7a168763779748194f770d8368d4bfc6404a1659c3f393c30c9726433c686f3d"
+    },
+    {
+      "path": "docs/qa/m1-desktop/evidence/ui-runtime.json",
+      "gitBlob": "c2dfa1a22d63b850aa038ed823287fc10957218d",
+      "bytes": 65360,
+      "sha256": "b8890868bec4c25b8a8aba251b86d00f6e7f494cabf55a5a55f19cddcd8159e2"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-dashboard-dark-1366.jpg",
+      "gitBlob": "e10fb7ce2149d0aa25d5d6527144ee88fc8f9e63",
+      "bytes": 91180,
+      "sha256": "ac82e6a76f550dc988f87020efde6e33afcaea90f30a89fec4eea5fa68cc14f6"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-dashboard-dark-320.jpg",
+      "gitBlob": "3ca2ece42dd66772b4b6fd4b933cab6062dcaef8",
+      "bytes": 23251,
+      "sha256": "5ed28274410fc375d71b6e4f2f75228ddeb1720ebf887b2d86fde4d9aba181ca"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-dashboard-dark-390.jpg",
+      "gitBlob": "194c49fe1fa315083414213ab69f1d01fe597ccf",
+      "bytes": 36326,
+      "sha256": "275af5fabac3e23a6de6d7c302f0204af6a69e34a6833a4b5798a531634c85a2"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-dashboard-light-1366.jpg",
+      "gitBlob": "dfb48ee291ec5360b92b7b7e3bd432174c193faf",
+      "bytes": 96434,
+      "sha256": "2ca0ea8ef04b8c4fa2c6e88928e0200616fac1597887f5de9158b5a6107b740f"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-dashboard-light-320.jpg",
+      "gitBlob": "5741872815df4d0d583ab9194119ce22429f2be2",
+      "bytes": 24881,
+      "sha256": "06fd4205c122429a912642cc2fbb51fd6fecf65f8f945be9de4cd4d2fcbf9948"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-dashboard-light-390.jpg",
+      "gitBlob": "cd1fc46574d664d31dd53099d62b983554c809db",
+      "bytes": 38107,
+      "sha256": "09352ba1e3d2f357678b5d623bbcabcc705e7c6ea41e7025c262f4fd13c5106f"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-drawer-dark-390.jpg",
+      "gitBlob": "f111d6f6f905ede9b5f49e558937d3776367435a",
+      "bytes": 25666,
+      "sha256": "b3e0003ca2dae1e74cf3b939be067c40d564cf5ec2cbb28cb8cc080a25457d6e"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-kinship-dark-390.jpg",
+      "gitBlob": "6b501f72c8cb91e5357322116d7cc3abc6b70d3f",
+      "bytes": 37188,
+      "sha256": "9295c594b78420ff23d4b92a93bc6713a69c50af766f50af6a8aa05814dea003"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-pin-dark-390.jpg",
+      "gitBlob": "92e0661de95301ce66833b3b48b1b42b0adb8149",
+      "bytes": 15682,
+      "sha256": "fbb5e53e7e4eb600c6f05d38dbb6676b901c3ad8d4ce02ba050e97bfdff6f9f0"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-qr-dark-390.jpg",
+      "gitBlob": "05c623d578a8ddcfb3ee5d70c2a7259e845e6a35",
+      "bytes": 37768,
+      "sha256": "866f011c76b473e53f334f8b4d5d7dfb03b3013a2ba1ac834d1b1c2f5e568ebe"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-search-dark-390.jpg",
+      "gitBlob": "9df130c6876d2e34df87e2013907cbf8c54e5981",
+      "bytes": 43255,
+      "sha256": "db528c803db77958d9dd56ecb94485ef25e7d869320bf705997822285de8a78e"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-tour-dark-390.jpg",
+      "gitBlob": "5e1b0f7553ae6d7ff9c6843e315542a290dde6ad",
+      "bytes": 48406,
+      "sha256": "53c813330874f514fd813fef27fed44e1874ffdef88b4f4a7bfe92ad84d21666"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/after-tour-light-390.jpg",
+      "gitBlob": "46b4792df08baa0828d5c444ba488d6b9840d192",
+      "bytes": 45014,
+      "sha256": "0ec0f6c8053c308adc1cc30752a452007394bd2b837068ad82267e0acd010b55"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/before-dashboard-dark-1366.jpg",
+      "gitBlob": "4204fb83239c4d35c781f68b219378773575c0ff",
+      "bytes": 41606,
+      "sha256": "d88b5df7841571d3d594e9eeadc1e44c57cb8baf9529718a36f82e81937a8510"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/before-dashboard-dark-320.jpg",
+      "gitBlob": "9d80c75353bf83becdb680f396b7d2e82b5330ff",
+      "bytes": 22045,
+      "sha256": "69f9ef0fd8ed90a48eca48820ad37da3aab9fd92386027d9ae22184e894b76ec"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/before-dashboard-dark-390.jpg",
+      "gitBlob": "73325ab304e63b8a15f5d01dded028da11022a5c",
+      "bytes": 36057,
+      "sha256": "12a4b3ae6ebbb163a2edb91168899f81364e5b9eeca0a4a3de3c00339af6a419"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/before-dashboard-light-1366.jpg",
+      "gitBlob": "1f6725bf34dab18ba4a869bc2aaac32af07223e4",
+      "bytes": 99750,
+      "sha256": "d70eb30880f68271eaaaa5d8bbfb0b2a3bdbf7bd1f52f35d157a8e71e8be06ee"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/before-dashboard-light-320.jpg",
+      "gitBlob": "ea56192e24045590b4ac3cbfd456c343a4fd7c36",
+      "bytes": 19361,
+      "sha256": "8574b5d594af4c4e985fcc62c44c74fe1d0083e4e9c4adb146105accd719ca43"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/before-dashboard-light-390.jpg",
+      "gitBlob": "4163449b7dbeb2fde3504f57e0bd2d27a73c43e1",
+      "bytes": 38381,
+      "sha256": "d09b38d5ebe139fca9583f8c6bbc12517e15e843a97b5f29cfeafa7a9e5af598"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/before-tour-dark-390.jpg",
+      "gitBlob": "aeb5e85837da8ca0f982d3d86bbee373b75afa35",
+      "bytes": 32511,
+      "sha256": "2ed40e01b5c3c19a2fbeb9188ee2042ae131bacd715bf96ba14412d2cd7e6354"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/pr2-merge-after.jpg",
+      "gitBlob": "3221962d4005380a6434c560acf054572b0b8aeb",
+      "bytes": 38336,
+      "sha256": "669a8fb47d176cc9e4f4c7ff02799e98aacabd84fe1bf270bb06857e3bb6705e"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/pr2-merge-before.jpg",
+      "gitBlob": "26b9be50b96c9b070883304e8ac895e247fb7c8a",
+      "bytes": 45178,
+      "sha256": "3d83651f8f150f6aaef35171a3738ec8bf566d2375f2bf2e6bb585bceb94600d"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/pr2-story-after.jpg",
+      "gitBlob": "d56611d895a2160f17559b72cba0db156b92951c",
+      "bytes": 76831,
+      "sha256": "65b3d12a1a5a85e7eef332f020fe528e51e77d779bd92caa95ecc60164b79fae"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/pr3-duplicate-id-error.jpg",
+      "gitBlob": "fa040f8213eed1fa962259ac7582221afafbf813",
+      "bytes": 22814,
+      "sha256": "7cebd8725f15cb6e1e2bd7138278e4d95eb68eb429f96610349124b6a3ebdc9a"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/pr3-empty-after-reload.jpg",
+      "gitBlob": "4069b00efafe83a3d67b2cb45ed17a56411f883a",
+      "bytes": 64796,
+      "sha256": "6a80c09f3ba1d407c6a5d9e81701dc18dc7d788700b77f069352f6f44fe9a39f"
+    },
+    {
+      "path": "docs/qa/m1-desktop/screenshots/pr3-json-confirm.jpg",
+      "gitBlob": "09bc3d9d08332cff32d6bf6d9700ba1eafa381e6",
+      "bytes": 35438,
+      "sha256": "c091f3b3273a7e22d42391459830ebcbb83b16188d8a54cfa172c7bac1b254cd"
+    }
+  ]
+}
