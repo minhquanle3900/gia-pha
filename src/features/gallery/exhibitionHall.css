@@ -423,7 +423,8 @@
   position: fixed;
   inset: 0;
   box-sizing: border-box;
-  width: 100%;
+  width: 100vw;
+  width: 100dvw;
   max-width: none;
   height: 100%;
   height: 100dvh;

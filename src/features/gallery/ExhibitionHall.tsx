@@ -153,7 +153,7 @@ function ExhibitDetail({ exhibit, media, people, branchName, onOpenBranch, onOpe
   if (exhibit.kind === 'reference') {
     return (
       <div className="exhibition-detail-layout">
-        <figure className="exhibition-detail-art exhibition-detail-couplet">
+        <figure className="exhibition-detail-art exhibition-detail-couplet exhibition-art-calligraphy">
           <blockquote><Couplet lines={exhibit.lines} vertical /></blockquote>
           <figcaption className="exhibition-caption">
             <span>Câu đối tham khảo</span>
