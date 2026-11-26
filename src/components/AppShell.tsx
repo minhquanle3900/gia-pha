@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { BarChart3, BookOpen, Calendar, Compass, Database, GitFork, GitMerge, HelpCircle, Landmark, MapPin, Moon, MoreHorizontal, Plus, QrCode, ShieldAlert, ShieldCheck, Sun, Users, X } from 'lucide-react';
+import { ArrowLeft, BarChart3, Calendar, Compass, Database, GitFork, GitMerge, HardDrive, HelpCircle, Landmark, MapPin, Moon, MoreHorizontal, Plus, QrCode, ShieldAlert, ShieldCheck, Sun, Users, X } from 'lucide-react';
 import { useGenealogy } from '../context/GenealogyContext';
 import { usePreferences } from '../hooks/usePreferences';
 import { usePrivacyShield } from '../hooks/usePrivacyShield';
@@ -9,6 +9,9 @@ import { GlobalSearch } from './GlobalSearch';
 import { PrivacyPinModal } from './PrivacyPinModal';
 import { PWAWidgets } from './PWAWidgets';
 import { GROUP_DESTINATIONS, NAVIGATION_GROUPS, NavigationDestination, NavigationGroup, PAGE_GROUP } from './navigation';
+import { LocalDataSafetyPanel } from '../features/data-safety/LocalDataSafetyPanel';
+import { StoragePressureNotice } from '../features/data-safety/StoragePressureNotice';
+import { useDeviceStorageStatus } from '../features/data-safety/useDeviceStorageStatus';
 
 interface AppShellProps {
   activeTab: NavigationTab;
@@ -35,13 +38,39 @@ export const AppShell: React.FC<AppShellProps> = ({ activeTab, galleryView = 'ar
   const { preferences, toggleTheme } = usePreferences();
   const { isShieldActive, hasPin, lockShield } = usePrivacyShield();
   const [moreOpen, setMoreOpen] = useState(false);
+  const [moreView, setMoreView] = useState<'tools' | 'device'>('tools');
+  const storage = useDeviceStorageStatus();
   const [pinOpen, setPinOpen] = useState(false);
   const [pinMode, setPinMode] = useState<'unlock' | 'setup'>('unlock');
   const moreRef = useRef<HTMLDivElement>(null);
   const returnRef = useRef<HTMLElement | null>(null);
   const pendingAction = useRef<(() => void) | null>(null);
+  const moreHeadingRef = useRef<HTMLHeadingElement>(null);
+  const deviceEntryRef = useRef<HTMLButtonElement>(null);
+  const desktopMoreRef = useRef<HTMLButtonElement>(null);
+  const mobileMoreRef = useRef<HTMLButtonElement>(null);
+  const viewFocus = useRef<'heading' | 'entry' | null>(null);
   const group = PAGE_GROUP[activeTab];
-  const { requestClose } = useModalAccessibility({ open: moreOpen, dialogRef: moreRef, returnFocusRef: returnRef, onRequestClose: () => setMoreOpen(false) });
+  const closeMore = () => {
+    if (!returnRef.current?.isConnected) {
+      returnRef.current = [desktopMoreRef.current, mobileMoreRef.current].find(element => element?.getClientRects().length) ?? null;
+    }
+    setMoreOpen(false);
+  };
+  const { requestClose } = useModalAccessibility({ open: moreOpen, dialogRef: moreRef, returnFocusRef: returnRef, onRequestClose: closeMore });
+  const openDeviceDetails = () => {
+    if (!moreOpen) returnRef.current = document.activeElement instanceof HTMLElement ? document.activeElement : null;
+    viewFocus.current = 'heading';
+    setMoreView('device');
+    setMoreOpen(true);
+    void storage.refresh();
+  };
+  useEffect(() => {
+    if (!moreOpen || !viewFocus.current) return;
+    const target = viewFocus.current === 'heading' ? moreHeadingRef.current : deviceEntryRef.current;
+    viewFocus.current = null;
+    target?.focus({ preventScroll: true });
+  }, [moreOpen, moreView]);
   const launch = (action: () => void) => {
     if (!moreOpen) { action(); return; }
     pendingAction.current = action;
@@ -67,7 +96,7 @@ export const AppShell: React.FC<AppShellProps> = ({ activeTab, galleryView = 'ar
     : destination === 'gallery' ? activeTab === 'gallery' && galleryView === 'archive' : activeTab === destination;
   const openGroup = (item: typeof NAVIGATION_GROUPS[number], trigger: HTMLButtonElement) => {
     if (item.destination) navigate(item.destination);
-    else { returnRef.current = trigger; setMoreOpen(true); }
+    else { returnRef.current = trigger; viewFocus.current = null; setMoreView('tools'); setMoreOpen(true); }
   };
   const destinations = (scope: NavigationGroup) => GROUP_DESTINATIONS[scope].map(item => (
     <button type="button" key={item.destination} onClick={() => navigate(item.destination)} aria-current={selected(item.destination) ? 'page' : undefined}
@@ -75,14 +104,14 @@ export const AppShell: React.FC<AppShellProps> = ({ activeTab, galleryView = 'ar
       {item.label}
     </button>
   ));
-  const brand = <><span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-xl border border-[#2B4B3A] bg-forest-800 font-serif text-lg text-[#DBC599]">源</span><span className="min-w-0"><span data-calligraphy-slot="brand" className="block truncate font-serif text-lg leading-tight font-bold text-forest-800 dark:text-stone-100">Cội Nguồn</span><span data-calligraphy-slot="clan-name" className="block truncate text-xs text-bark-600 dark:text-stone-300">{settings.clanName || 'Gia Phả Việt'}</span></span></>;
+  const brand = <><span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-xl border border-[#2B4B3A] bg-forest-800 font-serif text-lg text-[#DBC599]">源</span><span className="min-w-0"><span data-calligraphy-slot="brand" className="heritage-display block truncate text-xl text-forest-800 dark:text-stone-100">Cội Nguồn</span><span data-calligraphy-slot="clan-name" className="heritage-heading block truncate text-sm text-bark-600 dark:text-stone-300">{settings.clanName || 'Gia Phả Việt'}</span></span></>;
 
   return <div className="app-shell min-h-screen min-w-0 bg-ivory-50 text-bark-900">
     <aside className="app-sidebar print:hidden fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-ivory-200 bg-[#FFFDF9] dark:border-[#374A3D] lg:flex" aria-label="Điều hướng trên máy tính">
       <button type="button" onClick={() => navigate('dashboard')} className="flex min-h-20 min-w-0 items-center gap-2 border-b border-ivory-200 p-4 text-left dark:border-[#374A3D]">{brand}</button>
       <nav aria-label="Năm nhóm chức năng" className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain p-3">
         {NAVIGATION_GROUPS.map(item => { const Icon = groupIcons[item.id]; return <div key={item.id}>
-          <button type="button" onClick={event => openGroup(item, event.currentTarget)} aria-current={group === item.id ? 'true' : undefined} aria-haspopup={item.id === 'more' ? 'dialog' : undefined}
+          <button type="button" ref={item.id === 'more' ? desktopMoreRef : undefined} onClick={event => openGroup(item, event.currentTarget)} aria-current={group === item.id ? 'true' : undefined} aria-haspopup={item.id === 'more' ? 'dialog' : undefined}
             className={'flex min-h-12 w-full items-center gap-3 rounded-xl px-3 text-left text-sm font-semibold ' + (group === item.id ? 'bg-forest-800 text-white' : 'text-bark-800 hover:bg-ivory-100 dark:text-stone-200 dark:hover:bg-[#26382D]')}><Icon aria-hidden="true" className="size-5 shrink-0" />{item.label}</button>
           {group === item.id && GROUP_DESTINATIONS[item.id].length > 0 && <div className="ml-5 mt-1 grid border-l border-ivory-200 pl-2 dark:border-[#374A3D]">{destinations(item.id)}</div>}
         </div>; })}
@@ -105,6 +134,7 @@ export const AppShell: React.FC<AppShellProps> = ({ activeTab, galleryView = 'ar
       </header>
       <main className="app-main min-w-0">
         <div className="app-content mx-auto min-w-0 max-w-7xl space-y-4 pt-4 sm:pt-6">
+          <StoragePressureNotice storage={storage} onOpenDetails={openDeviceDetails} />
           {GROUP_DESTINATIONS[group].length > 0 && <nav aria-label={'Chức năng ' + NAVIGATION_GROUPS.find(item => item.id === group)?.label} className="print:hidden flex min-w-0 flex-wrap gap-2 lg:hidden">{destinations(group)}</nav>}
           {group === 'genealogy' && <div className="print:hidden flex flex-wrap gap-2">{onOpenKinship && <button type="button" className={actionClass} onClick={onOpenKinship}><Users className="size-4" />Tra vai vế</button>}</div>}
           {children}
@@ -112,12 +142,17 @@ export const AppShell: React.FC<AppShellProps> = ({ activeTab, galleryView = 'ar
       </main>
     </div>
     <nav aria-label="Điều hướng chính" className="app-bottom-nav print:hidden fixed inset-x-0 bottom-0 z-40 border-t border-ivory-200 bg-[#FFFDF9]/95 backdrop-blur-md dark:border-[#374A3D] lg:hidden">
-      <div className="grid grid-cols-5 gap-1">{NAVIGATION_GROUPS.map(item => { const Icon = groupIcons[item.id]; return <button type="button" key={item.id} onClick={event => openGroup(item, event.currentTarget)} aria-current={group === item.id ? 'true' : undefined} aria-haspopup={item.id === 'more' ? 'dialog' : undefined} className={'flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 text-[11px] font-semibold ' + (group === item.id ? 'bg-forest-50 text-forest-800 dark:bg-[#25372C] dark:text-emerald-200' : 'text-bark-600 dark:text-stone-300')}><Icon aria-hidden="true" className="size-5" /><span>{item.label}</span></button>; })}</div>
+      <div className="grid grid-cols-5 gap-1">{NAVIGATION_GROUPS.map(item => { const Icon = groupIcons[item.id]; return <button type="button" key={item.id} ref={item.id === 'more' ? mobileMoreRef : undefined} onClick={event => openGroup(item, event.currentTarget)} aria-current={group === item.id ? 'true' : undefined} aria-haspopup={item.id === 'more' ? 'dialog' : undefined} className={'flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 text-[11px] font-semibold ' + (group === item.id ? 'bg-forest-50 text-forest-800 dark:bg-[#25372C] dark:text-emerald-200' : 'text-bark-600 dark:text-stone-300')}><Icon aria-hidden="true" className="size-5" /><span>{item.label}</span></button>; })}</div>
     </nav>
     {moreOpen && <div className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 sm:items-center sm:justify-center sm:p-4" onClick={() => requestClose('backdrop')}>
       <div ref={moreRef} role="dialog" aria-modal="true" aria-labelledby="more-tools-heading" tabIndex={-1} onClick={event => event.stopPropagation()} className="mobile-safe-dialog app-mobile-tools flex max-h-[100dvh] w-full flex-col rounded-t-3xl border border-ivory-200 bg-[#FFFDF9] p-4 shadow-2xl dark:border-[#374A3D] sm:max-h-[calc(100dvh-2rem)] sm:max-w-xl sm:rounded-3xl">
-        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-ivory-200 pb-3 dark:border-[#374A3D]"><h2 id="more-tools-heading" className="font-serif text-2xl font-bold">Tiện ích dòng họ</h2><button type="button" className={actionClass} aria-label="Đóng tiện ích" onClick={() => requestClose('button')}><X className="size-5" /></button></div>
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-ivory-200 pb-3 dark:border-[#374A3D]"><h2 ref={moreHeadingRef} id="more-tools-heading" tabIndex={-1} className={moreView === 'device' ? 'heritage-ui text-xl font-bold' : 'font-serif text-2xl font-bold'}>{moreView === 'device' ? 'Dữ liệu trên thiết bị' : 'Tiện ích dòng họ'}</h2><button type="button" className={actionClass} aria-label="Đóng tiện ích" onClick={() => requestClose('button')}><X className="size-5" /></button></div>
         <div className="min-h-0 space-y-4 overflow-y-auto overscroll-contain py-4">
+          {moreView === 'device' ? <>
+            <button type="button" className={actionClass} onClick={() => { viewFocus.current = 'entry'; setMoreView('tools'); }}><ArrowLeft className="size-4" />Về tiện ích</button>
+            <LocalDataSafetyPanel settings={settings} storage={storage} onOpenBackup={() => navigate('data')} />
+          </> : <>
+          <button ref={deviceEntryRef} type="button" className={actionClass + ' w-full justify-start'} onClick={openDeviceDetails}><HardDrive className="size-4 shrink-0" />Dữ liệu trên thiết bị</button>
           <div className="grid gap-2 sm:grid-cols-3">{GROUP_DESTINATIONS.more.map(item => {const Icon = pageIcons[item.destination as keyof typeof pageIcons];return <button key={item.destination} type="button" className={actionClass + ' justify-start'} onClick={() => navigate(item.destination)}><Icon className="size-4 shrink-0" />{item.label}</button>;})}</div>
           <div className="grid grid-cols-2 gap-2">
             {onOpenKinship && <button type="button" className={actionClass} onClick={() => launch(onOpenKinship)}><Users className="size-4" />Tra vai vế</button>}
@@ -127,6 +162,7 @@ export const AppShell: React.FC<AppShellProps> = ({ activeTab, galleryView = 'ar
             <button type="button" className={actionClass} onClick={toggleTheme}>{preferences.theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}Sáng / tối</button>
             <button type="button" className={actionClass} onClick={() => launch(shield)}>{isShieldActive ? <ShieldAlert className="size-4" /> : <ShieldCheck className="size-4" />}Riêng tư / PIN</button>
           </div>
+          </>}
         </div>
       </div>
     </div>}

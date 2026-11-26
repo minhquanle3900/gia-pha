@@ -403,7 +403,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
   const moreMenuRef = useRef<HTMLDivElement | null>(null);
   const viewMenuRef = useRef<HTMLDivElement | null>(null);
   const workspaceHeader = <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-ivory-200 bg-ivory-50 p-3 dark:border-[#374A3D]">
-    <h2 data-calligraphy-slot="tree-title" className="font-serif text-xl font-bold text-forest-800 dark:text-stone-100">Cây gia phả</h2>
+    <h2 data-calligraphy-slot="tree-title" className="heritage-heading text-xl font-bold text-forest-800 dark:text-stone-100">Cây gia phả</h2>
     <div className="flex gap-2">
       {chartType === 'tree' && <button type="button" className="min-h-11 rounded-xl border border-ivory-300 px-3 text-sm sm:hidden" aria-expanded={filtersOpen} aria-controls="tree-filter-controls" onClick={() => setFiltersOpen(value => !value)}>Lọc & tìm</button>}
       <button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-ivory-300 px-3 text-sm" onClick={() => { void workspace.toggle(); }}><Maximize2 className="size-4" />{workspace.active ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</button>

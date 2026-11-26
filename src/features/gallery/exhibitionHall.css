@@ -104,7 +104,8 @@
   text-wrap: balance;
 }
 
-.exhibition-hero h2.heritage-display { font-weight: 400; line-height: 1.16; }
+.exhibition-hero h2.heritage-display,
+.exhibition-interior-header h2.heritage-display { font-weight: 400; line-height: 1.16; }
 
 .exhibition-hero p {
   max-width: 28rem;

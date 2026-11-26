@@ -344,6 +344,9 @@ export default function ExhibitionHall({ onOpenArchive, onNavigate, onSelectPers
     const canOpenJournal = view.kind === 'collections' || (view.kind === 'room' && (view.room === 'precepts' || view.room === 'memories'));
     const EmptyIcon = room?.icon ?? Layers3;
     const emptyTitle = view.kind === 'collections' ? 'Chưa có bộ sưu tập' : 'Chưa có mục trưng bày';
+    const titleSlot = view.kind === 'collection' && view.key.startsWith('branch:')
+      ? 'branch-title'
+      : view.kind === 'room' && view.room === 'portraits' ? 'memorial-title' : undefined;
 
     return (
       <div className="exhibition" ref={root}>
@@ -354,7 +357,7 @@ export default function ExhibitionHall({ onOpenArchive, onNavigate, onSelectPers
 
         <header className="exhibition-interior-header">
           <span className="exhibition-eyebrow">{exhibit ? exhibitSubtitle(exhibit) : 'Phòng trưng bày'}</span>
-          <h2 ref={heading} tabIndex={-1}>{titleOf(view)}</h2>
+          <h2 ref={heading} tabIndex={-1} data-calligraphy-slot={titleSlot} className={titleSlot ? 'heritage-display' : undefined}>{titleOf(view)}</h2>
           {room?.description && <p>{room.description}</p>}
           {collection?.description && <p>{collection.description}</p>}
           {view.kind === 'collections' && <p>Khám phá tư liệu theo chi họ và chủ đề trong nhật ký.</p>}
