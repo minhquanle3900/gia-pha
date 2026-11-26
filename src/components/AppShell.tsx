@@ -242,7 +242,7 @@ export const AppShell: React.FC<AppShellProps> = ({
                         className={`w-full flex items-start gap-2.5 p-2 rounded-xl text-left transition-colors ${
                           isActive
                             ? 'bg-[#1B3B2B]/10 text-[#1B3B2B] font-bold'
-                            : 'hover:bg-stone-100 text-[#3C3228]'
+                            : 'hover:bg-stone-100 text-[#3C3228] dark:text-[#EDE6DC]'
                         }`}
                       >
                         <Icon className="w-4 h-4 text-[#8C6D32] shrink-0 mt-0.5" />
@@ -261,7 +261,7 @@ export const AppShell: React.FC<AppShellProps> = ({
                       <button
                         type="button"
                         onClick={() => launchTool(onOpenKinship, 'desktop')}
-                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] hover:bg-stone-100 text-left"
+                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] dark:text-[#EDE6DC] hover:bg-stone-100 text-left"
                       >
                         <Users className="w-3.5 h-3.5 text-[#1B3B2B]" />
                         <span>Tra xưng hô họ hàng tự động</span>
@@ -271,7 +271,7 @@ export const AppShell: React.FC<AppShellProps> = ({
                       <button
                         type="button"
                         onClick={() => launchTool(onOpenQRShare, 'desktop')}
-                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] hover:bg-stone-100 text-left"
+                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] dark:text-[#EDE6DC] hover:bg-stone-100 text-left"
                       >
                         <QrCode className="w-3.5 h-3.5 text-[#1B3B2B]" />
                         <span>Tạo mã QR chia sẻ ngoại tuyến</span>
