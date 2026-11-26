@@ -38,6 +38,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
   onOpenTour,
 }) => {
   const { people, branches, media, stories, settings } = useGenealogy();
+  const clanMotto = settings.clanMotto || 'Cây có cội mới trổ cành xanh lá, nước có nguồn mới bủa khắp rạch sông.';
 
   const livingCount = useMemo(() => people.filter((person) => person.isLiving).length, [people]);
   const deceasedCount = people.length - livingCount;
@@ -77,11 +78,12 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
           <div className="absolute inset-[4.5rem] rounded-full border border-[#D8BD82]/10" />
         </div>
         <div className="min-w-0 max-w-2xl">
-          <h1 id="dashboard-title" className="text-3xl font-bold leading-[1.05] tracking-tight text-[#FFFDF9] [overflow-wrap:anywhere] sm:text-5xl">
+          <p className="heritage-display mb-1 text-xl text-[#E3CA91] sm:text-2xl">Cội Nguồn</p>
+          <h1 id="dashboard-title" className="heritage-display text-3xl text-[#FFFDF9] [overflow-wrap:anywhere] sm:text-5xl">
             {settings.clanName || 'Dòng họ Việt Nam'}
           </h1>
-          <p className="mt-3 max-w-lg font-serif text-base italic leading-snug text-[#F1E8D6] [overflow-wrap:anywhere] sm:text-lg">
-            {settings.clanMotto || 'Cây có cội mới trổ cành xanh lá, nước có nguồn mới bủa khắp rạch sông.'}
+          <p className={`mt-3 max-w-lg text-base text-[#F1E8D6] [overflow-wrap:anywhere] sm:text-lg ${clanMotto.length <= 100 ? 'heritage-intro' : 'heritage-body'}`}>
+            {clanMotto}
           </p>
           {settings.ancestralHallLocation && (
             <p className="mt-3 flex items-start gap-2 text-sm leading-snug text-[#E4DAC7]">

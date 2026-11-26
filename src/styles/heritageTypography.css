@@ -1,0 +1,82 @@
+@font-face {
+  font-family: "Charm";
+  src: url("./fonts/Charm-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Viaoda Libre";
+  src: url("./fonts/ViaodaLibre-Regular.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("./fonts/CormorantGaramond-Latin-Vietnamese.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  src: url("./fonts/CormorantGaramond-Italic-Latin-Vietnamese.woff2") format("woff2");
+  font-style: italic;
+  font-weight: 300 700;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Plus Jakarta Sans";
+  src: url("./fonts/PlusJakartaSans-Latin-Vietnamese.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 200 800;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "JetBrains Mono";
+  src: url("./fonts/JetBrainsMono-Latin-Vietnamese.woff2") format("woff2");
+  font-style: normal;
+  font-weight: 100 800;
+  font-display: swap;
+}
+
+:root {
+  /* Charm is the licensed artwork fallback while the Vietnamese brush face is unresolved. */
+  --heritage-font-brush: "Charm", "Cormorant Garamond", Georgia, serif;
+  --heritage-font-display: "Viaoda Libre", "Cormorant Garamond", Georgia, serif;
+  --heritage-font-heading: "Cormorant Garamond", Georgia, Cambria, "Times New Roman", serif;
+  --heritage-font-body: "Plus Jakarta Sans", system-ui, sans-serif;
+  --heritage-font-ui: "Plus Jakarta Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.heritage-brush,
+.heritage-display,
+.heritage-intro {
+  font-weight: 400;
+  font-style: normal;
+  font-synthesis: none;
+  letter-spacing: normal;
+}
+
+.heritage-brush {
+  font-family: var(--heritage-font-brush);
+  line-height: 1.32;
+}
+
+.heritage-display,
+.heritage-intro {
+  font-family: var(--heritage-font-display);
+  overflow-wrap: anywhere;
+}
+
+.heritage-display { line-height: 1.16; }
+.heritage-intro { line-height: 1.45; }
+.heritage-heading { font-family: var(--heritage-font-heading); }
+.heritage-body { font-family: var(--heritage-font-body); line-height: 1.65; }
+.heritage-ui { font-family: var(--heritage-font-ui); }

@@ -6,7 +6,7 @@ import {
 import { useGenealogy } from '../../context/GenealogyContext';
 import type { Media } from '../../models/genealogy';
 import { buildExhibitionCatalog, buildExhibitionCollections, type Exhibit, type RoomId } from './exhibitionCatalog';
-import { ArtworkFullscreen, Couplet } from './ExhibitionArtwork';
+import { ArtworkFullscreen, Couplet, CoupletDetail } from './ExhibitionArtwork';
 import hallImage from './exhibition-hall.webp?inline';
 import './exhibitionHall.css';
 
@@ -151,24 +151,7 @@ function ExhibitDetail({ exhibit, media, people, branchName, onOpenBranch, onOpe
   onOpenBranch?: () => void;
 } & ExhibitionHallProps) {
   if (exhibit.kind === 'reference') {
-    return (
-      <div className="exhibition-detail-layout">
-        <figure className="exhibition-detail-art exhibition-detail-couplet exhibition-art-calligraphy">
-          <blockquote><Couplet lines={exhibit.lines} vertical /></blockquote>
-          <figcaption className="exhibition-caption">
-            <span>Câu đối tham khảo</span>
-            <ArtworkFullscreen title={exhibit.title}><Couplet lines={exhibit.lines} vertical /></ArtworkFullscreen>
-          </figcaption>
-        </figure>
-        <div className="exhibition-detail-copy">
-          <h3>Về câu đối</h3>
-          <p>{exhibit.key === 'reference:ancestral-merit'
-            ? 'Cặp câu gợi nhắc công đức của tổ tiên và lòng hiếu thảo của con cháu.'
-            : 'Cặp câu chúc năm mới thêm phúc, thọ và bình an.'}</p>
-          <p className="exhibition-detail-note">Nguồn và dị bản chưa được xác minh.</p>
-        </div>
-      </div>
-    );
+    return <CoupletDetail title={exhibit.title} lines={exhibit.lines} isAncestral={exhibit.key === 'reference:ancestral-merit'} />;
   }
 
   const item = exhibit.kind === 'media' ? exhibit.media : undefined;
@@ -411,8 +394,8 @@ export default function ExhibitionHall({ onOpenArchive, onNavigate, onSelectPers
         <img src={hallImage} alt="" aria-hidden="true" className="exhibition-hero-image" />
         <span className="exhibition-hero-caption">Ảnh minh họa</span>
         <div className="exhibition-hero-content">
-          <span className="exhibition-eyebrow">Di sản gia tộc</span>
-          <h2 ref={heading} tabIndex={-1}>Phòng trưng bày</h2>
+          <span className="exhibition-plaque heritage-display">Di sản gia tộc</span>
+          <h2 ref={heading} tabIndex={-1} className="heritage-display">Phòng trưng bày</h2>
           <p>Thư pháp, ảnh xưa và lời dạy được gìn giữ qua các thế hệ.</p>
           <div className="exhibition-hero-actions">
             <button type="button" className="exhibition-hero-primary" onClick={() => {
