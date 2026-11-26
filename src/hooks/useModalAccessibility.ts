@@ -75,6 +75,8 @@ export function useModalAccessibility({
 
     const handleKeyDown = (event: KeyboardEvent) => {
       if (modalStack.at(-1) !== id) return;
+      const nativeDialog = document.querySelector<HTMLDialogElement>('dialog[open]');
+      if (nativeDialog && !dialog.contains(nativeDialog) && nativeDialog.getClientRects().length > 0) return;
       if (event.key === 'Escape') {
         event.preventDefault();
         event.stopPropagation();
@@ -103,6 +105,7 @@ export function useModalAccessibility({
 
     const handleFocusIn = (event: FocusEvent) => {
       if (modalStack.at(-1) !== id || dialog.contains(event.target as Node)) return;
+      if ((event.target as Element)?.closest('dialog[open]')) return;
       focusInitial();
     };
 
@@ -119,7 +122,7 @@ export function useModalAccessibility({
         const nextTopmost = modalStack.at(-1);
         queueMicrotask(() => {
           if (!trigger.isConnected || modalStack.at(-1) !== nextTopmost) return;
-          const otherDialog = Array.from(document.querySelectorAll<HTMLElement>('[aria-modal="true"]'))
+          const otherDialog = Array.from(document.querySelectorAll<HTMLElement>('[aria-modal="true"], dialog[open]'))
             .some((element) => element !== dialog && element.getClientRects().length > 0 && !element.contains(trigger));
           if (!otherDialog) trigger.focus({ preventScroll: true });
         });

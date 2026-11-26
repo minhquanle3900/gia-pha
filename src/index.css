@@ -386,3 +386,48 @@ html.dark {
   }
 }
 
+.app-sidebar { padding-left: env(safe-area-inset-left, 0px); }
+html.dark .app-shell { background-color: #101713; color: #EDE6DC; }
+html.dark .app-shell :where(.bg-ivory-50, .bg-ivory-50\/95) { background-color: #101713; }
+html.dark .app-shell :where(.text-bark-600) { color: #C6BCAF; }
+html.dark .app-shell :where(.text-bark-800, .text-bark-900) { color: #EDE6DC; }
+html.dark .app-shell :where(.text-forest-800):not(.bg-forest-800) { color: #9DDBB8; }
+.genealogy-workspace {
+  height: clamp(25rem, calc(100dvh - 14rem), 64rem);
+  min-width: 0;
+}
+.genealogy-workspace.is-expanded,
+.genealogy-workspace:fullscreen {
+  position: fixed;
+  inset: 0;
+  z-index: 45;
+  width: 100%;
+  height: 100dvh;
+  max-height: none;
+  border-radius: 0;
+  padding-top: env(safe-area-inset-top, 0px);
+  padding-bottom: env(safe-area-inset-bottom, 0px);
+}
+.genealogy-workspace button,
+.genealogy-workspace select,
+.genealogy-members button,
+.genealogy-members select {
+  min-height: 44px;
+  min-width: 44px;
+}
+.genealogy-workspace input,
+.genealogy-members input { min-height: 44px; }
+.tree-filter-controls { max-width: 100%; }
+.tree-filter-controls > * { min-width: 0; max-width: 100%; }
+html.dark .genealogy-workspace :is(.bg-\[\#EAE3D6\], .bg-\[\#EFE9DF\], .bg-\[\#F7F2E7\], .bg-\[\#FAF5EB\], .bg-white\/90) { background-color: #1F2E25; }
+html.dark .genealogy-workspace :is(.text-\[\#3A2E25\], .text-\[\#3E342B\], .text-\[\#4A3F35\], .text-\[\#695E52\]) { color: #D1C7BA; }
+.person-profile button { min-height: 44px; min-width: 44px; }
+.person-profile { overflow-wrap: anywhere; }
+.fan-toolbar { flex-shrink: 0; max-height: 42%; overflow: auto; overscroll-behavior: contain; }
+.fan-toolbar > div { flex-wrap: wrap; min-width: 0; max-width: 100%; }
+.genealogy-members .overflow-x-auto { overscroll-behavior-x: contain; max-width: 100%; }
+@media (max-width: 639px) {
+  .genealogy-workspace input, .genealogy-workspace select,
+  .genealogy-members input, .genealogy-members select { font-size: 16px; }
+}
+
