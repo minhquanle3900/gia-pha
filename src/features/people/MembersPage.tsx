@@ -580,15 +580,16 @@ export const MembersPage: React.FC<MembersPageProps> = ({
 
       {/* People Results Display */}
       {filteredPeople.length === 0 ? (
-        <div className="p-12 text-center bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] space-y-3">
+        <div className="p-6 sm:p-12 text-center bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] space-y-3">
           <Users className="w-10 h-10 text-stone-300 mx-auto" />
-          <p className="text-sm font-serif font-bold text-stone-700">
-            Không tìm thấy thành viên nào phù hợp với bộ lọc
+          <p className="heritage-ui text-sm font-bold text-stone-700">
+            {people.length === 0 ? 'Chưa có thành viên trong gia phả' : 'Không tìm thấy thành viên nào phù hợp với bộ lọc'}
           </p>
           <p className="text-xs text-stone-500">
-            Hãy thử xóa bớt tiêu chí lọc hoặc thay đổi từ khóa tìm kiếm.
+            {people.length === 0 ? 'Thêm thành viên đầu tiên hoặc khôi phục bản sao JSON đã có trong Dữ liệu & sao lưu.' : 'Hãy thử xóa bớt tiêu chí lọc hoặc thay đổi từ khóa tìm kiếm.'}
           </p>
-          {hasActiveFilters && (
+          {people.length === 0 && <button type="button" onClick={onAddPerson} className="min-h-11 w-full sm:w-auto rounded-xl bg-[#1B3B2B] px-4 py-2 text-sm font-semibold text-white hover:bg-[#28503C]">Thêm thành viên đầu tiên</button>}
+          {people.length > 0 && hasActiveFilters && (
             <button
               type="button"
               onClick={handleResetFilters}
