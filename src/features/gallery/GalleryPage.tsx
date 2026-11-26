@@ -1,5 +1,6 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import {
+  ArrowLeft,
   Calendar,
   Camera,
   Mic,
@@ -11,11 +12,14 @@ import {
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
-import { Media, MediaCategory } from '../../models/genealogy';
+import { Media, MediaCategory, NavigationTab } from '../../models/genealogy';
 import { compressImageFile } from '../../utils/imageUtils';
 import { AudioRecorderModal } from './AudioRecorderModal';
 
+const ExhibitionHall = lazy(() => import('./ExhibitionHall'));
+
 interface GalleryPageProps {
+  onNavigate: (tab: NavigationTab) => void;
   onSelectPerson: (personId: string) => void;
 }
 
@@ -31,9 +35,10 @@ const CATEGORY_LABELS: Record<MediaCategory, string> = {
 
 const filterClass = 'mt-1 min-h-11 min-w-0 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-2.5 text-base text-[#2C241C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm';
 
-export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
+export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPerson }) => {
   const { media, people, saveMedia, deleteMedia } = useGenealogy();
 
+  const [archiveOpen, setArchiveOpen] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPersonFilter, setSelectedPersonFilter] = useState<string>('all');
   const [viewingMedia, setViewingMedia] = useState<Media | null>(null);
@@ -45,6 +50,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
   const [isPreparing, setIsPreparing] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
   const uploadRevision = useRef(0);
+  const archiveHeadingRef = useRef<HTMLHeadingElement>(null);
   const viewerCloseRef = useRef<HTMLButtonElement>(null);
   const uploadCloseRef = useRef<HTMLButtonElement>(null);
 
@@ -85,6 +91,10 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
     setSelectedCategory('all');
     setSelectedPersonFilter('all');
   };
+
+  useEffect(() => {
+    if (archiveOpen) archiveHeadingRef.current?.focus();
+  }, [archiveOpen]);
 
   useEffect(() => {
     const closeButton = addModalOpen ? uploadCloseRef.current : viewingMedia ? viewerCloseRef.current : null;
@@ -184,12 +194,35 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
     }
   };
 
+  if (!archiveOpen) {
+    return (
+      <Suspense fallback={<p role="status" className="px-4 py-6">Đang mở phòng trưng bày…</p>}>
+        <ExhibitionHall
+          onNavigate={onNavigate}
+          onOpenArchive={(item) => {
+            setArchiveOpen(true);
+            setViewingMedia(item ?? null);
+          }}
+        />
+      </Suspense>
+    );
+  }
+
   return (
     <div className="min-w-0 space-y-4 pb-14 sm:space-y-6">
       <header className="rounded-2xl border border-forest-700 bg-forest-900 p-4 text-white sm:rounded-3xl sm:p-6 lg:p-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div>
-            <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Kho kỷ vật</h2>
+            <button
+              type="button"
+              onClick={() => setArchiveOpen(false)}
+              disabled={Boolean(viewingMedia || deleteId) || addModalOpen || audioRecorderOpen}
+              className="mb-2 inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-[#DBC599] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599]"
+            >
+              <ArrowLeft className="size-4 shrink-0" aria-hidden="true" />
+              Về phòng trưng bày
+            </button>
+            <h2 ref={archiveHeadingRef} tabIndex={-1} className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Kho kỷ vật</h2>
             <p className="mt-2 text-sm text-[#E6DFD5]">Ảnh, tư liệu và bản ghi âm của dòng họ</p>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:flex">

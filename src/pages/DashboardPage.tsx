@@ -57,7 +57,7 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
     { label: 'Thành viên', value: people.length, unit: 'người', note: `${livingCount} còn sống · ${deceasedCount} đã mất`, icon: Users, tab: 'members' },
     { label: 'Thế hệ', value: maxGeneration || '—', unit: maxGeneration ? 'đời' : '', note: maxGeneration ? 'Xem thống kê phả hệ' : 'Chưa ghi số đời', icon: GitFork, tab: 'stats' },
     { label: 'Chi họ', value: branches.length, unit: 'chi', note: 'Xem thành viên theo chi', icon: Scroll, tab: 'members' },
-    { label: 'Kho kỷ vật', value: media.length, unit: 'tư liệu', note: 'Ảnh và tư liệu dòng họ', icon: ImageIcon, tab: 'gallery' },
+    { label: 'Di sản', value: media.length, unit: 'tư liệu', note: 'Mở phòng trưng bày', icon: ImageIcon, tab: 'gallery' },
   ] as const;
 
   const secondaryActions = [
