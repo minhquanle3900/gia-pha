@@ -87,6 +87,40 @@
   color: #655A4E;
 }
 
+.app-header-layout {
+  padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+}
+
+:where(.app-header-layout, .app-bottom-nav, .app-mobile-tools, .global-search, .heritage-anniversaries) button {
+  min-inline-size: 44px;
+  min-block-size: 44px;
+}
+
+:where(button, input, select, textarea, a[href], [tabindex]):focus-visible {
+  outline: 3px solid #856428;
+  outline-offset: 3px;
+}
+
+html.dark :where(button, input, select, textarea, a[href], [tabindex]):focus-visible {
+  outline-color: #E5BE6C;
+}
+
+.mobile-safe-dialog {
+  padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+}
+
+.app-mobile-tools {
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px)) max(1.25rem, env(safe-area-inset-right, 0px));
+  padding-top: max(1.25rem, env(safe-area-inset-top, 0px));
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 639px) {
+  .mobile-safe-dialog :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    font-size: 1rem;
+  }
+}
+
 @media (min-width: 640px) {
   .app-header-layout,
   .app-content {
