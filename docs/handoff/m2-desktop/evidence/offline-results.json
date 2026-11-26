@@ -1,0 +1,21 @@
+{
+  "testedSHA": "211a85d25a491be1cf8317fd85cba853f1437888",
+  "originUnavailable": true,
+  "httpProbeExit": 7,
+  "environment": "IAB Chromium on Windows; origin stopped; OS connectivity unchanged",
+  "cancelNoRecords": true,
+  "edited": {
+    "id": "person_1795677514046_m9sta",
+    "people": 32,
+    "media": 6,
+    "portraitLinked": true,
+    "embeddedBytes": 9391
+  },
+  "deleted": {
+    "people": 31,
+    "media": 6,
+    "personAbsent": true
+  },
+  "originalPeopleUnchanged": true,
+  "originalStoresUnchanged": true
+}

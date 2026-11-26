@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>M1 Desktop independent IndexedDB checks</title>
+  <style>
+    body { margin: 24px auto; max-width: 1100px; padding: 0 20px; font: 16px/1.5 system-ui,sans-serif; color: #2e241e; background:#faf7f2; }
+    button { min-height:44px; margin:4px; padding:8px 16px; cursor:pointer; }
+    button:focus-visible { outline:3px solid #1b3b2b; outline-offset:3px; }
+    pre { white-space:pre-wrap; overflow-wrap:anywhere; background:white; padding:16px; border:1px solid #bbb; }
+    table { border-collapse:collapse; width:100%; } th,td { text-align:left; border:1px solid #bbb; padding:8px; vertical-align:top; }
+    .pass { color:#14532d; } .fail { color:#991b1b; } .partial { color:#754800; }
+  </style>
+</head>
+<body>
+  <h1>M1 Desktop independent IndexedDB checks</h1>
+  <p>This audit-only harness calls the unchanged application adapters in a real browser. It replaces the genealogy database at this origin. Use only a dedicated test profile and synthetic data.</p>
+  <p><strong>Adapter assertions are not product-modal, PDF, keyboard or busy-state UI certification.</strong> The case table keeps these requirements pending where the harness cannot test them.</p>
+  <p id="environment"></p>
+  <div>
+    <button id="run-m11">Run M11 adapter checks</button>
+    <button id="run-m12">Run M12A adapter checks</button>
+    <button id="prepare-merge">Prepare M11 linked fixture for product UI</button>
+    <button id="download" disabled>Download evidence JSON</button>
+  </div>
+  <p id="status" role="status" aria-live="polite">Ready. No tests have run.</p>
+  <table><thead><tr><th>Case</th><th>Adapter result</th><th>Assertions / pending product UI</th></tr></thead><tbody id="cases"></tbody></table>
+  <h2>Evidence</h2><pre id="output">No result yet.</pre>
+  <script type="module" src="./harness.mjs"></script>
+</body>
+</html>

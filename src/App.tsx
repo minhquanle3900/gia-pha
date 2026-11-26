@@ -23,6 +23,8 @@ const MainWorkspace: React.FC = () => {
   const { loading, error, refresh } = useGenealogy();
 
   const [activeTab, setActiveTab] = useState<NavigationTab>('dashboard');
+  const [galleryEntry, setGalleryEntry] = useState({ view: 'archive' as 'hall' | 'archive', sequence: 0 });
+  const [galleryView, setGalleryView] = useState<'hall' | 'archive'>('archive');
   const [viewingPersonId, setViewingPersonId] = useState<string | null>(null);
   const [treeFocusPersonId, setTreeFocusPersonId] = useState<string | undefined>(undefined);
 
@@ -56,7 +58,18 @@ const MainWorkspace: React.FC = () => {
 
   const handleSelectTab = (tab: NavigationTab) => {
     setViewingPersonId(null);
+    if (tab === 'gallery') {
+      setGalleryView('archive');
+      setGalleryEntry(previous => ({ view: 'archive', sequence: previous.sequence + 1 }));
+    }
     setActiveTab(tab);
+  };
+
+  const handleOpenExhibition = () => {
+    setViewingPersonId(null);
+    setGalleryView('hall');
+    setGalleryEntry(previous => ({ view: 'hall', sequence: previous.sequence + 1 }));
+    setActiveTab('gallery');
   };
 
   const handleOpenProfile = (personId: string) => {
@@ -129,7 +142,9 @@ const MainWorkspace: React.FC = () => {
   return (
     <AppShell
       activeTab={activeTab}
+      galleryView={galleryView}
       onSelectTab={handleSelectTab}
+      onOpenExhibition={handleOpenExhibition}
       onQuickAddPerson={handleOpenAddPerson}
       onOpenKinship={() => {
         setKinshipInitialA(undefined);
@@ -202,7 +217,7 @@ const MainWorkspace: React.FC = () => {
           )}
 
           {activeTab === 'gallery' && (
-            <GalleryPage onNavigate={handleSelectTab} onSelectPerson={handleOpenProfile} />
+            <GalleryPage onNavigate={handleSelectTab} onSelectPerson={handleOpenProfile} entryRequest={galleryEntry} onViewChange={setGalleryView} />
           )}
 
           {activeTab === 'rites' && <RitesAssistantPage onSelectPerson={handleOpenProfile} />}

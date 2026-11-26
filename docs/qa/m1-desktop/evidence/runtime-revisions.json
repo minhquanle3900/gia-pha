@@ -1,0 +1,25 @@
+{
+  "capturedAt": "2026-11-26T02:13:01.979704+00:00",
+  "platform": "Windows-10-10.0.19044-SP0",
+  "sourceUiHead": "0e51835552741a81ed69d31080d900bf7cc726f0",
+  "worktrees": {
+    "pr2": {
+      "cwd": "D:\\LMQ_My mine\\Gia-pha\\.worktrees\\m1-pr2-qa",
+      "head": "6e2ba3c7a8896a0027d8d7f8198e4d5b3ab2d44e",
+      "trackedRuntimeDiffExitCode": 0,
+      "trackedRuntimeDiff": ""
+    },
+    "pr3": {
+      "cwd": "D:\\LMQ_My mine\\Gia-pha\\.worktrees\\m1-pr3-qa",
+      "head": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+      "trackedRuntimeDiffExitCode": 0,
+      "trackedRuntimeDiff": ""
+    },
+    "ui": {
+      "cwd": "D:\\LMQ_My mine\\Gia-pha\\.worktrees\\m1-desktop-ui",
+      "head": "0e51835552741a81ed69d31080d900bf7cc726f0",
+      "trackedRuntimeDiffExitCode": 0,
+      "trackedRuntimeDiff": ""
+    }
+  }
+}

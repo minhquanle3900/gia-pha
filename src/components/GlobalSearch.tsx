@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
   Calendar,
   Compass,
@@ -17,6 +17,7 @@ import { Person } from '../models/genealogy';
 import { searchFamilyMembers, SearchResultItem } from '../services/searchService';
 import { formatLifespan } from '../utils/dateUtils';
 import { HeritageAvatar } from './HeritageAvatar';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 
 interface GlobalSearchProps {
   onSelectPerson?: (personId: string) => void;
@@ -45,6 +46,16 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
   const desktopInputRef = useRef<HTMLInputElement | null>(null);
   const mobileInputRef = useRef<HTMLInputElement | null>(null);
   const listRef = useRef<HTMLDivElement | null>(null);
+  const mobileDialogRef = useRef<HTMLDivElement>(null);
+  const mobileTriggerRef = useRef<HTMLButtonElement>(null);
+  const mobileSearchId = useId();
+  const { requestClose } = useModalAccessibility({
+    open: mobileModalOpen,
+    dialogRef: mobileDialogRef,
+    initialFocusRef: mobileInputRef,
+    returnFocusRef: mobileTriggerRef,
+    onRequestClose: () => setMobileModalOpen(false),
+  });
 
   const branchMap = useMemo(() => new Map(branches.map((b) => [b.id, b.name])), [branches]);
 
@@ -116,23 +127,22 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (variant === 'header' && (e.metaKey || e.ctrlKey) && (e.key === 'k' || e.key === 'K')) {
+        if (document.querySelector('[aria-modal="true"]') && !mobileModalOpen) return;
         e.preventDefault();
         if (window.innerWidth < 640) {
           setMobileModalOpen(true);
-          setTimeout(() => mobileInputRef.current?.focus(), 60);
         } else {
           setIsOpen(true);
           setTimeout(() => desktopInputRef.current?.focus(), 50);
         }
       } else if (e.key === 'Escape') {
         setIsOpen(false);
-        setMobileModalOpen(false);
       }
     };
 
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [variant]);
+  }, [variant, mobileModalOpen]);
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -148,7 +158,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
 
   // Keyboard navigation within results
   const handleInputKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (!isOpen && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
+    if (!isOpen && !mobileModalOpen && (e.key === 'ArrowDown' || e.key === 'ArrowUp')) {
       setIsOpen(true);
       return;
     }
@@ -192,7 +202,6 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
       <div
         key={p.id}
         data-search-index={index}
-        onClick={() => handleChoosePerson(p.id)}
         onMouseEnter={() => setSelectedIndex(index)}
         className={`group flex items-center justify-between p-2.5 rounded-xl cursor-pointer transition-all ${
           isSelected
@@ -200,7 +209,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
             : 'hover:bg-stone-100/80 dark:hover:bg-[#1E2E25] border border-transparent'
         }`}
       >
-        <div className="flex items-center gap-3 min-w-0 flex-1">
+        <button type="button" onClick={() => handleChoosePerson(p.id)} className="flex items-center gap-3 min-w-0 min-h-11 flex-1 text-left" aria-label={`Xem hồ sơ ${p.fullName}`}>
           <HeritageAvatar
             fullName={p.fullName}
             portraitUrl={p.portraitUrl}
@@ -242,7 +251,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
               )}
             </div>
           </div>
-        </div>
+        </button>
 
         {/* Action buttons */}
         <div className="flex items-center gap-1 shrink-0 ml-2">
@@ -250,8 +259,9 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
             <button
               type="button"
               onClick={(e) => handleJumpToTree(e, p.id)}
-              className="p-1.5 rounded-lg text-stone-400 hover:text-[#1B3B2B] dark:hover:text-[#52B788] hover:bg-white dark:hover:bg-[#16221B] transition-colors"
+              className="min-w-11 min-h-11 flex items-center justify-center rounded-lg text-stone-400 hover:text-[#1B3B2B] dark:hover:text-[#52B788] hover:bg-white dark:hover:bg-[#16221B] transition-colors"
               title="Xem vị trí trên Cây phả hệ"
+              aria-label={`Xem ${p.fullName} trên cây phả hệ`}
             >
               <GitFork className="w-3.5 h-3.5" />
             </button>
@@ -324,13 +334,13 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
   );
 
   return (
-    <div ref={containerRef} className={`relative ${className}`}>
+    <div ref={containerRef} className={`global-search ${variant === 'prominent' ? 'relative' : ''} min-w-0 ${className}`}>
       {/* 1. Header / Prominent Input on Desktop (or always if prominent) */}
       <div
-        className={`relative transition-all ${
+        className={`transition-all ${
           variant === 'prominent'
-            ? 'w-full'
-            : 'hidden sm:block w-56 md:w-64 lg:w-80 xl:w-96 focus-within:w-full focus-within:max-w-md'
+            ? 'relative w-full'
+            : 'hidden sm:block w-[clamp(8rem,20vw,18rem)]'
         }`}
       >
         <div className="relative flex items-center">
@@ -346,7 +356,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
             onFocus={() => setIsOpen(true)}
             onKeyDown={handleInputKeyDown}
             placeholder={placeholder}
-            className={`w-full pl-9 pr-16 py-2 bg-white/95 dark:bg-[#16221B] border border-[#D5CABE] dark:border-[#2C3E33] rounded-2xl text-xs text-[#241C15] dark:text-[#EDE6DC] placeholder-stone-400 dark:placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-[#1B3B2B]/20 dark:focus:ring-[#52B788]/30 focus:border-[#1B3B2B] dark:focus:border-[#52B788] shadow-2xs transition-all ${
+            className={`w-full min-h-11 pl-9 pr-16 py-2 bg-white/95 dark:bg-[#16221B] border border-[#D5CABE] dark:border-[#2C3E33] rounded-2xl text-xs text-[#241C15] dark:text-[#EDE6DC] placeholder-stone-400 dark:placeholder-stone-500 focus:outline-none focus:ring-2 focus:ring-[#1B3B2B]/20 dark:focus:ring-[#52B788]/30 focus:border-[#1B3B2B] dark:focus:border-[#52B788] shadow-2xs transition-all ${
               variant === 'prominent' ? 'py-2.5 text-sm' : ''
             }`}
             aria-label="Tìm kiếm thành viên trong dòng họ"
@@ -359,8 +369,9 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
                 setQuery('');
                 desktopInputRef.current?.focus();
               }}
-              className="absolute right-2.5 p-1 text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 rounded-md transition-colors"
+                className="absolute right-0 min-w-11 min-h-11 flex items-center justify-center text-stone-400 hover:text-stone-600 dark:hover:text-stone-300 rounded-md transition-colors"
               title="Xóa tìm kiếm"
+              aria-label="Xóa tìm kiếm"
             >
               <X className="w-3.5 h-3.5" />
             </button>
@@ -373,7 +384,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
 
         {/* Dropdown Results */}
         {isOpen && (
-          <div className="absolute left-0 right-0 top-full mt-2 min-w-[340px] sm:min-w-[420px] md:min-w-[480px] bg-[#FFFDF9] dark:bg-[#17231B] border border-[#E7DFD4] dark:border-[#2C3E33] rounded-2xl shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-100">
+          <div className={`absolute top-full mt-2 w-[min(30rem,calc(100vw-3rem))] max-w-[calc(100vw-3rem)] bg-[#FFFDF9] dark:bg-[#17231B] border border-[#E7DFD4] dark:border-[#2C3E33] rounded-2xl shadow-2xl z-50 overflow-hidden animate-in fade-in zoom-in-95 duration-100 ${variant === 'header' ? 'right-0' : 'left-0'}`}>
             {/* Search Header / Count */}
             <div className="p-3 bg-[#FAF8F5] dark:bg-[#141E18] border-b border-[#E7DFD4] dark:border-[#2C3E33] flex items-center justify-between text-xs">
               <span className="font-semibold text-[#1B3B2B] dark:text-[#EDE6DC] flex items-center gap-1.5">
@@ -452,14 +463,12 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
       {variant === 'header' && (
         <div className="sm:hidden">
           <button
+            ref={mobileTriggerRef}
             type="button"
             onClick={() => {
               setMobileModalOpen(true);
-              setTimeout(() => {
-                mobileInputRef.current?.focus();
-              }, 100);
             }}
-            className="flex items-center justify-center w-9 h-9 rounded-xl bg-white border border-[#D5CABE] text-[#1B3B2B] hover:bg-stone-50 shadow-xs transition-colors"
+            className="flex items-center justify-center min-w-11 min-h-11 rounded-xl bg-white border border-[#D5CABE] text-[#1B3B2B] hover:bg-stone-50 shadow-xs transition-colors"
             title="Tìm kiếm nhanh thành viên"
             aria-label="Mở tìm kiếm thành viên"
           >
@@ -470,19 +479,21 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
 
       {/* 3. Mobile Full-Screen / Modal Search Overlay */}
       {mobileModalOpen && (
-        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex flex-col p-3 animate-in fade-in">
-          <div className="bg-[#FFFDF9] dark:bg-[#17231B] rounded-2xl border border-[#E7DFD4] dark:border-[#2C3E33] flex flex-col max-h-[90vh] shadow-2xl overflow-hidden mt-4">
+        <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex flex-col animate-in fade-in" onClick={() => requestClose('backdrop')}>
+          <div ref={mobileDialogRef} role="dialog" aria-modal="true" aria-label="Tìm kiếm thành viên" tabIndex={-1} onClick={(event) => event.stopPropagation()} className="mobile-safe-dialog bg-[#FFFDF9] dark:bg-[#17231B] border border-[#E7DFD4] dark:border-[#2C3E33] flex flex-col h-[100dvh] max-h-[100dvh] shadow-2xl overflow-hidden pb-[env(safe-area-inset-bottom)]">
+            <label htmlFor={mobileSearchId} className="shrink-0 px-3 pt-[max(0.75rem,env(safe-area-inset-top))] text-sm font-semibold text-[#1B3B2B]">Tìm kiếm thành viên</label>
             {/* Mobile Input Bar */}
-            <div className="p-3 border-b border-[#E7DFD4] dark:border-[#2C3E33] flex items-center gap-2">
+            <div className="shrink-0 p-3 border-b border-[#E7DFD4] dark:border-[#2C3E33] flex items-center gap-2">
               <Search className="w-4 h-4 text-stone-400 dark:text-stone-500 shrink-0" />
               <input
                 ref={mobileInputRef}
+                id={mobileSearchId}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 onKeyDown={handleInputKeyDown}
                 placeholder="Tìm tên, tên tự, năm sinh, đời thứ..."
-                className="flex-1 bg-transparent text-xs text-[#241C15] dark:text-[#EDE6DC] placeholder-stone-400 outline-none"
+                className="flex-1 min-w-0 min-h-11 bg-transparent text-base text-[#241C15] dark:text-[#EDE6DC] placeholder-stone-400 outline-none"
               />
               {query && (
                 <button
@@ -491,14 +502,15 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
                     setQuery('');
                     mobileInputRef.current?.focus();
                   }}
-                  className="p-1 text-stone-400 hover:text-stone-600 rounded-lg"
+                  aria-label="Xóa tìm kiếm"
+                  className="min-w-11 min-h-11 flex items-center justify-center text-stone-400 hover:text-stone-600 rounded-lg"
                 >
                   <X className="w-4 h-4" />
                 </button>
               )}
               <button
                 type="button"
-                onClick={() => setMobileModalOpen(false)}
+                onClick={() => requestClose('button')}
                 className="px-2 py-1 text-xs font-semibold text-[#1B3B2B] dark:text-[#52B788]"
               >
                 Đóng
@@ -509,7 +521,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
             {renderFilterChips()}
 
             {/* Mobile Results Scrollview */}
-            <div className="flex-1 overflow-y-auto p-2 space-y-1">
+            <div className="min-h-0 flex-1 overflow-y-auto overscroll-contain p-2 space-y-1">
               {query.trim() || filterMode !== 'all' ? (
                 searchResults.length > 0 ? (
                   searchResults.map((item, idx) => renderResultItem(item, idx))

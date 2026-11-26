@@ -1,583 +1,135 @@
 import React, { useEffect, useRef, useState } from 'react';
-import {
-  BarChart3,
-  BookOpen,
-  Calendar,
-  ChevronDown,
-  Compass,
-  Database,
-  GitFork,
-  GitMerge,
-  HelpCircle,
-  Image as ImageIcon,
-  MapPin,
-  Menu,
-  Moon,
-  MoreHorizontal,
-  Plus,
-  QrCode,
-  Scroll,
-  Shield,
-  ShieldAlert,
-  ShieldCheck,
-  Sun,
-  Users,
-  X,
-} from 'lucide-react';
+import { BarChart3, BookOpen, Calendar, Compass, Database, GitFork, GitMerge, HelpCircle, Landmark, MapPin, Moon, MoreHorizontal, Plus, QrCode, ShieldAlert, ShieldCheck, Sun, Users, X } from 'lucide-react';
 import { useGenealogy } from '../context/GenealogyContext';
 import { usePreferences } from '../hooks/usePreferences';
 import { usePrivacyShield } from '../hooks/usePrivacyShield';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 import { NavigationTab } from '../models/genealogy';
 import { GlobalSearch } from './GlobalSearch';
 import { PrivacyPinModal } from './PrivacyPinModal';
 import { PWAWidgets } from './PWAWidgets';
+import { GROUP_DESTINATIONS, NAVIGATION_GROUPS, NavigationDestination, NavigationGroup, PAGE_GROUP } from './navigation';
 
 interface AppShellProps {
   activeTab: NavigationTab;
+  galleryView?: 'hall' | 'archive';
   onSelectTab: (tab: NavigationTab) => void;
+  onOpenExhibition: () => void;
   onQuickAddPerson: () => void;
   onOpenKinship?: () => void;
   onOpenQRShare?: () => void;
   onOpenDuplicateMerge?: () => void;
   onOpenTour?: () => void;
-  onSelectPerson?: (personId: string) => void;
-  onFocusInTree?: (personId: string) => void;
+  onSelectPerson?: (id: string) => void;
+  onFocusInTree?: (id: string) => void;
   children: React.ReactNode;
 }
+const groupIcons = { home: Compass, genealogy: GitFork, heritage: Landmark, rites: Calendar, more: MoreHorizontal };
+const pageIcons = { stats: BarChart3, map: MapPin, data: Database };
+const actionClass = 'inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl border border-ivory-300 bg-white px-3 text-sm font-semibold text-forest-800 transition-colors hover:bg-ivory-100 dark:border-[#374A3D] dark:text-emerald-200 dark:hover:bg-[#26382D]';
+const headerActionClass = actionClass.replace('inline-flex', 'hidden md:inline-flex');
+const linkClass = 'min-h-11 rounded-xl px-3 py-2 text-left text-sm transition-colors ';
 
-interface NavItem {
-  key: NavigationTab;
-  label: string;
-  icon: React.ComponentType<{ className?: string }>;
-  description?: string;
-}
-
-// 5 Core primary navigation tabs (high-frequency)
-const CORE_NAV_ITEMS: NavItem[] = [
-  { key: 'dashboard', label: 'Tổng quan', icon: Compass },
-  { key: 'tree', label: 'Cây gia phả', icon: GitFork },
-  { key: 'members', label: 'Thành viên', icon: Users },
-  { key: 'journal', label: 'Nhật ký dòng họ', icon: Scroll },
-  { key: 'rites', label: 'Lễ giỗ & Tiết kỵ', icon: Calendar },
-];
-
-// Extended archival & analytical tools
-const EXTENDED_NAV_ITEMS: NavItem[] = [
-  { key: 'stats', label: 'Thống kê gia tộc', icon: BarChart3, description: 'Biểu đồ thế hệ, tỷ lệ nam/nữ, tuổi thọ' },
-  { key: 'gallery', label: 'Kho kỷ vật', icon: ImageIcon, description: 'Hình ảnh chân dung, tư liệu lịch sử' },
-  { key: 'book', label: 'Sách phả ký', icon: BookOpen, description: 'Xuất bản gia phả khổ A4 truyền thống' },
-  { key: 'map', label: 'Bản đồ di cư', icon: MapPin, description: 'Dấu chân thiên di và các phân chi' },
-  { key: 'data', label: 'Quản lý dữ liệu', icon: Database, description: 'Sao lưu JSON, nhập xuất GEDCOM, Excel' },
-];
-
-export const AppShell: React.FC<AppShellProps> = ({
-  activeTab,
-  onSelectTab,
-  onQuickAddPerson,
-  onOpenKinship,
-  onOpenQRShare,
-  onOpenDuplicateMerge,
-  onOpenTour,
-  onSelectPerson,
-  onFocusInTree,
-  children,
-}) => {
+export const AppShell: React.FC<AppShellProps> = ({ activeTab, galleryView = 'archive', onSelectTab, onOpenExhibition, onQuickAddPerson, onOpenKinship, onOpenQRShare, onOpenDuplicateMerge, onOpenTour, onSelectPerson, onFocusInTree, children }) => {
   const { settings } = useGenealogy();
   const { preferences, toggleTheme } = usePreferences();
   const { isShieldActive, hasPin, lockShield } = usePrivacyShield();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [desktopToolsOpen, setDesktopToolsOpen] = useState(false);
-  const [pinModalOpen, setPinModalOpen] = useState(false);
-  const [pinModalMode, setPinModalMode] = useState<'unlock' | 'setup' | 'change'>('unlock');
-
-  const toolsDropdownRef = useRef<HTMLDivElement | null>(null);
-
-  // Close desktop dropdown on outside click
-  useEffect(() => {
-    const handleOutsideClick = (e: MouseEvent) => {
-      if (toolsDropdownRef.current && !toolsDropdownRef.current.contains(e.target as Node)) {
-        setDesktopToolsOpen(false);
-      }
-    };
-    document.addEventListener('mousedown', handleOutsideClick);
-    return () => document.removeEventListener('mousedown', handleOutsideClick);
-  }, []);
-
-  const handleShieldToggle = () => {
-    if (isShieldActive) {
-      setPinModalMode(hasPin ? 'unlock' : 'setup');
-      setPinModalOpen(true);
-    } else {
-      lockShield();
-    }
+  const [moreOpen, setMoreOpen] = useState(false);
+  const [pinOpen, setPinOpen] = useState(false);
+  const [pinMode, setPinMode] = useState<'unlock' | 'setup'>('unlock');
+  const moreRef = useRef<HTMLDivElement>(null);
+  const returnRef = useRef<HTMLElement | null>(null);
+  const pendingAction = useRef<(() => void) | null>(null);
+  const group = PAGE_GROUP[activeTab];
+  const { requestClose } = useModalAccessibility({ open: moreOpen, dialogRef: moreRef, returnFocusRef: returnRef, onRequestClose: () => setMoreOpen(false) });
+  const launch = (action: () => void) => {
+    if (!moreOpen) { action(); return; }
+    pendingAction.current = action;
+    setMoreOpen(false);
   };
+  useEffect(() => {
+    if (moreOpen || !pendingAction.current) return;
+    const action = pendingAction.current;
+    pendingAction.current = null;
+    returnRef.current?.focus({ preventScroll: true });
+    action();
+  }, [moreOpen]);
+  const shield = () => {
+    if (isShieldActive) { setPinMode(hasPin ? 'unlock' : 'setup'); setPinOpen(true); }
+    else lockShield();
+  };
+  const navigate = (destination: NavigationDestination) => launch(() => {
+    if (destination === 'exhibition') onOpenExhibition();
+    else onSelectTab(destination);
+  });
+  const selected = (destination: NavigationDestination) => destination === 'exhibition'
+    ? activeTab === 'gallery' && galleryView === 'hall'
+    : destination === 'gallery' ? activeTab === 'gallery' && galleryView === 'archive' : activeTab === destination;
+  const openGroup = (item: typeof NAVIGATION_GROUPS[number], trigger: HTMLButtonElement) => {
+    if (item.destination) navigate(item.destination);
+    else { returnRef.current = trigger; setMoreOpen(true); }
+  };
+  const destinations = (scope: NavigationGroup) => GROUP_DESTINATIONS[scope].map(item => (
+    <button type="button" key={item.destination} onClick={() => navigate(item.destination)} aria-current={selected(item.destination) ? 'page' : undefined}
+      className={linkClass + (selected(item.destination) ? 'bg-forest-800 text-white font-semibold' : 'text-bark-600 hover:bg-ivory-100 dark:text-stone-200 dark:hover:bg-[#26382D]')}>
+      {item.label}
+    </button>
+  ));
+  const brand = <><span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-xl border border-[#2B4B3A] bg-forest-800 font-serif text-lg text-[#DBC599]">源</span><span className="min-w-0"><span data-calligraphy-slot="brand" className="block truncate font-serif text-lg leading-tight font-bold text-forest-800 dark:text-stone-100">Cội Nguồn</span><span data-calligraphy-slot="clan-name" className="block truncate text-xs text-bark-600 dark:text-stone-300">{settings.clanName || 'Gia Phả Việt'}</span></span></>;
 
-  const isExtendedTabActive = EXTENDED_NAV_ITEMS.some((item) => item.key === activeTab);
-  const activeExtendedItem = EXTENDED_NAV_ITEMS.find((item) => item.key === activeTab);
-
-  return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#241C15]">
-      {/* Top Header - Strict 3-Zone Contract */}
-      <header className="print:hidden sticky top-0 z-30 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E7DFD4] transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
-          {/* Zone 1: Brand Wordmark (Single clean element) */}
-          <div
-            className="flex items-center gap-2.5 cursor-pointer group shrink-0 select-none"
-            onClick={() => onSelectTab('dashboard')}
-            title="Về trang tổng quan"
-          >
-            <div className="w-9 h-9 rounded-xl bg-[#1B3B2B] text-[#DBC599] flex items-center justify-center font-serif text-base font-bold shadow-xs border border-[#2B4B3A] shrink-0">
-              源
-            </div>
-            <div className="flex flex-col">
-              <span className="font-serif font-bold text-sm sm:text-base text-[#1B3B2B] tracking-tight group-hover:text-[#28503C] transition-colors whitespace-nowrap truncate max-w-[150px] sm:max-w-[200px]">
-                {settings.clanName || 'Gia Phả Việt'}
-              </span>
-              <span className="text-[10px] text-[#947432] font-semibold tracking-wider uppercase hidden sm:block">
-                Cội Nguồn Dòng Họ
-              </span>
-            </div>
+  return <div className="app-shell min-h-screen min-w-0 bg-ivory-50 text-bark-900">
+    <aside className="app-sidebar print:hidden fixed inset-y-0 left-0 z-30 hidden w-60 flex-col border-r border-ivory-200 bg-[#FFFDF9] dark:border-[#374A3D] lg:flex" aria-label="Điều hướng trên máy tính">
+      <button type="button" onClick={() => navigate('dashboard')} className="flex min-h-20 min-w-0 items-center gap-2 border-b border-ivory-200 p-4 text-left dark:border-[#374A3D]">{brand}</button>
+      <nav aria-label="Năm nhóm chức năng" className="min-h-0 flex-1 space-y-2 overflow-y-auto overscroll-contain p-3">
+        {NAVIGATION_GROUPS.map(item => { const Icon = groupIcons[item.id]; return <div key={item.id}>
+          <button type="button" onClick={event => openGroup(item, event.currentTarget)} aria-current={group === item.id ? 'true' : undefined} aria-haspopup={item.id === 'more' ? 'dialog' : undefined}
+            className={'flex min-h-12 w-full items-center gap-3 rounded-xl px-3 text-left text-sm font-semibold ' + (group === item.id ? 'bg-forest-800 text-white' : 'text-bark-800 hover:bg-ivory-100 dark:text-stone-200 dark:hover:bg-[#26382D]')}><Icon aria-hidden="true" className="size-5 shrink-0" />{item.label}</button>
+          {group === item.id && GROUP_DESTINATIONS[item.id].length > 0 && <div className="ml-5 mt-1 grid border-l border-ivory-200 pl-2 dark:border-[#374A3D]">{destinations(item.id)}</div>}
+        </div>; })}
+      </nav>
+      <p className="border-t border-ivory-200 p-4 text-xs leading-relaxed text-bark-600 dark:border-[#374A3D] dark:text-stone-300">Gia phả và kỷ vật của dòng họ<br />trên thiết bị của bạn.</p>
+    </aside>
+    <div className="min-w-0 lg:pl-60">
+      <header className="print:hidden sticky top-0 z-30 border-b border-ivory-200 bg-ivory-50/95 backdrop-blur-md dark:border-[#374A3D]">
+        <div className="app-header-layout mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)_auto] items-center gap-2 py-2">
+          <button type="button" onClick={() => navigate('dashboard')} className="flex min-h-11 min-w-0 items-center gap-2 text-left lg:hidden">{brand}</button>
+          <div className="hidden min-w-0 lg:block"><p className="text-sm font-semibold text-forest-800 dark:text-stone-100">{NAVIGATION_GROUPS.find(item => item.id === group)?.label}</p><p className="truncate text-xs text-bark-600 dark:text-stone-300">{settings.clanName}</p></div>
+          <div className="app-header-actions relative flex min-w-0 items-center justify-end gap-2">
+            <GlobalSearch onSelectPerson={onSelectPerson} onFocusInTree={onFocusInTree} placeholder="Tìm thành viên (Ctrl+K)…" />
+            <button type="button" onClick={toggleTheme} aria-label="Chuyển đổi giao diện sáng tối" className={headerActionClass}>{preferences.theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}</button>
+            <button type="button" onClick={shield} aria-label={isShieldActive ? 'Mở khóa riêng tư bằng mã PIN' : 'Khóa thông tin riêng tư'} className={headerActionClass}>{isShieldActive ? <ShieldAlert className="size-4" /> : <ShieldCheck className="size-4" />}</button>
+            <button type="button" onClick={onQuickAddPerson} aria-label="Thêm thành viên mới" className="inline-flex min-h-11 min-w-11 shrink-0 items-center justify-center gap-2 rounded-xl bg-forest-800 px-3 text-sm font-semibold text-white hover:bg-forest-700"><Plus className="size-4" /><span className="hidden sm:inline">Thêm người</span></button>
           </div>
-
-          {/* Zone 2: Navigation Links (Core 5 Tabs + Tools Menu) */}
-          <nav className="hidden lg:flex items-center gap-1 bg-[#F1EBE1]/75 p-1 rounded-2xl border border-[#E3D9CC]">
-            {CORE_NAV_ITEMS.map((item) => {
-              const Icon = item.icon;
-              const isActive = activeTab === item.key;
-              return (
-                <button
-                  key={item.key}
-                  type="button"
-                  onClick={() => onSelectTab(item.key)}
-                  className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
-                    isActive
-                      ? 'bg-[#1B3B2B] text-white shadow-xs'
-                      : 'text-[#5C4F42] hover:text-[#1B3B2B] hover:bg-white/70'
-                  }`}
-                >
-                  <Icon className="w-3.5 h-3.5" />
-                  <span>{item.label}</span>
-                </button>
-              );
-            })}
-
-            {/* Extended Tools Dropdown */}
-            <div ref={toolsDropdownRef} className="relative">
-              <button
-                type="button"
-                onClick={() => setDesktopToolsOpen(!desktopToolsOpen)}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
-                  isExtendedTabActive
-                    ? 'bg-[#1B3B2B] text-white shadow-xs'
-                    : 'text-[#5C4F42] hover:text-[#1B3B2B] hover:bg-white/70'
-                }`}
-                title="Các công cụ và tiện ích phả hệ mở rộng"
-              >
-                <span>{activeExtendedItem ? activeExtendedItem.label : 'Tiện ích mở rộng'}</span>
-                <ChevronDown className={`w-3.5 h-3.5 transition-transform duration-150 ${desktopToolsOpen ? 'rotate-180' : ''}`} />
-              </button>
-
-              {desktopToolsOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-[#FFFDF9] dark:bg-[#17231B] rounded-2xl border border-[#E7DFD4] dark:border-[#2C3E33] shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
-                  <div className="text-[10px] uppercase font-bold text-stone-400 px-2.5 py-1 tracking-wider">
-                    Phân Tích & Tư Liệu
-                  </div>
-                  {EXTENDED_NAV_ITEMS.map((item) => {
-                    const Icon = item.icon;
-                    const isActive = activeTab === item.key;
-                    return (
-                      <button
-                        key={item.key}
-                        type="button"
-                        onClick={() => {
-                          onSelectTab(item.key);
-                          setDesktopToolsOpen(false);
-                        }}
-                        className={`w-full flex items-start gap-2.5 p-2 rounded-xl text-left transition-colors ${
-                          isActive
-                            ? 'bg-[#1B3B2B]/10 text-[#1B3B2B] font-bold'
-                            : 'hover:bg-stone-100 text-[#3C3228]'
-                        }`}
-                      >
-                        <Icon className="w-4 h-4 text-[#8C6D32] shrink-0 mt-0.5" />
-                        <div className="min-w-0">
-                          <p className="text-xs font-semibold truncate">{item.label}</p>
-                          {item.description && (
-                            <p className="text-[10px] text-stone-400 truncate">{item.description}</p>
-                          )}
-                        </div>
-                      </button>
-                    );
-                  })}
-
-                  <div className="border-t border-[#EAE3D7] my-1 pt-1">
-                    {onOpenKinship && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setDesktopToolsOpen(false);
-                          onOpenKinship();
-                        }}
-                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] hover:bg-stone-100 text-left"
-                      >
-                        <Users className="w-3.5 h-3.5 text-[#1B3B2B]" />
-                        <span>Tra xưng hô họ hàng tự động</span>
-                      </button>
-                    )}
-                    {onOpenQRShare && (
-                      <button
-                        type="button"
-                        onClick={() => {
-                          setDesktopToolsOpen(false);
-                          onOpenQRShare();
-                        }}
-                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] hover:bg-stone-100 text-left"
-                      >
-                        <QrCode className="w-3.5 h-3.5 text-[#1B3B2B]" />
-                        <span>Tạo mã QR chia sẻ ngoại tuyến</span>
-                      </button>
-                    )}
-                  </div>
-                </div>
-              )}
-            </div>
-          </nav>
-
-          {/* Zone 3: Actions & Search (High-intent controls) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
-            {/* Global Search */}
-            <GlobalSearch
-              onSelectPerson={onSelectPerson}
-              onFocusInTree={onFocusInTree}
-              placeholder="Tìm nhanh (Ctrl+K)..."
-            />
-
-            <PWAWidgets />
-
-            {/* Dark Mode Theme Toggle */}
-            <button
-              type="button"
-              onClick={toggleTheme}
-              className="flex items-center justify-center w-9 h-9 rounded-xl bg-white border border-[#D5CABE] text-[#1B3B2B] hover:bg-stone-50 shadow-xs transition-colors shrink-0"
-              title={
-                preferences.theme === 'dark'
-                  ? 'Chuyển sang chế độ ban ngày (Light Mode)'
-                  : 'Chuyển sang chế độ đọc ban đêm (Dark Mode)'
-              }
-              aria-label="Chuyển đổi giao diện sáng tối"
-            >
-              {preferences.theme === 'dark' ? (
-                <Sun className="w-4 h-4 text-amber-400" />
-              ) : (
-                <Moon className="w-4 h-4 text-[#1B3B2B]" />
-              )}
-            </button>
-
-            {/* Privacy Shield Button */}
-            <button
-              type="button"
-              onClick={handleShieldToggle}
-              className={`flex items-center gap-1.5 px-2.5 py-2 rounded-xl border text-xs font-semibold shadow-xs transition-colors shrink-0 ${
-                isShieldActive
-                  ? 'bg-amber-50/80 border-amber-300 text-amber-900 hover:bg-amber-100'
-                  : 'bg-emerald-50/80 border-emerald-300 text-emerald-900 hover:bg-emerald-100'
-              }`}
-              title={
-                isShieldActive
-                  ? 'Lá chắn riêng tư đang BẬT: Ẩn thông tin riêng của người còn sống. Bấm để mở khóa PIN.'
-                  : 'Lá chắn riêng tư đang TẮT: Hiển thị đầy đủ thông tin. Bấm để khóa riêng tư ngay.'
-              }
-            >
-              {isShieldActive ? (
-                <>
-                  <ShieldAlert className="w-3.5 h-3.5 text-amber-700" />
-                  <span className="hidden xl:inline">Khóa riêng tư</span>
-                </>
-              ) : (
-                <>
-                  <ShieldCheck className="w-3.5 h-3.5 text-emerald-700" />
-                  <span className="hidden xl:inline">Đã mở PIN</span>
-                </>
-              )}
-            </button>
-
-            {/* Tour Guide Button */}
-            {onOpenTour && (
-              <button
-                type="button"
-                onClick={onOpenTour}
-                className="hidden xl:flex items-center gap-1 px-2.5 py-2 rounded-xl bg-white border border-[#D5CABE] text-[#1B3B2B] hover:bg-stone-50 text-xs font-semibold shadow-xs transition-colors shrink-0"
-                title="Khám phá các tính năng cốt lõi (Onboarding Tour)"
-              >
-                <HelpCircle className="w-3.5 h-3.5 text-[#C19B4C]" />
-                <span>Hướng dẫn</span>
-              </button>
-            )}
-
-            {/* Primary Action CTA Button: Add Person */}
-            <button
-              type="button"
-              onClick={onQuickAddPerson}
-              className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-[#1B3B2B] hover:bg-[#254F3A] text-white text-xs font-semibold shadow-xs transition-colors shrink-0"
-              title="Thêm thành viên mới vào gia phả"
-            >
-              <Plus className="w-4 h-4" />
-              <span className="hidden sm:inline">Thêm người</span>
-            </button>
-          </div>
+          <div className="app-pwa-status col-span-2 min-w-0"><PWAWidgets /></div>
         </div>
       </header>
-
-      {/* Main Content Area */}
-      <main className="flex-1 pb-24 lg:pb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6">{children}</div>
-      </main>
-
-      {/* Mobile Bottom Navigation Bar */}
-      <nav className="print:hidden lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFFDF9]/95 backdrop-blur-md border-t border-[#E7DFD4] px-2 py-1.5 pb-safe shadow-lg">
-        <div className="grid grid-cols-5 gap-1">
-          {[
-            { key: 'dashboard', label: 'Tổng quan', icon: Compass },
-            { key: 'tree', label: 'Cây phả hệ', icon: GitFork },
-            { key: 'members', label: 'Thành viên', icon: Users },
-            { key: 'rites', label: 'Lễ giỗ', icon: Calendar },
-          ].map((item) => {
-            const Icon = item.icon;
-            const isActive = activeTab === item.key && !mobileMenuOpen;
-            return (
-              <button
-                key={item.key}
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onSelectTab(item.key as NavigationTab);
-                }}
-                className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all ${
-                  isActive
-                    ? 'text-[#1B3B2B] font-semibold bg-[#1B3B2B]/8'
-                    : 'text-[#6C5F51] hover:text-[#1B3B2B]'
-                }`}
-              >
-                <Icon className={`w-5 h-5 ${isActive ? 'stroke-[2.2]' : 'stroke-[1.7]'}`} />
-                <span className="text-[10px] mt-0.5 tracking-tight truncate max-w-[64px]">
-                  {item.label}
-                </span>
-              </button>
-            );
-          })}
-
-          {/* More Menu toggle */}
-          <button
-            type="button"
-            onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-            className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all ${
-              mobileMenuOpen || ['stats', 'journal', 'gallery', 'book', 'map', 'data'].includes(activeTab)
-                ? 'text-[#1B3B2B] font-semibold bg-[#1B3B2B]/8'
-                : 'text-[#6C5F51] hover:text-[#1B3B2B]'
-            }`}
-          >
-            <MoreHorizontal className="w-5 h-5" />
-            <span className="text-[10px] mt-0.5 tracking-tight">Thêm...</span>
-          </button>
+      <main className="app-main min-w-0">
+        <div className="app-content mx-auto min-w-0 max-w-7xl space-y-4 pt-4 sm:pt-6">
+          {GROUP_DESTINATIONS[group].length > 0 && <nav aria-label={'Chức năng ' + NAVIGATION_GROUPS.find(item => item.id === group)?.label} className="print:hidden flex min-w-0 flex-wrap gap-2 lg:hidden">{destinations(group)}</nav>}
+          {group === 'genealogy' && <div className="print:hidden flex flex-wrap gap-2">{onOpenKinship && <button type="button" className={actionClass} onClick={onOpenKinship}><Users className="size-4" />Tra vai vế</button>}</div>}
+          {children}
         </div>
-      </nav>
-
-      {/* Mobile Drawer / Popup for remaining tools */}
-      {mobileMenuOpen && (
-        <div
-          className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex flex-col justify-end p-3 animate-in fade-in"
-          onClick={() => setMobileMenuOpen(false)}
-        >
-          <div
-            className="w-full bg-[#FFFDF9] rounded-3xl border border-[#E7DFD4] p-5 space-y-4 shadow-2xl"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between border-b border-[#E7DFD4] pb-2.5">
-              <h3 className="font-serif font-bold text-sm text-[#1B3B2B]">
-                Tiện Ích Gia Phả Mở Rộng
-              </h3>
-              <button
-                type="button"
-                onClick={() => setMobileMenuOpen(false)}
-                className="p-1 rounded-lg text-stone-400 hover:text-stone-700"
-              >
-                <X className="w-5 h-5" />
-              </button>
-            </div>
-
-            <div className="grid grid-cols-2 gap-2.5">
-              {/* Dark mode toggle option for mobile */}
-              <button
-                type="button"
-                onClick={toggleTheme}
-                className="col-span-2 flex items-center justify-between p-3 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] text-xs font-medium hover:bg-stone-100 transition-colors"
-              >
-                <div className="flex items-center gap-2">
-                  {preferences.theme === 'dark' ? (
-                    <Sun className="w-4 h-4 text-amber-400" />
-                  ) : (
-                    <Moon className="w-4 h-4 text-[#1B3B2B]" />
-                  )}
-                  <span className="font-semibold text-stone-800">
-                    Chế độ đọc ban đêm (Dark Mode)
-                  </span>
-                </div>
-                <span className="text-xs font-bold text-[#1B3B2B]">
-                  {preferences.theme === 'dark' ? 'Đang bật' : 'Đang tắt'}
-                </span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onSelectTab('journal');
-                }}
-                className="flex items-center gap-2 p-3 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] text-left text-xs font-medium hover:bg-stone-100"
-              >
-                <Scroll className="w-4 h-4 text-[#8C3A27]" />
-                <span>Nhật ký dòng họ</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onSelectTab('stats');
-                }}
-                className="flex items-center gap-2 p-3 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] text-left text-xs font-medium hover:bg-stone-100"
-              >
-                <BarChart3 className="w-4 h-4 text-[#1B3B2B]" />
-                <span>Thống kê dòng họ</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onSelectTab('gallery');
-                }}
-                className="flex items-center gap-2 p-3 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] text-left text-xs font-medium hover:bg-stone-100"
-              >
-                <ImageIcon className="w-4 h-4 text-[#1B3B2B]" />
-                <span>Kho kỷ vật</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onSelectTab('book');
-                }}
-                className="flex items-center gap-2 p-3 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] text-left text-xs font-medium hover:bg-stone-100"
-              >
-                <BookOpen className="w-4 h-4 text-[#8C6D32]" />
-                <span>Sách phả ký</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onSelectTab('map');
-                }}
-                className="flex items-center gap-2 p-3 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] text-left text-xs font-medium hover:bg-stone-100"
-              >
-                <MapPin className="w-4 h-4 text-[#2D5A43]" />
-                <span>Bản đồ di cư</span>
-              </button>
-
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  onSelectTab('data');
-                }}
-                className="flex items-center gap-2 p-3 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] text-left text-xs font-medium hover:bg-stone-100"
-              >
-                <Database className="w-4 h-4 text-stone-600" />
-                <span>Quản lý dữ liệu</span>
-              </button>
-            </div>
-
-            <div className="pt-2 border-t border-stone-100 grid grid-cols-3 gap-2">
-              {onOpenKinship && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenKinship();
-                  }}
-                  className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
-                >
-                  Tra xưng hô
-                </button>
-              )}
-
-              {onOpenQRShare && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenQRShare();
-                  }}
-                  className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
-                >
-                  Chia sẻ QR
-                </button>
-              )}
-
-              {onOpenDuplicateMerge && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenDuplicateMerge();
-                  }}
-                  className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
-                >
-                  Lọc trùng lặp
-                </button>
-              )}
-
-              {onOpenTour && (
-                <button
-                  type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenTour();
-                  }}
-                  className="p-2 rounded-xl bg-[#FAF7F2] border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B] col-span-2"
-                >
-                  Hướng dẫn nhanh
-                </button>
-              )}
-
-              <button
-                type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  handleShieldToggle();
-                }}
-                className={`p-2 rounded-xl border text-center text-[11px] font-bold ${
-                  isShieldActive
-                    ? 'bg-amber-100/80 border-amber-300 text-amber-900'
-                    : 'bg-emerald-100/80 border-emerald-300 text-emerald-900'
-                }`}
-              >
-                {isShieldActive ? 'Khóa riêng tư' : 'Mở PIN'}
-              </button>
-            </div>
+      </main>
+    </div>
+    <nav aria-label="Điều hướng chính" className="app-bottom-nav print:hidden fixed inset-x-0 bottom-0 z-40 border-t border-ivory-200 bg-[#FFFDF9]/95 backdrop-blur-md dark:border-[#374A3D] lg:hidden">
+      <div className="grid grid-cols-5 gap-1">{NAVIGATION_GROUPS.map(item => { const Icon = groupIcons[item.id]; return <button type="button" key={item.id} onClick={event => openGroup(item, event.currentTarget)} aria-current={group === item.id ? 'true' : undefined} aria-haspopup={item.id === 'more' ? 'dialog' : undefined} className={'flex min-h-14 min-w-0 flex-col items-center justify-center gap-1 rounded-xl px-1 text-[11px] font-semibold ' + (group === item.id ? 'bg-forest-50 text-forest-800 dark:bg-[#25372C] dark:text-emerald-200' : 'text-bark-600 dark:text-stone-300')}><Icon aria-hidden="true" className="size-5" /><span>{item.label}</span></button>; })}</div>
+    </nav>
+    {moreOpen && <div className="fixed inset-0 z-50 flex flex-col justify-end bg-black/60 sm:items-center sm:justify-center sm:p-4" onClick={() => requestClose('backdrop')}>
+      <div ref={moreRef} role="dialog" aria-modal="true" aria-labelledby="more-tools-heading" tabIndex={-1} onClick={event => event.stopPropagation()} className="mobile-safe-dialog app-mobile-tools flex max-h-[100dvh] w-full flex-col rounded-t-3xl border border-ivory-200 bg-[#FFFDF9] p-4 shadow-2xl dark:border-[#374A3D] sm:max-h-[calc(100dvh-2rem)] sm:max-w-xl sm:rounded-3xl">
+        <div className="flex shrink-0 items-center justify-between gap-3 border-b border-ivory-200 pb-3 dark:border-[#374A3D]"><h2 id="more-tools-heading" className="font-serif text-2xl font-bold">Tiện ích dòng họ</h2><button type="button" className={actionClass} aria-label="Đóng tiện ích" onClick={() => requestClose('button')}><X className="size-5" /></button></div>
+        <div className="min-h-0 space-y-4 overflow-y-auto overscroll-contain py-4">
+          <div className="grid gap-2 sm:grid-cols-3">{GROUP_DESTINATIONS.more.map(item => {const Icon = pageIcons[item.destination as keyof typeof pageIcons];return <button key={item.destination} type="button" className={actionClass + ' justify-start'} onClick={() => navigate(item.destination)}><Icon className="size-4 shrink-0" />{item.label}</button>;})}</div>
+          <div className="grid grid-cols-2 gap-2">
+            {onOpenKinship && <button type="button" className={actionClass} onClick={() => launch(onOpenKinship)}><Users className="size-4" />Tra vai vế</button>}
+            {onOpenQRShare && <button type="button" className={actionClass} onClick={() => launch(onOpenQRShare)}><QrCode className="size-4" />Chia sẻ QR</button>}
+            {onOpenDuplicateMerge && <button type="button" className={actionClass} onClick={() => launch(onOpenDuplicateMerge)}><GitMerge className="size-4" />Lọc trùng lặp</button>}
+            {onOpenTour && <button type="button" className={actionClass} onClick={() => launch(onOpenTour)}><HelpCircle className="size-4" />Hướng dẫn</button>}
+            <button type="button" className={actionClass} onClick={toggleTheme}>{preferences.theme === 'dark' ? <Sun className="size-4" /> : <Moon className="size-4" />}Sáng / tối</button>
+            <button type="button" className={actionClass} onClick={() => launch(shield)}>{isShieldActive ? <ShieldAlert className="size-4" /> : <ShieldCheck className="size-4" />}Riêng tư / PIN</button>
           </div>
         </div>
-      )}
-
-      {/* Family Privacy Shield PIN Modal */}
-      <PrivacyPinModal
-        open={pinModalOpen}
-        onClose={() => setPinModalOpen(false)}
-        defaultMode={pinModalMode}
-      />
-    </div>
-  );
+      </div>
+    </div>}
+    <PrivacyPinModal open={pinOpen} defaultMode={pinMode} onClose={() => setPinOpen(false)} />
+  </div>;
 };

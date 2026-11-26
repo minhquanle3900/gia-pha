@@ -1,0 +1,41 @@
+{
+  "scope": "Implemented navigation, muted text, tree control and focus token samples; not a whole-app WCAG certification",
+  "pairings": [
+    {
+      "fg": "#1B3B2B",
+      "bg": "#FAF7F2",
+      "ratio": 11.51168064789168,
+      "normalAA": true
+    },
+    {
+      "fg": "#FFFFFF",
+      "bg": "#1B3B2B",
+      "ratio": 12.301767275756255,
+      "normalAA": true
+    },
+    {
+      "fg": "#655A4E",
+      "bg": "#FAF7F2",
+      "ratio": 6.286759828630963,
+      "normalAA": true
+    },
+    {
+      "fg": "#9DDBB8",
+      "bg": "#101713",
+      "ratio": 11.489113646351353,
+      "normalAA": true
+    },
+    {
+      "fg": "#C6BCAF",
+      "bg": "#101713",
+      "ratio": 9.71709805338251,
+      "normalAA": true
+    },
+    {
+      "fg": "#E5BE6C",
+      "bg": "#17241C",
+      "ratio": 9.125291605340388,
+      "normalAA": true
+    }
+  ]
+}

@@ -1,0 +1,100 @@
+- banner:
+  - button "Cội Nguồn M0 DEMO Desktop":
+    - generic: 源
+    - generic: Cội Nguồn
+    - generic: M0 DEMO Desktop
+  - button "Mở tìm kiếm thành viên":
+  - button "Thêm thành viên mới":
+- main:
+  - navigation "Chức năng Thêm":
+    - button "Thống kê"
+    - button "Bản đồ di cư"
+    - button "Dữ liệu & sao lưu"
+  - heading "Quản lý dữ liệu" [level=1]
+  - paragraph: Dữ liệu nằm trong trình duyệt này. Hãy giữ một bản sao lưu khi đổi thiết bị hoặc trước khi thay thế dữ liệu.
+  - alert:
+    - generic: Không thể nhập bản sao lưu. people[0].birthDate thiếu hoặc không hợp lệ.
+    - button "Đóng"
+  - region "Sao lưu và khôi phục JSON":
+    - heading "Sao lưu và khôi phục JSON" [level=2]
+    - paragraph: Bản sao lưu giữ các bản ghi và tệp đã nhúng. Tệp từ đường dẫn ngoài có thể không mở trên thiết bị khác.
+    - heading "Lưu bản sao" [level=3]
+    - paragraph: Tải tệp JSON về để lưu giữ hoặc chuyển sang thiết bị khác.
+    - button "Tải bản sao lưu JSON":
+      - text: Tải bản sao lưu JSON
+    - heading "Nhập bản sao lưu" [level=3]
+    - group "Nhập bản sao lưu":
+      - button "Thay thế toàn bộ" [pressed]
+      - button "Gộp bổ sung"
+    - paragraph: Khôi phục bản sao bằng cách thay thế dữ liệu hiện tại.
+    - text: Chọn tệp JSON
+    - button "Chọn tệp JSON" [active]
+  - region "Thông tin dòng họ":
+    - heading "Thông tin dòng họ" [level=2]
+    - paragraph: Cập nhật tên họ, gia huấn, địa chỉ từ đường và nhân vật khởi thủy.
+    - generic: Tên dòng họ / Gia tộc
+    - textbox "Tên dòng họ / Gia tộc": M0 DEMO Desktop
+    - generic: Nhân vật khởi thủy (Gốc cây gia phả)
+    - combobox "Nhân vật khởi thủy (Gốc cây gia phả)":
+      - option "-- Tự động chọn đời 1 --"
+      - option "M0 Con Mẫu (Đời 4)"
+      - option "M0 Ông Mẫu (Đời 1)"
+      - option "M0 Cha Mẫu (Đời 2)"
+      - option "M0 Phối Ngẫu A (Đời 3)"
+      - option "M0 Phối Ngẫu B (Đời 3)"
+      - option "M0 Nguyễn Trùng Tên (Đời 3)" [selected]
+      - option "M0 Con Riêng Mẫu (Đời 4)"
+      - option "M0 Nguyễn Trùng Tên (Đời 3)"
+    - generic: Gia huấn / Câu đối / Tôn chỉ dòng họ
+    - textbox "Gia huấn / Câu đối / Tôn chỉ dòng họ": Dữ liệu tổng hợp phục vụ kiểm thử
+    - generic: Địa chỉ Nhà thờ tổ / Từ đường dòng họ
+    - textbox "Địa chỉ Nhà thờ tổ / Từ đường dòng họ": Địa điểm giả M0
+    - button "Lưu thông tin":
+      - generic: Lưu thông tin
+  - region "Chi họ (1)":
+    - heading "Chi họ (1)" [level=2]
+    - paragraph: Tổ chức các chi trưởng, chi thứ hoặc chi di cư để lọc cây gia phả và bản đồ địa lý.
+    - button "Thêm chi họ":
+      - generic: Thêm chi họ
+    - heading "Chi M0 Demo" [level=4]
+    - generic: M0
+    - generic: 8 thành viên
+    - button "Sửa chi họ Chi M0 Demo":
+    - button "Xóa chi họ Chi M0 Demo":
+  - region "Trao đổi GEDCOM":
+    - heading "Trao đổi GEDCOM" [level=2]
+    - paragraph: Nhập hoặc xuất cây phả hệ GEDCOM 5.5.1 bằng tiếng Việt.
+    - heading "Xuất tệp GEDCOM (.ged)" [level=4]
+    - paragraph: Trao đổi cấu trúc phả hệ và các trường tiếng Việt được hỗ trợ. Dùng JSON để sao lưu toàn bộ dữ liệu.
+    - button "Xuất tệp GEDCOM":
+      - generic: Xuất tệp GEDCOM
+    - heading "Nhập tệp GEDCOM (.ged)" [level=4]
+    - paragraph: Nhập phả hệ từ các phần mềm khác để tiếp tục quản lý và vẽ cây trong Gia Phả Việt.
+    - generic: Chọn tệp GEDCOM...
+    - button "Chọn tệp GEDCOM..."
+  - region "Nhập CSV":
+    - heading "Nhập CSV" [level=2]
+    - paragraph: Thêm nhiều thành viên từ bảng tính lưu dưới dạng CSV.
+    - heading "Tải tệp mẫu Excel (.csv)" [level=4]
+    - paragraph: Dùng tệp mẫu để điền đúng tên cột.
+    - button "Tải mẫu CSV":
+      - generic: Tải mẫu CSV
+    - heading "Tải lên danh sách thành viên" [level=4]
+    - paragraph: Xem trước các hồ sơ và quan hệ trước khi nhập.
+    - generic: Chọn tệp CSV
+    - button "Chọn tệp CSV"
+  - heading "Dữ liệu mẫu" [level=3]
+  - paragraph: Nạp dữ liệu mẫu họ Trần – Đông Ngạc sẽ thay thế dữ liệu đang có.
+  - button "Nạp lại dữ liệu mẫu":
+    - generic: Nạp lại dữ liệu mẫu
+- navigation "Điều hướng chính":
+  - button "Trang chủ":
+    - generic: Trang chủ
+  - button "Gia phả":
+    - generic: Gia phả
+  - button "Di sản":
+    - generic: Di sản
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm":
+    - generic: Thêm

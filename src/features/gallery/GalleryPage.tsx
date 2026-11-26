@@ -21,6 +21,8 @@ const ExhibitionHall = lazy(() => import('./ExhibitionHall'));
 interface GalleryPageProps {
   onNavigate: (tab: NavigationTab) => void;
   onSelectPerson: (personId: string) => void;
+  entryRequest?: { view: 'hall' | 'archive'; sequence: number };
+  onViewChange?: (view: 'hall' | 'archive') => void;
 }
 
 const CATEGORY_LABELS: Record<MediaCategory, string> = {
@@ -35,10 +37,17 @@ const CATEGORY_LABELS: Record<MediaCategory, string> = {
 
 const filterClass = 'mt-1 min-h-11 min-w-0 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-2.5 text-base text-[#2C241C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm';
 
-export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPerson }) => {
+export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPerson, entryRequest, onViewChange }) => {
   const { media, people, saveMedia, deleteMedia } = useGenealogy();
 
-  const [archiveOpen, setArchiveOpen] = useState(true);
+  const [archiveOpen, setArchiveOpen] = useState(entryRequest?.view !== 'hall');
+  useEffect(() => {
+    if (entryRequest) setArchiveOpen(entryRequest.view === 'archive');
+  }, [entryRequest]);
+  const changeArchiveView = (open: boolean) => {
+    setArchiveOpen(open);
+    onViewChange?.(open ? 'archive' : 'hall');
+  };
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPersonFilter, setSelectedPersonFilter] = useState<string>('all');
   const [viewingMedia, setViewingMedia] = useState<Media | null>(null);
@@ -201,7 +210,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
           onNavigate={onNavigate}
           onSelectPerson={onSelectPerson}
           onOpenArchive={(item) => {
-            setArchiveOpen(true);
+            changeArchiveView(true);
             setViewingMedia(item ?? null);
           }}
         />
@@ -216,7 +225,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
           <div>
             <button
               type="button"
-              onClick={() => setArchiveOpen(false)}
+              onClick={() => changeArchiveView(false)}
               disabled={Boolean(viewingMedia || deleteId) || addModalOpen || audioRecorderOpen}
               className="mb-3 inline-flex min-h-11 items-center gap-2 rounded-lg border border-[#DBC599]/40 bg-[#DBC599]/10 px-3 text-sm font-semibold text-[#F2E3C6] hover:bg-[#DBC599]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599]"
             >

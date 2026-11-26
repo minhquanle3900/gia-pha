@@ -1,0 +1,15 @@
+{
+  "pr2": {
+    "testedSha": "6e2ba3c7a8896a0027d8d7f8198e4d5b3ab2d44e",
+    "statusAfter": "",
+    "trackedSourceAndLockDiffExit": 0,
+    "trackedPdfDiffExit": 0
+  },
+  "pr3": {
+    "testedSha": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+    "statusAfter": "?? docs/qa/m1-desktop/evidence/chrome-profile.json\n?? docs/qa/m1-desktop/evidence/launch_browser.py\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-build.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-focused.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-install.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-lint.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-regression.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-status-after.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-build.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-focused.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-install.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-lint.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-regression.txt\n?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-status-after.txt\n",
+    "trackedSourceAndLockDiffExit": 0,
+    "trackedPdfDiffExit": 0
+  },
+  "notes": "git status captures allow only untracked docs/qa audit evidence in PR3; no source edits."
+}

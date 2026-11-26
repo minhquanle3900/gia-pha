@@ -32,6 +32,7 @@ import {
 import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { usePreferences } from '../../hooks/usePreferences';
+import { useWorkspaceFullscreen } from '../../hooks/useWorkspaceFullscreen';
 import { Person, TreeViewMode } from '../../models/genealogy';
 import {
   formatFlexibleDate,
@@ -61,12 +62,19 @@ interface FamilyTreePageProps {
 
 export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
   initialFocusPersonId,
-  onOpenProfile,
-  onEditPerson,
-  onAddPerson,
-  onOpenKinship,
-  onOpenBook,
+  onOpenProfile: openProfile,
+  onEditPerson: editPerson,
+  onAddPerson: addPerson,
+  onOpenKinship: openKinship,
+  onOpenBook: openBook,
 }) => {
+  const workspace = useWorkspaceFullscreen();
+  const onOpenProfile = (id: string) => workspace.runOutside(() => openProfile(id));
+  const onEditPerson = editPerson ? (person: Person) => workspace.runOutside(() => editPerson(person)) : undefined;
+  const onAddPerson = () => workspace.runOutside(addPerson);
+  const onOpenKinship = openKinship ? () => workspace.runOutside(openKinship) : undefined;
+  const onOpenBook = openBook ? () => workspace.runOutside(openBook) : undefined;
+  const [filtersOpen, setFiltersOpen] = useState(false);
   const {
     people,
     relationships,
@@ -94,16 +102,18 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
 
   // Interactive Node Inspector (Gramps Web / MyHeritage slide-over panel)
   const [inspectedPersonId, setInspectedPersonId] = useState<string | null>(
-    initialFocusPersonId || settings.rootPersonId || (people[0]?.id ?? null)
+    initialFocusPersonId || null
   );
   const [zoomScale, setZoomScale] = useState<number>(1);
   const [showShortcutsHint, setShowShortcutsHint] = useState<boolean>(false);
   const [relEditorOpen, setRelEditorOpen] = useState<boolean>(false);
+  const openRelationships = () => workspace.runOutside(() => setRelEditorOpen(true));
 
   // SVG ref and zoom state
   const svgRef = useRef<SVGSVGElement | null>(null);
   const gRef = useRef<SVGGElement | null>(null);
   const zoomBehaviorRef = useRef<d3.ZoomBehavior<SVGSVGElement, unknown> | null>(null);
+  const fitRef = useRef<() => void>(() => {});
 
   // Sync initialFocusPersonId
   useEffect(() => {
@@ -189,7 +199,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
     return () => {
       svg.on('.zoom', null);
     };
-  }, []);
+  }, [chartType]);
 
   const fitToScreen = () => {
     if (!svgRef.current || !zoomBehaviorRef.current) return;
@@ -220,6 +230,14 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
     svg.transition().duration(500).call(zoomBehaviorRef.current.transform, transform);
     setZoomScale(scale);
   };
+  fitRef.current = fitToScreen;
+
+  useEffect(() => {
+    if (!svgRef.current) return;
+    const observer = new ResizeObserver(() => fitRef.current());
+    observer.observe(svgRef.current);
+    return () => observer.disconnect();
+  }, [chartType]);
 
   const zoomIn = () => {
     if (!svgRef.current || !zoomBehaviorRef.current) return;
@@ -279,20 +297,20 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
   // Keyboard navigation shortcuts
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement) return;
+      if (e.target instanceof HTMLElement && e.target.closest('input, textarea, select, [role="dialog"], dialog')) return;
       if (e.key === '+' || e.key === '=') {
         zoomIn();
       } else if (e.key === '-' || e.key === '_') {
         zoomOut();
       } else if (e.key === '0') {
         fitToScreen();
-      } else if (e.key === 'Escape') {
+      } else if (e.key === 'Escape' && !workspace.active) {
         setInspectedPersonId(null);
       }
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [layout]);
+  }, [layout, workspace.active]);
 
   const toggleCollapse = (nodeId: string, e: React.MouseEvent) => {
     e.stopPropagation();
@@ -384,6 +402,14 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
   const [viewModeMenuOpen, setViewModeMenuOpen] = useState(false);
   const moreMenuRef = useRef<HTMLDivElement | null>(null);
   const viewMenuRef = useRef<HTMLDivElement | null>(null);
+  const workspaceHeader = <div className="flex shrink-0 flex-wrap items-center justify-between gap-2 border-b border-ivory-200 bg-ivory-50 p-3 dark:border-[#374A3D]">
+    <h2 data-calligraphy-slot="tree-title" className="font-serif text-xl font-bold text-forest-800 dark:text-stone-100">Cây gia phả</h2>
+    <div className="flex gap-2">
+      {chartType === 'tree' && <button type="button" className="min-h-11 rounded-xl border border-ivory-300 px-3 text-sm sm:hidden" aria-expanded={filtersOpen} aria-controls="tree-filter-controls" onClick={() => setFiltersOpen(value => !value)}>Lọc & tìm</button>}
+      <button type="button" className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-ivory-300 px-3 text-sm" onClick={() => { void workspace.toggle(); }}><Maximize2 className="size-4" />{workspace.active ? 'Thoát toàn màn hình' : 'Toàn màn hình'}</button>
+    </div>
+    {workspace.error && <p role="alert" className="w-full text-sm text-red-800 dark:text-red-200">{workspace.error}</p>}
+  </div>;
 
   // Close menus on outside click
   useEffect(() => {
@@ -401,7 +427,8 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
 
   if (chartType === 'fan') {
     return (
-      <div className="flex flex-col h-[calc(100vh-125px)] min-h-[550px] relative bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] shadow-xs overflow-hidden">
+      <div ref={workspace.panelRef} role={workspace.active ? 'dialog' : 'region'} aria-modal={workspace.active || undefined} aria-label="Cây gia phả" tabIndex={-1} data-fullscreen-mode={workspace.mode} className={'genealogy-workspace relative flex min-w-0 flex-col rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] shadow-xs overflow-hidden ' + (workspace.active ? 'is-expanded' : '')}>
+        {workspaceHeader}
         {/* Top Slim Switcher */}
         <div className="px-3.5 py-2 bg-[#FAF7F2] border-b border-[#E7DFD4] flex items-center justify-between gap-2 z-20">
           <div className="flex items-center gap-2">
@@ -447,12 +474,13 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
   }
 
   return (
-    <div className="flex flex-col h-[calc(100vh-125px)] min-h-[550px] relative bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] shadow-xs overflow-hidden">
+    <div ref={workspace.panelRef} role={workspace.active ? 'dialog' : 'region'} aria-modal={workspace.active || undefined} aria-label="Cây gia phả" tabIndex={-1} data-fullscreen-mode={workspace.mode} className={'genealogy-workspace relative flex min-w-0 flex-col rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] shadow-xs overflow-hidden ' + (workspace.active ? 'is-expanded' : '')}>
+      {workspaceHeader}
       {/* Canvas-First Slim Header Toolbar */}
       <div className="px-3 py-2 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E7DFD4] flex flex-wrap items-center justify-between gap-2 z-20">
         {/* Left: View Mode Segmented Controls */}
-        <div className="flex items-center gap-1.5">
-          <div className="flex items-center p-0.5 rounded-xl bg-[#EAE3D6] border border-[#D9CEBF]">
+        <div className="flex min-w-0 w-full sm:w-auto items-center gap-1.5">
+          <div className="tree-view-modes grid min-w-0 w-full grid-cols-4 items-center p-0.5 rounded-xl bg-[#EAE3D6] border border-[#D9CEBF]">
             {[
               { mode: 'descendant', label: 'Hậu duệ' },
               { mode: 'ancestor', label: 'Tổ tiên' },
@@ -461,6 +489,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
               <button
                 key={item.mode}
                 type="button"
+                aria-pressed={viewMode === item.mode}
                 onClick={() => {
                   setViewMode(item.mode as TreeViewMode);
                   updatePreferences({ defaultTreeView: item.mode as TreeViewMode });
@@ -476,9 +505,10 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
             ))}
 
             {/* Overflow Modes Dropdown */}
-            <div className="relative" ref={viewMenuRef}>
+            <div className="relative" ref={viewMenuRef} onKeyDown={event => { if (event.key === 'Escape') { event.stopPropagation(); setViewModeMenuOpen(false); viewMenuRef.current?.querySelector('button')?.focus(); } }}>
               <button
                 type="button"
+                aria-expanded={viewModeMenuOpen}
                 onClick={() => setViewModeMenuOpen((prev) => !prev)}
                 className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                   viewMode === 'individual' || viewMode === 'generation'
@@ -498,7 +528,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
               </button>
 
               {viewModeMenuOpen && (
-                <div className="absolute left-0 top-full mt-1.5 w-40 bg-white rounded-xl border border-[#D5CABE] shadow-xl z-50 p-1 space-y-0.5 text-xs">
+                <div className="absolute right-0 top-full mt-1.5 w-40 bg-white rounded-xl border border-[#D5CABE] shadow-xl z-50 p-1 space-y-0.5 text-xs">
                   <button
                     type="button"
                     onClick={() => {
@@ -547,14 +577,15 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
         </div>
 
         {/* Right: Quick Search, Branch Filter & Overflow Menu */}
-        <div className="flex items-center gap-2">
+        <div id="tree-filter-controls" className={'tree-filter-controls min-w-0 flex-wrap items-center gap-2 ' + (filtersOpen ? 'flex' : 'hidden sm:flex')}>
           {/* Branch Filter dropdown */}
           {branches.length > 1 && (
             <div className="relative">
               <select
+                aria-label="Lọc cây theo chi họ"
                 value={selectedBranch}
                 onChange={(e) => setSelectedBranch(e.target.value)}
-                className="text-xs rounded-xl border border-[#D5CABE] bg-white pl-6 pr-2.5 py-1.5 text-[#2C241C] font-medium outline-none focus:border-[#1B3B2B] cursor-pointer"
+                className="min-h-11 min-w-0 max-w-full text-sm rounded-xl border border-[#D5CABE] bg-white pl-6 pr-2.5 py-1.5 text-[#2C241C] font-medium outline-none focus:border-[#1B3B2B] cursor-pointer"
               >
                 <option value="all">Tất cả chi</option>
                 {branches.map((b) => (
@@ -572,6 +603,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
             <div className="flex items-center rounded-xl border border-[#D5CABE] bg-white px-2.5 py-1.5">
               <Search className="w-3.5 h-3.5 text-stone-400 mr-1.5 shrink-0" />
               <input
+                aria-label="Tìm thành viên trong cây"
                 type="text"
                 placeholder="Tìm thành viên..."
                 value={searchQuery}
@@ -725,6 +757,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
         <svg
           ref={svgRef}
           style={{ touchAction: 'none' }}
+          aria-label="Vùng cây gia phả. Kéo để di chuyển, dùng các nút cộng trừ để thu phóng."
           className="w-full h-full cursor-grab active:cursor-grabbing"
           onClick={() => {
             // Clicking empty canvas keeps inspection or can close if user desires
@@ -790,6 +823,16 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
               return (
                 <g
                   key={node.id}
+                  role="button"
+                  tabIndex={0}
+                  aria-label={'Xem ' + p.fullName + ' trong cây'}
+                  onFocus={() => centerOnNode(node)}
+                  onKeyDown={event => {
+                    if (event.key !== 'Enter' && event.key !== ' ') return;
+                    event.preventDefault();
+                    event.stopPropagation();
+                    setInspectedPersonId(node.id);
+                  }}
                   transform={`translate(${node.x}, ${node.y})`}
                   className="cursor-pointer group"
                   onClick={(e) => {
@@ -1204,7 +1247,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
                   )}
                   <button
                     type="button"
-                    onClick={() => setRelEditorOpen(true)}
+                    onClick={openRelationships}
                     className="flex items-center justify-center gap-1 py-1.5 rounded-xl border border-[#D5CABE] bg-white hover:bg-stone-50 text-[11px] font-semibold text-[#8C6D32] transition-colors cursor-pointer"
                   >
                     <UserPlus className="w-3 h-3" />
@@ -1267,6 +1310,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
                   <button
                     type="button"
                     onClick={() => setInspectedPersonId(null)}
+                    aria-label="Đóng thông tin thành viên"
                     className="p-1.5 text-stone-400"
                   >
                     <X className="w-4 h-4" />
@@ -1286,7 +1330,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
                 )}
                 <button
                   type="button"
-                  onClick={() => setRelEditorOpen(true)}
+                  onClick={openRelationships}
                   className="py-1.5 rounded-xl border border-[#D5CABE] bg-white text-[11px] font-semibold text-[#8C6D32]"
                 >
                   Quan hệ
@@ -1304,7 +1348,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
         )}
 
         {/* Sleek Floating Canvas Controls (Horizontal Glass Dock at bottom-left to avoid drawer collision) */}
-        <div className="absolute bottom-3.5 left-3.5 z-20 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1.5 rounded-xl border border-[#D5CABE] shadow-md select-none text-xs">
+        <div className={'absolute left-3.5 z-20 flex max-w-[calc(100%-1.75rem)] flex-wrap items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1.5 rounded-xl border border-[#D5CABE] shadow-md select-none text-xs ' + (inspectedPerson ? 'top-3.5 lg:top-auto lg:bottom-3.5' : 'bottom-3.5')}>
           <button
             type="button"
             onClick={zoomIn}
@@ -1314,14 +1358,12 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
             <Plus className="w-3.5 h-3.5" />
           </button>
 
-          <button
-            type="button"
-            onClick={fitToScreen}
-            className="text-[11px] font-mono font-semibold text-stone-600 hover:text-[#1B3B2B] px-1.5 py-0.5 rounded transition-colors"
-            title="Tỷ lệ hiện tại (Bấm để vừa màn hình)"
+          <output
+            aria-label="Tỷ lệ thu phóng hiện tại"
+            className="sr-only sm:not-sr-only text-[11px] font-mono font-semibold text-stone-600 px-1.5 py-0.5"
           >
             {Math.round(zoomScale * 100)}%
-          </button>
+          </output>
 
           <button
             type="button"

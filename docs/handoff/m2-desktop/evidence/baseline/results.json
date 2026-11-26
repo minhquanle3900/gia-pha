@@ -1,0 +1,33 @@
+{
+  "head": "0f885e742f18d2b6d9a179f8f3649b25a5906489",
+  "platform": "Windows-10-10.0.19044-SP0",
+  "label": "baseline",
+  "lockSHA256": "1aae372dac021d58b958f441316679ec3d21056e74c85ae655059db4bb48f35e",
+  "commands": [
+    {
+      "command": "npm run lint",
+      "exitCode": 0,
+      "elapsedSeconds": 1.515,
+      "log": "lint.txt"
+    },
+    {
+      "command": "npm run build",
+      "exitCode": 0,
+      "elapsedSeconds": 5.704,
+      "log": "build.txt"
+    },
+    {
+      "command": "npm test",
+      "exitCode": 0,
+      "elapsedSeconds": 3.171,
+      "log": "regression.txt"
+    },
+    {
+      "command": "node scripts/check-pwa-assets.mjs",
+      "exitCode": 1,
+      "elapsedSeconds": 0.141,
+      "log": "pwa-assets.txt"
+    }
+  ],
+  "sourceDiff": ""
+}

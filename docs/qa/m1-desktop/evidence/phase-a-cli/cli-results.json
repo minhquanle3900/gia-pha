@@ -1,0 +1,95 @@
+{
+  "environment": {
+    "date": "2026-11-25",
+    "timezone": "Asia/Saigon",
+    "windows": "10.0.19044.2846",
+    "shell": "cmd.exe",
+    "node": "24.22.1",
+    "npm": "11.19.1",
+    "bun": "1.4.5",
+    "vitest": "5.1.0"
+  },
+  "pr2": {
+    "testedSha": "6e2ba3c7a8896a0027d8d7f8198e4d5b3ab2d44e",
+    "baseSha": "1cec38dc77ea46260fa0608c931b22e0b508d531",
+    "install": {
+      "command": "npm exec --yes --package bun -- bun install --frozen-lockfile",
+      "exit": 0,
+      "packages": 626,
+      "blockedPostinstalls": 3,
+      "evidence": "pr2-install.txt"
+    },
+    "lint": {
+      "command": "npm run lint",
+      "exit": 0,
+      "evidence": "pr2-lint.txt"
+    },
+    "build": {
+      "command": "npm run build",
+      "exit": 0,
+      "evidence": "pr2-build.txt",
+      "mainJsKB": 1952.7,
+      "mainGzipKB": 541.99
+    },
+    "regression": {
+      "command": "npm test",
+      "exit": 0,
+      "passed": 103,
+      "files": 10,
+      "durationSeconds": 3.61,
+      "evidence": "pr2-regression.txt"
+    },
+    "focused": {
+      "command": "npm test -- src/__tests__/atomicPersonMerge.test.ts src/__tests__/familyBookPdf.test.ts src/__tests__/personReport.test.ts",
+      "exit": 0,
+      "passed": 32,
+      "files": 3,
+      "evidence": "pr2-focused.txt"
+    }
+  },
+  "pr3": {
+    "testedSha": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+    "baseSha": "6e2ba3c7a8896a0027d8d7f8198e4d5b3ab2d44e",
+    "install": {
+      "command": "npm exec --yes --package bun -- bun install --frozen-lockfile",
+      "exit": 0,
+      "packages": 626,
+      "blockedPostinstalls": 3,
+      "evidence": "pr3-install.txt"
+    },
+    "lint": {
+      "command": "npm run lint",
+      "exit": 0,
+      "evidence": "pr3-lint.txt"
+    },
+    "build": {
+      "command": "npm run build",
+      "exit": 0,
+      "evidence": "pr3-build.txt",
+      "mainJsKB": 1965.18,
+      "mainGzipKB": 547.49
+    },
+    "regression": {
+      "command": "npm test",
+      "exit": 0,
+      "passed": 145,
+      "files": 12,
+      "durationSeconds": 5.26,
+      "evidence": "pr3-regression.txt"
+    },
+    "focused": {
+      "command": "npm test -- src/__tests__/atomicPersonMerge.test.ts src/__tests__/importIntegrity.test.ts src/__tests__/importAdapters.test.ts src/__tests__/familyBookPdf.test.ts src/__tests__/personReport.test.ts",
+      "exit": 0,
+      "passed": 74,
+      "files": 5,
+      "evidence": "pr3-focused.txt"
+    }
+  },
+  "limitations": [
+    "All database fault/race tests in existing suites use fake-indexeddb, not native Chrome/Edge IndexedDB.",
+    "PDF bytes assert %PDF/%%EOF and expected file names with ASCII names in Node fallback and intercepted writeFileSync; they do not prove browser canvas export or Vietnamese glyphs.",
+    "CLI cannot verify busy controls, double-click UX, native profile isolation, camera/mic, or browser multi-tab behavior."
+  ],
+  "sourceEdited": false,
+  "committed": false
+}

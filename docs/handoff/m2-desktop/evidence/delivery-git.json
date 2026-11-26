@@ -1,0 +1,82 @@
+{
+  "codeHead": "c739bd8a7bca1d8267ffe43eadbaf4ea08bd4629",
+  "base": "cf009fcc26f4c9ef5ba7a14a69daba2984af94f9",
+  "included": [
+    {
+      "pr": 2,
+      "sha": "6e2ba3c7a8896a0027d8d7f8198e4d5b3ab2d44e",
+      "ancestor": true
+    },
+    {
+      "pr": 3,
+      "sha": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+      "ancestor": true
+    },
+    {
+      "pr": 5,
+      "sha": "0eadd0099377632c3eb8d16fe28390ea2799b61a",
+      "ancestor": true
+    },
+    {
+      "pr": 6,
+      "sha": "c8b1a4d49489c5f4fda7dc048c679339d17e384e",
+      "ancestor": true
+    },
+    {
+      "pr": 7,
+      "sha": "6ffcba5908c0d64800c2c94cb46241d14d186e1f",
+      "ancestor": true
+    },
+    {
+      "pr": 8,
+      "sha": "cf009fcc26f4c9ef5ba7a14a69daba2984af94f9",
+      "ancestor": true
+    },
+    {
+      "pr": 9,
+      "sha": "41f3b264521c201d6863236304478edb4b054e01",
+      "ancestor": true
+    }
+  ],
+  "sourcePR9LocalHead": "41f3b264521c201d6863236304478edb4b054e01",
+  "draftBaseRemoteHead": "cf009fcc26f4c9ef5ba7a14a69daba2984af94f9",
+  "desktopChangedFiles": [
+    "src/App.tsx",
+    "src/__tests__/navigationReadiness.test.ts",
+    "src/components/AppShell.tsx",
+    "src/components/navigation.ts",
+    "src/features/family-tree/FamilyTreePage.tsx",
+    "src/features/family-tree/FanChartLayout.tsx",
+    "src/features/family-tree/viewportGesture.ts",
+    "src/features/gallery/GalleryPage.tsx",
+    "src/features/people/MembersPage.tsx",
+    "src/features/people/PersonProfileView.tsx",
+    "src/hooks/useModalAccessibility.ts",
+    "src/hooks/useWorkspaceFullscreen.ts",
+    "src/index.css"
+  ],
+  "changedSourceFilesFromPR8": [
+    "src/App.tsx",
+    "src/__tests__/navigationReadiness.test.ts",
+    "src/components/AppShell.tsx",
+    "src/components/GlobalSearch.tsx",
+    "src/components/OnboardingTour.tsx",
+    "src/components/PWAWidgets.tsx",
+    "src/components/PrivacyPinModal.tsx",
+    "src/components/navigation.ts",
+    "src/features/family-tree/FamilyTreePage.tsx",
+    "src/features/family-tree/FanChartLayout.tsx",
+    "src/features/family-tree/viewportGesture.ts",
+    "src/features/gallery/GalleryPage.tsx",
+    "src/features/kinship/KinshipCalculatorModal.tsx",
+    "src/features/people/MembersPage.tsx",
+    "src/features/people/PersonProfileView.tsx",
+    "src/features/rites/UpcomingAnniversariesWidget.tsx",
+    "src/features/sharing/QRShareModal.tsx",
+    "src/hooks/useModalAccessibility.ts",
+    "src/hooks/useWorkspaceFullscreen.ts",
+    "src/index.css",
+    "src/main.tsx"
+  ],
+  "businessCoreUnchangedFromIntegration": true
+}

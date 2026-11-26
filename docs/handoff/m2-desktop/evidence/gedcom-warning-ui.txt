@@ -1,0 +1,9 @@
+Xác nhận khôi phục & thay thế dữ liệu
+
+Thao tác này sẽ thay thế toàn bộ dữ liệu gia phả hiện tại bằng GEDCOM (31 thành viên, 40 quan hệ). Nên xuất bản sao lưu JSON trước khi tiếp tục.
+
+Cảnh báo:
+GEDCOM dùng để trao đổi phả hệ. Khi thay thế bằng GEDCOM, mốc sự kiện, kho ảnh và tư liệu, nhật ký dòng họ cùng các liên kết tới những mục này sẽ mất. Một số chi tiết khác trong hồ sơ, chi họ và thiết lập cũng không được chuyển. Hãy xuất JSON trước khi tiếp tục để giữ bản sao đầy đủ.
+
+Hủy
+Xác nhận thay thế
