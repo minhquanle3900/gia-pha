@@ -30,6 +30,8 @@
 }
 
 @layer base {
+  button:not(:disabled), select:not(:disabled), summary, a[href], [role="button"] { cursor: pointer; }
+  button:disabled, select:disabled { cursor: not-allowed; }
   html {
     font-family: var(--font-sans);
     background-color: #FAF7F2;
@@ -419,6 +421,7 @@ html.dark .app-shell :where(.text-forest-800):not(.bg-forest-800) { color: #9DDB
 .genealogy-members input { min-height: 44px; }
 .tree-filter-controls { max-width: 100%; }
 .tree-filter-controls > * { min-width: 0; max-width: 100%; }
+.tree-view-modes > button, .tree-view-modes > div > button { width: 100%; padding-inline: .375rem; line-height: 1rem; }
 html.dark .genealogy-workspace :is(.bg-\[\#EAE3D6\], .bg-\[\#EFE9DF\], .bg-\[\#F7F2E7\], .bg-\[\#FAF5EB\], .bg-white\/90) { background-color: #1F2E25; }
 html.dark .genealogy-workspace :is(.text-\[\#3A2E25\], .text-\[\#3E342B\], .text-\[\#4A3F35\], .text-\[\#695E52\]) { color: #D1C7BA; }
 .person-profile button { min-height: 44px; min-width: 44px; }

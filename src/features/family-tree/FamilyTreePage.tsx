@@ -479,8 +479,8 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
       {/* Canvas-First Slim Header Toolbar */}
       <div className="px-3 py-2 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E7DFD4] flex flex-wrap items-center justify-between gap-2 z-20">
         {/* Left: View Mode Segmented Controls */}
-        <div className="flex items-center gap-1.5">
-          <div className="flex items-center p-0.5 rounded-xl bg-[#EAE3D6] border border-[#D9CEBF]">
+        <div className="flex min-w-0 w-full sm:w-auto items-center gap-1.5">
+          <div className="tree-view-modes grid min-w-0 w-full grid-cols-4 items-center p-0.5 rounded-xl bg-[#EAE3D6] border border-[#D9CEBF]">
             {[
               { mode: 'descendant', label: 'Hậu duệ' },
               { mode: 'ancestor', label: 'Tổ tiên' },
@@ -489,6 +489,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
               <button
                 key={item.mode}
                 type="button"
+                aria-pressed={viewMode === item.mode}
                 onClick={() => {
                   setViewMode(item.mode as TreeViewMode);
                   updatePreferences({ defaultTreeView: item.mode as TreeViewMode });
@@ -504,9 +505,10 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
             ))}
 
             {/* Overflow Modes Dropdown */}
-            <div className="relative" ref={viewMenuRef}>
+            <div className="relative" ref={viewMenuRef} onKeyDown={event => { if (event.key === 'Escape') { event.stopPropagation(); setViewModeMenuOpen(false); viewMenuRef.current?.querySelector('button')?.focus(); } }}>
               <button
                 type="button"
+                aria-expanded={viewModeMenuOpen}
                 onClick={() => setViewModeMenuOpen((prev) => !prev)}
                 className={`flex items-center gap-1 px-2.5 py-1.5 rounded-lg text-xs font-medium transition-colors ${
                   viewMode === 'individual' || viewMode === 'generation'
@@ -526,7 +528,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
               </button>
 
               {viewModeMenuOpen && (
-                <div className="absolute left-0 top-full mt-1.5 w-40 bg-white rounded-xl border border-[#D5CABE] shadow-xl z-50 p-1 space-y-0.5 text-xs">
+                <div className="absolute right-0 top-full mt-1.5 w-40 bg-white rounded-xl border border-[#D5CABE] shadow-xl z-50 p-1 space-y-0.5 text-xs">
                   <button
                     type="button"
                     onClick={() => {
@@ -1308,6 +1310,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
                   <button
                     type="button"
                     onClick={() => setInspectedPersonId(null)}
+                    aria-label="Đóng thông tin thành viên"
                     className="p-1.5 text-stone-400"
                   >
                     <X className="w-4 h-4" />
@@ -1345,7 +1348,7 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
         )}
 
         {/* Sleek Floating Canvas Controls (Horizontal Glass Dock at bottom-left to avoid drawer collision) */}
-        <div className="absolute bottom-3.5 left-3.5 z-20 flex items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1.5 rounded-xl border border-[#D5CABE] shadow-md select-none text-xs">
+        <div className={'absolute left-3.5 z-20 flex max-w-[calc(100%-1.75rem)] flex-wrap items-center gap-1 bg-white/90 backdrop-blur-md px-2 py-1.5 rounded-xl border border-[#D5CABE] shadow-md select-none text-xs ' + (inspectedPerson ? 'top-3.5 lg:top-auto lg:bottom-3.5' : 'bottom-3.5')}>
           <button
             type="button"
             onClick={zoomIn}
@@ -1355,14 +1358,12 @@ export const FamilyTreePage: React.FC<FamilyTreePageProps> = ({
             <Plus className="w-3.5 h-3.5" />
           </button>
 
-          <button
-            type="button"
-            onClick={fitToScreen}
-            className="text-[11px] font-mono font-semibold text-stone-600 hover:text-[#1B3B2B] px-1.5 py-0.5 rounded transition-colors"
-            title="Tỷ lệ hiện tại (Bấm để vừa màn hình)"
+          <output
+            aria-label="Tỷ lệ thu phóng hiện tại"
+            className="sr-only sm:not-sr-only text-[11px] font-mono font-semibold text-stone-600 px-1.5 py-0.5"
           >
             {Math.round(zoomScale * 100)}%
-          </button>
+          </output>
 
           <button
             type="button"
