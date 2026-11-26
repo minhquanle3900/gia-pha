@@ -1,12 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Calendar,
   Camera,
-  Filter,
   Mic,
-  Music,
   Plus,
-  Tag,
   Trash2,
   Users,
   X,
@@ -32,6 +29,8 @@ const CATEGORY_LABELS: Record<MediaCategory, string> = {
   audio: 'Bản ghi âm ký ức',
 };
 
+const filterClass = 'mt-1 min-h-11 min-w-0 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-2.5 text-base text-[#2C241C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm';
+
 export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
   const { media, people, saveMedia, deleteMedia } = useGenealogy();
 
@@ -42,6 +41,12 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
   const [audioRecorderOpen, setAudioRecorderOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
   const [deleteError, setDeleteError] = useState<string | null>(null);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const [isPreparing, setIsPreparing] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
+  const uploadRevision = useRef(0);
+  const viewerCloseRef = useRef<HTMLButtonElement>(null);
+  const uploadCloseRef = useRef<HTMLButtonElement>(null);
 
   // New Media Form state
   const [newTitle, setNewTitle] = useState('');
@@ -50,7 +55,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
   const [newDescription, setNewDescription] = useState('');
   const [newStoryContext, setNewStoryContext] = useState('');
   const [newSelectedPeople, setNewSelectedPeople] = useState<string[]>([]);
-  const [newDataUrl, setNewDataUrl] = useState<string | null>(null);
+  const [draftImage, setDraftImage] = useState<{ dataUrl: string; mimeType: string } | null>(null);
   const [uploadError, setUploadError] = useState<string | null>(null);
 
   const peopleMap = useMemo(() => {
@@ -69,60 +74,104 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
     });
   }, [media, selectedCategory, selectedPersonFilter]);
 
-  const handleFileUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
-    if (!file) return;
+  const categoryCounts = useMemo(() => {
+    const counts = new Map<MediaCategory, number>();
+    for (const item of media) counts.set(item.category, (counts.get(item.category) ?? 0) + 1);
+    return counts;
+  }, [media]);
 
-    try {
-      setUploadError(null);
-      const compressed = await compressImageFile(file, 1200, 0.85);
-      setNewDataUrl(compressed.dataUrl);
-      if (!newTitle) {
-        setNewTitle(file.name.replace(/\.[^/.]+$/, ''));
-      }
-    } catch {
-      setUploadError('Không thể nén tệp ảnh. Vui lòng chọn tệp định dạng JPG hoặc PNG nhỏ hơn 10MB.');
-    }
+  const hasFilters = selectedCategory !== 'all' || selectedPersonFilter !== 'all';
+  const clearFilters = () => {
+    setSelectedCategory('all');
+    setSelectedPersonFilter('all');
   };
 
-  const handleSaveNewMedia = async () => {
-    if (!newTitle.trim() || !newDataUrl) {
-      setUploadError('Vui lòng chọn ảnh và nhập tiêu đề kỷ vật.');
-      return;
-    }
-
-    const newItem: Media = {
-      id: `media_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`,
-      title: newTitle.trim(),
-      category: newCategory,
-      dateLabel: newDateLabel.trim() || undefined,
-      description: newDescription.trim() || undefined,
-      storyContext: newStoryContext.trim() || undefined,
-      mimeType: 'image/jpeg',
-      dataUrl: newDataUrl,
-      personIds: newSelectedPeople,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+  useEffect(() => {
+    const closeButton = addModalOpen ? uploadCloseRef.current : viewingMedia ? viewerCloseRef.current : null;
+    if (!closeButton) return;
+    const trigger = document.activeElement;
+    closeButton.focus();
+    return () => {
+      if (trigger instanceof HTMLElement && trigger.isConnected) trigger.focus();
     };
-
-    await saveMedia(newItem);
-    setAddModalOpen(false);
-    resetForm();
-  };
+  }, [addModalOpen, viewingMedia]);
 
   const resetForm = () => {
+    uploadRevision.current += 1;
     setNewTitle('');
     setNewCategory('historical_photo');
     setNewDateLabel('');
     setNewDescription('');
     setNewStoryContext('');
     setNewSelectedPeople([]);
-    setNewDataUrl(null);
+    setDraftImage(null);
     setUploadError(null);
+    setIsPreparing(false);
+  };
+
+  const closeUpload = () => {
+    if (isSaving) return;
+    setAddModalOpen(false);
+    resetForm();
+  };
+
+  const handleFileUpload = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.currentTarget.files?.[0];
+    event.currentTarget.value = '';
+    if (!file) return;
+
+    const revision = ++uploadRevision.current;
+    setIsPreparing(true);
+    setUploadError(null);
+    try {
+      const compressed = await compressImageFile(file, 1200, 0.85);
+      if (revision !== uploadRevision.current) return;
+      setDraftImage({ dataUrl: compressed.dataUrl, mimeType: compressed.mimeType });
+      setNewTitle((current) => current || file.name.replace(/\.[^/.]+$/, ''));
+    } catch {
+      if (revision === uploadRevision.current) setUploadError('Không thể xử lý ảnh. Hãy thử một tệp JPG hoặc PNG khác.');
+    } finally {
+      if (revision === uploadRevision.current) setIsPreparing(false);
+    }
+  };
+
+  const handleSaveNewMedia = async () => {
+    if (isSaving || isPreparing) return;
+    if (!newTitle.trim() || !draftImage) {
+      setUploadError('Vui lòng chọn ảnh và nhập tiêu đề kỷ vật.');
+      return;
+    }
+
+    const newItem: Media = {
+      id: 'media_' + Date.now() + '_' + Math.random().toString(36).substring(2, 6),
+      title: newTitle.trim(),
+      category: newCategory,
+      dateLabel: newDateLabel.trim() || undefined,
+      description: newDescription.trim() || undefined,
+      storyContext: newStoryContext.trim() || undefined,
+      mimeType: draftImage.mimeType,
+      dataUrl: draftImage.dataUrl,
+      personIds: newSelectedPeople,
+      createdAt: new Date().toISOString(),
+      updatedAt: new Date().toISOString(),
+    };
+
+    setIsSaving(true);
+    setUploadError(null);
+    try {
+      await saveMedia(newItem);
+      setAddModalOpen(false);
+      resetForm();
+    } catch (error) {
+      setUploadError(error instanceof Error ? error.message : 'Không thể lưu kỷ vật. Vui lòng thử lại.');
+    } finally {
+      setIsSaving(false);
+    }
   };
 
   const handleDeleteMedia = async () => {
-    if (!deleteId) return;
+    if (!deleteId || isDeleting) return;
+    setIsDeleting(true);
     try {
       await deleteMedia(deleteId);
       if (viewingMedia?.id === deleteId) setViewingMedia(null);
@@ -130,131 +179,114 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
       setDeleteError(error instanceof Error ? error.message : 'Không thể xóa kỷ vật.');
       setViewingMedia(null);
     } finally {
+      setIsDeleting(false);
       setDeleteId(null);
     }
   };
 
   return (
-    <div className="space-y-6 pb-12 animate-in fade-in">
-      {deleteError && (
-        <p role="alert" className="rounded-xl bg-red-50 p-3 text-xs text-red-800">{deleteError}</p>
-      )}
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E7DFD4] pb-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1B3B2B] tracking-tight">
-            Kho Kỷ Vật & Tư Liệu Gia Tộc
-          </h2>
-          <p className="text-xs text-stone-500 mt-0.5">
-            Lưu giữ ảnh tư liệu, gia phả giấy dó, sắc phong, thư từ và ký ức lịch sử của dòng họ.
-          </p>
-        </div>
-
-        <div className="flex items-center gap-2 self-start sm:self-auto">
-          <button
-            type="button"
-            onClick={() => setAudioRecorderOpen(true)}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#FAF5EB] border border-[#C19B4C]/40 text-[#8C6D32] hover:bg-[#F3EAD6] text-xs font-semibold shadow-xs transition-colors"
-            title="Thu âm trực tiếp giọng nói hoặc lời dặn của tiền nhân"
-          >
-            <Mic className="w-4 h-4 text-[#C19B4C]" />
-            <span>Thu âm ký ức</span>
-          </button>
-
-          <button
-            type="button"
-            onClick={() => setAddModalOpen(true)}
-            className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold shadow-xs transition-colors"
-          >
-            <Plus className="w-4 h-4" />
-            <span>Thêm kỷ vật</span>
-          </button>
-        </div>
-      </div>
-
-      {/* Filter Bar */}
-      <div className="p-3.5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] flex flex-wrap items-center justify-between gap-3 shadow-xs">
-        <div className="flex flex-wrap items-center gap-2">
-          <div className="flex items-center gap-1 text-xs text-stone-500 mr-1">
-            <Filter className="w-3.5 h-3.5" />
-            <span>Phân loại:</span>
+    <div className="min-w-0 space-y-4 pb-14 sm:space-y-6">
+      <header className="rounded-2xl border border-forest-700 bg-forest-900 p-4 text-white sm:rounded-3xl sm:p-6 lg:p-8">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div>
+            <h2 className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Kho kỷ vật</h2>
+            <p className="mt-2 text-sm text-[#E6DFD5]">Ảnh, tư liệu và bản ghi âm của dòng họ</p>
           </div>
-
-          <button
-            type="button"
-            onClick={() => setSelectedCategory('all')}
-            className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
-              selectedCategory === 'all'
-                ? 'bg-[#1B3B2B] text-white'
-                : 'bg-[#F2EDE4] text-[#54483C] hover:bg-stone-200'
-            }`}
-          >
-            Tất cả ({media.length})
-          </button>
-
-          {(Object.keys(CATEGORY_LABELS) as MediaCategory[]).map((cat) => {
-            const count = media.filter((m) => m.category === cat).length;
-            if (count === 0 && selectedCategory !== cat) return null;
-            return (
-              <button
-                key={cat}
-                type="button"
-                onClick={() => setSelectedCategory(cat)}
-                className={`px-3 py-1.5 rounded-xl text-xs font-medium transition-all ${
-                  selectedCategory === cat
-                    ? 'bg-[#1B3B2B] text-white'
-                    : 'bg-[#F2EDE4] text-[#54483C] hover:bg-stone-200'
-                }`}
-              >
-                {CATEGORY_LABELS[cat]} ({count})
-              </button>
-            );
-          })}
+          <div className="grid grid-cols-2 gap-2 sm:flex">
+            <button
+              type="button"
+              onClick={() => setAddModalOpen(true)}
+              className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl bg-[#DBC599] px-2.5 text-xs font-bold text-forest-900 transition-colors hover:bg-[#E7D1A8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599] sm:px-4 sm:text-sm"
+            >
+              <Plus className="size-4 shrink-0" aria-hidden="true" />
+              Thêm kỷ vật
+            </button>
+            <button
+              type="button"
+              onClick={() => setAudioRecorderOpen(true)}
+              className="inline-flex min-h-11 items-center justify-center gap-1.5 rounded-xl border border-white/20 px-2.5 text-xs font-semibold text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599] sm:px-4 sm:text-sm"
+            >
+              <Mic className="size-4 shrink-0 text-[#DBC599]" aria-hidden="true" />
+              Ghi âm
+            </button>
+          </div>
         </div>
+      </header>
 
-        {/* Filter by Person */}
-        <div className="flex items-center gap-2">
-          <label className="text-xs text-stone-500">Người liên quan:</label>
+      {deleteError && (
+        <p role="alert" className="rounded-xl bg-rose-50 p-3 text-sm text-rose-900">{deleteError}</p>
+      )}
+
+      <section aria-label="Lọc kỷ vật" className="grid min-w-0 grid-cols-2 gap-2 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-3 sm:max-w-none sm:gap-4 sm:p-4 lg:grid-cols-[minmax(0,1fr)_minmax(0,1fr)_auto]">
+        <label className="min-w-0 text-xs font-semibold text-stone-600">
+          Loại kỷ vật
           <select
-            value={selectedPersonFilter}
-            onChange={(e) => setSelectedPersonFilter(e.target.value)}
-            className="text-xs rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-2.5 py-1.5 text-[#2C241C] outline-none focus:border-[#1B3B2B]"
+            value={selectedCategory}
+            onChange={(event) => setSelectedCategory(event.target.value)}
+            className={filterClass}
           >
-            <option value="all">Mọi thành viên</option>
-            {people.map((p) => (
-              <option key={p.id} value={p.id}>
-                {p.fullName}
+            <option value="all">Tất cả ({media.length})</option>
+            {(Object.keys(CATEGORY_LABELS) as MediaCategory[]).map((category) => (
+              <option key={category} value={category}>
+                {CATEGORY_LABELS[category]} ({categoryCounts.get(category) ?? 0})
               </option>
             ))}
           </select>
+        </label>
+        <label className="min-w-0 text-xs font-semibold text-stone-600">
+          Người liên quan
+          <select
+            value={selectedPersonFilter}
+            onChange={(event) => setSelectedPersonFilter(event.target.value)}
+            className={filterClass}
+          >
+            <option value="all">Mọi thành viên</option>
+            {people.map((person) => (
+              <option key={person.id} value={person.id}>{person.fullName}</option>
+            ))}
+          </select>
+        </label>
+        <div className="col-span-2 flex items-center justify-between gap-2 lg:col-span-1 lg:self-end">
+          <p role="status" className="text-sm text-stone-600">{filteredMedia.length} kỷ vật</p>
+          {hasFilters && (
+            <button type="button" onClick={clearFilters} className="min-h-11 rounded-lg px-2 text-xs font-semibold text-[#1B3B2B] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-forest-700 sm:text-sm">
+              Xóa bộ lọc
+            </button>
+          )}
         </div>
-      </div>
+      </section>
 
       {/* Gallery Grid */}
       {filteredMedia.length === 0 ? (
-        <div className="p-12 text-center bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] space-y-3">
-          <Camera className="w-10 h-10 text-stone-300 mx-auto" />
-          <p className="text-sm font-serif font-bold text-stone-700">Chưa có kỷ vật nào trong mục này</p>
-          <p className="text-xs text-stone-500">
-            Hãy tải lên các bức ảnh gia đình xưa, sắc phong, hoặc bản gia phả cổ để lưu giữ.
+        <div className="rounded-2xl border border-dashed border-[#E7DFD4] bg-[#FFFDF9] p-6 text-center sm:p-10">
+          <Camera className="mx-auto size-7 text-[#8C6D32]" aria-hidden="true" />
+          <h3 className="mt-3 text-xl font-bold text-[#1F1913]">
+            {hasFilters ? 'Không có kỷ vật phù hợp' : 'Kho chưa có kỷ vật'}
+          </h3>
+          <p className="mt-1 text-sm text-stone-600">
+            {hasFilters ? 'Chọn loại tư liệu hoặc người liên quan khác.' : 'Thêm ảnh hoặc ghi âm từ thiết bị.'}
           </p>
-          <button
-            type="button"
-            onClick={() => setAddModalOpen(true)}
-            className="px-4 py-2 rounded-xl bg-[#1B3B2B] text-white text-xs font-semibold"
-          >
-            + Tải lên kỷ vật
-          </button>
+          {!hasFilters && (
+            <button type="button" onClick={() => setAddModalOpen(true)} className="mt-4 min-h-11 rounded-xl bg-forest-800 px-4 text-sm font-semibold text-white hover:bg-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700">
+              Thêm kỷ vật
+            </button>
+          )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div className="grid min-w-0 grid-cols-1 gap-3 min-[360px]:grid-cols-2 lg:grid-cols-3 lg:gap-5 xl:grid-cols-4">
           {filteredMedia.map((item) => (
-            <div
+            <article
               key={item.id}
-              onClick={() => setViewingMedia(item)}
-              className="group rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] overflow-hidden shadow-xs hover:shadow-md hover:border-[#1B3B2B]/40 cursor-pointer transition-all flex flex-col"
+              className="group relative flex min-w-0 flex-col overflow-hidden rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] shadow-xs transition-colors hover:border-forest-600 focus-within:ring-2 focus-within:ring-forest-600"
             >
-              <div className="aspect-4/3 w-full bg-stone-100 relative overflow-hidden flex items-center justify-center">
+              <button
+                type="button"
+                onClick={() => setViewingMedia(item)}
+                aria-label={'Xem kỷ vật: ' + item.title}
+                aria-haspopup="dialog"
+                className="absolute inset-0 z-10 rounded-2xl outline-none"
+              />
+              <div className="relative flex aspect-4/3 w-full items-center justify-center overflow-hidden bg-stone-100">
                 {item.category === 'audio' ? (
                   <div className="w-full h-full bg-[#1B3B2B] flex flex-col items-center justify-center p-3 text-center text-white">
                     <div className="w-11 h-11 rounded-full bg-white/10 flex items-center justify-center border border-white/20 mb-1.5 shadow-inner">
@@ -268,17 +300,17 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                     src={item.dataUrl}
                     alt={item.title}
                     loading="lazy"
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none"
                   />
                 )}
-                <span className="absolute top-2 left-2 px-2 py-0.5 rounded-md text-[10px] font-semibold bg-black/60 text-white backdrop-blur-xs">
+                <span className="absolute top-2 left-2 max-w-[calc(100%-1rem)] break-words rounded-md bg-black/75 px-2 py-0.5 text-[10px] font-semibold text-white">
                   {CATEGORY_LABELS[item.category] || item.category}
                 </span>
               </div>
 
-              <div className="p-3.5 flex-1 flex flex-col justify-between space-y-2">
+              <div className="flex flex-1 flex-col justify-between gap-2 p-3 sm:p-4">
                 <div>
-                  <h3 className="text-xs font-serif font-bold text-[#1F1913] group-hover:text-[#1B3B2B] transition-colors line-clamp-1">
+                  <h3 className="line-clamp-2 break-words font-serif text-base font-bold leading-snug text-[#1F1913] sm:text-xl">
                     {item.title}
                   </h3>
                   {item.dateLabel && (
@@ -288,7 +320,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                     </p>
                   )}
                   {item.description && (
-                    <p className="text-[11px] text-stone-500 line-clamp-2 mt-1">
+                    <p className="mt-1 line-clamp-2 break-words text-xs text-stone-600 sm:text-sm">
                       {item.description}
                     </p>
                   )}
@@ -296,8 +328,8 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
 
                 {/* Linked People Avatars */}
                 {item.personIds.length > 0 && (
-                  <div className="pt-2 border-t border-stone-100 flex items-center justify-between">
-                    <span className="text-[10px] text-stone-400">Gắn với {item.personIds.length} người</span>
+                  <div className="flex flex-wrap items-center justify-between gap-1 border-t border-stone-100 pt-2">
+                    <span className="text-xs text-stone-600">Gắn với {item.personIds.length} người</span>
                     <div className="flex -space-x-1.5 overflow-hidden">
                       {item.personIds.slice(0, 3).map((pId) => {
                         const person = peopleMap.get(pId);
@@ -317,7 +349,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                   </div>
                 )}
               </div>
-            </div>
+            </article>
           ))}
         </div>
       )}
@@ -328,13 +360,20 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in"
           role="dialog"
           aria-modal="true"
+          aria-labelledby="gallery-view-title"
+          onKeyDown={(event) => {
+            if (event.key === 'Escape' && !deleteId) {
+              event.stopPropagation();
+              setViewingMedia(null);
+            }
+          }}
         >
           <div
-            className="w-full max-w-4xl max-h-[92vh] rounded-3xl bg-[#FFFDF9] overflow-hidden flex flex-col md:flex-row shadow-2xl"
+            className="flex max-h-[90dvh] w-full max-w-4xl flex-col overflow-y-auto rounded-2xl bg-[#FFFDF9] shadow-2xl md:flex-row md:overflow-hidden"
             onClick={(e) => e.stopPropagation()}
           >
             {/* Left: Media / Image / Audio Container */}
-            <div className="flex-1 bg-stone-900 flex flex-col items-center justify-center p-6 relative min-h-[250px] md:min-h-[480px]">
+            <div className="relative flex shrink-0 items-center justify-center bg-forest-900 p-3 md:min-h-[420px] md:min-w-0 md:flex-1 md:p-6">
               {viewingMedia.category === 'audio' ? (
                 <div className="w-full max-w-md flex flex-col items-center text-center space-y-4">
                   <div className="w-20 h-20 rounded-full bg-[#1B3B2B] text-[#DBC599] flex items-center justify-center border-2 border-[#DBC599]/50 shadow-2xl">
@@ -350,13 +389,13 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                 <img
                   src={viewingMedia.dataUrl}
                   alt={viewingMedia.title}
-                  className="max-h-[75vh] max-w-full object-contain rounded-lg"
+                  className="max-h-[40dvh] max-w-full rounded-lg object-contain md:max-h-[75dvh]"
                 />
               )}
             </div>
 
             {/* Right: Info Panel */}
-            <div className="w-full md:w-80 p-5 md:p-6 overflow-y-auto flex flex-col justify-between space-y-4 bg-[#FFFDF9] border-l border-[#E7DFD4]">
+            <div className="flex w-full min-w-0 flex-col justify-between gap-4 bg-[#FFFDF9] p-4 md:w-80 md:overflow-y-auto md:border-l md:border-[#E7DFD4] md:p-6">
               <div className="space-y-3">
                 <div className="flex items-start justify-between gap-2">
                   <span className="text-[11px] font-bold uppercase tracking-wider text-[#1B3B2B]">
@@ -364,14 +403,16 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                   </span>
                   <button
                     type="button"
+                    ref={viewerCloseRef}
+                    aria-label="Đóng kỷ vật"
                     onClick={() => setViewingMedia(null)}
-                    className="p-1 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100"
+                    className="grid size-11 shrink-0 place-items-center rounded-lg text-stone-600 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-forest-700"
                   >
                     <X className="w-5 h-5" />
                   </button>
                 </div>
 
-                <h3 className="text-base font-serif font-bold text-[#1F1913] leading-snug">
+                <h3 id="gallery-view-title" className="break-words text-xl font-serif font-bold leading-snug text-[#1F1913]">
                   {viewingMedia.title}
                 </h3>
 
@@ -383,14 +424,14 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                 )}
 
                 {viewingMedia.description && (
-                  <div className="text-xs text-[#4A3F35] leading-relaxed pt-2 border-t border-stone-200">
+                  <div className="break-words border-t border-stone-200 pt-2 text-sm leading-relaxed text-[#54483C]">
                     <h4 className="font-semibold text-stone-600 mb-1">Mô tả tư liệu</h4>
                     <p className="whitespace-pre-line">{viewingMedia.description}</p>
                   </div>
                 )}
 
                 {viewingMedia.storyContext && (
-                  <div className="text-xs text-[#4A3F35] leading-relaxed p-3 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4]">
+                  <div className="break-words rounded-xl border border-[#E7DFD4] bg-[#FAF7F2] p-3 text-sm leading-relaxed text-[#54483C]">
                     <h4 className="font-semibold text-[#8C6D32] mb-1">Hoàn cảnh & Ký ức</h4>
                     <p className="whitespace-pre-line">{viewingMedia.storyContext}</p>
                   </div>
@@ -408,13 +449,14 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                         const p = peopleMap.get(pId);
                         if (!p) return null;
                         return (
-                          <div
+                          <button
                             key={pId}
+                            type="button"
                             onClick={() => {
                               setViewingMedia(null);
                               onSelectPerson(pId);
                             }}
-                            className="flex items-center gap-2 p-1.5 rounded-xl hover:bg-stone-100 cursor-pointer text-xs"
+                            className="flex min-h-11 w-full items-center gap-2 rounded-xl p-1.5 text-left text-sm hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-forest-700"
                           >
                             <HeritageAvatar
                               fullName={p.fullName}
@@ -422,10 +464,10 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                               gender={p.gender}
                               size="xs"
                             />
-                            <span className="font-medium text-[#1F1913] hover:text-[#1B3B2B] truncate">
+                            <span className="min-w-0 truncate font-medium text-[#1F1913] hover:text-[#1B3B2B]">
                               {p.fullName}
                             </span>
-                          </div>
+                          </button>
                         );
                       })}
                     </div>
@@ -433,11 +475,11 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                 )}
               </div>
 
-              <div className="pt-3 border-t border-stone-200 flex items-center justify-between">
+              <div className="flex flex-wrap items-center justify-between gap-2 border-t border-stone-200 pt-2">
                 <button
                   type="button"
                   onClick={() => { setDeleteError(null); setDeleteId(viewingMedia.id); }}
-                  className="flex items-center gap-1 text-xs text-red-600 hover:text-red-800"
+                  className="flex min-h-11 items-center gap-2 rounded-lg px-2 text-sm text-rose-900 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-rose-700"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
                   <span>Xóa kỷ vật</span>
@@ -445,7 +487,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
                 <button
                   type="button"
                   onClick={() => setViewingMedia(null)}
-                  className="px-4 py-1.5 text-xs font-medium bg-[#1B3B2B] text-white rounded-xl"
+                  className="min-h-11 rounded-xl bg-forest-800 px-4 text-sm font-semibold text-white hover:bg-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700"
                 >
                   Đóng
                 </button>
@@ -461,168 +503,183 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
           className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in"
           role="dialog"
           aria-modal="true"
+          aria-labelledby="gallery-upload-title"
+          onKeyDown={(event) => {
+            if (event.key === 'Escape') {
+              event.stopPropagation();
+              closeUpload();
+            }
+          }}
         >
           <div
-            className="w-full max-w-lg rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 sm:p-6 shadow-2xl space-y-4 max-h-[90vh] overflow-y-auto"
+            className="max-h-[90dvh] w-full max-w-lg space-y-4 overflow-y-auto rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-4 shadow-2xl sm:p-6"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-[#E7DFD4] pb-3">
-              <h3 className="text-base font-serif font-bold text-[#1F1913]">
-                Thêm Kỷ Vật / Tư Liệu Mới
+              <h3 id="gallery-upload-title" className="text-xl font-serif font-bold text-[#1F1913]">
+                Thêm kỷ vật
               </h3>
               <button
                 type="button"
-                onClick={() => {
-                  setAddModalOpen(false);
-                  resetForm();
-                }}
-                className="p-1 rounded-lg text-stone-400 hover:text-stone-700"
+                ref={uploadCloseRef}
+                aria-label="Đóng biểu mẫu thêm kỷ vật"
+                disabled={isSaving}
+                onClick={closeUpload}
+                className="grid size-11 shrink-0 place-items-center rounded-lg text-stone-600 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-forest-700 disabled:opacity-50"
               >
                 <X className="w-5 h-5" />
               </button>
             </div>
 
             {uploadError && (
-              <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800">
+              <div role="alert" className="rounded-xl border border-rose-100 bg-rose-50 p-3 text-sm text-rose-900">
                 {uploadError}
               </div>
             )}
 
-            {/* Image Preview & Upload */}
-            <div>
-              <label className="block text-xs font-semibold text-[#54483C] mb-1">
-                Tệp hình ảnh / tư liệu <span className="text-red-500">*</span>
-              </label>
-              {newDataUrl ? (
-                <div className="relative rounded-xl border border-[#D5CABE] overflow-hidden bg-stone-100 aspect-16/9 flex items-center justify-center">
-                  <img src={newDataUrl} alt="Preview" className="max-h-full object-contain" />
-                  <button
-                    type="button"
-                    onClick={() => setNewDataUrl(null)}
-                    className="absolute top-2 right-2 p-1.5 rounded-full bg-black/60 text-white hover:bg-black/80"
-                  >
-                    <Trash2 className="w-4 h-4" />
-                  </button>
-                </div>
-              ) : (
-                <label className="flex flex-col items-center justify-center p-6 rounded-xl border-2 border-dashed border-[#D5CABE] hover:border-[#1B3B2B] bg-[#FAF8F5] cursor-pointer transition-colors">
-                  <Camera className="w-8 h-8 text-stone-400 mb-2" />
-                  <span className="text-xs font-semibold text-[#1B3B2B]">Chọn ảnh từ thiết bị</span>
-                  <span className="text-[11px] text-stone-400 mt-0.5">JPG, PNG (Tự động nén tối ưu)</span>
-                  <input
-                    type="file"
-                    accept="image/*"
-                    onChange={handleFileUpload}
-                    className="hidden"
-                  />
-                </label>
-              )}
-            </div>
-
-            <div>
-              <label className="block text-xs font-semibold text-[#54483C] mb-1">
-                Tiêu đề kỷ vật <span className="text-red-500">*</span>
-              </label>
-              <input
-                type="text"
-                placeholder="VD: Sắc phong triều Nguyễn năm 1904 / Ảnh đại gia đình"
-                value={newTitle}
-                onChange={(e) => setNewTitle(e.target.value)}
-                className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
-              />
-            </div>
-
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <fieldset disabled={isSaving} className="min-w-0 space-y-4">
+              {/* Image Preview & Upload */}
               <div>
-                <label className="block text-xs font-medium text-[#54483C] mb-1">Phân loại</label>
-                <select
-                  value={newCategory}
-                  onChange={(e) => setNewCategory(e.target.value as MediaCategory)}
-                  className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
-                >
-                  {(Object.keys(CATEGORY_LABELS) as MediaCategory[]).map((cat) => (
-                    <option key={cat} value={cat}>
-                      {CATEGORY_LABELS[cat]}
-                    </option>
-                  ))}
-                </select>
+                <label className="block text-xs font-semibold text-[#54483C] mb-1">
+                  Tệp hình ảnh / tư liệu <span className="text-red-500">*</span>
+                </label>
+                {draftImage ? (
+                  <div className="relative rounded-xl border border-[#D5CABE] overflow-hidden bg-stone-100 aspect-16/9 flex items-center justify-center">
+                    <img src={draftImage.dataUrl} alt="Ảnh kỷ vật đã chọn" className="max-h-full object-contain" />
+                    <button
+                      type="button"
+                      aria-label="Bỏ ảnh đã chọn"
+                      onClick={() => setDraftImage(null)}
+                      className="absolute right-2 top-2 grid size-11 place-items-center rounded-full bg-black/75 text-white hover:bg-black focus-visible:outline-2 focus-visible:outline-white"
+                    >
+                      <Trash2 className="w-4 h-4" />
+                    </button>
+                  </div>
+                ) : (
+                  <label className="flex cursor-pointer flex-col items-center justify-center rounded-xl border border-dashed border-[#D5CABE] bg-[#FAF8F5] p-4 transition-colors hover:border-forest-600 focus-within:ring-2 focus-within:ring-forest-600">
+                    <Camera className="w-8 h-8 text-stone-400 mb-2" />
+                    <span className="text-sm font-semibold text-[#1B3B2B]">{isPreparing ? 'Đang xử lý ảnh…' : 'Chọn ảnh từ thiết bị'}</span>
+                    <span className="text-[11px] text-stone-400 mt-0.5">JPG, PNG (Tự động nén tối ưu)</span>
+                    <input
+                      type="file"
+                      accept="image/*"
+                      aria-label="Chọn ảnh kỷ vật từ thiết bị"
+                      onChange={handleFileUpload}
+                      className="sr-only"
+                    />
+                  </label>
+                )}
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-[#54483C] mb-1">
-                  Niên đại / Thời kỳ
+                <label htmlFor="gallery-title" className="block text-xs font-semibold text-[#54483C] mb-1">
+                  Tiêu đề kỷ vật <span className="text-red-500">*</span>
                 </label>
                 <input
+                  id="gallery-title"
                   type="text"
-                  placeholder="VD: Xuân Canh Dần 1950 / Khoảng năm 1930"
-                  value={newDateLabel}
-                  onChange={(e) => setNewDateLabel(e.target.value)}
-                  className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                  placeholder="VD: Sắc phong triều Nguyễn năm 1904 / Ảnh đại gia đình"
+                  value={newTitle}
+                  onChange={(e) => setNewTitle(e.target.value)}
+                  className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
                 />
               </div>
-            </div>
 
-            <div>
-              <label className="block text-xs font-medium text-[#54483C] mb-1">Mô tả tư liệu</label>
-              <textarea
-                rows={2}
-                placeholder="Mô tả hoàn cảnh, xuất xứ, nơi bảo quản..."
-                value={newDescription}
-                onChange={(e) => setNewDescription(e.target.value)}
-                className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white p-2.5 outline-none focus:border-[#1B3B2B]"
-              />
-            </div>
+              <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                <div>
+                  <label htmlFor="gallery-category" className="block text-xs font-medium text-[#54483C] mb-1">Phân loại</label>
+                  <select
+                  id="gallery-category"
+                    value={newCategory}
+                    onChange={(e) => setNewCategory(e.target.value as MediaCategory)}
+                    className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
+                  >
+                    {(Object.keys(CATEGORY_LABELS) as MediaCategory[]).map((cat) => (
+                      <option key={cat} value={cat}>
+                        {CATEGORY_LABELS[cat]}
+                      </option>
+                    ))}
+                  </select>
+                </div>
 
-            {/* People link multi-select */}
-            <div>
-              <label className="block text-xs font-medium text-[#54483C] mb-1">
-                Gắn thẻ các thành viên có mặt / liên quan
-              </label>
-              <div className="max-h-32 overflow-y-auto rounded-xl border border-[#D5CABE] bg-white p-2 space-y-1">
-                {people.map((p) => {
-                  const isChecked = newSelectedPeople.includes(p.id);
-                  return (
-                    <label
-                      key={p.id}
-                      className="flex items-center gap-2 text-xs p-1 hover:bg-stone-50 rounded cursor-pointer"
-                    >
-                      <input
-                        type="checkbox"
-                        checked={isChecked}
-                        onChange={() => {
-                          setNewSelectedPeople((prev) =>
-                            isChecked ? prev.filter((id) => id !== p.id) : [...prev, p.id]
-                          );
-                        }}
-                        className="accent-[#1B3B2B]"
-                      />
-                      <span>{p.fullName}</span>
-                      {p.generation && (
-                        <span className="text-[10px] text-stone-400">(Đời {p.generation})</span>
-                      )}
-                    </label>
-                  );
-                })}
+                <div>
+                  <label htmlFor="gallery-period" className="block text-xs font-medium text-[#54483C] mb-1">
+                    Niên đại / Thời kỳ
+                  </label>
+                  <input
+                  id="gallery-period"
+                    type="text"
+                    placeholder="VD: Xuân Canh Dần 1950 / Khoảng năm 1930"
+                    value={newDateLabel}
+                    onChange={(e) => setNewDateLabel(e.target.value)}
+                    className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-white px-3 text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
+                  />
+                </div>
               </div>
-            </div>
 
-            <div className="flex justify-end gap-2 pt-2 border-t border-[#E7DFD4]">
+              <div>
+                <label htmlFor="gallery-description" className="block text-xs font-medium text-[#54483C] mb-1">Mô tả tư liệu</label>
+                <textarea
+                  id="gallery-description"
+                  rows={2}
+                  placeholder="Mô tả hoàn cảnh, xuất xứ, nơi bảo quản..."
+                  value={newDescription}
+                  onChange={(e) => setNewDescription(e.target.value)}
+                  className="w-full rounded-xl border border-[#D5CABE] bg-white p-2.5 text-base focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
+                />
+              </div>
+
+              {/* People link multi-select */}
+              <div>
+                <label className="block text-xs font-medium text-[#54483C] mb-1">
+                  Gắn thẻ các thành viên có mặt / liên quan
+                </label>
+                <div className="max-h-32 overflow-y-auto rounded-xl border border-[#D5CABE] bg-white p-2 space-y-1">
+                  {people.map((p) => {
+                    const isChecked = newSelectedPeople.includes(p.id);
+                    return (
+                      <label
+                        key={p.id}
+                        className="flex min-h-11 cursor-pointer items-center gap-2 rounded px-2 text-sm hover:bg-stone-50"
+                      >
+                        <input
+                          type="checkbox"
+                          checked={isChecked}
+                          onChange={() => {
+                            setNewSelectedPeople((prev) =>
+                              isChecked ? prev.filter((id) => id !== p.id) : [...prev, p.id]
+                            );
+                          }}
+                          className="accent-[#1B3B2B]"
+                        />
+                        <span>{p.fullName}</span>
+                        {p.generation && (
+                          <span className="text-[10px] text-stone-400">(Đời {p.generation})</span>
+                        )}
+                      </label>
+                    );
+                  })}
+                </div>
+              </div>
+
+            </fieldset>
+
+            <div className="grid grid-cols-2 gap-2 border-t border-[#E7DFD4] pt-3">
               <button
                 type="button"
-                onClick={() => {
-                  setAddModalOpen(false);
-                  resetForm();
-                }}
-                className="px-4 py-2 text-xs font-medium text-stone-600 hover:bg-stone-100 rounded-xl"
+                onClick={closeUpload}
+                disabled={isSaving}
+                className="min-h-11 rounded-xl border border-[#D5CABE] px-4 text-sm font-medium text-stone-600 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-forest-700 disabled:opacity-50"
               >
                 Hủy
               </button>
               <button
                 type="button"
                 onClick={handleSaveNewMedia}
-                className="px-5 py-2 text-xs font-semibold bg-[#1B3B2B] text-white rounded-xl shadow-xs hover:bg-[#28503C]"
+                disabled={isPreparing || isSaving}
+                className="min-h-11 rounded-xl bg-forest-800 px-4 text-sm font-semibold text-white hover:bg-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 disabled:opacity-50"
               >
-                Lưu kỷ vật
+                {isSaving ? 'Đang lưu…' : 'Lưu kỷ vật'}
               </button>
             </div>
           </div>
@@ -637,6 +694,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
         confirmLabel="Xóa kỷ vật"
         cancelLabel="Hủy"
         danger={true}
+        busy={isDeleting}
         onConfirm={handleDeleteMedia}
         onCancel={() => setDeleteId(null)}
       />

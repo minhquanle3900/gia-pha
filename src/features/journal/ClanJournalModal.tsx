@@ -1,14 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import {
   AlertCircle,
   BookOpen,
   Calendar,
   Check,
-  FileText,
   MapPin,
   Pin,
-  Sparkles,
-  Tag,
   Trash2,
   User,
   Users,
@@ -86,6 +83,17 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
   const [errorMsg, setErrorMsg] = useState<string | null>(null);
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [confirmDeleteOpen, setConfirmDeleteOpen] = useState(false);
+  const [isDeleting, setIsDeleting] = useState(false);
+  const closeRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const trigger = document.activeElement;
+    closeRef.current?.focus();
+    return () => {
+      if (trigger instanceof HTMLElement && trigger.isConnected) trigger.focus();
+    };
+  }, [open]);
 
   useEffect(() => {
     if (editingStory) {
@@ -135,6 +143,7 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (isSubmitting || isDeleting) return;
     if (!title.trim()) {
       setErrorMsg('Vui lòng nhập tiêu đề cho sự kiện hoặc ghi chú nhật ký.');
       return;
@@ -181,51 +190,65 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
   };
 
   const handleDelete = async () => {
-    if (!editingStory) return;
+    if (!editingStory || isDeleting) return;
+    setIsDeleting(true);
     try {
       await deleteStory(editingStory.id);
       setConfirmDeleteOpen(false);
       onClose();
     } catch (err) {
       console.error(err);
+      setConfirmDeleteOpen(false);
       setErrorMsg('Không thể xóa bài viết nhật ký.');
+    } finally {
+      setIsDeleting(false);
     }
   };
 
   return (
-    <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-4 overflow-y-auto animate-in fade-in">
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center overflow-hidden bg-black/60 p-2 backdrop-blur-xs sm:p-4"
+      onKeyDown={(event) => {
+        if (event.key !== 'Escape' || isSubmitting || isDeleting) return;
+        event.stopPropagation();
+        if (confirmDeleteOpen) setConfirmDeleteOpen(false);
+        else onClose();
+      }}
+    >
       <div
-        className="w-full max-w-2xl bg-[#FFFDF9] rounded-3xl border border-[#E7DFD4] shadow-2xl overflow-hidden flex flex-col my-auto"
-        onClick={(e) => e.stopPropagation()}
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="journal-entry-title"
+        className="flex max-h-[92dvh] w-full max-w-2xl flex-col overflow-hidden rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] shadow-2xl"
       >
         {/* Header */}
-        <div className="p-4 sm:p-5 bg-linear-to-r from-[#1B3B2B] to-[#254F3A] text-white flex items-center justify-between">
+        <div className="flex shrink-0 items-center justify-between gap-2 bg-forest-900 px-4 py-2 text-white sm:px-6 sm:py-3">
           <div className="flex items-center gap-2.5">
             <span className="p-2 rounded-xl bg-white/10 border border-white/20 text-[#DBC599]">
               <BookOpen className="w-5 h-5" />
             </span>
             <div>
-              <h2 className="text-base sm:text-lg font-serif font-bold text-[#FFFDF9]">
-                {editingStory ? 'Chỉnh Sửa Nhật Ký Dòng Họ' : 'Viết Nhật Ký Dòng Họ Mới'}
+              <h2 id="journal-entry-title" className="text-xl font-serif font-bold text-white sm:text-2xl">
+                {editingStory ? 'Chỉnh sửa nhật ký' : 'Viết nhật ký mới'}
               </h2>
-              <p className="text-xs text-[#E3DACD]">
-                Ghi chép sự kiện lịch sử chung, kỷ niệm hoặc hương ước toàn tộc
-              </p>
             </div>
           </div>
           <button
             type="button"
+            ref={closeRef}
+            aria-label="Đóng biểu mẫu nhật ký"
+            disabled={isSubmitting || isDeleting}
             onClick={onClose}
-            className="p-1.5 rounded-xl text-stone-300 hover:text-white hover:bg-white/10 transition-colors"
+            className="grid size-11 shrink-0 place-items-center rounded-xl text-white hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-[#DBC599] disabled:opacity-50"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Form Body */}
-        <form onSubmit={handleSubmit} className="p-5 sm:p-6 space-y-4 sm:space-y-5 overflow-y-auto max-h-[75vh]">
+        <form onSubmit={handleSubmit} className="min-h-0 space-y-4 overflow-y-auto p-4 sm:p-6">
           {errorMsg && (
-            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-red-800 text-xs flex items-center gap-2">
+            <div role="alert" className="flex items-center gap-2 rounded-xl border border-rose-100 bg-rose-50 p-3 text-sm text-rose-900">
               <AlertCircle className="w-4 h-4 shrink-0" />
               <span>{errorMsg}</span>
             </div>
@@ -233,25 +256,50 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
 
           {/* Title */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-[#2C231A]">
+            <label htmlFor="journal-title" className="block text-sm font-semibold text-[#1F1913]">
               Tiêu đề sự kiện / ghi chú nhật ký <span className="text-red-500">*</span>
             </label>
             <input
+             id="journal-title"
               type="text"
               required
               value={title}
               onChange={(e) => setTitle(e.target.value)}
               placeholder="Ví dụ: Đại lễ khánh thành Từ đường, Biến cố lũ sông Hồng năm 1971..."
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#1F1913] placeholder-stone-400 focus:outline-none focus:border-[#1B3B2B] focus:bg-white"
+              className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 py-2 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
             />
           </div>
 
-          {/* Category Selection */}
+          {/* Full content */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-[#2C231A]">
-              Thể loại sự kiện / ghi chép <span className="text-red-500">*</span>
+            <label htmlFor="journal-content" className="block text-sm font-semibold text-[#1F1913]">
+              Nội dung chi tiết nhật ký dòng họ <span className="text-red-500">*</span>
             </label>
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-2">
+            <textarea
+             id="journal-content"
+              required
+              rows={6}
+              value={content}
+              onChange={(e) => setContent(e.target.value)}
+              placeholder="Ghi chép diễn biến chi tiết sự kiện lịch sử, bối cảnh, các nhân vật tham gia, ý nghĩa đối với các thế hệ mai sau..."
+              className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 py-2 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm leading-relaxed"
+            />
+          </div>
+
+          <fieldset className="min-w-0 space-y-1.5">
+            <legend className="text-sm font-semibold text-[#1F1913]">Thể loại</legend>
+            <select
+              aria-label="Thể loại bài viết"
+              value={category}
+              onChange={(event) => setCategory(event.target.value as JournalCategory)}
+              className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:hidden"
+            >
+              {(Object.keys(JOURNAL_CATEGORY_META) as JournalCategory[]).map((value) => (
+                <option value={value} key={value}>{JOURNAL_CATEGORY_META[value].label}</option>
+              ))}
+            </select>
+            <p className="text-xs text-stone-600 sm:hidden">{JOURNAL_CATEGORY_META[category]?.description}</p>
+            <div className="hidden grid-cols-2 gap-2 sm:grid">
               {(Object.keys(JOURNAL_CATEGORY_META) as JournalCategory[]).map((cat) => {
                 const meta = JOURNAL_CATEGORY_META[cat];
                 const isSelected = category === cat;
@@ -260,6 +308,7 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
                     key={cat}
                     type="button"
                     onClick={() => setCategory(cat)}
+                    aria-pressed={isSelected}
                     className={`p-2.5 rounded-xl border text-left text-xs transition-all ${
                       isSelected
                         ? 'bg-[#1B3B2B]/10 border-[#1B3B2B] text-[#1B3B2B] font-semibold ring-1 ring-[#1B3B2B]'
@@ -277,35 +326,37 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
                 );
               })}
             </div>
-          </div>
+          </fieldset>
 
           {/* Grid 2: Period / Year & Location */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold text-[#2C231A] flex items-center gap-1.5">
+              <label htmlFor="journal-period" className="block text-sm font-semibold text-[#1F1913] flex items-center gap-1.5">
                 <Calendar className="w-3.5 h-3.5 text-[#8C6D32]" />
                 <span>Thời gian / Niên đại</span>
               </label>
               <input
+               id="journal-period"
                 type="text"
                 value={periodLabel}
                 onChange={(e) => setPeriodLabel(e.target.value)}
                 placeholder="Ví dụ: Mùa xuân 1995, Năm 2024, 1946 – 1954..."
-                className="w-full px-3 py-2 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#1F1913] placeholder-stone-400 focus:outline-none focus:border-[#1B3B2B] focus:bg-white"
+                className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold text-[#2C231A] flex items-center gap-1.5">
+              <label htmlFor="journal-location" className="block text-sm font-semibold text-[#1F1913] flex items-center gap-1.5">
                 <MapPin className="w-3.5 h-3.5 text-[#2E6B4F]" />
                 <span>Địa điểm diễn ra</span>
               </label>
               <input
+               id="journal-location"
                 type="text"
                 value={location}
                 onChange={(e) => setLocation(e.target.value)}
                 placeholder="Ví dụ: Nhà thờ họ Đông Ngạc, Hà Nội..."
-                className="w-full px-3 py-2 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#1F1913] placeholder-stone-400 focus:outline-none focus:border-[#1B3B2B] focus:bg-white"
+                className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
               />
             </div>
           </div>
@@ -313,28 +364,30 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
           {/* Grid 2: Recorder & Branch */}
           <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold text-[#2C231A] flex items-center gap-1.5">
+              <label htmlFor="journal-recorder" className="block text-sm font-semibold text-[#1F1913] flex items-center gap-1.5">
                 <User className="w-3.5 h-3.5 text-stone-500" />
                 <span>Người ghi chép / Đơn vị ghi chép</span>
               </label>
               <input
+               id="journal-recorder"
                 type="text"
                 value={recordedBy}
                 onChange={(e) => setRecordedBy(e.target.value)}
                 placeholder="Ví dụ: Ban Trị Sự Dòng Họ, Trưởng tộc..."
-                className="w-full px-3 py-2 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#1F1913] placeholder-stone-400 focus:outline-none focus:border-[#1B3B2B] focus:bg-white"
+                className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
               />
             </div>
 
             <div className="space-y-1.5">
-              <label className="block text-xs font-bold text-[#2C231A] flex items-center gap-1.5">
+              <label htmlFor="journal-branch" className="block text-sm font-semibold text-[#1F1913] flex items-center gap-1.5">
                 <Users className="w-3.5 h-3.5 text-stone-500" />
                 <span>Phạm vi chi họ liên quan</span>
               </label>
               <select
+               id="journal-branch"
                 value={branchId}
                 onChange={(e) => setBranchId(e.target.value)}
-                className="w-full px-3 py-2 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#1F1913] focus:outline-none focus:border-[#1B3B2B] focus:bg-white"
+                className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
               >
                 <option value="">Toàn bộ dòng họ (Đại Tôn & các Chi)</option>
                 {branches.map((b) => (
@@ -348,30 +401,16 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
 
           {/* Short summary */}
           <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-[#2C231A]">
+            <label htmlFor="journal-summary" className="block text-sm font-semibold text-[#1F1913]">
               Tóm tắt ý chính (Hiển thị đầu bài viết)
             </label>
             <input
+             id="journal-summary"
               type="text"
               value={summary}
               onChange={(e) => setSummary(e.target.value)}
               placeholder="Tóm tắt ngắn gọn trong 1-2 câu để người đọc nắm nhanh..."
-              className="w-full px-3.5 py-2 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#1F1913] placeholder-stone-400 focus:outline-none focus:border-[#1B3B2B] focus:bg-white"
-            />
-          </div>
-
-          {/* Full content */}
-          <div className="space-y-1.5">
-            <label className="block text-xs font-bold text-[#2C231A]">
-              Nội dung chi tiết nhật ký dòng họ <span className="text-red-500">*</span>
-            </label>
-            <textarea
-              required
-              rows={6}
-              value={content}
-              onChange={(e) => setContent(e.target.value)}
-              placeholder="Ghi chép diễn biến chi tiết sự kiện lịch sử, bối cảnh, các nhân vật tham gia, ý nghĩa đối với các thế hệ mai sau..."
-              className="w-full px-3.5 py-2.5 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#1F1913] placeholder-stone-400 focus:outline-none focus:border-[#1B3B2B] focus:bg-white leading-relaxed"
+              className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
             />
           </div>
 
@@ -396,6 +435,7 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
               <div className="flex items-center gap-1.5">
                 <input
                   type="text"
+                  aria-label="Từ khóa mới"
                   value={tagInput}
                   onChange={(e) => setTagInput(e.target.value)}
                   onKeyDown={(e) => {
@@ -405,12 +445,12 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
                     }
                   }}
                   placeholder="Thêm thẻ #hashtag..."
-                  className="px-2.5 py-1.5 text-xs rounded-xl border border-stone-300 bg-white"
+                  className="min-h-11 min-w-0 flex-1 rounded-xl border border-stone-300 bg-white px-2.5 text-base sm:text-sm"
                 />
                 <button
                   type="button"
                   onClick={handleAddTag}
-                  className="px-2.5 py-1.5 bg-[#FAF2E6] text-[#8C6D32] border border-[#E3CCA0] rounded-xl text-xs font-medium hover:bg-[#F3E5D0]"
+                  className="min-h-11 shrink-0 rounded-xl border border-amber-200 bg-amber-50 px-2.5 text-xs font-medium text-amber-900"
                 >
                   Thêm thẻ
                 </button>
@@ -429,7 +469,8 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
                     <button
                       type="button"
                       onClick={() => handleRemoveTag(tag)}
-                      className="hover:text-red-600 ml-0.5"
+                      aria-label={'Xóa thẻ ' + tag}
+                      className="grid size-11 place-items-center rounded-full hover:text-rose-800 focus-visible:outline-2 focus-visible:outline-forest-700"
                     >
                       ×
                     </button>
@@ -440,12 +481,13 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
           </div>
 
           {/* Footer Actions */}
-          <div className="flex items-center justify-between pt-4 border-t border-[#F0EAE1]">
+          <div className="flex flex-wrap items-center justify-end gap-2 border-t border-[#E7DFD4] pt-3">
             {editingStory ? (
               <button
                 type="button"
+                disabled={isSubmitting || isDeleting}
                 onClick={() => setConfirmDeleteOpen(true)}
-                className="flex items-center gap-1.5 px-3 py-2 rounded-xl text-red-700 hover:bg-red-50 text-xs font-semibold transition-colors"
+                className="mr-auto flex min-h-11 items-center gap-1.5 rounded-xl px-2 text-xs font-semibold text-rose-900 hover:bg-rose-50 focus-visible:outline-2 focus-visible:outline-rose-700 disabled:opacity-50"
               >
                 <Trash2 className="w-4 h-4" />
                 <span>Xóa bài nhật ký</span>
@@ -457,15 +499,16 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
             <div className="flex items-center gap-2">
               <button
                 type="button"
+                disabled={isSubmitting || isDeleting}
                 onClick={onClose}
-                className="px-4 py-2 rounded-xl border border-[#D5CABE] text-[#54483C] hover:bg-stone-100 text-xs font-semibold transition-colors"
+                className="min-h-11 rounded-xl border border-[#D5CABE] px-3 text-xs font-semibold text-[#54483C] hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-forest-700 disabled:opacity-50"
               >
                 Hủy bỏ
               </button>
               <button
                 type="submit"
-                disabled={isSubmitting}
-                className="flex items-center gap-1.5 px-5 py-2 rounded-xl bg-[#1B3B2B] text-white hover:bg-[#28503C] text-xs font-semibold shadow-xs transition-colors disabled:opacity-50"
+                disabled={isSubmitting || isDeleting}
+                className="flex min-h-11 items-center gap-1.5 rounded-xl bg-forest-800 px-3 text-xs font-semibold text-white hover:bg-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 disabled:opacity-50"
               >
                 <BookOpen className="w-4 h-4 text-[#DBC599]" />
                 <span>{isSubmitting ? 'Đang lưu...' : 'Lưu vào Nhật ký'}</span>
@@ -483,6 +526,7 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
         confirmLabel="Xóa bài viết"
         cancelLabel="Hủy"
         danger={true}
+        busy={isDeleting}
         onConfirm={handleDelete}
         onCancel={() => setConfirmDeleteOpen(false)}
       />
