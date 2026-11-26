@@ -207,6 +207,83 @@ describe('Individual Formatted PDF Report Service', () => {
     expect(html).toContain('TỘC ẤN');
   });
 
+  it('escapes dossier fields as text in standalone HTML and preserves multilingual content', () => {
+    const sample = `Gia phả 家譜 & "Đông" 'Tây' (2 < 3 > 1)`;
+    const escaped = 'Gia phả 家譜 &amp; &quot;Đông&quot; &#39;Tây&#39; (2 &lt; 3 &gt; 1)';
+    const withSample = (field: string) => field + ' ' + sample;
+    const date = (field: string) => ({ precision: 'unknown' as const, displayText: withSample(field) });
+    const data: PersonReportData = {
+      ...mockReportData,
+      person: {
+        ...mockReportData.person,
+        id: 'A& B< C>',
+        fullName: withSample('Tên'),
+        subBranch: withSample('Phái'),
+        clanRole: withSample('Vai vế'),
+        tabooName: withSample('Húy'),
+        courtesyName: withSample('Tên tự'),
+        commonName: withSample('Thường gọi'),
+        birthDate: date('Mô tả sinh'),
+        birthPlace: withSample('Nơi sinh'),
+        deathDate: date('Mô tả mất'),
+        deathAnniversaryLunar: { day: 10, month: 2, note: withSample('Giỗ') },
+        burialPlace: withSample('Mộ'),
+        ancestralHome: withSample('Nguyên quán'),
+        merits: withSample('Công đức'),
+        biography: withSample('Tiểu sử') + '\nDòng thứ hai &amp; Việt Nam',
+      },
+      settings: {
+        ...mockReportData.settings,
+        clanName: sample,
+        clanMotto: withSample('Gia huấn'),
+      },
+      branch: { ...branch, name: withSample('Chi') },
+      parents: [{
+        ...mockReportData.parents[0],
+        parent: { ...mockReportData.parents[0].parent, fullName: withSample('Cha'), birthDate: date('Mốc cha') },
+      }],
+      spouses: [{
+        ...mockReportData.spouses[0],
+        spouse: { ...mockReportData.spouses[0].spouse!, fullName: withSample('Bạn đời'), birthDate: date('Mốc bạn đời') },
+      }],
+      children: [{
+        ...mockReportData.children[0],
+        child: { ...mockReportData.children[0].child, fullName: withSample('Con'), birthDate: date('Mốc con') },
+      }],
+    };
+
+    const html = generateStandalonePrintableHtml(data, DEFAULT_REPORT_CONFIG);
+
+    expect(html).toContain('<title>Trích Lục Phả Ký – Tên ' + escaped + '</title>');
+    expect(html).toContain('DÒNG HỌ GIA PHẢ 家譜 &amp; &quot;ĐÔNG&quot; &#39;TÂY&#39; (2 &lt; 3 &gt; 1)');
+    expect(html).toContain('Số hiệu: GPV-A&amp; B&lt; C&gt;');
+    for (const field of [
+      'Phái', 'Vai vế', 'Húy', 'Tên tự', 'Thường gọi', 'Mô tả sinh', 'Nơi sinh', 'Mô tả mất',
+      'Giỗ', 'Mộ', 'Nguyên quán', 'Công đức', 'Tiểu sử', 'Gia huấn', 'Chi', 'Cha', 'Mốc cha',
+      'Bạn đời', 'Mốc bạn đời', 'Con', 'Mốc con',
+    ]) {
+      expect(html).toContain(field + ' ' + escaped);
+    }
+    expect(html).toContain('Dòng thứ hai &amp;amp; Việt Nam');
+    expect(html).not.toContain(sample);
+    expect(buildTextDossierSummary(data)).toContain(data.person.biography);
+  });
+
+  it('escapes place and occupation in the printable profile of a living person', () => {
+    const html = generateStandalonePrintableHtml({
+      ...mockReportData,
+      person: {
+        ...mockReportData.person,
+        isLiving: true,
+        residence: 'Đà Nẵng & Huế',
+        occupation: 'Nhà giáo "Tiếng Việt"',
+      },
+    }, DEFAULT_REPORT_CONFIG);
+
+    expect(html).toContain('Đà Nẵng &amp; Huế');
+    expect(html).toContain('Nhà giáo &quot;Tiếng Việt&quot;');
+  });
+
   it('respects report config customization toggles', () => {
     const customConfig = {
       ...DEFAULT_REPORT_CONFIG,

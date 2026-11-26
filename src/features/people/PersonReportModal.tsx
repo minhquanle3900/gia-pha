@@ -157,7 +157,7 @@ export const PersonReportModal: React.FC<PersonReportModalProps> = ({
       setTimeout(() => setExportMessage(null), 3000);
     } catch (err) {
       console.error('Lỗi xuất PDF:', err);
-      setExportMessage('Có lỗi khi tạo tệp PDF, quý vị có thể dùng nút "In / Lưu PDF" bên cạnh.');
+      setExportMessage('Trình duyệt không tạo được PDF theo bố cục này. Dùng nút "In / Lưu PDF" để lưu qua hộp thoại in.');
       setTimeout(() => setExportMessage(null), 4000);
     } finally {
       setIsExportingPdf(false);

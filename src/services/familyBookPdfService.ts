@@ -9,6 +9,7 @@ import {
   Union,
 } from '../models/genealogy';
 import { formatFlexibleDate, formatLifespan, formatLunarAnniversary } from '../utils/dateUtils';
+import { escapeHtml } from '../utils/htmlUtils';
 
 export interface FamilyBookExportData {
   settings: AppSettings;
@@ -38,16 +39,6 @@ export const DEFAULT_FAMILY_BOOK_CONFIG: FamilyBookPrintConfig = {
   includeRelationships: true,
   includeTabooIndex: true,
 };
-
-function escapeHtml(text: string | undefined | null): string {
-  if (!text) return '';
-  return text
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;')
-    .replace(/'/g, '&#39;');
-}
 
 function getPeopleByGeneration(people: Person[]): { generation: number; members: Person[] }[] {
   const map = new Map<number, Person[]>();
@@ -537,7 +528,7 @@ function renderTabooIndexChunkHtml(
               (p) => `
             <tr>
               <td style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;color:#1F1913;">${escapeHtml(p.fullName)}</td>
-              <td style="font-weight:600;color:#1B3B2B;">${p.generation ? `Đời ${p.generation}` : '—'}</td>
+              <td style="font-weight:600;color:#1B3B2B;">${p.generation ? `Đời ${escapeHtml(p.generation)}` : '—'}</td>
               <td style="font-weight:600;color:#8C3A27;">${escapeHtml(p.tabooName) || '—'}</td>
               <td style="color:#1B3B2B;">${escapeHtml(p.courtesyName) || '—'}</td>
               <td style="color:#5C4F42;">${escapeHtml(p.commonName) || '—'}</td>
@@ -585,7 +576,7 @@ export function buildFamilyBookBlocks(
         const headerHtml =
           i === 0
             ? `<div class="fb-gen-header">
-                <span class="fb-gen-badge">ĐỜI THỨ ${generation}</span>
+                <span class="fb-gen-badge">ĐỜI THỨ ${escapeHtml(generation)}</span>
                 <span class="fb-gen-count">${members.length} vị thành viên</span>
               </div>`
             : '';
