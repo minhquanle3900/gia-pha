@@ -1,0 +1,5437 @@
+{
+  "suite": "M11",
+  "expectedTestedSha": "6e2ba3c7a8896a0027d8d7f8198e4d5b3ab2d44e",
+  "shaVerification": "Verify server worktree SHA externally; the harness does not infer Git revision.",
+  "startedAt": "2026-11-26T01:32:13.009Z",
+  "origin": "http://localhost:3211",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "profile": "iab-origin-pr2",
+  "engine": "native browser IndexedDB (not fake-indexeddb)",
+  "fixtureOrigin": "Extended M0 synthetic merge fixture; no family data",
+  "scope": "Application adapters/parsers; pending product UI explicitly listed per case",
+  "cases": [
+    {
+      "id": "M11-D01",
+      "title": "Three original event IDs and contents survive merge",
+      "adapterStatus": "PASS",
+      "productUiStatus": "PENDING",
+      "assertions": [
+        {
+          "label": "all original event IDs",
+          "value": [
+            "m0_event_source_1",
+            "m0_event_source_2",
+            "m0_event_target"
+          ]
+        }
+      ],
+      "snapshots": {
+        "before": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.071Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "after": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.081Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-26T01:32:13.074Z",
+            "rootPersonId": "m0_target"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "portraitMediaId": "m0_image"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_target",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_target",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_target"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_target",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_target",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z",
+              "notes": "Đích\n\nNguồn",
+              "unionId": "m0_union_1",
+              "birthOrder": 1
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.074Z"
+            }
+          ]
+        }
+      },
+      "pending": [
+        "Product merge-modal success message and product timeline rendering must be checked separately."
+      ],
+      "startedAt": "2026-11-26T01:32:13.009Z",
+      "finishedAt": "2026-11-26T01:32:13.081Z"
+    },
+    {
+      "id": "M11-D02",
+      "title": "Portrait, media, story, root and founder transfer exactly once",
+      "adapterStatus": "PASS",
+      "productUiStatus": "PENDING",
+      "assertions": [
+        {
+          "label": "counts",
+          "value": {
+            "settings": 1,
+            "branches": 1,
+            "people": 7,
+            "unions": 3,
+            "relationships": 5,
+            "lifeEvents": 3,
+            "media": 1,
+            "stories": 1
+          }
+        }
+      ],
+      "snapshots": {
+        "before": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.118Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "after": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.121Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-26T01:32:13.119Z",
+            "rootPersonId": "m0_target"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "portraitMediaId": "m0_image"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_target",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_target",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_target"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_target",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_target",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z",
+              "notes": "Đích\n\nNguồn",
+              "unionId": "m0_union_1",
+              "birthOrder": 1
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.119Z"
+            }
+          ]
+        }
+      },
+      "pending": [
+        "Product portrait/gallery/story rendering must be checked separately."
+      ],
+      "startedAt": "2026-11-26T01:32:13.082Z",
+      "finishedAt": "2026-11-26T01:32:13.122Z"
+    },
+    {
+      "id": "M11-D03",
+      "title": "Three generations, two unions, compatible edge and step child remain consistent",
+      "adapterStatus": "PASS",
+      "productUiStatus": "PENDING",
+      "assertions": [
+        {
+          "label": "retained edge",
+          "value": {
+            "id": "z_target_child",
+            "parentId": "m0_target",
+            "childId": "m0_child",
+            "lineageType": "biological",
+            "createdAt": "2026-11-25T00:00:00.000Z",
+            "updatedAt": "2026-11-26T01:32:13.150Z",
+            "notes": "Đích\n\nNguồn",
+            "unionId": "m0_union_1",
+            "birthOrder": 1
+          }
+        }
+      ],
+      "snapshots": {
+        "before": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.150Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "after": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.154Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-26T01:32:13.150Z",
+            "rootPersonId": "m0_target"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "portraitMediaId": "m0_image"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_target",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_target",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_target"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_target",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_target",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z",
+              "notes": "Đích\n\nNguồn",
+              "unionId": "m0_union_1",
+              "birthOrder": 1
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.150Z"
+            }
+          ]
+        }
+      },
+      "pending": [
+        "Product tree and profile views from spouse and child ends must be checked separately."
+      ],
+      "startedAt": "2026-11-26T01:32:13.122Z",
+      "finishedAt": "2026-11-26T01:32:13.154Z"
+    },
+    {
+      "id": "M11-D04",
+      "title": "Direct/indirect ancestry and source-target union merges reject without writes",
+      "adapterStatus": "PASS",
+      "productUiStatus": "PENDING",
+      "assertions": [
+        {
+          "label": "direct",
+          "value": "Error: Không thể sáp nhập vì sẽ tạo quan hệ cha mẹ/con cái với chính mình."
+        },
+        {
+          "label": "indirect",
+          "value": "Error: Không thể sáp nhập vì đồ thị tổ tiên sau sáp nhập có vòng lặp."
+        },
+        {
+          "label": "union",
+          "value": "Error: Không thể sáp nhập hai hồ sơ đang có quan hệ hôn phối với nhau."
+        }
+      ],
+      "snapshots": {
+        "directBefore": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.182Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z"
+          },
+          "branches": [],
+          "people": [
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "middle",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [],
+          "relationships": [
+            {
+              "id": "a",
+              "parentId": "m0_target",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "e",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT e",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content e",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [],
+          "stories": []
+        },
+        "directAfter": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.187Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z"
+          },
+          "branches": [],
+          "people": [
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "middle",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [],
+          "relationships": [
+            {
+              "id": "a",
+              "parentId": "m0_target",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "e",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT e",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content e",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [],
+          "stories": []
+        },
+        "indirectBefore": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.191Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z"
+          },
+          "branches": [],
+          "people": [
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "middle",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [],
+          "relationships": [
+            {
+              "id": "a",
+              "parentId": "m0_target",
+              "childId": "middle",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "b",
+              "parentId": "middle",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "e",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT e",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content e",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [],
+          "stories": []
+        },
+        "indirectAfter": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.192Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z"
+          },
+          "branches": [],
+          "people": [
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "middle",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [],
+          "relationships": [
+            {
+              "id": "a",
+              "parentId": "m0_target",
+              "childId": "middle",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "b",
+              "parentId": "middle",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "e",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT e",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content e",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [],
+          "stories": []
+        },
+        "unionBefore": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.196Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z"
+          },
+          "branches": [],
+          "people": [
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "middle",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "u",
+              "partnerIds": [
+                "m0_target",
+                "m0_source"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [],
+          "lifeEvents": [
+            {
+              "id": "e",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT e",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content e",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [],
+          "stories": []
+        },
+        "unionAfter": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.197Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z"
+          },
+          "branches": [],
+          "people": [
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "middle",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "u",
+              "partnerIds": [
+                "m0_target",
+                "m0_source"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [],
+          "lifeEvents": [
+            {
+              "id": "e",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT e",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content e",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [],
+          "stories": []
+        }
+      },
+      "pending": [
+        "Product modal error copy must be checked separately."
+      ],
+      "startedAt": "2026-11-26T01:32:13.155Z",
+      "finishedAt": "2026-11-26T01:32:13.197Z"
+    },
+    {
+      "id": "M11-D05",
+      "title": "Fresh transaction state, competing calls, real abort rollback and retry",
+      "adapterStatus": "PASS",
+      "productUiStatus": "PENDING",
+      "assertions": [
+        {
+          "label": "concurrent results",
+          "value": [
+            "fulfilled",
+            "rejected"
+          ]
+        },
+        {
+          "label": "async-event-put",
+          "value": "ConstraintError: Key already exists in the object store."
+        },
+        {
+          "label": "sync-source-delete",
+          "value": "Error: M1 injected source delete failure"
+        },
+        {
+          "label": "abort-after-delete",
+          "value": "AbortError: AbortError"
+        }
+      ],
+      "snapshots": {
+        "staleDisplayed": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.253Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "freshAfter": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.259Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-26T01:32:13.254Z",
+            "rootPersonId": "m0_target"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z",
+              "occupation": "M1 edit from competing connection",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "portraitMediaId": "m0_image"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_target",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_target",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_target"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_target",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_target",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z",
+              "notes": "Đích\n\nNguồn",
+              "unionId": "m0_union_1",
+              "birthOrder": 1
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_queued",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_queued",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_queued",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z"
+            },
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.254Z"
+            }
+          ]
+        },
+        "async-event-putBefore": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.277Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "async-event-putAfter": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.281Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "sync-source-deleteBefore": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.292Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "sync-source-deleteAfter": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.298Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "abort-after-deleteBefore": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.312Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "abort-after-deleteAfter": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.317Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        }
+      },
+      "pending": [
+        "Actual two-tab modal interaction and UI double-click lock remain separate product UI checks."
+      ],
+      "startedAt": "2026-11-26T01:32:13.199Z",
+      "finishedAt": "2026-11-26T01:32:13.323Z"
+    },
+    {
+      "id": "M11-D06",
+      "title": "Normal delete keeps baseline cascade independently of merge",
+      "adapterStatus": "PASS",
+      "productUiStatus": "PENDING",
+      "assertions": [],
+      "snapshots": {
+        "before": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.406Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-25T00:00:00.000Z",
+            "rootPersonId": "m0_source"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "founderId": "m0_source",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_source",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "portraitMediaId": "m0_image",
+              "portraitUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_source",
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "marriageOrder": 2
+            },
+            {
+              "id": "m0_union_single",
+              "partnerIds": [
+                "m0_source"
+              ],
+              "status": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "relationships": [
+            {
+              "id": "a_source_child",
+              "parentId": "m0_source",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1",
+              "birthOrder": 1,
+              "notes": "Nguồn"
+            },
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "m0_parent_source",
+              "parentId": "m0_parent",
+              "childId": "m0_source",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_step",
+              "parentId": "m0_source",
+              "childId": "m0_stepchild",
+              "lineageType": "step",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_2"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_source_1",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_1",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_1",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_source_2",
+              "personId": "m0_source",
+              "title": "M0 MỐC DUY NHẤT m0_event_source_2",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_source_2",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_source",
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ]
+        },
+        "after": {
+          "app": "Gia Phả Việt – Cội Nguồn",
+          "schemaVersion": 1,
+          "exportedAt": "2026-11-26T01:32:13.414Z",
+          "settings": {
+            "id": "default",
+            "clanName": "M0 DEMO Desktop",
+            "clanMotto": "Dữ liệu tổng hợp phục vụ kiểm thử",
+            "ancestralHallLocation": "Địa điểm giả M0",
+            "schemaVersion": 1,
+            "updatedAt": "2026-11-26T01:32:13.410Z"
+          },
+          "branches": [
+            {
+              "id": "m0_branch",
+              "name": "Chi M0 Demo",
+              "code": "M0",
+              "subBranches": [],
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.410Z"
+            }
+          ],
+          "people": [
+            {
+              "id": "m0_child",
+              "fullName": "M0 Con Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2000
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_grandparent",
+              "fullName": "M0 Ông Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1920
+              },
+              "generation": 1,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_parent",
+              "fullName": "M0 Cha Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1950
+              },
+              "generation": 2,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_a",
+              "fullName": "M0 Phối Ngẫu A",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_partner_b",
+              "fullName": "M0 Phối Ngẫu B",
+              "gender": "female",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_stepchild",
+              "fullName": "M0 Con Riêng Mẫu",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 2002
+              },
+              "generation": 4,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_target",
+              "fullName": "M0 Nguyễn Trùng Tên",
+              "gender": "male",
+              "isLiving": true,
+              "birthDate": {
+                "precision": "year",
+                "year": 1980
+              },
+              "generation": 3,
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "unions": [
+            {
+              "id": "m0_union_1",
+              "partnerIds": [
+                "m0_partner_a"
+              ],
+              "status": "married",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.407Z",
+              "marriageOrder": 1
+            },
+            {
+              "id": "m0_union_2",
+              "partnerIds": [
+                "m0_partner_b"
+              ],
+              "status": "widowed",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.408Z",
+              "marriageOrder": 2
+            }
+          ],
+          "relationships": [
+            {
+              "id": "m0_ancestor",
+              "parentId": "m0_grandparent",
+              "childId": "m0_parent",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            },
+            {
+              "id": "m0_other_parent",
+              "parentId": "m0_partner_a",
+              "childId": "m0_child",
+              "lineageType": "biological",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "unionId": "m0_union_1"
+            },
+            {
+              "id": "z_target_child",
+              "parentId": "m0_target",
+              "childId": "m0_child",
+              "lineageType": "unknown",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z",
+              "notes": "Đích"
+            }
+          ],
+          "lifeEvents": [
+            {
+              "id": "m0_event_target",
+              "personId": "m0_target",
+              "title": "M0 MỐC DUY NHẤT m0_event_target",
+              "type": "other",
+              "date": {
+                "precision": "year",
+                "year": 2000
+              },
+              "description": "Synthetic event content m0_event_target",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-25T00:00:00.000Z"
+            }
+          ],
+          "media": [
+            {
+              "id": "m0_image",
+              "title": "Ảnh hình học tổng hợp M0",
+              "category": "portrait",
+              "mimeType": "image/svg+xml",
+              "dataUrl": "data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSI2NCIgaGVpZ2h0PSI2NCI+PHJlY3Qgd2lkdGg9IjY0IiBoZWlnaHQ9IjY0IiBmaWxsPSIjMUIzQjJCIi8+PC9zdmc+",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.409Z"
+            }
+          ],
+          "stories": [
+            {
+              "id": "m0_story",
+              "title": "M0 Nhật ký kiểm thử",
+              "content": "Ghi chép tổng hợp, không có người thật",
+              "personIds": [
+                "m0_target",
+                "m0_child"
+              ],
+              "mediaIds": [
+                "m0_image"
+              ],
+              "branchId": "m0_branch",
+              "createdAt": "2026-11-25T00:00:00.000Z",
+              "updatedAt": "2026-11-26T01:32:13.409Z"
+            }
+          ]
+        }
+      },
+      "pending": [
+        "Product normal-delete confirmation UI must be checked separately."
+      ],
+      "startedAt": "2026-11-26T01:32:13.325Z",
+      "finishedAt": "2026-11-26T01:32:13.414Z"
+    },
+    {
+      "id": "M11-D07",
+      "title": "PDF and test hygiene are intentionally outside adapter harness",
+      "adapterStatus": "NOT_APPLICABLE",
+      "productUiStatus": "PENDING",
+      "assertions": [
+        {
+          "label": "scope",
+          "value": "No PDF download or Git cleanliness assertion is made by this harness."
+        }
+      ],
+      "snapshots": {},
+      "pending": [
+        "Parent must run Windows suites and inspect Git/PDF files; product personal/book export must be checked separately."
+      ],
+      "startedAt": "2026-11-26T01:32:13.420Z",
+      "finishedAt": "2026-11-26T01:32:13.421Z"
+    }
+  ],
+  "finishedAt": "2026-11-26T01:32:13.422Z",
+  "summary": {
+    "pass": 6,
+    "fail": 0,
+    "notApplicable": 1,
+    "productUiPending": 7
+  }
+}

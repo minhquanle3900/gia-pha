@@ -1,0 +1,2641 @@
+{
+  "testedSha": "0e51835552741a81ed69d31080d900bf7cc726f0",
+  "baseSha": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+  "environment": "IAB Chromium156 on Windows; CSS viewport emulation only, no touch emulation or realdevice",
+  "fixture": "Bundled demo31 people; same M0 demo fixture",
+  "viewports": [
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 185.8249969482422
+      },
+      "clientWidth": 305,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 76.80000305175781
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 568,
+      "scrollWidth": 305,
+      "theme": "dark",
+      "width": 320,
+      "requested": {
+        "width": 320,
+        "height": 568
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 553,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 324.8000183105469
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 320,
+      "scrollWidth": 553,
+      "theme": "dark",
+      "width": 568,
+      "requested": {
+        "width": 568,
+        "height": 320
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 345,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 116.8000030517578
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 800,
+      "scrollWidth": 345,
+      "theme": "dark",
+      "width": 360,
+      "requested": {
+        "width": 360,
+        "height": 800
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 785,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 335.5874938964844
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 360,
+      "scrollWidth": 785,
+      "theme": "dark",
+      "width": 800,
+      "requested": {
+        "width": 800,
+        "height": 360
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 375,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 147.1999969482422
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 844,
+      "scrollWidth": 375,
+      "theme": "dark",
+      "width": 390,
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 829,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 370.7875061035156
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 390,
+      "scrollWidth": 829,
+      "theme": "dark",
+      "width": 844,
+      "requested": {
+        "width": 844,
+        "height": 390
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 415,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 187.1999969482422
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 932,
+      "scrollWidth": 415,
+      "theme": "dark",
+      "width": 430,
+      "requested": {
+        "width": 430,
+        "height": 932
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 917,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 469.1875
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 430,
+      "scrollWidth": 917,
+      "theme": "dark",
+      "width": 932,
+      "requested": {
+        "width": 932,
+        "height": 430
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 753,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 277.1875
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1024,
+      "scrollWidth": 753,
+      "theme": "dark",
+      "width": 768,
+      "requested": {
+        "width": 768,
+        "height": 1024
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1009,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 514.7875366210938
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 768,
+      "scrollWidth": 1009,
+      "theme": "dark",
+      "width": 1024,
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1009,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 514.7875366210938
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 768,
+      "scrollWidth": 1009,
+      "theme": "dark",
+      "width": 1024,
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 753,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 309.9875183105469
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1024,
+      "scrollWidth": 753,
+      "theme": "dark",
+      "width": 768,
+      "requested": {
+        "width": 768,
+        "height": 1024
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1351,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 532.9249877929688
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 117.6875
+        },
+        {
+          "height": 44,
+          "name": "Hướng dẫn",
+          "width": 102.9000015258789
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 900,
+      "scrollWidth": 1351,
+      "theme": "dark",
+      "width": 1366,
+      "requested": {
+        "width": 1366,
+        "height": 900
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 885,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 415.5874938964844
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1366,
+      "scrollWidth": 885,
+      "theme": "dark",
+      "width": 900,
+      "requested": {
+        "width": 900,
+        "height": 1366
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1905,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 518.2000122070312
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 117.6875
+        },
+        {
+          "height": 44,
+          "name": "Hướng dẫn",
+          "width": 102.9000015258789
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1080,
+      "scrollWidth": 1905,
+      "theme": "dark",
+      "width": 1920,
+      "requested": {
+        "width": 1920,
+        "height": 1080
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1065,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 559.5875244140625
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1920,
+      "scrollWidth": 1065,
+      "theme": "dark",
+      "width": 1080,
+      "requested": {
+        "width": 1080,
+        "height": 1920
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 185.8249969482422
+      },
+      "clientWidth": 305,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 76.80000305175781
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 568,
+      "scrollWidth": 305,
+      "theme": "",
+      "width": 320,
+      "requested": {
+        "width": 320,
+        "height": 568
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 553,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 324.8000183105469
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 320,
+      "scrollWidth": 553,
+      "theme": "",
+      "width": 568,
+      "requested": {
+        "width": 568,
+        "height": 320
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 345,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 116.8000030517578
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 800,
+      "scrollWidth": 345,
+      "theme": "",
+      "width": 360,
+      "requested": {
+        "width": 360,
+        "height": 800
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 785,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 335.5874938964844
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 360,
+      "scrollWidth": 785,
+      "theme": "",
+      "width": 800,
+      "requested": {
+        "width": 800,
+        "height": 360
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 375,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 147.1999969482422
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 844,
+      "scrollWidth": 375,
+      "theme": "",
+      "width": 390,
+      "requested": {
+        "width": 390,
+        "height": 844
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 829,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 370.7875061035156
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 390,
+      "scrollWidth": 829,
+      "theme": "",
+      "width": 844,
+      "requested": {
+        "width": 844,
+        "height": 390
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 415,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc",
+          "width": 187.1999969482422
+        },
+        {
+          "height": 44,
+          "name": "Mở tìm kiếm thành viên",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 44
+        }
+      ],
+      "height": 932,
+      "scrollWidth": 415,
+      "theme": "",
+      "width": 430,
+      "requested": {
+        "width": 430,
+        "height": 932
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 917,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 469.1875
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 430,
+      "scrollWidth": 917,
+      "theme": "",
+      "width": 932,
+      "requested": {
+        "width": 932,
+        "height": 430
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 753,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 309.9875183105469
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1024,
+      "scrollWidth": 753,
+      "theme": "",
+      "width": 768,
+      "requested": {
+        "width": 768,
+        "height": 1024
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1009,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 514.7875366210938
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 768,
+      "scrollWidth": 1009,
+      "theme": "",
+      "width": 1024,
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1009,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 514.7875366210938
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 768,
+      "scrollWidth": 1009,
+      "theme": "",
+      "width": 1024,
+      "requested": {
+        "width": 1024,
+        "height": 768
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 753,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 309.9875183105469
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1024,
+      "scrollWidth": 753,
+      "theme": "",
+      "width": 768,
+      "requested": {
+        "width": 768,
+        "height": 1024
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1351,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 532.9249877929688
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 117.6875
+        },
+        {
+          "height": 44,
+          "name": "Hướng dẫn",
+          "width": 102.9000015258789
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 900,
+      "scrollWidth": 1351,
+      "theme": "",
+      "width": 1366,
+      "requested": {
+        "width": 1366,
+        "height": 900
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 885,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 415.5874938964844
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1366,
+      "scrollWidth": 885,
+      "theme": "",
+      "width": 900,
+      "requested": {
+        "width": 900,
+        "height": 1366
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1905,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 626.2000122070312
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 117.6875
+        },
+        {
+          "height": 44,
+          "name": "Hướng dẫn",
+          "width": 102.9000015258789
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1080,
+      "scrollWidth": 1905,
+      "theme": "",
+      "width": 1920,
+      "requested": {
+        "width": 1920,
+        "height": 1080
+      },
+      "layoutPass": true
+    },
+    {
+      "branchFilter": {
+        "height": 44,
+        "label": "Chi họ\nTất cả chi họ\nChi Ất (Chi Thứ)\nChi Bính (Chi Nam Tiến)\nĐại Tôn Họ Trần Đông Ngạc\nChi Giáp (Chi Trưởng)",
+        "width": 194.40000915527344
+      },
+      "clientWidth": 1065,
+      "headerButtons": [
+        {
+          "height": 44,
+          "name": "源\nDòng họ Trần – Đông Ngạc\nCỘI NGUỒN DÒNG HỌ",
+          "width": 487.5874938964844
+        },
+        {
+          "height": 44,
+          "name": "Tổng quan",
+          "width": 104.25
+        },
+        {
+          "height": 44,
+          "name": "Cây gia phả",
+          "width": 110.8625030517578
+        },
+        {
+          "height": 44,
+          "name": "Thành viên",
+          "width": 104.4250030517578
+        },
+        {
+          "height": 44,
+          "name": "Nhật ký dòng họ",
+          "width": 137.2624969482422
+        },
+        {
+          "height": 44,
+          "name": "Lễ giỗ & Tiết kỵ",
+          "width": 129.28750610351562
+        },
+        {
+          "height": 44,
+          "name": "Tiện ích mở rộng",
+          "width": 136.85000610351562
+        },
+        {
+          "height": 44,
+          "name": "Chuyển đổi giao diện sáng tối",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Mở khóa riêng tư bằng mã PIN",
+          "width": 44
+        },
+        {
+          "height": 44,
+          "name": "Thêm thành viên mới",
+          "width": 121.2125015258789
+        }
+      ],
+      "height": 1920,
+      "scrollWidth": 1065,
+      "theme": "",
+      "width": 1080,
+      "requested": {
+        "width": 1080,
+        "height": 1920
+      },
+      "layoutPass": true
+    }
+  ],
+  "keyboard": [
+    {
+      "dialog": "Tour390dark",
+      "reverseWrap": true,
+      "forwardWrap": true,
+      "closed": true
+    },
+    {
+      "dialog": "PIN-empty390dark",
+      "fields": [
+        {
+          "height": 45.60000228881836,
+          "id": "_r_5_-pin",
+          "label": "Mã PIN mới (4 - 8 chữ số)",
+          "valueLength": 0
+        },
+        {
+          "height": 45.60000228881836,
+          "id": "_r_5_-confirm-pin",
+          "label": "Xác nhận mã PIN mới",
+          "valueLength": 0
+        }
+      ],
+      "reverseWrap": true,
+      "forwardWrap": true,
+      "landscape": {
+        "dialog": {
+          "bottom": 374.3999938964844,
+          "height": 358.3999938964844,
+          "left": 198,
+          "right": 646,
+          "top": 16,
+          "width": 448,
+          "x": 198,
+          "y": 16
+        },
+        "height": 390,
+        "save": {
+          "bottom": 353.6000061035156,
+          "height": 44,
+          "left": 511.4875183105469,
+          "right": 625.2000198364258,
+          "top": 309.6000061035156,
+          "width": 113.7125015258789,
+          "x": 511.4875183105469,
+          "y": 309.6000061035156
+        },
+        "scroller": {
+          "bottom": 288.7999954223633,
+          "height": 187.1999969482422,
+          "left": 198.8000030517578,
+          "right": 645.1999969482422,
+          "top": 101.5999984741211,
+          "width": 446.3999938964844,
+          "x": 198.8000030517578,
+          "y": 101.5999984741211
+        },
+        "width": 844
+      },
+      "restored": "Mở khóa riêng tư bằng mã PIN",
+      "credentialSubmission": "SKIP: no new PIN set"
+    },
+    {
+      "dialog": "drawer390dark",
+      "before": {
+        "bounds": {
+          "bottom": 844.0000305175781,
+          "height": 439.2000122070313,
+          "left": 0,
+          "right": 390.3999938964844,
+          "top": 404.8000183105469,
+          "width": 390.3999938964844,
+          "x": 0,
+          "y": 404.8000183105469
+        },
+        "buttons": [
+          {
+            "height": 44,
+            "name": "Đóng tiện ích mở rộng",
+            "width": 44
+          },
+          {
+            "height": 44,
+            "name": "Chế độ đọc ban đêm (Dark Mode)Đang bật",
+            "width": 348.8000183105469
+          },
+          {
+            "height": 44,
+            "name": "Nhật ký dòng họ",
+            "width": 169.40000915527344
+          },
+          {
+            "height": 44,
+            "name": "Thống kê dòng họ",
+            "width": 169.40000915527344
+          },
+          {
+            "height": 44,
+            "name": "Kho kỷ vật",
+            "width": 169.40000915527344
+          },
+          {
+            "height": 44,
+            "name": "Sách phả ký",
+            "width": 169.40000915527344
+          },
+          {
+            "height": 44,
+            "name": "Bản đồ di cư",
+            "width": 169.40000915527344
+          },
+          {
+            "height": 44,
+            "name": "Quản lý dữ liệu",
+            "width": 169.40000915527344
+          },
+          {
+            "height": 44,
+            "name": "Tra xưng hô",
+            "width": 110.9250030517578
+          },
+          {
+            "height": 44,
+            "name": "Chia sẻ QR",
+            "width": 110.9375
+          },
+          {
+            "height": 44,
+            "name": "Lọc trùng lặp",
+            "width": 110.9375
+          },
+          {
+            "height": 44,
+            "name": "Hướng dẫn nhanh",
+            "width": 229.8625030517578
+          },
+          {
+            "height": 44,
+            "name": "Khóa riêng tư",
+            "width": 110.9375
+          }
+        ],
+        "initial": "Đóng tiện ích mở rộng",
+        "labels": []
+      },
+      "reverse": "Khóa riêng tư",
+      "forward": "Đóng tiện ích mở rộng",
+      "forwardPass": true,
+      "closed": true,
+      "restored": {
+        "name": "Thêm...",
+        "tag": "BUTTON"
+      }
+    },
+    {
+      "dialog": "qr390dark",
+      "before": {
+        "bounds": {
+          "bottom": 844,
+          "height": 844,
+          "left": 0,
+          "right": 390.3999938964844,
+          "top": 0,
+          "width": 390.3999938964844,
+          "x": 0,
+          "y": 0
+        },
+        "buttons": [
+          {
+            "height": 44,
+            "name": "Đóng chia sẻ mã QR",
+            "width": 44
+          },
+          {
+            "height": 44,
+            "name": "Tải ảnh QR",
+            "width": 171.1999969482422
+          },
+          {
+            "height": 44,
+            "name": "Chép nội dung",
+            "width": 169.60000610351562
+          }
+        ],
+        "initial": "SELECT",
+        "labels": [
+          {
+            "id": "_r_3_-person",
+            "label": "Chọn thành viên để tạo mã QR:"
+          }
+        ]
+      },
+      "reverse": "Chép nội dung",
+      "forward": "Đóng chia sẻ mã QR",
+      "forwardPass": true,
+      "closed": true,
+      "restored": {
+        "name": "Thêm...",
+        "tag": "BUTTON"
+      }
+    },
+    {
+      "dialog": "kinship390dark",
+      "before": {
+        "bounds": {
+          "bottom": 844,
+          "height": 844,
+          "left": 0,
+          "right": 390.3999938964844,
+          "top": 0,
+          "width": 390.3999938964844,
+          "x": 0,
+          "y": 0
+        },
+        "buttons": [
+          {
+            "height": 44,
+            "name": "Đóng tra cứu xưng hô",
+            "width": 44
+          },
+          {
+            "height": 44,
+            "name": "Trần Văn Lộc",
+            "width": 121.4875030517578
+          },
+          {
+            "height": 44,
+            "name": "Nguyễn Thị Kim",
+            "width": 135.83750915527344
+          },
+          {
+            "height": 44,
+            "name": "Đóng tra cứu",
+            "width": 113.9000015258789
+          }
+        ],
+        "initial": "SELECT",
+        "labels": [
+          {
+            "id": "_r_2_-person-a",
+            "label": "Người thứ nhất (A)"
+          },
+          {
+            "id": "_r_2_-person-b",
+            "label": "Người thứ hai (B)"
+          }
+        ]
+      },
+      "reverse": "Đóng tra cứu",
+      "forward": "Đóng tra cứu xưng hô",
+      "forwardPass": true,
+      "closed": true,
+      "restored": {
+        "name": "Thêm...",
+        "tag": "BUTTON"
+      }
+    },
+    {
+      "dialog": "Search390dark",
+      "forward": {
+        "label": "Tìm kiếm thành viên",
+        "tag": "INPUT"
+      },
+      "reverse": {
+        "inside": true,
+        "tag": "BUTTON"
+      },
+      "restored": "Mở tìm kiếm thành viên",
+      "reopenedQuery": "Tran",
+      "escapeClosed": true
+    },
+    {
+      "dialog": "DesktopQR1366dark",
+      "restored": "Tiện ích mở rộng",
+      "toolsEscapeExpanded": "false",
+      "menuColorsBeforeCorrection": [
+        {
+          "bg": "rgb(23, 36, 28)",
+          "color": "rgb(60, 50, 40)",
+          "text": "Thống kê gia tộcBiểu đồ thế hệ, tỷ lệ nam/nữ, tuổi thọ"
+        },
+        {
+          "bg": "rgb(23, 36, 28)",
+          "color": "rgb(60, 50, 40)",
+          "text": "Kho kỷ vậtHình ảnh chân dung, tư liệu lịch sử"
+        },
+        {
+          "bg": "rgb(23, 36, 28)",
+          "color": "rgb(60, 50, 40)",
+          "text": "Sách phả kýXuất bản gia phả khổ A4 truyền thống"
+        },
+        {
+          "bg": "rgb(23, 36, 28)",
+          "color": "rgb(60, 50, 40)",
+          "text": "Bản đồ di cưDấu chân thiên di và các phân chi"
+        },
+        {
+          "bg": "rgb(23, 36, 28)",
+          "color": "rgb(60, 50, 40)",
+          "text": "Quản lý dữ liệuSao lưu JSON, nhập xuất GEDCOM, Excel"
+        },
+        {
+          "bg": "rgb(23, 36, 28)",
+          "color": "rgb(74, 62, 51)",
+          "text": "Tra xưng hô họ hàng tự động"
+        },
+        {
+          "bg": "rgb(23, 36, 28)",
+          "color": "rgb(74, 62, 51)",
+          "text": "Tạo mã QR chia sẻ ngoại tuyến"
+        }
+      ]
+    }
+  ],
+  "desktopMenuColors": [
+    {
+      "bg": "rgb(23, 36, 28)",
+      "color": "rgb(237, 230, 220)",
+      "text": "Thống kê gia tộcBiểu đồ thế hệ, tỷ lệ nam/nữ, tuổi"
+    },
+    {
+      "bg": "rgb(23, 36, 28)",
+      "color": "rgb(237, 230, 220)",
+      "text": "Kho kỷ vậtHình ảnh chân dung, tư liệu lịch sử"
+    },
+    {
+      "bg": "rgb(23, 36, 28)",
+      "color": "rgb(237, 230, 220)",
+      "text": "Sách phả kýXuất bản gia phả khổ A4 truyền thống"
+    },
+    {
+      "bg": "rgb(23, 36, 28)",
+      "color": "rgb(237, 230, 220)",
+      "text": "Bản đồ di cưDấu chân thiên di và các phân chi"
+    },
+    {
+      "bg": "rgb(23, 36, 28)",
+      "color": "rgb(237, 230, 220)",
+      "text": "Quản lý dữ liệuSao lưu JSON, nhập xuất GEDCOM, Exc"
+    },
+    {
+      "bg": "rgb(23, 36, 28)",
+      "color": "rgb(237, 230, 220)",
+      "text": "Tra xưng hô họ hàng tự động"
+    },
+    {
+      "bg": "rgb(23, 36, 28)",
+      "color": "rgb(237, 230, 220)",
+      "text": "Tạo mã QR chia sẻ ngoại tuyến"
+    }
+  ],
+  "checkpoints": {
+    "initialLayout": "1026d658ea0170ff62f7418132deb10bcf9b9137",
+    "keyboardFix": "0b7b6f8",
+    "darkDialogFix": "7a3a948",
+    "final": "f07ac92733081da08ba92e2e07f081cca89c2c17"
+  },
+  "focusedSearch320Before": {
+    "clientWidth": 305,
+    "h": 568,
+    "panels": [
+      {
+        "bottom": 885.1124877929688,
+        "height": 571.1749877929688,
+        "left": 32.79999923706055,
+        "right": 304.79999923706055,
+        "top": 313.9375,
+        "width": 272,
+        "x": 32.79999923706055,
+        "y": 313.9375
+      }
+    ],
+    "scrollWidth": 305,
+    "w": 320
+  },
+  "viewportsTestedSha": "0e51835552741a81ed69d31080d900bf7cc726f0",
+  "modalLayouts": [
+    {
+      "body": [
+        {
+          "client": 363,
+          "scroll": 767
+        }
+      ],
+      "bounds": {
+        "bottom": 568,
+        "height": 568,
+        "left": 0,
+        "right": 320,
+        "top": 0,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "buttons": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 261.6000061035156
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 98.45000457763672
+        }
+      ],
+      "clientWidth": 320,
+      "height": 568,
+      "scrollWidth": 320,
+      "text": [
+        {
+          "color": "rgb(185, 174, 160)",
+          "text": "Lưu giữ cây phả hệ, niên biểu gia t"
+        },
+        {
+          "color": "rgb(237, 230, 220)",
+          "text": "Chào mừng quý vị đến với ứng dụng G"
+        }
+      ],
+      "theme": "dark",
+      "width": 320
+    },
+    {
+      "body": [
+        {
+          "client": 691,
+          "scroll": 691
+        }
+      ],
+      "bounds": {
+        "bottom": 844,
+        "height": 844,
+        "left": 0,
+        "right": 390.3999938964844,
+        "top": 0,
+        "width": 390.3999938964844,
+        "x": 0,
+        "y": 0
+      },
+      "buttons": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 347.20001220703125
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 98.45000457763672
+        }
+      ],
+      "clientWidth": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "text": [
+        {
+          "color": "rgb(185, 174, 160)",
+          "text": "Lưu giữ cây phả hệ, niên biểu gia t"
+        },
+        {
+          "color": "rgb(237, 230, 220)",
+          "text": "Chào mừng quý vị đến với ứng dụng G"
+        }
+      ],
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "body": [
+        {
+          "client": 206,
+          "scroll": 571
+        }
+      ],
+      "bounds": {
+        "bottom": 374.3999938964844,
+        "height": 358.3999938964844,
+        "left": 134,
+        "right": 710,
+        "top": 16,
+        "width": 576,
+        "x": 134,
+        "y": 16
+      },
+      "buttons": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 509.6000061035156
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 98.45000457763672
+        }
+      ],
+      "clientWidth": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "text": [
+        {
+          "color": "rgb(185, 174, 160)",
+          "text": "Lưu giữ cây phả hệ, niên biểu gia t"
+        },
+        {
+          "color": "rgb(237, 230, 220)",
+          "text": "Chào mừng quý vị đến với ứng dụng G"
+        }
+      ],
+      "theme": "dark",
+      "width": 844
+    },
+    {
+      "body": [
+        {
+          "client": 548,
+          "scroll": 548
+        }
+      ],
+      "bounds": {
+        "bottom": 800.375,
+        "height": 700.75,
+        "left": 395.2000122070313,
+        "right": 971.2000122070312,
+        "top": 99.625,
+        "width": 576,
+        "x": 395.2000122070313,
+        "y": 99.625
+      },
+      "buttons": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 524.7999877929688
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 98.45000457763672
+        }
+      ],
+      "clientWidth": 1366,
+      "height": 900,
+      "scrollWidth": 1366,
+      "text": [
+        {
+          "color": "rgb(185, 174, 160)",
+          "text": "Lưu giữ cây phả hệ, niên biểu gia t"
+        },
+        {
+          "color": "rgb(237, 230, 220)",
+          "text": "Chào mừng quý vị đến với ứng dụng G"
+        }
+      ],
+      "theme": "dark",
+      "width": 1366
+    },
+    {
+      "body": [
+        {
+          "client": 363,
+          "scroll": 767
+        }
+      ],
+      "bounds": {
+        "bottom": 568,
+        "height": 568,
+        "left": 0,
+        "right": 320,
+        "top": 0,
+        "width": 320,
+        "x": 0,
+        "y": 0
+      },
+      "buttons": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 261.6000061035156
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 98.45000457763672
+        }
+      ],
+      "clientWidth": 320,
+      "height": 568,
+      "scrollWidth": 320,
+      "text": [
+        {
+          "color": "rgb(106, 90, 74)",
+          "text": "Lưu giữ cây phả hệ, niên biểu gia t"
+        },
+        {
+          "color": "rgb(78, 65, 52)",
+          "text": "Chào mừng quý vị đến với ứng dụng G"
+        }
+      ],
+      "theme": "",
+      "width": 320
+    },
+    {
+      "body": [
+        {
+          "client": 691,
+          "scroll": 691
+        }
+      ],
+      "bounds": {
+        "bottom": 844,
+        "height": 844,
+        "left": 0,
+        "right": 390.3999938964844,
+        "top": 0,
+        "width": 390.3999938964844,
+        "x": 0,
+        "y": 0
+      },
+      "buttons": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 347.20001220703125
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 98.45000457763672
+        }
+      ],
+      "clientWidth": 390,
+      "height": 844,
+      "scrollWidth": 390,
+      "text": [
+        {
+          "color": "rgb(106, 90, 74)",
+          "text": "Lưu giữ cây phả hệ, niên biểu gia t"
+        },
+        {
+          "color": "rgb(78, 65, 52)",
+          "text": "Chào mừng quý vị đến với ứng dụng G"
+        }
+      ],
+      "theme": "",
+      "width": 390
+    },
+    {
+      "body": [
+        {
+          "client": 206,
+          "scroll": 571
+        }
+      ],
+      "bounds": {
+        "bottom": 374.3999938964844,
+        "height": 358.3999938964844,
+        "left": 134,
+        "right": 710,
+        "top": 16,
+        "width": 576,
+        "x": 134,
+        "y": 16
+      },
+      "buttons": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 509.6000061035156
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 98.45000457763672
+        }
+      ],
+      "clientWidth": 844,
+      "height": 390,
+      "scrollWidth": 844,
+      "text": [
+        {
+          "color": "rgb(106, 90, 74)",
+          "text": "Lưu giữ cây phả hệ, niên biểu gia t"
+        },
+        {
+          "color": "rgb(78, 65, 52)",
+          "text": "Chào mừng quý vị đến với ứng dụng G"
+        }
+      ],
+      "theme": "",
+      "width": 844
+    },
+    {
+      "body": [
+        {
+          "client": 548,
+          "scroll": 548
+        }
+      ],
+      "bounds": {
+        "bottom": 800.375,
+        "height": 700.75,
+        "left": 395.2000122070313,
+        "right": 971.2000122070312,
+        "top": 99.625,
+        "width": 576,
+        "x": 395.2000122070313,
+        "y": 99.625
+      },
+      "buttons": [
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 524.7999877929688
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 44
+        },
+        {
+          "h": 44,
+          "w": 98.45000457763672
+        }
+      ],
+      "clientWidth": 1366,
+      "height": 900,
+      "scrollWidth": 1366,
+      "text": [
+        {
+          "color": "rgb(106, 90, 74)",
+          "text": "Lưu giữ cây phả hệ, niên biểu gia t"
+        },
+        {
+          "color": "rgb(78, 65, 52)",
+          "text": "Chào mừng quý vị đến với ứng dụng G"
+        }
+      ],
+      "theme": "",
+      "width": 1366
+    }
+  ],
+  "headerSearchLayouts": [
+    {
+      "client": 625,
+      "panels": [
+        {
+          "bottom": 599.9874877929688,
+          "height": 539.9874877929688,
+          "left": 120.8000030517578,
+          "right": 600.8000030517578,
+          "top": 60,
+          "width": 480,
+          "x": 120.8000030517578,
+          "y": 60
+        }
+      ],
+      "scroll": 625,
+      "width": 640
+    },
+    {
+      "client": 753,
+      "panels": [
+        {
+          "bottom": 599.9874877929688,
+          "height": 539.9874877929688,
+          "left": 248.8000030517578,
+          "right": 728.8000030517578,
+          "top": 60,
+          "width": 480,
+          "x": 248.8000030517578,
+          "y": 60
+        }
+      ],
+      "scroll": 753,
+      "width": 768
+    },
+    {
+      "client": 1009,
+      "panels": [
+        {
+          "bottom": 599.9874877929688,
+          "height": 539.9874877929688,
+          "left": 504.8000183105469,
+          "right": 984.8000183105468,
+          "top": 60,
+          "width": 480,
+          "x": 504.8000183105469,
+          "y": 60
+        }
+      ],
+      "scroll": 1009,
+      "width": 1024
+    },
+    {
+      "client": 1351,
+      "panels": [
+        {
+          "bottom": 599.9874877929688,
+          "height": 539.9874877929688,
+          "left": 811.6000366210938,
+          "right": 1291.6000366210938,
+          "top": 60,
+          "width": 480,
+          "x": 811.6000366210938,
+          "y": 60
+        }
+      ],
+      "scroll": 1351,
+      "width": 1366
+    },
+    {
+      "client": 1905,
+      "panels": [
+        {
+          "bottom": 599.9874877929688,
+          "height": 539.9874877929688,
+          "left": 1088.4000244140625,
+          "right": 1568.4000244140625,
+          "top": 60,
+          "width": 480,
+          "x": 1088.4000244140625,
+          "y": 60
+        }
+      ],
+      "scroll": 1905,
+      "width": 1920
+    }
+  ],
+  "keyboardTestedSha": "7a3a948",
+  "modalLayoutsTestedSha": "f07ac92733081da08ba92e2e07f081cca89c2c17",
+  "desktopMenuColorsTestedSha": "f07ac92733081da08ba92e2e07f081cca89c2c17",
+  "dashboardComputedColors": {
+    "testedSha": "0e51835552741a81ed69d31080d900bf7cc726f0",
+    "cta": {
+      "background": "rgb(219, 197, 153)",
+      "color": "rgb(46, 36, 30)"
+    },
+    "subtitle": {
+      "color": "rgb(168, 159, 147)",
+      "text": "Tìm kiếm trực tiếp theo họ tên, tên tự, tên húy, năm sinh hoặc đời thứ"
+    }
+  }
+}

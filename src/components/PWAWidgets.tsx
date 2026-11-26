@@ -5,8 +5,10 @@ import { usePWAInstall } from '../hooks/usePWAInstall';
 export const PWAWidgets: React.FC = () => {
   const { isInstallable, isOnline, triggerInstall } = usePWAInstall();
 
+  if (isOnline && !isInstallable) return null;
+
   return (
-    <div className="flex items-center gap-2">
+    <div className="flex flex-wrap items-center justify-end gap-2">
       {!isOnline && (
         <div
           className="flex items-center gap-1.5 px-2.5 py-1 rounded-full bg-amber-100 text-amber-900 border border-amber-300 text-[11px] font-medium shadow-xs"
@@ -21,7 +23,7 @@ export const PWAWidgets: React.FC = () => {
         <button
           type="button"
           onClick={triggerInstall}
-          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#C19B4C] hover:bg-[#A98436] text-white text-xs font-semibold shadow-xs transition-colors"
+          className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#C19B4C] hover:bg-[#A98436] text-[#2E241E] text-xs font-semibold shadow-xs transition-colors"
           title="Cài đặt Gia Phả Việt vào màn hình chính của điện thoại hoặc máy tính"
         >
           <Download className="w-3.5 h-3.5" />

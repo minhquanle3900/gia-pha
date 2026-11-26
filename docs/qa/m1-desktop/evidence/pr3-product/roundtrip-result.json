@@ -1,0 +1,39 @@
+{
+  "testedSha": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+  "uiFlow": "Download JSON -> choose samefile -> confirm replacement -> reload -> reopen data -> exportJSON",
+  "normalizedEqual": false,
+  "normalization": "Sort objectkeys and arrays byid; omit top exportedAt only",
+  "counts": {
+    "people": 31,
+    "branches": 4,
+    "unions": 12,
+    "relationships": 40,
+    "lifeEvents": 7,
+    "media": 5,
+    "stories": 3
+  },
+  "settingsEqual": false,
+  "differences": [
+    {
+      "path": "/settings/lastBackupAt",
+      "before": "2026-11-26T01:50:00.717Z",
+      "after": "2026-11-26T01:51:42.695Z"
+    }
+  ],
+  "businessEqualExcludingExportBookkeeping": true,
+  "allowedDifference": "settings.lastBackupAt advances when the user exports anotherbackup; exact equality remains false and is reported",
+  "emptyRestore": {
+    "counts": {
+      "people": 0,
+      "branches": 0,
+      "unions": 0,
+      "relationships": 0,
+      "lifeEvents": 0,
+      "media": 0,
+      "stories": 0
+    },
+    "settingsPresent": true,
+    "clanName": "M0 DEMO Desktop",
+    "pass": true
+  }
+}

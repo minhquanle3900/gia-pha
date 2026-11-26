@@ -54,6 +54,86 @@
   font-variant-numeric: tabular-nums;
 }
 
+.app-header-layout {
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+}
+
+.app-pwa-status:empty {
+  display: none;
+}
+
+.app-bottom-nav {
+  padding-inline: max(0.5rem, env(safe-area-inset-left, 0px)) max(0.5rem, env(safe-area-inset-right, 0px));
+  padding-bottom: max(0.375rem, env(safe-area-inset-bottom, 0px));
+}
+
+.app-main {
+  padding-bottom: calc(5.5rem + env(safe-area-inset-bottom, 0px));
+}
+
+.app-content {
+  padding-inline: max(1rem, env(safe-area-inset-left, 0px)) max(1rem, env(safe-area-inset-right, 0px));
+}
+
+.app-content > * {
+  min-inline-size: 0;
+}
+
+.app-shell :where(.text-stone-400, .text-stone-500) {
+  color: #655A4E;
+}
+
+.app-shell :where(input, textarea)::placeholder {
+  color: #655A4E;
+}
+
+.app-header-layout {
+  padding-top: max(0.5rem, env(safe-area-inset-top, 0px));
+}
+
+:where(.app-header-layout, .app-bottom-nav, .app-mobile-tools, .global-search, .heritage-anniversaries) button {
+  min-inline-size: 44px;
+  min-block-size: 44px;
+}
+
+:where(button, input, select, textarea, a[href], [tabindex]):focus-visible {
+  outline: 3px solid #856428;
+  outline-offset: 3px;
+}
+
+html.dark :where(button, input, select, textarea, a[href], [tabindex]):focus-visible {
+  outline-color: #E5BE6C;
+}
+
+.mobile-safe-dialog {
+  padding-inline: env(safe-area-inset-left, 0px) env(safe-area-inset-right, 0px);
+}
+
+.app-mobile-tools {
+  padding-inline: max(1.25rem, env(safe-area-inset-left, 0px)) max(1.25rem, env(safe-area-inset-right, 0px));
+  padding-top: max(1.25rem, env(safe-area-inset-top, 0px));
+  padding-bottom: max(1.25rem, env(safe-area-inset-bottom, 0px));
+}
+
+@media (max-width: 639px) {
+  .mobile-safe-dialog :where(input:not([type="checkbox"]):not([type="radio"]), select, textarea) {
+    font-size: 1rem;
+  }
+}
+
+@media (min-width: 640px) {
+  .app-header-layout,
+  .app-content {
+    padding-inline: max(1.5rem, env(safe-area-inset-left, 0px)) max(1.5rem, env(safe-area-inset-right, 0px));
+  }
+}
+
+@media (min-width: 1024px) {
+  .app-main {
+    padding-bottom: calc(2rem + env(safe-area-inset-bottom, 0px));
+  }
+}
+
 /* High readability Evening Dark Mode Adjustments */
 html.dark {
   /* Surfaces & Backgrounds */
@@ -78,12 +158,15 @@ html.dark {
   .bg-\[\#FFFDF9\]\/95,
   .bg-\[\#FFFDF9\]\/90,
   .bg-\[\#FAF8F5\],
+  .bg-\[\#FAF8F5\]\/80,
   .bg-\[\#FAF8F5\]\/90 {
     background-color: #17241C !important;
   }
 
   /* Secondary surface / pill / controls */
   .bg-\[\#F1EBE1\],
+  .bg-\[\#EAF2ED\],
+  .bg-\[\#F1EBE1\]\/75,
   .bg-\[\#F1EBE1\]\/70,
   .bg-white\/80,
   .bg-white\/60,
@@ -142,6 +225,7 @@ html.dark {
   .text-\[\#231C16\],
   .text-\[\#1F1913\],
   .text-\[\#2C241C\],
+  .text-\[\#3C3228\],
   .text-stone-900,
   .text-stone-800 {
     color: #EDE6DC !important;
@@ -152,18 +236,23 @@ html.dark {
   .text-\[\#655A4E\],
   .text-\[\#5C4F42\],
   .text-\[\#54483C\],
+  .text-\[\#6E5F50\],
   .text-stone-600,
   .text-stone-500 {
     color: #A89F93 !important;
   }
 
   .text-stone-400 {
-    color: #8A8073 !important;
+    color: #B9AEA0 !important;
   }
 
   /* Headings & Brand Emeralds */
   .text-\[\#1B3B2B\] {
     color: #52B788 !important;
+  }
+
+  .bg-\[\#DBC599\].text-\[\#1B3B2B\] {
+    color: #2E241E !important;
   }
 
   /* Heritage Golds */
@@ -201,7 +290,7 @@ html.dark {
 
   input::placeholder,
   textarea::placeholder {
-    color: #796E61 !important;
+    color: #A89F93 !important;
   }
 
   /* Interactive hover highlights */

@@ -31,6 +31,7 @@ import { NavigationTab } from '../models/genealogy';
 import { GlobalSearch } from './GlobalSearch';
 import { PrivacyPinModal } from './PrivacyPinModal';
 import { PWAWidgets } from './PWAWidgets';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 
 interface AppShellProps {
   activeTab: NavigationTab;
@@ -91,6 +92,42 @@ export const AppShell: React.FC<AppShellProps> = ({
   const [pinModalMode, setPinModalMode] = useState<'unlock' | 'setup' | 'change'>('unlock');
 
   const toolsDropdownRef = useRef<HTMLDivElement | null>(null);
+  const desktopToolsButtonRef = useRef<HTMLButtonElement>(null);
+  const mobileDialogRef = useRef<HTMLDivElement>(null);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const pendingTool = useRef<{ action: () => void; trigger: HTMLButtonElement | null } | null>(null);
+  const { requestClose: requestMobileMenuClose } = useModalAccessibility({
+    open: mobileMenuOpen,
+    dialogRef: mobileDialogRef,
+    returnFocusRef: mobileMenuButtonRef,
+    onRequestClose: () => setMobileMenuOpen(false),
+  });
+
+  const launchTool = (action: () => void, menu: 'mobile' | 'desktop') => {
+    pendingTool.current = {
+      action,
+      trigger: menu === 'mobile' ? mobileMenuButtonRef.current : desktopToolsButtonRef.current,
+    };
+    setMobileMenuOpen(false);
+    setDesktopToolsOpen(false);
+  };
+
+  useEffect(() => {
+    if (mobileMenuOpen || desktopToolsOpen || !pendingTool.current) return;
+    const { action, trigger } = pendingTool.current;
+    pendingTool.current = null;
+    trigger?.focus({ preventScroll: true });
+    action();
+  }, [mobileMenuOpen, desktopToolsOpen]);
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const closeHiddenDrawer = () => {
+      if (desktop.matches) setMobileMenuOpen(false);
+    };
+    desktop.addEventListener('change', closeHiddenDrawer);
+    return () => desktop.removeEventListener('change', closeHiddenDrawer);
+  }, []);
 
   // Close desktop dropdown on outside click
   useEffect(() => {
@@ -116,31 +153,32 @@ export const AppShell: React.FC<AppShellProps> = ({
   const activeExtendedItem = EXTENDED_NAV_ITEMS.find((item) => item.key === activeTab);
 
   return (
-    <div className="min-h-screen flex flex-col bg-[#FAF7F2] text-[#241C15]">
+    <div className="app-shell min-h-screen min-w-0 flex flex-col bg-[#FAF7F2] text-[#241C15]">
       {/* Top Header - Strict 3-Zone Contract */}
       <header className="print:hidden sticky top-0 z-30 bg-[#FAF7F2]/95 backdrop-blur-md border-b border-[#E7DFD4] transition-all">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 h-16 flex items-center justify-between gap-4">
+        <div className="app-header-layout max-w-7xl mx-auto grid grid-cols-[minmax(0,1fr)_auto] items-center gap-2 py-2">
           {/* Zone 1: Brand Wordmark (Single clean element) */}
-          <div
-            className="flex items-center gap-2.5 cursor-pointer group shrink-0 select-none"
+          <button
+            type="button"
+            className="flex min-w-0 items-center gap-2 text-left group select-none"
             onClick={() => onSelectTab('dashboard')}
             title="Về trang tổng quan"
           >
             <div className="w-9 h-9 rounded-xl bg-[#1B3B2B] text-[#DBC599] flex items-center justify-center font-serif text-base font-bold shadow-xs border border-[#2B4B3A] shrink-0">
               源
             </div>
-            <div className="flex flex-col">
-              <span className="font-serif font-bold text-sm sm:text-base text-[#1B3B2B] tracking-tight group-hover:text-[#28503C] transition-colors whitespace-nowrap truncate max-w-[150px] sm:max-w-[200px]">
+            <div className="flex min-w-0 flex-col">
+              <span className="font-serif font-bold text-sm sm:text-base text-[#1B3B2B] tracking-tight group-hover:text-[#28503C] transition-colors truncate">
                 {settings.clanName || 'Gia Phả Việt'}
               </span>
               <span className="text-[10px] text-[#947432] font-semibold tracking-wider uppercase hidden sm:block">
                 Cội Nguồn Dòng Họ
               </span>
             </div>
-          </div>
+          </button>
 
           {/* Zone 2: Navigation Links (Core 5 Tabs + Tools Menu) */}
-          <nav className="hidden lg:flex items-center gap-1 bg-[#F1EBE1]/75 p-1 rounded-2xl border border-[#E3D9CC]">
+          <nav aria-label="Điều hướng chính trên máy tính" className="order-3 col-span-2 hidden min-w-0 lg:flex flex-wrap items-center justify-center gap-1 bg-[#F1EBE1]/75 p-1 rounded-2xl border border-[#E3D9CC]">
             {CORE_NAV_ITEMS.map((item) => {
               const Icon = item.icon;
               const isActive = activeTab === item.key;
@@ -162,9 +200,17 @@ export const AppShell: React.FC<AppShellProps> = ({
             })}
 
             {/* Extended Tools Dropdown */}
-            <div ref={toolsDropdownRef} className="relative">
+            <div ref={toolsDropdownRef} className="relative" onKeyDown={(event) => {
+              if (event.key !== 'Escape' || !desktopToolsOpen) return;
+              event.stopPropagation();
+              setDesktopToolsOpen(false);
+              desktopToolsButtonRef.current?.focus();
+            }}>
               <button
                 type="button"
+                ref={desktopToolsButtonRef}
+                aria-expanded={desktopToolsOpen}
+                aria-controls="desktop-tools-panel"
                 onClick={() => setDesktopToolsOpen(!desktopToolsOpen)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
                   isExtendedTabActive
@@ -178,7 +224,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               </button>
 
               {desktopToolsOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 bg-[#FFFDF9] dark:bg-[#17231B] rounded-2xl border border-[#E7DFD4] dark:border-[#2C3E33] shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+                <div id="desktop-tools-panel" className="absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] max-h-[70dvh] overflow-y-auto bg-[#FFFDF9] dark:bg-[#17231B] rounded-2xl border border-[#E7DFD4] dark:border-[#2C3E33] shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
                   <div className="text-[10px] uppercase font-bold text-stone-400 px-2.5 py-1 tracking-wider">
                     Phân Tích & Tư Liệu
                   </div>
@@ -196,7 +242,7 @@ export const AppShell: React.FC<AppShellProps> = ({
                         className={`w-full flex items-start gap-2.5 p-2 rounded-xl text-left transition-colors ${
                           isActive
                             ? 'bg-[#1B3B2B]/10 text-[#1B3B2B] font-bold'
-                            : 'hover:bg-stone-100 text-[#3C3228]'
+                            : 'hover:bg-stone-100 text-[#3C3228] dark:text-[#EDE6DC]'
                         }`}
                       >
                         <Icon className="w-4 h-4 text-[#8C6D32] shrink-0 mt-0.5" />
@@ -214,11 +260,8 @@ export const AppShell: React.FC<AppShellProps> = ({
                     {onOpenKinship && (
                       <button
                         type="button"
-                        onClick={() => {
-                          setDesktopToolsOpen(false);
-                          onOpenKinship();
-                        }}
-                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] hover:bg-stone-100 text-left"
+                        onClick={() => launchTool(onOpenKinship, 'desktop')}
+                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] dark:text-[#EDE6DC] hover:bg-stone-100 text-left"
                       >
                         <Users className="w-3.5 h-3.5 text-[#1B3B2B]" />
                         <span>Tra xưng hô họ hàng tự động</span>
@@ -227,11 +270,8 @@ export const AppShell: React.FC<AppShellProps> = ({
                     {onOpenQRShare && (
                       <button
                         type="button"
-                        onClick={() => {
-                          setDesktopToolsOpen(false);
-                          onOpenQRShare();
-                        }}
-                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] hover:bg-stone-100 text-left"
+                        onClick={() => launchTool(onOpenQRShare, 'desktop')}
+                        className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] dark:text-[#EDE6DC] hover:bg-stone-100 text-left"
                       >
                         <QrCode className="w-3.5 h-3.5 text-[#1B3B2B]" />
                         <span>Tạo mã QR chia sẻ ngoại tuyến</span>
@@ -244,15 +284,13 @@ export const AppShell: React.FC<AppShellProps> = ({
           </nav>
 
           {/* Zone 3: Actions & Search (High-intent controls) */}
-          <div className="flex items-center gap-1.5 sm:gap-2 shrink-0">
+          <div className="app-header-actions relative flex min-w-0 items-center justify-end gap-1 sm:gap-2">
             {/* Global Search */}
             <GlobalSearch
               onSelectPerson={onSelectPerson}
               onFocusInTree={onFocusInTree}
               placeholder="Tìm nhanh (Ctrl+K)..."
             />
-
-            <PWAWidgets />
 
             {/* Dark Mode Theme Toggle */}
             <button
@@ -277,6 +315,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             <button
               type="button"
               onClick={handleShieldToggle}
+              aria-label={isShieldActive ? 'Mở khóa riêng tư bằng mã PIN' : 'Khóa thông tin riêng tư'}
               className={`flex items-center gap-1.5 px-2.5 py-2 rounded-xl border text-xs font-semibold shadow-xs transition-colors shrink-0 ${
                 isShieldActive
                   ? 'bg-amber-50/80 border-amber-300 text-amber-900 hover:bg-amber-100'
@@ -318,6 +357,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             <button
               type="button"
               onClick={onQuickAddPerson}
+              aria-label="Thêm thành viên mới"
               className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-[#1B3B2B] hover:bg-[#254F3A] text-white text-xs font-semibold shadow-xs transition-colors shrink-0"
               title="Thêm thành viên mới vào gia phả"
             >
@@ -325,16 +365,19 @@ export const AppShell: React.FC<AppShellProps> = ({
               <span className="hidden sm:inline">Thêm người</span>
             </button>
           </div>
+          <div className="app-pwa-status order-4 col-span-2 min-w-0">
+            <PWAWidgets />
+          </div>
         </div>
       </header>
 
       {/* Main Content Area */}
-      <main className="flex-1 pb-24 lg:pb-8">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6">{children}</div>
+      <main className="app-main min-w-0 flex-1 pb-24 lg:pb-8">
+        <div className="app-content min-w-0 max-w-7xl mx-auto px-4 sm:px-6 pt-4 sm:pt-6">{children}</div>
       </main>
 
       {/* Mobile Bottom Navigation Bar */}
-      <nav className="print:hidden lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFFDF9]/95 backdrop-blur-md border-t border-[#E7DFD4] px-2 py-1.5 pb-safe shadow-lg">
+      <nav aria-label="Điều hướng chính" className="app-bottom-nav print:hidden lg:hidden fixed bottom-0 left-0 right-0 z-40 bg-[#FFFDF9]/95 backdrop-blur-md border-t border-[#E7DFD4] px-2 py-1.5 shadow-lg">
         <div className="grid grid-cols-5 gap-1">
           {[
             { key: 'dashboard', label: 'Tổng quan', icon: Compass },
@@ -369,6 +412,9 @@ export const AppShell: React.FC<AppShellProps> = ({
           {/* More Menu toggle */}
           <button
             type="button"
+            ref={mobileMenuButtonRef}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-tools-dialog"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all ${
               mobileMenuOpen || ['stats', 'journal', 'gallery', 'book', 'map', 'data'].includes(activeTab)
@@ -385,11 +431,17 @@ export const AppShell: React.FC<AppShellProps> = ({
       {/* Mobile Drawer / Popup for remaining tools */}
       {mobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex flex-col justify-end p-3 animate-in fade-in"
-          onClick={() => setMobileMenuOpen(false)}
+          className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex flex-col justify-end sm:p-3 animate-in fade-in"
+          onClick={() => requestMobileMenuClose('backdrop')}
         >
           <div
-            className="w-full bg-[#FFFDF9] rounded-3xl border border-[#E7DFD4] p-5 space-y-4 shadow-2xl"
+            ref={mobileDialogRef}
+            id="mobile-tools-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Tiện ích gia phả mở rộng"
+            tabIndex={-1}
+            className="mobile-safe-dialog app-mobile-tools w-full max-h-[100dvh] sm:max-h-[calc(100dvh-1.5rem)] overflow-y-auto overscroll-contain bg-[#FFFDF9] rounded-t-3xl sm:rounded-3xl border border-[#E7DFD4] p-5 space-y-4 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-[#E7DFD4] pb-2.5">
@@ -398,7 +450,8 @@ export const AppShell: React.FC<AppShellProps> = ({
               </h3>
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => requestMobileMenuClose('button')}
+                aria-label="Đóng tiện ích mở rộng"
                 className="p-1 rounded-lg text-stone-400 hover:text-stone-700"
               >
                 <X className="w-5 h-5" />
@@ -504,10 +557,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               {onOpenKinship && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenKinship();
-                  }}
+                  onClick={() => launchTool(onOpenKinship, 'mobile')}
                   className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
                 >
                   Tra xưng hô
@@ -517,10 +567,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               {onOpenQRShare && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenQRShare();
-                  }}
+                  onClick={() => launchTool(onOpenQRShare, 'mobile')}
                   className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
                 >
                   Chia sẻ QR
@@ -530,10 +577,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               {onOpenDuplicateMerge && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenDuplicateMerge();
-                  }}
+                  onClick={() => launchTool(onOpenDuplicateMerge, 'mobile')}
                   className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
                 >
                   Lọc trùng lặp
@@ -543,10 +587,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               {onOpenTour && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenTour();
-                  }}
+                  onClick={() => launchTool(onOpenTour, 'mobile')}
                   className="p-2 rounded-xl bg-[#FAF7F2] border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B] col-span-2"
                 >
                   Hướng dẫn nhanh
@@ -555,10 +596,7 @@ export const AppShell: React.FC<AppShellProps> = ({
 
               <button
                 type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  handleShieldToggle();
-                }}
+                onClick={() => launchTool(handleShieldToggle, 'mobile')}
                 className={`p-2 rounded-xl border text-center text-[11px] font-bold ${
                   isShieldActive
                     ? 'bg-amber-100/80 border-amber-300 text-amber-900'

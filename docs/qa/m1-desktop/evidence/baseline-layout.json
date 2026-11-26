@@ -1,0 +1,48 @@
+{
+  "testedSha": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+  "fixture": "bundled demo31 (product reset)",
+  "metrics": [
+    {
+      "clientWidth": 305,
+      "height": 568,
+      "scrollWidth": 394,
+      "theme": "dark",
+      "width": 320
+    },
+    {
+      "clientWidth": 375,
+      "height": 844,
+      "scrollWidth": 394,
+      "theme": "dark",
+      "width": 390
+    },
+    {
+      "clientWidth": 1351,
+      "height": 900,
+      "scrollWidth": 1840,
+      "theme": "dark",
+      "width": 1366
+    },
+    {
+      "clientWidth": 305,
+      "height": 568,
+      "scrollWidth": 394,
+      "theme": "",
+      "width": 320
+    },
+    {
+      "clientWidth": 375,
+      "height": 844,
+      "scrollWidth": 394,
+      "theme": "",
+      "width": 390
+    },
+    {
+      "clientWidth": 1351,
+      "height": 900,
+      "scrollWidth": 1840,
+      "theme": "",
+      "width": 1366
+    }
+  ]
+}

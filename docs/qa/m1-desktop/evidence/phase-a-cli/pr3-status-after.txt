@@ -1,0 +1,14 @@
+?? docs/qa/m1-desktop/evidence/chrome-profile.json
+?? docs/qa/m1-desktop/evidence/launch_browser.py
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-build.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-focused.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-install.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-lint.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-regression.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr2-status-after.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-build.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-focused.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-install.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-lint.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-regression.txt
+?? docs/qa/m1-desktop/evidence/phase-a-cli/pr3-status-after.txt
