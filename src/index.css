@@ -79,6 +79,14 @@
   min-inline-size: 0;
 }
 
+.app-shell :where(.text-stone-400, .text-stone-500) {
+  color: #655A4E;
+}
+
+.app-shell :where(input, textarea)::placeholder {
+  color: #655A4E;
+}
+
 @media (min-width: 640px) {
   .app-header-layout,
   .app-content {
@@ -122,6 +130,7 @@ html.dark {
 
   /* Secondary surface / pill / controls */
   .bg-\[\#F1EBE1\],
+  .bg-\[\#F1EBE1\]\/75,
   .bg-\[\#F1EBE1\]\/70,
   .bg-white\/80,
   .bg-white\/60,
@@ -196,7 +205,7 @@ html.dark {
   }
 
   .text-stone-400 {
-    color: #8A8073 !important;
+    color: #B9AEA0 !important;
   }
 
   /* Headings & Brand Emeralds */
@@ -239,7 +248,7 @@ html.dark {
 
   input::placeholder,
   textarea::placeholder {
-    color: #796E61 !important;
+    color: #A89F93 !important;
   }
 
   /* Interactive hover highlights */

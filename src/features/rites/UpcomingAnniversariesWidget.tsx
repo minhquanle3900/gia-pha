@@ -91,24 +91,24 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
   };
 
   return (
-    <div className="rounded-3xl bg-linear-to-br from-[#FFFDF9] via-[#FAF7F2] to-[#FAF4EB] border-2 border-[#EADCC8] p-5 sm:p-6 shadow-sm space-y-5 relative overflow-hidden transition-all">
+    <div className="heritage-anniversaries rounded-3xl bg-linear-to-br from-[#FFFDF9] via-[#FAF7F2] to-[#FAF4EB] dark:from-[#17241C] dark:via-[#152219] dark:to-[#101713] border-2 border-[#EADCC8] dark:border-[#3B4D40] p-5 sm:p-6 shadow-sm space-y-5 relative overflow-hidden transition-all">
       {/* Header Bar */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E8DDCD] pb-4">
         <div className="space-y-1">
           <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-xl bg-[#FAF0DC] text-[#8C3A27] border border-[#E3CCA0]">
+            <span className="p-1.5 rounded-xl bg-[#FAF0DC] dark:bg-[#2B2618] text-[#8C3A27] dark:text-[#E5BE6C] border border-[#E3CCA0] dark:border-[#64502A]">
               <Flame className="w-4 h-4 fill-[#8C3A27]" />
             </span>
             <h3 className="text-base sm:text-lg font-serif font-bold text-[#1F1913]">
               Nhắc Nhở Ngày Giỗ & Tiết Kỵ Sắp Tới
             </h3>
             {filteredList.length > 0 && (
-              <span className="text-xs font-serif font-bold text-[#8C3A27] tabular-nums">
+              <span className="text-xs font-serif font-bold text-[#8C3A27] dark:text-[#E5BE6C] tabular-nums">
                 · {filteredList.length} lễ giỗ
               </span>
             )}
           </div>
-          <p className="text-xs text-[#6E5F50]">
+          <p className="text-xs text-[#6E5F50] dark:text-[#B9AEA0]">
             Tự động quy đổi âm dương lịch và nhắc nhở con cháu chuẩn bị lễ vật, cáo giỗ Tiên Thường và Chính Kỵ
           </p>
         </div>
@@ -116,14 +116,14 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
         {/* Action Controls */}
         <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
           {/* 30 days vs All toggle */}
-          <div className="inline-flex p-1 rounded-xl bg-[#EDE4D6] border border-[#DDD0BF] text-xs">
+          <div className="inline-flex p-1 rounded-xl bg-[#EDE4D6] dark:bg-[#1F2E25] border border-[#DDD0BF] dark:border-[#3B4D40] text-xs">
             <button
               type="button"
               onClick={() => setScope('30days')}
               className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                 scope === '30days'
                   ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#6A5A4A] hover:text-[#1F1913]'
+                  : 'text-[#6A5A4A] dark:text-[#C9BFB1] hover:text-[#1F1913] dark:hover:text-white'
               }`}
             >
               Trong 30 ngày tới
@@ -134,7 +134,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
               className={`px-3 py-1 rounded-lg font-semibold transition-all ${
                 scope === 'all'
                   ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#6A5A4A] hover:text-[#1F1913]'
+                  : 'text-[#6A5A4A] dark:text-[#C9BFB1] hover:text-[#1F1913] dark:hover:text-white'
               }`}
             >
               Tất cả trong năm
@@ -198,7 +198,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
             <h4 className="font-serif font-bold text-sm text-[#1F1913]">
               Không có ngày giỗ nào trong 30 ngày tới
             </h4>
-            <p className="text-xs text-[#695A4B] max-w-md mx-auto leading-relaxed">
+            <p className="text-xs text-[#695A4B] dark:text-[#B9AEA0] max-w-md mx-auto leading-relaxed">
               Trong 30 ngày tới không có tiết kỵ của các bậc tiền nhân. Con cháu có thể chuyển sang
               chế độ xem toàn năm hoặc tra cứu sổ văn khấn gia tiên.
             </p>
@@ -206,7 +206,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
 
           {nextSingleAnniversary && (
             <div className="pt-2 max-w-md mx-auto">
-              <div className="p-3 rounded-xl bg-[#FAF5EB] border border-[#E8DDCD] flex items-center justify-between gap-3 text-left">
+              <div className="p-3 rounded-xl bg-[#FAF5EB] dark:bg-[#1F2E25] border border-[#E8DDCD] dark:border-[#3B4D40] flex items-center justify-between gap-3 text-left">
                 <div className="flex items-center gap-2.5">
                   <HeritageAvatar
                     fullName={nextSingleAnniversary.person.fullName}
@@ -264,9 +264,9 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                 key={item.person.id}
                 className={`rounded-2xl border transition-all p-4 flex flex-col justify-between space-y-3 shadow-2xs hover:shadow-sm ${
                   isToday
-                    ? 'bg-gradient-to-br from-[#FFF5F2] to-[#FFEDE8] border-rose-300 ring-2 ring-rose-300/40'
+                    ? 'bg-gradient-to-br from-[#FFF5F2] to-[#FFEDE8] dark:from-[#321F1B] dark:to-[#2A1717] border-rose-300 dark:border-rose-700 ring-2 ring-rose-300/40'
                     : isTomorrow
-                    ? 'bg-gradient-to-br from-[#FFF8EE] to-[#FFF1DE] border-amber-300 ring-1 ring-amber-300/40'
+                    ? 'bg-gradient-to-br from-[#FFF8EE] to-[#FFF1DE] dark:from-[#302716] dark:to-[#252014] border-amber-300 dark:border-amber-700 ring-1 ring-amber-300/40'
                     : 'bg-white border-[#E7DFD4] hover:border-[#C19B4C]'
                 }`}
               >
@@ -317,14 +317,14 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                           <span>HÔM NAY (Chính Kỵ)</span>
                         </span>
                       ) : isTomorrow ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-[#C19B4C] text-white shadow-xs">
+                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-[#C19B4C] text-[#2E241E] shadow-xs">
                           <Clock className="w-3 h-3" />
                           <span>NGÀY MAI (Tiên Thường)</span>
                         </span>
                       ) : (
                         <span
                           className={`inline-flex items-center gap-1 text-xs font-bold ${
-                            isVerySoon ? 'text-[#8C3A27]' : 'text-[#695843]'
+                            isVerySoon ? 'text-[#8C3A27] dark:text-[#F0B6A5]' : 'text-[#695843] dark:text-[#C9BFB1]'
                           }`}
                         >
                           <Clock className="w-3 h-3 text-[#C19B4C]" />
@@ -336,7 +336,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
 
                   {/* Dates Box */}
                   <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#ECE4D8] space-y-1 text-xs">
-                    <div className="flex items-center justify-between text-[#8C3A27] font-semibold">
+                    <div className="flex items-center justify-between text-[#8C3A27] dark:text-[#F0B6A5] font-semibold">
                       <span className="flex items-center gap-1">
                         <Calendar className="w-3.5 h-3.5" />
                         <span>Ngày Âm lịch:</span>
@@ -359,7 +359,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                     </div>
 
                     {item.lunarNote && (
-                      <p className="text-[11px] text-[#6B5A47] italic pt-0.5 border-t border-stone-200 line-clamp-1">
+                      <p className="text-[11px] text-[#6B5A47] dark:text-[#B9AEA0] italic pt-0.5 border-t border-stone-200 line-clamp-1">
                         "{item.lunarNote}"
                       </p>
                     )}
@@ -413,10 +413,10 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
       )}
 
       {/* Cultural Ritual Tip Footer */}
-      <div className="p-3.5 rounded-2xl bg-[#FAF6EE] border border-[#E6DCB8] flex items-start gap-2.5 text-xs text-[#6B5B47] leading-relaxed">
+      <div className="p-3.5 rounded-2xl bg-[#FAF6EE] dark:bg-[#1F2E25] border border-[#E6DCB8] dark:border-[#3B4D40] flex items-start gap-2.5 text-xs text-[#6B5B47] dark:text-[#B9AEA0] leading-relaxed">
         <Info className="w-4 h-4 text-[#C19B4C] shrink-0 mt-0.5" />
         <div className="space-y-0.5">
-          <strong className="text-[#3E3326]">Phong tục cúng giỗ gia tiên cổ truyền:</strong>
+          <strong className="text-[#3E3326] dark:text-[#EDE6DC]">Phong tục cúng giỗ gia tiên cổ truyền:</strong>
           <p>
             Chiều hôm trước ngày giỗ cử hành <strong>Lễ Tiên Thường</strong> (lễ cáo giỗ, thỉnh rước
             chư vị tiên tổ về ngự). Sáng ngày hôm sau là <strong>Lễ Chính Kỵ</strong> (dâng mâm cỗ cúng,
