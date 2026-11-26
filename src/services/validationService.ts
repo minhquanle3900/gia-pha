@@ -1,10 +1,12 @@
 import {
+  FlexibleDate,
   GenealogyDatabaseSnapshot,
   LineageType,
   Person,
   Relationship,
   Union,
 } from '../models/genealogy';
+import { daysInGregorianMonth } from '../utils/dateUtils';
 
 export interface ValidationResult {
   valid: boolean;
@@ -186,6 +188,45 @@ export function validateParentChildRelationship(params: {
   };
 }
 
+function marriageDateRange(date?: FlexibleDate): [start: number, end: number] | undefined {
+  const year = date?.year;
+  if (!date || !year || !Number.isInteger(year) || year < 1 || year > 9999) return undefined;
+  if (date.precision !== 'year' && date.precision !== 'month' && date.precision !== 'exact') return undefined;
+  if (date.calendar !== undefined && date.calendar !== 'solar' && date.calendar !== 'lunar') return undefined;
+
+  const start = year * 10000;
+  const month = date.month;
+  if (date.precision === 'year' || month === undefined) return [start + 101, start + 1231];
+  if (!Number.isInteger(month) || month < 1 || month > 12) return undefined;
+
+  const maxDay = date.calendar === 'lunar' ? 30 : daysInGregorianMonth(month, year);
+  const monthStart = start + month * 100;
+  const day = date.day;
+  if (date.precision === 'month' || day === undefined) return [monthStart + 1, monthStart + maxDay];
+  if (!Number.isInteger(day) || day < 1 || day > maxDay) return undefined;
+  return [monthStart + day, monthStart + day];
+}
+
+function hasDistinctMarriageDate(first?: FlexibleDate, second?: FlexibleDate): boolean {
+  if ((first?.calendar ?? 'solar') !== (second?.calendar ?? 'solar')) return false;
+  const firstRange = marriageDateRange(first);
+  const secondRange = marriageDateRange(second);
+  return !!firstRange && !!secondRange &&
+    (firstRange[1] < secondRange[0] || secondRange[1] < firstRange[0]);
+}
+
+export function findUnionCollision(candidate: Pick<Union, 'id' | 'partnerIds' | 'marriageDate'>, unions: Union[]) {
+  const [first, second] = candidate.partnerIds;
+  if (candidate.partnerIds.length !== 2 || first === second) return undefined;
+  return unions.find((union) =>
+    union.id !== candidate.id &&
+    union.partnerIds.length === 2 &&
+    union.partnerIds.includes(first) &&
+    union.partnerIds.includes(second) &&
+    !hasDistinctMarriageDate(candidate.marriageDate, union.marriageDate)
+  );
+}
+
 export function validateSpouseUnion(params: {
   personAId: string;
   personBId: string;
@@ -193,8 +234,9 @@ export function validateSpouseUnion(params: {
   unions: Union[];
   relationships: Relationship[];
   editingUnionId?: string;
+  marriageDate?: FlexibleDate;
 }): ValidationResult {
-  const { personAId, personBId, people, unions, relationships, editingUnionId } = params;
+  const { personAId, personBId, people, unions, relationships, editingUnionId, marriageDate } = params;
   const errors: string[] = [];
   const warnings: string[] = [];
 
@@ -215,12 +257,14 @@ export function validateSpouseUnion(params: {
     return { valid: false, errors, warnings };
   }
 
-  const duplicate = unions.find((u) => {
-    if (editingUnionId && u.id === editingUnionId) return false;
-    return u.partnerIds.includes(personAId) && u.partnerIds.includes(personBId);
-  });
+  const duplicate = findUnionCollision({
+    id: editingUnionId ?? '', partnerIds: [personAId, personBId], marriageDate,
+  }, unions);
   if (duplicate) {
-    errors.push(`Quan hệ hôn phối giữa "${personA.fullName}" và "${personB.fullName}" đã được ghi nhận.`);
+    errors.push(
+      `Hôn phối giữa "${personA.fullName}" và "${personB.fullName}" đã được ghi nhận. ` +
+      'Để ghi một lần tái hôn, cần có niên đại phân biệt được với hôn phối đã lưu.'
+    );
   }
 
   if (

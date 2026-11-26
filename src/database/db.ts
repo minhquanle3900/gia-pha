@@ -12,8 +12,9 @@ import {
   Union,
 } from '../models/genealogy';
 import { executeMergeRecords } from '../services/duplicateMergeService';
-import { validateImportSnapshot } from '../services/importValidationService';
+import { isValidFlexibleDate, validateImportSnapshot } from '../services/importValidationService';
 import { planSnapshotMerge, SNAPSHOT_DATA_STORES } from '../services/snapshotMergeService';
+import { validateSpouseUnion } from '../services/validationService';
 import { generateId } from '../utils/dateUtils';
 import { createSeedSnapshot } from './seedData';
 
@@ -476,8 +477,52 @@ export async function deletePersonSafely(personId: string): Promise<void> {
 }
 
 export async function saveUnionRecord(union: Union): Promise<void> {
-  const db = await getDatabase();
-  await db.put('unions', { ...union, updatedAt: new Date().toISOString() });
+  const candidate = structuredClone(union);
+  await writeDatabaseTransaction(['people', 'unions', 'relationships'] as const, async (tx) => {
+    const [first, second] = candidate.partnerIds;
+    if (!candidate.id.trim() || candidate.partnerIds.length < 1 || candidate.partnerIds.length > 2) {
+      throw new Error('Bản ghi hôn phối phải có mã định danh và một hoặc hai thành viên.');
+    }
+    if (candidate.marriageDate !== undefined && !isValidFlexibleDate(candidate.marriageDate)) {
+      throw new Error('Niên đại hôn phối không hợp lệ. Hãy kiểm tra ngày, tháng và năm.');
+    }
+
+    const peopleStore = tx.objectStore('people');
+    const unionStore = tx.objectStore('unions');
+    const relationshipStore = tx.objectStore('relationships');
+    const [unions, partners, relationships] = await Promise.all([
+      unionStore.getAll(),
+      Promise.all(candidate.partnerIds.map((id) => peopleStore.get(id))),
+      relationshipStore.getAll(),
+    ]);
+
+    if (partners.some((partner) => !partner)) {
+      throw new Error('Không tìm thấy hồ sơ thành viên của hôn phối.');
+    }
+    if (candidate.partnerIds.length === 2) {
+      const validation = validateSpouseUnion({
+        personAId: first,
+        personBId: second,
+        people: partners.filter((partner): partner is Person => partner !== undefined),
+        unions,
+        relationships,
+        editingUnionId: candidate.id,
+        marriageDate: candidate.marriageDate,
+      });
+      if (!validation.valid) throw new Error(validation.errors.join(' '));
+    }
+
+    const previous = unions.find((record) => record.id === candidate.id);
+    if (previous && relationships.some((link) =>
+      link.unionId === candidate.id &&
+      previous.partnerIds.includes(link.parentId) &&
+      !candidate.partnerIds.includes(link.parentId)
+    )) {
+      throw new Error('Không thể bỏ thành viên khỏi hôn phối khi còn liên kết cha/mẹ – con trong hôn phối này.');
+    }
+
+    await unionStore.put({ ...candidate, updatedAt: new Date().toISOString() });
+  });
 }
 
 export async function deleteUnionRecord(unionId: string): Promise<void> {

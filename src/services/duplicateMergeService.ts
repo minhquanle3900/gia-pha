@@ -6,7 +6,7 @@ import {
   Union,
 } from '../models/genealogy';
 import { normalizeVietnameseText } from '../utils/dateUtils';
-import { hasAncestryCycleThrough } from './validationService';
+import { findUnionCollision, hasAncestryCycleThrough } from './validationService';
 
 export interface DuplicatePair {
   personA: Person;
@@ -307,6 +307,17 @@ export function executeMergeRecords(params: {
       partnerIds: [...new Set(union.partnerIds.map((id) => id === sourceId ? targetId : id))],
       updatedAt,
     });
+  }
+  if (updatedUnions.length > 0) {
+    const mergedUnions = [...unions.filter((union) => !union.partnerIds.includes(sourceId)), ...updatedUnions];
+    for (const union of updatedUnions) {
+      const collision = findUnionCollision(union, mergedUnions);
+      if (collision) {
+        throw new Error(
+          `Không thể sáp nhập vì hôn phối "${union.id}" và "${collision.id}" cùng cặp thành viên nhưng thiếu niên đại phân biệt.`
+        );
+      }
+    }
   }
 
   const updatedLifeEvents = lifeEvents
