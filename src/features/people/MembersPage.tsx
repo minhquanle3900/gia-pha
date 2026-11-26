@@ -582,7 +582,7 @@ export const MembersPage: React.FC<MembersPageProps> = ({
       {filteredPeople.length === 0 ? (
         <div className="p-6 sm:p-12 text-center bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] space-y-3">
           <Users className="w-10 h-10 text-stone-300 mx-auto" />
-          <p className="heritage-ui text-sm font-bold text-stone-700">
+          <p className="heritage-ui text-sm font-bold text-stone-700 dark:text-stone-100">
             {people.length === 0 ? 'Chưa có thành viên trong gia phả' : 'Không tìm thấy thành viên nào phù hợp với bộ lọc'}
           </p>
           <p className="text-xs text-stone-500">
