@@ -138,7 +138,7 @@ export const KinshipCalculatorModal: React.FC<KinshipCalculatorModalProps> = ({
 
             {/* Person B Selector */}
             <div className="p-4 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] space-y-2.5">
-              <label htmlFor={`${id}-person-b`} className="block text-xs font-bold uppercase tracking-wider text-[#8C3A27]">
+              <label htmlFor={`${id}-person-b`} className="block text-xs font-bold uppercase tracking-wider text-[#8C3A27] dark:text-[#F0B6A5]">
                 Người thứ hai (B)
               </label>
               <select
@@ -197,18 +197,18 @@ export const KinshipCalculatorModal: React.FC<KinshipCalculatorModalProps> = ({
                   <span className="text-[11px] text-stone-500 font-medium">
                     {personB?.fullName} xưng là:
                   </span>
-                  <p className="text-base font-serif font-bold text-[#8C3A27]">{result.termBtoA}</p>
+                  <p className="text-base font-serif font-bold text-[#8C3A27] dark:text-[#F0B6A5]">{result.termBtoA}</p>
                   <p className="text-[10px] text-stone-400">(với {personA?.fullName})</p>
                 </div>
               </div>
 
               {/* Cultural Explanation */}
               <div className="p-3.5 rounded-xl bg-[#FFFDF9] border border-[#E7DFD4] text-xs space-y-1.5">
-                <span className="font-bold text-stone-700 flex items-center gap-1.5">
+                <span className="font-bold text-stone-700 dark:text-[#EDE6DC] flex items-center gap-1.5">
                   <HelpCircle className="w-3.5 h-3.5 text-[#1B3B2B]" />
                   <span>Cơ sở phả hệ & nguồn gốc:</span>
                 </span>
-                <p className="text-[#4A3F35] leading-relaxed">{result.explanation}</p>
+                <p className="text-[#4A3F35] dark:text-[#EDE6DC] leading-relaxed">{result.explanation}</p>
                 {result.lcaPerson && (
                   <p className="text-[11px] text-[#8C6D32] font-medium pt-1 border-t border-stone-100">
                     ✦ Tổ tiên chung gần nhất: <strong>{result.lcaPerson.fullName}</strong>{' '}

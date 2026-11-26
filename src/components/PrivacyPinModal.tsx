@@ -234,7 +234,7 @@ export const PrivacyPinModal: React.FC<PrivacyPinModalProps> = ({
               type="button"
               onClick={() => requestClose('button')}
               disabled={isSubmitting}
-              className="min-h-11 px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium disabled:opacity-50"
+              className="min-h-11 px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 dark:text-[#EDE6DC] font-medium disabled:opacity-50"
             >
               Hủy
             </button>
