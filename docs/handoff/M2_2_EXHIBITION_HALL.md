@@ -1,20 +1,23 @@
-# M2.2 · Phòng trưng bày
+# M2.2 · Phòng trưng bày di sản
 
-Base `c8b1a4d49489c5f4fda7dc048c679339d17e384e` (PR #6), code `e86f72664dc3d1db02702026baa3ebb0021312f3`. Mở từ ô **Di sản** ở Tổng quan hoặc lối **Kho kỷ vật** sẵn có. Từ sảnh vào kho để dùng bộ lọc, thêm, ghi âm, xem và xóa như trước. Các nút Nhật ký, Lễ giỗ và Sách phả ký mở đúng màn hình hiện có.
+PR #8 dựa trên `c8b1a4d` (PR #6). Commit triển khai Marathon `0815c8ae752a35f2364183501067aec4597e7013`. Mobile Platform đã hoàn thành ở PR #7, head `6ffcba5`.
 
-Năm khu trưng bày dùng `Media.category`, `FamilyStory.category` và các thẻ hiện có như Thư pháp, Gia huấn hoặc Ký ức. Mục nổi bật ưu tiên bài ghim và bổ sung câu đối tham khảo. Mở chi tiết để đọc ngữ cảnh, xem tư liệu nhúng và nhận biết người hoặc chi họ liên quan. Hai câu đối mẫu chỉ dùng để trưng bày. Schema, IndexedDB, bộ dữ liệu backup và AppShell giữ nguyên. Ảnh minh họa nhà thờ họ Bắc Bộ tạo bằng ImageGen, nhúng vào chunk riêng của triển lãm để precache cùng shell.
+- Từ **Kho kỷ vật**, chọn **Vào phòng trưng bày**. Sảnh dẫn đến bảy khu, gồm Chân dung tiền nhân tách riêng khỏi Ảnh gia tộc và Triển lãm theo chủ đề. Chủ đề đọc từ chi họ và thẻ Nhật ký sẵn có. Mục nổi bật tiếp tục dùng bài ghim và tư liệu trong kho.
+- Chi tiết có caption, câu chuyện, xem toàn màn hình và lối mở hồ sơ, bộ sưu tập chi họ, tư liệu gốc. Hai câu đối do Product Owner cung cấp được trình bày dọc với ghi chú nguồn và dị bản chưa xác minh. Ảnh sảnh tạo bằng ImageGen có nhãn minh họa, dùng font Heritage sẵn có.
+- Thay đổi nằm ở `GalleryPage.tsx`, `ExhibitionHall.tsx`, `ExhibitionArtwork.tsx`, CSS và catalog cùng test. App dùng callback điều hướng hiện có. Media, FamilyStory, Person, FamilyBranch và backup vẫn theo schema hiện hành.
 
 ## Ảnh Chromium
 
-| Khung | Trước | Sau |
-|---|---|---|
-| Mobile 390 × 844 | [Kho kỷ vật](screenshots/m2-exhibition/before-gallery-mobile.jpg) | [Sảnh](screenshots/m2-exhibition/after-hall-mobile.jpg) · [Năm khu](screenshots/m2-exhibition/after-rooms-mobile.jpg) · [Câu đối](screenshots/m2-exhibition/after-couplet-mobile.jpg) · [Hiện vật](screenshots/m2-exhibition/after-artifact-mobile.jpg) |
-| Desktop 1440 × 900 | [Kho kỷ vật](screenshots/m2-exhibition/before-gallery-desktop.jpg) | [Sảnh](screenshots/m2-exhibition/after-hall-desktop.jpg) · [Kho kỷ vật sau thay đổi](screenshots/m2-exhibition/after-gallery-desktop.jpg) |
+- Trước Marathon [Sảnh 390 px](screenshots/m2-exhibition/after-hall-mobile.jpg) · [Sảnh 1440 px](screenshots/m2-exhibition/after-hall-desktop.jpg).
+- Sau Marathon [Sảnh sáng 390 px](screenshots/m2-exhibition-marathon/after-hall-390-light.jpg) · [Sảnh tối 1440 px](screenshots/m2-exhibition-marathon/after-hall-1440-dark.jpg) · [Danh sách các khu](screenshots/m2-exhibition-marathon/after-rooms-390-light.jpg).
+- [Hai vế câu đối](screenshots/m2-exhibition-marathon/after-couplet-390-light.jpg) · [Câu đối toàn màn hình](screenshots/m2-exhibition-marathon/after-fullscreen-couplet-390-light.jpg) · [Hiện vật toàn màn hình](screenshots/m2-exhibition-marathon/after-fullscreen-390-dark.jpg) · [Bộ sưu tập theo chi](screenshots/m2-exhibition-marathon/after-branch-390-light.jpg) · [Bộ sưu tập trống](screenshots/m2-exhibition-marathon/after-empty-collections-390-light.jpg).
 
 ## Kiểm thử
 
-- `npm test -- src/__tests__/exhibitionCatalog.test.ts src/__tests__/clanJournal.test.ts src/__tests__/portraitLifecycle.test.ts src/__tests__/branchDeletion.test.ts src/__tests__/familyYearTimeline.test.ts src/__tests__/familyBookPdf.test.ts` đạt **46/46**.
-- `npm test` đạt **214/214**, gồm 194 baseline và 20 ca catalog. `npm run lint` và `npm run build` exit 0. PDF tracked giữ nguyên.
-- Chromium ở 320, 390 và 1440 px kiểm đủ năm khu, hai loại chi tiết, trả tiêu điểm khi quay lại, khu trống, kho cũ và điều hướng sang ba màn hình liên quan. ID fixture demo giữ nguyên, 0 runtime exception. Mở triển lãm lần đầu offline từ Dashboard đã tải online vẫn có ảnh sảnh và chi tiết. [Log Chromium](screenshots/m2-exhibition/chromium-results.txt).
+- `npm test` đạt **221/221**, gồm 194 baseline. Targeted catalog, Journal, portrait, branch, timeline và PDF đạt **53/53**. Lint và production build đạt.
+- Chromium kiểm light/dark tại 320, 390, 430, 768 và 1440 px, chạm giả lập, bàn phím, toàn màn hình, trạng thái trống, mở lần đầu offline sau khi tải shell và liên kết hồ sơ/chi họ/tư liệu. Chế độ reduced motion tắt hiệu ứng trưng bày. 0 lỗi runtime. [Log Chromium](screenshots/m2-exhibition-marathon/chromium-results.txt).
+- AppShell có tràn ngang từ baseline. Vùng trưng bày vừa khung ở cả năm kích thước. Thiết bị iOS/Android thật chưa được kiểm ở vòng Cloud.
 
-Review Desktop kiểm đường vào sau khi tích hợp AppShell và thử bàn phím hoặc chạm. Vùng triển lãm vừa chiều rộng ở cả ba viewport. AppShell vẫn có tràn ngang từ baseline. Revert `e86f726` để rollback giao diện, giữ nguyên dữ liệu dùng chung.
+## NEXT_TASK
+
+Desktop tích hợp đường vào chính thức của Di sản trong UI Foundation. Dùng luồng **Kho kỷ vật → Vào phòng trưng bày** để đối chiếu và xác nhận toàn màn hình trên thiết bị thật.
