@@ -194,7 +194,7 @@ export const FamilyBookPage: React.FC = () => {
     <div className="min-w-0 space-y-4 pb-16 sm:space-y-6">
       <section aria-labelledby="book-heading" className="space-y-4 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-3 shadow-xs sm:p-5 print:hidden">
         <div className="min-w-0 px-1 pt-1">
-          <h1 id="book-heading" className="text-3xl font-bold leading-none text-[#1B3B2B] sm:text-4xl">
+          <h1 id="book-heading" className="heritage-display text-3xl text-[#1B3B2B] sm:text-4xl">
             Sách phả ký
           </h1>
           <p className="mt-2 text-sm text-[#655A4E]">Chọn bản xem trước, khổ giấy và cách xuất bản in.</p>
@@ -382,10 +382,10 @@ export const FamilyBookPage: React.FC = () => {
             <p className="text-xs uppercase tracking-[0.3em] font-semibold text-[#8C6D32] mb-3">
               Gia Phả Dòng Tộc Việt Nam
             </p>
-            <h2 className="mb-4 break-words font-serif text-3xl font-bold leading-tight tracking-tight text-[#1B3B2B] sm:text-5xl">
+            <h2 className="heritage-display mb-4 break-words text-3xl text-[#1B3B2B] sm:text-5xl">
               {settings.clanName}
             </h2>
-            <p className="text-base sm:text-lg font-serif italic text-[#54483C] max-w-xl mx-auto mb-8">
+            <p className={`mx-auto mb-8 max-w-xl break-words text-base text-[#54483C] sm:text-lg ${settings.clanMotto.length <= 100 ? 'heritage-intro' : 'heritage-body'}`}>
               "{settings.clanMotto}"
             </p>
 
@@ -398,10 +398,10 @@ export const FamilyBookPage: React.FC = () => {
 
           {/* Preface / Lời Tựa */}
           <section className="space-y-4 pt-6 border-t border-stone-200">
-            <h2 className="text-xl font-serif font-bold text-[#1B3B2B] text-center border-b-2 border-[#1B3B2B] pb-2 inline-block mx-auto">
+            <h2 className="heritage-heading mx-auto inline-block border-b-2 border-[#1B3B2B] pb-2 text-center text-xl text-[#1B3B2B]">
               LỜI TỰA PHẢ KÝ (TIỀN NGÔN)
             </h2>
-            <div className="text-sm font-serif text-[#332A22] leading-relaxed space-y-3 indent-6">
+            <div className="heritage-body space-y-3 indent-6 text-sm text-[#332A22]">
               <p>
                 Cổ nhân có câu: "Mộc hữu bản, thủy hữu nguyên; nhân hữu tổ". Cây có gốc mới trổ
                 nhánh đơm hoa kết trái, nước có nguồn mới chảy xiết thành sông lớn; con người có tổ
@@ -425,7 +425,7 @@ export const FamilyBookPage: React.FC = () => {
 
           {/* Branches Directory / Chi Phái */}
           <section className="space-y-4 pt-6 border-t border-stone-200">
-            <h2 className="text-xl font-serif font-bold text-[#1B3B2B] text-center">
+            <h2 className="heritage-heading text-center text-xl text-[#1B3B2B]">
               DANH SÁCH CÁC CHI PHÁI TRỰC THUỘC
             </h2>
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
@@ -456,7 +456,7 @@ export const FamilyBookPage: React.FC = () => {
 
           {/* Generation Biographies (Phả Lục Từng Đời) */}
           <section className="space-y-8 pt-6 border-t border-stone-200">
-            <h2 className="text-xl font-serif font-bold text-[#1B3B2B] text-center">
+            <h2 className="heritage-heading text-center text-xl text-[#1B3B2B]">
               PHẢ LỤC CHI TIẾT CÁC THẾ HỆ
             </h2>
 

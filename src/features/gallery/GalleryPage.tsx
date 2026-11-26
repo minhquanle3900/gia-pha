@@ -232,7 +232,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
               <Landmark className="size-4 shrink-0" aria-hidden="true" />
               Vào phòng trưng bày
             </button>
-            <h2 ref={archiveHeadingRef} tabIndex={-1} className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Kho kỷ vật</h2>
+            <h2 ref={archiveHeadingRef} tabIndex={-1} className="heritage-display text-3xl sm:text-4xl lg:text-5xl">Kho kỷ vật</h2>
             <p className="mt-2 text-sm text-[#E6DFD5]">Ảnh, tư liệu và bản ghi âm của dòng họ</p>
           </div>
           <div className="grid grid-cols-2 gap-2 sm:flex">

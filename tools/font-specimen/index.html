@@ -1,0 +1,143 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Mẫu chữ Di sản · Cội Nguồn</title>
+  <link rel="stylesheet" href="/src/styles/heritageTypography.css" />
+  <style>
+    :root {
+      color-scheme: light dark;
+      --paper: #f4ede1;
+      --card: #fffcf5;
+      --ink: #22352b;
+      --muted: #675941;
+      --line: #d8cab3;
+      --wash: #f0e5d2;
+      color: var(--ink);
+      background: var(--paper);
+      font: 15px/1.5 system-ui, sans-serif;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --paper: #17231b;
+        --card: #202d23;
+        --ink: #fbf0dc;
+        --muted: #d7c4a5;
+        --line: #6a624d;
+        --wash: #304231;
+      }
+    }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { margin: 0; }
+    main { width: min(96rem, 100%); margin: auto; padding: clamp(.875rem, 3vw, 3rem); }
+    .specimen-header { max-width: 58rem; margin-block-end: 1.5rem; }
+    h1 { font-family: Georgia, serif; font-size: clamp(2.2rem, 5vw, 3.9rem); line-height: 1.08; margin: 0; }
+    .specimen-header p { margin: .65rem 0 0; color: var(--muted); }
+    .specimen-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 21rem), 1fr)); gap: 1rem; }
+    .specimen-card { min-width: 0; overflow-wrap: anywhere; border: 1px solid var(--line); border-radius: 1.125rem; background: var(--card); }
+    .specimen-card header { padding: 1.15rem; border-bottom: 1px solid var(--line); }
+    .specimen-card h2 { font: 700 1.18rem/1.25 system-ui, sans-serif; margin: 0; }
+    .specimen-card header p { margin: .25rem 0 0; color: var(--muted); }
+    .specimen-card dl { display: grid; grid-template-columns: auto minmax(0, 1fr); gap: .25rem .8rem; margin: .75rem 0 0; font-size: .83rem; }
+    .specimen-card dt { color: var(--muted); }
+    .specimen-card dd { margin: 0; }
+    .specimen-card a { color: inherit; text-underline-offset: .14em; }
+    .specimen-samples { padding: 1rem; font-family: var(--face), Georgia, serif; font-weight: var(--weight, 400); }
+    .specimen-samples > p { margin: .1rem 0 .3rem; padding-block: .1em; font-size: 1.55rem; line-height: 1.4; }
+    .specimen-samples > p:first-child { margin-bottom: .25rem; font-size: clamp(2.65rem, 5.5vw, 4.1rem); line-height: 1.18; }
+    .specimen-samples blockquote { margin: .75rem 0 0; padding: .75rem; background: var(--wash); border-radius: .625rem; font-size: 1.25rem; line-height: 1.55; }
+    .specimen-samples blockquote p { margin: 0; }
+    .specimen-note { max-width: 65ch; color: var(--muted); }
+  </style>
+</head>
+<body>
+  <main>
+    <header class="specimen-header">
+      <h1>Mẫu chữ Di sản</h1>
+      <p>So sánh dấu tiếng Việt, nét chữ và khoảng cách dòng trên cùng nội dung.</p>
+      <p><strong>BLOCKED · Thư pháp Quốc ngữ</strong> — Đang chờ xác minh quyền phân phối font thư pháp truyền thống.</p>
+    </header>
+    <section class="specimen-grid" aria-label="So sánh font">
+      <article class="specimen-card" data-font-file="Charm-Regular.woff2" style="--face: 'Charm'">
+        <header>
+          <h2>Charm</h2>
+          <p>Nét bút dự phòng</p>
+          <dl>
+            <dt>Thiết kế</dt><dd>Cadson Demak</dd>
+            <dt>Giấy phép</dt><dd><a href="https://github.com/google/fonts/blob/main/ofl/charm/OFL.txt">SIL OFL 1.1</a></dd>
+            <dt>WOFF2</dt><dd data-size>Đang đọc tệp</dd>
+            <dt>Unicode</dt><dd>Tiếng Việt · 146 dạng chữ NFC và dấu NFD</dd>
+          </dl>
+        </header>
+        <div class="specimen-samples"></div>
+      </article>
+      <article class="specimen-card" data-font-file="ViaodaLibre-Regular.woff2" style="--face: 'Viaoda Libre'">
+        <header>
+          <h2>Viaoda Libre</h2>
+          <p>Serif trưng bày</p>
+          <dl>
+            <dt>Thiết kế</dt><dd>Gydient, ViệtAnh Nguyễn</dd>
+            <dt>Giấy phép</dt><dd><a href="https://github.com/google/fonts/blob/main/ofl/viaodalibre/OFL.txt">SIL OFL 1.1</a></dd>
+            <dt>WOFF2</dt><dd data-size>Đang đọc tệp</dd>
+            <dt>Unicode</dt><dd>Tiếng Việt · 146 dạng chữ NFC và dấu NFD</dd>
+          </dl>
+        </header>
+        <div class="specimen-samples"></div>
+      </article>
+      <article class="specimen-card" data-font-file="CormorantGaramond-Latin-Vietnamese.woff2" style="--face: 'Cormorant Garamond'; --weight: 500">
+        <header>
+          <h2>Cormorant Garamond</h2>
+          <p>Serif tiêu đề</p>
+          <dl>
+            <dt>Thiết kế</dt><dd>Christian Thalmann</dd>
+            <dt>Giấy phép</dt><dd><a href="https://github.com/google/fonts/blob/main/ofl/cormorantgaramond/OFL.txt">SIL OFL 1.1</a></dd>
+            <dt>WOFF2</dt><dd data-size>Đang đọc tệp</dd>
+            <dt>Unicode</dt><dd>Tiếng Việt · 146 dạng chữ NFC và dấu NFD</dd>
+          </dl>
+        </header>
+        <div class="specimen-samples"></div>
+      </article>
+    </section>
+    <p class="specimen-note">Dị bản “Khứa niên” / “Cựu niên” đang chờ Product Owner xác nhận. Mẫu dùng lời đang lưu trong catalog.</p>
+  </main>
+  <script type="module">
+    import { buildExhibitionCatalog } from '/src/features/gallery/exhibitionCatalog.ts';
+
+    const samples = ['Cội Nguồn', 'Uống nước nhớ nguồn', 'Phòng trưng bày', 'Tâm – Đức – Hiếu – Phúc – Lộc – Thọ'];
+    const couplets = buildExhibitionCatalog([], []).rooms.calligraphy.flatMap((entry) => entry.kind === 'reference' ? [entry.lines] : []);
+    const candidates = [...document.querySelectorAll('[data-font-file]')];
+
+    function paragraph(text) {
+      const node = document.createElement('p');
+      node.textContent = text;
+      return node;
+    }
+
+    for (const candidate of candidates) {
+      const container = candidate.querySelector('.specimen-samples');
+      container.append(...samples.map(paragraph));
+      for (const lines of couplets) {
+        const quote = document.createElement('blockquote');
+        quote.append(...lines.map(paragraph));
+        container.append(quote);
+      }
+    }
+
+    await document.fonts.ready;
+    await Promise.all(candidates.map(async (candidate) => {
+      const metadata = candidate.querySelector('[data-size]');
+      try {
+        const file = await fetch('/src/styles/fonts/' + candidate.dataset.fontFile);
+        if (!file.ok) throw new Error('Font request failed');
+        const bytes = new DataView(await file.arrayBuffer());
+        if (bytes.byteLength < 4 || bytes.getUint32(0) !== 0x774f4632) throw new Error('Expected WOFF2');
+        const kib = bytes.byteLength / 1024;
+        metadata.textContent = new Intl.NumberFormat('vi', { maximumFractionDigits: 1 }).format(kib) + ' KiB';
+      } catch {
+        metadata.textContent = 'Chưa đọc được tệp';
+      }
+    }));
+  </script>
+</body>
+</html>
