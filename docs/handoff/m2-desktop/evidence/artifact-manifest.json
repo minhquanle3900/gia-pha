@@ -9,28 +9,28 @@
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/baseline/build.txt",
-      "bytes": 2026,
-      "sha256": "6bc9ca965f3b974bce3fefbc49b778ea5f217b92e3d37bc788f088213c05c947"
+      "bytes": 1987,
+      "sha256": "9b39bc2e5d4e35c1a2b6970af5301532296ea40bf0a91979c2e091e1007f9a43"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/baseline/lint.txt",
-      "bytes": 58,
-      "sha256": "a62da1ed12276c5bceddb8ad5aa64cab92f7bf026418ae6b66fb7a398580cff5"
+      "bytes": 52,
+      "sha256": "8dcef344651fc3ba957542f1201d6f52c463c5dd574fa9f761f97065e42ad12e"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/baseline/pwa-assets.txt",
-      "bytes": 939,
-      "sha256": "9e59a238a484cf13d24b59224302ae44c8ef7fe493070b2dbdf85f05c7de035a"
+      "bytes": 904,
+      "sha256": "f6ec0e50c7d0083ddb388d51fc035fc92f58fc10944fc84475b890600e1a9348"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/baseline/regression.txt",
-      "bytes": 806,
-      "sha256": "742aabeeaf5612a838765f6960f80771777d7ed6d7223ee6808cfb1972a4df12"
+      "bytes": 785,
+      "sha256": "6e6b166f99ec27039a2dee282427a4b13a057c8233eee543ab52fb3a3ba325ee"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/baseline/results.json",
-      "bytes": 797,
-      "sha256": "202bb8695b4289eb3f7de2f4cf09e60874031e38b1ad2effd9b0b094c5702ecd"
+      "bytes": 765,
+      "sha256": "7a5cd1115b5a7ae60932c0ddfaafca255c0b006e98329058e1ec820f6e906663"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/contrast-tokens.json",
@@ -39,8 +39,8 @@
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/delivery-git.json",
-      "bytes": 2629,
-      "sha256": "8ccae7a00dddece3436ce2a9d904ff9111ae1a7a32fc5655efb494c86d2bb5be"
+      "bytes": 2548,
+      "sha256": "93b360ecb3e8423e8d2febf68acafb753f4b9d2684e21cfbe7bbfcff2bcf697e"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/duplicate-review-ui.txt",
@@ -119,8 +119,8 @@
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/exports/pdf-results.json",
-      "bytes": 1741,
-      "sha256": "cffc086967d999a13addad599a1c1ce2e7d40cf8a8422549ec6ca10101e3158f"
+      "bytes": 1719,
+      "sha256": "51f810026fd585ab56a20ad2834a0b6187da3e3ad68cdab337c3ed7af21f4ef2"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/exports/person-direct.pdf",
@@ -159,28 +159,28 @@
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/final/build.txt",
-      "bytes": 2026,
-      "sha256": "4b113f567b0c05c7e7796e7d12af26690c4e8a471cd920f06d5751d318416dc4"
+      "bytes": 1987,
+      "sha256": "e8b201ee41e762ce4becdbaa53896aa8304f3859fab332272a5f637cd4ae4927"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/final/lint.txt",
-      "bytes": 58,
-      "sha256": "a62da1ed12276c5bceddb8ad5aa64cab92f7bf026418ae6b66fb7a398580cff5"
+      "bytes": 52,
+      "sha256": "8dcef344651fc3ba957542f1201d6f52c463c5dd574fa9f761f97065e42ad12e"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/final/pwa-assets.txt",
-      "bytes": 334,
-      "sha256": "0d09a940acc9995c981a00ebb9a1f82ba5d103248a0a058c448af990911bf1bd"
+      "bytes": 323,
+      "sha256": "5975242c3057ab1b3da183e841c75ad75613f2d0fb394ee1747369eaba13903d"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/final/regression.txt",
-      "bytes": 806,
-      "sha256": "23e42aa85b3af30dd7fae58d2f95842681070ff5a2cdcd762b0fea7274d3fea2"
+      "bytes": 785,
+      "sha256": "542cf61873afd24d631292c5c5c299e5ad8cc6b56044d7e9c8aca2b18e60401f"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/final/results.json",
-      "bytes": 816,
-      "sha256": "2345e4550e39b8a7e6e89b7e05a7bffaf619392fe600c5235248de34ad86a7cf"
+      "bytes": 784,
+      "sha256": "1bc6854da39e591411482f557318aa118ff863ce0ba6b264553f271eab4a2db9"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/final-tree-layout.json",
@@ -194,8 +194,8 @@
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/integration-baseline.json",
-      "bytes": 2032,
-      "sha256": "f318414ac8decf03fc4db850aa882a33bcc2e524aa13d1566fb7a074258a065d"
+      "bytes": 1973,
+      "sha256": "71b6764852eaa1205cb606ee1957ec6012ed6a3659afa4ba6d715e1f22bebad1"
     },
     {
       "path": "docs/handoff/m2-desktop/evidence/invalid-date-ui.txt",
@@ -387,5 +387,6 @@
       "bytes": 83119,
       "sha256": "9b28f21fc48f32cdc63fcfb01dcccc957c4ee52cd2682ce391b36d1c6d71bb2a"
     }
-  ]
+  ],
+  "byteRepresentation": "Git blob bytes, including Git LF text normalization; verify the bytes from git show HEAD:path rather than a CRLF Windows checkout."
 }
