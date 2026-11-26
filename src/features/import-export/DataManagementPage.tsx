@@ -16,6 +16,7 @@ import {
   Upload,
 } from 'lucide-react';
 import { ConfirmDialog } from '../../components/ConfirmDialog';
+import { useNativeModal } from '../../hooks/useNativeModal';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { FamilyBranch, GenealogyDatabaseSnapshot } from '../../models/genealogy';
 import { exportGedcom551, GEDCOM_REPLACEMENT_WARNING, parseAndPreviewGedcom } from '../../services/gedcomService';
@@ -89,6 +90,7 @@ export const DataManagementPage: React.FC = () => {
   const [branchError, setBranchError] = useState<string | null>(null);
   const [deletingBranch, setDeletingBranch] = useState<FamilyBranch | null>(null);
   const [isDeletingBranch, setIsDeletingBranch] = useState(false);
+  const branchDeletionInProgress = useRef(false);
 
   const branchMemberCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -117,6 +119,8 @@ export const DataManagementPage: React.FC = () => {
     message: string;
   } | null>(null);
   const [resetConfirmOpen, setResetConfirmOpen] = useState(false);
+  const [isResettingDemo, setIsResettingDemo] = useState(false);
+  const resetInProgress = useRef(false);
   const [jsonImportMode, setJsonImportMode] = useState<'replace' | 'merge'>('replace');
   const [pendingImport, setPendingImport] = useState<{
     snapshot: GenealogyDatabaseSnapshot;
@@ -138,14 +142,13 @@ export const DataManagementPage: React.FC = () => {
   }) | null>(null);
   const [csvPreviewOpen, setCsvPreviewOpen] = useState(false);
   const [isProcessingCsv, setIsProcessingCsv] = useState(false);
-  const csvPreviewDialogRef = useRef<HTMLDialogElement>(null);
+  const csvPreviewDialogRef = useNativeModal(csvPreviewOpen);
 
-  useEffect(() => {
-    const dialog = csvPreviewDialogRef.current;
-    if (!csvPreviewOpen || !dialog) return;
-    dialog.showModal();
-    return () => dialog.close();
-  }, [csvPreviewOpen]);
+  const closeCsvPreview = () => {
+    if (importInProgress.current) return;
+    setCsvPreviewOpen(false);
+    setCsvResult(null);
+  };
 
   const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -233,7 +236,8 @@ export const DataManagementPage: React.FC = () => {
   };
 
   const handleConfirmDeleteBranch = async () => {
-    if (!deletingBranch || isDeletingBranch) return;
+    if (!deletingBranch || branchDeletionInProgress.current) return;
+    branchDeletionInProgress.current = true;
     setIsDeletingBranch(true);
     try {
       await deleteBranch(deletingBranch.id);
@@ -247,6 +251,7 @@ export const DataManagementPage: React.FC = () => {
         message: `Không thể xóa chi họ. ${error instanceof Error ? error.message : String(error)}`,
       });
     } finally {
+      branchDeletionInProgress.current = false;
       setDeletingBranch(null);
       setIsDeletingBranch(false);
     }
@@ -274,6 +279,7 @@ export const DataManagementPage: React.FC = () => {
         return;
       }
 
+      jsonInputRef.current?.focus({ preventScroll: true });
       setPendingImport({
         snapshot: parsed.snapshot,
         mode: jsonImportMode,
@@ -322,6 +328,7 @@ export const DataManagementPage: React.FC = () => {
         setImportNotice({ type: 'error', message: describeDiagnostics(validation.errors) });
         return;
       }
+      gedcomInputRef.current?.focus({ preventScroll: true });
       setPendingImport({
         snapshot: importedSnapshot,
         mode: 'replace',
@@ -406,6 +413,7 @@ export const DataManagementPage: React.FC = () => {
         errors: [...result.errors, ...validation.errors],
         warnings: [...result.warnings, ...validation.warnings],
       });
+      csvInputRef.current?.focus({ preventScroll: true });
       setCsvPreviewOpen(true);
     } catch (error) {
       setImportNotice({ type: 'error', message: `Lỗi đọc tệp CSV / Excel: ${importErrorMessage(error)}` });
@@ -423,12 +431,22 @@ export const DataManagementPage: React.FC = () => {
 
   // 5. Reset to Demo Dataset
   const handleResetDemoConfirmed = async () => {
-    await resetToDemo();
-    setResetConfirmOpen(false);
-    setImportNotice({
-      type: 'success',
-      message: 'Đã nạp lại bộ dữ liệu mẫu mẫu mực: Dòng họ Trần – Đông Ngạc.',
-    });
+    if (resetInProgress.current) return;
+    resetInProgress.current = true;
+    setIsResettingDemo(true);
+    try {
+      await resetToDemo();
+      setImportNotice({
+        type: 'success',
+        message: 'Đã nạp lại bộ dữ liệu mẫu mẫu mực: Dòng họ Trần – Đông Ngạc.',
+      });
+    } catch (error) {
+      setImportNotice({ type: 'error', message: `Không thể nạp lại dữ liệu mẫu. ${importErrorMessage(error)}` });
+    } finally {
+      resetInProgress.current = false;
+      setIsResettingDemo(false);
+      setResetConfirmOpen(false);
+    }
   };
 
   return (
@@ -985,11 +1003,14 @@ export const DataManagementPage: React.FC = () => {
         open={resetConfirmOpen}
         title="Xác nhận nạp lại dữ liệu mẫu"
         description="Thao tác này sẽ ghi đè cơ sở dữ liệu hiện tại bằng bộ dữ liệu mẫu mẫu mực của Dòng họ Trần – Đông Ngạc. Bạn có muốn tiếp tục?"
-        confirmLabel="Đồng ý nạp lại"
+        confirmLabel={isResettingDemo ? 'Đang nạp lại…' : 'Đồng ý nạp lại'}
+        busy={isResettingDemo}
         cancelLabel="Hủy"
         danger={true}
         onConfirm={handleResetDemoConfirmed}
-        onCancel={() => setResetConfirmOpen(false)}
+        onCancel={() => {
+          if (!resetInProgress.current) setResetConfirmOpen(false);
+        }}
       />
 
       {/* Delete Branch Confirm Dialog */}
@@ -1007,7 +1028,9 @@ export const DataManagementPage: React.FC = () => {
         danger={true}
         busy={isDeletingBranch}
         onConfirm={handleConfirmDeleteBranch}
-        onCancel={() => setDeletingBranch(null)}
+        onCancel={() => {
+          if (!branchDeletionInProgress.current) setDeletingBranch(null);
+        }}
       />
 
       {/* Import Backup / GEDCOM Confirm Dialog */}
@@ -1035,21 +1058,24 @@ export const DataManagementPage: React.FC = () => {
         cancelLabel="Hủy"
         danger={pendingImport?.mode !== 'merge'}
         onConfirm={handleConfirmPendingImport}
-        onCancel={() => setPendingImport(null)}
+        onCancel={() => {
+          if (!importInProgress.current) setPendingImport(null);
+        }}
       />
 
       {/* CSV Import Preview Modal */}
       {csvPreviewOpen && csvResult && (
         <dialog
           ref={csvPreviewDialogRef}
+          aria-modal="true"
           aria-labelledby="csv-preview-title"
           aria-busy={isApplyingImport}
           onCancel={(event) => {
             event.preventDefault();
-            if (!isApplyingImport) setCsvPreviewOpen(false);
+            closeCsvPreview();
           }}
           onClick={(event) => {
-            if (event.target === event.currentTarget && !isApplyingImport) setCsvPreviewOpen(false);
+            if (event.target === event.currentTarget) closeCsvPreview();
           }}
           className="m-auto w-[calc(100%-1rem)] max-w-3xl rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-0 text-[#1F1913] shadow-2xl backdrop:bg-black/60"
         >
@@ -1065,7 +1091,7 @@ export const DataManagementPage: React.FC = () => {
               <button
                 type="button"
                 disabled={isApplyingImport}
-                onClick={() => setCsvPreviewOpen(false)}
+                onClick={closeCsvPreview}
                 aria-label="Đóng xem trước CSV"
                 className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl text-[#655A4E] hover:bg-stone-50 focus-visible:outline-2"
               >
@@ -1158,7 +1184,7 @@ export const DataManagementPage: React.FC = () => {
                 <button
                   type="button"
                   disabled={isApplyingImport}
-                onClick={() => setCsvPreviewOpen(false)}
+                onClick={closeCsvPreview}
                   className={`${dataAction} ${dataSecondary}`}
                 >
                   Hủy
