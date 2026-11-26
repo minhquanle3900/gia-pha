@@ -438,7 +438,7 @@
 .exhibition-couplet[data-treatment="scroll"] .exhibition-couplet-panel::before,
 .exhibition-couplet[data-treatment="scroll"] .exhibition-couplet-panel::after {
   position: absolute;
-  inset-inline: -.16rem;
+  inset-inline: 0;
   height: .42rem;
   border-radius: 1rem;
   background: linear-gradient(#744d32, #38251b 65%, #805a39);
