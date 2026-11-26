@@ -42,6 +42,7 @@ export const ConfirmDialog: React.FC<ConfirmDialogProps> = ({
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
       aria-busy={busy}
+      closedby={busy ? 'none' : 'closerequest'}
       onKeyDown={(event) => {
         if (event.key === 'Escape') event.stopPropagation();
       }}

@@ -240,6 +240,7 @@ export const ClanJournalModal: React.FC<ClanJournalModalProps> = ({
         aria-modal="true"
         aria-labelledby="journal-entry-title"
         aria-busy={isSubmitting || isDeleting}
+        closedby={isSubmitting || isDeleting ? 'none' : 'closerequest'}
         onCancel={(event) => {
           event.preventDefault();
           requestClose();

@@ -412,6 +412,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
           aria-modal="true"
           aria-labelledby="gallery-view-title"
           aria-busy={isDeleting}
+          closedby={isDeleting ? 'none' : 'closerequest'}
           onCancel={(event) => {
             event.preventDefault();
             closeViewer();

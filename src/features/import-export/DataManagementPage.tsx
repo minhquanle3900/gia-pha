@@ -1070,6 +1070,7 @@ export const DataManagementPage: React.FC = () => {
           aria-modal="true"
           aria-labelledby="csv-preview-title"
           aria-busy={isApplyingImport}
+          closedby={isApplyingImport ? 'none' : 'closerequest'}
           onCancel={(event) => {
             event.preventDefault();
             closeCsvPreview();

@@ -10,8 +10,14 @@ export function useNativeModal(open: boolean, initialFocusRef?: RefObject<HTMLEl
     dialog.showModal();
     initialFocusRef?.current?.focus({ preventScroll: true });
 
-    const wrapTab = (event: KeyboardEvent) => {
-      if (event.key !== 'Tab' || !(event.target instanceof Element) || event.target.closest('dialog') !== dialog) return;
+    const handleKeyDown = (event: KeyboardEvent) => {
+      if (!(event.target instanceof Element) || event.target.closest('dialog') !== dialog) return;
+      if (event.key === 'Escape' && dialog.getAttribute('aria-busy') === 'true') {
+        event.preventDefault();
+        event.stopPropagation();
+        return;
+      }
+      if (event.key !== 'Tab') return;
       const controls = Array.from(dialog.querySelectorAll<HTMLElement>(
         'button, input, select, textarea, a[href], [tabindex]',
       )).filter((element) => element.tabIndex >= 0 && !element.matches(':disabled') &&
@@ -25,10 +31,10 @@ export function useNativeModal(open: boolean, initialFocusRef?: RefObject<HTMLEl
         (event.shiftKey ? last : first)?.focus();
       }
     };
-    dialog.addEventListener('keydown', wrapTab);
+    dialog.addEventListener('keydown', handleKeyDown);
 
     return () => {
-      dialog.removeEventListener('keydown', wrapTab);
+      dialog.removeEventListener('keydown', handleKeyDown);
       dialog.close();
       if (!(opener instanceof HTMLElement)) return;
       queueMicrotask(() => {

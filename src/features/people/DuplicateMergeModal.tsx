@@ -93,6 +93,7 @@ export const DuplicateMergeModal: React.FC<DuplicateMergeModalProps> = ({ open, 
       aria-labelledby={titleId}
       aria-describedby={descriptionId}
       aria-busy={isMerging}
+      closedby={isMerging ? 'none' : 'closerequest'}
       onCancel={(event) => {
         event.preventDefault();
         requestClose();
