@@ -26,6 +26,16 @@ import { formatLifespan, formatLunarAnniversary } from '../../utils/dateUtils';
 import { buildFamilyTreeLayout, generateCurvedLinkPath } from '../family-tree/treeLayout';
 import { PersonReportModal } from '../people/PersonReportModal';
 
+const bookViews = [
+  { id: 'book', label: 'Sách phả ký', icon: BookOpen },
+  { id: 'scroll', label: 'Phả đồ khổ lớn', icon: GitFork },
+  { id: 'table', label: 'Bảng chi', icon: FileText },
+  { id: 'individual', label: 'Trích lục cá nhân', icon: User },
+] as const;
+
+const bookControl = 'inline-flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32] disabled:opacity-60';
+const bookSecondary = 'border border-[#D5CABE] bg-white text-[#1B3B2B] hover:bg-stone-50';
+
 export const FamilyBookPage: React.FC = () => {
   const { people, branches, settings, stories, relationships, unions } = useGenealogy();
 
@@ -65,6 +75,18 @@ export const FamilyBookPage: React.FC = () => {
       .filter((p) => p.tabooName || p.courtesyName || p.commonName)
       .sort((a, b) => a.fullName.localeCompare(b.fullName, 'vi'));
   }, [people]);
+
+  const reportQuery = individualSearch.trim().toLocaleLowerCase('vi');
+  const reportPeople = activeTab === 'individual' ? people.filter((person) => {
+    if (!reportQuery) return true;
+    return [
+      person.fullName,
+      person.tabooName,
+      person.courtesyName,
+      person.commonName,
+      person.generation ? `đời ${person.generation}` : undefined,
+    ].some((value) => value?.toLocaleLowerCase('vi').includes(reportQuery));
+  }) : [];
 
   // Tree layout for A0/A1 scroll export
   const treeLayout = useMemo(() => {
@@ -169,233 +191,188 @@ export const FamilyBookPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 pb-16 animate-in fade-in">
-      {/* Top Controls Toolbar (Hidden during print) */}
-      <div className="print:hidden p-4 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-3">
-        <div className="flex flex-wrap items-center justify-between gap-3">
-          <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0">
-            <button
-              type="button"
-              onClick={() => setActiveTab('book')}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                activeTab === 'book'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'bg-stone-100 text-[#54483C] hover:bg-stone-200'
-              }`}
-            >
-              <BookOpen className="w-4 h-4" />
-              <span>Sách Phả Ký In Ấn</span>
-            </button>
+    <div className="min-w-0 space-y-4 pb-16 sm:space-y-6">
+      <section aria-labelledby="book-heading" className="space-y-4 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-3 shadow-xs sm:p-5 print:hidden">
+        <div className="min-w-0 px-1 pt-1">
+          <h1 id="book-heading" className="text-3xl font-bold leading-none text-[#1B3B2B] sm:text-4xl">
+            Sách phả ký
+          </h1>
+          <p className="mt-2 text-sm text-[#655A4E]">Chọn bản xem trước, khổ giấy và cách xuất bản in.</p>
+        </div>
 
+        <div role="group" aria-label="Kiểu bản xem trước" className="grid grid-cols-2 gap-1 rounded-xl border border-[#E7DFD4] bg-[#F1EBE1] p-1 sm:grid-cols-4">
+          {bookViews.map(({ id, label, icon: Icon }) => (
             <button
+              key={id}
               type="button"
-              onClick={() => setActiveTab('scroll')}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                activeTab === 'scroll'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'bg-stone-100 text-[#54483C] hover:bg-stone-200'
-              }`}
+              onClick={() => setActiveTab(id)}
+              aria-pressed={activeTab === id}
+              disabled={isExportingPdf}
+              className={`${bookControl} px-2 text-xs sm:text-sm ${activeTab === id
+                ? 'bg-[#1B3B2B] text-white shadow-xs'
+                : 'text-[#54483C] hover:bg-[#FFFDF9]'}`}
             >
-              <GitFork className="w-4 h-4" />
-              <span>Phả Đồ Khổ Lớn ({scrollFormat})</span>
+              <Icon aria-hidden="true" className="size-4 shrink-0" />
+              <span className="text-left leading-snug">{label}</span>
             </button>
+          ))}
+        </div>
 
-            <button
-              type="button"
-              onClick={() => setActiveTab('table')}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                activeTab === 'table'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'bg-stone-100 text-[#54483C] hover:bg-stone-200'
-              }`}
-            >
-              <FileText className="w-4 h-4" />
-              <span>Bảng Chi Truyền Thống</span>
-            </button>
-
-            <button
-              type="button"
-              onClick={() => setActiveTab('individual')}
-              className={`flex items-center gap-2 px-3.5 py-2 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                activeTab === 'individual'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'bg-stone-100 text-[#54483C] hover:bg-stone-200'
-              }`}
-            >
-              <User className="w-4 h-4" />
-              <span>Trích Lục Cá Nhân (PDF)</span>
-            </button>
-          </div>
-
-          <div className="flex flex-wrap items-center gap-2">
-            {activeTab === 'scroll' && (
-              <div className="flex items-center gap-1 text-xs">
-                <span className="text-stone-500">Khổ giấy:</span>
-                {(['A1', 'A0', 'A3'] as const).map((fmt) => (
-                  <button
-                    key={fmt}
-                    type="button"
-                    onClick={() => setScrollFormat(fmt)}
-                    className={`px-2 py-1 rounded-lg text-xs font-semibold ${
-                      scrollFormat === fmt
-                        ? 'bg-[#1B3B2B] text-white'
-                        : 'bg-stone-100 text-stone-600'
-                    }`}
-                  >
-                    {fmt}
-                  </button>
-                ))}
+        <div className="grid gap-3 border-t border-[#E7DFD4] pt-3 lg:grid-cols-[1fr_auto] lg:items-center">
+          {activeTab === 'scroll' ? (
+            <div role="group" aria-label="Khổ giấy phả đồ" className="flex min-w-0 flex-wrap items-center gap-1.5">
+              <span className="mr-1 text-sm font-medium text-[#655A4E]">Khổ giấy</span>
+              {(['A1', 'A0', 'A3'] as const).map((format) => (
                 <button
+                  key={format}
                   type="button"
-                  onClick={handleExportScrollSvg}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-[#D5CABE] text-[#54483C] hover:bg-stone-50 text-xs font-semibold ml-1"
+                  onClick={() => setScrollFormat(format)}
+                  aria-pressed={scrollFormat === format}
+                  disabled={isExportingPdf}
+                  className={`${bookControl} ${scrollFormat === format ? 'bg-[#1B3B2B] text-white' : bookSecondary}`}
                 >
-                  <Download className="w-3.5 h-3.5" />
-                  <span>Tải SVG</span>
+                  {format}
                 </button>
-              </div>
-            )}
+              ))}
+            </div>
+          ) : (
+            <p className="text-sm text-[#655A4E]">
+              Khổ giấy PDF <span className="font-semibold text-[#1F1913]">{printConfig.paperSize.toUpperCase()}</span>
+            </p>
+          )}
 
-            {activeTab !== 'scroll' && (
+          <div className="grid grid-cols-2 gap-2 sm:flex sm:flex-wrap">
+            {activeTab === 'scroll' ? (
+              <button type="button" onClick={handleExportScrollSvg} className={`${bookControl} ${bookSecondary}`}>
+                <Download aria-hidden="true" className="size-4 shrink-0" />
+                Tải SVG
+              </button>
+            ) : (
               <button
                 type="button"
                 onClick={() => setShowPrintOptions((prev) => !prev)}
-                className={`flex items-center gap-1.5 px-3 py-2 rounded-xl border text-xs font-semibold transition-colors ${
-                  showPrintOptions
-                    ? 'bg-[#FAF5EB] border-[#8C6D32] text-[#8C6D32]'
-                    : 'bg-white border-[#D5CABE] text-[#54483C] hover:bg-stone-50'
-                }`}
-                title="Tùy chỉnh khổ giấy và nội dung xuất PDF"
+                aria-expanded={showPrintOptions}
+                aria-controls="family-book-pdf-options"
+                disabled={isExportingPdf}
+                className={`${bookControl} ${bookSecondary}`}
               >
-                <Sliders className="w-3.5 h-3.5" />
-                <span className="hidden sm:inline">Tùy chỉnh PDF</span>
+                <Sliders aria-hidden="true" className="size-4 shrink-0" />
+                Tùy chỉnh PDF
               </button>
             )}
-
             <button
               type="button"
               onClick={handlePrint}
-              className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-white border border-[#D5CABE] hover:bg-stone-50 text-[#1B3B2B] text-xs font-semibold transition-colors"
-              title="Mở hộp thoại in ấn của trình duyệt"
+              disabled={isExportingPdf}
+              className={`${bookControl} ${bookSecondary}`}
             >
-              <Printer className="w-4 h-4" />
-              <span>In trang</span>
+              <Printer aria-hidden="true" className="size-4 shrink-0" />
+              In trang
             </button>
-
             <button
               type="button"
               disabled={isExportingPdf}
               onClick={handleExportPdf}
-              aria-label="In Ấn / Xuất PDF"
-              title="Tạo và tải xuống tài liệu PDF gia phả hoàn chỉnh để lưu trữ hoặc in ấn"
-              className="flex items-center gap-2 px-4 py-2 rounded-xl bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold shadow-xs transition-colors disabled:opacity-60"
+              className={`${bookControl} col-span-2 bg-[#1B3B2B] text-white hover:bg-[#28503C]`}
             >
               {isExportingPdf ? (
                 <>
-                  <Loader2 className="w-4 h-4 animate-spin" />
-                  <span className="tabular-nums">Đang xuất PDF ({exportProgress}%)</span>
+                  <Loader2 aria-hidden="true" className="size-4 shrink-0 animate-spin" />
+                  <span className="tabular-nums" role="status">Đang xuất PDF ({exportProgress}%)</span>
                 </>
               ) : (
                 <>
-                  <FileDown className="w-4 h-4" />
-                  <span>
-                    {activeTab === 'scroll' ? `Xuất PDF (${scrollFormat})` : 'In / Xuất PDF'}
-                  </span>
+                  <FileDown aria-hidden="true" className="size-4 shrink-0" />
+                  <span>{activeTab === 'scroll' ? `Xuất PDF (${scrollFormat})` : 'Xuất PDF'}</span>
                 </>
               )}
             </button>
           </div>
         </div>
 
-        {/* Print & PDF Options Panel */}
-        {showPrintOptions && activeTab !== 'scroll' && (
-          <div className="pt-3 border-t border-[#E7DFD4] flex flex-wrap items-center justify-between gap-4 text-xs">
-            <div className="flex flex-wrap items-center gap-4">
-              <div className="flex items-center gap-1.5">
-                <span className="text-stone-500 font-semibold">Khổ giấy:</span>
-                {(['a4', 'letter'] as const).map((sz) => (
-                  <button
-                    key={sz}
-                    type="button"
-                    onClick={() => setPrintConfig((prev) => ({ ...prev, paperSize: sz }))}
-                    className={`px-2.5 py-1 rounded-lg font-semibold uppercase border transition-colors ${
-                      printConfig.paperSize === sz
-                        ? 'bg-[#1B3B2B] text-white border-[#1B3B2B]'
-                        : 'bg-white text-stone-600 border-[#D5CABE]'
-                    }`}
-                  >
-                    {sz}
-                  </button>
-                ))}
-              </div>
-
-              <div className="flex flex-wrap items-center gap-3 text-[11px] text-[#4A3F35]">
-                {(
-                  [
-                    ['includeCover', 'Trang bìa'],
-                    ['includePreface', 'Lời tựa'],
-                    ['includeBranches', 'Chi phái'],
-                    ['includeGenerations', 'Phả lục thế hệ'],
-                    ['includeRelationships', 'Cha mẹ & Hôn phối'],
-                    ['includeTabooIndex', 'Mục lục tên húy'],
-                  ] as const
-                ).map(([key, label]) => (
-                  <label key={key} className="flex items-center gap-1.5 cursor-pointer select-none">
+        {activeTab !== 'scroll' && (
+          <div
+            id="family-book-pdf-options"
+            hidden={!showPrintOptions}
+            className="space-y-3 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] p-3 sm:p-4"
+          >
+            <div role="group" aria-label="Khổ giấy PDF" className="flex flex-wrap items-center gap-2">
+              <span className="text-sm font-semibold text-[#655A4E]">Khổ giấy</span>
+              {(['a4', 'letter'] as const).map((size) => (
+                <button
+                  key={size}
+                  type="button"
+                  onClick={() => setPrintConfig((prev) => ({ ...prev, paperSize: size }))}
+                  aria-pressed={printConfig.paperSize === size}
+                  disabled={isExportingPdf}
+                  className={`${bookControl} uppercase ${printConfig.paperSize === size ? 'bg-[#1B3B2B] text-white' : bookSecondary}`}
+                >
+                  {size}
+                </button>
+              ))}
+            </div>
+            <fieldset disabled={isExportingPdf}>
+              <legend className="text-sm font-semibold text-[#1F1913]">Nội dung xuất bản in</legend>
+              <div className="mt-1 grid grid-cols-1 gap-x-3 sm:grid-cols-3">
+                {([
+                  ['includeCover', 'Trang bìa'],
+                  ['includePreface', 'Lời tựa'],
+                  ['includeBranches', 'Chi phái'],
+                  ['includeGenerations', 'Phả lục thế hệ'],
+                  ['includeRelationships', 'Cha mẹ và hôn phối'],
+                  ['includeTabooIndex', 'Mục lục tên húy'],
+                ] as const).map(([key, label]) => (
+                  <label key={key} className="flex min-h-11 cursor-pointer items-center gap-2 text-sm text-[#655A4E]">
                     <input
                       type="checkbox"
                       checked={printConfig[key]}
-                      onChange={(e) =>
-                        setPrintConfig((prev) => ({ ...prev, [key]: e.target.checked }))
-                      }
-                      className="rounded text-[#1B3B2B]"
+                      onChange={(e) => setPrintConfig((prev) => ({ ...prev, [key]: e.target.checked }))}
+                      className="size-4 shrink-0 accent-[#1B3B2B]"
                     />
-                    <span>{label}</span>
+                    {label}
                   </label>
                 ))}
               </div>
-            </div>
-
+            </fieldset>
             <button
               type="button"
               onClick={handleExportPrintableHtml}
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#FAF5EB] hover:bg-[#F0E6D2] text-[#8C6D32] font-semibold border border-[#E8DDCD] transition-colors"
+              disabled={isExportingPdf}
+              className={`${bookControl} ${bookSecondary} w-full sm:w-auto`}
             >
-              <Download className="w-3.5 h-3.5" />
-              <span>Tải HTML bản in</span>
+              <Download aria-hidden="true" className="size-4 shrink-0" />
+              Tải HTML bản in
             </button>
           </div>
         )}
 
-        {/* Export feedback message */}
         {exportStatus && (
-          <div
-            className={`px-3.5 py-2 rounded-xl border text-xs font-medium flex items-center justify-between ${
-              exportStatus.type === 'success'
-                ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
-                : 'bg-amber-50 border-amber-200 text-amber-900'
-            }`}
-          >
-            <span>{exportStatus.text}</span>
+          <div className={`flex min-w-0 items-center justify-between gap-2 rounded-xl border px-3 text-sm ${exportStatus.type === 'success'
+            ? 'border-emerald-200 bg-emerald-50 text-emerald-900'
+            : 'border-amber-200 bg-amber-50 text-amber-900'}`}>
+            <p role={exportStatus.type === 'error' ? 'alert' : 'status'} className="py-2">
+              {exportStatus.text}
+            </p>
             <button
               type="button"
               onClick={() => setExportStatus(null)}
-              className="p-0.5 rounded hover:bg-black/5"
-              aria-label="Đóng thông báo"
+              className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl focus-visible:outline-2"
+              aria-label="Đóng thông báo xuất"
             >
-              <X className="w-3.5 h-3.5" />
+              <X aria-hidden="true" className="size-4" />
             </button>
           </div>
         )}
-      </div>
+      </section>
 
       {/* ========================================================================= */}
       {/* 1. SÁCH PHẢ KÝ IN ẤN (FAMILY BOOK PREVIEW & PRINT) */}
       {/* ========================================================================= */}
       {activeTab === 'book' && (
-        <div className="max-w-4xl mx-auto space-y-12 bg-white p-6 sm:p-12 rounded-3xl border border-[#E7DFD4] shadow-sm print:p-0 print:border-none print:shadow-none">
+        <div className="mx-auto min-w-0 max-w-4xl space-y-8 rounded-3xl border border-[#E7DFD4] bg-white p-3 shadow-sm sm:space-y-12 sm:p-8 lg:p-12 print:space-y-12 print:border-none print:p-0 print:shadow-none">
           {/* Cover Page */}
-          <section className="text-center py-16 sm:py-24 border-8 border-double border-[#1B3B2B] rounded-3xl p-8 bg-[#FAF7F2] relative">
-            <div className="absolute top-4 left-4 text-[#C19B4C] text-xs font-serif font-bold">
+          <section className="relative rounded-2xl border-4 border-double border-[#1B3B2B] bg-[#FAF7F2] px-4 pb-10 pt-14 text-center sm:rounded-3xl sm:border-8 sm:px-8 sm:py-24 print:rounded-3xl print:border-8 print:px-8 print:py-24">
+            <div className="absolute left-0 right-0 top-4 px-3 text-center font-serif text-xs font-bold text-[#8C6D32] sm:right-auto sm:pl-4 sm:text-left">
               ✦ QUỐC ÂM PHẢ KÝ ✦
             </div>
             <div className="w-16 h-16 rounded-2xl bg-[#1B3B2B] text-[#DBC599] flex items-center justify-center font-serif text-3xl font-bold mx-auto mb-6 shadow-sm">
@@ -405,9 +382,9 @@ export const FamilyBookPage: React.FC = () => {
             <p className="text-xs uppercase tracking-[0.3em] font-semibold text-[#8C6D32] mb-3">
               Gia Phả Dòng Tộc Việt Nam
             </p>
-            <h1 className="text-3xl sm:text-5xl font-serif font-bold text-[#1B3B2B] tracking-tight mb-4">
+            <h2 className="mb-4 break-words font-serif text-3xl font-bold leading-tight tracking-tight text-[#1B3B2B] sm:text-5xl">
               {settings.clanName}
-            </h1>
+            </h2>
             <p className="text-base sm:text-lg font-serif italic text-[#54483C] max-w-xl mx-auto mb-8">
               "{settings.clanMotto}"
             </p>
@@ -552,7 +529,7 @@ export const FamilyBookPage: React.FC = () => {
                           <button
                             type="button"
                             onClick={() => setSelectedReportPersonId(p.id)}
-                            className="inline-flex items-center gap-1 px-2 py-1 rounded-lg bg-[#FAF5EB] text-[#8C6D32] hover:bg-[#F0E6D2] text-[10px] font-semibold transition-colors"
+                            className="inline-flex min-h-11 items-center gap-1.5 rounded-lg bg-[#FAF8F5] px-2.5 text-xs font-semibold text-[#8C6D32] transition-colors hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32]"
                             title="Xuất bản in & PDF riêng cho thành viên này"
                           >
                             <Printer className="w-3 h-3" />
@@ -576,7 +553,7 @@ export const FamilyBookPage: React.FC = () => {
               Theo phong tục Việt Nam, con cháu khi tế tự xướng danh theo Tên Húy để tỏ lòng cung kính.
             </p>
 
-            <div className="overflow-x-auto rounded-xl border border-[#E7DFD4]">
+            <div className="max-w-full overflow-x-auto rounded-xl border border-[#E7DFD4] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32]" role="region" aria-label="Mục lục tên húy và tên tự" tabIndex={0}>
               <table className="w-full text-left text-xs">
                 <thead className="bg-[#FAF7F2] text-stone-600 font-semibold border-b border-[#E7DFD4]">
                   <tr>
@@ -613,23 +590,15 @@ export const FamilyBookPage: React.FC = () => {
       {/* ========================================================================= */}
       {activeTab === 'scroll' && (
         <div className="space-y-4">
-          <div className="p-4 rounded-2xl bg-amber-50 border border-amber-200 text-xs text-amber-900 flex items-center justify-between">
-            <div>
-              <p className="font-semibold">Bản đồ phả hệ khổ lớn định dạng vector ({scrollFormat})</p>
-              <p className="text-[11px] text-amber-800">
-                Tệp vector sắc nét không bị vỡ hạt, thích hợp đem in bạt Hiflex hoặc lụa treo nhà thờ tổ.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleExportScrollSvg}
-              className="px-3.5 py-1.5 rounded-xl bg-[#1B3B2B] text-white font-semibold text-xs shrink-0"
-            >
-              Tải tệp SVG
-            </button>
-          </div>
-
-          <div className="overflow-auto max-h-[75vh] p-6 bg-[#FAF7F2] rounded-3xl border border-[#D5CABE] shadow-inner flex items-center justify-center">
+          <p className="rounded-2xl border border-amber-200 bg-amber-50 p-3 text-sm text-amber-900 print:hidden">
+            Cuộn để xem phả đồ. Tải SVG để in khổ lớn ở định dạng vector.
+          </p>
+          <div
+            role="region"
+            aria-label="Bản xem trước phả đồ có thể cuộn"
+            tabIndex={0}
+            className="max-h-[75vh] min-w-0 max-w-full overflow-auto rounded-2xl border border-[#D5CABE] bg-[#FAF7F2] p-3 shadow-inner focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32] sm:p-6 print:max-h-none print:overflow-visible print:border-none print:p-0"
+          >
             <svg
               id="family-scroll-svg"
               xmlns="http://www.w3.org/2000/svg"
@@ -638,7 +607,7 @@ export const FamilyBookPage: React.FC = () => {
               } ${treeLayout.bounds.height + 200}`}
               width={treeLayout.bounds.width + 100}
               height={treeLayout.bounds.height + 200}
-              className="bg-[#FFFDF9] shadow-md border-4 border-[#1B3B2B] rounded-2xl"
+              className="block max-w-none rounded-2xl border-4 border-[#1B3B2B] bg-[#FFFDF9] shadow-md print:max-w-full"
             >
               {/* Header Title on Scroll */}
               <text
@@ -742,7 +711,7 @@ export const FamilyBookPage: React.FC = () => {
       {/* 3. BẢNG CHI TRUYỀN THỐNG (TRADITIONAL ANCESTOR TABLE) */}
       {/* ========================================================================= */}
       {activeTab === 'table' && (
-        <div className="bg-white p-6 sm:p-10 rounded-3xl border border-[#E7DFD4] shadow-xs space-y-6">
+        <div className="min-w-0 space-y-5 rounded-3xl border border-[#E7DFD4] bg-white p-4 shadow-xs sm:p-7 lg:p-10 print:p-10">
           <div className="text-center space-y-1">
             <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1B3B2B]">
               BẢNG PHÂN ĐỊNH CHI PHÁI & THẾ THỨ CỔ TRUYỀN
@@ -785,7 +754,7 @@ export const FamilyBookPage: React.FC = () => {
                               : 'bg-rose-50 text-rose-800'
                           }`}
                         >
-                          {p.gender === 'male' ? 'Nam' : 'Nữ'}
+                          {p.gender === 'male' ? 'Nam' : p.gender === 'female' ? 'Nữ' : 'Chưa rõ'}
                         </span>
                       </div>
                       <p className="text-[11px] text-stone-500">
@@ -807,7 +776,7 @@ export const FamilyBookPage: React.FC = () => {
       {/* 4. TRÍCH LỤC HỒ SƠ CÁ NHÂN (INDIVIDUAL PDF DOSSIER SELECTOR) */}
       {/* ========================================================================= */}
       {activeTab === 'individual' && (
-        <div className="bg-white p-6 sm:p-10 rounded-3xl border border-[#E7DFD4] shadow-xs space-y-6">
+        <div className="min-w-0 space-y-5 rounded-3xl border border-[#E7DFD4] bg-white p-4 shadow-xs sm:p-7 lg:p-10 print:p-10">
           <div className="text-center space-y-1">
             <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1B3B2B]">
               TRÍCH LỤC TIỂU SỬ & HỒ SƠ PHẢ KÝ CÁ NHÂN
@@ -824,26 +793,20 @@ export const FamilyBookPage: React.FC = () => {
               type="text"
               value={individualSearch}
               onChange={(e) => setIndividualSearch(e.target.value)}
-              placeholder="Tìm kiếm thành viên theo họ tên, tên húy, thế hệ..."
-              className="w-full px-4 py-2.5 rounded-2xl bg-[#FAF7F2] border border-[#D5CABE] text-xs outline-none focus:border-[#1B3B2B]"
+              aria-label="Tìm thành viên để trích lục"
+              placeholder="Họ tên, tên húy hoặc thế hệ"
+              className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF7F2] px-3 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32]"
             />
           </div>
 
           {/* Members Grid for Quick PDF Report */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 pt-2">
-            {people
-              .filter((p) => {
-                if (!individualSearch.trim()) return true;
-                const q = individualSearch.toLowerCase();
-                return (
-                  p.fullName.toLowerCase().includes(q) ||
-                  p.tabooName?.toLowerCase().includes(q) ||
-                  p.courtesyName?.toLowerCase().includes(q) ||
-                  p.commonName?.toLowerCase().includes(q) ||
-                  (p.generation && `đời ${p.generation}`.includes(q))
-                );
-              })
-              .map((p) => (
+          <div className="grid min-w-0 grid-cols-1 gap-3.5 sm:grid-cols-2 lg:grid-cols-3">
+            {reportPeople.length === 0 && (
+              <p className="text-sm text-[#655A4E] sm:col-span-2 lg:col-span-3" role="status">
+                {reportQuery ? 'Không tìm thấy thành viên phù hợp.' : 'Chưa có thành viên để trích lục.'}
+              </p>
+            )}
+            {reportPeople.map((p) => (
                 <div
                   key={p.id}
                   className="p-3.5 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] hover:border-[#1B3B2B]/40 hover:shadow-xs transition-all flex items-start gap-3"
@@ -876,7 +839,7 @@ export const FamilyBookPage: React.FC = () => {
                     <button
                       type="button"
                       onClick={() => setSelectedReportPersonId(p.id)}
-                      className="mt-2.5 w-full flex items-center justify-center gap-1.5 py-1.5 px-3 rounded-xl bg-[#FAF5EB] hover:bg-[#1B3B2B] text-[#8C6D32] hover:text-white font-semibold text-[11px] transition-colors border border-[#E8DDCD]"
+                      className="mt-2.5 flex min-h-11 w-full items-center justify-center gap-1.5 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 text-xs font-semibold text-[#1B3B2B] transition-colors hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32]"
                     >
                       <Printer className="w-3.5 h-3.5" />
                       <span>Xuất Bản In PDF</span>
