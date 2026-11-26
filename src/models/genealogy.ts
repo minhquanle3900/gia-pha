@@ -131,6 +131,9 @@ export interface Media {
   updatedAt: string;
 }
 
+// The form keeps this in memory until the person and image can be saved together.
+export type PortraitDraft = Pick<Media, 'dataUrl' | 'mimeType'>;
+
 export interface FamilyStory {
   id: string;
   title: string;

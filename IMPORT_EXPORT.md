@@ -6,7 +6,7 @@ Tài liệu này hướng dẫn cách sao lưu, xuất khẩu và chuyển đổ
 
 ## 1. Định dạng Bản sao lưu Toàn vẹn JSON (.json)
 
-Tệp sao lưu `.json` của ứng dụng là một **snapshot tự túc 100% (Self-contained)**. Toàn bộ hình ảnh chân dung và tư liệu kỷ vật được nhúng trực tiếp dưới dạng chuỗi **Base64 Data URL** (`data:image/jpeg;base64,...`).
+Tệp sao lưu `.json` giữ nguyên các bản ghi. Ảnh và kỷ vật tải lên trong ứng dụng đã được lưu dưới dạng data URL, nên đi kèm bản sao lưu. Với dữ liệu v1 có URL bên ngoài, tệp giữ nguyên URL và preview cảnh báo sự phụ thuộc này. Xuất JSON không tải tài nguyên từ các URL bên ngoài.
 
 ### Cấu trúc tệp JSON:
 ```json
@@ -39,8 +39,8 @@ Tệp sao lưu `.json` của ứng dụng là một **snapshot tự túc 100% (S
    - Dùng khi chuyển đổi thiết bị hoặc phục hồi từ bản sao lưu trước đó.
    - Toàn bộ cơ sở dữ liệu hiện tại trong IndexedDB sẽ được thay thế bằng dữ liệu trong tệp.
 2. **Hợp nhất thông minh (Smart Merge)**:
-   - Tự động nhận diện thành viên trùng lặp theo mã định danh hoặc cặp `(Họ tên, Năm sinh)`.
-   - Bổ sung các thành viên và mối quan hệ mới mà không làm mất thông tin đã có.
+   - ID và nội dung giống hệt được giữ một lần. ID trùng nhưng nội dung khác chặn nhập. Trùng tên hoặc năm sinh chỉ là gợi ý để xem xét.
+   - Gộp bổ sung bản ghi hợp lệ và giữ thiết lập của thiết bị hiện tại.
 
 ---
 

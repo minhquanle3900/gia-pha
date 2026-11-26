@@ -31,6 +31,7 @@ import {
   LifeEvent,
   Media,
   Person,
+  PortraitDraft,
   Relationship,
   Union,
 } from '../models/genealogy';
@@ -65,7 +66,7 @@ export interface GenealogyContextType {
   refresh: () => Promise<void>;
 
   // CRUD
-  savePerson: (person: Person) => Promise<void>;
+  savePerson: (person: Person, portrait?: PortraitDraft | null) => Promise<Person>;
   deletePerson: (personId: string) => Promise<void>;
   mergePeople: (targetId: string, sourceId: string) => Promise<void>;
   saveRelationship: (rel: Relationship) => Promise<void>;
@@ -150,7 +151,17 @@ export const GenealogyProvider: React.FC<{ children: React.ReactNode }> = ({ chi
     };
   }, []);
 
-  const people = useMemo(() => snapshot?.people ?? [], [snapshot]);
+  const people = useMemo(() => {
+    if (!snapshot) return [];
+    const mediaById = new Map(snapshot.media.map((item) => [item.id, item]));
+    return snapshot.people.map((person) => {
+      if (person.portraitUrl || !person.portraitMediaId) return person;
+      const image = mediaById.get(person.portraitMediaId);
+      return image && /^data:image\//i.test(image.dataUrl)
+        ? { ...person, portraitUrl: image.dataUrl }
+        : person;
+    });
+  }, [snapshot]);
   const unions = useMemo(() => snapshot?.unions ?? [], [snapshot]);
   const relationships = useMemo(() => snapshot?.relationships ?? [], [snapshot]);
   const branches = useMemo(() => snapshot?.branches ?? [], [snapshot]);
@@ -249,9 +260,10 @@ export const GenealogyProvider: React.FC<{ children: React.ReactNode }> = ({ chi
   );
 
   // Database action mutations
-  const handleSavePerson = async (person: Person) => {
-    await savePersonRecord(person);
+  const handleSavePerson = async (person: Person, portrait?: PortraitDraft | null) => {
+    const saved = await savePersonRecord(person, portrait);
     await reloadData();
+    return saved;
   };
 
   const handleDeletePerson = async (personId: string) => {
