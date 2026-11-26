@@ -31,6 +31,7 @@ import { NavigationTab } from '../models/genealogy';
 import { GlobalSearch } from './GlobalSearch';
 import { PrivacyPinModal } from './PrivacyPinModal';
 import { PWAWidgets } from './PWAWidgets';
+import { useModalAccessibility } from '../hooks/useModalAccessibility';
 
 interface AppShellProps {
   activeTab: NavigationTab;
@@ -91,6 +92,23 @@ export const AppShell: React.FC<AppShellProps> = ({
   const [pinModalMode, setPinModalMode] = useState<'unlock' | 'setup' | 'change'>('unlock');
 
   const toolsDropdownRef = useRef<HTMLDivElement | null>(null);
+  const mobileDialogRef = useRef<HTMLDivElement>(null);
+  const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const { requestClose: requestMobileMenuClose } = useModalAccessibility({
+    open: mobileMenuOpen,
+    dialogRef: mobileDialogRef,
+    returnFocusRef: mobileMenuButtonRef,
+    onRequestClose: () => setMobileMenuOpen(false),
+  });
+
+  useEffect(() => {
+    const desktop = window.matchMedia('(min-width: 1024px)');
+    const closeHiddenDrawer = () => {
+      if (desktop.matches) setMobileMenuOpen(false);
+    };
+    desktop.addEventListener('change', closeHiddenDrawer);
+    return () => desktop.removeEventListener('change', closeHiddenDrawer);
+  }, []);
 
   // Close desktop dropdown on outside click
   useEffect(() => {
@@ -245,7 +263,7 @@ export const AppShell: React.FC<AppShellProps> = ({
           </nav>
 
           {/* Zone 3: Actions & Search (High-intent controls) */}
-          <div className="app-header-actions flex min-w-0 items-center justify-end gap-1 sm:gap-2">
+          <div className="app-header-actions relative flex min-w-0 items-center justify-end gap-1 sm:gap-2">
             {/* Global Search */}
             <GlobalSearch
               onSelectPerson={onSelectPerson}
@@ -276,6 +294,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             <button
               type="button"
               onClick={handleShieldToggle}
+              aria-label={isShieldActive ? 'Mở khóa riêng tư bằng mã PIN' : 'Khóa thông tin riêng tư'}
               className={`flex items-center gap-1.5 px-2.5 py-2 rounded-xl border text-xs font-semibold shadow-xs transition-colors shrink-0 ${
                 isShieldActive
                   ? 'bg-amber-50/80 border-amber-300 text-amber-900 hover:bg-amber-100'
@@ -317,6 +336,7 @@ export const AppShell: React.FC<AppShellProps> = ({
             <button
               type="button"
               onClick={onQuickAddPerson}
+              aria-label="Thêm thành viên mới"
               className="flex items-center gap-1.5 px-3 py-2 sm:px-4 sm:py-2 rounded-xl bg-[#1B3B2B] hover:bg-[#254F3A] text-white text-xs font-semibold shadow-xs transition-colors shrink-0"
               title="Thêm thành viên mới vào gia phả"
             >
@@ -371,6 +391,9 @@ export const AppShell: React.FC<AppShellProps> = ({
           {/* More Menu toggle */}
           <button
             type="button"
+            ref={mobileMenuButtonRef}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-tools-dialog"
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className={`flex flex-col items-center justify-center py-1.5 px-1 rounded-xl transition-all ${
               mobileMenuOpen || ['stats', 'journal', 'gallery', 'book', 'map', 'data'].includes(activeTab)
@@ -387,11 +410,17 @@ export const AppShell: React.FC<AppShellProps> = ({
       {/* Mobile Drawer / Popup for remaining tools */}
       {mobileMenuOpen && (
         <div
-          className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex flex-col justify-end p-3 animate-in fade-in"
-          onClick={() => setMobileMenuOpen(false)}
+          className="lg:hidden fixed inset-0 z-50 bg-black/50 backdrop-blur-xs flex flex-col justify-end sm:p-3 animate-in fade-in"
+          onClick={() => requestMobileMenuClose('backdrop')}
         >
           <div
-            className="w-full bg-[#FFFDF9] rounded-3xl border border-[#E7DFD4] p-5 space-y-4 shadow-2xl"
+            ref={mobileDialogRef}
+            id="mobile-tools-dialog"
+            role="dialog"
+            aria-modal="true"
+            aria-label="Tiện ích gia phả mở rộng"
+            tabIndex={-1}
+            className="mobile-safe-dialog app-mobile-tools w-full max-h-[100dvh] sm:max-h-[calc(100dvh-1.5rem)] overflow-y-auto overscroll-contain bg-[#FFFDF9] rounded-t-3xl sm:rounded-3xl border border-[#E7DFD4] p-5 space-y-4 shadow-2xl"
             onClick={(e) => e.stopPropagation()}
           >
             <div className="flex items-center justify-between border-b border-[#E7DFD4] pb-2.5">
@@ -400,7 +429,8 @@ export const AppShell: React.FC<AppShellProps> = ({
               </h3>
               <button
                 type="button"
-                onClick={() => setMobileMenuOpen(false)}
+                onClick={() => requestMobileMenuClose('button')}
+                aria-label="Đóng tiện ích mở rộng"
                 className="p-1 rounded-lg text-stone-400 hover:text-stone-700"
               >
                 <X className="w-5 h-5" />
