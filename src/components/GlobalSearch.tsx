@@ -1,4 +1,4 @@
-import React, { useEffect, useMemo, useRef, useState } from 'react';
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import {
   Calendar,
   Compass,
@@ -48,6 +48,7 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
   const listRef = useRef<HTMLDivElement | null>(null);
   const mobileDialogRef = useRef<HTMLDivElement>(null);
   const mobileTriggerRef = useRef<HTMLButtonElement>(null);
+  const mobileSearchId = useId();
   const { requestClose } = useModalAccessibility({
     open: mobileModalOpen,
     dialogRef: mobileDialogRef,
@@ -480,12 +481,13 @@ export const GlobalSearch: React.FC<GlobalSearchProps> = ({
       {mobileModalOpen && (
         <div className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex flex-col animate-in fade-in" onClick={() => requestClose('backdrop')}>
           <div ref={mobileDialogRef} role="dialog" aria-modal="true" aria-label="Tìm kiếm thành viên" tabIndex={-1} onClick={(event) => event.stopPropagation()} className="mobile-safe-dialog bg-[#FFFDF9] dark:bg-[#17231B] border border-[#E7DFD4] dark:border-[#2C3E33] flex flex-col h-[100dvh] max-h-[100dvh] shadow-2xl overflow-hidden pb-[env(safe-area-inset-bottom)]">
+            <label htmlFor={mobileSearchId} className="shrink-0 px-3 pt-[max(0.75rem,env(safe-area-inset-top))] text-sm font-semibold text-[#1B3B2B]">Tìm kiếm thành viên</label>
             {/* Mobile Input Bar */}
-            <div className="shrink-0 p-3 pt-[max(0.75rem,env(safe-area-inset-top))] border-b border-[#E7DFD4] dark:border-[#2C3E33] flex items-center gap-2">
+            <div className="shrink-0 p-3 border-b border-[#E7DFD4] dark:border-[#2C3E33] flex items-center gap-2">
               <Search className="w-4 h-4 text-stone-400 dark:text-stone-500 shrink-0" />
               <input
                 ref={mobileInputRef}
-                aria-label="Tên, tên tự, năm sinh hoặc đời thứ"
+                id={mobileSearchId}
                 type="text"
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}

@@ -92,14 +92,33 @@ export const AppShell: React.FC<AppShellProps> = ({
   const [pinModalMode, setPinModalMode] = useState<'unlock' | 'setup' | 'change'>('unlock');
 
   const toolsDropdownRef = useRef<HTMLDivElement | null>(null);
+  const desktopToolsButtonRef = useRef<HTMLButtonElement>(null);
   const mobileDialogRef = useRef<HTMLDivElement>(null);
   const mobileMenuButtonRef = useRef<HTMLButtonElement>(null);
+  const pendingTool = useRef<{ action: () => void; trigger: HTMLButtonElement | null } | null>(null);
   const { requestClose: requestMobileMenuClose } = useModalAccessibility({
     open: mobileMenuOpen,
     dialogRef: mobileDialogRef,
     returnFocusRef: mobileMenuButtonRef,
     onRequestClose: () => setMobileMenuOpen(false),
   });
+
+  const launchTool = (action: () => void, menu: 'mobile' | 'desktop') => {
+    pendingTool.current = {
+      action,
+      trigger: menu === 'mobile' ? mobileMenuButtonRef.current : desktopToolsButtonRef.current,
+    };
+    setMobileMenuOpen(false);
+    setDesktopToolsOpen(false);
+  };
+
+  useEffect(() => {
+    if (mobileMenuOpen || desktopToolsOpen || !pendingTool.current) return;
+    const { action, trigger } = pendingTool.current;
+    pendingTool.current = null;
+    trigger?.focus({ preventScroll: true });
+    action();
+  }, [mobileMenuOpen, desktopToolsOpen]);
 
   useEffect(() => {
     const desktop = window.matchMedia('(min-width: 1024px)');
@@ -181,9 +200,17 @@ export const AppShell: React.FC<AppShellProps> = ({
             })}
 
             {/* Extended Tools Dropdown */}
-            <div ref={toolsDropdownRef} className="relative">
+            <div ref={toolsDropdownRef} className="relative" onKeyDown={(event) => {
+              if (event.key !== 'Escape' || !desktopToolsOpen) return;
+              event.stopPropagation();
+              setDesktopToolsOpen(false);
+              desktopToolsButtonRef.current?.focus();
+            }}>
               <button
                 type="button"
+                ref={desktopToolsButtonRef}
+                aria-expanded={desktopToolsOpen}
+                aria-controls="desktop-tools-panel"
                 onClick={() => setDesktopToolsOpen(!desktopToolsOpen)}
                 className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap shrink-0 transition-all ${
                   isExtendedTabActive
@@ -197,7 +224,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               </button>
 
               {desktopToolsOpen && (
-                <div className="absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] max-h-[70dvh] overflow-y-auto bg-[#FFFDF9] dark:bg-[#17231B] rounded-2xl border border-[#E7DFD4] dark:border-[#2C3E33] shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
+                <div id="desktop-tools-panel" className="absolute right-0 top-full mt-2 w-64 max-w-[calc(100vw-2rem)] max-h-[70dvh] overflow-y-auto bg-[#FFFDF9] dark:bg-[#17231B] rounded-2xl border border-[#E7DFD4] dark:border-[#2C3E33] shadow-xl p-2 z-50 animate-in fade-in zoom-in-95 duration-100">
                   <div className="text-[10px] uppercase font-bold text-stone-400 px-2.5 py-1 tracking-wider">
                     Phân Tích & Tư Liệu
                   </div>
@@ -233,10 +260,7 @@ export const AppShell: React.FC<AppShellProps> = ({
                     {onOpenKinship && (
                       <button
                         type="button"
-                        onClick={() => {
-                          setDesktopToolsOpen(false);
-                          onOpenKinship();
-                        }}
+                        onClick={() => launchTool(onOpenKinship, 'desktop')}
                         className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] hover:bg-stone-100 text-left"
                       >
                         <Users className="w-3.5 h-3.5 text-[#1B3B2B]" />
@@ -246,10 +270,7 @@ export const AppShell: React.FC<AppShellProps> = ({
                     {onOpenQRShare && (
                       <button
                         type="button"
-                        onClick={() => {
-                          setDesktopToolsOpen(false);
-                          onOpenQRShare();
-                        }}
+                        onClick={() => launchTool(onOpenQRShare, 'desktop')}
                         className="w-full flex items-center gap-2 p-2 rounded-xl text-xs font-medium text-[#4A3E33] hover:bg-stone-100 text-left"
                       >
                         <QrCode className="w-3.5 h-3.5 text-[#1B3B2B]" />
@@ -536,10 +557,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               {onOpenKinship && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenKinship();
-                  }}
+                  onClick={() => launchTool(onOpenKinship, 'mobile')}
                   className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
                 >
                   Tra xưng hô
@@ -549,10 +567,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               {onOpenQRShare && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenQRShare();
-                  }}
+                  onClick={() => launchTool(onOpenQRShare, 'mobile')}
                   className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
                 >
                   Chia sẻ QR
@@ -562,10 +577,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               {onOpenDuplicateMerge && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenDuplicateMerge();
-                  }}
+                  onClick={() => launchTool(onOpenDuplicateMerge, 'mobile')}
                   className="p-2 rounded-xl bg-white border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B]"
                 >
                   Lọc trùng lặp
@@ -575,10 +587,7 @@ export const AppShell: React.FC<AppShellProps> = ({
               {onOpenTour && (
                 <button
                   type="button"
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    onOpenTour();
-                  }}
+                  onClick={() => launchTool(onOpenTour, 'mobile')}
                   className="p-2 rounded-xl bg-[#FAF7F2] border border-[#D5CABE] text-center text-[11px] font-semibold text-[#1B3B2B] col-span-2"
                 >
                   Hướng dẫn nhanh
@@ -587,10 +596,7 @@ export const AppShell: React.FC<AppShellProps> = ({
 
               <button
                 type="button"
-                onClick={() => {
-                  setMobileMenuOpen(false);
-                  handleShieldToggle();
-                }}
+                onClick={() => launchTool(handleShieldToggle, 'mobile')}
                 className={`p-2 rounded-xl border text-center text-[11px] font-bold ${
                   isShieldActive
                     ? 'bg-amber-100/80 border-amber-300 text-amber-900'
