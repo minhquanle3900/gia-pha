@@ -1,6 +1,6 @@
 import React, { lazy, Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import {
-  ArrowLeft,
+  Landmark,
   Calendar,
   Camera,
   Mic,
@@ -38,7 +38,7 @@ const filterClass = 'mt-1 min-h-11 min-w-0 w-full rounded-xl border border-[#D5C
 export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPerson }) => {
   const { media, people, saveMedia, deleteMedia } = useGenealogy();
 
-  const [archiveOpen, setArchiveOpen] = useState(false);
+  const [archiveOpen, setArchiveOpen] = useState(true);
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPersonFilter, setSelectedPersonFilter] = useState<string>('all');
   const [viewingMedia, setViewingMedia] = useState<Media | null>(null);
@@ -199,6 +199,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
       <Suspense fallback={<p role="status" className="px-4 py-6">Đang mở phòng trưng bày…</p>}>
         <ExhibitionHall
           onNavigate={onNavigate}
+          onSelectPerson={onSelectPerson}
           onOpenArchive={(item) => {
             setArchiveOpen(true);
             setViewingMedia(item ?? null);
@@ -217,10 +218,10 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
               type="button"
               onClick={() => setArchiveOpen(false)}
               disabled={Boolean(viewingMedia || deleteId) || addModalOpen || audioRecorderOpen}
-              className="mb-2 inline-flex min-h-11 items-center gap-2 rounded-lg text-sm font-semibold text-[#DBC599] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599]"
+              className="mb-3 inline-flex min-h-11 items-center gap-2 rounded-lg border border-[#DBC599]/40 bg-[#DBC599]/10 px-3 text-sm font-semibold text-[#F2E3C6] hover:bg-[#DBC599]/20 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599]"
             >
-              <ArrowLeft className="size-4 shrink-0" aria-hidden="true" />
-              Về phòng trưng bày
+              <Landmark className="size-4 shrink-0" aria-hidden="true" />
+              Vào phòng trưng bày
             </button>
             <h2 ref={archiveHeadingRef} tabIndex={-1} className="text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Kho kỷ vật</h2>
             <p className="mt-2 text-sm text-[#E6DFD5]">Ảnh, tư liệu và bản ghi âm của dòng họ</p>

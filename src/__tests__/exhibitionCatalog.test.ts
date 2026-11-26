@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
-import { buildExhibitionCatalog } from '../features/gallery/exhibitionCatalog';
+import { buildExhibitionCatalog, buildExhibitionCollections } from '../features/gallery/exhibitionCatalog';
 import type { RoomId } from '../features/gallery/exhibitionCatalog';
-import type { FamilyStory, Media, MediaCategory } from '../models/genealogy';
+import type { FamilyBranch, FamilyStory, Media, MediaCategory } from '../models/genealogy';
 
 const date = '2024-01-01T00:00:00Z';
 
@@ -31,6 +31,10 @@ function makeStory(id: string, overrides: Partial<FamilyStory> = {}): FamilyStor
   };
 }
 
+function makeBranch(id: string, name: string, description?: string): FamilyBranch {
+  return { id, name, description, code: id, subBranches: [], createdAt: date, updatedAt: date };
+}
+
 describe('Exhibition catalog', () => {
   it('shows the two reference couplets without adding any family records', () => {
     const { rooms, featured } = buildExhibitionCatalog([], []);
@@ -51,6 +55,7 @@ describe('Exhibition catalog', () => {
         ],
       },
     ]);
+    expect(rooms.portraits).toEqual([]);
     expect(rooms.photos).toEqual([]);
     expect(rooms.artifacts).toEqual([]);
     expect(rooms.precepts).toEqual([]);
@@ -59,7 +64,7 @@ describe('Exhibition catalog', () => {
   });
 
   it.each<[MediaCategory, RoomId]>([
-    ['portrait', 'photos'],
+    ['portrait', 'portraits'],
     ['historical_photo', 'photos'],
     ['document', 'artifacts'],
     ['certificate', 'artifacts'],
@@ -78,12 +83,16 @@ describe('Exhibition catalog', () => {
   it.each<[string, RoomId]>([
     ['  THƯ PHÁP ', 'calligraphy'],
     ['CAU   DOI', 'calligraphy'],
+    ['Chân dung', 'portraits'],
+    ['CHAN DUNG TIEN NHAN', 'portraits'],
     ['Ảnh gia tộc', 'photos'],
     ['hien vat', 'artifacts'],
     ['Kỷ vật', 'artifacts'],
+    ['Kỷ vật gia truyền', 'artifacts'],
     ['gia  phong', 'precepts'],
     ['Gia huấn', 'precepts'],
     ['nghi le', 'memories'],
+    ['Phong tục', 'memories'],
     ['Ký ức', 'memories'],
   ])('uses the whole tag "%s" to override the story category', (tag, room) => {
     const story = makeStory('a', { category: 'historical_event', tags: [tag, 'không phân loại'] });
@@ -126,10 +135,63 @@ describe('Exhibition catalog', () => {
   it('features distinct rooms when the family has different kinds of material', () => {
     const media = [
       makeMedia('a', 'portrait'),
-      makeMedia('b', 'historical_photo'),
+      makeMedia('b', 'portrait'),
       makeMedia('c', 'document'),
+      makeMedia('d', 'historical_photo'),
     ];
     const { featured } = buildExhibitionCatalog(media, []);
     expect(featured.map(({ key }) => key)).toEqual(['reference:ancestral-merit', 'media:a', 'media:c']);
+  });
+});
+
+describe('Thematic exhibition collections', () => {
+  it('has no collections from empty branches or the built-in reference works', () => {
+    const catalog = buildExhibitionCatalog([], []);
+    expect(buildExhibitionCollections(catalog, [makeBranch('a', 'Chi A')])).toEqual([]);
+  });
+
+  it('collects exhibits with a matching branch without changing rooms or displaying missing branches', () => {
+    const branches = Object.freeze([
+      makeBranch('b', 'Chi B'),
+      makeBranch('a', 'Chi A', 'Chi có tư liệu thử nghiệm'),
+      makeBranch('c', 'Chi C chưa có tư liệu'),
+    ]);
+    const portrait = { ...makeMedia('portrait', 'portrait'), branchId: 'b' };
+    const artifact = { ...makeMedia('artifact', 'document'), branchId: 'a' };
+    const legacy = { ...makeMedia('legacy', 'historical_photo'), branchId: 'missing' };
+    const precepts = makeStory('precepts', { category: 'communal_rule', branchId: 'a' });
+    const catalog = buildExhibitionCatalog([portrait, artifact, legacy], [precepts]);
+    const collections = buildExhibitionCollections(catalog, branches);
+
+    expect(collections).toEqual([
+      {
+        key: 'branch:a',
+        title: 'Chi A',
+        description: 'Chi có tư liệu thử nghiệm',
+        entries: [catalog.rooms.artifacts[0], catalog.rooms.precepts[0]],
+      },
+      { key: 'branch:b', title: 'Chi B', entries: [catalog.rooms.portraits[0]] },
+    ]);
+    expect(collections[0].entries[0]).toBe(catalog.rooms.artifacts[0]);
+    expect(catalog.rooms.photos[0].key).toBe('media:legacy');
+  });
+
+  it('combines normalized thematic tags and excludes room labels and repeated tags', () => {
+    const first = makeStory('a', {
+      tags: [' Chân dung   tiền nhân ', '  Tết   Đoàn viên ', 'TET DOAN VIEN', 'Áo dài'],
+    });
+    const second = makeStory('b', { tags: ['Ký ức', 'Tet Doan Vien', ' '] });
+    const catalog = buildExhibitionCatalog([], [second, first]);
+    const collections = buildExhibitionCollections(catalog, []);
+
+    expect(collections.map(({ key, title, entries }) => ({
+      key,
+      title,
+      works: entries.map(({ key: workKey }) => workKey),
+    }))).toEqual([
+      { key: 'tag:ao dai', title: 'Áo dài', works: ['story:a'] },
+      { key: 'tag:tet doan vien', title: 'Tết Đoàn viên', works: ['story:a', 'story:b'] },
+    ]);
+    expect(first.tags).toEqual([' Chân dung   tiền nhân ', '  Tết   Đoàn viên ', 'TET DOAN VIEN', 'Áo dài']);
   });
 });

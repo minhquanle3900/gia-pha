@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import {
   Amphora, ArrowDown, ArrowLeft, ArrowRight, BookOpen, CalendarDays,
-  Images, Landmark, Mic, PenTool, ScrollText,
+  Images, Landmark, Layers3, Mic, PenTool, ScrollText, UserRound,
 } from 'lucide-react';
 import { useGenealogy } from '../../context/GenealogyContext';
 import type { Media } from '../../models/genealogy';
-import { buildExhibitionCatalog, type Exhibit, type RoomId } from './exhibitionCatalog';
+import { buildExhibitionCatalog, buildExhibitionCollections, type Exhibit, type RoomId } from './exhibitionCatalog';
+import { ArtworkFullscreen, Couplet } from './ExhibitionArtwork';
 import hallImage from './exhibition-hall.webp?inline';
 import './exhibitionHall.css';
 
@@ -14,12 +15,20 @@ type HeritageTab = 'journal' | 'rites' | 'book';
 interface ExhibitionHallProps {
   onOpenArchive: (item?: Media) => void;
   onNavigate: (tab: HeritageTab) => void;
+  onSelectPerson: (personId: string) => void;
 }
 
 type ExhibitionView =
   | { kind: 'hall' }
   | { kind: 'room'; room: RoomId }
-  | { kind: 'detail'; exhibit: Exhibit; from: RoomId | 'featured' };
+  | { kind: 'collections' }
+  | { kind: 'collection'; key: string }
+  | { kind: 'detail'; exhibit: Exhibit };
+
+interface ExhibitionVisit {
+  view: ExhibitionView;
+  returnTo?: string;
+}
 
 const rooms = {
   calligraphy: {
@@ -28,14 +37,20 @@ const rooms = {
     empty: 'Khu này chưa có tác phẩm.',
     icon: PenTool,
   },
+  portraits: {
+    title: 'Chân dung tiền nhân',
+    description: 'Chân dung trong kho tư liệu và hồ sơ người được ghi lại.',
+    empty: 'Chưa có tư liệu chân dung trong kho.',
+    icon: UserRound,
+  },
   photos: {
     title: 'Ảnh gia tộc',
-    description: 'Chân dung, ảnh xưa và những khoảnh khắc sum họp.',
-    empty: 'Chưa có chân dung hay ảnh tư liệu trong kho.',
+    description: 'Ảnh xưa và những khoảnh khắc sum họp.',
+    empty: 'Chưa có ảnh tư liệu trong kho.',
     icon: Images,
   },
   artifacts: {
-    title: 'Kỷ vật và hiện vật',
+    title: 'Kỷ vật gia truyền',
     description: 'Giấy tờ, thư từ và bút tích còn được lưu giữ.',
     empty: 'Chưa có tư liệu hay hiện vật trong kho.',
     icon: Amphora,
@@ -47,14 +62,15 @@ const rooms = {
     icon: ScrollText,
   },
   memories: {
-    title: 'Nghi lễ và ký ức',
+    title: 'Nghi lễ và phong tục',
     description: 'Ghi chép, lời kể và bản ghi âm của người trong họ.',
     empty: 'Chưa có lời kể hay bản ghi âm ký ức.',
     icon: Mic,
   },
 };
 
-const roomIds: RoomId[] = ['calligraphy', 'photos', 'artifacts', 'precepts', 'memories'];
+const roomIds: RoomId[] = ['calligraphy', 'portraits', 'photos', 'artifacts', 'precepts', 'memories'];
+const collectionsTitle = 'Triển lãm theo chủ đề';
 
 const heritageLinks = [
   { tab: 'journal', title: 'Nhật ký dòng họ', icon: ScrollText },
@@ -88,19 +104,10 @@ function exhibitSubtitle(exhibit: Exhibit) {
   }
 }
 
-function Couplet({ lines }: { lines: readonly [string, string] }) {
-  return (
-    <span className="exhibition-couplet">
-      <span>{lines[0]}</span>
-      <span>{lines[1]}</span>
-    </span>
-  );
-}
-
 function ExhibitCard({ exhibit, cover, from, onOpen }: {
   exhibit: Exhibit;
   cover?: Media;
-  from: RoomId | 'featured';
+  from: string;
   onOpen: () => void;
 }) {
   const Icon = rooms[exhibit.room].icon;
@@ -136,24 +143,29 @@ function ExhibitCard({ exhibit, cover, from, onOpen }: {
   );
 }
 
-function ExhibitDetail({ exhibit, media, people, branches, onOpenArchive, onNavigate }: {
+function ExhibitDetail({ exhibit, media, people, branchName, onOpenBranch, onOpenArchive, onNavigate, onSelectPerson }: {
   exhibit: Exhibit;
   media: ReadonlyMap<string, Media>;
   people: ReadonlyMap<string, string>;
-  branches: ReadonlyMap<string, string>;
+  branchName?: string;
+  onOpenBranch?: () => void;
 } & ExhibitionHallProps) {
   if (exhibit.kind === 'reference') {
     return (
       <div className="exhibition-detail-layout">
-        <div className="exhibition-detail-art exhibition-detail-couplet">
-          <blockquote><Couplet lines={exhibit.lines} /></blockquote>
-        </div>
+        <figure className="exhibition-detail-art exhibition-detail-couplet">
+          <blockquote><Couplet lines={exhibit.lines} vertical /></blockquote>
+          <figcaption className="exhibition-caption">
+            <span>Câu đối tham khảo</span>
+            <ArtworkFullscreen title={exhibit.title}><Couplet lines={exhibit.lines} vertical /></ArtworkFullscreen>
+          </figcaption>
+        </figure>
         <div className="exhibition-detail-copy">
           <h3>Về câu đối</h3>
           <p>{exhibit.key === 'reference:ancestral-merit'
             ? 'Cặp câu gợi nhắc công đức của tổ tiên và lòng hiếu thảo của con cháu.'
             : 'Cặp câu chúc năm mới thêm phúc, thọ và bình an.'}</p>
-          <p className="exhibition-detail-note">Câu đối tham khảo trong khu thư pháp.</p>
+          <p className="exhibition-detail-note">Nguồn và dị bản chưa được xác minh.</p>
         </div>
       </div>
     );
@@ -166,25 +178,30 @@ function ExhibitDetail({ exhibit, media, people, branches, onOpenArchive, onNavi
   const audio = embeddedSource(item, 'audio');
   const attachments = attachedMedia(exhibit, media);
   const record = exhibit.kind === 'media' ? exhibit.media : exhibit.story;
-  const branchName = record.branchId ? branches.get(record.branchId) : undefined;
-  const names = record.personIds.flatMap((id) => {
+  const relatedPeople = [...new Set(record.personIds)].flatMap((id) => {
     const name = people.get(id);
-    return name ? [name] : [];
-  }).join(', ');
+    return name ? [{ id, name }] : [];
+  });
   const fields = [
     ['Thời kỳ', item?.dateLabel || story?.periodLabel],
     ['Địa điểm', story?.location],
-    ['Chi họ', branchName],
-    ['Người liên quan', names],
     ['Người ghi lại', story?.recordedBy],
   ].filter(([, value]) => Boolean(value));
   const Icon = rooms[exhibit.room].icon;
 
   return (
     <div className="exhibition-detail-layout">
-      <div className={`exhibition-detail-art exhibition-art-${exhibit.room}`}>
+      <figure className={`exhibition-detail-art exhibition-art-${exhibit.room}`}>
         {image ? (
-          <img src={image} alt={source?.title || exhibit.title} decoding="async" />
+          <>
+            <img src={image} alt={source?.title || exhibit.title} decoding="async" />
+            <figcaption className="exhibition-caption">
+              <span>{source?.title}</span>
+              <ArtworkFullscreen title={source?.title || exhibit.title}>
+                <img src={image} alt={source?.title || exhibit.title} decoding="async" />
+              </ArtworkFullscreen>
+            </figcaption>
+          </>
         ) : audio ? (
           <div className="exhibition-audio">
             <Mic aria-hidden="true" size={44} strokeWidth={1.2} />
@@ -196,11 +213,25 @@ function ExhibitDetail({ exhibit, media, people, branches, onOpenArchive, onNavi
             {item && <span>Tư liệu này chưa có bản xem trước trong phòng trưng bày.</span>}
           </div>
         )}
-      </div>
+      </figure>
       <div className="exhibition-detail-copy">
-        {fields.length > 0 && (
+        {(fields.length > 0 || branchName || relatedPeople.length > 0) && (
           <dl className="exhibition-meta">
             {fields.map(([label, value]) => <div key={label}><dt>{label}</dt><dd>{value}</dd></div>)}
+            {branchName && <div><dt>Chi họ</dt><dd>
+              {onOpenBranch ? (
+                <button id="exhibition-related-branch" type="button" className="exhibition-text-link" onClick={onOpenBranch}>
+                  {branchName}
+                </button>
+              ) : branchName}
+            </dd></div>}
+            {relatedPeople.length > 0 && <div><dt>Người liên quan</dt><dd>
+              <ul className="exhibition-related-people">
+                {relatedPeople.map(({ id, name }) => <li key={id}>
+                  <button type="button" className="exhibition-text-link" onClick={() => onSelectPerson(id)}>{name}</button>
+                </li>)}
+              </ul>
+            </dd></div>}
           </dl>
         )}
         {(story?.content || item?.description || item?.storyContext) && (
@@ -231,17 +262,43 @@ function ExhibitDetail({ exhibit, media, people, branches, onOpenArchive, onNavi
   );
 }
 
-function cardId(from: RoomId | 'featured', exhibit: Exhibit) {
+function cardId(from: string, exhibit: Exhibit) {
   return `exhibition-card-${from}-${exhibit.key}`;
 }
 
-export default function ExhibitionHall({ onOpenArchive, onNavigate }: ExhibitionHallProps) {
+function CollectionButton({ id, title, description, count, icon: Icon, onClick }: {
+  id: string;
+  title: string;
+  description?: string;
+  count: number;
+  icon: typeof Layers3;
+  onClick: () => void;
+}) {
+  return (
+    <li>
+      <button type="button" className="exhibition-room" id={id} onClick={onClick}>
+        <Icon className="exhibition-room-icon" size={26} strokeWidth={1.35} aria-hidden="true" />
+        <span className="exhibition-room-title">{title}</span>
+        {description && <span className="exhibition-room-description">{description}</span>}
+        <span className="exhibition-room-count">{count ? `${count} mục` : 'Chưa có tư liệu'}</span>
+        <ArrowRight className="exhibition-room-arrow" size={18} aria-hidden="true" />
+      </button>
+    </li>
+  );
+}
+
+export default function ExhibitionHall({ onOpenArchive, onNavigate, onSelectPerson }: ExhibitionHallProps) {
   const { media, stories, people, branches } = useGenealogy();
   const catalog = useMemo(() => buildExhibitionCatalog(media, stories), [media, stories]);
+  const collections = useMemo(() => buildExhibitionCollections(catalog, branches), [catalog, branches]);
+  const collectionsByKey = useMemo(() => new Map(collections.map((item) => [item.key, item])), [collections]);
   const mediaById = useMemo(() => new Map(media.map((item) => [item.id, item])), [media]);
   const peopleById = useMemo(() => new Map(people.map((person) => [person.id, person.fullName])), [people]);
   const branchesById = useMemo(() => new Map(branches.map((branch) => [branch.id, branch.name])), [branches]);
-  const [view, setView] = useState<ExhibitionView>({ kind: 'hall' });
+  const [trail, setTrail] = useState<ExhibitionVisit[]>([{ view: { kind: 'hall' } }]);
+  const current = trail[trail.length - 1];
+  const view = current.view;
+  const parent = trail[trail.length - 2]?.view;
   const root = useRef<HTMLDivElement>(null);
   const heading = useRef<HTMLHeadingElement>(null);
   const roomsHeading = useRef<HTMLHeadingElement>(null);
@@ -259,51 +316,87 @@ export default function ExhibitionHall({ onOpenArchive, onNavigate }: Exhibition
     }
   }, [view]);
 
-  const showBack = () => {
-    if (view.kind === 'detail') {
-      returnFocus.current = cardId(view.from, view.exhibit);
-      setView(view.from === 'featured' ? { kind: 'hall' } : { kind: 'room', room: view.from });
-    } else if (view.kind === 'room') {
-      returnFocus.current = 'exhibition-room-' + view.room;
-      setView({ kind: 'hall' });
-    }
+  const open = (next: ExhibitionView, returnTo: string) => {
+    setTrail((visits) => [...visits, { view: next, returnTo }]);
   };
 
-  const renderCards = (entries: readonly Exhibit[], from: RoomId | 'featured') => (
+  const showBack = () => {
+    returnFocus.current = current.returnTo ?? null;
+    setTrail((visits) => visits.slice(0, -1));
+  };
+
+  const renderCards = (entries: readonly Exhibit[], from: string) => (
     <ul className="exhibition-cards">
       {entries.map((exhibit) => (
         <ExhibitCard key={exhibit.key} exhibit={exhibit} from={from} cover={exhibitCover(exhibit, mediaById)}
-          onOpen={() => setView({ kind: 'detail', exhibit, from })} />
+          onOpen={() => open({ kind: 'detail', exhibit }, cardId(from, exhibit))} />
       ))}
     </ul>
   );
 
+  const titleOf = (panel: ExhibitionView) => {
+    switch (panel.kind) {
+      case 'hall': return 'phòng trưng bày';
+      case 'room': return rooms[panel.room].title;
+      case 'collections': return collectionsTitle;
+      case 'collection': return collectionsByKey.get(panel.key)?.title ?? 'Bộ sưu tập';
+      case 'detail': return panel.exhibit.title;
+    }
+  };
+
   if (view.kind !== 'hall') {
-    const room = rooms[view.kind === 'room' ? view.room : view.exhibit.room];
+    const exhibit = view.kind === 'detail' ? view.exhibit : undefined;
+    const room = view.kind === 'room' ? rooms[view.room] : undefined;
+    const collection = view.kind === 'collection' ? collectionsByKey.get(view.key) : undefined;
+    const entries = view.kind === 'room' ? catalog.rooms[view.room] : collection?.entries;
+    const branchId = exhibit?.kind === 'media' ? exhibit.media.branchId
+      : exhibit?.kind === 'story' ? exhibit.story.branchId : undefined;
+    const branchKey = branchId ? 'branch:' + branchId : undefined;
+    const openBranch = branchKey && collectionsByKey.has(branchKey)
+      ? () => {
+        if (parent?.kind === 'collection' && parent.key === branchKey) showBack();
+        else open({ kind: 'collection', key: branchKey }, 'exhibition-related-branch');
+      }
+      : undefined;
+    const canOpenJournal = view.kind === 'collections' || (view.kind === 'room' && (view.room === 'precepts' || view.room === 'memories'));
+    const EmptyIcon = room?.icon ?? Layers3;
+    const emptyTitle = view.kind === 'collections' ? 'Chưa có bộ sưu tập' : 'Chưa có mục trưng bày';
+
     return (
       <div className="exhibition" ref={root}>
         <button type="button" className="exhibition-back" onClick={showBack}>
           <ArrowLeft size={17} aria-hidden="true" />
-          {view.kind === 'detail' && view.from !== 'featured' ? 'Về ' + room.title : 'Về phòng trưng bày'}
+          Về {parent ? titleOf(parent) : 'phòng trưng bày'}
         </button>
 
         <header className="exhibition-interior-header">
-          <span className="exhibition-eyebrow">{view.kind === 'detail' ? exhibitSubtitle(view.exhibit) : 'Phòng trưng bày'}</span>
-          <h2 ref={heading} tabIndex={-1}>{view.kind === 'detail' ? view.exhibit.title : room.title}</h2>
-          {view.kind === 'room' && <p>{room.description}</p>}
+          <span className="exhibition-eyebrow">{exhibit ? exhibitSubtitle(exhibit) : 'Phòng trưng bày'}</span>
+          <h2 ref={heading} tabIndex={-1}>{titleOf(view)}</h2>
+          {room?.description && <p>{room.description}</p>}
+          {collection?.description && <p>{collection.description}</p>}
+          {view.kind === 'collections' && <p>Khám phá tư liệu theo chi họ và chủ đề trong nhật ký.</p>}
         </header>
 
-        {view.kind === 'detail' ? (
-          <ExhibitDetail exhibit={view.exhibit} media={mediaById} people={peopleById} branches={branchesById}
-            onOpenArchive={onOpenArchive} onNavigate={onNavigate} />
-        ) : catalog.rooms[view.room].length ? renderCards(catalog.rooms[view.room], view.room) : (
+        {exhibit ? (
+          <ExhibitDetail key={exhibit.key} exhibit={exhibit} media={mediaById} people={peopleById}
+            branchName={branchId ? branchesById.get(branchId) : undefined} onOpenBranch={openBranch}
+            onOpenArchive={onOpenArchive} onNavigate={onNavigate} onSelectPerson={onSelectPerson} />
+        ) : view.kind === 'collections' && collections.length > 0 ? (
+          <ul className="exhibition-rooms">
+            {collections.map((item) => (
+              <CollectionButton key={item.key} id={'exhibition-collection-' + item.key}
+                title={item.title} description={item.description} count={item.entries.length}
+                icon={item.key.startsWith('branch:') ? Landmark : Layers3}
+                onClick={() => open({ kind: 'collection', key: item.key }, 'exhibition-collection-' + item.key)} />
+            ))}
+          </ul>
+        ) : entries?.length ? renderCards(entries, view.kind === 'room' ? view.room : collection?.key ?? 'collection') : (
           <section className="exhibition-empty">
-            <room.icon size={37} strokeWidth={1.2} aria-hidden="true" />
-            <h3>Chưa có mục trưng bày</h3>
-            <p>{room.empty}</p>
-            <button type="button" className="exhibition-action"
-              onClick={() => view.room === 'precepts' || view.room === 'memories' ? onNavigate('journal') : onOpenArchive()}>
-              {view.room === 'precepts' || view.room === 'memories' ? 'Mở nhật ký dòng họ' : 'Mở kho kỷ vật'}
+            <EmptyIcon size={37} strokeWidth={1.2} aria-hidden="true" />
+            <h3>{emptyTitle}</h3>
+            <p>{room?.empty ?? 'Tư liệu gắn với chi họ và ghi chép có thẻ chủ đề sẽ xuất hiện tại đây.'}</p>
+            <button type="button" className="exhibition-action" onClick={() => canOpenJournal ? onNavigate('journal') : onOpenArchive()}>
+              {canOpenJournal ? 'Mở nhật ký dòng họ' : 'Mở kho kỷ vật'}
               <ArrowRight size={16} aria-hidden="true" />
             </button>
           </section>
@@ -316,6 +409,7 @@ export default function ExhibitionHall({ onOpenArchive, onNavigate }: Exhibition
     <div className="exhibition" ref={root}>
       <header className="exhibition-hero">
         <img src={hallImage} alt="" aria-hidden="true" className="exhibition-hero-image" />
+        <span className="exhibition-hero-caption">Ảnh minh họa</span>
         <div className="exhibition-hero-content">
           <span className="exhibition-eyebrow">Di sản gia tộc</span>
           <h2 ref={heading} tabIndex={-1}>Phòng trưng bày</h2>
@@ -343,21 +437,16 @@ export default function ExhibitionHall({ onOpenArchive, onNavigate }: Exhibition
         <h3 id="exhibition-rooms" className="exhibition-section-title" ref={roomsHeading} tabIndex={-1}>Các khu trưng bày</h3>
         <ul className="exhibition-rooms">
           {roomIds.map((id) => {
-            const { icon: Icon, title, description } = rooms[id];
-            const count = catalog.rooms[id].length;
+            const { icon, title, description } = rooms[id];
             return (
-              <li key={id}>
-                <button type="button" className={`exhibition-room exhibition-art-${id}`} id={'exhibition-room-' + id}
-                  onClick={() => setView({ kind: 'room', room: id })}>
-                  <Icon className="exhibition-room-icon" size={26} strokeWidth={1.35} aria-hidden="true" />
-                  <span className="exhibition-room-title">{title}</span>
-                  <span className="exhibition-room-description">{description}</span>
-                  <span className="exhibition-room-count">{count ? `${count} mục` : 'Chưa có tư liệu'}</span>
-                  <ArrowRight className="exhibition-room-arrow" size={18} aria-hidden="true" />
-                </button>
-              </li>
+              <CollectionButton key={id} id={'exhibition-room-' + id} icon={icon} title={title}
+                description={description} count={catalog.rooms[id].length}
+                onClick={() => open({ kind: 'room', room: id }, 'exhibition-room-' + id)} />
             );
           })}
+          <CollectionButton id="exhibition-room-collections" icon={Layers3} title={collectionsTitle}
+            description="Tư liệu được quy tụ theo chi họ và thẻ chủ đề." count={collections.length}
+            onClick={() => open({ kind: 'collections' }, 'exhibition-room-collections')} />
         </ul>
       </section>
 

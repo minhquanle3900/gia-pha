@@ -1,4 +1,8 @@
 .exhibition {
+  --hall-forest: #1B3B2B;
+  --hall-ivory: #FAF7F2;
+  --hall-gold: #C5A059;
+  --hall-bark: #2E241E;
   --hall-paper: #fffcf6;
   --hall-ink: #213128;
   --hall-muted: #64584b;
@@ -341,4 +345,131 @@
   .exhibition-reading { grid-template-columns: auto 1fr auto; padding: 1.4rem; }
   .exhibition-detail-layout { grid-template-columns: minmax(0, 1.18fr) minmax(0, 1fr); }
   .exhibition-detail-art { min-height: 21rem; padding: 1.25rem; }
+}
+
+.exhibition-hero-caption {
+  position: absolute;
+  top: 1.15rem;
+  right: 1.15rem;
+  padding: .2rem .45rem;
+  border-radius: .25rem;
+  background: #101e17dc;
+  color: var(--hall-ivory);
+  font-size: .72rem;
+}
+
+.exhibition-art-portraits { --plate: var(--hall-forest); --plate-ink: #ebd8af; }
+.exhibition-room-description { display: -webkit-box; -webkit-box-orient: vertical; -webkit-line-clamp: 2; overflow: hidden; }
+
+.exhibition-detail-art { margin: 0; }
+.exhibition-caption {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: .5rem;
+  width: 100%;
+  margin-top: .65rem;
+  font-size: .82rem;
+  line-height: 1.5;
+}
+.exhibition-caption .exhibition-fullscreen-action {
+  background-color: transparent;
+  border-color: #e8d2a788;
+  color: var(--hall-ivory);
+}
+.exhibition-caption .exhibition-fullscreen-action:hover { background-color: #fae5b820; }
+.exhibition-caption .exhibition-fullscreen-action:focus-visible { outline-color: var(--hall-gold); }
+
+.exhibition-couplet.exhibition-couplet-vertical {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: clamp(.6rem, 2.2vw, 1.35rem);
+  justify-self: center;
+  width: min(100%, 22rem);
+  margin: 0 auto;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+.exhibition-couplet-panel {
+  display: grid;
+  align-items: center;
+  padding: .9rem .35rem;
+  border: 1px solid var(--hall-gold);
+  box-shadow: inset 0 0 0 .25rem #632b235c, inset 0 0 0 calc(.25rem + 1px) #d3ac637a;
+  background: linear-gradient(115deg, #78372d, #51251e 68%, #6a2b23);
+}
+
+.exhibition-couplet-words {
+  display: grid;
+  justify-items: center;
+  gap: .15rem;
+  font-size: clamp(1.05rem, 3.4vw, 1.55rem);
+  line-height: 1.22;
+}
+
+.exhibition-text-link {
+  min-height: 44px;
+  color: var(--hall-accent);
+  text-align: start;
+  text-decoration: underline;
+  text-underline-offset: .2em;
+  cursor: pointer;
+}
+.exhibition-related-people { display: flex; flex-wrap: wrap; gap: .15rem .9rem; }
+
+.exhibition-fullscreen {
+  position: fixed;
+  inset: 0;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: none;
+  height: 100%;
+  height: 100dvh;
+  max-height: none;
+  margin: 0;
+  padding: env(safe-area-inset-top, 0px) env(safe-area-inset-right, 0px)
+    env(safe-area-inset-bottom, 0px) env(safe-area-inset-left, 0px);
+  border: 0;
+  overflow-y: auto;
+  overscroll-behavior: contain;
+  background: var(--hall-bark);
+  color: var(--hall-ivory);
+}
+
+.exhibition-fullscreen[open] { display: grid; grid-template-rows: auto minmax(0, 1fr); }
+.exhibition-fullscreen::backdrop { background: #101713; }
+
+.exhibition-fullscreen-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: .6rem;
+  padding: .6rem clamp(.7rem, 3vw, 1.75rem);
+  border-bottom: 1px solid #c5a05967;
+}
+
+.exhibition-fullscreen-header h3 { font-size: clamp(1.12rem, 3.5vw, 1.85rem); font-weight: 700; line-height: 1.2; }
+.exhibition-fullscreen-header button { display: grid; place-items: center; flex: none; width: 44px; height: 44px; border: 1px solid #c5a05999; border-radius: .6rem; cursor: pointer; }
+.exhibition-fullscreen-header button:focus-visible { outline-color: var(--hall-gold); }
+.exhibition-fullscreen-art {
+  display: grid;
+  place-items: center;
+  min-height: 0;
+  padding: clamp(.6rem, 2.2vw, 1.8rem);
+  overflow: auto;
+}
+.exhibition-fullscreen-art img { display: block; width: 100%; height: 100%; min-height: 0; max-height: none; object-fit: contain; }
+
+@media (prefers-reduced-motion: no-preference) {
+  .exhibition :is(.exhibition-interior-header, .exhibition-detail-layout, .exhibition-empty, .exhibition-fullscreen[open]) {
+    animation: exhibition-reveal 150ms ease-out both;
+  }
+  .exhibition :is(.exhibition-card, .exhibition-room, .exhibition-action) { transition: border-color 150ms ease-out; }
+}
+
+@keyframes exhibition-reveal {
+  from { opacity: .78; }
+  to { opacity: 1; }
 }

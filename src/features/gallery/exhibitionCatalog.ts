@@ -1,6 +1,6 @@
-import type { FamilyStory, Media, MediaCategory } from '../../models/genealogy';
+import type { FamilyBranch, FamilyStory, Media, MediaCategory } from '../../models/genealogy';
 
-export type RoomId = 'calligraphy' | 'photos' | 'artifacts' | 'precepts' | 'memories';
+export type RoomId = 'calligraphy' | 'portraits' | 'photos' | 'artifacts' | 'precepts' | 'memories';
 
 interface ExhibitLabel {
   key: string;
@@ -17,6 +17,18 @@ type MediaExhibit = ExhibitLabel & { kind: 'media'; media: Media };
 type StoryExhibit = ExhibitLabel & { kind: 'story'; story: FamilyStory };
 
 export type Exhibit = ReferenceExhibit | MediaExhibit | StoryExhibit;
+
+export interface ExhibitionCatalog {
+  rooms: Record<RoomId, Exhibit[]>;
+  featured: Exhibit[];
+}
+
+export interface ExhibitionCollection {
+  key: string;
+  title: string;
+  description?: string;
+  entries: Exhibit[];
+}
 
 const referenceCouplets: readonly [ReferenceExhibit, ReferenceExhibit] = [
   {
@@ -42,7 +54,7 @@ const referenceCouplets: readonly [ReferenceExhibit, ReferenceExhibit] = [
 ];
 
 const mediaRooms: Record<MediaCategory, RoomId> = {
-  portrait: 'photos',
+  portrait: 'portraits',
   historical_photo: 'photos',
   document: 'artifacts',
   certificate: 'artifacts',
@@ -54,25 +66,32 @@ const mediaRooms: Record<MediaCategory, RoomId> = {
 const roomTags = new Map<string, RoomId>([
   ['thu phap', 'calligraphy'],
   ['cau doi', 'calligraphy'],
+  ['chan dung', 'portraits'],
+  ['chan dung tien nhan', 'portraits'],
   ['anh gia toc', 'photos'],
   ['hien vat', 'artifacts'],
   ['ky vat', 'artifacts'],
+  ['ky vat gia truyen', 'artifacts'],
   ['gia phong', 'precepts'],
   ['gia huan', 'precepts'],
   ['nghi le', 'memories'],
+  ['phong tuc', 'memories'],
   ['ky uc', 'memories'],
 ]);
 
+function normalizedTag(tag: string) {
+  return tag
+    .toLowerCase()
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .replace(/đ/g, 'd')
+    .trim()
+    .replace(/\s+/g, ' ');
+}
+
 function storyRoom(story: FamilyStory): RoomId {
   for (const tag of story.tags ?? []) {
-    const label = tag
-      .toLowerCase()
-      .normalize('NFD')
-      .replace(/[\u0300-\u036f]/g, '')
-      .replace(/đ/g, 'd')
-      .trim()
-      .replace(/\s+/g, ' ');
-    const room = roomTags.get(label);
+    const room = roomTags.get(normalizedTag(tag));
     if (room) return room;
   }
   return story.category === 'communal_rule' ? 'precepts' : 'memories';
@@ -82,9 +101,10 @@ function newestFirst(a: Pick<Media, 'createdAt' | 'id'>, b: Pick<Media, 'created
   return (Date.parse(b.createdAt) || 0) - (Date.parse(a.createdAt) || 0) || a.id.localeCompare(b.id);
 }
 
-export function buildExhibitionCatalog(media: readonly Media[], stories: readonly FamilyStory[]) {
+export function buildExhibitionCatalog(media: readonly Media[], stories: readonly FamilyStory[]): ExhibitionCatalog {
   const rooms: Record<RoomId, Exhibit[]> = {
     calligraphy: [...referenceCouplets],
+    portraits: [],
     photos: [],
     artifacts: [],
     precepts: [],
@@ -121,4 +141,54 @@ export function buildExhibitionCatalog(media: readonly Media[], stories: readonl
   featured.push(...candidates.filter((candidate) => !featured.includes(candidate)).slice(0, 3 - featured.length));
 
   return { rooms, featured };
+}
+
+function collectionOrder(a: ExhibitionCollection, b: ExhibitionCollection) {
+  return a.title.localeCompare(b.title, 'vi') || a.key.localeCompare(b.key);
+}
+
+export function buildExhibitionCollections(
+  catalog: ExhibitionCatalog,
+  branches: readonly FamilyBranch[],
+): ExhibitionCollection[] {
+  const branchCollections = new Map<string, ExhibitionCollection>(branches.map((branch) => [
+    branch.id,
+    {
+      key: `branch:${branch.id}`,
+      title: branch.name,
+      description: branch.description,
+      entries: [],
+    },
+  ]));
+  const tagCollections = new Map<string, ExhibitionCollection>();
+
+  for (const exhibit of Object.values(catalog.rooms).flat()) {
+    if (exhibit.kind === 'reference') continue;
+    const record = exhibit.kind === 'media' ? exhibit.media : exhibit.story;
+    if (record.branchId) branchCollections.get(record.branchId)?.entries.push(exhibit);
+    if (exhibit.kind !== 'story') continue;
+
+    const seenTags = new Set<string>();
+    for (const tag of exhibit.story.tags ?? []) {
+      const label = normalizedTag(tag);
+      if (!label || roomTags.has(label) || seenTags.has(label)) continue;
+      seenTags.add(label);
+
+      const collection = tagCollections.get(label);
+      if (collection) {
+        collection.entries.push(exhibit);
+      } else {
+        tagCollections.set(label, {
+          key: `tag:${label}`,
+          title: tag.trim().replace(/\s+/g, ' '),
+          entries: [exhibit],
+        });
+      }
+    }
+  }
+
+  return [
+    ...[...branchCollections.values()].filter(({ entries }) => entries.length > 0).sort(collectionOrder),
+    ...[...tagCollections.values()].sort(collectionOrder),
+  ];
 }
