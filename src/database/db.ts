@@ -604,20 +604,54 @@ export async function saveBranchRecord(branch: FamilyBranch): Promise<void> {
 export async function deleteBranchRecord(branchId: string): Promise<void> {
   const db = await getDatabase();
   const tx = db.transaction(['branches', 'people', 'media', 'stories'], 'readwrite');
-  await tx.objectStore('branches').delete(branchId);
+  const done = tx.done;
+  void done.catch(() => {});
 
-  const people = await tx.objectStore('people').getAll();
-  for (const p of people) {
-    if (p.branchId === branchId || p.secondaryBranchIds?.includes(branchId)) {
-      await tx.objectStore('people').put({
-        ...p,
-        branchId: p.branchId === branchId ? undefined : p.branchId,
-        secondaryBranchIds: p.secondaryBranchIds?.filter((id) => id !== branchId),
-        updatedAt: new Date().toISOString(),
+  try {
+    const branchStore = tx.objectStore('branches');
+    const peopleStore = tx.objectStore('people');
+    const mediaStore = tx.objectStore('media');
+    const storyStore = tx.objectStore('stories');
+    const [branches, people, media, stories] = await Promise.all([
+      branchStore.getAll(),
+      peopleStore.getAll(),
+      mediaStore.getAll(),
+      storyStore.getAll(),
+    ]);
+    const updatedAt = new Date().toISOString();
+
+    for (const person of people) {
+      if (person.branchId !== branchId && !person.secondaryBranchIds?.includes(branchId)) continue;
+      await peopleStore.put({
+        ...person,
+        branchId: person.branchId === branchId ? undefined : person.branchId,
+        secondaryBranchIds: person.secondaryBranchIds?.filter((id) => id !== branchId),
+        updatedAt,
       });
     }
+    for (const branch of branches) {
+      if (branch.id !== branchId && branch.parentBranchId === branchId) {
+        await branchStore.put({ ...branch, parentBranchId: undefined, updatedAt });
+      }
+    }
+    for (const item of media) {
+      if (item.branchId === branchId) await mediaStore.put({ ...item, branchId: undefined, updatedAt });
+    }
+    for (const story of stories) {
+      if (story.branchId === branchId) await storyStore.put({ ...story, branchId: undefined, updatedAt });
+    }
+
+    await branchStore.delete(branchId);
+    await done;
+  } catch (error) {
+    try {
+      tx.abort();
+    } catch {
+      // A failed request may have already aborted the transaction.
+    }
+    await done.catch(() => {});
+    throw error;
   }
-  await tx.done;
 }
 
 export async function saveSettingsRecord(settings: AppSettings): Promise<void> {
