@@ -1,29 +1,24 @@
-import React, { useMemo, useState } from 'react';
+import React, { useId, useMemo, useState } from 'react';
 import {
+  ArrowUpRight,
   Bell,
   BookOpen,
   Calendar,
   CheckCircle,
   CheckSquare,
-  Clock,
   Compass,
   Copy,
-  FileText,
   Flame,
-  Info,
   MapPin,
-  Printer,
   Sparkles,
-  Square,
   Users,
   Utensils,
 } from 'lucide-react';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
-import { Person } from '../../models/genealogy';
-import { formatLunarAnniversary } from '../../utils/dateUtils';
 import {
   calculateUpcomingAnniversaries,
+  getCanChiYear,
   PrayerTemplate,
   REGIONAL_RITE_GUIDES,
   RITE_PREPARATION_CHECKLIST,
@@ -37,17 +32,44 @@ interface RitesAssistantPageProps {
   onSelectPerson: (personId: string) => void;
 }
 
+const riteTabs = [
+  { key: 'calendar', label: 'Lịch giỗ tiền nhân', icon: Calendar },
+  { key: 'prayers', label: 'Sổ văn khấn', icon: BookOpen },
+  { key: 'regional', label: 'Phong tục ba miền', icon: Compass },
+  { key: 'checklist', label: 'Chuẩn bị lễ giỗ', icon: CheckSquare },
+] as const;
+
+const riteRegions = [
+  { id: 'north', label: 'Miền Bắc', prayerId: 'prayer_truong_toc' },
+  { id: 'central', label: 'Miền Trung', prayerId: 'prayer_mien_trung_tien_thuong' },
+  { id: 'south', label: 'Miền Nam', prayerId: 'prayer_mien_nam_dam_gio' },
+] as const;
+
+const regionalTerms = [
+  ['father', 'Cha / Bố'],
+  ['mother', 'Mẹ / Má'],
+  ['grandfather', 'Ông'],
+  ['grandmother', 'Bà'],
+  ['elderBrother', 'Anh trưởng / Anh Hai'],
+  ['uncle', 'Bác / Chú / Cậu'],
+] as const;
+
+const focusOutline = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600';
+
 export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelectPerson }) => {
   const { people, settings } = useGenealogy();
   const { permission, settings: notifSettings } = useAnniversaryNotifications();
   const [notifModalOpen, setNotifModalOpen] = useState(false);
 
-  const [activeTab, setActiveTab] = useState<'calendar' | 'prayers' | 'regional' | 'checklist'>('calendar');
+  const [activeTab, setActiveTab] = useState<(typeof riteTabs)[number]['key']>('calendar');
   const [selectedRegion, setSelectedRegion] = useState<VietnameseRegion>('north');
-  const [prayerRegionFilter, setPrayerRegionFilter] = useState<'all' | VietnameseRegion>('all');
   const [selectedPrayer, setSelectedPrayer] = useState<PrayerTemplate>(TRADITIONAL_PRAYERS[0]);
   const [representativeName, setRepresentativeName] = useState('Trưởng nam / Tộc trưởng');
-  const [copySuccess, setCopySuccess] = useState(false);
+  const [copyStatus, setCopyStatus] = useState<'idle' | 'copied' | 'error'>('idle');
+  const prayerSelectId = useId();
+  const representativeId = useId();
+  const currentYear = new Date().getFullYear();
+  const currentGuide = REGIONAL_RITE_GUIDES[selectedRegion];
 
   // Checked state for preparation checklist
   const [checkedTasks, setCheckedTasks] = useState<Set<string>>(new Set());
@@ -97,52 +119,51 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
   }, [selectedPrayer, settings, representativeName, upcomingAnniversaries]);
 
   const handleCopyPrayer = async () => {
-    await navigator.clipboard.writeText(renderedPrayerText);
-    setCopySuccess(true);
-    setTimeout(() => setCopySuccess(false), 2500);
+    try {
+      await navigator.clipboard.writeText(renderedPrayerText);
+      setCopyStatus('copied');
+      setTimeout(() => setCopyStatus('idle'), 2500);
+    } catch {
+      setCopyStatus('error');
+    }
+  };
+
+  const selectPrayer = (prayer: PrayerTemplate) => {
+    setSelectedPrayer(prayer);
+    setCopyStatus('idle');
   };
 
   return (
-    <div className="space-y-6 pb-16 animate-in fade-in">
-      {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E7DFD4] pb-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1B3B2B] tracking-tight flex items-center gap-2">
-            <Calendar className="w-6 h-6 text-[#8C6D32]" />
-            <span>Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch</span>
-          </h2>
-          <p className="text-xs text-stone-500 mt-0.5">
-            Tự động tính ngày dương tương ứng, sổ văn khấn cổ truyền và danh mục chuẩn bị lễ giỗ họ.
-          </p>
-        </div>
+    <div className="min-w-0 space-y-5 pb-16 sm:space-y-6">
+      <header className="flex items-center gap-3 sm:gap-4">
+        <span className="grid size-11 shrink-0 place-items-center rounded-2xl border border-ivory-200 bg-gold-100 text-gold-700 dark:border-[#374A3D] dark:bg-[#283426] dark:text-[#E5BE6C]">
+          <Calendar aria-hidden="true" className="size-5" />
+        </span>
+        <h2 className="min-w-0 font-serif text-3xl leading-none font-bold tracking-tight text-forest-800 dark:text-emerald-200 sm:text-4xl">
+          Lễ giỗ và nghi lễ
+        </h2>
+      </header>
 
-        {/* Tab switchers */}
-        <div className="flex items-center gap-1.5 bg-[#F1EBE1] p-1 rounded-2xl border border-[#E3D9CC] overflow-x-auto max-w-full">
-          {[
-            { key: 'calendar', label: 'Lịch giỗ tiền nhân', icon: Calendar },
-            { key: 'prayers', label: 'Sổ văn khấn', icon: BookOpen },
-            { key: 'regional', label: 'Phong tục 3 Miền', icon: Compass },
-            { key: 'checklist', label: 'Nghi thức chuẩn bị', icon: CheckSquare },
-          ].map((tab) => {
-            const Icon = tab.icon;
-            const isActive = activeTab === tab.key;
-            return (
-              <button
-                key={tab.key}
-                type="button"
-                onClick={() => setActiveTab(tab.key as 'calendar' | 'prayers' | 'regional' | 'checklist')}
-                className={`flex items-center gap-1.5 px-3 py-1.5 rounded-xl text-xs font-semibold whitespace-nowrap transition-all ${
-                  isActive
-                    ? 'bg-[#1B3B2B] text-white shadow-xs'
-                    : 'text-[#5C4F42] hover:text-[#1B3B2B]'
-                }`}
-              >
-                <Icon className="w-3.5 h-3.5" />
-                <span>{tab.label}</span>
-              </button>
-            );
-          })}
-        </div>
+      <div role="group" aria-label="Nội dung lễ giỗ" className="grid min-w-0 grid-cols-2 gap-1.5 rounded-2xl border border-ivory-200 bg-ivory-100 p-1.5 dark:border-[#374A3D] dark:bg-[#1F2E25] sm:grid-cols-4">
+        {riteTabs.map(({ key, label, icon: Icon }) => {
+          const isActive = activeTab === key;
+          return (
+            <button
+              key={key}
+              type="button"
+              aria-pressed={isActive}
+              onClick={() => setActiveTab(key)}
+              className={`flex min-h-11 min-w-0 items-center justify-center gap-1.5 rounded-xl px-2 py-2 text-xs font-semibold transition-colors sm:gap-2 sm:text-sm ${focusOutline} ${
+                isActive
+                  ? 'bg-forest-800 text-white shadow-xs'
+                  : 'text-bark-600 hover:bg-ivory-200 dark:text-stone-200 dark:hover:bg-[#334538]'
+              }`}
+            >
+              <Icon aria-hidden="true" className="size-4 shrink-0" />
+              <span>{label}</span>
+            </button>
+          );
+        })}
       </div>
 
       {/* ========================================================================= */}
@@ -150,21 +171,16 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
       {/* ========================================================================= */}
       {activeTab === 'calendar' && (
         <div className="space-y-4">
-          <div className="p-4 rounded-2xl bg-amber-50/80 border border-amber-200 text-xs text-amber-900 flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <Clock className="w-4 h-4 text-amber-700 shrink-0" />
-              <span>
-                Năm hiện tại: <strong>{new Date().getFullYear()}</strong> (Can Chi:{' '}
-                <strong>{upcomingAnniversaries[0]?.canChiYear || 'Bính Ngọ'}</strong>). Con cháu nên
-                lên kế hoạch cúng giỗ trước 1–2 tuần.
-              </span>
-            </div>
+          <div className="flex flex-col gap-3 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 sm:flex-row sm:items-center sm:justify-between">
+            <p className="text-sm font-semibold text-bark-800 dark:text-stone-200">
+              Năm {currentYear} <span aria-hidden="true" className="mx-1 text-gold-700 dark:text-gold-500">·</span> {getCanChiYear(currentYear)}
+            </p>
             <button
               type="button"
               onClick={() => setNotifModalOpen(true)}
-              className="shrink-0 flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-amber-300 hover:bg-amber-100/60 text-amber-900 font-semibold text-xs transition-colors shadow-xs"
+              className={`inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-ivory-300 px-3 py-2 text-sm font-semibold text-forest-800 transition-colors hover:bg-ivory-100 dark:border-[#374A3D] dark:text-emerald-200 dark:hover:bg-[#26382D] ${focusOutline}`}
             >
-              <Bell className="w-3.5 h-3.5 text-amber-700" />
+              <Bell aria-hidden="true" className="size-4 shrink-0 text-gold-700 dark:text-gold-500" />
               <span>
                 Cài đặt thông báo{permission === 'granted' && notifSettings.enabled ? ' (Đang bật)' : ''}
               </span>
@@ -172,96 +188,88 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
           </div>
 
           {upcomingAnniversaries.length === 0 ? (
-            <div className="p-12 text-center bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] space-y-3">
-              <Calendar className="w-10 h-10 text-stone-300 mx-auto" />
-              <p className="text-sm font-serif font-bold text-stone-700">
+            <div className="space-y-2 rounded-2xl border border-ivory-200 bg-[#FFFDF9] px-4 py-8 text-center sm:py-12">
+              <Calendar aria-hidden="true" className="mx-auto size-7 text-gold-700 dark:text-gold-500" />
+              <p className="font-serif text-xl font-bold text-bark-900 dark:text-stone-100">
                 Chưa có ngày giỗ âm lịch nào được ghi nhận
               </p>
-              <p className="text-xs text-stone-500">
-                Hãy vào hồ sơ các thành viên đã khuất và điền "Ngày giỗ Âm lịch" để ứng dụng tự động
-                tính toán.
+              <p className="mx-auto max-w-md text-sm text-bark-600 dark:text-stone-300">
+                Thêm ngày giỗ âm lịch trong hồ sơ thành viên đã khuất để xem ngày dương lịch tương ứng.
               </p>
             </div>
           ) : (
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+            <ul className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
               {upcomingAnniversaries.map((anniv) => {
                 const p = anniv.person;
                 const isUpcomingSoon = anniv.daysRemaining >= 0 && anniv.daysRemaining <= 14;
 
                 return (
-                  <div
+                  <li
                     key={p.id}
-                    onClick={() => onSelectPerson(p.id)}
-                    className={`p-4 rounded-2xl bg-[#FFFDF9] border transition-all cursor-pointer shadow-xs hover:shadow-md flex flex-col justify-between ${
-                      isUpcomingSoon
-                        ? 'border-amber-400 ring-2 ring-amber-100 bg-amber-50/20'
-                        : 'border-[#E7DFD4] hover:border-[#1B3B2B]/40'
+                    className={`group relative flex min-w-0 flex-col gap-3 rounded-2xl border bg-[#FFFDF9] p-4 shadow-xs transition-colors hover:border-gold-600 focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-gold-600 ${
+                        isUpcomingSoon ? 'border-gold-500 dark:border-gold-700' : 'border-ivory-200 dark:border-[#374A3D]'
                     }`}
                   >
-                    <div>
-                      <div className="flex items-start justify-between gap-3 mb-2.5">
-                        <HeritageAvatar
-                          fullName={p.fullName}
-                          portraitUrl={p.portraitUrl}
-                          gender={p.gender}
-                          size="md"
-                          isLiving={false}
-                        />
-
-                        <div className="text-right">
-                          <span
-                            className={`text-[11px] font-bold tabular-nums ${
-                              anniv.daysRemaining < 0
-                                ? 'text-stone-400'
-                                : anniv.daysRemaining <= 7
-                                ? 'text-red-700'
-                                : anniv.daysRemaining <= 30
-                                ? 'text-[#8C6D32]'
-                                : 'text-[#1B3B2B]'
-                            }`}
+                    <div className="flex min-w-0 items-start gap-3">
+                      <HeritageAvatar
+                        fullName={p.fullName}
+                        portraitUrl={p.portraitUrl}
+                        gender={p.gender}
+                        size="sm"
+                        isLiving={false}
+                      />
+                      <div className="min-w-0 flex-1">
+                        <h3>
+                          <button
+                            type="button"
+                            onClick={() => onSelectPerson(p.id)}
+                            className="block text-left font-serif text-xl leading-snug font-bold wrap-anywhere text-bark-900 after:absolute after:inset-0 focus:outline-none dark:text-stone-100"
                           >
-                            {anniv.daysRemaining < 0
-                              ? 'Đã qua'
-                              : anniv.daysRemaining === 0
-                              ? 'Hôm nay giỗ'
-                              : `Còn ${anniv.daysRemaining} ngày`}
-                          </span>
-                        </div>
+                            {p.fullName}
+                          </button>
+                        </h3>
+                        {p.clanRole && <span className="block text-sm wrap-anywhere text-bark-600 dark:text-stone-300">{p.clanRole}</span>}
                       </div>
-
-                      <h3 className="font-serif font-bold text-sm text-[#1F1913] hover:text-[#1B3B2B] truncate">
-                        {p.fullName}
-                      </h3>
-
-                      <p className="text-xs text-[#8C6D32] font-semibold mt-0.5">
-                        Ngày {anniv.lunarDay} tháng {anniv.lunarMonth} (Âm lịch)
-                      </p>
-
-                      <p className="text-[11px] text-stone-500 mt-0.5">
-                        Dương lịch ước tính: {anniv.solarDate.toLocaleDateString('vi-VN')}
-                      </p>
-
-                      {p.clanRole && (
-                        <p className="text-[10px] text-stone-400 mt-1">Vai vế: {p.clanRole}</p>
-                      )}
-
-                      {anniv.lunarNote && (
-                        <p className="text-[10px] text-amber-900 italic mt-1 bg-amber-50 p-1.5 rounded-lg border border-amber-200">
-                          {anniv.lunarNote}
-                        </p>
-                      )}
+                      <ArrowUpRight aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold-700 group-hover:text-forest-800 dark:text-gold-500" />
                     </div>
 
-                    {p.burialPlace && (
-                      <div className="mt-3 pt-2 border-t border-stone-100 flex items-center gap-1 text-[10px] text-stone-400 truncate">
-                        <MapPin className="w-3 h-3 text-[#1B3B2B] shrink-0" />
-                        <span className="truncate">{p.burialPlace}</span>
-                      </div>
+                    <span className="grid grid-cols-2 gap-2 rounded-xl bg-ivory-50 p-3 text-xs dark:bg-[#1F2E25]">
+                      <span>
+                        <span className="block text-bark-600 dark:text-stone-300">Âm lịch</span>
+                        <span className="mt-0.5 block text-sm font-semibold tabular-nums text-bark-900 dark:text-stone-100">
+                          {anniv.lunarDay}/{anniv.lunarMonth}
+                        </span>
+                      </span>
+                      <span>
+                        <span className="block text-bark-600 dark:text-stone-300">Dương lịch (ước tính)</span>
+                        <span className="mt-0.5 block text-sm font-semibold tabular-nums text-bark-900 dark:text-stone-100">
+                          {anniv.solarDate.toLocaleDateString('vi-VN')}
+                        </span>
+                      </span>
+                    </span>
+                    {anniv.lunarNote && (
+                      <span className="text-sm leading-relaxed wrap-anywhere text-bark-600 italic dark:text-stone-300">
+                        {anniv.lunarNote}
+                      </span>
                     )}
-                  </div>
+                    {p.burialPlace && (
+                      <span className="flex items-start gap-1.5 text-xs wrap-anywhere text-bark-600 dark:text-stone-300">
+                        <MapPin aria-hidden="true" className="mt-0.5 size-3.5 shrink-0 text-gold-700 dark:text-gold-500" />
+                        {p.burialPlace}
+                      </span>
+                    )}
+                    <span className={`mt-auto self-start rounded-full px-2.5 py-1 text-xs font-semibold ${isUpcomingSoon
+                      ? 'bg-gold-100 text-gold-700 dark:bg-[#342D20] dark:text-amber-200'
+                      : 'bg-forest-50 text-forest-800 dark:bg-[#25372C] dark:text-emerald-200'
+                    }`}>
+                      {anniv.daysRemaining < 0
+                        ? 'Đã qua'
+                        : anniv.daysRemaining === 0 ? 'Hôm nay' : `Còn ${anniv.daysRemaining} ngày`}
+                    </span>
+                  </li>
                 );
               })}
-            </div>
+            </ul>
           )}
         </div>
       )}
@@ -270,80 +278,95 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
       {/* 2. SỔ VĂN KHẤN CỔ TRUYỀN */}
       {/* ========================================================================= */}
       {activeTab === 'prayers' && (
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-          {/* Left: Template Selector */}
-          <div className="space-y-3">
-            <h3 className="text-xs font-bold uppercase tracking-wider text-stone-500">
-              Chọn Bài Văn Khấn
-            </h3>
-            <div className="space-y-2">
+        <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(14rem,1fr)_minmax(0,2.25fr)] lg:items-start">
+          <div className="min-w-0 space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 dark:border-[#374A3D] sm:p-5">
+            <div className="space-y-1.5 lg:hidden">
+              <label htmlFor={prayerSelectId} className="text-sm font-semibold text-bark-800 dark:text-stone-200">
+                Bài văn khấn
+              </label>
+              <select
+                id={prayerSelectId}
+                value={selectedPrayer.id}
+                onChange={(e) => {
+                  const prayer = TRADITIONAL_PRAYERS.find((item) => item.id === e.target.value);
+                  if (prayer) selectPrayer(prayer);
+                }}
+                className={`min-h-11 w-full rounded-xl border border-ivory-300 bg-white px-3 py-2 text-base text-bark-900 ${focusOutline}`}
+              >
+                {TRADITIONAL_PRAYERS.map((prayer) => (
+                  <option key={prayer.id} value={prayer.id}>{prayer.title}</option>
+                ))}
+              </select>
+            </div>
+            <div role="group" aria-label="Bài văn khấn" className="hidden lg:grid lg:gap-1.5">
               {TRADITIONAL_PRAYERS.map((prayer) => (
-                <div
+                <button
                   key={prayer.id}
-                  onClick={() => setSelectedPrayer(prayer)}
-                  className={`p-3 rounded-2xl border cursor-pointer transition-all ${
+                  type="button"
+                  aria-pressed={selectedPrayer.id === prayer.id}
+                  onClick={() => selectPrayer(prayer)}
+                  className={`min-h-11 rounded-xl border px-3 py-2.5 text-left transition-colors ${focusOutline} ${
                     selectedPrayer.id === prayer.id
-                      ? 'bg-[#1B3B2B] text-white border-[#1B3B2B] shadow-xs'
-                      : 'bg-[#FFFDF9] border-[#E7DFD4] text-[#332A22] hover:bg-stone-50'
+                      ? 'border-forest-800 bg-forest-800 text-white'
+                      : 'border-transparent text-bark-900 hover:bg-ivory-50 dark:text-stone-100 dark:hover:bg-[#1F2E25]'
                   }`}
                 >
-                  <h4 className="font-serif font-bold text-xs">{prayer.title}</h4>
-                  <p
-                    className={`text-[10px] mt-0.5 ${
-                      selectedPrayer.id === prayer.id ? 'text-[#DBC599]' : 'text-stone-500'
+                  <span className="block text-sm font-semibold">{prayer.title}</span>
+                  <span
+                    className={`mt-0.5 block text-xs ${
+                      selectedPrayer.id === prayer.id ? 'text-[#DBC599]' : 'text-bark-600 dark:text-stone-300'
                     }`}
                   >
                     {prayer.targetRitual}
-                  </p>
-                </div>
+                  </span>
+                </button>
               ))}
             </div>
 
-            {/* Customization field */}
-            <div className="p-3 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] space-y-2">
-              <label className="block text-[11px] font-semibold text-stone-600">
-                Người đứng cúng (Tín chủ):
+            <div className="space-y-1.5">
+              <label htmlFor={representativeId} className="block text-sm font-semibold text-bark-800 dark:text-stone-200">
+                Người đứng cúng (tín chủ)
               </label>
               <input
+                id={representativeId}
                 type="text"
                 value={representativeName}
                 onChange={(e) => setRepresentativeName(e.target.value)}
                 placeholder="VD: Trưởng nam Trần Văn Khải"
-                className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-2.5 py-1.5 outline-none focus:border-[#1B3B2B]"
+                className={`min-h-11 w-full rounded-xl border border-ivory-300 bg-white px-3 py-2 text-base text-bark-900 ${focusOutline}`}
               />
             </div>
           </div>
 
-          {/* Right: Rendered Prayer Preview & Copy */}
-          <div className="md:col-span-2 rounded-3xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 sm:p-6 shadow-sm space-y-4">
-            <div className="flex items-center justify-between border-b border-[#E7DFD4] pb-3">
-              <div>
-                <h3 className="text-base font-serif font-bold text-[#1F1913]">
+          <section className="min-w-0 space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 shadow-xs dark:border-[#374A3D] sm:p-6">
+            <div className="flex flex-col gap-3 border-b border-ivory-200 pb-4 dark:border-[#374A3D] sm:flex-row sm:items-start sm:justify-between">
+              <div className="min-w-0 space-y-1">
+                <h3 className="font-serif text-2xl leading-tight font-bold text-bark-900 dark:text-stone-100">
                   {selectedPrayer.title}
                 </h3>
-                <p className="text-xs text-[#8C6D32]">{selectedPrayer.regionalNotes}</p>
+                <p className="text-sm text-gold-700 dark:text-[#E5BE6C]">{selectedPrayer.regionalNotes}</p>
               </div>
 
-              <div className="flex items-center gap-2">
-                <button
-                  type="button"
-                  onClick={handleCopyPrayer}
-                  className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-[#D5CABE] text-xs font-semibold text-[#1B3B2B] hover:bg-stone-100 transition-colors"
-                >
-                  {copySuccess ? (
-                    <CheckCircle className="w-3.5 h-3.5 text-emerald-600" />
-                  ) : (
-                    <Copy className="w-3.5 h-3.5" />
-                  )}
-                  <span>{copySuccess ? 'Đã sao chép' : 'Sao chép văn khấn'}</span>
-                </button>
-              </div>
+              <button
+                type="button"
+                onClick={handleCopyPrayer}
+                className={`inline-flex min-h-11 shrink-0 items-center justify-center gap-2 rounded-xl border border-ivory-300 px-3 py-2 text-sm font-semibold text-forest-800 transition-colors hover:bg-ivory-100 dark:border-[#374A3D] dark:text-emerald-200 dark:hover:bg-[#26382D] ${focusOutline}`}
+              >
+                {copyStatus === 'copied'
+                  ? <CheckCircle aria-hidden="true" className="size-4" />
+                  : <Copy aria-hidden="true" className="size-4" />}
+                <span>{copyStatus === 'copied' ? 'Đã sao chép' : 'Sao chép văn khấn'}</span>
+              </button>
             </div>
 
-            <div className="p-4 sm:p-6 rounded-2xl bg-[#FAF8F5] border border-[#E7DFD4] font-serif text-xs sm:text-sm text-[#2C241C] leading-relaxed whitespace-pre-line max-h-[60vh] overflow-y-auto select-text">
+            <div role="status" className={copyStatus === 'error' ? 'text-sm text-red-800 dark:text-red-200' : 'sr-only'}>
+              {copyStatus === 'copied' && 'Đã sao chép bài văn khấn.'}
+              {copyStatus === 'error' && 'Không sao chép được. Bạn có thể chọn và sao chép văn bản bên dưới.'}
+            </div>
+            <p className="select-text rounded-xl bg-ivory-50 p-3 font-serif text-lg leading-relaxed wrap-anywhere whitespace-pre-line text-bark-900 dark:bg-[#1F2E25] dark:text-stone-100 sm:p-6">
               {renderedPrayerText}
-            </div>
-          </div>
+            </p>
+          </section>
         </div>
       )}
 
@@ -351,237 +374,130 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
       {/* 3. NGHI THỨC & DANH MỤC CHUẨN BỊ */}
       {/* ========================================================================= */}
       {activeTab === 'checklist' && (
-        <div className="max-w-3xl mx-auto rounded-3xl bg-[#FFFDF9] border border-[#E7DFD4] p-6 shadow-sm space-y-6">
-          <div className="border-b border-[#E7DFD4] pb-3">
-            <h3 className="text-base font-serif font-bold text-[#1F1913] flex items-center gap-2">
-              <CheckSquare className="w-5 h-5 text-[#1B3B2B]" />
-              <span>Danh Mục Việc Cần Chuẩn Bị Ngày Giỗ Họ</span>
-            </h3>
-            <p className="text-xs text-stone-500">
-              Phân công việc chu đáo giúp ngày giỗ tổ và giỗ tiền nhân diễn ra trang nghiêm, thuận hòa.
-            </p>
-          </div>
-
-          <div className="space-y-3">
+        <section className="mx-auto max-w-3xl space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 dark:border-[#374A3D] sm:p-6">
+          <h3 className="border-b border-ivory-200 pb-3 font-serif text-2xl leading-tight font-bold text-bark-900 dark:border-[#374A3D] dark:text-stone-100">
+            Việc cần chuẩn bị
+          </h3>
+          <ul className="space-y-2">
             {RITE_PREPARATION_CHECKLIST.map((item) => {
               const isDone = checkedTasks.has(item.id);
               return (
-                <div
-                  key={item.id}
-                  onClick={() => toggleTask(item.id)}
-                  className={`p-3.5 rounded-2xl border cursor-pointer transition-all flex items-start gap-3 ${
+                <li key={item.id}>
+                  <label className={`flex min-h-11 cursor-pointer items-start gap-3 rounded-xl border p-3 transition-colors focus-within:border-gold-600 ${
                     isDone
-                      ? 'bg-emerald-50/60 border-emerald-200 text-stone-400'
-                      : 'bg-[#FAF8F5] border-[#E7DFD4] text-[#1F1913] hover:bg-white'
-                  }`}
-                >
-                  <button type="button" className="mt-0.5">
-                    {isDone ? (
-                      <CheckSquare className="w-4 h-4 text-emerald-700" />
-                    ) : (
-                      <Square className="w-4 h-4 text-stone-400" />
-                    )}
-                  </button>
-
-                  <div className="flex-1">
-                    <span className="text-[10px] font-bold uppercase tracking-wider text-[#8C6D32] block mb-0.5">
-                      {item.category}
+                      ? 'border-forest-600/30 bg-forest-50 dark:border-[#374A3D] dark:bg-[#25372C]'
+                      : 'border-ivory-200 bg-ivory-50 hover:border-gold-600 dark:border-[#374A3D] dark:bg-[#1F2E25]'
+                  }`}>
+                    <input
+                      type="checkbox"
+                      checked={isDone}
+                      onChange={() => toggleTask(item.id)}
+                      className={`mt-0.5 size-5 shrink-0 accent-forest-800 ${focusOutline}`}
+                    />
+                    <span className="min-w-0">
+                      <span className="mb-0.5 block text-xs font-semibold text-gold-700 dark:text-[#E5BE6C]">{item.category}</span>
+                      <span className={`block text-sm text-bark-900 dark:text-stone-100 ${isDone ? 'line-through' : ''}`}>{item.task}</span>
                     </span>
-                    <p className={`text-xs ${isDone ? 'line-through text-stone-400' : 'font-medium'}`}>
-                      {item.task}
-                    </p>
-                  </div>
-                </div>
+                  </label>
+                </li>
               );
             })}
-          </div>
-        </div>
+          </ul>
+        </section>
       )}
 
       {/* ========================================================================= */}
       {/* 3. PHONG TỤC CÚNG GIỖ 3 MIỀN (BẮC - TRUNG - NAM) */}
       {/* ========================================================================= */}
       {activeTab === 'regional' && (
-        <div className="space-y-6 max-w-5xl mx-auto">
-          {/* Region Switcher Bar */}
-          <div className="p-3 bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] shadow-xs flex flex-col sm:flex-row sm:items-center justify-between gap-3">
-            <div className="flex items-center gap-2">
-              <Compass className="w-5 h-5 text-[#8C6D32]" />
-              <div>
-                <h3 className="text-xs font-bold uppercase tracking-wider text-[#8C6D32]">
-                  Không Gian Văn Hóa & Lễ Tục
-                </h3>
-                <p className="text-sm font-serif font-bold text-[#1B3B2B]">
-                  Nghi Lễ Gia Tiên Theo 3 Miền Đất Nước
-                </p>
-              </div>
+        <div className="mx-auto max-w-6xl space-y-4">
+          <header className="flex min-w-0 flex-col gap-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 dark:border-[#374A3D] sm:p-6 lg:flex-row lg:items-center lg:justify-between">
+            <div className="min-w-0 space-y-1">
+              <h3 className="font-serif text-2xl leading-tight font-bold text-bark-900 dark:text-stone-100">{currentGuide.regionName}</h3>
+              <p className="text-sm text-gold-700 dark:text-[#E5BE6C]">{currentGuide.subTitle}</p>
             </div>
-
-            <div className="flex items-center gap-1.5 p-1 rounded-xl bg-[#EFE9DF] border border-[#DDD4C7]">
-              {[
-                { id: 'north', name: 'Miền Bắc' },
-                { id: 'central', name: 'Miền Trung' },
-                { id: 'south', name: 'Miền Nam' },
-              ].map((r) => (
+            <div role="group" aria-label="Vùng miền" className="grid min-w-0 grid-cols-3 gap-1 rounded-xl bg-ivory-100 p-1 dark:bg-[#1F2E25] lg:min-w-72">
+              {riteRegions.map(({ id, label }) => (
                 <button
-                  key={r.id}
+                  key={id}
                   type="button"
-                  onClick={() => setSelectedRegion(r.id as VietnameseRegion)}
-                  className={`px-3 py-1.5 rounded-lg text-xs font-bold transition-all ${
-                    selectedRegion === r.id
-                      ? 'bg-[#1B3B2B] text-white shadow-xs'
-                      : 'text-[#5C4F42] hover:text-[#1B3B2B]'
+                  aria-pressed={selectedRegion === id}
+                  onClick={() => setSelectedRegion(id)}
+                  className={`min-h-11 rounded-lg px-1.5 py-2 text-xs font-semibold transition-colors sm:px-3 sm:text-sm ${focusOutline} ${
+                    selectedRegion === id
+                      ? 'bg-forest-800 text-white'
+                      : 'text-bark-600 hover:bg-ivory-200 dark:text-stone-200 dark:hover:bg-[#334538]'
                   }`}
                 >
-                  {r.name}
+                  {label}
                 </button>
               ))}
             </div>
-          </div>
+          </header>
 
-          {/* Active Region Content Card */}
-          {(() => {
-            const currentGuide = REGIONAL_RITE_GUIDES[selectedRegion];
-            return (
-              <div className="space-y-6">
-                <div className="p-5 rounded-3xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-sm space-y-2">
-                  <div className="flex flex-wrap items-center gap-2 text-xs">
-                    <span className="font-bold uppercase tracking-wider text-[#1B3B2B]">
-                      {currentGuide.regionName}
-                    </span>
-                    <span aria-hidden="true" className="text-stone-300">·</span>
-                    <span className="text-[#8C6D32] italic">
-                      {currentGuide.subTitle}
-                    </span>
+          <div className="grid gap-4 lg:grid-cols-2">
+            <section className="space-y-3 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 dark:border-[#374A3D] sm:p-5">
+              <h4 className="flex items-center gap-2 font-serif text-xl font-bold text-forest-800 dark:text-emerald-200">
+                <Utensils aria-hidden="true" className="size-4 shrink-0 text-gold-700 dark:text-gold-500" />
+                Mâm cỗ truyền thống
+              </h4>
+              <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-bark-800 marker:text-gold-700 dark:text-stone-200">
+                {currentGuide.traditionalDishes.map((dish) => <li key={dish}>{dish}</li>)}
+              </ul>
+            </section>
+
+            <section className="space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 dark:border-[#374A3D] sm:p-5">
+              <h4 className="flex items-center gap-2 font-serif text-xl font-bold text-forest-800 dark:text-emerald-200">
+                <Users aria-hidden="true" className="size-4 shrink-0 text-gold-700 dark:text-gold-500" />
+                Xưng hô thân tộc
+              </h4>
+              <dl className="grid grid-cols-2 gap-2">
+                {regionalTerms.map(([key, label]) => (
+                  <div key={key} className="min-w-0 rounded-xl bg-ivory-50 p-2.5 dark:bg-[#1F2E25]">
+                    <dt className="text-xs text-bark-600 dark:text-stone-300">{label}</dt>
+                    <dd className="mt-0.5 text-sm font-semibold wrap-anywhere text-bark-900 dark:text-stone-100">{currentGuide.kinshipTerms[key]}</dd>
                   </div>
-                  <h4 className="text-lg font-serif font-bold text-[#1F1913]">
-                    Đặc trưng nghi lễ & chuẩn mực phong tục thờ cúng
-                  </h4>
-                </div>
-
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                  {/* Traditional Banquet Dishes */}
-                  <div className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-4">
-                    <div className="flex items-center gap-2 border-b border-[#E7DFD4] pb-2">
-                      <Utensils className="w-4 h-4 text-[#8C6D32]" />
-                      <h4 className="text-sm font-serif font-bold text-[#1B3B2B]">
-                        Mâm Cỗ Cúng Giỗ Truyền Thống
-                      </h4>
-                    </div>
-                    <ul className="space-y-2 text-xs text-[#332920]">
-                      {currentGuide.traditionalDishes.map((dish, idx) => (
-                        <li key={idx} className="flex items-start gap-2 p-2 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4]/70">
-                          <span className="w-5 h-5 rounded-full bg-[#1B3B2B]/10 text-[#1B3B2B] font-bold text-[10px] flex items-center justify-center shrink-0 mt-0.5">
-                            {idx + 1}
-                          </span>
-                          <span className="leading-relaxed">{dish}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
-
-                  {/* Regional Kinship Dialect Terms */}
-                  <div className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-4">
-                    <div className="flex items-center gap-2 border-b border-[#E7DFD4] pb-2">
-                      <Users className="w-4 h-4 text-[#8C6D32]" />
-                      <h4 className="text-sm font-serif font-bold text-[#1B3B2B]">
-                        Xưng Hô Thân Tộc Theo Phương Ngữ
-                      </h4>
-                    </div>
-                    <div className="grid grid-cols-2 gap-2 text-xs">
-                      <div className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4]">
-                        <span className="text-stone-400 text-[10px] block">Cha / Bố</span>
-                        <span className="font-bold text-[#1B3B2B] text-xs">{currentGuide.kinshipTerms.father}</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4]">
-                        <span className="text-stone-400 text-[10px] block">Mẹ / Má</span>
-                        <span className="font-bold text-[#1B3B2B] text-xs">{currentGuide.kinshipTerms.mother}</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4]">
-                        <span className="text-stone-400 text-[10px] block">Ông Nội / Cố</span>
-                        <span className="font-bold text-[#1B3B2B] text-xs">{currentGuide.kinshipTerms.grandfather}</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4]">
-                        <span className="text-stone-400 text-[10px] block">Bà Nội / Mệ</span>
-                        <span className="font-bold text-[#1B3B2B] text-xs">{currentGuide.kinshipTerms.grandmother}</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4]">
-                        <span className="text-stone-400 text-[10px] block">Anh Trưởng / Anh Hai</span>
-                        <span className="font-bold text-[#1B3B2B] text-xs">{currentGuide.kinshipTerms.elderBrother}</span>
-                      </div>
-                      <div className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4]">
-                        <span className="text-stone-400 text-[10px] block">Bác / Chú / Cậu</span>
-                        <span className="font-bold text-[#1B3B2B] text-xs">{currentGuide.kinshipTerms.uncle}</span>
-                      </div>
-                    </div>
-
-                    <div className="pt-2 border-t border-stone-200">
-                      <h5 className="text-xs font-semibold text-[#8C6D32] mb-1.5 flex items-center gap-1.5">
-                        <Flame className="w-3.5 h-3.5" />
-                        <span>Tập quán cúng tế & Nghi lễ cốt lõi</span>
-                      </h5>
-                      <ul className="space-y-1 text-xs text-stone-600">
-                        {currentGuide.customRituals.map((r, i) => (
-                          <li key={i} className="flex items-start gap-1.5">
-                            <span className="text-[#8C6D32] font-bold">•</span>
-                            <span>{r}</span>
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-
-                  {/* Altar arrangement & spiritual notes */}
-                  <div className="md:col-span-2 p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-3">
-                    <div className="flex items-center gap-2 border-b border-[#E7DFD4] pb-2">
-                      <Sparkles className="w-4 h-4 text-[#8C6D32]" />
-                      <h4 className="text-sm font-serif font-bold text-[#1B3B2B]">
-                        Lưu Ý Bài Trí Hương Án & Bàn Thờ Gia Tiên
-                      </h4>
-                    </div>
-                    <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
-                      {currentGuide.altarArrangementTips.map((tip, idx) => (
-                        <div key={idx} className="p-3 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4] text-xs text-stone-700 leading-relaxed">
-                          <span className="font-bold text-[#1B3B2B] block mb-1">Quy tắc {idx + 1}</span>
-                          {tip}
-                        </div>
-                      ))}
-                    </div>
-
-                    {/* Regional Prayer Direct Action */}
-                    <div className="p-3.5 rounded-xl bg-[#FAF5EB] border border-[#8C6D32]/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 mt-2">
-                      <div>
-                        <p className="text-xs font-bold text-[#1B3B2B]">
-                          Văn khấn cổ truyền phù hợp cho {currentGuide.regionName}
-                        </p>
-                        <p className="text-[11px] text-[#8C6D32]">
-                          Xem và tự động điền tên tiền nhân, tộc trưởng vào bài văn cúng theo đúng phong tục vùng miền.
-                        </p>
-                      </div>
-                      <button
-                        type="button"
-                        onClick={() => {
-                          const prayerId =
-                            selectedRegion === 'north'
-                              ? 'prayer_truong_toc'
-                              : selectedRegion === 'central'
-                              ? 'prayer_mien_trung_tien_thuong'
-                              : 'prayer_mien_nam_dam_gio';
-                          const p = TRADITIONAL_PRAYERS.find((item) => item.id === prayerId);
-                          if (p) setSelectedPrayer(p);
-                          setActiveTab('prayers');
-                          window.scrollTo({ top: 0, behavior: 'smooth' });
-                        }}
-                        className="px-3.5 py-1.5 rounded-xl bg-[#1B3B2B] text-white text-xs font-semibold hover:bg-[#28503C] transition-colors shrink-0"
-                      >
-                        Mở bài văn khấn vùng này →
-                      </button>
-                    </div>
-                  </div>
-                </div>
+                ))}
+              </dl>
+              <div className="space-y-2 border-t border-ivory-200 pt-3 dark:border-[#374A3D]">
+                <h5 className="flex items-center gap-2 text-sm font-semibold text-bark-900 dark:text-stone-100">
+                  <Flame aria-hidden="true" className="size-4 shrink-0 text-gold-700 dark:text-gold-500" />
+                  Tập quán và nghi lễ
+                </h5>
+                <ul className="list-disc space-y-2 pl-5 text-sm leading-relaxed text-bark-800 marker:text-gold-700 dark:text-stone-200">
+                  {currentGuide.customRituals.map((ritual) => <li key={ritual}>{ritual}</li>)}
+                </ul>
               </div>
-            );
-          })()}
+            </section>
+
+            <section className="space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 dark:border-[#374A3D] sm:p-5 lg:col-span-2">
+              <h4 className="flex items-center gap-2 font-serif text-xl font-bold text-forest-800 dark:text-emerald-200">
+                <Sparkles aria-hidden="true" className="size-4 shrink-0 text-gold-700 dark:text-gold-500" />
+                Bài trí bàn thờ gia tiên
+              </h4>
+              <ul className="grid gap-3 sm:grid-cols-3">
+                {currentGuide.altarArrangementTips.map((tip) => (
+                  <li key={tip} className="rounded-xl bg-ivory-50 p-3 text-sm leading-relaxed text-bark-800 dark:bg-[#1F2E25] dark:text-stone-200">
+                    {tip}
+                  </li>
+                ))}
+              </ul>
+              <button
+                type="button"
+                onClick={() => {
+                  const prayerId = riteRegions.find((region) => region.id === selectedRegion)?.prayerId;
+                  const prayer = TRADITIONAL_PRAYERS.find((item) => item.id === prayerId);
+                  if (prayer) selectPrayer(prayer);
+                  setActiveTab('prayers');
+                  window.scrollTo({ top: 0 });
+                }}
+                className={`inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-forest-800 px-4 py-2 text-sm font-semibold text-white transition-colors hover:bg-forest-700 sm:w-auto ${focusOutline}`}
+              >
+                <BookOpen aria-hidden="true" className="size-4" />
+                Mở bài văn khấn vùng này
+              </button>
+            </section>
+          </div>
         </div>
       )}
 
