@@ -1,0 +1,21 @@
+
+> react-example@0.0.0 test
+> vitest run
+
+
+ RUN  v5.1.0 D:/LMQ_My mine/Gia-pha/.worktrees/m2-desktop-product-integration
+
+
+ Test Files  19 passed (19)
+      Tests  221 passed (221)
+   Start at  13:41:25
+   Duration  2.14s (transform 33%, tests 32%, import 32%, worker 3%)
+
+    Isolate  19 workers spawned · ~307ms startup each (spawn + environment, per file)
+             at least ~526ms faster with isolate: false — reuses workers across files instead of one per file
+
+
+STDERR
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:60:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.

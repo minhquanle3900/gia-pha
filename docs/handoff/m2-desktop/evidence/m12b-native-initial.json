@@ -1,0 +1,76 @@
+{
+  "testedSHA": "211a85d25a491be1cf8317fd85cba853f1437888",
+  "userAgent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/156.0.0.0 Safari/537.36",
+  "origin": "http://127.0.0.1:3230",
+  "startedAt": "2026-11-26T07:13:19.774Z",
+  "cases": [
+    {
+      "id": "M12B-D01",
+      "adapterStatus": "PASS",
+      "details": {
+        "concurrent": [
+          "fulfilled",
+          "rejected"
+        ],
+        "rejection": "Error: Không thể sáp nhập vì hôn phối \"source-u\" và \"target-u\" cùng cặp thành viên nhưng thiếu niên đại phân biệt.",
+        "twoTabProductUI": "NOT_TESTED: concurrent adapter calls share one page connection"
+      }
+    },
+    {
+      "id": "M12B-D02",
+      "adapterStatus": "PASS",
+      "details": {
+        "rejection": "Error: Ảnh hoặc kỷ vật đang được sử dụng trong hồ sơ hoặc nhật ký. Hãy gỡ liên kết trước khi xóa.",
+        "mediaBefore": 1,
+        "mediaAfter": 2,
+        "productLargePNG": "Separate product UI check required"
+      }
+    },
+    {
+      "id": "M12B-D03",
+      "adapterStatus": "FAIL",
+      "error": "Error: Round-trip changed data"
+    },
+    {
+      "id": "M12B-D04",
+      "adapterStatus": "PASS",
+      "details": {
+        "warnings": [
+          "people[m0_child].birthDate: precision \"exact\" thiếu ngày, tháng hoặc năm. Giữ nguyên giá trị đã nhập."
+        ],
+        "blockedErrors": [
+          "people[0].birthDate thiếu hoặc không hợp lệ."
+        ]
+      }
+    },
+    {
+      "id": "M12B-D06",
+      "adapterStatus": "PASS",
+      "details": {
+        "original": {
+          "relationships": 40,
+          "unions": 12
+        },
+        "restored": {
+          "relationships": 40,
+          "unions": 12
+        },
+        "warnings": [],
+        "productWarningUI": "Separate UI inspection required"
+      }
+    },
+    {
+      "id": "M12B-D07",
+      "adapterStatus": "PASS",
+      "details": {
+        "people": 2,
+        "reasons": [
+          "Họ và tên trùng sau chuẩn hóa",
+          "Cùng năm sinh (1980)",
+          "Khác đời (3 và 4): cần đối chiếu"
+        ]
+      }
+    }
+  ],
+  "finishedAt": "2026-11-26T07:13:19.999Z"
+}

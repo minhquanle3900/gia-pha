@@ -1,0 +1,54 @@
+{
+  "testedCoreSHA": "211a85d25a491be1cf8317fd85cba853f1437888",
+  "ownBackupMergeNoOp": true,
+  "historicalPreserved": true,
+  "historicalDates": [
+    {
+      "id": "m0_child",
+      "birthDate": {
+        "precision": "exact",
+        "year": 1900,
+        "month": 3
+      }
+    },
+    {
+      "id": "m0_grandparent",
+      "birthDate": {
+        "precision": "year",
+        "year": 1920
+      },
+      "deathDate": {
+        "precision": "approx",
+        "displayText": "Cuối đời Lê"
+      }
+    }
+  ],
+  "duplicateReview": {
+    "people": 32,
+    "names": [
+      {
+        "id": "p_01",
+        "generation": 1
+      },
+      {
+        "id": "person_24e9b601-a4be-4a97-92f1-9f5574f2320b",
+        "generation": 2
+      }
+    ],
+    "originalPeopleRetained": true
+  },
+  "gedcom": {
+    "people": 31,
+    "unions": 12,
+    "relationships": 40,
+    "semanticEdgesEqual": true,
+    "lifeEvents": 0,
+    "media": 0,
+    "stories": 0
+  },
+  "fullJSONRestoreEqual": true,
+  "comparisonExceptions": [
+    "exportedAt",
+    "settings.lastBackupAt"
+  ]
+}

@@ -1,0 +1,12 @@
+[
+  {
+    "id": "form-escape",
+    "dialogStillOpen": true,
+    "focus": "VD: Trần Văn Khải"
+  },
+  {
+    "id": "form-dirty-cancel",
+    "reopenedName": "Trần Văn Lộc",
+    "observation": "Cancel dismissed the dirty draft without a confirmation; reopening shows stored name."
+  }
+]

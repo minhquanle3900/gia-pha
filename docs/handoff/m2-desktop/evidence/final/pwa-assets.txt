@@ -1,0 +1,11 @@
+200 application/manifest+json /manifest.webmanifest
+200 image/png /pwa-192x192.png
+200 image/png /pwa-512x512.png
+200 image/png /pwa-maskable-512x512.png
+200 text/html /
+200 image/png /apple-touch-icon.png
+200 image/svg+xml /icon.svg
+200 text/javascript /sw.js
+PASS manifest, PNG sizes, Apple touch icon and worker
+
+STDERR

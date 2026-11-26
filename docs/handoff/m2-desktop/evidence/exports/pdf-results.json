@@ -1,0 +1,23 @@
+[
+  {
+    "file": "family-book.pdf",
+    "bytes": 2712879,
+    "pdfinfo": "Producer:        jsPDF 4.2.1\nCreationDate:    Thu Nov 26 14:07:55 2026 SE Asia Standard Time\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           7\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       2712879 bytes\nOptimized:       no\nPDF version:     1.3\n",
+    "renderExit": 0,
+    "error": "Syntax Error: No display font for 'Symbol'\nSyntax Error: No display font for 'ArialUnicode'\n"
+  },
+  {
+    "file": "person-direct.pdf",
+    "bytes": 484975,
+    "pdfinfo": "Producer:        jsPDF 4.2.1\nCreationDate:    Thu Nov 26 14:07:10 2026 SE Asia Standard Time\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           2\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       484975 bytes\nOptimized:       no\nPDF version:     1.3\n",
+    "renderExit": 0,
+    "error": ""
+  },
+  {
+    "file": "person-modal.pdf",
+    "bytes": 715073,
+    "pdfinfo": "Producer:        jsPDF 4.2.1\nCreationDate:    Thu Nov 26 14:07:44 2026 SE Asia Standard Time\nCustom Metadata: no\nMetadata Stream: no\nTagged:          no\nUserProperties:  no\nSuspects:        no\nForm:            none\nJavaScript:      no\nPages:           15\nEncrypted:       no\nPage size:       595.28 x 841.89 pts (A4)\nPage rot:        0\nFile size:       715073 bytes\nOptimized:       no\nPDF version:     1.3\n",
+    "renderExit": 0,
+    "error": ""
+  }
+]

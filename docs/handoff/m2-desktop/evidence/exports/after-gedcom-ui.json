@@ -1,0 +1,1566 @@
+{
+  "app": "Gia Phả Việt – Cội Nguồn",
+  "schemaVersion": 1,
+  "exportedAt": "2026-11-26T07:28:02.132Z",
+  "settings": {
+    "id": "default",
+    "clanName": "Gia Phả Nhập Từ GEDCOM",
+    "clanMotto": "Uống nước nhớ nguồn",
+    "ancestralHallLocation": "Việt Nam",
+    "schemaVersion": 1,
+    "updatedAt": "2026-11-26T07:27:49.920Z",
+    "rootPersonId": "p_ged_00fe18e3-edf6-4783-878c-84092399885e",
+    "lastBackupAt": "2026-11-26T07:28:02.132Z"
+  },
+  "branches": [
+    {
+      "id": "branch_ged_077b01d8-6372-4689-9264-dd8628ff4185",
+      "name": "Chi Bính (Chi Nam Tiến)",
+      "code": "CHI-BÍNH-(CH",
+      "subBranches": [],
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "branch_ged_74c2cb5c-d967-42fe-8eff-cd5640f21c09",
+      "name": "Chi Ất (Chi Thứ)",
+      "code": "CHI-ẤT-(CHI-",
+      "subBranches": [],
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "branch_ged_ce9ab93f-4269-4a1e-940f-4a62b7fbf918",
+      "name": "Đại Tôn Họ Trần Đông Ngạc",
+      "code": "ĐẠI-TÔN-HỌ-T",
+      "subBranches": [],
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "name": "Chi Giáp (Chi Trưởng)",
+      "code": "CHI-GIÁP-(CH",
+      "subBranches": [],
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    }
+  ],
+  "people": [
+    {
+      "id": "p_ged_00fe18e3-edf6-4783-878c-84092399885e",
+      "fullName": "Trần Văn Lộc",
+      "commonName": "Cụ Đồ Lộc",
+      "gender": "male",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 14,
+        "month": 3,
+        "year": 1872,
+        "displayText": "14 MAR 1872"
+      },
+      "birthPlace": "Làng Đông Ngạc, phủ Hoài Đức, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 22,
+        "month": 11,
+        "year": 1948,
+        "displayText": "22 NOV 1948"
+      },
+      "deathPlace": "Đông Ngạc, Hà Nội",
+      "burialPlace": "Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc",
+      "occupation": "Nhà nho, Thầy đồ dạy chữ Hán và Quốc ngữ",
+      "residence": "Nhà cổ 3 gian Xóm Chùa, Đông Ngạc",
+      "biography": "Cụ Trần Văn Lộc sinh trưởng trong một gia đình nho học lâu đời ven sông Hồng. Năm 1898 cụ mở lớp dạy học miễn phí cho trẻ nghèo trong vùng, đồng thời kết hợp truyền dạy cả chữ Hán Nôm lẫn chữ Quốc ngữ buổi giao thời. Cụ nổi tiếng cương trực, điềm đạm, để lại bản Gia huấn 12 điều răn dạy con cháu lấy chữ Hiếu và sự học làm gốc.",
+      "generation": 1,
+      "branchId": "branch_ged_ce9ab93f-4269-4a1e-940f-4a62b7fbf918",
+      "subBranch": "Gốc Tổ Đông Ngạc",
+      "clanRole": "Thủy tổ chi phái cận đại",
+      "tabooName": "Trọng Lộc",
+      "courtesyName": "Đức Hiên",
+      "ancestralHome": "Làng Đông Ngạc, Hà Nội",
+      "merits": "Đứng ra trùng tu nhà thờ họ năm 1924, chép lại cuốn Gia phả chữ Hán sang Quốc ngữ năm 1930 và lập quỹ khuyến học cho con cháu trong làng.",
+      "deathAnniversaryLunar": {
+        "day": 22,
+        "month": 10,
+        "note": "Giỗ Tổ Đại Tôn tại Từ đường Đông Ngạc"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_043de85f-f969-4044-aabc-e83ace62fe57",
+      "fullName": "Đỗ Ngọc Lan Anh",
+      "commonName": "Lan Anh",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 7,
+        "month": 6,
+        "year": 1988,
+        "displayText": "7 JUN 1988"
+      },
+      "birthPlace": "Hải Dương",
+      "occupation": "Bác sĩ Nhi khoa",
+      "residence": "Nam Từ Liêm, Hà Nội",
+      "generation": 5,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "ancestralHome": "Chí Linh, Hải Dương",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_09816f58-e0d5-4c33-bc6b-d887ef655e25",
+      "fullName": "Trần Hữu Đạt",
+      "commonName": "Ông Cả Đạt Sài Gòn",
+      "gender": "male",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 12,
+        "month": 4,
+        "year": 1929,
+        "displayText": "12 APR 1929"
+      },
+      "birthPlace": "Hàng Đào, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 9,
+        "month": 11,
+        "year": 2015,
+        "displayText": "9 NOV 2015"
+      },
+      "deathPlace": "TP. Hồ Chí Minh",
+      "burialPlace": "Hoa viên Nghĩa trang Bình Dương",
+      "occupation": "Nghệ nhân kim hoàn và đồng hồ cổ",
+      "residence": "Phú Nhuận, TP. Hồ Chí Minh",
+      "biography": "Con trai trưởng của ông Trần Văn Phúc (Chi Ất). Năm 1955 ông vào Sài Gòn lập nghiệp với nghề chế tác kim hoàn và sửa đồng hồ tinh xảo, gây dựng Chi Bính gắn bó nghĩa tình.",
+      "generation": 3,
+      "branchId": "branch_ged_077b01d8-6372-4689-9264-dd8628ff4185",
+      "subBranch": "Phái Sài Gòn",
+      "clanRole": "Trưởng Chi Bính (Nam Tiến)",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Kết nối bà con đồng hương họ Trần tại miền Nam, lập Ban liên lạc họ Trần phía Nam từ năm 1995.",
+      "deathAnniversaryLunar": {
+        "day": 28,
+        "month": 9,
+        "note": "Giỗ Trưởng Chi Bính"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_1314d678-d28c-4f54-855c-9dfd1009988d",
+      "fullName": "Nguyễn Thị Kim",
+      "commonName": "Cụ Bà Đồ Lộc",
+      "gender": "female",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1876,
+        "displayText": "1876"
+      },
+      "birthPlace": "Làng Nhật Tân, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 8,
+        "month": 12,
+        "year": 1954,
+        "displayText": "8 DEC 1954"
+      },
+      "deathPlace": "Đông Ngạc, Hà Nội",
+      "burialPlace": "Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc",
+      "occupation": "Nghề dệt lụa và trồng dâu tằm",
+      "residence": "Đông Ngạc, Hà Nội",
+      "biography": "Cụ bà Nguyễn Thị Kim vốn dòng dõi gia giáo làng Nhật Tân, nổi tiếng khéo tay nghề tơ lụa. Trong những năm mất mùa đầu thế kỷ XX, cụ mở kho thóc gia đình giúp đỡ bà con lối xóm, được dân làng kính trọng gọi là Cụ Bà Từ Thuận.",
+      "generation": 1,
+      "branchId": "branch_ged_ce9ab93f-4269-4a1e-940f-4a62b7fbf918",
+      "clanRole": "Tổ mẫu Đại Tôn",
+      "tabooName": "Thị Kim",
+      "courtesyName": "Từ Thuận",
+      "ancestralHome": "Nhật Tân, Tây Hồ, Hà Nội",
+      "merits": "Tần tảo nuôi dạy ba người con trưởng thành qua thời kỳ biến động, quyên góp ruộng hương hỏa 3 mẫu để lo việc tế tự lâu dài.",
+      "deathAnniversaryLunar": {
+        "day": 14,
+        "month": 11,
+        "note": "Giỗ Tổ Mẫu"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_1d076e45-2c38-4cc4-9c41-babcb8de15ab",
+      "fullName": "Trần Khôi Nguyên",
+      "commonName": "Khôi Nguyên",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 14,
+        "month": 1,
+        "year": 1998,
+        "displayText": "14 JAN 1998"
+      },
+      "birthPlace": "Hà Nội",
+      "occupation": "Kiến trúc sư quy hoạch đô thị",
+      "residence": "Long Biên, Hà Nội",
+      "generation": 5,
+      "branchId": "branch_ged_74c2cb5c-d967-42fe-8eff-cd5640f21c09",
+      "subBranch": "Phái Bắc",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_1e702e02-7df4-4293-9631-e2e4e74958ea",
+      "fullName": "Trần Bảo Nam",
+      "commonName": "Bảo Nam",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 3,
+        "month": 4,
+        "year": 1995,
+        "displayText": "3 APR 1995"
+      },
+      "birthPlace": "TP. Hồ Chí Minh",
+      "occupation": "Chuyên viên Thiết kế Công nghiệp",
+      "residence": "Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh",
+      "generation": 5,
+      "branchId": "branch_ged_077b01d8-6372-4689-9264-dd8628ff4185",
+      "subBranch": "Phái Sài Gòn",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_281b47fb-ff56-467a-a10c-753509908623",
+      "fullName": "Lê Thị Thanh",
+      "commonName": "Bà Hai Hàng Đào",
+      "gender": "female",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1904,
+        "displayText": "1904"
+      },
+      "birthPlace": "Bắc Ninh",
+      "deathDate": {
+        "precision": "year",
+        "year": 1989,
+        "displayText": "1989"
+      },
+      "deathPlace": "Hà Nội",
+      "burialPlace": "Nghĩa trang Văn Điển, Hà Nội",
+      "occupation": "Buôn bán tơ lụa",
+      "residence": "Hoàn Kiếm, Hà Nội",
+      "generation": 2,
+      "branchId": "branch_ged_74c2cb5c-d967-42fe-8eff-cd5640f21c09",
+      "clanRole": "Nội tướng Chi Ất",
+      "ancestralHome": "Đình Bảng, Từ Sơn, Bắc Ninh",
+      "deathAnniversaryLunar": {
+        "day": 19,
+        "month": 9,
+        "note": "Giỗ cuối thu"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+      "fullName": "Trần Văn Khải",
+      "commonName": "Ông Cả Khải",
+      "gender": "male",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 5,
+        "month": 2,
+        "year": 1897,
+        "displayText": "5 FEB 1897"
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 19,
+        "month": 11,
+        "year": 1974,
+        "displayText": "19 NOV 1974"
+      },
+      "deathPlace": "Đông Ngạc, Hà Nội",
+      "burialPlace": "Nghĩa trang dòng họ Trần, Đông Ngạc",
+      "occupation": "Lương y Đông y, Giáo viên tiểu học",
+      "residence": "Đông Ngạc, Hà Nội",
+      "biography": "Ông Trần Văn Khải là trưởng nam của cụ Đồ Lộc. Ông nối nghiệp cha dạy học và bốc thuốc Bắc cứu người. Sau khi người vợ đầu là bà Nguyễn Thị Lan qua đời sớm năm 1932, ông tục huyền với bà Đặng Thị Nguyệt để cùng nuôi dạy đàn con nên người.",
+      "generation": 2,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "clanRole": "Trưởng tộc đời thứ 2 · Trưởng Chi Giáp",
+      "tabooName": "Minh Khải",
+      "courtesyName": "Kế Quang",
+      "ancestralHome": "Làng Đông Ngạc, Hà Nội",
+      "merits": "Bảo vệ nguyên vẹn hòm sắc phong và cuốn Gia phả cổ trong những năm chiến tranh tản cư 1946–1954.",
+      "deathAnniversaryLunar": {
+        "day": 6,
+        "month": 10,
+        "note": "Giỗ Ông Cả tại nhà thờ Chi Giáp"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_3ff21323-d54b-4c73-9c72-8776091f8371",
+      "fullName": "Ngô Thị Phương Thảo",
+      "commonName": "Bà Thảo",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 12,
+        "month": 8,
+        "year": 1958,
+        "displayText": "12 AUG 1958"
+      },
+      "birthPlace": "Hà Nội",
+      "occupation": "Kế toán trưởng (nghỉ hưu)",
+      "residence": "Đông Ngạc, Bắc Từ Liêm, Hà Nội",
+      "generation": 4,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "clanRole": "Thủ quỹ Quỹ Khuyến học dòng họ",
+      "ancestralHome": "Thanh Oai, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_40108e62-1a7e-45aa-9d26-efd47146aca5",
+      "fullName": "Trần Văn Phúc",
+      "commonName": "Ông Hai Phúc",
+      "gender": "male",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 18,
+        "month": 6,
+        "year": 1900,
+        "displayText": "18 JUN 1900"
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 27,
+        "month": 11,
+        "year": 1981,
+        "displayText": "27 NOV 1981"
+      },
+      "deathPlace": "Hoàn Kiếm, Hà Nội",
+      "burialPlace": "Nghĩa trang Văn Điển, Hà Nội",
+      "occupation": "Thương nhân tơ lụa, Nghệ nhân khảm trai",
+      "residence": "Số 42 Hàng Đào, Hoàn Kiếm, Hà Nội",
+      "biography": "Ông Trần Văn Phúc là con trai thứ hai của cụ Đồ Lộc. Năm 1926 ông lập hiệu tơ lụa và đồ gỗ khảm trai tại phố Hàng Đào, mở đầu cho Chi Ất phát triển tại nội thành Hà Nội.",
+      "generation": 2,
+      "branchId": "branch_ged_74c2cb5c-d967-42fe-8eff-cd5640f21c09",
+      "subBranch": "Phái Bắc",
+      "clanRole": "Trưởng Chi Ất",
+      "tabooName": "Hồng Phúc",
+      "courtesyName": "Tân Dân",
+      "ancestralHome": "Làng Đông Ngạc, Hà Nội",
+      "merits": "Đóng góp toàn bộ gỗ lim trùng tu hậu cung Từ đường năm 1962 và hỗ trợ con cháu các chi ra Hà Nội ăn học.",
+      "deathAnniversaryLunar": {
+        "day": 2,
+        "month": 11,
+        "note": "Giỗ Trưởng Chi Ất"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_5f54180d-dff8-4e77-a447-3b80c027e802",
+      "fullName": "Nguyễn Thị Lan",
+      "commonName": "Bà Cả Lan",
+      "gender": "female",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1899,
+        "displayText": "1899"
+      },
+      "birthPlace": "Làng Vẽ, Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 12,
+        "month": 9,
+        "year": 1932,
+        "displayText": "12 SEP 1932"
+      },
+      "deathPlace": "Đông Ngạc, Hà Nội",
+      "burialPlace": "Nghĩa trang dòng họ Trần, Đông Ngạc",
+      "occupation": "Nội trợ, làm bánh truyền thống",
+      "biography": "Bà Nguyễn Thị Lan là người vợ đầu của ông Trần Văn Khải, tính tình hiền hậu, đảm đang. Bà lâm bệnh qua đời sớm ở tuổi 33, để lại hai người con nhỏ.",
+      "generation": 2,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "clanRole": "Chính thất Trưởng chi Giáp",
+      "tabooName": "Ngọc Lan",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "deathAnniversaryLunar": {
+        "day": 12,
+        "month": 8,
+        "note": "Giỗ mùa thu rằm tháng Tám"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_69d2d5ab-c3c9-4978-a72b-4b2bdf96ac8f",
+      "fullName": "Trần Thị Thu Thủy",
+      "commonName": "Cô Thủy",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 4,
+        "month": 12,
+        "year": 1959,
+        "displayText": "4 DEC 1959"
+      },
+      "birthPlace": "Hà Nội",
+      "occupation": "Biên tập viên xuất bản văn hóa",
+      "residence": "Cầu Giấy, Hà Nội",
+      "generation": 4,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Biên tập cuốn Ký ức Đông Ngạc và sưu tầm tư liệu ảnh gia đình.",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_7b9a392d-5465-4754-8caf-11ab04ef26fc",
+      "fullName": "Hoàng Thị Bích",
+      "commonName": "Bà Bích",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 8,
+        "month": 3,
+        "year": 1942,
+        "displayText": "8 MAR 1942"
+      },
+      "birthPlace": "Nam Định",
+      "occupation": "Dược sĩ cao cấp (nghỉ hưu)",
+      "residence": "Quận Ba Đình, Hà Nội",
+      "generation": 3,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đoài",
+      "ancestralHome": "Hành Thiện, Xuân Trường, Nam Định",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_88c5d98a-dd53-4652-9427-7d8657b42d08",
+      "fullName": "Trần Gia Hưng",
+      "commonName": "Anh Hưng Sài Gòn",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 15,
+        "month": 3,
+        "year": 1963,
+        "displayText": "15 MAR 1963"
+      },
+      "birthPlace": "Sài Gòn",
+      "occupation": "Doanh nhân xuất nhập khẩu nông sản",
+      "residence": "Quận 3, TP. Hồ Chí Minh",
+      "generation": 4,
+      "branchId": "branch_ged_077b01d8-6372-4689-9264-dd8628ff4185",
+      "subBranch": "Phái Sài Gòn",
+      "clanRole": "Trưởng Ban liên lạc Chi Bính",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Tài trợ học bổng khuyến tài hằng năm cho sinh viên xuất sắc toàn dòng họ.",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_89a60627-1126-4477-9553-fdbf25027ab3",
+      "fullName": "Lâm Mỹ Dung",
+      "commonName": "Chị Dung",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 9,
+        "month": 9,
+        "year": 1966,
+        "displayText": "9 SEP 1966"
+      },
+      "birthPlace": "Đà Lạt, Lâm Đồng",
+      "occupation": "Chuyên gia dinh dưỡng",
+      "residence": "Quận 3, TP. Hồ Chí Minh",
+      "generation": 4,
+      "branchId": "branch_ged_077b01d8-6372-4689-9264-dd8628ff4185",
+      "subBranch": "Phái Sài Gòn",
+      "ancestralHome": "Đà Lạt, Lâm Đồng",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_8f218a8d-a950-4a49-9502-8219d8526991",
+      "fullName": "Phạm Thị Hiền",
+      "commonName": "Bà Giáo Hiền",
+      "gender": "female",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 2,
+        "month": 9,
+        "year": 1927,
+        "displayText": "2 SEP 1927"
+      },
+      "birthPlace": "Hà Đông, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 21,
+        "month": 1,
+        "year": 2016,
+        "displayText": "21 JAN 2016"
+      },
+      "deathPlace": "Hà Nội",
+      "occupation": "Giáo viên Văn học",
+      "residence": "Đông Ngạc, Hà Nội",
+      "generation": 3,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "ancestralHome": "Làng lụa Vạn Phúc, Hà Đông",
+      "deathAnniversaryLunar": {
+        "day": 12,
+        "month": 12
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_97aa295f-ffa1-42ef-8f06-1094517128f5",
+      "fullName": "Trần Thị Mai",
+      "commonName": "Bà Cô Mai",
+      "gender": "female",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1928,
+        "displayText": "1928"
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "year",
+        "year": 2012,
+        "displayText": "2012"
+      },
+      "deathPlace": "Hải Phòng",
+      "occupation": "Y tá bệnh viện đa khoa",
+      "residence": "Lê Chân, Hải Phòng",
+      "generation": 3,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "deathAnniversaryLunar": {
+        "day": 18,
+        "month": 7
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_9951e839-a2d2-4619-8bbc-489d0ed582c9",
+      "fullName": "Đặng Thị Nguyệt",
+      "commonName": "Bà Hai Nguyệt",
+      "gender": "female",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 20,
+        "month": 8,
+        "year": 1908,
+        "displayText": "20 AUG 1908"
+      },
+      "birthPlace": "Làng Xuân Đỉnh, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 3,
+        "month": 4,
+        "year": 1986,
+        "displayText": "3 APR 1986"
+      },
+      "deathPlace": "Hà Nội",
+      "burialPlace": "Nghĩa trang dòng họ Trần, Đông Ngạc",
+      "occupation": "Bào chế dược liệu Đông y",
+      "biography": "Bà Đặng Thị Nguyệt kết hôn với ông Trần Văn Khải năm 1934. Bà phụ giúp chồng bốc thuốc nam và chăm sóc cả đại gia đình trong giai đoạn tản cư lên Phú Thọ.",
+      "generation": 2,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "clanRole": "Kế thất Trưởng chi Giáp",
+      "tabooName": "Thu Nguyệt",
+      "ancestralHome": "Xuân Đỉnh, Từ Liêm, Hà Nội",
+      "merits": "Hết lòng thương yêu, nuôi dạy các con riêng của chồng như con ruột, giữ hòa khí đại gia đình qua nhiều thập kỷ.",
+      "deathAnniversaryLunar": {
+        "day": 25,
+        "month": 2
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_a24c4d6a-3195-4c9e-bab8-0a81e3ecefe9",
+      "fullName": "Trần Quốc Tuấn",
+      "commonName": "Ông Tuấn Trưởng Tộc",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 19,
+        "month": 5,
+        "year": 1954,
+        "displayText": "19 MAY 1954"
+      },
+      "birthPlace": "Hà Nội",
+      "occupation": "Bác sĩ chuyên khoa Nội, Giảng viên Y khoa",
+      "residence": "Đông Ngạc, Bắc Từ Liêm, Hà Nội",
+      "biography": "Là con trưởng của ông Trần Văn Nghị, bác sĩ Trần Quốc Tuấn hiện đảm nhiệm vai trò Trưởng tộc, tận tâm kết nối các thế hệ trẻ trong và ngoài nước hướng về cội nguồn.",
+      "generation": 4,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "clanRole": "Trưởng tộc đương nhiệm",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Chủ trì số hóa Gia phả dòng họ Trần Đông Ngạc, tổ chức khám sức khỏe định kỳ cho các bậc cao niên trong họ.",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_a79942b8-5734-4667-83d0-a5a86237117f",
+      "fullName": "Trần Đức Bảo",
+      "commonName": "Chú Bảo",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "approx",
+        "year": 1972,
+        "displayText": "ABT 1972"
+      },
+      "birthPlace": "Quảng Bình",
+      "occupation": "Nghệ nhân phục chế đồ gỗ cổ",
+      "residence": "Đống Đa, Hà Nội",
+      "biography": "Ông Trần Văn Minh và bà Hoàng Thị Bích nhận nuôi Trần Đức Bảo từ năm 1973 sau chiến tranh. Anh lớn lên trong tình yêu thương trọn vẹn của dòng họ và trở thành nghệ nhân chăm lo nội thất thờ tự của Từ đường.",
+      "generation": 4,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đoài",
+      "clanRole": "Thành viên Ban Nghi lễ Từ đường",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Trực tiếp sơn son thếp vàng và bảo dưỡng hoành phi câu đối tại nhà thờ họ.",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_bfe19b00-c0f8-449b-97a0-5d70314b9128",
+      "fullName": "Trần Ngọc Khánh Linh",
+      "commonName": "Khánh Linh",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 18,
+        "month": 11,
+        "year": 2001,
+        "displayText": "18 NOV 2001"
+      },
+      "birthPlace": "TP. Hồ Chí Minh",
+      "occupation": "Nghiên cứu sinh Văn hóa Đông Nam Á",
+      "residence": "Quận 3, TP. Hồ Chí Minh",
+      "generation": 5,
+      "branchId": "branch_ged_077b01d8-6372-4689-9264-dd8628ff4185",
+      "subBranch": "Phái Sài Gòn",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_c14310f7-08ae-4f3d-8efe-dca5045e96a6",
+      "fullName": "Trần Thị Thu Hà",
+      "commonName": "Cô Hà Kiến Trúc",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 22,
+        "month": 7,
+        "year": 1968,
+        "displayText": "22 JUL 1968"
+      },
+      "birthPlace": "Ba Đình, Hà Nội",
+      "occupation": "Kiến trúc sư cảnh quan",
+      "residence": "Tây Hồ, Hà Nội",
+      "generation": 4,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đoài",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_c9e66d3d-5b07-48d9-b382-dce1d3fa2d57",
+      "fullName": "Trần Hữu Khôi",
+      "commonName": "Anh Khôi",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 28,
+        "month": 10,
+        "year": 1965,
+        "displayText": "28 OCT 1965"
+      },
+      "birthPlace": "Hoàn Kiếm, Hà Nội",
+      "occupation": "Giảng viên Lịch sử Việt Nam",
+      "residence": "Long Biên, Hà Nội",
+      "generation": 4,
+      "branchId": "branch_ged_74c2cb5c-d967-42fe-8eff-cd5640f21c09",
+      "subBranch": "Phái Bắc",
+      "clanRole": "Thư ký Hội đồng Gia tộc · Phụ trách biên khảo phả hệ",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_d07d93ae-797f-4faa-b8ce-1db518d35325",
+      "fullName": "Trần Văn Nghị",
+      "commonName": "Ông Trưởng Nghị",
+      "gender": "male",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 10,
+        "month": 5,
+        "year": 1923,
+        "displayText": "10 MAY 1923"
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 15,
+        "month": 12,
+        "year": 2004,
+        "displayText": "15 DEC 2004"
+      },
+      "deathPlace": "Hà Nội",
+      "burialPlace": "Nghĩa trang dòng họ Trần, Đông Ngạc",
+      "occupation": "Nhà giáo ưu tú, Hiệu trưởng trường cấp 3",
+      "residence": "Đông Ngạc, Bắc Từ Liêm, Hà Nội",
+      "biography": "Ông Trần Văn Nghị là con trai trưởng của ông Khải và bà Lan. Tham gia bình dân học vụ từ năm 1945, sau đó cống hiến hơn 40 năm cho ngành giáo dục Thủ đô.",
+      "generation": 3,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "clanRole": "Trưởng tộc đời thứ 3",
+      "alias": "Việt Sơn",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Chủ trì biên soạn tập Gia phả đánh máy năm 1992 và thành lập Hội đồng Gia tộc họ Trần Đông Ngạc.",
+      "deathAnniversaryLunar": {
+        "day": 4,
+        "month": 11,
+        "note": "Giỗ Ông Trưởng Nghị"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_d754aafb-d08c-48f6-ac34-036bec5e23cd",
+      "fullName": "Trần Thị Hạnh",
+      "commonName": "Bà Cô Ba Hạnh",
+      "gender": "female",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "approx",
+        "year": 1903,
+        "displayText": "ABT 1903"
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "occupation": "Làm vườn, dệt vải",
+      "residence": "Sơn Tây, Hà Nội",
+      "generation": 2,
+      "branchId": "branch_ged_ce9ab93f-4269-4a1e-940f-4a62b7fbf918",
+      "clanRole": "Cô họ Đời thứ 2",
+      "ancestralHome": "Làng Đông Ngạc, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_df7c1aa5-d608-4027-94f9-8ddab97f73e2",
+      "fullName": "Trần Văn Minh",
+      "commonName": "Ông Minh Kiến Trúc",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 16,
+        "month": 10,
+        "year": 1938,
+        "displayText": "16 OCT 1938"
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "occupation": "Kiến trúc sư bảo tồn di sản",
+      "residence": "Quận Ba Đình, Hà Nội",
+      "biography": "Ông Trần Văn Minh là con trai của ông Khải và bà Đặng Thị Nguyệt. Tốt nghiệp Đại học Kiến trúc khóa đầu, ông dành trọn sự nghiệp nghiên cứu đình chùa và nhà cổ đồng bằng Bắc Bộ. Hiện ở tuổi gần 90, ông vẫn minh mẫn kể chuyện lịch sử dòng họ cho con cháu.",
+      "generation": 3,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đoài",
+      "clanRole": "Cố vấn Hội đồng Gia tộc · Trưởng Phái Đoài",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Thiết kế bản vẽ tu bổ Từ đường năm 2008 giữ nguyên kiến trúc gỗ kẻ truyền Bắc Bộ.",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_e8f2a4fb-147e-4ca2-b6ed-0ec3c0d8220e",
+      "fullName": "Võ Thị Ngọc Mai",
+      "commonName": "Bà Đạt",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 25,
+        "month": 1,
+        "year": 1935,
+        "displayText": "25 JAN 1935"
+      },
+      "birthPlace": "Gia Định, TP. Hồ Chí Minh",
+      "occupation": "Giáo viên nữ công gia chánh (nghỉ hưu)",
+      "residence": "Phú Nhuận, TP. Hồ Chí Minh",
+      "generation": 3,
+      "branchId": "branch_ged_077b01d8-6372-4689-9264-dd8628ff4185",
+      "subBranch": "Phái Sài Gòn",
+      "ancestralHome": "Gò Công, Tiền Giang",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_ef537f5e-2a9b-4a29-8174-8de9b2519c67",
+      "fullName": "Trần Hữu Kiên",
+      "commonName": "Ông Kiên Hàng Đào",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 3,
+        "month": 11,
+        "year": 1934,
+        "displayText": "3 NOV 1934"
+      },
+      "birthPlace": "Hoàn Kiếm, Hà Nội",
+      "occupation": "Kỹ sư cơ khí chế tạo (nghỉ hưu)",
+      "residence": "Hoàn Kiếm, Hà Nội",
+      "generation": 3,
+      "branchId": "branch_ged_74c2cb5c-d967-42fe-8eff-cd5640f21c09",
+      "subBranch": "Phái Bắc",
+      "clanRole": "Trưởng Chi Ất đương nhiệm",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_f9d86dad-ce3d-4190-9837-368f295aa6dc",
+      "fullName": "Trần Văn Tín",
+      "commonName": "Chú Út Tín",
+      "gender": "male",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1944,
+        "displayText": "1944"
+      },
+      "birthPlace": "Phú Thọ (nơi tản cư)",
+      "deathDate": {
+        "precision": "exact",
+        "day": 30,
+        "month": 10,
+        "year": 1971,
+        "displayText": "30 OCT 1971"
+      },
+      "deathPlace": "Quảng Trị",
+      "burialPlace": "Nghĩa trang Liệt sĩ Trường Sơn, Quảng Trị",
+      "occupation": "Kỹ sư thông tin quân đội (Liệt sĩ)",
+      "biography": "Sinh ra trong những năm gia đình bắt đầu chuẩn bị kháng chiến, Trần Văn Tín là sinh viên xuất sắc ngành vô tuyến điện trước khi nhập ngũ năm 1968. Những bức thư tay từ chiến trường của ông hiện được lưu giữ trang trọng tại phòng truyền thống dòng họ.",
+      "generation": 3,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đoài",
+      "clanRole": "Liệt sĩ dòng họ",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Hy sinh vì độc lập Tổ quốc năm 27 tuổi khi chưa lập gia đình.",
+      "deathAnniversaryLunar": {
+        "day": 12,
+        "month": 9,
+        "note": "Giỗ Liệt sĩ Trần Văn Tín"
+      },
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_fbe62ba2-f351-4103-aa9b-345b06fe1af5",
+      "fullName": "Trần Minh Châu",
+      "commonName": "Minh Châu",
+      "gender": "female",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 24,
+        "month": 9,
+        "year": 1991,
+        "displayText": "24 SEP 1991"
+      },
+      "birthPlace": "Hà Nội",
+      "occupation": "Nhà nghiên cứu mỹ thuật cổ",
+      "residence": "Đông Ngạc, Hà Nội",
+      "generation": 5,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "p_ged_fe6f07e2-964f-41a6-856b-f1cfd18b63a5",
+      "fullName": "Trần Minh Quân",
+      "commonName": "Minh Quân",
+      "gender": "male",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 11,
+        "month": 2,
+        "year": 1985,
+        "displayText": "11 FEB 1985"
+      },
+      "birthPlace": "Hà Nội",
+      "occupation": "Kỹ sư phần mềm & Lưu trữ số",
+      "residence": "Nam Từ Liêm, Hà Nội",
+      "generation": 5,
+      "branchId": "branch_ged_e74e7462-9332-47c6-9cab-5e9e3c7340e0",
+      "subBranch": "Phái Đông",
+      "clanRole": "Trưởng tôn Đời thứ 5 · Quản trị gia phả số",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "merits": "Xây dựng hệ thống lưu trữ gia phả số ngoại tuyến cho toàn dòng họ.",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    }
+  ],
+  "unions": [
+    {
+      "id": "u_ged_23c4931d-51a4-4c2e-b773-59e81d349a19",
+      "partnerIds": [
+        "p_ged_ef537f5e-2a9b-4a29-8174-8de9b2519c67"
+      ],
+      "status": "married",
+      "marriageOrder": 1,
+      "notes": "Thông tin người phối ngẫu đang được con cháu cập nhật bổ sung.",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_4a875c14-f2cc-4ed5-9298-4a1d8dca641b",
+      "partnerIds": [
+        "p_ged_d07d93ae-797f-4faa-b8ce-1db518d35325",
+        "p_ged_8f218a8d-a950-4a49-9502-8219d8526991"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1951,
+        "displayText": "1951"
+      },
+      "marriagePlace": "Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_949110f0-7316-4320-a1de-c6b530d16865",
+      "partnerIds": [
+        "p_ged_00fe18e3-edf6-4783-878c-84092399885e",
+        "p_ged_1314d678-d28c-4f54-855c-9dfd1009988d"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1895,
+        "displayText": "1895"
+      },
+      "marriagePlace": "Đông Ngạc, Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "notes": "Hôn lễ truyền thống tại làng Đông Ngạc.",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_9b9c63c4-654c-4a7e-aa56-3960efed71be",
+      "partnerIds": [
+        "p_ged_df7c1aa5-d608-4027-94f9-8ddab97f73e2",
+        "p_ged_7b9a392d-5465-4754-8caf-11ab04ef26fc"
+      ],
+      "marriageDate": {
+        "precision": "exact",
+        "day": 20,
+        "month": 11,
+        "year": 1965,
+        "displayText": "20 NOV 1965"
+      },
+      "marriagePlace": "Ba Đình, Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_b5abdb74-5dd9-4b5a-91e2-f372c68ff1cc",
+      "partnerIds": [
+        "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+        "p_ged_5f54180d-dff8-4e77-a447-3b80c027e802"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1920,
+        "displayText": "1920"
+      },
+      "marriagePlace": "Đông Ngạc, Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "notes": "Chính thất (bà Nguyễn Thị Lan mất sớm năm 1932).",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_ba11b484-40de-4b95-9ebd-79f029ef8fbc",
+      "partnerIds": [
+        "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+        "p_ged_9951e839-a2d2-4619-8bbc-489d0ed582c9"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1934,
+        "displayText": "1934"
+      },
+      "marriagePlace": "Xuân Đỉnh, Hà Nội",
+      "status": "married",
+      "marriageOrder": 2,
+      "notes": "Tục huyền (kế thất bà Đặng Thị Nguyệt).",
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_caf5d533-ec5d-4428-9927-8a428eeb89dd",
+      "partnerIds": [
+        "p_ged_88c5d98a-dd53-4652-9427-7d8657b42d08",
+        "p_ged_89a60627-1126-4477-9553-fdbf25027ab3"
+      ],
+      "marriageDate": {
+        "precision": "exact",
+        "day": 10,
+        "month": 12,
+        "year": 1992,
+        "displayText": "10 DEC 1992"
+      },
+      "marriagePlace": "TP. Hồ Chí Minh",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_d87489b5-9700-401b-a8b5-743532b32b6c",
+      "partnerIds": [
+        "p_ged_fe6f07e2-964f-41a6-856b-f1cfd18b63a5",
+        "p_ged_043de85f-f969-4044-aabc-e83ace62fe57"
+      ],
+      "marriageDate": {
+        "precision": "exact",
+        "day": 22,
+        "month": 10,
+        "year": 2014,
+        "displayText": "22 OCT 2014"
+      },
+      "marriagePlace": "Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_e2848103-8e07-47ad-8094-ab6d0c09f1f2",
+      "partnerIds": [
+        "p_ged_09816f58-e0d5-4c33-bc6b-d887ef655e25",
+        "p_ged_e8f2a4fb-147e-4ca2-b6ed-0ec3c0d8220e"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1960,
+        "displayText": "1960"
+      },
+      "marriagePlace": "Gia Định, Sài Gòn",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_ed5e1602-d69c-4e06-84c5-e2da2c65272d",
+      "partnerIds": [
+        "p_ged_c9e66d3d-5b07-48d9-b382-dce1d3fa2d57"
+      ],
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_f0ca66c6-04ad-477d-8e77-13bf1e9bd566",
+      "partnerIds": [
+        "p_ged_40108e62-1a7e-45aa-9d26-efd47146aca5",
+        "p_ged_281b47fb-ff56-467a-a10c-753509908623"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1925,
+        "displayText": "1925"
+      },
+      "marriagePlace": "Từ Sơn, Bắc Ninh",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "u_ged_feadec10-8bdd-463e-83a1-d08eaf7a0947",
+      "partnerIds": [
+        "p_ged_a24c4d6a-3195-4c9e-bab8-0a81e3ecefe9",
+        "p_ged_3ff21323-d54b-4c73-9c72-8776091f8371"
+      ],
+      "marriageDate": {
+        "precision": "exact",
+        "day": 16,
+        "month": 1,
+        "year": 1983,
+        "displayText": "16 JAN 1983"
+      },
+      "marriagePlace": "Đông Ngạc, Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r_ged_02f9f175-6562-4193-b785-a0f093af41b8",
+      "parentId": "p_ged_e8f2a4fb-147e-4ca2-b6ed-0ec3c0d8220e",
+      "childId": "p_ged_88c5d98a-dd53-4652-9427-7d8657b42d08",
+      "unionId": "u_ged_e2848103-8e07-47ad-8094-ab6d0c09f1f2",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_063c325d-fc0c-450d-b07e-1a3a79015717",
+      "parentId": "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+      "childId": "p_ged_df7c1aa5-d608-4027-94f9-8ddab97f73e2",
+      "unionId": "u_ged_ba11b484-40de-4b95-9ebd-79f029ef8fbc",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_06bcaa57-7a37-4442-999d-91e7b45e538a",
+      "parentId": "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+      "childId": "p_ged_f9d86dad-ce3d-4190-9837-368f295aa6dc",
+      "unionId": "u_ged_ba11b484-40de-4b95-9ebd-79f029ef8fbc",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_0808cb2c-576e-436d-a22c-beecbf33836b",
+      "parentId": "p_ged_00fe18e3-edf6-4783-878c-84092399885e",
+      "childId": "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+      "unionId": "u_ged_949110f0-7316-4320-a1de-c6b530d16865",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_08a68782-0bee-474f-a6f1-c0e870bbd688",
+      "parentId": "p_ged_09816f58-e0d5-4c33-bc6b-d887ef655e25",
+      "childId": "p_ged_88c5d98a-dd53-4652-9427-7d8657b42d08",
+      "unionId": "u_ged_e2848103-8e07-47ad-8094-ab6d0c09f1f2",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_0c35d775-d71e-453e-b84f-7215376cf9d9",
+      "parentId": "p_ged_df7c1aa5-d608-4027-94f9-8ddab97f73e2",
+      "childId": "p_ged_a79942b8-5734-4667-83d0-a5a86237117f",
+      "unionId": "u_ged_9b9c63c4-654c-4a7e-aa56-3960efed71be",
+      "lineageType": "adoptive",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_1e9212bf-8993-47c7-877f-738ba355d6ed",
+      "parentId": "p_ged_d07d93ae-797f-4faa-b8ce-1db518d35325",
+      "childId": "p_ged_69d2d5ab-c3c9-4978-a72b-4b2bdf96ac8f",
+      "unionId": "u_ged_4a875c14-f2cc-4ed5-9298-4a1d8dca641b",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_2cf2451e-8366-43cd-837a-2af877fc35a2",
+      "parentId": "p_ged_8f218a8d-a950-4a49-9502-8219d8526991",
+      "childId": "p_ged_69d2d5ab-c3c9-4978-a72b-4b2bdf96ac8f",
+      "unionId": "u_ged_4a875c14-f2cc-4ed5-9298-4a1d8dca641b",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_32f54cf5-d6b7-4913-adeb-6133e9c5d146",
+      "parentId": "p_ged_88c5d98a-dd53-4652-9427-7d8657b42d08",
+      "childId": "p_ged_bfe19b00-c0f8-449b-97a0-5d70314b9128",
+      "unionId": "u_ged_caf5d533-ec5d-4428-9927-8a428eeb89dd",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_38bb8564-5ec6-4b5a-b39f-19b6f20a0c23",
+      "parentId": "p_ged_c9e66d3d-5b07-48d9-b382-dce1d3fa2d57",
+      "childId": "p_ged_1d076e45-2c38-4cc4-9c41-babcb8de15ab",
+      "unionId": "u_ged_ed5e1602-d69c-4e06-84c5-e2da2c65272d",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_3bc6fe63-ff3d-403b-8c98-c38efd90d460",
+      "parentId": "p_ged_9951e839-a2d2-4619-8bbc-489d0ed582c9",
+      "childId": "p_ged_f9d86dad-ce3d-4190-9837-368f295aa6dc",
+      "unionId": "u_ged_ba11b484-40de-4b95-9ebd-79f029ef8fbc",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_3eb81f54-650f-4068-8000-20afd900defe",
+      "parentId": "p_ged_88c5d98a-dd53-4652-9427-7d8657b42d08",
+      "childId": "p_ged_1e702e02-7df4-4293-9631-e2e4e74958ea",
+      "unionId": "u_ged_caf5d533-ec5d-4428-9927-8a428eeb89dd",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_41dffd50-36e2-4da4-aff0-7bf54533ad7c",
+      "parentId": "p_ged_7b9a392d-5465-4754-8caf-11ab04ef26fc",
+      "childId": "p_ged_a79942b8-5734-4667-83d0-a5a86237117f",
+      "unionId": "u_ged_9b9c63c4-654c-4a7e-aa56-3960efed71be",
+      "lineageType": "adoptive",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_4b457a62-cdbb-4b45-a519-ee87349abb8c",
+      "parentId": "p_ged_281b47fb-ff56-467a-a10c-753509908623",
+      "childId": "p_ged_ef537f5e-2a9b-4a29-8174-8de9b2519c67",
+      "unionId": "u_ged_f0ca66c6-04ad-477d-8e77-13bf1e9bd566",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_6d5eeb78-1204-4153-8198-6f6276daca40",
+      "parentId": "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+      "childId": "p_ged_d07d93ae-797f-4faa-b8ce-1db518d35325",
+      "unionId": "u_ged_b5abdb74-5dd9-4b5a-91e2-f372c68ff1cc",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_6f7d063c-1ae4-415f-b6a2-f8b374093f6d",
+      "parentId": "p_ged_a24c4d6a-3195-4c9e-bab8-0a81e3ecefe9",
+      "childId": "p_ged_fbe62ba2-f351-4103-aa9b-345b06fe1af5",
+      "unionId": "u_ged_feadec10-8bdd-463e-83a1-d08eaf7a0947",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_7c434770-4c30-4516-9583-3f14c3dd8320",
+      "parentId": "p_ged_df7c1aa5-d608-4027-94f9-8ddab97f73e2",
+      "childId": "p_ged_c14310f7-08ae-4f3d-8efe-dca5045e96a6",
+      "unionId": "u_ged_9b9c63c4-654c-4a7e-aa56-3960efed71be",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_8012f693-42f3-451d-9728-0ef40377da5b",
+      "parentId": "p_ged_9951e839-a2d2-4619-8bbc-489d0ed582c9",
+      "childId": "p_ged_df7c1aa5-d608-4027-94f9-8ddab97f73e2",
+      "unionId": "u_ged_ba11b484-40de-4b95-9ebd-79f029ef8fbc",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_8495925e-b6fe-4263-b18a-09a04640f080",
+      "parentId": "p_ged_5f54180d-dff8-4e77-a447-3b80c027e802",
+      "childId": "p_ged_97aa295f-ffa1-42ef-8f06-1094517128f5",
+      "unionId": "u_ged_b5abdb74-5dd9-4b5a-91e2-f372c68ff1cc",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_88e706c0-e76c-4838-8a2e-4c207d234669",
+      "parentId": "p_ged_40108e62-1a7e-45aa-9d26-efd47146aca5",
+      "childId": "p_ged_09816f58-e0d5-4c33-bc6b-d887ef655e25",
+      "unionId": "u_ged_f0ca66c6-04ad-477d-8e77-13bf1e9bd566",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_8946bd9f-75aa-413c-9468-c91095f5b391",
+      "parentId": "p_ged_d07d93ae-797f-4faa-b8ce-1db518d35325",
+      "childId": "p_ged_a24c4d6a-3195-4c9e-bab8-0a81e3ecefe9",
+      "unionId": "u_ged_4a875c14-f2cc-4ed5-9298-4a1d8dca641b",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_a12f1f28-fa2d-4b32-9ab8-36e18083c624",
+      "parentId": "p_ged_89a60627-1126-4477-9553-fdbf25027ab3",
+      "childId": "p_ged_bfe19b00-c0f8-449b-97a0-5d70314b9128",
+      "unionId": "u_ged_caf5d533-ec5d-4428-9927-8a428eeb89dd",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_a7b8b25e-d1dd-461c-9a7c-686e1e6e2ad2",
+      "parentId": "p_ged_3ff21323-d54b-4c73-9c72-8776091f8371",
+      "childId": "p_ged_fbe62ba2-f351-4103-aa9b-345b06fe1af5",
+      "unionId": "u_ged_feadec10-8bdd-463e-83a1-d08eaf7a0947",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_b5e312bb-7193-4622-9b41-9fdc7cb23504",
+      "parentId": "p_ged_8f218a8d-a950-4a49-9502-8219d8526991",
+      "childId": "p_ged_a24c4d6a-3195-4c9e-bab8-0a81e3ecefe9",
+      "unionId": "u_ged_4a875c14-f2cc-4ed5-9298-4a1d8dca641b",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_ba2c64eb-9249-4aed-98c4-1ed427125e51",
+      "parentId": "p_ged_9951e839-a2d2-4619-8bbc-489d0ed582c9",
+      "childId": "p_ged_97aa295f-ffa1-42ef-8f06-1094517128f5",
+      "unionId": "u_ged_ba11b484-40de-4b95-9ebd-79f029ef8fbc",
+      "lineageType": "step",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_beb3fe48-6d6a-4309-91e2-90966b177362",
+      "parentId": "p_ged_00fe18e3-edf6-4783-878c-84092399885e",
+      "childId": "p_ged_d754aafb-d08c-48f6-ac34-036bec5e23cd",
+      "unionId": "u_ged_949110f0-7316-4320-a1de-c6b530d16865",
+      "lineageType": "biological",
+      "birthOrder": 3,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_c06b6ed3-9c4d-498c-9019-a1f99dc43b0b",
+      "parentId": "p_ged_89a60627-1126-4477-9553-fdbf25027ab3",
+      "childId": "p_ged_1e702e02-7df4-4293-9631-e2e4e74958ea",
+      "unionId": "u_ged_caf5d533-ec5d-4428-9927-8a428eeb89dd",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_c8307500-b244-42ce-a34b-9ea3a71ae8c7",
+      "parentId": "p_ged_7b9a392d-5465-4754-8caf-11ab04ef26fc",
+      "childId": "p_ged_c14310f7-08ae-4f3d-8efe-dca5045e96a6",
+      "unionId": "u_ged_9b9c63c4-654c-4a7e-aa56-3960efed71be",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_c98c6bd9-45dc-4ec6-b662-8295e1ec9790",
+      "parentId": "p_ged_00fe18e3-edf6-4783-878c-84092399885e",
+      "childId": "p_ged_40108e62-1a7e-45aa-9d26-efd47146aca5",
+      "unionId": "u_ged_949110f0-7316-4320-a1de-c6b530d16865",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_cb586988-72fc-47f2-b099-ef5a8a121d8d",
+      "parentId": "p_ged_281b47fb-ff56-467a-a10c-753509908623",
+      "childId": "p_ged_09816f58-e0d5-4c33-bc6b-d887ef655e25",
+      "unionId": "u_ged_f0ca66c6-04ad-477d-8e77-13bf1e9bd566",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_cc108e1b-c1d3-483f-8983-597fc3f49c9d",
+      "parentId": "p_ged_9951e839-a2d2-4619-8bbc-489d0ed582c9",
+      "childId": "p_ged_d07d93ae-797f-4faa-b8ce-1db518d35325",
+      "unionId": "u_ged_ba11b484-40de-4b95-9ebd-79f029ef8fbc",
+      "lineageType": "step",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_cee8012b-ba74-42e8-9f6b-5e841a835f6e",
+      "parentId": "p_ged_1314d678-d28c-4f54-855c-9dfd1009988d",
+      "childId": "p_ged_40108e62-1a7e-45aa-9d26-efd47146aca5",
+      "unionId": "u_ged_949110f0-7316-4320-a1de-c6b530d16865",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_d3508abd-0b03-4b82-9432-3174c37303fc",
+      "parentId": "p_ged_1314d678-d28c-4f54-855c-9dfd1009988d",
+      "childId": "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+      "unionId": "u_ged_949110f0-7316-4320-a1de-c6b530d16865",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_d616401a-348d-42bb-b378-f71c469976e2",
+      "parentId": "p_ged_ef537f5e-2a9b-4a29-8174-8de9b2519c67",
+      "childId": "p_ged_c9e66d3d-5b07-48d9-b382-dce1d3fa2d57",
+      "unionId": "u_ged_23c4931d-51a4-4c2e-b773-59e81d349a19",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_d63472e0-3f2e-4b29-9eb0-b573e67ae5ce",
+      "parentId": "p_ged_5f54180d-dff8-4e77-a447-3b80c027e802",
+      "childId": "p_ged_d07d93ae-797f-4faa-b8ce-1db518d35325",
+      "unionId": "u_ged_b5abdb74-5dd9-4b5a-91e2-f372c68ff1cc",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_ea1389cd-b947-4d31-9b23-56789ab06a3f",
+      "parentId": "p_ged_40108e62-1a7e-45aa-9d26-efd47146aca5",
+      "childId": "p_ged_ef537f5e-2a9b-4a29-8174-8de9b2519c67",
+      "unionId": "u_ged_f0ca66c6-04ad-477d-8e77-13bf1e9bd566",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_ef489989-6fd3-4887-b8e3-bb84ee6f7385",
+      "parentId": "p_ged_1314d678-d28c-4f54-855c-9dfd1009988d",
+      "childId": "p_ged_d754aafb-d08c-48f6-ac34-036bec5e23cd",
+      "unionId": "u_ged_949110f0-7316-4320-a1de-c6b530d16865",
+      "lineageType": "biological",
+      "birthOrder": 3,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_f88b1a13-5dda-41c0-b913-bb4c9dd37d17",
+      "parentId": "p_ged_2beab55c-3b3c-4d0d-a490-0e0f4224379f",
+      "childId": "p_ged_97aa295f-ffa1-42ef-8f06-1094517128f5",
+      "unionId": "u_ged_b5abdb74-5dd9-4b5a-91e2-f372c68ff1cc",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_fc46ba05-d3d9-4a8f-b061-2e61557946e4",
+      "parentId": "p_ged_3ff21323-d54b-4c73-9c72-8776091f8371",
+      "childId": "p_ged_fe6f07e2-964f-41a6-856b-f1cfd18b63a5",
+      "unionId": "u_ged_feadec10-8bdd-463e-83a1-d08eaf7a0947",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    },
+    {
+      "id": "r_ged_fc8eb2f3-c615-46b5-bc7a-50be71be9e6e",
+      "parentId": "p_ged_a24c4d6a-3195-4c9e-bab8-0a81e3ecefe9",
+      "childId": "p_ged_fe6f07e2-964f-41a6-856b-f1cfd18b63a5",
+      "unionId": "u_ged_feadec10-8bdd-463e-83a1-d08eaf7a0947",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-11-26T07:27:49.925Z",
+      "updatedAt": "2026-11-26T07:27:49.925Z"
+    }
+  ],
+  "lifeEvents": [],
+  "media": [],
+  "stories": []
+}

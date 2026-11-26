@@ -1,0 +1,1839 @@
+{
+  "app": "Gia Phả Việt – Cội Nguồn",
+  "schemaVersion": 1,
+  "exportedAt": "2026-11-26T07:34:19.192Z",
+  "settings": {
+    "id": "default",
+    "clanName": "Dòng họ Trần – Đông Ngạc",
+    "clanMotto": "Tiên tổ phương danh lưu vạn đại · Tử tôn hiếu thảo kế thiên thu",
+    "ancestralHallLocation": "Làng cổ Đông Ngạc, Bắc Từ Liêm, Hà Nội",
+    "rootPersonId": "p_01",
+    "schemaVersion": 1,
+    "updatedAt": "2026-10-15T08:00:00.000Z",
+    "lastBackupAt": "2026-11-26T07:34:19.192Z"
+  },
+  "branches": [
+    {
+      "id": "branch_at",
+      "name": "Chi Ất (Chi Thứ)",
+      "code": "CHI-AT",
+      "founderId": "p_04",
+      "parentBranchId": "branch_daiton",
+      "subBranches": [
+        "Phái Nam",
+        "Phái Bắc"
+      ],
+      "originPlace": "Phố Hàng Đào, Hoàn Kiếm, Hà Nội",
+      "establishedPeriod": "1926",
+      "description": "Chi thứ lập nghiệp tại nội thành Hà Nội và Hải Phòng, phát triển nghề thủ công mỹ nghệ, kiến trúc và thương mại.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "branch_binh",
+      "name": "Chi Bính (Chi Nam Tiến)",
+      "code": "CHI-BINH",
+      "founderId": "p_10",
+      "parentBranchId": "branch_at",
+      "subBranches": [
+        "Phái Sài Gòn",
+        "Phái Đà Lạt"
+      ],
+      "originPlace": "Quận Phú Nhuận, TP. Hồ Chí Minh",
+      "establishedPeriod": "1955",
+      "description": "Nhánh con cháu vào Nam sinh sống và lập nghiệp từ giữa thế kỷ XX, vẫn đều đặn hướng về giỗ Tổ tháng Chạp hằng năm.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "branch_daiton",
+      "name": "Đại Tôn Họ Trần Đông Ngạc",
+      "code": "DAI-TON",
+      "founderId": "p_01",
+      "subBranches": [
+        "Gốc Tổ Đông Ngạc"
+      ],
+      "originPlace": "Làng Đông Ngạc, phủ Hoài Đức, Hà Nội",
+      "establishedPeriod": "Cuối thế kỷ XIX",
+      "description": "Gốc đại tôn quy tụ các thế hệ khai cơ lập nghiệp tại làng khoa bảng Đông Ngạc bên bờ sông Hồng, gìn giữ từ đường và gia phả gốc.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "branch_giap",
+      "name": "Chi Giáp (Chi Trưởng)",
+      "code": "CHI-GIAP",
+      "founderId": "p_02",
+      "parentBranchId": "branch_daiton",
+      "subBranches": [
+        "Phái Đông",
+        "Phái Đoài"
+      ],
+      "originPlace": "Đông Ngạc, Hà Nội",
+      "establishedPeriod": "1920",
+      "description": "Chi trưởng phụng sự từ đường chính tại Đông Ngạc, nhiều đời theo nghề dạy học, y thuật cổ truyền và nghiên cứu văn hóa.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    }
+  ],
+  "people": [
+    {
+      "id": "p_01",
+      "fullName": "Trần Văn Lộc",
+      "gender": "male",
+      "portraitUrl": "data:image/jpeg;base64,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",
+      "portraitMediaId": "media_f5b1326d-a55d-4c05-8b3d-6283feab51af",
+      "commonName": "Cụ Đồ Lộc",
+      "tabooName": "Trọng Lộc",
+      "courtesyName": "Đức Hiên",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 14,
+        "month": 3,
+        "year": 1872
+      },
+      "birthPlace": "Làng Đông Ngạc, phủ Hoài Đức, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 22,
+        "month": 11,
+        "year": 1948
+      },
+      "deathPlace": "Đông Ngạc, Hà Nội",
+      "ancestralHome": "Làng Đông Ngạc, Hà Nội",
+      "residence": "Nhà cổ 3 gian Xóm Chùa, Đông Ngạc",
+      "occupation": "Nhà nho, Thầy đồ dạy chữ Hán và Quốc ngữ",
+      "biography": "Cụ Trần Văn Lộc sinh trưởng trong một gia đình nho học lâu đời ven sông Hồng. Năm 1898 cụ mở lớp dạy học miễn phí cho trẻ nghèo trong vùng, đồng thời kết hợp truyền dạy cả chữ Hán Nôm lẫn chữ Quốc ngữ buổi giao thời. Cụ nổi tiếng cương trực, điềm đạm, để lại bản Gia huấn 12 điều răn dạy con cháu lấy chữ Hiếu và sự học làm gốc.",
+      "notes": "Chân dung chụp tại hiệu ảnh Lê Văn – Hà Nội năm 1926.",
+      "generation": 1,
+      "branchId": "branch_daiton",
+      "subBranch": "Gốc Tổ Đông Ngạc",
+      "clanRole": "Thủy tổ chi phái cận đại",
+      "deathAnniversaryLunar": {
+        "day": 22,
+        "month": 10,
+        "note": "Giỗ Tổ Đại Tôn tại Từ đường Đông Ngạc"
+      },
+      "burialPlace": "Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc",
+      "merits": "Đứng ra trùng tu nhà thờ họ năm 1924, chép lại cuốn Gia phả chữ Hán sang Quốc ngữ năm 1930 và lập quỹ khuyến học cho con cháu trong làng.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-11-26T07:34:18.334Z"
+    },
+    {
+      "id": "p_01_sp",
+      "fullName": "Nguyễn Thị Kim",
+      "gender": "female",
+      "portraitMediaId": "media_02",
+      "portraitUrl": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20533%22%20width%3D%22400%22%20height%3D%22533%22%3E%0A%20%20%3Crect%20width%3D%22400%22%20height%3D%22533%22%20fill%3D%22%233A2E25%22%2F%3E%0A%20%20%3Crect%20x%3D%2216%22%20y%3D%2216%22%20width%3D%22368%22%20height%3D%22501%22%20rx%3D%228%22%20fill%3D%22%23F2E9DF%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22180%22%20r%3D%2272%22%20fill%3D%22%23DFCBB8%22%2F%3E%0A%20%20%3C!--%20Traditional%20Headscarf%20silhouette%20--%3E%0A%20%20%3Cpath%20d%3D%22M136%20140%20Q200%20112%20264%20140%20Q270%20200%20250%20230%20Q200%20244%20150%20230%20Z%22%20fill%3D%22%23231C16%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22182%22%20r%3D%2244%22%20fill%3D%22%23DFCBB8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M110%20320%20Q200%20250%20290%20320%20L310%20470%20L90%20470%20Z%22%20fill%3D%22%234A2E1F%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22300%22%20r%3D%2214%22%20fill%3D%22none%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%224%22%2F%3E%0A%20%20%3Ctext%20x%3D%22200%22%20y%3D%22440%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%20font-size%3D%2220%22%20font-weight%3D%22bold%22%20fill%3D%22%23856428%22%3EC%E1%BB%A4%20B%C3%80%20KIM%20(1876%20-%201954)%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22200%22%20y%3D%22468%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20fill%3D%22%2385786A%22%3ET%E1%BB%95%20m%E1%BA%ABu%20%C4%90%E1%BA%A1i%20T%C3%B4n%20%E2%80%93%20%C4%90%C3%B4ng%20Ng%E1%BA%A1c%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A",
+      "commonName": "Cụ Bà Đồ Lộc",
+      "tabooName": "Thị Kim",
+      "courtesyName": "Từ Thuận",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1876
+      },
+      "birthPlace": "Làng Nhật Tân, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 8,
+        "month": 12,
+        "year": 1954
+      },
+      "deathPlace": "Đông Ngạc, Hà Nội",
+      "ancestralHome": "Nhật Tân, Tây Hồ, Hà Nội",
+      "residence": "Đông Ngạc, Hà Nội",
+      "occupation": "Nghề dệt lụa và trồng dâu tằm",
+      "generation": 1,
+      "branchId": "branch_daiton",
+      "clanRole": "Tổ mẫu Đại Tôn",
+      "deathAnniversaryLunar": {
+        "day": 14,
+        "month": 11,
+        "note": "Giỗ Tổ Mẫu"
+      },
+      "burialPlace": "Khu mộ Tổ đồng Cửa Chùa, Đông Ngạc",
+      "merits": "Tần tảo nuôi dạy ba người con trưởng thành qua thời kỳ biến động, quyên góp ruộng hương hỏa 3 mẫu để lo việc tế tự lâu dài.",
+      "biography": "Cụ bà Nguyễn Thị Kim vốn dòng dõi gia giáo làng Nhật Tân, nổi tiếng khéo tay nghề tơ lụa. Trong những năm mất mùa đầu thế kỷ XX, cụ mở kho thóc gia đình giúp đỡ bà con lối xóm, được dân làng kính trọng gọi là Cụ Bà Từ Thuận.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-28T14:20:00.000Z"
+    },
+    {
+      "id": "p_02",
+      "fullName": "Trần Văn Khải",
+      "gender": "male",
+      "commonName": "Ông Cả Khải",
+      "tabooName": "Minh Khải",
+      "courtesyName": "Kế Quang",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 5,
+        "month": 2,
+        "year": 1897
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 19,
+        "month": 11,
+        "year": 1974
+      },
+      "deathPlace": "Đông Ngạc, Hà Nội",
+      "ancestralHome": "Làng Đông Ngạc, Hà Nội",
+      "residence": "Đông Ngạc, Hà Nội",
+      "occupation": "Lương y Đông y, Giáo viên tiểu học",
+      "generation": 2,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "clanRole": "Trưởng tộc đời thứ 2 · Trưởng Chi Giáp",
+      "deathAnniversaryLunar": {
+        "day": 6,
+        "month": 10,
+        "note": "Giỗ Ông Cả tại nhà thờ Chi Giáp"
+      },
+      "burialPlace": "Nghĩa trang dòng họ Trần, Đông Ngạc",
+      "merits": "Bảo vệ nguyên vẹn hòm sắc phong và cuốn Gia phả cổ trong những năm chiến tranh tản cư 1946–1954.",
+      "biography": "Ông Trần Văn Khải là trưởng nam của cụ Đồ Lộc. Ông nối nghiệp cha dạy học và bốc thuốc Bắc cứu người. Sau khi người vợ đầu là bà Nguyễn Thị Lan qua đời sớm năm 1932, ông tục huyền với bà Đặng Thị Nguyệt để cùng nuôi dạy đàn con nên người.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-11-02T10:00:00.000Z"
+    },
+    {
+      "id": "p_03",
+      "fullName": "Nguyễn Thị Lan",
+      "gender": "female",
+      "commonName": "Bà Cả Lan",
+      "tabooName": "Ngọc Lan",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1899
+      },
+      "birthPlace": "Làng Vẽ, Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 12,
+        "month": 9,
+        "year": 1932
+      },
+      "deathPlace": "Đông Ngạc, Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "occupation": "Nội trợ, làm bánh truyền thống",
+      "generation": 2,
+      "branchId": "branch_giap",
+      "clanRole": "Chính thất Trưởng chi Giáp",
+      "deathAnniversaryLunar": {
+        "day": 12,
+        "month": 8,
+        "note": "Giỗ mùa thu rằm tháng Tám"
+      },
+      "burialPlace": "Nghĩa trang dòng họ Trần, Đông Ngạc",
+      "biography": "Bà Nguyễn Thị Lan là người vợ đầu của ông Trần Văn Khải, tính tình hiền hậu, đảm đang. Bà lâm bệnh qua đời sớm ở tuổi 33, để lại hai người con nhỏ.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_03b",
+      "fullName": "Đặng Thị Nguyệt",
+      "gender": "female",
+      "commonName": "Bà Hai Nguyệt",
+      "tabooName": "Thu Nguyệt",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 20,
+        "month": 8,
+        "year": 1908
+      },
+      "birthPlace": "Làng Xuân Đỉnh, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 3,
+        "month": 4,
+        "year": 1986
+      },
+      "deathPlace": "Hà Nội",
+      "ancestralHome": "Xuân Đỉnh, Từ Liêm, Hà Nội",
+      "occupation": "Bào chế dược liệu Đông y",
+      "generation": 2,
+      "branchId": "branch_giap",
+      "clanRole": "Kế thất Trưởng chi Giáp",
+      "deathAnniversaryLunar": {
+        "day": 25,
+        "month": 2
+      },
+      "burialPlace": "Nghĩa trang dòng họ Trần, Đông Ngạc",
+      "merits": "Hết lòng thương yêu, nuôi dạy các con riêng của chồng như con ruột, giữ hòa khí đại gia đình qua nhiều thập kỷ.",
+      "biography": "Bà Đặng Thị Nguyệt kết hôn với ông Trần Văn Khải năm 1934. Bà phụ giúp chồng bốc thuốc nam và chăm sóc cả đại gia đình trong giai đoạn tản cư lên Phú Thọ.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_04",
+      "fullName": "Trần Văn Phúc",
+      "gender": "male",
+      "commonName": "Ông Hai Phúc",
+      "tabooName": "Hồng Phúc",
+      "courtesyName": "Tân Dân",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 18,
+        "month": 6,
+        "year": 1900
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 27,
+        "month": 11,
+        "year": 1981
+      },
+      "deathPlace": "Hoàn Kiếm, Hà Nội",
+      "ancestralHome": "Làng Đông Ngạc, Hà Nội",
+      "residence": "Số 42 Hàng Đào, Hoàn Kiếm, Hà Nội",
+      "occupation": "Thương nhân tơ lụa, Nghệ nhân khảm trai",
+      "generation": 2,
+      "branchId": "branch_at",
+      "subBranch": "Phái Bắc",
+      "clanRole": "Trưởng Chi Ất",
+      "deathAnniversaryLunar": {
+        "day": 2,
+        "month": 11,
+        "note": "Giỗ Trưởng Chi Ất"
+      },
+      "burialPlace": "Nghĩa trang Văn Điển, Hà Nội",
+      "merits": "Đóng góp toàn bộ gỗ lim trùng tu hậu cung Từ đường năm 1962 và hỗ trợ con cháu các chi ra Hà Nội ăn học.",
+      "biography": "Ông Trần Văn Phúc là con trai thứ hai của cụ Đồ Lộc. Năm 1926 ông lập hiệu tơ lụa và đồ gỗ khảm trai tại phố Hàng Đào, mở đầu cho Chi Ất phát triển tại nội thành Hà Nội.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_04_sp",
+      "fullName": "Lê Thị Thanh",
+      "gender": "female",
+      "commonName": "Bà Hai Hàng Đào",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1904
+      },
+      "birthPlace": "Bắc Ninh",
+      "deathDate": {
+        "precision": "year",
+        "year": 1989
+      },
+      "deathPlace": "Hà Nội",
+      "ancestralHome": "Đình Bảng, Từ Sơn, Bắc Ninh",
+      "residence": "Hoàn Kiếm, Hà Nội",
+      "occupation": "Buôn bán tơ lụa",
+      "generation": 2,
+      "branchId": "branch_at",
+      "clanRole": "Nội tướng Chi Ất",
+      "deathAnniversaryLunar": {
+        "day": 19,
+        "month": 9,
+        "note": "Giỗ cuối thu"
+      },
+      "burialPlace": "Nghĩa trang Văn Điển, Hà Nội",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_05",
+      "fullName": "Trần Thị Hạnh",
+      "gender": "female",
+      "commonName": "Bà Cô Ba Hạnh",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "approx",
+        "year": 1903,
+        "displayText": "Khoảng năm Quý Mão 1903"
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "unknown",
+        "displayText": "Khoảng thập niên 1970"
+      },
+      "ancestralHome": "Làng Đông Ngạc, Hà Nội",
+      "residence": "Sơn Tây, Hà Nội",
+      "occupation": "Làm vườn, dệt vải",
+      "generation": 2,
+      "branchId": "branch_daiton",
+      "clanRole": "Cô họ Đời thứ 2",
+      "notes": "Tư liệu ngày mất thất lạc trong chiến tranh, con cháu giỗ chung vào ngày giỗ Tổ mẫu 14/11 ÂL.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_06",
+      "fullName": "Trần Văn Nghị",
+      "gender": "male",
+      "commonName": "Ông Trưởng Nghị",
+      "alias": "Việt Sơn",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 10,
+        "month": 5,
+        "year": 1923
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 15,
+        "month": 12,
+        "year": 2004
+      },
+      "deathPlace": "Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Đông Ngạc, Bắc Từ Liêm, Hà Nội",
+      "occupation": "Nhà giáo ưu tú, Hiệu trưởng trường cấp 3",
+      "generation": 3,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "clanRole": "Trưởng tộc đời thứ 3",
+      "deathAnniversaryLunar": {
+        "day": 4,
+        "month": 11,
+        "note": "Giỗ Ông Trưởng Nghị"
+      },
+      "burialPlace": "Nghĩa trang dòng họ Trần, Đông Ngạc",
+      "merits": "Chủ trì biên soạn tập Gia phả đánh máy năm 1992 và thành lập Hội đồng Gia tộc họ Trần Đông Ngạc.",
+      "biography": "Ông Trần Văn Nghị là con trai trưởng của ông Khải và bà Lan. Tham gia bình dân học vụ từ năm 1945, sau đó cống hiến hơn 40 năm cho ngành giáo dục Thủ đô.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-30T11:10:00.000Z"
+    },
+    {
+      "id": "p_06_sp",
+      "fullName": "Phạm Thị Hiền",
+      "gender": "female",
+      "commonName": "Bà Giáo Hiền",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 2,
+        "month": 9,
+        "year": 1927
+      },
+      "birthPlace": "Hà Đông, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 21,
+        "month": 1,
+        "year": 2016
+      },
+      "deathPlace": "Hà Nội",
+      "ancestralHome": "Làng lụa Vạn Phúc, Hà Đông",
+      "residence": "Đông Ngạc, Hà Nội",
+      "occupation": "Giáo viên Văn học",
+      "generation": 3,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "deathAnniversaryLunar": {
+        "day": 12,
+        "month": 12
+      },
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_07",
+      "fullName": "Trần Thị Mai",
+      "gender": "female",
+      "commonName": "Bà Cô Mai",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1928
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "deathDate": {
+        "precision": "year",
+        "year": 2012
+      },
+      "deathPlace": "Hải Phòng",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Lê Chân, Hải Phòng",
+      "occupation": "Y tá bệnh viện đa khoa",
+      "generation": 3,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "deathAnniversaryLunar": {
+        "day": 18,
+        "month": 7
+      },
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_08",
+      "fullName": "Trần Văn Minh",
+      "gender": "male",
+      "commonName": "Ông Minh Kiến Trúc",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 16,
+        "month": 10,
+        "year": 1938
+      },
+      "birthPlace": "Đông Ngạc, Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Quận Ba Đình, Hà Nội",
+      "occupation": "Kiến trúc sư bảo tồn di sản",
+      "generation": 3,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đoài",
+      "clanRole": "Cố vấn Hội đồng Gia tộc · Trưởng Phái Đoài",
+      "merits": "Thiết kế bản vẽ tu bổ Từ đường năm 2008 giữ nguyên kiến trúc gỗ kẻ truyền Bắc Bộ.",
+      "biography": "Ông Trần Văn Minh là con trai của ông Khải và bà Đặng Thị Nguyệt. Tốt nghiệp Đại học Kiến trúc khóa đầu, ông dành trọn sự nghiệp nghiên cứu đình chùa và nhà cổ đồng bằng Bắc Bộ. Hiện ở tuổi gần 90, ông vẫn minh mẫn kể chuyện lịch sử dòng họ cho con cháu.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-11-03T16:40:00.000Z"
+    },
+    {
+      "id": "p_08_sp",
+      "fullName": "Hoàng Thị Bích",
+      "gender": "female",
+      "commonName": "Bà Bích",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 8,
+        "month": 3,
+        "year": 1942
+      },
+      "birthPlace": "Nam Định",
+      "ancestralHome": "Hành Thiện, Xuân Trường, Nam Định",
+      "residence": "Quận Ba Đình, Hà Nội",
+      "occupation": "Dược sĩ cao cấp (nghỉ hưu)",
+      "generation": 3,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đoài",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_09",
+      "fullName": "Trần Văn Tín",
+      "gender": "male",
+      "commonName": "Chú Út Tín",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "year",
+        "year": 1944
+      },
+      "birthPlace": "Phú Thọ (nơi tản cư)",
+      "deathDate": {
+        "precision": "exact",
+        "day": 30,
+        "month": 10,
+        "year": 1971
+      },
+      "deathPlace": "Quảng Trị",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "occupation": "Kỹ sư thông tin quân đội (Liệt sĩ)",
+      "generation": 3,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đoài",
+      "clanRole": "Liệt sĩ dòng họ",
+      "deathAnniversaryLunar": {
+        "day": 12,
+        "month": 9,
+        "note": "Giỗ Liệt sĩ Trần Văn Tín"
+      },
+      "burialPlace": "Nghĩa trang Liệt sĩ Trường Sơn, Quảng Trị",
+      "merits": "Hy sinh vì độc lập Tổ quốc năm 27 tuổi khi chưa lập gia đình.",
+      "biography": "Sinh ra trong những năm gia đình bắt đầu chuẩn bị kháng chiến, Trần Văn Tín là sinh viên xuất sắc ngành vô tuyến điện trước khi nhập ngũ năm 1968. Những bức thư tay từ chiến trường của ông hiện được lưu giữ trang trọng tại phòng truyền thống dòng họ.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_10",
+      "fullName": "Trần Hữu Đạt",
+      "gender": "male",
+      "commonName": "Ông Cả Đạt Sài Gòn",
+      "isLiving": false,
+      "birthDate": {
+        "precision": "exact",
+        "day": 12,
+        "month": 4,
+        "year": 1929
+      },
+      "birthPlace": "Hàng Đào, Hà Nội",
+      "deathDate": {
+        "precision": "exact",
+        "day": 9,
+        "month": 11,
+        "year": 2015
+      },
+      "deathPlace": "TP. Hồ Chí Minh",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Phú Nhuận, TP. Hồ Chí Minh",
+      "occupation": "Nghệ nhân kim hoàn và đồng hồ cổ",
+      "generation": 3,
+      "branchId": "branch_binh",
+      "secondaryBranchIds": [
+        "branch_at"
+      ],
+      "subBranch": "Phái Sài Gòn",
+      "clanRole": "Trưởng Chi Bính (Nam Tiến)",
+      "deathAnniversaryLunar": {
+        "day": 28,
+        "month": 9,
+        "note": "Giỗ Trưởng Chi Bính"
+      },
+      "burialPlace": "Hoa viên Nghĩa trang Bình Dương",
+      "merits": "Kết nối bà con đồng hương họ Trần tại miền Nam, lập Ban liên lạc họ Trần phía Nam từ năm 1995.",
+      "biography": "Con trai trưởng của ông Trần Văn Phúc (Chi Ất). Năm 1955 ông vào Sài Gòn lập nghiệp với nghề chế tác kim hoàn và sửa đồng hồ tinh xảo, gây dựng Chi Bính gắn bó nghĩa tình.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_10_sp",
+      "fullName": "Võ Thị Ngọc Mai",
+      "gender": "female",
+      "commonName": "Bà Đạt",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 25,
+        "month": 1,
+        "year": 1935
+      },
+      "birthPlace": "Gia Định, TP. Hồ Chí Minh",
+      "ancestralHome": "Gò Công, Tiền Giang",
+      "residence": "Phú Nhuận, TP. Hồ Chí Minh",
+      "occupation": "Giáo viên nữ công gia chánh (nghỉ hưu)",
+      "generation": 3,
+      "branchId": "branch_binh",
+      "subBranch": "Phái Sài Gòn",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_11",
+      "fullName": "Trần Hữu Kiên",
+      "gender": "male",
+      "commonName": "Ông Kiên Hàng Đào",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 3,
+        "month": 11,
+        "year": 1934
+      },
+      "birthPlace": "Hoàn Kiếm, Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Hoàn Kiếm, Hà Nội",
+      "occupation": "Kỹ sư cơ khí chế tạo (nghỉ hưu)",
+      "generation": 3,
+      "branchId": "branch_at",
+      "subBranch": "Phái Bắc",
+      "clanRole": "Trưởng Chi Ất đương nhiệm",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_12",
+      "fullName": "Trần Quốc Tuấn",
+      "gender": "male",
+      "commonName": "Ông Tuấn Trưởng Tộc",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 19,
+        "month": 5,
+        "year": 1954
+      },
+      "birthPlace": "Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Đông Ngạc, Bắc Từ Liêm, Hà Nội",
+      "occupation": "Bác sĩ chuyên khoa Nội, Giảng viên Y khoa",
+      "generation": 4,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "clanRole": "Trưởng tộc đương nhiệm",
+      "merits": "Chủ trì số hóa Gia phả dòng họ Trần Đông Ngạc, tổ chức khám sức khỏe định kỳ cho các bậc cao niên trong họ.",
+      "biography": "Là con trưởng của ông Trần Văn Nghị, bác sĩ Trần Quốc Tuấn hiện đảm nhiệm vai trò Trưởng tộc, tận tâm kết nối các thế hệ trẻ trong và ngoài nước hướng về cội nguồn.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-11-04T01:00:00.000Z"
+    },
+    {
+      "id": "p_12_sp",
+      "fullName": "Ngô Thị Phương Thảo",
+      "gender": "female",
+      "commonName": "Bà Thảo",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 12,
+        "month": 8,
+        "year": 1958
+      },
+      "birthPlace": "Hà Nội",
+      "ancestralHome": "Thanh Oai, Hà Nội",
+      "residence": "Đông Ngạc, Bắc Từ Liêm, Hà Nội",
+      "occupation": "Kế toán trưởng (nghỉ hưu)",
+      "generation": 4,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "clanRole": "Thủ quỹ Quỹ Khuyến học dòng họ",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_13",
+      "fullName": "Trần Thị Thu Thủy",
+      "gender": "female",
+      "commonName": "Cô Thủy",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 4,
+        "month": 12,
+        "year": 1959
+      },
+      "birthPlace": "Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Cầu Giấy, Hà Nội",
+      "occupation": "Biên tập viên xuất bản văn hóa",
+      "generation": 4,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "merits": "Biên tập cuốn Ký ức Đông Ngạc và sưu tầm tư liệu ảnh gia đình.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_14",
+      "fullName": "Trần Thị Thu Hà",
+      "gender": "female",
+      "commonName": "Cô Hà Kiến Trúc",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 22,
+        "month": 7,
+        "year": 1968
+      },
+      "birthPlace": "Ba Đình, Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Tây Hồ, Hà Nội",
+      "occupation": "Kiến trúc sư cảnh quan",
+      "generation": 4,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đoài",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_15",
+      "fullName": "Trần Đức Bảo",
+      "gender": "male",
+      "commonName": "Chú Bảo",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "approx",
+        "year": 1972,
+        "displayText": "Khoảng cuối năm 1972"
+      },
+      "birthPlace": "Quảng Bình",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Đống Đa, Hà Nội",
+      "occupation": "Nghệ nhân phục chế đồ gỗ cổ",
+      "generation": 4,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đoài",
+      "clanRole": "Thành viên Ban Nghi lễ Từ đường",
+      "merits": "Trực tiếp sơn son thếp vàng và bảo dưỡng hoành phi câu đối tại nhà thờ họ.",
+      "biography": "Ông Trần Văn Minh và bà Hoàng Thị Bích nhận nuôi Trần Đức Bảo từ năm 1973 sau chiến tranh. Anh lớn lên trong tình yêu thương trọn vẹn của dòng họ và trở thành nghệ nhân chăm lo nội thất thờ tự của Từ đường.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_16",
+      "fullName": "Trần Gia Hưng",
+      "gender": "male",
+      "commonName": "Anh Hưng Sài Gòn",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 15,
+        "month": 3,
+        "year": 1963
+      },
+      "birthPlace": "Sài Gòn",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Quận 3, TP. Hồ Chí Minh",
+      "occupation": "Doanh nhân xuất nhập khẩu nông sản",
+      "generation": 4,
+      "branchId": "branch_binh",
+      "subBranch": "Phái Sài Gòn",
+      "clanRole": "Trưởng Ban liên lạc Chi Bính",
+      "merits": "Tài trợ học bổng khuyến tài hằng năm cho sinh viên xuất sắc toàn dòng họ.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_16_sp",
+      "fullName": "Lâm Mỹ Dung",
+      "gender": "female",
+      "commonName": "Chị Dung",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 9,
+        "month": 9,
+        "year": 1966
+      },
+      "birthPlace": "Đà Lạt, Lâm Đồng",
+      "ancestralHome": "Đà Lạt, Lâm Đồng",
+      "residence": "Quận 3, TP. Hồ Chí Minh",
+      "occupation": "Chuyên gia dinh dưỡng",
+      "generation": 4,
+      "branchId": "branch_binh",
+      "subBranch": "Phái Sài Gòn",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_17",
+      "fullName": "Trần Hữu Khôi",
+      "gender": "male",
+      "commonName": "Anh Khôi",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 28,
+        "month": 10,
+        "year": 1965
+      },
+      "birthPlace": "Hoàn Kiếm, Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Long Biên, Hà Nội",
+      "occupation": "Giảng viên Lịch sử Việt Nam",
+      "generation": 4,
+      "branchId": "branch_at",
+      "subBranch": "Phái Bắc",
+      "clanRole": "Thư ký Hội đồng Gia tộc · Phụ trách biên khảo phả hệ",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_18",
+      "fullName": "Trần Minh Quân",
+      "gender": "male",
+      "commonName": "Minh Quân",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 11,
+        "month": 2,
+        "year": 1985
+      },
+      "birthPlace": "Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Nam Từ Liêm, Hà Nội",
+      "occupation": "Kỹ sư phần mềm & Lưu trữ số",
+      "generation": 5,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "clanRole": "Trưởng tôn Đời thứ 5 · Quản trị gia phả số",
+      "merits": "Xây dựng hệ thống lưu trữ gia phả số ngoại tuyến cho toàn dòng họ.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-11-04T01:30:00.000Z"
+    },
+    {
+      "id": "p_18_sp",
+      "fullName": "Đỗ Ngọc Lan Anh",
+      "gender": "female",
+      "commonName": "Lan Anh",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 7,
+        "month": 6,
+        "year": 1988
+      },
+      "birthPlace": "Hải Dương",
+      "ancestralHome": "Chí Linh, Hải Dương",
+      "residence": "Nam Từ Liêm, Hà Nội",
+      "occupation": "Bác sĩ Nhi khoa",
+      "generation": 5,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_19",
+      "fullName": "Trần Minh Châu",
+      "gender": "female",
+      "commonName": "Minh Châu",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 24,
+        "month": 9,
+        "year": 1991
+      },
+      "birthPlace": "Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Đông Ngạc, Hà Nội",
+      "occupation": "Nhà nghiên cứu mỹ thuật cổ",
+      "generation": 5,
+      "branchId": "branch_giap",
+      "subBranch": "Phái Đông",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_20",
+      "fullName": "Trần Bảo Nam",
+      "gender": "male",
+      "commonName": "Bảo Nam",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 3,
+        "month": 4,
+        "year": 1995
+      },
+      "birthPlace": "TP. Hồ Chí Minh",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Thảo Điền, TP. Thủ Đức, TP. Hồ Chí Minh",
+      "occupation": "Chuyên viên Thiết kế Công nghiệp",
+      "generation": 5,
+      "branchId": "branch_binh",
+      "subBranch": "Phái Sài Gòn",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_21",
+      "fullName": "Trần Ngọc Khánh Linh",
+      "gender": "female",
+      "commonName": "Khánh Linh",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 18,
+        "month": 11,
+        "year": 2001
+      },
+      "birthPlace": "TP. Hồ Chí Minh",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Quận 3, TP. Hồ Chí Minh",
+      "occupation": "Nghiên cứu sinh Văn hóa Đông Nam Á",
+      "generation": 5,
+      "branchId": "branch_binh",
+      "subBranch": "Phái Sài Gòn",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "p_22",
+      "fullName": "Trần Khôi Nguyên",
+      "gender": "male",
+      "commonName": "Khôi Nguyên",
+      "isLiving": true,
+      "birthDate": {
+        "precision": "exact",
+        "day": 14,
+        "month": 1,
+        "year": 1998
+      },
+      "birthPlace": "Hà Nội",
+      "ancestralHome": "Đông Ngạc, Hà Nội",
+      "residence": "Long Biên, Hà Nội",
+      "occupation": "Kiến trúc sư quy hoạch đô thị",
+      "generation": 5,
+      "branchId": "branch_at",
+      "subBranch": "Phái Bắc",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    }
+  ],
+  "unions": [
+    {
+      "id": "u_01",
+      "partnerIds": [
+        "p_01",
+        "p_01_sp"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1895
+      },
+      "marriagePlace": "Đông Ngạc, Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "notes": "Hôn lễ truyền thống tại làng Đông Ngạc.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_02a",
+      "partnerIds": [
+        "p_02",
+        "p_03"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1920
+      },
+      "marriagePlace": "Đông Ngạc, Hà Nội",
+      "status": "widowed",
+      "marriageOrder": 1,
+      "notes": "Chính thất (bà Nguyễn Thị Lan mất sớm năm 1932).",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_02b",
+      "partnerIds": [
+        "p_02",
+        "p_03b"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1934
+      },
+      "marriagePlace": "Xuân Đỉnh, Hà Nội",
+      "status": "married",
+      "marriageOrder": 2,
+      "notes": "Tục huyền (kế thất bà Đặng Thị Nguyệt).",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_04",
+      "partnerIds": [
+        "p_04",
+        "p_04_sp"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1925
+      },
+      "marriagePlace": "Từ Sơn, Bắc Ninh",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_06",
+      "partnerIds": [
+        "p_06",
+        "p_06_sp"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1951
+      },
+      "marriagePlace": "Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_08",
+      "partnerIds": [
+        "p_08",
+        "p_08_sp"
+      ],
+      "marriageDate": {
+        "precision": "exact",
+        "day": 20,
+        "month": 11,
+        "year": 1965
+      },
+      "marriagePlace": "Ba Đình, Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_10",
+      "partnerIds": [
+        "p_10",
+        "p_10_sp"
+      ],
+      "marriageDate": {
+        "precision": "year",
+        "year": 1960
+      },
+      "marriagePlace": "Gia Định, Sài Gòn",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_11",
+      "partnerIds": [
+        "p_11"
+      ],
+      "status": "married",
+      "marriageOrder": 1,
+      "notes": "Thông tin người phối ngẫu đang được con cháu cập nhật bổ sung.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_12",
+      "partnerIds": [
+        "p_12",
+        "p_12_sp"
+      ],
+      "marriageDate": {
+        "precision": "exact",
+        "day": 16,
+        "month": 1,
+        "year": 1983
+      },
+      "marriagePlace": "Đông Ngạc, Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_16",
+      "partnerIds": [
+        "p_16",
+        "p_16_sp"
+      ],
+      "marriageDate": {
+        "precision": "exact",
+        "day": 10,
+        "month": 12,
+        "year": 1992
+      },
+      "marriagePlace": "TP. Hồ Chí Minh",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_17",
+      "partnerIds": [
+        "p_17"
+      ],
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "u_18",
+      "partnerIds": [
+        "p_18",
+        "p_18_sp"
+      ],
+      "marriageDate": {
+        "precision": "exact",
+        "day": 22,
+        "month": 10,
+        "year": 2014
+      },
+      "marriagePlace": "Hà Nội",
+      "status": "married",
+      "marriageOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    }
+  ],
+  "relationships": [
+    {
+      "id": "r_01",
+      "parentId": "p_01",
+      "childId": "p_02",
+      "unionId": "u_01",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_02",
+      "parentId": "p_01_sp",
+      "childId": "p_02",
+      "unionId": "u_01",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_03",
+      "parentId": "p_01",
+      "childId": "p_04",
+      "unionId": "u_01",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_04",
+      "parentId": "p_01_sp",
+      "childId": "p_04",
+      "unionId": "u_01",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_05",
+      "parentId": "p_01",
+      "childId": "p_05",
+      "unionId": "u_01",
+      "lineageType": "biological",
+      "birthOrder": 3,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_06",
+      "parentId": "p_01_sp",
+      "childId": "p_05",
+      "unionId": "u_01",
+      "lineageType": "biological",
+      "birthOrder": 3,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_07",
+      "parentId": "p_02",
+      "childId": "p_06",
+      "unionId": "u_02a",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_08",
+      "parentId": "p_03",
+      "childId": "p_06",
+      "unionId": "u_02a",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_09",
+      "parentId": "p_02",
+      "childId": "p_07",
+      "unionId": "u_02a",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_10",
+      "parentId": "p_03",
+      "childId": "p_07",
+      "unionId": "u_02a",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_10_step1",
+      "parentId": "p_03b",
+      "childId": "p_06",
+      "unionId": "u_02b",
+      "lineageType": "step",
+      "birthOrder": 1,
+      "notes": "Mẹ kế nuôi dưỡng từ nhỏ",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_10_step2",
+      "parentId": "p_03b",
+      "childId": "p_07",
+      "unionId": "u_02b",
+      "lineageType": "step",
+      "birthOrder": 2,
+      "notes": "Mẹ kế nuôi dưỡng từ nhỏ",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_11",
+      "parentId": "p_02",
+      "childId": "p_08",
+      "unionId": "u_02b",
+      "lineageType": "biological",
+      "birthOrder": 3,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_12",
+      "parentId": "p_03b",
+      "childId": "p_08",
+      "unionId": "u_02b",
+      "lineageType": "biological",
+      "birthOrder": 3,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_13",
+      "parentId": "p_02",
+      "childId": "p_09",
+      "unionId": "u_02b",
+      "lineageType": "biological",
+      "birthOrder": 4,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_14",
+      "parentId": "p_03b",
+      "childId": "p_09",
+      "unionId": "u_02b",
+      "lineageType": "biological",
+      "birthOrder": 4,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_15",
+      "parentId": "p_04",
+      "childId": "p_10",
+      "unionId": "u_04",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_16",
+      "parentId": "p_04_sp",
+      "childId": "p_10",
+      "unionId": "u_04",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_17",
+      "parentId": "p_04",
+      "childId": "p_11",
+      "unionId": "u_04",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_18",
+      "parentId": "p_04_sp",
+      "childId": "p_11",
+      "unionId": "u_04",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_19",
+      "parentId": "p_06",
+      "childId": "p_12",
+      "unionId": "u_06",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_20",
+      "parentId": "p_06_sp",
+      "childId": "p_12",
+      "unionId": "u_06",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_21",
+      "parentId": "p_06",
+      "childId": "p_13",
+      "unionId": "u_06",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_22",
+      "parentId": "p_06_sp",
+      "childId": "p_13",
+      "unionId": "u_06",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_23",
+      "parentId": "p_08",
+      "childId": "p_14",
+      "unionId": "u_08",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_24",
+      "parentId": "p_08_sp",
+      "childId": "p_14",
+      "unionId": "u_08",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_25",
+      "parentId": "p_08",
+      "childId": "p_15",
+      "unionId": "u_08",
+      "lineageType": "adoptive",
+      "birthOrder": 2,
+      "notes": "Nhận nuôi năm 1973",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_26",
+      "parentId": "p_08_sp",
+      "childId": "p_15",
+      "unionId": "u_08",
+      "lineageType": "adoptive",
+      "birthOrder": 2,
+      "notes": "Nhận nuôi năm 1973",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_27",
+      "parentId": "p_10",
+      "childId": "p_16",
+      "unionId": "u_10",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_28",
+      "parentId": "p_10_sp",
+      "childId": "p_16",
+      "unionId": "u_10",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_29",
+      "parentId": "p_11",
+      "childId": "p_17",
+      "unionId": "u_11",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_30",
+      "parentId": "p_12",
+      "childId": "p_18",
+      "unionId": "u_12",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_31",
+      "parentId": "p_12_sp",
+      "childId": "p_18",
+      "unionId": "u_12",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_32",
+      "parentId": "p_12",
+      "childId": "p_19",
+      "unionId": "u_12",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_33",
+      "parentId": "p_12_sp",
+      "childId": "p_19",
+      "unionId": "u_12",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_34",
+      "parentId": "p_16",
+      "childId": "p_20",
+      "unionId": "u_16",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_35",
+      "parentId": "p_16_sp",
+      "childId": "p_20",
+      "unionId": "u_16",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_36",
+      "parentId": "p_16",
+      "childId": "p_21",
+      "unionId": "u_16",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_37",
+      "parentId": "p_16_sp",
+      "childId": "p_21",
+      "unionId": "u_16",
+      "lineageType": "biological",
+      "birthOrder": 2,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "r_38",
+      "parentId": "p_17",
+      "childId": "p_22",
+      "unionId": "u_17",
+      "lineageType": "biological",
+      "birthOrder": 1,
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    }
+  ],
+  "lifeEvents": [
+    {
+      "id": "ev_01",
+      "personId": "p_01",
+      "title": "Mở lớp nghĩa thục tại làng Đông Ngạc",
+      "type": "career",
+      "date": {
+        "precision": "year",
+        "year": 1898
+      },
+      "location": "Xóm Chùa, Đông Ngạc, Hà Nội",
+      "description": "Dạy chữ Hán Nôm và đạo lý làm người miễn phí cho thanh thiếu niên trong vùng.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "ev_02",
+      "personId": "p_01",
+      "title": "Chủ trì đại trùng tu Từ đường họ Trần",
+      "type": "contribution",
+      "date": {
+        "precision": "exact",
+        "day": 15,
+        "month": 10,
+        "year": 1924
+      },
+      "location": "Từ đường họ Trần, Đông Ngạc",
+      "description": "Dựng lại 3 gian tiền tế bằng gỗ lim và khắc bức hoành phi Thế Đức Truyền Gia.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "ev_03",
+      "personId": "p_01",
+      "title": "Phiên âm và biên tập bộ Gia phả chữ Quốc ngữ đầu tiên",
+      "type": "contribution",
+      "date": {
+        "precision": "year",
+        "year": 1930
+      },
+      "location": "Đông Ngạc, Hà Nội",
+      "description": "Chuyển dịch phả ký cổ sang Quốc ngữ để các thế hệ hậu sinh dễ dàng tra cứu.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "ev_04",
+      "personId": "p_02",
+      "title": "Đưa đại gia đình và hòm gia phả tản cư lên Phú Thọ",
+      "type": "migration",
+      "date": {
+        "precision": "month",
+        "month": 12,
+        "year": 1946
+      },
+      "location": "Thanh Ba, Phú Thọ",
+      "description": "Giữ gìn nguyên vẹn sắc phong và sổ giỗ họ suốt 8 năm kháng chiến.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "ev_05",
+      "personId": "p_10",
+      "title": "Di cư lập nghiệp tại Sài Gòn – Khởi lập Chi Bính",
+      "type": "migration",
+      "date": {
+        "precision": "year",
+        "year": 1955
+      },
+      "location": "Phú Nhuận, Sài Gòn",
+      "description": "Mở tiệm kim hoàn Đức Đạt, giữ liên lạc thư từ đều đặn với quê nhà Đông Ngạc.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "ev_06",
+      "personId": "p_08",
+      "title": "Chủ trì thiết kế tu bổ Từ đường họ Trần theo lối cổ",
+      "type": "contribution",
+      "date": {
+        "precision": "exact",
+        "day": 8,
+        "month": 3,
+        "year": 2008
+      },
+      "location": "Đông Ngạc, Hà Nội",
+      "description": "Phục dựng mái ngói mũi hài, sân gạch Bát Tràng và hệ thống cột lim truyền thống.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "ev_07",
+      "personId": "p_12",
+      "title": "Tổ chức Đại lễ kỷ niệm 100 năm trùng tu Từ đường (1924 – 2024)",
+      "type": "contribution",
+      "date": {
+        "precision": "exact",
+        "day": 20,
+        "month": 11,
+        "year": 2024
+      },
+      "location": "Từ đường họ Trần, Đông Ngạc, Hà Nội",
+      "description": "Quy tụ hơn 120 con cháu cả ba chi Bắc – Trung – Nam về dự lễ dâng hương.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    }
+  ],
+  "media": [
+    {
+      "id": "media_01",
+      "title": "Chân dung Cụ Tổ Trần Văn Lộc (1926)",
+      "description": "Bức ảnh chân dung lưu trữ chụp tại hiệu ảnh Lê Văn – Hà Nội khi cụ tròn 54 tuổi.",
+      "dateLabel": "Năm 1926",
+      "category": "portrait",
+      "mimeType": "image/svg+xml",
+      "dataUrl": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20533%22%20width%3D%22400%22%20height%3D%22533%22%3E%0A%20%20%3Crect%20width%3D%22400%22%20height%3D%22533%22%20fill%3D%22%233A2E25%22%2F%3E%0A%20%20%3Crect%20x%3D%2216%22%20y%3D%2216%22%20width%3D%22368%22%20height%3D%22501%22%20rx%3D%228%22%20fill%3D%22%23EAE4D6%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22180%22%20r%3D%2272%22%20fill%3D%22%23D5CBB8%22%2F%3E%0A%20%20%3C!--%20Turban%20and%20Robe%20silhouette%20--%3E%0A%20%20%3Cpath%20d%3D%22M140%20136%20Q200%20106%20260%20136%20Q250%20110%20200%20106%20Q150%20110%20140%20136%20Z%22%20fill%3D%22%23231C16%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22178%22%20r%3D%2246%22%20fill%3D%22%23D5CBB8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M110%20320%20Q200%20240%20290%20320%20L310%20470%20L90%20470%20Z%22%20fill%3D%22%231B3B2B%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M170%20250%20L200%20360%20L230%20250%20Z%22%20fill%3D%22%23FAF7F2%22%20opacity%3D%220.8%22%2F%3E%0A%20%20%3Ctext%20x%3D%22200%22%20y%3D%22440%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%20font-size%3D%2220%22%20font-weight%3D%22bold%22%20fill%3D%22%23C5A059%22%3EC%E1%BB%A4%20%C4%90%E1%BB%92%20L%E1%BB%98C%20(1872%20-%201948)%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22200%22%20y%3D%22468%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20fill%3D%22%23655A4E%22%3EHi%E1%BB%87u%20%E1%BA%A3nh%20L%C3%AA%20V%C4%83n%20%E2%80%93%20H%C3%A0%20N%E1%BB%99i%201926%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A",
+      "personIds": [
+        "p_01"
+      ],
+      "branchId": "branch_daiton",
+      "storyContext": "Cụ mặc áo ngũ thân lụa thâm, đội khăn xếp chỉnh tề, tay đặt lên cuốn sách gia huấn vừa biên soạn xong.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "media_02",
+      "title": "Chân dung Tổ mẫu Nguyễn Thị Kim (1935)",
+      "description": "Ảnh chụp lưu niệm của cụ bà Nguyễn Thị Kim trong trang phục áo dài lụa nâu truyền thống.",
+      "dateLabel": "Khoảng năm 1935",
+      "category": "portrait",
+      "mimeType": "image/svg+xml",
+      "dataUrl": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20400%20533%22%20width%3D%22400%22%20height%3D%22533%22%3E%0A%20%20%3Crect%20width%3D%22400%22%20height%3D%22533%22%20fill%3D%22%233A2E25%22%2F%3E%0A%20%20%3Crect%20x%3D%2216%22%20y%3D%2216%22%20width%3D%22368%22%20height%3D%22501%22%20rx%3D%228%22%20fill%3D%22%23F2E9DF%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22180%22%20r%3D%2272%22%20fill%3D%22%23DFCBB8%22%2F%3E%0A%20%20%3C!--%20Traditional%20Headscarf%20silhouette%20--%3E%0A%20%20%3Cpath%20d%3D%22M136%20140%20Q200%20112%20264%20140%20Q270%20200%20250%20230%20Q200%20244%20150%20230%20Z%22%20fill%3D%22%23231C16%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22182%22%20r%3D%2244%22%20fill%3D%22%23DFCBB8%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M110%20320%20Q200%20250%20290%20320%20L310%20470%20L90%20470%20Z%22%20fill%3D%22%234A2E1F%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22300%22%20r%3D%2214%22%20fill%3D%22none%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%224%22%2F%3E%0A%20%20%3Ctext%20x%3D%22200%22%20y%3D%22440%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%20font-size%3D%2220%22%20font-weight%3D%22bold%22%20fill%3D%22%23856428%22%3EC%E1%BB%A4%20B%C3%80%20KIM%20(1876%20-%201954)%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22200%22%20y%3D%22468%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2212%22%20fill%3D%22%2385786A%22%3ET%E1%BB%95%20m%E1%BA%ABu%20%C4%90%E1%BA%A1i%20T%C3%B4n%20%E2%80%93%20%C4%90%C3%B4ng%20Ng%E1%BA%A1c%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A",
+      "personIds": [
+        "p_01_sp"
+      ],
+      "branchId": "branch_daiton",
+      "storyContext": "Chiếc vòng ngọc thạch cụ đeo trên cổ tay trái sau này được truyền lại cho con dâu trưởng qua các thế hệ.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "media_03",
+      "title": "Đại gia đình sum họp đầu xuân Ất Tỵ tại Đông Ngạc (1965)",
+      "description": "Bức ảnh quý chụp ba thế hệ quây quần trước hiên nhà cổ 5 gian dịp Tết Nguyên đán.",
+      "dateLabel": "Xuân Ất Tỵ 1965",
+      "category": "historical_photo",
+      "mimeType": "image/svg+xml",
+      "dataUrl": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%232E241E%22%2F%3E%0A%20%20%3Crect%20x%3D%2220%22%20y%3D%2220%22%20width%3D%22760%22%20height%3D%22560%22%20rx%3D%2212%22%20fill%3D%22%23E8DFD1%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%224%22%2F%3E%0A%20%20%3C!--%20Courtyard%20veranda%20--%3E%0A%20%20%3Cpath%20d%3D%22M80%20180%20L720%20180%20L720%20480%20L80%20480%20Z%22%20fill%3D%22%23D8CEBD%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22280%22%20cy%3D%22310%22%20r%3D%2234%22%20fill%3D%22%231B3B2B%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22400%22%20cy%3D%22290%22%20r%3D%2238%22%20fill%3D%22%233D2B1F%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22520%22%20cy%3D%22310%22%20r%3D%2234%22%20fill%3D%22%231B3B2B%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22200%22%20cy%3D%22330%22%20r%3D%2228%22%20fill%3D%22%238B3A2B%22%2F%3E%0A%20%20%3Ccircle%20cx%3D%22600%22%20cy%3D%22330%22%20r%3D%2228%22%20fill%3D%22%238B3A2B%22%2F%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22520%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%20font-size%3D%2224%22%20font-weight%3D%22bold%22%20fill%3D%22%23231C16%22%3E%C4%90%E1%BA%A1i%20gia%20%C4%91%C3%ACnh%20sum%20h%E1%BB%8Dp%20xu%C3%A2n%20%E1%BA%A4t%20T%E1%BB%B5%201965%3C%2Ftext%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22546%22%20text-anchor%3D%22middle%22%20font-family%3D%22sans-serif%22%20font-size%3D%2213%22%20fill%3D%22%23655A4E%22%3EHi%C3%AAn%20nh%C3%A0%20c%E1%BB%95%205%20gian%20t%E1%BA%A1i%20X%C3%B3m%20Ch%C3%B9a%2C%20l%C3%A0ng%20%C4%90%C3%B4ng%20Ng%E1%BA%A1c%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A",
+      "personIds": [
+        "p_02",
+        "p_03b",
+        "p_06",
+        "p_06_sp",
+        "p_08",
+        "p_08_sp",
+        "p_09",
+        "p_12",
+        "p_13"
+      ],
+      "branchId": "branch_giap",
+      "storyContext": "Đây là bức ảnh chụp chung đông đủ cuối cùng có mặt chú Út Trần Văn Tín trước khi chú lên đường nhập ngũ năm 1968.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "media_04",
+      "title": "Bản Gia phả cổ chép tay trên giấy dó",
+      "description": "Cuốn phả ký gốc chữ Hán Nôm do tiền nhân truyền lại và được cụ Đồ Lộc chú giải năm 1930.",
+      "dateLabel": "Cuối thế kỷ XIX – 1930",
+      "category": "document",
+      "mimeType": "image/svg+xml",
+      "dataUrl": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20800%20600%22%20width%3D%22800%22%20height%3D%22600%22%3E%0A%20%20%3Crect%20width%3D%22800%22%20height%3D%22600%22%20fill%3D%22%232E241E%22%2F%3E%0A%20%20%3Crect%20x%3D%2220%22%20y%3D%2220%22%20width%3D%22760%22%20height%3D%22560%22%20rx%3D%2212%22%20fill%3D%22%23DFD3BE%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%224%22%2F%3E%0A%20%20%3C!--%20Open%20Manuscript%20Pages%20--%3E%0A%20%20%3Crect%20x%3D%22100%22%20y%3D%22100%22%20width%3D%22290%22%20height%3D%22380%22%20rx%3D%226%22%20fill%3D%22%23F4EBD9%22%20stroke%3D%22%23C5B59A%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3Crect%20x%3D%22410%22%20y%3D%22100%22%20width%3D%22290%22%20height%3D%22380%22%20rx%3D%226%22%20fill%3D%22%23F4EBD9%22%20stroke%3D%22%23C5B59A%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3C!--%20Calligraphy%20vertical%20strips%20--%3E%0A%20%20%3Cline%20x1%3D%22160%22%20y1%3D%22140%22%20x2%3D%22160%22%20y2%3D%22440%22%20stroke%3D%22%233A2E25%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%2216%2C10%22%2F%3E%0A%20%20%3Cline%20x1%3D%22240%22%20y1%3D%22140%22%20x2%3D%22240%22%20y2%3D%22440%22%20stroke%3D%22%233A2E25%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%2216%2C10%22%2F%3E%0A%20%20%3Cline%20x1%3D%22320%22%20y1%3D%22140%22%20x2%3D%22320%22%20y2%3D%22440%22%20stroke%3D%22%233A2E25%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%2216%2C10%22%2F%3E%0A%20%20%3Cline%20x1%3D%22480%22%20y1%3D%22140%22%20x2%3D%22480%22%20y2%3D%22440%22%20stroke%3D%22%233A2E25%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%2216%2C10%22%2F%3E%0A%20%20%3Cline%20x1%3D%22560%22%20y1%3D%22140%22%20x2%3D%22560%22%20y2%3D%22440%22%20stroke%3D%22%233A2E25%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%2216%2C10%22%2F%3E%0A%20%20%3Cline%20x1%3D%22640%22%20y1%3D%22140%22%20x2%3D%22640%22%20y2%3D%22440%22%20stroke%3D%22%233A2E25%22%20stroke-width%3D%226%22%20stroke-linecap%3D%22round%22%20stroke-dasharray%3D%2216%2C10%22%2F%3E%0A%20%20%3C!--%20Red%20seal%20imprint%20--%3E%0A%20%20%3Crect%20x%3D%22220%22%20y%3D%22400%22%20width%3D%2240%22%20height%3D%2240%22%20rx%3D%224%22%20fill%3D%22%23B22222%22%20opacity%3D%220.85%22%2F%3E%0A%20%20%3Ctext%20x%3D%22400%22%20y%3D%22530%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%20font-size%3D%2222%22%20font-weight%3D%22bold%22%20fill%3D%22%23231C16%22%3EB%E1%BA%A3n%20Gia%20ph%E1%BA%A3%20c%E1%BB%95%20ch%C3%A9p%20tay%20tr%C3%AAn%20gi%E1%BA%A5y%20d%C3%B3%20(1930)%3C%2Ftext%3E%0A%3C%2Fsvg%3E%0A",
+      "personIds": [
+        "p_01",
+        "p_02",
+        "p_06",
+        "p_17"
+      ],
+      "branchId": "branch_daiton",
+      "storyContext": "Được cất giữ trong tráp gỗ sơn son chống ẩm suốt thời gian tản cư lên Phú Thọ (1946–1954).",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "media_05",
+      "title": "Từ đường họ Trần tại làng cổ Đông Ngạc",
+      "description": "Không gian sân gạch, phương đình và bức hoành phi Thế Đức Truyền Gia vào buổi sớm mùa thu.",
+      "dateLabel": "Năm 2024",
+      "category": "historical_photo",
+      "mimeType": "image/svg+xml",
+      "dataUrl": "data:image/svg+xml;utf8,%0A%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%201200%20675%22%20width%3D%221200%22%20height%3D%22675%22%3E%0A%20%20%3Cdefs%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22bg%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%220%22%20y2%3D%221%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%231B3B2B%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2260%25%22%20stop-color%3D%22%23132A1F%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%230D1D15%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%20%20%3ClinearGradient%20id%3D%22gold%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%220%22%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%220%25%22%20stop-color%3D%22%23C5A059%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%2250%25%22%20stop-color%3D%22%23E5C788%22%2F%3E%0A%20%20%20%20%20%20%3Cstop%20offset%3D%22100%25%22%20stop-color%3D%22%239E7B3B%22%2F%3E%0A%20%20%20%20%3C%2FlinearGradient%3E%0A%20%20%3C%2Fdefs%3E%0A%20%20%3Crect%20width%3D%221200%22%20height%3D%22675%22%20fill%3D%22url(%23bg)%22%2F%3E%0A%20%20%3C!--%20Courtyard%20floor%20tiles%20--%3E%0A%20%20%3Cpath%20d%3D%22M0%20500%20L1200%20500%20L1200%20675%20L0%20675%20Z%22%20fill%3D%22%232E241E%22%20opacity%3D%220.9%22%2F%3E%0A%20%20%3C!--%20Traditional%20temple%20columns%20--%3E%0A%20%20%3Crect%20x%3D%22220%22%20y%3D%22240%22%20width%3D%2244%22%20height%3D%22260%22%20rx%3D%224%22%20fill%3D%22%233D2B1F%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3Crect%20x%3D%22420%22%20y%3D%22220%22%20width%3D%2248%22%20height%3D%22280%22%20rx%3D%224%22%20fill%3D%22%233D2B1F%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3Crect%20x%3D%22732%22%20y%3D%22220%22%20width%3D%2248%22%20height%3D%22280%22%20rx%3D%224%22%20fill%3D%22%233D2B1F%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3Crect%20x%3D%22936%22%20y%3D%22240%22%20width%3D%2244%22%20height%3D%22260%22%20rx%3D%224%22%20fill%3D%22%233D2B1F%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%222%22%2F%3E%0A%20%20%3C!--%20Curved%20roof%20eaves%20--%3E%0A%20%20%3Cpath%20d%3D%22M120%20250%20Q600%20160%201080%20250%20L1020%20220%20Q600%20130%20180%20220%20Z%22%20fill%3D%22%238B3A2B%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%223%22%2F%3E%0A%20%20%3Cpath%20d%3D%22M260%20170%20Q600%2090%20940%20170%20L900%20150%20Q600%2080%20300%20150%20Z%22%20fill%3D%22%238B3A2B%22%2F%3E%0A%20%20%3C!--%20Plaque%20%22TH%E1%BA%BE%20%C4%90%E1%BB%A8C%20TRUY%E1%BB%80N%20GIA%22%20--%3E%0A%20%20%3Crect%20x%3D%22490%22%20y%3D%22250%22%20width%3D%22220%22%20height%3D%2274%22%20rx%3D%228%22%20fill%3D%22%235A1A1A%22%20stroke%3D%22url(%23gold)%22%20stroke-width%3D%224%22%2F%3E%0A%20%20%3Ctext%20x%3D%22600%22%20y%3D%22296%22%20text-anchor%3D%22middle%22%20font-family%3D%22serif%22%20font-size%3D%2224%22%20font-weight%3D%22bold%22%20fill%3D%22%23E5C788%22%20letter-spacing%3D%224%22%3ETH%E1%BA%BE%20%C4%90%E1%BB%A8C%20TRUY%E1%BB%80N%20GIA%3C%2Ftext%3E%0A%20%20%3Ccircle%20cx%3D%22600%22%20cy%3D%22400%22%20r%3D%2248%22%20fill%3D%22none%22%20stroke%3D%22%23C5A059%22%20stroke-width%3D%222%22%20opacity%3D%220.4%22%2F%3E%0A%3C%2Fsvg%3E%0A",
+      "personIds": [
+        "p_01",
+        "p_08",
+        "p_12",
+        "p_15"
+      ],
+      "branchId": "branch_daiton",
+      "storyContext": "Nơi con cháu ba chi hội tụ mỗi dịp Giỗ Tổ 22 tháng Mười Âm lịch và lễ khuyến học rằm tháng Giêng.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "media_f5b1326d-a55d-4c05-8b3d-6283feab51af",
+      "title": "Chân dung - Trần Văn Lộc",
+      "category": "portrait",
+      "dataUrl": "data:image/jpeg;base64,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",
+      "mimeType": "image/jpeg",
+      "personIds": [
+        "p_01"
+      ],
+      "createdAt": "2026-11-26T07:34:18.334Z",
+      "updatedAt": "2026-11-26T07:34:18.334Z"
+    }
+  ],
+  "stories": [
+    {
+      "id": "story_01",
+      "title": "Chiếc tráp gỗ sơn son và hành trình giữ Gia phả năm 1946",
+      "summary": "Câu chuyện ông Cả Trần Văn Khải gùi hòm gia phả vượt sông Hồng trong đêm đông tản cư.",
+      "periodLabel": "1946 – 1954",
+      "personIds": [
+        "p_01",
+        "p_02",
+        "p_03b",
+        "p_06"
+      ],
+      "branchId": "branch_giap",
+      "mediaIds": [
+        "media_04"
+      ],
+      "recordedBy": "Trần Hữu Khôi (ghi theo lời kể của KTS Trần Văn Minh)",
+      "content": "Cuối tháng Chạp năm 1946, khi tiếng đại bác vang rền phía nội thành Hà Nội, cụ Đồ Lộc tuổi đã cao liền gọi trưởng nam là ông Trần Văn Khải đến bên án thư. Cụ trao chiếc tráp gỗ lim sơn phủ cánh gián, bên trong bọc vải điều giữ cuốn Gia phả giấy dó và năm đạo sắc phong cổ, dặn rằng: \"Nhà cửa có thể dựng lại, ruộng vườn còn đất còn người, nhưng mất chữ của tổ tiên là con cháu lạc mất cội nguồn.\"\n\nSuốt tám năm tản cư nơi đồi cọ Thanh Ba (Phú Thọ), bà Hai Đặng Thị Nguyệt cứ mỗi mùa mưa ngâu lại đem tráp ra hong nắng sớm cùng lá long não để chống mối mọt. Nhờ tấm lòng thành kính ấy, ngày trở về làng Đông Ngạc mùa thu năm 1954, từng trang giấy dó vẫn còn nguyên nét mực tàu sắc sảo.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "story_02",
+      "title": "Tấm lòng người mẹ kế Đặng Thị Nguyệt và nếp nhà hòa thuận",
+      "summary": "Sự gắn kết máu thịt giữa hai dòng con trong gia đình ông Cả Khải.",
+      "periodLabel": "1934 – 1986",
+      "personIds": [
+        "p_02",
+        "p_03",
+        "p_03b",
+        "p_06",
+        "p_07",
+        "p_08",
+        "p_09"
+      ],
+      "branchId": "branch_giap",
+      "mediaIds": [
+        "media_03"
+      ],
+      "recordedBy": "Trần Thị Thu Thủy",
+      "content": "Khi bà Nguyễn Thị Lan lâm bệnh qua đời sớm năm 1932, bác Nghị mới 9 tuổi, cô Mai mới lên 4. Hai năm sau, bà Đặng Thị Nguyệt về làm kế thất. Ngày bước chân qua bậc cửa gỗ nhà họ Trần, việc đầu tiên bà làm là tự tay thắp hương trước bàn thờ người vợ trước của chồng và xin nhận hai con nhỏ làm con đẻ trong lòng.\n\nNhững năm đói kém 1945, phần cơm trắng ít ỏi trong nồi đất bao giờ bà cũng xới cho anh Nghị đang tuổi ăn học và bé Tín nhỏ nhất nhà, còn mình ăn độn khoai sắn không một lời than vãn. Bởi thế trong họ Trần Đông Ngạc không bao giờ tồn tại hai tiếng \"con chung – con riêng\", mà chỉ có một nghĩa tình anh em ruột thịt vẹn tròn.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    },
+    {
+      "id": "story_03",
+      "title": "Nhịp cầu Bắc – Nam của Chi Bính sau bốn mươi năm đoàn tụ",
+      "summary": "Chuyến trở về Từ đường Đông Ngạc xúc động của ông Trần Hữu Đạt mùa thu năm 1995.",
+      "periodLabel": "1955 – 1995",
+      "personIds": [
+        "p_04",
+        "p_10",
+        "p_11",
+        "p_16"
+      ],
+      "branchId": "branch_binh",
+      "mediaIds": [
+        "media_05"
+      ],
+      "recordedBy": "Trần Gia Hưng",
+      "content": "Rời phố Hàng Đào vào Sài Gòn lập nghiệp năm 26 tuổi, ông Trần Hữu Đạt luôn đặt trên bàn thờ gia tiên tại Phú Nhuận một nắm đất nhỏ lấy từ gốc cây đại trước cổng làng Đông Ngạc. Hằng năm đúng ngày 22 tháng Mười Âm lịch, dù ở cách xa gần hai nghìn cây số, gia đình Chi Bính đều bày mâm cỗ hướng về phương Bắc vọng bái tổ tiên.\n\nMùa thu năm 1995, khi dẫn các con cháu miền Nam lần đầu bước qua cổng tam quan Từ đường, ông Đạt chạm tay vào hàng cột gỗ lim do chính cha mình là ông Hai Phúc cung tiến năm xưa mà rưng rưng nước mắt. Từ chuyến đi ấy, Quỹ Khuyến học họ Trần ba miền chính thức ra đời và duy trì bền bỉ đến tận hôm nay.",
+      "createdAt": "2026-10-15T08:00:00.000Z",
+      "updatedAt": "2026-10-15T08:00:00.000Z"
+    }
+  ]
+}

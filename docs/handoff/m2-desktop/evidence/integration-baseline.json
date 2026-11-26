@@ -1,0 +1,60 @@
+{
+  "baseline": "cf009fcc26f4c9ef5ba7a14a69daba2984af94f9",
+  "prs": [
+    {
+      "pr": 2,
+      "head": "6e2ba3c7a8896a0027d8d7f8198e4d5b3ab2d44e",
+      "ref": "fix/m1-cloud-atomic-merge",
+      "ancestorOfPR8": true,
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/2"
+    },
+    {
+      "pr": 3,
+      "head": "43d9b0271c9f2fdb53f419b2fd507a7a6dd80748",
+      "ref": "fix/m1-cloud-import-integrity",
+      "ancestorOfPR8": true,
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/3"
+    },
+    {
+      "pr": 5,
+      "head": "0eadd0099377632c3eb8d16fe28390ea2799b61a",
+      "ref": "fix/m1-cloud-core-closure",
+      "ancestorOfPR8": true,
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/5"
+    },
+    {
+      "pr": 6,
+      "head": "c8b1a4d49489c5f4fda7dc048c679339d17e384e",
+      "ref": "feat/m2-cloud-product-polish",
+      "ancestorOfPR8": true,
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/6"
+    },
+    {
+      "pr": 7,
+      "head": "6ffcba5908c0d64800c2c94cb46241d14d186e1f",
+      "ref": "fix/m2-cloud-mobile-platform",
+      "ancestorOfPR8": false,
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/7"
+    },
+    {
+      "pr": 8,
+      "head": "cf009fcc26f4c9ef5ba7a14a69daba2984af94f9",
+      "ref": "feat/m2-cloud-exhibition-hall",
+      "ancestorOfPR8": true,
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/8"
+    },
+    {
+      "pr": 9,
+      "head": "41f3b264521c201d6863236304478edb4b054e01",
+      "ref": "fix/m1-desktop-ui-foundation",
+      "ancestorOfPR8": false,
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/9"
+    }
+  ],
+  "refs": {
+    "preservedPR9": "41f3b264521c201d6863236304478edb4b054e01",
+    "integration": "0f885e742f18d2b6d9a179f8f3649b25a5906489"
+  },
+  "strategy": "Merge PR7 then PR9; no duplicate cherry-picks",
+  "conflict": "UpcomingAnniversariesWidget: Cloud logic/layout retained, Desktop visible label and target selector retained"
+}
