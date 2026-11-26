@@ -12,6 +12,7 @@ import {
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
+import { useNativeModal } from '../../hooks/useNativeModal';
 import { Media, MediaCategory, NavigationTab } from '../../models/genealogy';
 import { compressImageFile } from '../../utils/imageUtils';
 import { AudioRecorderModal } from './AudioRecorderModal';
@@ -52,6 +53,8 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
   const uploadRevision = useRef(0);
   const archiveHeadingRef = useRef<HTMLHeadingElement>(null);
   const viewerCloseRef = useRef<HTMLButtonElement>(null);
+  const viewerDialogRef = useNativeModal(Boolean(viewingMedia), viewerCloseRef);
+  const restoreArchiveOnViewerClose = useRef(false);
   const uploadCloseRef = useRef<HTMLButtonElement>(null);
 
   // New Media Form state
@@ -93,18 +96,28 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
   };
 
   useEffect(() => {
-    if (archiveOpen) archiveHeadingRef.current?.focus();
+    if (archiveOpen && !restoreArchiveOnViewerClose.current) archiveHeadingRef.current?.focus();
   }, [archiveOpen]);
 
   useEffect(() => {
-    const closeButton = addModalOpen ? uploadCloseRef.current : viewingMedia ? viewerCloseRef.current : null;
+    if (viewingMedia || !restoreArchiveOnViewerClose.current) return;
+    restoreArchiveOnViewerClose.current = false;
+    archiveHeadingRef.current?.focus({ preventScroll: true });
+  }, [viewingMedia]);
+
+  useEffect(() => {
+    const closeButton = addModalOpen ? uploadCloseRef.current : null;
     if (!closeButton) return;
     const trigger = document.activeElement;
     closeButton.focus();
     return () => {
       if (trigger instanceof HTMLElement && trigger.isConnected) trigger.focus();
     };
-  }, [addModalOpen, viewingMedia]);
+  }, [addModalOpen]);
+
+  const closeViewer = () => {
+    if (!deleteId && !isDeleting) setViewingMedia(null);
+  };
 
   const resetForm = () => {
     uploadRevision.current += 1;
@@ -184,7 +197,10 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
     setIsDeleting(true);
     try {
       await deleteMedia(deleteId);
-      if (viewingMedia?.id === deleteId) setViewingMedia(null);
+      if (viewingMedia?.id === deleteId) {
+        restoreArchiveOnViewerClose.current = true;
+        setViewingMedia(null);
+      }
     } catch (error) {
       setDeleteError(error instanceof Error ? error.message : 'Không thể xóa kỷ vật.');
       setViewingMedia(null);
@@ -201,6 +217,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
           onNavigate={onNavigate}
           onSelectPerson={onSelectPerson}
           onOpenArchive={(item) => {
+            restoreArchiveOnViewerClose.current = Boolean(item);
             setArchiveOpen(true);
             setViewingMedia(item ?? null);
           }}
@@ -390,17 +407,16 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
 
       {/* Lightbox / Media Viewer Modal */}
       {viewingMedia && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-6 bg-black/80 backdrop-blur-sm animate-in fade-in"
-          role="dialog"
+        <dialog
+          ref={viewerDialogRef}
           aria-modal="true"
           aria-labelledby="gallery-view-title"
-          onKeyDown={(event) => {
-            if (event.key === 'Escape' && !deleteId) {
-              event.stopPropagation();
-              setViewingMedia(null);
-            }
+          aria-busy={isDeleting}
+          onCancel={(event) => {
+            event.preventDefault();
+            closeViewer();
           }}
+          className="m-auto w-[calc(100%-1.5rem)] max-w-4xl overflow-hidden rounded-2xl bg-transparent p-0 shadow-2xl backdrop:bg-black/80 backdrop:backdrop-blur-sm sm:w-[calc(100%-3rem)]"
         >
           <div
             className="flex max-h-[90dvh] w-full max-w-4xl flex-col overflow-y-auto rounded-2xl bg-[#FFFDF9] shadow-2xl md:flex-row md:overflow-hidden"
@@ -417,7 +433,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
                     <h3 className="text-white font-serif text-lg font-bold">{viewingMedia.title}</h3>
                     <p className="text-[#DBC599] text-xs mt-1">Bản ghi âm giọng nói & Lời dặn tiền nhân</p>
                   </div>
-                  <audio controls src={viewingMedia.dataUrl} className="w-full mt-2" autoPlay />
+                  <audio controls tabIndex={0} src={viewingMedia.dataUrl} className="w-full mt-2" autoPlay />
                 </div>
               ) : (
                 <img
@@ -439,7 +455,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
                     type="button"
                     ref={viewerCloseRef}
                     aria-label="Đóng kỷ vật"
-                    onClick={() => setViewingMedia(null)}
+                    onClick={closeViewer}
                     className="grid size-11 shrink-0 place-items-center rounded-lg text-stone-600 hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-forest-700"
                   >
                     <X className="w-5 h-5" />
@@ -520,7 +536,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
                 </button>
                 <button
                   type="button"
-                  onClick={() => setViewingMedia(null)}
+                  onClick={closeViewer}
                   className="min-h-11 rounded-xl bg-forest-800 px-4 text-sm font-semibold text-white hover:bg-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700"
                 >
                   Đóng
@@ -528,7 +544,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
               </div>
             </div>
           </div>
-        </div>
+        </dialog>
       )}
 
       {/* Add Media Modal */}
