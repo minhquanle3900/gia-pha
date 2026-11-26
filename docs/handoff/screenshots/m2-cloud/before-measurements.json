@@ -1,0 +1,153 @@
+{
+  "measurements": {
+    "mobile": {
+      "dashboard": {
+        "heading": "Dòng họ Trần – Đông Ngạc",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 22
+      },
+      "journal": {
+        "heading": "Nhật Ký Dòng Họ & Kỷ Niệm Chung",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 17
+      },
+      "gallery": {
+        "heading": "Kho Kỷ Vật & Tư Liệu Gia Tộc",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 6
+      },
+      "rites": {
+        "heading": "Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 5
+      },
+      "statistics": {
+        "heading": "Dashboard Thống Kê Phả Hệ & Nhân Khẩu",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 8
+      },
+      "map": {
+        "heading": "Bản Đồ Di Cư & Địa Lý Dòng Họ",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 4
+      },
+      "book": {
+        "heading": "Dòng họ Trần – Đông Ngạc",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 38
+      },
+      "data": {
+        "heading": "Quản Lý Dữ Liệu & Sao Lưu",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 16
+      }
+    },
+    "desktop": {
+      "dashboard": {
+        "heading": "Dòng họ Trần – Đông Ngạc",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1910,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 22
+      },
+      "journal": {
+        "heading": "Nhật Ký Dòng Họ & Kỷ Niệm Chung",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1910,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 17
+      },
+      "gallery": {
+        "heading": "Kho Kỷ Vật & Tư Liệu Gia Tộc",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1873,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 6
+      },
+      "rites": {
+        "heading": "Trợ Lý Lễ Giỗ & Nghi Lễ Âm Lịch",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1910,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 5
+      },
+      "statistics": {
+        "heading": "Dashboard Thống Kê Phả Hệ & Nhân Khẩu",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1907,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 8
+      },
+      "map": {
+        "heading": "Bản Đồ Di Cư & Địa Lý Dòng Họ",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1885,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 4
+      },
+      "book": {
+        "heading": "Dòng họ Trần – Đông Ngạc",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1882,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 38
+      },
+      "data": {
+        "heading": "Quản Lý Dữ Liệu & Sao Lưu",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1899,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 16
+      }
+    }
+  },
+  "errors": []
+}
