@@ -207,6 +207,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
     return (
       <Suspense fallback={<p role="status" className="px-4 py-6">Đang mở phòng trưng bày…</p>}>
         <ExhibitionHall
+          key={entryRequest?.sequence}
           onNavigate={onNavigate}
           onSelectPerson={onSelectPerson}
           onOpenArchive={(item) => {
