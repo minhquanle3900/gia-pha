@@ -1,0 +1,36 @@
+{
+  "codeHead": "0f7594bea23cada24754d94aec2b9b7b8191027d",
+  "preservedPR11": "0eef3667284032a06074718dc1a515fc4d2c7342",
+  "preservedLocalBranch": "0eef3667284032a06074718dc1a515fc4d2c7342",
+  "includedPR10": "f0fafa2c1aaf479bb99db173a9b049ab2f597055",
+  "prs": [
+    {
+      "number": 10,
+      "head": "f0fafa2c1aaf479bb99db173a9b049ab2f597055",
+      "branch": "feat/m2-cloud-vietnamese-calligraphy",
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/10"
+    },
+    {
+      "number": 11,
+      "head": "0eef3667284032a06074718dc1a515fc4d2c7342",
+      "branch": "feat/m2-desktop-product-integration",
+      "url": "https://github.com/minhquanle3900/gia-pha/pull/11"
+    }
+  ],
+  "privacyPlanRef": "origin/docs/core-freeze-mobile-release",
+  "privacyPlanSHA": "c8f98c3f93ca7287af7ce74581413e2436c6a86e",
+  "desktopChangedFiles": [
+    "src/__tests__/localDataSafety.test.ts",
+    "src/components/AppShell.tsx",
+    "src/features/data-safety/LocalDataSafetyPanel.tsx",
+    "src/features/data-safety/StoragePressureNotice.tsx",
+    "src/features/data-safety/storageStatus.ts",
+    "src/features/data-safety/useDeviceStorageStatus.ts",
+    "src/features/family-tree/FamilyTreePage.tsx",
+    "src/features/gallery/ExhibitionHall.tsx",
+    "src/features/gallery/GalleryPage.tsx",
+    "src/features/gallery/exhibitionHall.css",
+    "src/features/people/MembersPage.tsx"
+  ],
+  "protectedUnchanged": true
+}

@@ -1,0 +1,44 @@
+Dữ liệu trên thiết bị
+Về tiện ích
+Dung lượng lưu trữ
+
+Dung lượng website trên trình duyệt này, gồm gia phả và bộ nhớ ứng dụng ngoại tuyến.
+
+Đây là ước tính do trình duyệt cung cấp, không phải dung lượng trống của toàn thiết bị.
+
+Đã dùng (ước tính)
+4,9 MB
+Hạn mức (ước tính)
+10,7 GB
+
+Khoảng 0% hạn mức được báo cáo.
+
+Website đang dùng chế độ lưu trữ thông thường. Trình duyệt có thể dọn dữ liệu khi cần dung lượng; hãy giữ một bản JSON ngoài trình duyệt.
+
+Kiểm tra lại dung lượng
+Sao lưu JSON
+
+Lần sao lưu được ghi nhận gần nhất: Chưa từng sao lưu.
+
+Bạn chưa có thời điểm sao lưu hợp lệ được ghi nhận. Nên xuất bản JSON mới và kiểm tra tệp đã tải.
+
+Thời điểm này không xác nhận tệp vẫn còn trên thiết bị. Hãy kiểm tra tệp trong thư mục Tải xuống và giữ thêm một bản ở nơi riêng tư.
+
+Mở sao lưu và khôi phục JSON
+Dữ liệu riêng trên thiết bị
+
+Gia phả được lưu trong trình duyệt trên thiết bị này. Dữ liệu gắn với địa chỉ website và hồ sơ trình duyệt đang dùng; không tự đồng bộ sang thiết bị khác và không tự chuyển bản sao lưu lên máy chủ.
+
+Xóa dữ liệu website, dùng trình duyệt hoặc hồ sơ khác, hay đổi địa chỉ ứng dụng có thể khiến bạn không còn thấy gia phả đã lưu.
+
+PIN chỉ khóa hoặc che một phần giao diện, không mã hóa dữ liệu. Dữ liệu IndexedDB và tệp JSON vẫn đọc được với quyền truy cập phù hợp. Giữ thiết bị và bản sao lưu ở nơi riêng tư.
+
+Chuyển gia phả sang thiết bị khác
+Trên thiết bị nguồn, mở sao lưu JSON, tải bản mới và kiểm tra tệp đã có trong thư mục Tải xuống.
+Tự chuyển tệp JSON sang thiết bị đích bằng cách riêng tư bạn chọn, chẳng hạn cáp hoặc công cụ chia sẻ tệp.
+Sao lưu dữ liệu đang có trên thiết bị đích trước. Mở ứng dụng, chọn tệp JSON và đọc kỹ xác nhận gộp hoặc thay thế.
+Đối chiếu thành viên, quan hệ, ảnh và nhật ký sau khi nhập; giữ tệp gốc cho đến khi đã kiểm tra xong.
+
+JSON giữ các bản ghi và nội dung đã nhúng. Ảnh, âm thanh hoặc tư liệu chỉ còn liên kết ngoài hay URL blob có thể không mở trên thiết bị khác; hãy giữ tệp gốc để bổ sung lại khi cần.
+
+Tệp JSON có thể chứa thông tin gia đình ở dạng đọc được. Chỉ chuyển cho người được phép nhận dữ liệu.

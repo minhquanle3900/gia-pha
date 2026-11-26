@@ -1,0 +1,33 @@
+{
+  "scope": "IAB Chromium 156; 390x844 CSS emulation; panel only, not Cloud modals",
+  "servedBuildSHA": "0f7594bea23cada24754d94aec2b9b7b8191027d",
+  "observations": [
+    {
+      "focus": "Dữ liệu trên thiết bị",
+      "focusId": "more-tools-heading",
+      "inside": true,
+      "step": "enter device details"
+    },
+    {
+      "focus": "Đóng tiện ích",
+      "inside": true,
+      "step": "Tab from last focusable backup button"
+    },
+    {
+      "focus": "Mở sao lưu và khôi phục JSON",
+      "inside": true,
+      "step": "Shift+Tab from close"
+    },
+    {
+      "focus": "Dữ liệu trên thiết bị",
+      "inside": true,
+      "step": "Back to tools"
+    },
+    {
+      "dialogCount": 0,
+      "focus": "Thêm",
+      "focusVisible": true,
+      "step": "Escape from device panel"
+    }
+  ]
+}

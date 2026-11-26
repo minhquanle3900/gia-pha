@@ -1,0 +1,18 @@
+<!doctype html><html lang="vi"><meta charset="utf-8"><title>QA fixture controls</title><style>body{font:16px/1.5 system-ui;margin:2rem}button{min-height:44px;margin:1rem;padding:8px}pre{white-space:pre-wrap}</style>
+<h1>Chỉ fixture tổng hợp · localhost:3240</h1><p>Thay thế dữ liệu của origin QA bằng fixture rỗng hoặc bản demo đã lưu trước kiểm thử. Không dùng với dữ liệu thật.</p>
+<button data-fixture="empty">Nạp fixture rỗng</button><button data-fixture="original">Khôi phục fixture demo</button><button id="read">Đọc số bản ghi</button><p id="status" role="status">Sẵn sàng</p><pre id="result"></pre>
+<script type="module">
+import { replaceEntireDatabase, loadFullSnapshot } from '/src/database/db.ts';
+const output=document.querySelector('#result'),status=document.querySelector('#status');
+function canonical(value){if(Array.isArray(value))return value.map(canonical);if(value&&typeof value==='object')return Object.fromEntries(Object.keys(value).sort().filter(key=>value[key]!==undefined).map(key=>[key,canonical(value[key])]));return value;}
+function business(value){const data=structuredClone(value);delete data.exportedAt;delete data.settings.lastBackupAt;for(const key of ['people','branches','unions','relationships','lifeEvents','media','stories'])data[key].sort((a,b)=>a.id.localeCompare(b.id));return JSON.stringify(canonical(data));}
+async function read(){const data=await loadFullSnapshot();const original=await fetch('/docs/handoff/m2-final-polish/evidence/before-navigation.json').then(response=>response.json());output.textContent=JSON.stringify({schemaVersion:data.schemaVersion,settings:data.settings?1:0,...Object.fromEntries(['people','branches','unions','relationships','lifeEvents','media','stories'].map(key=>[key,data[key].length])),matchesOriginal:business(data)===business(original),comparisonExceptions:['exportedAt','settings.lastBackupAt']},null,2);}
+for(const button of document.querySelectorAll('[data-fixture]'))button.addEventListener('click',async()=>{
+  if(location.origin!=='http://localhost:3240'){status.textContent='BLOCKED: sai origin QA';return;}
+  const url=button.dataset.fixture==='empty'?'/docs/qa/m1-desktop/evidence/pr3-product/empty-v1-from-native-fixture.json':'/docs/handoff/m2-final-polish/evidence/before-navigation.json';
+  const response=await fetch(url);if(!response.ok)throw Error('Fixture không có sẵn');const data=await response.json();
+  if(data.schemaVersion!==1||!['M0 DEMO Desktop','Dòng họ Trần – Đông Ngạc'].includes(data.settings.clanName))throw Error('Fixture không đúng hợp đồng');
+  await replaceEntireDatabase(data);await read();status.textContent='Đã nạp fixture';
+});
+document.querySelector('#read').addEventListener('click',read);
+</script></html>

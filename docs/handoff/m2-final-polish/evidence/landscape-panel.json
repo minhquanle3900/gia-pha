@@ -1,0 +1,74 @@
+[
+  {
+    "client": 844,
+    "dialog": {
+      "bottom": 374.3999938964844,
+      "height": 358.3999938964844,
+      "left": 134,
+      "right": 710,
+      "top": 16,
+      "width": 576,
+      "x": 134,
+      "y": 16
+    },
+    "height": 390,
+    "page": "local-data-safety",
+    "scroll": 844,
+    "theme": "dark",
+    "width": 844
+  },
+  {
+    "client": 926,
+    "dialog": {
+      "bottom": 414.3999938964844,
+      "height": 398.3999938964844,
+      "left": 175.1999969482422,
+      "right": 751.1999969482422,
+      "top": 16,
+      "width": 576,
+      "x": 175.1999969482422,
+      "y": 16
+    },
+    "height": 430,
+    "page": "local-data-safety",
+    "scroll": 926,
+    "theme": "dark",
+    "width": 926
+  },
+  {
+    "client": 844,
+    "dialog": {
+      "bottom": 374.3999938964844,
+      "height": 358.3999938964844,
+      "left": 134,
+      "right": 710,
+      "top": 16,
+      "width": 576,
+      "x": 134,
+      "y": 16
+    },
+    "height": 390,
+    "page": "local-data-safety",
+    "scroll": 844,
+    "theme": "light",
+    "width": 844
+  },
+  {
+    "client": 926,
+    "dialog": {
+      "bottom": 414.3999938964844,
+      "height": 398.3999938964844,
+      "left": 175.1999969482422,
+      "right": 751.1999969482422,
+      "top": 16,
+      "width": 576,
+      "x": 175.1999969482422,
+      "y": 16
+    },
+    "height": 430,
+    "page": "local-data-safety",
+    "scroll": 926,
+    "theme": "light",
+    "width": 926
+  }
+]
