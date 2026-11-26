@@ -1,4 +1,4 @@
-import { DBSchema, IDBPDatabase, IDBPTransaction, openDB } from 'idb';
+import { DBSchema, IDBPDatabase, IDBPTransaction, openDB, StoreNames } from 'idb';
 import {
   AppSettings,
   FamilyBranch,
@@ -7,12 +7,15 @@ import {
   LifeEvent,
   Media,
   Person,
+  PortraitDraft,
   Relationship,
   Union,
 } from '../models/genealogy';
 import { executeMergeRecords } from '../services/duplicateMergeService';
-import { validateImportSnapshot } from '../services/importValidationService';
+import { isValidFlexibleDate, validateImportSnapshot } from '../services/importValidationService';
 import { planSnapshotMerge, SNAPSHOT_DATA_STORES } from '../services/snapshotMergeService';
+import { validateSpouseUnion } from '../services/validationService';
+import { generateId } from '../utils/dateUtils';
 import { createSeedSnapshot } from './seedData';
 
 export const DB_NAME = 'gia-pha-viet-coi-nguon-db';
@@ -176,11 +179,12 @@ export async function loadFullSnapshot(): Promise<GenealogyDatabaseSnapshot> {
   return snapshot;
 }
 
-async function writeSnapshotTransaction<T>(
-  write: (tx: SnapshotTransaction<'readwrite'>) => Promise<T>
+async function writeDatabaseTransaction<Stores extends readonly StoreNames<GenealogyDBSchema>[], T>(
+  stores: Stores,
+  write: (tx: IDBPTransaction<GenealogyDBSchema, Stores, 'readwrite'>) => Promise<T>
 ): Promise<T> {
   const db = await getDatabase();
-  const tx = db.transaction(SNAPSHOT_STORES, 'readwrite');
+  const tx = db.transaction(stores, 'readwrite');
   const done = tx.done;
   void done.catch(() => {});
 
@@ -201,7 +205,7 @@ async function writeSnapshotTransaction<T>(
 
 // Low-level replacement for trusted demo data and test setup.
 export async function replaceEntireDatabase(snapshot: GenealogyDatabaseSnapshot): Promise<void> {
-  await writeSnapshotTransaction(async (tx) => {
+  await writeDatabaseTransaction(SNAPSHOT_STORES, async (tx) => {
     for (const store of SNAPSHOT_STORES) await tx.objectStore(store).clear();
 
     await tx.objectStore('settings').put({
@@ -230,7 +234,7 @@ export interface SnapshotMergeStats {
 
 export async function mergeDatabaseSnapshot(snapshot: GenealogyDatabaseSnapshot): Promise<SnapshotMergeStats> {
   const incoming = structuredClone(snapshot);
-  return writeSnapshotTransaction(async (tx) => {
+  return writeDatabaseTransaction(SNAPSHOT_STORES, async (tx) => {
     const existing = await readSnapshot(tx);
     const plan = planSnapshotMerge(existing, incoming);
     if (!plan.additions) throw new Error(plan.errors.join(' · '));
@@ -254,11 +258,46 @@ export async function resetToDemoDataset(): Promise<GenealogyDatabaseSnapshot> {
   return seed;
 }
 
-export async function savePersonRecord(person: Person): Promise<void> {
-  const db = await getDatabase();
-  await db.put('people', {
-    ...person,
-    updatedAt: new Date().toISOString(),
+export async function savePersonRecord(person: Person, portrait?: PortraitDraft | null): Promise<Person> {
+  return writeDatabaseTransaction(['people', 'media'] as const, async (tx) => {
+    const people = tx.objectStore('people');
+    const media = tx.objectStore('media');
+    const current = await people.get(person.id);
+    const updatedAt = new Date().toISOString();
+    const saved = {
+      ...person,
+      portraitUrl: current ? current.portraitUrl : person.portraitUrl,
+      portraitMediaId: current ? current.portraitMediaId : person.portraitMediaId,
+      updatedAt,
+    };
+
+    if (portrait === null) {
+      // Keep the previous image as an artifact and leave other references intact.
+      saved.portraitUrl = undefined;
+      saved.portraitMediaId = undefined;
+    } else if (portrait) {
+      if (!/^image\//i.test(portrait.mimeType) || !/^data:image\/[^;,]+(?:;[^,]*)?,.+/is.test(portrait.dataUrl)) {
+        throw new Error('Ảnh chân dung chưa được xử lý thành công.');
+      }
+      const id = generateId('media');
+      await media.add({
+        id,
+        title: `Chân dung - ${person.fullName}`,
+        category: 'portrait',
+        dataUrl: portrait.dataUrl,
+        mimeType: portrait.mimeType,
+        personIds: [person.id],
+        createdAt: updatedAt,
+        updatedAt,
+      });
+      saved.portraitMediaId = id;
+      saved.portraitUrl = portrait.dataUrl;
+    } else if (!current && saved.portraitMediaId && !await media.get(saved.portraitMediaId)) {
+      throw new Error('Không tìm thấy ảnh chân dung được tham chiếu.');
+    }
+
+    await people.put(saved);
+    return saved;
   });
 }
 
@@ -438,8 +477,52 @@ export async function deletePersonSafely(personId: string): Promise<void> {
 }
 
 export async function saveUnionRecord(union: Union): Promise<void> {
-  const db = await getDatabase();
-  await db.put('unions', { ...union, updatedAt: new Date().toISOString() });
+  const candidate = structuredClone(union);
+  await writeDatabaseTransaction(['people', 'unions', 'relationships'] as const, async (tx) => {
+    const [first, second] = candidate.partnerIds;
+    if (!candidate.id.trim() || candidate.partnerIds.length < 1 || candidate.partnerIds.length > 2) {
+      throw new Error('Bản ghi hôn phối phải có mã định danh và một hoặc hai thành viên.');
+    }
+    if (candidate.marriageDate !== undefined && !isValidFlexibleDate(candidate.marriageDate)) {
+      throw new Error('Niên đại hôn phối không hợp lệ. Hãy kiểm tra ngày, tháng và năm.');
+    }
+
+    const peopleStore = tx.objectStore('people');
+    const unionStore = tx.objectStore('unions');
+    const relationshipStore = tx.objectStore('relationships');
+    const [unions, partners, relationships] = await Promise.all([
+      unionStore.getAll(),
+      Promise.all(candidate.partnerIds.map((id) => peopleStore.get(id))),
+      relationshipStore.getAll(),
+    ]);
+
+    if (partners.some((partner) => !partner)) {
+      throw new Error('Không tìm thấy hồ sơ thành viên của hôn phối.');
+    }
+    if (candidate.partnerIds.length === 2) {
+      const validation = validateSpouseUnion({
+        personAId: first,
+        personBId: second,
+        people: partners.filter((partner): partner is Person => partner !== undefined),
+        unions,
+        relationships,
+        editingUnionId: candidate.id,
+        marriageDate: candidate.marriageDate,
+      });
+      if (!validation.valid) throw new Error(validation.errors.join(' '));
+    }
+
+    const previous = unions.find((record) => record.id === candidate.id);
+    if (previous && relationships.some((link) =>
+      link.unionId === candidate.id &&
+      previous.partnerIds.includes(link.parentId) &&
+      !candidate.partnerIds.includes(link.parentId)
+    )) {
+      throw new Error('Không thể bỏ thành viên khỏi hôn phối khi còn liên kết cha/mẹ – con trong hôn phối này.');
+    }
+
+    await unionStore.put({ ...candidate, updatedAt: new Date().toISOString() });
+  });
 }
 
 export async function deleteUnionRecord(unionId: string): Promise<void> {
@@ -483,33 +566,24 @@ export async function saveMediaRecord(mediaItem: Media): Promise<void> {
 }
 
 export async function deleteMediaRecord(mediaId: string): Promise<void> {
-  const db = await getDatabase();
-  const tx = db.transaction(['media', 'people', 'stories'], 'readwrite');
-  await tx.objectStore('media').delete(mediaId);
+  await writeDatabaseTransaction(['media', 'people', 'stories'] as const, async (tx) => {
+    const media = tx.objectStore('media');
+    const item = await media.get(mediaId);
+    if (!item) return;
 
-  const people = await tx.objectStore('people').getAll();
-  for (const p of people) {
-    if (p.portraitMediaId === mediaId) {
-      await tx.objectStore('people').put({
-        ...p,
-        portraitMediaId: undefined,
-        portraitUrl: undefined,
-        updatedAt: new Date().toISOString(),
-      });
+    const [people, stories] = await Promise.all([
+      tx.objectStore('people').getAll(),
+      tx.objectStore('stories').getAll(),
+    ]);
+    const usedAsPortrait = people.some((person) =>
+      person.portraitMediaId === mediaId || (person.portraitUrl && person.portraitUrl === item.dataUrl)
+    );
+    if (usedAsPortrait || stories.some((story) => story.mediaIds.includes(mediaId))) {
+      throw new Error('Ảnh hoặc kỷ vật đang được sử dụng trong hồ sơ hoặc nhật ký. Hãy gỡ liên kết trước khi xóa.');
     }
-  }
 
-  const stories = await tx.objectStore('stories').getAll();
-  for (const s of stories) {
-    if (s.mediaIds.includes(mediaId)) {
-      await tx.objectStore('stories').put({
-        ...s,
-        mediaIds: s.mediaIds.filter((id) => id !== mediaId),
-        updatedAt: new Date().toISOString(),
-      });
-    }
-  }
-  await tx.done;
+    await media.delete(mediaId);
+  });
 }
 
 export async function saveStoryRecord(story: FamilyStory): Promise<void> {
@@ -530,20 +604,54 @@ export async function saveBranchRecord(branch: FamilyBranch): Promise<void> {
 export async function deleteBranchRecord(branchId: string): Promise<void> {
   const db = await getDatabase();
   const tx = db.transaction(['branches', 'people', 'media', 'stories'], 'readwrite');
-  await tx.objectStore('branches').delete(branchId);
+  const done = tx.done;
+  void done.catch(() => {});
 
-  const people = await tx.objectStore('people').getAll();
-  for (const p of people) {
-    if (p.branchId === branchId || p.secondaryBranchIds?.includes(branchId)) {
-      await tx.objectStore('people').put({
-        ...p,
-        branchId: p.branchId === branchId ? undefined : p.branchId,
-        secondaryBranchIds: p.secondaryBranchIds?.filter((id) => id !== branchId),
-        updatedAt: new Date().toISOString(),
+  try {
+    const branchStore = tx.objectStore('branches');
+    const peopleStore = tx.objectStore('people');
+    const mediaStore = tx.objectStore('media');
+    const storyStore = tx.objectStore('stories');
+    const [branches, people, media, stories] = await Promise.all([
+      branchStore.getAll(),
+      peopleStore.getAll(),
+      mediaStore.getAll(),
+      storyStore.getAll(),
+    ]);
+    const updatedAt = new Date().toISOString();
+
+    for (const person of people) {
+      if (person.branchId !== branchId && !person.secondaryBranchIds?.includes(branchId)) continue;
+      await peopleStore.put({
+        ...person,
+        branchId: person.branchId === branchId ? undefined : person.branchId,
+        secondaryBranchIds: person.secondaryBranchIds?.filter((id) => id !== branchId),
+        updatedAt,
       });
     }
+    for (const branch of branches) {
+      if (branch.id !== branchId && branch.parentBranchId === branchId) {
+        await branchStore.put({ ...branch, parentBranchId: undefined, updatedAt });
+      }
+    }
+    for (const item of media) {
+      if (item.branchId === branchId) await mediaStore.put({ ...item, branchId: undefined, updatedAt });
+    }
+    for (const story of stories) {
+      if (story.branchId === branchId) await storyStore.put({ ...story, branchId: undefined, updatedAt });
+    }
+
+    await branchStore.delete(branchId);
+    await done;
+  } catch (error) {
+    try {
+      tx.abort();
+    } catch {
+      // A failed request may have already aborted the transaction.
+    }
+    await done.catch(() => {});
+    throw error;
   }
-  await tx.done;
 }
 
 export async function saveSettingsRecord(settings: AppSettings): Promise<void> {

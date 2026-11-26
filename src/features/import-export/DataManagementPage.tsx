@@ -18,7 +18,7 @@ import {
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { FamilyBranch, GenealogyDatabaseSnapshot } from '../../models/genealogy';
-import { exportGedcom551, parseAndPreviewGedcom } from '../../services/gedcomService';
+import { exportGedcom551, GEDCOM_REPLACEMENT_WARNING, parseAndPreviewGedcom } from '../../services/gedcomService';
 import {
   exportDatabaseSnapshotJson,
   validateAndPreviewJsonBackup,
@@ -81,6 +81,7 @@ export const DataManagementPage: React.FC = () => {
   const [branchDesc, setBranchDesc] = useState('');
   const [branchError, setBranchError] = useState<string | null>(null);
   const [deletingBranch, setDeletingBranch] = useState<FamilyBranch | null>(null);
+  const [isDeletingBranch, setIsDeletingBranch] = useState(false);
 
   const branchMemberCounts = useMemo(() => {
     const counts = new Map<string, number>();
@@ -91,6 +92,17 @@ export const DataManagementPage: React.FC = () => {
     }
     return counts;
   }, [people]);
+
+  const deletingBranchId = deletingBranch?.id;
+  const deleteBranchImpact = deletingBranchId && snapshot
+    ? {
+      primary: branchMemberCounts.get(deletingBranchId) ?? 0,
+      secondary: people.filter((person) => person.secondaryBranchIds?.includes(deletingBranchId)).length,
+      children: branches.filter((branch) => branch.id !== deletingBranchId && branch.parentBranchId === deletingBranchId).length,
+      media: snapshot.media.filter((item) => item.branchId === deletingBranchId).length,
+      stories: snapshot.stories.filter((story) => story.branchId === deletingBranchId).length,
+    }
+    : null;
 
   // File import state
   const [importNotice, setImportNotice] = useState<{
@@ -206,13 +218,23 @@ export const DataManagementPage: React.FC = () => {
   };
 
   const handleConfirmDeleteBranch = async () => {
-    if (!deletingBranch) return;
-    await deleteBranch(deletingBranch.id);
-    setImportNotice({
-      type: 'success',
-      message: `Đã xóa chi họ "${deletingBranch.name}".`,
-    });
-    setDeletingBranch(null);
+    if (!deletingBranch || isDeletingBranch) return;
+    setIsDeletingBranch(true);
+    try {
+      await deleteBranch(deletingBranch.id);
+      setImportNotice({
+        type: 'success',
+        message: `Đã xóa chi họ "${deletingBranch.name}" và gỡ các liên kết tới chi này.`,
+      });
+    } catch (error) {
+      setImportNotice({
+        type: 'error',
+        message: `Không thể xóa chi họ. ${error instanceof Error ? error.message : String(error)}`,
+      });
+    } finally {
+      setDeletingBranch(null);
+      setIsDeletingBranch(false);
+    }
   };
 
   // 1. Export JSON Snapshot
@@ -255,7 +277,7 @@ export const DataManagementPage: React.FC = () => {
   };
 
   // 3. Export GEDCOM 5.5.1
-  const handleExportGedcom = async () => {
+  const handleExportGedcom = () => {
     if (!snapshot) return;
     const gedcomText = exportGedcom551(snapshot);
     const blob = new Blob([gedcomText], { type: 'text/plain;charset=utf-8' });
@@ -265,13 +287,6 @@ export const DataManagementPage: React.FC = () => {
     a.download = `GiaPhaViet-${settings.clanName.replace(/\s+/g, '_')}.ged`;
     a.click();
     URL.revokeObjectURL(url);
-
-    try {
-      const { recordBackupTimestamp } = await import('../../services/backupReminderService');
-      recordBackupTimestamp();
-    } catch {
-      // ignore
-    }
   };
 
   // 4. Import GEDCOM 5.5.1 (with Confirmation)
@@ -295,7 +310,7 @@ export const DataManagementPage: React.FC = () => {
       setPendingImport({
         snapshot: importedSnapshot,
         mode: 'replace',
-        warnings: [...parsed.warnings, ...validation.warnings],
+        warnings: [GEDCOM_REPLACEMENT_WARNING, ...parsed.warnings, ...validation.warnings],
         label: `GEDCOM (${importedSnapshot.people.length} thành viên, ${importedSnapshot.relationships.length} quan hệ)`,
       });
     } catch (err: unknown) {
@@ -848,7 +863,7 @@ export const DataManagementPage: React.FC = () => {
             <div>
               <h4 className="text-xs font-bold text-[#1F1913]">Xuất tệp GEDCOM (.ged)</h4>
               <p className="text-xs text-stone-500 mt-1">
-                Xuất cấu trúc cây gia phả cùng các thẻ bổ sung tiếng Việt (đời thứ, chi họ, tên húy...).
+                Trao đổi cấu trúc phả hệ và các trường tiếng Việt được hỗ trợ. Dùng JSON để sao lưu toàn bộ dữ liệu.
               </p>
             </div>
             <button
@@ -975,10 +990,16 @@ export const DataManagementPage: React.FC = () => {
       <ConfirmDialog
         open={!!deletingBranch}
         title={`Xác nhận xóa chi họ "${deletingBranch?.name || ''}"`}
-        description="Hồ sơ các thành viên thuộc chi họ này sẽ vẫn được giữ nguyên (không bị xóa), chỉ bỏ liên kết với chi họ đã xóa."
-        confirmLabel="Xóa chi họ"
+        description={[
+          'Giữ lại hồ sơ, chi con, kỷ vật và nhật ký. Khi xóa, hệ thống gỡ liên kết tới chi này. Chi con trực tiếp trở thành chi cấp cao nhất.',
+          deleteBranchImpact
+            ? `Theo dữ liệu đang hiển thị, liên kết bị ảnh hưởng gồm ${deleteBranchImpact.primary} hồ sơ chi chính, ${deleteBranchImpact.secondary} hồ sơ chi phụ, ${deleteBranchImpact.children} chi con trực tiếp, ${deleteBranchImpact.media} kỷ vật và ${deleteBranchImpact.stories} bản ghi nhật ký.`
+            : '',
+        ].filter(Boolean).join('\n\n')}
+        confirmLabel={isDeletingBranch ? 'Đang xóa…' : 'Xóa chi họ'}
         cancelLabel="Hủy"
         danger={true}
+        busy={isDeletingBranch}
         onConfirm={handleConfirmDeleteBranch}
         onCancel={() => setDeletingBranch(null)}
       />

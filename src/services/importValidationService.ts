@@ -1,4 +1,5 @@
-import type { GenealogyDatabaseSnapshot, Relationship } from '../models/genealogy';
+import type { FlexibleDate, GenealogyDatabaseSnapshot, Relationship } from '../models/genealogy';
+import { daysInGregorianMonth } from '../utils/dateUtils';
 import { validatePersonInput } from './validationService';
 
 export interface ImportValidationResult {
@@ -50,19 +51,13 @@ const ids = arrayOf(nonBlank);
 const texts = arrayOf(isString);
 const positiveInteger = optional(integer(1));
 
-function daysInMonth(month: number, year?: number): number {
-  if (month !== 2) return [4, 6, 9, 11].includes(month) ? 30 : 31;
-  const leap = year === undefined || (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
-  return leap ? 29 : 28;
-}
-
 function timestamp(value: unknown): boolean {
   if (value === '') return true; // Older v1 snapshots can carry empty record timestamps.
   if (typeof value !== 'string') return false;
   const match = /^(\d{4})-(\d{2})-(\d{2})(?:T\d{2}:\d{2}(?::\d{2}(?:\.\d+)?)?(?:Z|[+-]\d{2}:?\d{2})?)?$/.exec(value);
   if (!match || !Number.isFinite(Date.parse(value))) return false;
   const [, year, month, day] = match.map(Number);
-  return day <= daysInMonth(month, year);
+  return day <= daysInGregorianMonth(month, year);
 }
 
 const flexibleDateRules: RecordRules = {
@@ -84,13 +79,47 @@ function matchesFields(value: RecordValue, rules: RecordRules): boolean {
   return Object.entries(rules).every(([key, check]) => check(value[key]));
 }
 
-function flexibleDate(value: unknown): boolean {
+export function isValidFlexibleDate(value: unknown): value is FlexibleDate {
   if (!isRecord(value) || !matchesFields(value, flexibleDateRules)) return false;
   const { day, month, year, calendar } = value;
   if (typeof day !== 'number') return true;
   if (calendar === 'lunar') return day <= 30;
   if (typeof month !== 'number') return true;
-  return day <= daysInMonth(month, typeof year === 'number' ? year : undefined);
+  return day <= daysInGregorianMonth(month, typeof year === 'number' ? year : undefined);
+}
+
+function checkDatePrecision(date: FlexibleDate | undefined, path: string, warnings: string[]): void {
+  if (!date) return;
+
+  const { precision, year, month, day, displayText } = date;
+  // v1 saved incomplete dates and left hidden fields behind on precision changes.
+  // Historic backups keep their original precision and values.
+  let issue: string | undefined;
+  switch (precision) {
+    case 'exact':
+      if (year === undefined || month === undefined || day === undefined) issue = 'thiếu ngày, tháng hoặc năm';
+      break;
+    case 'month':
+      if (year === undefined || month === undefined) issue = 'thiếu tháng hoặc năm';
+      else if (day !== undefined) issue = 'có thêm trường ngày';
+      break;
+    case 'year':
+      if (month !== undefined || day !== undefined) issue = 'có thêm trường tháng hoặc ngày';
+      else if (year === undefined && !displayText?.trim()) issue = 'thiếu năm hoặc văn bản niên đại';
+      break;
+    case 'unknown':
+      if (year !== undefined || month !== undefined || day !== undefined) issue = 'vẫn có trường ngày, tháng hoặc năm';
+      break;
+    case 'approx':
+    case 'before':
+    case 'after':
+      // GEDCOM qualifiers can legitimately describe a year, month, or full date.
+      if (day !== undefined && month === undefined) issue = 'có ngày nhưng thiếu tháng';
+      else if (year === undefined && (month !== undefined || !displayText?.trim())) {
+        issue = 'thiếu năm hoặc văn bản niên đại';
+      }
+  }
+  if (issue) warnings.push(`${path}: precision "${precision}" ${issue}. Giữ nguyên giá trị đã nhập.`);
 }
 
 function mediaUrl(value: unknown): boolean {
@@ -122,9 +151,9 @@ const collections: Record<Collection, RecordRules> = {
     tabooName: text,
     courtesyName: text,
     alias: text,
-    birthDate: optional(flexibleDate),
+    birthDate: optional(isValidFlexibleDate),
     birthPlace: text,
-    deathDate: optional(flexibleDate),
+    deathDate: optional(isValidFlexibleDate),
     deathPlace: text,
     ancestralHome: text,
     residence: text,
@@ -142,7 +171,7 @@ const collections: Record<Collection, RecordRules> = {
   },
   unions: {
     partnerIds: (value) => Array.isArray(value) && value.length >= 1 && value.length <= 2 && ids(value),
-    marriageDate: optional(flexibleDate),
+    marriageDate: optional(isValidFlexibleDate),
     marriagePlace: text,
     status: oneOf('married', 'widowed', 'divorced', 'separated', 'unknown'),
     marriageOrder: positiveInteger,
@@ -160,7 +189,7 @@ const collections: Record<Collection, RecordRules> = {
     personId: nonBlank,
     title: nonBlank,
     type: oneOf('birth', 'education', 'marriage', 'career', 'migration', 'contribution', 'death', 'other'),
-    date: optional(flexibleDate),
+    date: optional(isValidFlexibleDate),
     location: text,
     description: text,
   },
@@ -397,6 +426,7 @@ export function validateImportSnapshot(
   }
   cycleErrors(branchEdges, 'chi họ', result.errors);
   for (const union of input.unions) {
+    checkDatePrecision(union.marriageDate, `unions[${union.id}].marriageDate`, result.warnings);
     if (new Set(union.partnerIds).size !== union.partnerIds.length) {
       result.errors.push(`unions[${union.id}].partnerIds chứa quan hệ hôn phối với chính mình.`);
     }
@@ -404,13 +434,19 @@ export function validateImportSnapshot(
   checkRelationshipGraph(input.relationships, result);
   if (verifyReferences) checkReferences(input, result);
 
+  for (const event of input.lifeEvents) {
+    checkDatePrecision(event.date, `lifeEvents[${event.id}].date`, result.warnings);
+  }
   for (const person of input.people) {
+    const path = `people[${person.id}]`;
+    checkDatePrecision(person.birthDate, path + '.birthDate', result.warnings);
+    checkDatePrecision(person.deathDate, path + '.deathDate', result.warnings);
     const review = validatePersonInput(person);
     for (const issue of [...review.errors, ...review.warnings]) {
-      result.warnings.push(`people[${person.id}] ${issue}`);
+      result.warnings.push(`${path} ${issue}`);
     }
     if (person.portraitUrl && !/^data:/i.test(person.portraitUrl)) {
-      result.warnings.push(`people[${person.id}].portraitUrl phụ thuộc vào nguồn ảnh ngoài bản sao lưu.`);
+      result.warnings.push(`${path}.portraitUrl phụ thuộc vào nguồn ảnh ngoài bản sao lưu.`);
     }
   }
   for (const item of input.media) {

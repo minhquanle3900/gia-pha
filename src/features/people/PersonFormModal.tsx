@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { Camera, Loader2, Sparkles, Trash2, X } from 'lucide-react';
 import { FlexibleDateInput } from '../../components/FlexibleDateInput';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
@@ -8,6 +8,7 @@ import {
   Gender,
   LunarAnniversary,
   Person,
+  PortraitDraft,
 } from '../../models/genealogy';
 import { generateBiographyWithAI } from '../../services/aiBiographyService';
 import { validatePersonInput } from '../../services/validationService';
@@ -26,7 +27,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
   onClose,
   onSaved,
 }) => {
-  const { branches, savePerson, saveMedia, lifeEvents } = useGenealogy();
+  const { branches, savePerson, lifeEvents } = useGenealogy();
 
   const [activeSection, setActiveSection] = useState<'identity' | 'life' | 'genealogy'>('identity');
   const [errors, setErrors] = useState<string[]>([]);
@@ -42,7 +43,10 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
   // Form Fields
   const [fullName, setFullName] = useState('');
   const [gender, setGender] = useState<Gender>('male');
-  const [portraitUrl, setPortraitUrl] = useState<string | undefined>(undefined);
+  const [portraitDraft, setPortraitDraft] = useState<PortraitDraft | null>();
+  const [isPreparingPortrait, setIsPreparingPortrait] = useState(false);
+  const portraitRequest = useRef(0);
+  const portraitUrl = portraitDraft === undefined ? editingPerson?.portraitUrl : portraitDraft?.dataUrl;
   const [commonName, setCommonName] = useState('');
   const [tabooName, setTabooName] = useState('');
   const [courtesyName, setCourtesyName] = useState('');
@@ -136,7 +140,6 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
     if (editingPerson) {
       setFullName(editingPerson.fullName || '');
       setGender(editingPerson.gender || 'male');
-      setPortraitUrl(editingPerson.portraitUrl);
       setCommonName(editingPerson.commonName || '');
       setTabooName(editingPerson.tabooName || '');
       setCourtesyName(editingPerson.courtesyName || '');
@@ -166,7 +169,6 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
       // Defaults for new person
       setFullName('');
       setGender('male');
-      setPortraitUrl(undefined);
       setCommonName('');
       setTabooName('');
       setCourtesyName('');
@@ -196,37 +198,38 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
     setErrors([]);
     setWarnings([]);
     setActiveSection('identity');
+    setPortraitDraft(undefined);
+    setIsPreparingPortrait(false);
+    return () => { portraitRequest.current += 1; };
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingPerson?.id, open]);
 
   if (!open) return null;
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
-    const file = e.target.files?.[0];
+    const file = e.currentTarget.files?.[0];
     if (!file) return;
-
+    e.currentTarget.value = '';
+    const request = ++portraitRequest.current;
+    setIsPreparingPortrait(true);
     try {
+      if (file.type && !file.type.startsWith('image/')) throw new Error('Invalid image type');
       const compressed = await compressImageFile(file, 400, 0.85);
-      setPortraitUrl(compressed.dataUrl);
-
-      // Save to media store as well
-      const mediaId = `media_${Date.now()}`;
-      await saveMedia({
-        id: mediaId,
-        title: `Chân dung - ${fullName || 'Thành viên'}`,
-        category: 'portrait',
-        mimeType: 'image/jpeg',
-        dataUrl: compressed.dataUrl,
-        personIds: editingPerson ? [editingPerson.id] : [],
-        createdAt: new Date().toISOString(),
-        updatedAt: new Date().toISOString(),
-      });
+      if (!compressed.mimeType.startsWith('image/')) throw new Error('Invalid image type');
+      if (request === portraitRequest.current) {
+        setPortraitDraft({ dataUrl: compressed.dataUrl, mimeType: compressed.mimeType });
+      }
     } catch {
-      setErrors(['Không thể xử lý tệp ảnh. Vui lòng chọn tệp định dạng JPG/PNG nhỏ hơn.']);
+      if (request === portraitRequest.current) {
+        setErrors(['Không thể xử lý ảnh trên thiết bị này. Hãy chọn ảnh JPG hoặc PNG nhỏ hơn.']);
+      }
+    } finally {
+      if (request === portraitRequest.current) setIsPreparingPortrait(false);
     }
   };
 
   const handleSave = async () => {
+    if (isSubmitting || isPreparingPortrait) return;
     const lunarAnniversary: LunarAnniversary | undefined =
       lunarDay !== '' || lunarMonth !== '' || lunarNote
         ? {
@@ -240,7 +243,8 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
       id: editingPerson?.id || `person_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
       fullName: fullName.trim(),
       gender,
-      portraitUrl,
+      portraitUrl: editingPerson?.portraitUrl,
+      portraitMediaId: editingPerson?.portraitMediaId,
       commonName: commonName.trim() || undefined,
       tabooName: tabooName.trim() || undefined,
       courtesyName: courtesyName.trim() || undefined,
@@ -259,6 +263,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
 
       generation: generation !== undefined && !isNaN(generation) ? Number(generation) : undefined,
       branchId: branchId || undefined,
+      secondaryBranchIds: editingPerson?.secondaryBranchIds,
       subBranch: subBranch.trim() || undefined,
       clanRole: clanRole.trim() || undefined,
       deathAnniversaryLunar: !isLiving ? lunarAnniversary : undefined,
@@ -278,8 +283,8 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
 
     try {
       setIsSubmitting(true);
-      await savePerson(personData);
-      onSaved(personData);
+      const saved = await savePerson(personData, portraitDraft);
+      onSaved(saved);
       onClose();
     } catch (err: unknown) {
       const msg = err instanceof Error ? err.message : String(err);
@@ -312,6 +317,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
           <button
             type="button"
             onClick={onClose}
+            disabled={isSubmitting}
             className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100"
           >
             <X className="w-5 h-5" />
@@ -380,6 +386,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
                       type="file"
                       accept="image/*"
                       onChange={handleImageUpload}
+                      disabled={isSubmitting}
                       className="hidden"
                     />
                   </label>
@@ -413,7 +420,12 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
                   {portraitUrl && (
                     <button
                       type="button"
-                      onClick={() => setPortraitUrl(undefined)}
+                      onClick={() => {
+                        portraitRequest.current += 1;
+                        setIsPreparingPortrait(false);
+                        setPortraitDraft(null);
+                      }}
+                      disabled={isSubmitting}
                       className="text-[11px] text-red-600 hover:underline flex items-center gap-1 mx-auto sm:mx-0"
                     >
                       <Trash2 className="w-3 h-3" />
@@ -895,17 +907,18 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
             <button
               type="button"
               onClick={onClose}
+              disabled={isSubmitting}
               className="px-4 py-2 text-xs font-medium text-stone-600 hover:bg-stone-200 rounded-xl"
             >
               Hủy
             </button>
             <button
               type="button"
-              disabled={isSubmitting}
+              disabled={isSubmitting || isPreparingPortrait}
               onClick={handleSave}
               className="px-5 py-2 text-xs font-semibold bg-[#1B3B2B] hover:bg-[#254F3A] text-white rounded-xl shadow-xs disabled:opacity-50 transition-colors"
             >
-              {isSubmitting ? 'Đang lưu...' : 'Lưu hồ sơ'}
+              {isSubmitting ? 'Đang lưu...' : isPreparingPortrait ? 'Đang xử lý ảnh...' : 'Lưu hồ sơ'}
             </button>
           </div>
         </div>

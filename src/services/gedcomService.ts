@@ -24,6 +24,15 @@ const GEDCOM_MONTHS = [
   'DEC',
 ];
 
+const UNBOUND_FAMILY = 'NONE';
+const RELATIONSHIP_FAMILY_TAG = '_GP_UNION';
+const UNKNOWN_LINEAGE_TAG = '_GP_LINEAGE';
+
+export const GEDCOM_REPLACEMENT_WARNING =
+  'GEDCOM dùng để trao đổi phả hệ. Khi thay thế bằng GEDCOM, mốc sự kiện, kho ảnh và tư liệu, nhật ký dòng họ ' +
+  'cùng các liên kết tới những mục này sẽ mất. Một số chi tiết khác trong hồ sơ, chi họ và thiết lập cũng không được chuyển. ' +
+  'Hãy xuất JSON trước khi tiếp tục để giữ bản sao đầy đủ.';
+
 export interface GedcomImportPreview {
   valid: boolean;
   errors: string[];
@@ -121,10 +130,10 @@ export function exportToGedcom551(snapshot: GenealogyDatabaseSnapshot): string {
 
   interface GedFamily {
     xref: string;
-    unionId?: string;
+    unionReference?: string;
     husbId?: string;
     wifeId?: string;
-    children: Array<{ childId: string; lineageType: LineageType }>;
+    children: Map<string, LineageType>;
     marriageDate?: FlexibleDate;
     marriagePlace?: string;
     notes?: string;
@@ -149,10 +158,9 @@ export function exportToGedcom551(snapshot: GenealogyDatabaseSnapshot): string {
 
     const fam: GedFamily = {
       xref: `@F${idx + 1}@`,
-      unionId: u.id,
       husbId,
       wifeId,
-      children: [],
+      children: new Map(),
       marriageDate: u.marriageDate,
       marriagePlace: u.marriagePlace,
       notes: u.notes,
@@ -161,43 +169,52 @@ export function exportToGedcom551(snapshot: GenealogyDatabaseSnapshot): string {
     unionToGedFam.set(u.id, fam);
   });
 
-  const orphanParentFam = new Map<string, GedFamily>();
+  const edgesByFamilyAndChild = new Map<string, Relationship[]>();
   for (const rel of snapshot.relationships) {
     if (!indiXref.has(rel.parentId) || !indiXref.has(rel.childId)) continue;
 
-    let targetFam: GedFamily | undefined;
-    if (rel.unionId && unionToGedFam.has(rel.unionId)) {
-      targetFam = unionToGedFam.get(rel.unionId);
-    } else {
-      targetFam = families.find(
-        (f) =>
-          (f.husbId === rel.parentId && !f.wifeId) ||
-          (f.wifeId === rel.parentId && !f.husbId)
-      );
-      if (!targetFam) {
-        const existingOrphan = orphanParentFam.get(rel.parentId);
-        if (existingOrphan) {
-          targetFam = existingOrphan;
-        } else {
-          const parent = personById.get(rel.parentId);
-          const newFam: GedFamily = {
-            xref: `@F${families.length + 1}@`,
-            husbId: parent?.gender !== 'female' ? rel.parentId : undefined,
-            wifeId: parent?.gender === 'female' ? rel.parentId : undefined,
-            children: [],
-          };
-          families.push(newFam);
-          orphanParentFam.set(rel.parentId, newFam);
-          targetFam = newFam;
-        }
-      }
+    const key = JSON.stringify([rel.unionId, rel.childId]);
+    const edges = edgesByFamilyAndChild.get(key) ?? [];
+    edges.push(rel);
+    edgesByFamilyAndChild.set(key, edges);
+  }
+
+  const singleParentFamilies = new Map<string, GedFamily[]>();
+  for (const edges of edgesByFamilyAndChild.values()) {
+    const [{ unionId, childId, lineageType }] = edges;
+    const family = unionId ? unionToGedFam.get(unionId) : undefined;
+    const familyParents = family ? [family.husbId, family.wifeId].filter(Boolean) : [];
+    const recordedParents = new Set(edges.map((edge) => edge.parentId));
+    const canUseFamily = family && familyParents.length === edges.length &&
+      familyParents.every((parentId) => parentId && recordedParents.has(parentId)) &&
+      edges.every((edge) => edge.lineageType === lineageType);
+
+    // A regular FAM/CHIL link applies to both named parents. Use it only when
+    // it expresses exactly the recorded links and their shared lineage.
+    if (canUseFamily) {
+      family.children.set(childId, lineageType);
+      continue;
     }
 
-    if (targetFam && !targetFam.children.some((c) => c.childId === rel.childId)) {
-      targetFam.children.push({
-        childId: rel.childId,
-        lineageType: rel.lineageType,
-      });
+    for (const edge of edges) {
+      const unionReference = family?.xref ?? UNBOUND_FAMILY;
+      const key = JSON.stringify([edge.parentId, unionReference]);
+      const matching = singleParentFamilies.get(key) ?? [];
+      let single = matching.find((entry) => !entry.children.has(childId));
+      if (!single) {
+        const isFemale = personById.get(edge.parentId)?.gender === 'female';
+        single = {
+          xref: `@F${families.length + 1}@`,
+          unionReference,
+          husbId: isFemale ? undefined : edge.parentId,
+          wifeId: isFemale ? edge.parentId : undefined,
+          children: new Map(),
+        };
+        matching.push(single);
+        singleParentFamilies.set(key, matching);
+        families.push(single);
+      }
+      single.children.set(childId, edge.lineageType);
     }
   }
 
@@ -211,10 +228,10 @@ export function exportToGedcom551(snapshot: GenealogyDatabaseSnapshot): string {
       list.push(fam.xref);
       famsByPerson.set(pid, list);
     }
-    for (const ch of fam.children) {
-      const list = famcByPerson.get(ch.childId) ?? [];
-      list.push({ xref: fam.xref, lineageType: ch.lineageType });
-      famcByPerson.set(ch.childId, list);
+    for (const [childId, lineageType] of fam.children) {
+      const list = famcByPerson.get(childId) ?? [];
+      list.push({ xref: fam.xref, lineageType });
+      famcByPerson.set(childId, list);
     }
   }
 
@@ -301,6 +318,7 @@ export function exportToGedcom551(snapshot: GenealogyDatabaseSnapshot): string {
       if (fc.lineageType === 'adoptive') lines.push('2 PEDI adopted');
       else if (fc.lineageType === 'step') lines.push('2 PEDI foster');
       else if (fc.lineageType === 'biological') lines.push('2 PEDI birth');
+      else lines.push(`2 ${UNKNOWN_LINEAGE_TAG} unknown`);
     }
 
     const famss = famsByPerson.get(p.id) ?? [];
@@ -317,10 +335,9 @@ export function exportToGedcom551(snapshot: GenealogyDatabaseSnapshot): string {
     if (fam.wifeId && indiXref.has(fam.wifeId)) {
       lines.push(`1 WIFE ${indiXref.get(fam.wifeId)!}`);
     }
-    for (const ch of fam.children) {
-      if (indiXref.has(ch.childId)) {
-        lines.push(`1 CHIL ${indiXref.get(ch.childId)!}`);
-      }
+    if (fam.unionReference) lines.push(`1 ${RELATIONSHIP_FAMILY_TAG} ${fam.unionReference}`);
+    for (const childId of fam.children.keys()) {
+      lines.push(`1 CHIL ${indiXref.get(childId)!}`);
     }
     const mDate = formatGedcomDate(fam.marriageDate);
     if (mDate || fam.marriagePlace) {
@@ -369,7 +386,7 @@ const SUPPORTED_INDI_TAGS = new Set([
   '_MERIT',
 ]);
 
-const SUPPORTED_FAM_TAGS = new Set(['HUSB', 'WIFE', 'CHIL', 'MARR', 'DIV', 'NOTE']);
+const SUPPORTED_FAM_TAGS = new Set(['HUSB', 'WIFE', 'CHIL', 'MARR', 'DIV', 'NOTE', RELATIONSHIP_FAMILY_TAG]);
 const TEXT_CONTINUATIONS = ['CONT', 'CONC'];
 const INDI_CHILD_TAGS: Record<string, string[]> = {
   NAME: ['GIVN', 'SURN', 'NICK'],
@@ -377,7 +394,7 @@ const INDI_CHILD_TAGS: Record<string, string[]> = {
   DEAT: ['DATE', 'PLAC'],
   BURI: ['PLAC'],
   RESI: ['PLAC', 'ADDR'],
-  FAMC: ['PEDI'],
+  FAMC: ['PEDI', UNKNOWN_LINEAGE_TAG],
   OCCU: TEXT_CONTINUATIONS,
   NOTE: TEXT_CONTINUATIONS,
   _MERIT: TEXT_CONTINUATIONS,
@@ -711,8 +728,14 @@ export function parseAndPreviewGedcom(
           }
           if (ch.tag === 'FAMC') {
             const pedi = ch.children.find((node) => node.tag === 'PEDI')?.value.trim().toLowerCase();
+            const explicitUnknown = ch.children.filter((node) => node.tag === UNKNOWN_LINEAGE_TAG);
             let lineageType: LineageType = 'biological';
-            if (pedi === 'adopted') lineageType = 'adoptive';
+            if (explicitUnknown.length > 0) {
+              if (explicitUnknown.length !== 1 || explicitUnknown[0].value.trim() !== 'unknown' || pedi !== undefined) {
+                errors.push(`Dòng ${ch.lineNumber}: thẻ ${UNKNOWN_LINEAGE_TAG} không hợp lệ hoặc mâu thuẫn với PEDI.`);
+              }
+              lineageType = 'unknown';
+            } else if (pedi === 'adopted') lineageType = 'adoptive';
             else if (pedi === 'foster' || pedi === 'step') lineageType = 'step';
             else if (pedi && pedi !== 'birth') {
               lineageType = 'unknown';
@@ -763,6 +786,19 @@ export function parseAndPreviewGedcom(
   const importedUnions: Union[] = [];
   const importedRelationships: Relationship[] = [];
   const marriageOrderCountByPerson = new Map<string, number>();
+  const unionIdsByFamily = new Map<string, string>();
+  const relationshipFamilyReferences = new Map<string, string>();
+  for (const fam of famNodes) {
+    const referenceTags = fam.children.filter((node) => node.tag === RELATIONSHIP_FAMILY_TAG);
+    if (referenceTags.length > 0) {
+      relationshipFamilyReferences.set(fam.xref!, referenceTags[0].value.trim());
+      if (referenceTags.length !== 1) {
+        errors.push(`Dòng ${fam.lineNumber}: bản ghi ${fam.xref} có nhiều thẻ ${RELATIONSHIP_FAMILY_TAG}.`);
+      }
+    } else {
+      unionIdsByFamily.set(fam.xref!, generateId('u_ged'));
+    }
+  }
 
   for (const fam of famNodes) {
     const partnerNodes = fam.children.filter((node) => node.tag === 'HUSB' || node.tag === 'WIFE');
@@ -819,13 +855,26 @@ export function parseAndPreviewGedcom(
     const isDivorced = fam.children.some((c) => c.tag === 'DIV');
     const notes = fam.children.filter((node) => node.tag === 'NOTE').map(extractNodeText).filter(Boolean).join('\n\n');
 
+    const relationshipFamilyReference = relationshipFamilyReferences.get(fam.xref!);
     let unionId: string | undefined;
-    if (partnerIds.length > 0) {
+    if (relationshipFamilyReference !== undefined) {
+      const hasUnionDetails = fam.children.some((node) => ['MARR', 'DIV', 'NOTE'].includes(node.tag));
+      if (partnerIds.length !== 1 || childNodes.length === 0 || hasUnionDetails) {
+        errors.push(`Dòng ${fam.lineNumber}: ${RELATIONSHIP_FAMILY_TAG} yêu cầu một phụ huynh, ít nhất một con và không chứa chi tiết hôn phối.`);
+      }
+      if (relationshipFamilyReference !== UNBOUND_FAMILY) {
+        unionId = unionIdsByFamily.get(relationshipFamilyReference);
+        const referencedFamily = familiesByXref.get(relationshipFamilyReference);
+        if (!unionId || !referencedFamily?.children.some((node) => node.tag === 'HUSB' || node.tag === 'WIFE')) {
+          errors.push(`Dòng ${fam.lineNumber}: ${RELATIONSHIP_FAMILY_TAG} không trỏ đến một hôn phối GEDCOM hợp lệ.`);
+        }
+      }
+    } else if (partnerIds.length > 0) {
       const primaryPartner = partnerIds[0];
       const nextOrder = (marriageOrderCountByPerson.get(primaryPartner) ?? 0) + 1;
       marriageOrderCountByPerson.set(primaryPartner, nextOrder);
 
-      unionId = generateId('u_ged');
+      unionId = unionIdsByFamily.get(fam.xref!)!;
       importedUnions.push({
         id: unionId,
         partnerIds,

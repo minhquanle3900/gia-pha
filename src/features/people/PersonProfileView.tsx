@@ -143,8 +143,11 @@ export const PersonProfileView: React.FC<PersonProfileViewProps> = ({
     try {
       setIsExportingDirectPdf(true);
       setDirectPdfToast('Đang kết xuất tệp PDF qua thư viện jsPDF...');
-      await exportPersonReportToPdfDirect(reportData);
-      setDirectPdfToast(`Đã xuất và tải xuống hồ sơ PDF của ${person.fullName} thành công!`);
+      const format = await exportPersonReportToPdfDirect(reportData);
+      setDirectPdfToast(format === 'text'
+        ? 'Đã tải bản PDF văn bản. Để giữ bố cục và dấu tiếng Việt, hãy chọn “In phả ký cá nhân”.'
+        : `Đã xuất và tải xuống hồ sơ PDF của ${person.fullName} thành công!`
+      );
       setTimeout(() => setDirectPdfToast(null), 4500);
     } catch (err) {
       console.error('Lỗi khi xuất PDF:', err);

@@ -1,7 +1,6 @@
 import { SCHEMA_VERSION } from '../database/db';
-import { GenealogyDatabaseSnapshot, Person } from '../models/genealogy';
+import { GenealogyDatabaseSnapshot } from '../models/genealogy';
 import { normalizeVietnameseText } from '../utils/dateUtils';
-import { ensureBase64DataUrl } from '../utils/imageUtils';
 import { validateImportSnapshot } from './importValidationService';
 import { planSnapshotMerge } from './snapshotMergeService';
 
@@ -26,30 +25,8 @@ export interface JsonImportPreview {
 export async function serializeDatabaseBackup(
   snapshot: GenealogyDatabaseSnapshot
 ): Promise<string> {
-  const mediaWithBase64 = await Promise.all(
-    snapshot.media.map(async (item) => ({
-      ...item,
-      dataUrl: await ensureBase64DataUrl(item.dataUrl),
-    }))
-  );
-
-  const mediaMap = new Map(mediaWithBase64.map((m) => [m.id, m.dataUrl]));
-
-  const peopleWithBase64: Person[] = await Promise.all(
-    snapshot.people.map(async (p) => {
-      let portraitUrl = p.portraitUrl;
-      if (p.portraitMediaId && mediaMap.has(p.portraitMediaId)) {
-        portraitUrl = mediaMap.get(p.portraitMediaId);
-      } else if (portraitUrl) {
-        portraitUrl = await ensureBase64DataUrl(portraitUrl);
-      }
-      return {
-        ...p,
-        portraitUrl,
-      };
-    })
-  );
-
+  // Export record values as stored. Rendering can resolve an ID-only portrait,
+  // but adding a derived URL here makes a backup conflict with its own source.
   const payload: GenealogyDatabaseSnapshot = {
     app: 'Gia Phả Việt – Cội Nguồn',
     schemaVersion: SCHEMA_VERSION,
@@ -60,11 +37,11 @@ export async function serializeDatabaseBackup(
       lastBackupAt: new Date().toISOString(),
     },
     branches: snapshot.branches,
-    people: peopleWithBase64,
+    people: snapshot.people,
     unions: snapshot.unions,
     relationships: snapshot.relationships,
     lifeEvents: snapshot.lifeEvents,
-    media: mediaWithBase64,
+    media: snapshot.media,
     stories: snapshot.stories,
   };
 

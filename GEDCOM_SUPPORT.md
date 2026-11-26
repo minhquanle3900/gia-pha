@@ -9,10 +9,12 @@
 
 **GEDCOM** (Genealogical Data Communication) là tiêu chuẩn dữ liệu phả hệ phổ biến nhất trên thế giới, được khởi xướng bởi Giáo hội Các Thánh hữu Ngày sau của Chúa Giê Su Ky Tô (LDS) và được hỗ trợ bởi hầu hết các phần mềm gia phả quốc tế như **Gramps, FamilySearch, MyHeritage, Ancestry, RootsMagic, Brother's Keeper**.
 
-**Gia Phả Việt – Cội Nguồn** hỗ trợ đầy đủ cả hai chiều:
-1. **Xuất file `.ged` (Export)**: Xuất toàn bộ dữ liệu phả hệ theo định dạng GEDCOM 5.5.1 với bảng mã ký tự **UTF-8**, bảo toàn nguyên vẹn dấu tiếng Việt và cấu trúc huyết thống.
+**Gia Phả Việt – Cội Nguồn** hỗ trợ trao đổi phả hệ hai chiều:
+1. **Xuất file `.ged` (Export)**: Xuất cấu trúc phả hệ và các trường được ánh xạ sang GEDCOM 5.5.1 với bảng mã ký tự **UTF-8**.
 2. **Nhập file `.ged` (Import)**: Đọc và phân tích các tệp GEDCOM tiêu chuẩn từ các phần mềm khác, tự động tạo thành viên, gia đình và liên kết phụ mẫu - con cái.
 3. **Phần mở rộng tiếng Việt (`_TAGS`)**: Bổ sung các thẻ tùy biến bắt đầu bằng ký tự gạch dưới `_` (theo đúng quy định chuẩn của GEDCOM) để bảo toàn các trường dữ liệu phả hệ đặc thù của văn hóa Việt Nam.
+
+Khi nhập GEDCOM để thay thế dữ liệu, hãy xuất JSON trước. Bộ chuyển đổi GEDCOM không chuyển mốc sự kiện, ảnh chân dung, kho ảnh và tư liệu, nhật ký dòng họ hoặc các liên kết đến những mục này.
 
 ---
 
@@ -55,10 +57,10 @@
 
 | Khái niệm Gia phả | Thẻ GEDCOM Chuẩn | Cấu trúc Ví dụ | Ghi chú |
 | :--- | :--- | :--- | :--- |
-| **Bản ghi Gia đình** | `0 @FAM_ID@ FAM` | `0 @F01@ FAM` | Một cuộc hôn nhân |
+| **Bản ghi Gia đình** | `0 @FAM_ID@ FAM` | `0 @F01@ FAM` | Một hôn phối hoặc nhóm liên kết cha/mẹ – con |
 | **Người Chồng** | `1 HUSB` | `1 HUSB @I01@` | Trỏ đến ID người cha/chồng |
 | **Người Vợ** | `1 WIFE` | `1 WIFE @I02@` | Trỏ đến ID người mẹ/vợ |
-| **Con cái** | `1 CHIL` | `1 CHIL @I03@`<br>`1 CHIL @I04@` | Danh sách con của cặp vợ chồng |
+| **Con cái** | `1 CHIL` | `1 CHIL @I03@`<br>`1 CHIL @I04@` | Áp dụng cho các phụ huynh được ghi trong chính `FAM` |
 | **Gắn kết từ phía con**| `1 FAMC` | `1 FAMC @F01@` (trong `INDI`) | Gia đình cha mẹ mà người này là con |
 | **Gắn kết từ phía vợ/chồng**| `1 FAMS` | `1 FAMS @F01@` (trong `INDI`) | Gia đình mà người này là vợ hoặc chồng |
 
@@ -81,6 +83,10 @@
 | `_BURIAL` | Nơi an táng / Mộ phần | Chuỗi mô tả vị trí lăng mộ | `1 _BURIAL Khu mộ Tổ đồng Cửa Chùa` |
 | `_MERIT` | Công đức dòng họ | Văn bản ghi nhận đóng góp | `1 _MERIT Trùng tu từ đường năm 1924` |
 | `_UNION_ROLE`| Thứ tự vợ chồng | `PRIMARY` / `SECONDARY` / `REMARRIED` | `1 _UNION_ROLE PRIMARY` (Chính thất) |
+| `_GP_UNION` | Hôn phối liên quan của liên kết cha/mẹ – con | Tham chiếu `FAM` hôn phối, hoặc `NONE` | `1 _GP_UNION @F02@` |
+| `_GP_LINEAGE` | Loại liên kết chưa rõ | `unknown`, dưới `FAMC` | `2 _GP_LINEAGE unknown` |
+
+Ứng dụng chỉ xuất `CHIL` trong bản ghi hôn phối khi mọi phụ huynh trong đó đều có liên kết đã ghi với cùng loại quan hệ. Nếu chỉ có một liên kết hoặc các loại quan hệ khác nhau, tệp sử dụng `FAM` riêng có một phụ huynh. `_GP_UNION` cho phép Gia Phả Việt nhập lại đúng liên kết và hôn phối mà không tạo thêm hôn phối. Phần mềm bên ngoài có thể bỏ qua thẻ mở rộng và hiển thị các nhóm một phụ huynh riêng.
 
 ---
 
@@ -157,17 +163,7 @@
 
 ## 6. Khả Năng Tương Thích Với Các Phần Mềm Khác
 
-### 1. Gramps (Mã nguồn mở - Đề xuất cao nhất)
-- Hỗ trợ hoàn hảo file GEDCOM UTF-8 xuất từ Gia Phả Việt.
-- Các thẻ tùy biến (`_GEN`, `_ROLE`, `_TABOO`...) được Gramps lưu giữ trong mục "Custom Attributes" của từng cá nhân mà không bị loại bỏ.
-
-### 2. FamilySearch & MyHeritage
-- Nhận diện chính xác cây phả hệ, cha mẹ, vợ chồng và con cái.
-- Hỗ trợ đầy đủ tiếng Việt Unicode.
-- Khi tải file lên, các trường ngày tháng linh hoạt và tiểu sử (`NOTE`) hiển thị rõ ràng.
-
-### 3. RootsMagic & Brother's Keeper
-- Nhập xuất bình thường với tùy chọn UTF-8 Character Set.
+Khi trao đổi với Gramps, FamilySearch, MyHeritage, RootsMagic hoặc Brother's Keeper, hãy kiểm tra họ tên tiếng Việt, hôn phối, liên kết cha/mẹ – con và trường riêng sau khi nhập. Mỗi phần mềm quyết định cách đọc thẻ mở rộng và thông tin lịch sử.
 
 ---
 
@@ -177,5 +173,5 @@
    - Luôn sử dụng chức năng **"Sao lưu JSON"** trong ứng dụng để tạo một bản sao lưu dự phòng toàn diện.
 2. **Khi chia sẻ cho người thân dùng các phần mềm quốc tế**:
    - Xuất file GEDCOM để họ có thể nạp vào Gramps hoặc tải lên tài khoản FamilySearch.
-3. **Khi cần bảo tồn 100% hình ảnh và bố cục**:
-   - Khuyến nghị sử dụng định dạng **JSON trọn gói (`.json`)** của Gia Phả Việt, vì chuẩn GEDCOM 5.5.1 không nhúng trực tiếp dữ liệu hình ảnh Base64 trong tệp.
+3. **Khi chuyển thiết bị hoặc cần khôi phục đầy đủ**:
+   - Dùng **JSON (`.json`)** của Gia Phả Việt để giữ các nhóm dữ liệu và liên kết của ứng dụng.

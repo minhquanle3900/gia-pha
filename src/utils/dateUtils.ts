@@ -7,6 +7,13 @@ export function generateId(prefix = 'rec'): string {
   return `${prefix}_${Date.now().toString(36)}_${Math.random().toString(36).slice(2, 10)}`;
 }
 
+// With an unknown year, February 29 is possible and must be retained.
+export function daysInGregorianMonth(month: number, year?: number): number {
+  if (month !== 2) return [4, 6, 9, 11].includes(month) ? 30 : 31;
+  const leap = year === undefined || (year % 4 === 0 && (year % 100 !== 0 || year % 400 === 0));
+  return leap ? 29 : 28;
+}
+
 export function formatFlexibleDate(date?: FlexibleDate): string {
   if (!date || date.precision === 'unknown') {
     return date?.displayText?.trim() || 'Không rõ';

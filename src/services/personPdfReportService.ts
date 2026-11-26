@@ -9,6 +9,7 @@ import {
   Union,
 } from '../models/genealogy';
 import { formatFlexibleDate, formatLifespan, formatLunarAnniversary } from '../utils/dateUtils';
+import { escapeHtml } from '../utils/htmlUtils';
 
 export interface ReportConfig {
   theme: 'heritage' | 'monochrome' | 'vermilion';
@@ -55,6 +56,49 @@ export interface PersonReportData {
   settings: AppSettings;
 }
 
+const captureColorProperties = [
+  'color', 'background-color',
+  'border-top-color', 'border-right-color', 'border-bottom-color', 'border-left-color',
+  'box-shadow', 'text-shadow', 'text-decoration-color', '-webkit-text-stroke-color', 'fill', 'stroke',
+];
+
+/** Convert computed colors in html2canvas's cloned document to its supported sRGB syntax. */
+function normalizePdfCaptureColors(document: Document, report: HTMLElement): void {
+  const view = document.defaultView;
+  const canvas = document.createElement('canvas');
+  canvas.width = 1;
+  canvas.height = 1;
+  const context = canvas.getContext('2d', { willReadFrequently: true });
+  if (!view || !context) return;
+
+  const normalized = new Map<string, string>();
+  const modernColor = /\b(?:oklab|oklch|lab|lch|color)\([^()]*\)/gi;
+  const toRgb = (color: string): string => {
+    const cached = normalized.get(color);
+    if (cached) return cached;
+
+    // Let the browser convert from the original color space and preserve opacity.
+    context.clearRect(0, 0, 1, 1);
+    context.fillStyle = color;
+    context.fillRect(0, 0, 1, 1);
+    const [red, green, blue, alpha] = context.getImageData(0, 0, 1, 1).data;
+    const rgba = 'rgba(' + [red, green, blue, (alpha / 255).toFixed(3)].join(', ') + ')';
+    normalized.set(color, rgba);
+    return rgba;
+  };
+
+  // html2canvas reads the root and body backgrounds even when capturing a subtree.
+  const elements = [document.documentElement, document.body, report, ...report.querySelectorAll<HTMLElement | SVGElement>('*')];
+  for (const element of elements) {
+    const computed = view.getComputedStyle(element);
+    for (const property of captureColorProperties) {
+      const color = computed.getPropertyValue(property);
+      const replacement = color.replace(modernColor, toRgb);
+      if (replacement !== color) element.style.setProperty(property, replacement, 'important');
+    }
+  }
+}
+
 /**
  * Generates and downloads a high-fidelity PDF from an HTML element using html2canvas & jsPDF.
  */
@@ -75,13 +119,15 @@ export async function exportElementToPdf(
     backgroundColor: '#FAF7F2',
     windowWidth: element.scrollWidth,
     windowHeight: element.scrollHeight,
+    onclone: normalizePdfCaptureColors,
   });
 
+  const { width: canvasWidth, height: canvasHeight } = canvas;
   const imgData = canvas.toDataURL('image/jpeg', 0.95);
+  if (!canvasWidth || !canvasHeight || imgData === 'data:,') {
+    throw new Error('Trình duyệt không thể tạo ảnh PDF cho khổ và độ dài hồ sơ này.');
+  }
   const pdf = new jsPDF('p', 'mm', paperSize);
-
-  const canvasWidth = canvas.width;
-  const canvasHeight = canvas.height;
 
   // Calculate proportional height in mm
   const imgHeightMm = (canvasHeight * pdfWidth) / canvasWidth;
@@ -226,7 +272,7 @@ export function generateStandalonePrintableHtml(
 <html lang="vi">
 <head>
   <meta charset="UTF-8">
-  <title>Trích Lục Phả Ký – ${person.fullName}</title>
+  <title>Trích Lục Phả Ký – ${escapeHtml(person.fullName)}</title>
   <style>
     @page {
       size: ${config.paperSize === 'letter' ? 'letter' : 'A4'} portrait;
@@ -355,44 +401,44 @@ export function generateStandalonePrintableHtml(
   <div class="sheet">
     <div class="inner-border">
       <div class="header">
-        <div class="clan-name">DÒNG HỌ ${settings.clanName.toUpperCase()}</div>
+        <div class="clan-name">DÒNG HỌ ${escapeHtml(settings.clanName.toUpperCase())}</div>
         <h1 class="title">TRÍCH LỤC TIỂU SỬ PHẢ KÝ</h1>
-        <div class="sub-title">Số hiệu: GPV-${person.id.slice(0, 8).toUpperCase()} · Trích lục ngày: ${new Date().toLocaleDateString('vi-VN')}</div>
-        ${settings.clanMotto ? `<div style="font-size: 10px; font-style: italic; color: ${accentColor}; margin-top: 3px;">"${settings.clanMotto}"</div>` : ''}
+        <div class="sub-title">Số hiệu: GPV-${escapeHtml(person.id.slice(0, 8).toUpperCase())} · Trích lục ngày: ${new Date().toLocaleDateString('vi-VN')}</div>
+        ${settings.clanMotto ? `<div style="font-size: 10px; font-style: italic; color: ${accentColor}; margin-top: 3px;">"${escapeHtml(settings.clanMotto)}"</div>` : ''}
       </div>
 
       <div class="section-title">I. Thông Tin Cá Nhân & Danh Xưng</div>
       <div class="grid-2">
         <div>
-          <div class="info-item"><span class="info-label">Họ và tên:</span> <span class="info-val" style="font-size: 13px; color: ${primaryColor};">${person.fullName}</span></div>
+          <div class="info-item"><span class="info-label">Họ và tên:</span> <span class="info-val" style="font-size: 13px; color: ${primaryColor};">${escapeHtml(person.fullName)}</span></div>
           <div class="info-item"><span class="info-label">Giới tính:</span> <span class="info-val">${person.gender === 'male' ? 'Nam' : person.gender === 'female' ? 'Nữ' : 'Chưa rõ'}</span></div>
-          <div class="info-item"><span class="info-label">Thế hệ:</span> <span class="info-val">Đời thứ ${person.generation ?? '—'}</span></div>
-          <div class="info-item"><span class="info-label">Chi phái:</span> <span class="info-val">${branch?.name || 'Chưa phân chi'}${person.subBranch ? ` (${person.subBranch})` : ''}</span></div>
-          <div class="info-item"><span class="info-label">Vai vế dòng tộc:</span> <span class="info-val">${person.clanRole || 'Thành viên'}</span></div>
+          <div class="info-item"><span class="info-label">Thế hệ:</span> <span class="info-val">Đời thứ ${escapeHtml(person.generation ?? '—')}</span></div>
+          <div class="info-item"><span class="info-label">Chi phái:</span> <span class="info-val">${escapeHtml(branch?.name || 'Chưa phân chi')}${person.subBranch ? ` (${escapeHtml(person.subBranch)})` : ''}</span></div>
+          <div class="info-item"><span class="info-label">Vai vế dòng tộc:</span> <span class="info-val">${escapeHtml(person.clanRole || 'Thành viên')}</span></div>
         </div>
         <div>
-          <div class="info-item"><span class="info-label">Tên húy (Tế tự):</span> <span class="info-val" style="color: #8C2A1E;">${person.tabooName || '—'}</span></div>
-          <div class="info-item"><span class="info-label">Tên tự / Tên hiệu:</span> <span class="info-val">${person.courtesyName || '—'}</span></div>
-          <div class="info-item"><span class="info-label">Tên thường gọi:</span> <span class="info-val">${person.commonName || '—'}</span></div>
+          <div class="info-item"><span class="info-label">Tên húy (Tế tự):</span> <span class="info-val" style="color: #8C2A1E;">${escapeHtml(person.tabooName || '—')}</span></div>
+          <div class="info-item"><span class="info-label">Tên tự / Tên hiệu:</span> <span class="info-val">${escapeHtml(person.courtesyName || '—')}</span></div>
+          <div class="info-item"><span class="info-label">Tên thường gọi:</span> <span class="info-val">${escapeHtml(person.commonName || '—')}</span></div>
           <div class="info-item"><span class="info-label">Trạng thái:</span> <span class="info-val">${person.isLiving ? 'Còn sống' : 'Đã tạ thế'}</span></div>
-          <div class="info-item"><span class="info-label">Thọ mệnh:</span> <span class="info-val">${formatLifespan(person.birthDate, person.deathDate, person.isLiving)}</span></div>
+          <div class="info-item"><span class="info-label">Thọ mệnh:</span> <span class="info-val">${escapeHtml(formatLifespan(person.birthDate, person.deathDate, person.isLiving))}</span></div>
         </div>
       </div>
 
       <div class="grid-2" style="margin-top: 6px; padding-top: 6px; border-top: 1px dashed #E7DFD4;">
         <div>
-          <div class="info-item"><span class="info-label">Ngày sinh:</span> <span class="info-val">${formatFlexibleDate(person.birthDate)}</span></div>
-          <div class="info-item"><span class="info-label">Nơi sinh:</span> <span class="info-val">${person.birthPlace || 'Chưa rõ'}</span></div>
-          <div class="info-item"><span class="info-label">Nguyên quán:</span> <span class="info-val">${person.ancestralHome || 'Chưa rõ'}</span></div>
+          <div class="info-item"><span class="info-label">Ngày sinh:</span> <span class="info-val">${escapeHtml(formatFlexibleDate(person.birthDate))}</span></div>
+          <div class="info-item"><span class="info-label">Nơi sinh:</span> <span class="info-val">${escapeHtml(person.birthPlace || 'Chưa rõ')}</span></div>
+          <div class="info-item"><span class="info-label">Nguyên quán:</span> <span class="info-val">${escapeHtml(person.ancestralHome || 'Chưa rõ')}</span></div>
         </div>
         <div>
           ${!person.isLiving ? `
-          <div class="info-item"><span class="info-label">Ngày mất:</span> <span class="info-val">${formatFlexibleDate(person.deathDate)}</span></div>
-          <div class="info-item"><span class="info-label">Giỗ Âm lịch:</span> <span class="info-val" style="color: ${accentColor}; font-weight: bold;">${formatLunarAnniversary(person.deathAnniversaryLunar) || 'Chưa ghi nhận'}</span></div>
-          <div class="info-item"><span class="info-label">Nơi an táng:</span> <span class="info-val">${person.burialPlace || 'Chưa ghi nhận'}</span></div>
+          <div class="info-item"><span class="info-label">Ngày mất:</span> <span class="info-val">${escapeHtml(formatFlexibleDate(person.deathDate))}</span></div>
+          <div class="info-item"><span class="info-label">Giỗ Âm lịch:</span> <span class="info-val" style="color: ${accentColor}; font-weight: bold;">${escapeHtml(formatLunarAnniversary(person.deathAnniversaryLunar) || 'Chưa ghi nhận')}</span></div>
+          <div class="info-item"><span class="info-label">Nơi an táng:</span> <span class="info-val">${escapeHtml(person.burialPlace || 'Chưa ghi nhận')}</span></div>
           ` : `
-          <div class="info-item"><span class="info-label">Nơi cư trú:</span> <span class="info-val">${person.residence || 'Chưa rõ'}</span></div>
-          <div class="info-item"><span class="info-label">Nghề nghiệp:</span> <span class="info-val">${person.occupation || 'Chưa rõ'}</span></div>
+          <div class="info-item"><span class="info-label">Nơi cư trú:</span> <span class="info-val">${escapeHtml(person.residence || 'Chưa rõ')}</span></div>
+          <div class="info-item"><span class="info-label">Nghề nghiệp:</span> <span class="info-val">${escapeHtml(person.occupation || 'Chưa rõ')}</span></div>
           `}
         </div>
       </div>
@@ -400,14 +446,14 @@ export function generateStandalonePrintableHtml(
       ${config.showMerits && person.merits ? `
       <div class="section-title">II. Công Đức & Đóng Góp Tông Tộc</div>
       <p style="font-size: 11px; color: #4A3F35; background: #FAF7F2; padding: 8px; border-left: 3px solid ${accentColor}; font-style: italic;">
-        ${person.merits}
+        ${escapeHtml(person.merits)}
       </p>
       ` : ''}
 
       ${config.showBio && person.biography ? `
       <div class="section-title">III. Tiểu Sử Hành Trạng</div>
       <p style="font-size: 11px; color: #3A2E25; text-align: justify; line-height: 1.6; white-space: pre-line;">
-        ${person.biography}
+        ${escapeHtml(person.biography)}
       </p>
       ` : ''}
 
@@ -416,9 +462,9 @@ export function generateStandalonePrintableHtml(
       <div class="grid-2">
         ${parents.length === 0 ? '<p style="font-size: 11px; color: #888; font-style: italic;">Chưa ghi nhận thông tin cha mẹ.</p>' : parents.map(({ relationship, parent }) => `
           <div style="background: #F9F6F0; padding: 6px 10px; border: 1px solid #E7DFD4; border-radius: 4px; font-size: 11px;">
-            <strong>${parent.gender === 'male' ? 'Thân phụ (Cha)' : 'Thân mẫu (Mẹ)'}:</strong> ${parent.fullName}
+            <strong>${parent.gender === 'male' ? 'Thân phụ (Cha)' : 'Thân mẫu (Mẹ)'}:</strong> ${escapeHtml(parent.fullName)}
             <div style="color: #655A4E; font-size: 10px; margin-top: 2px;">
-              ${formatLifespan(parent.birthDate, parent.deathDate, parent.isLiving)}${relationship.lineageType === 'adoptive' ? ' · Con nuôi' : ''}
+              ${escapeHtml(formatLifespan(parent.birthDate, parent.deathDate, parent.isLiving))}${relationship.lineageType === 'adoptive' ? ' · Con nuôi' : ''}
             </div>
           </div>
         `).join('')}
@@ -440,9 +486,9 @@ export function generateStandalonePrintableHtml(
           <tbody>
             ${spouses.map(({ union, spouse }) => `
               <tr>
-                <td>${union.marriageOrder === 1 ? 'Chính thất' : union.marriageOrder === 2 ? 'Kế thất' : `Lần ${union.marriageOrder || 1}`}</td>
-                <td><strong>${spouse?.fullName || 'Chưa rõ danh tính'}</strong></td>
-                <td>${spouse ? formatLifespan(spouse.birthDate, spouse.deathDate, spouse.isLiving) : '—'}</td>
+                <td>${union.marriageOrder === 1 ? 'Chính thất' : union.marriageOrder === 2 ? 'Kế thất' : `Lần ${escapeHtml(union.marriageOrder || 1)}`}</td>
+                <td><strong>${escapeHtml(spouse?.fullName || 'Chưa rõ danh tính')}</strong></td>
+                <td>${spouse ? escapeHtml(formatLifespan(spouse.birthDate, spouse.deathDate, spouse.isLiving)) : '—'}</td>
                 <td>${spouse ? (spouse.isLiving ? 'Còn sống' : 'Đã tạ thế') : '—'}</td>
               </tr>
             `).join('')}
@@ -468,10 +514,10 @@ export function generateStandalonePrintableHtml(
             ${children.map(({ child }, i) => `
               <tr>
                 <td style="text-align: center;">${i + 1}</td>
-                <td><strong>${child.fullName}</strong></td>
+                <td><strong>${escapeHtml(child.fullName)}</strong></td>
                 <td>${child.gender === 'male' ? 'Nam' : 'Nữ'}</td>
-                <td>${formatLifespan(child.birthDate, child.deathDate, child.isLiving)}</td>
-                <td>${child.generation ? `Đời ${child.generation}` : '—'}</td>
+                <td>${escapeHtml(formatLifespan(child.birthDate, child.deathDate, child.isLiving))}</td>
+                <td>${child.generation ? `Đời ${escapeHtml(child.generation)}` : '—'}</td>
               </tr>
             `).join('')}
           </tbody>
@@ -510,7 +556,7 @@ export function generateStandalonePrintableHtml(
 export async function exportPersonReportToPdfDirect(
   data: PersonReportData,
   config: ReportConfig = DEFAULT_REPORT_CONFIG
-): Promise<void> {
+): Promise<'layout' | 'text'> {
   const cleanFileName = `Ho_So_Gia_Pha_${data.person.fullName.replace(/\s+/g, '_')}`;
 
   if (typeof document === 'undefined') {
@@ -518,7 +564,7 @@ export async function exportPersonReportToPdfDirect(
     const doc = new jsPDF('p', 'mm', config.paperSize);
     doc.text(`TRICH LUC TIEU SU PHA KY - ${data.person.fullName}`, 20, 20);
     doc.save(`${cleanFileName}.pdf`);
-    return;
+    return 'text';
   }
 
   // Create temporary off-screen container
@@ -554,6 +600,7 @@ export async function exportPersonReportToPdfDirect(
     await new Promise((res) => setTimeout(res, 120));
 
     await exportElementToPdf(tempDiv, cleanFileName, config.paperSize);
+    return 'layout';
   } catch (err) {
     console.warn('Canvas export failed, falling back to direct jsPDF text document:', err);
     // Direct jsPDF text fallback
@@ -581,6 +628,7 @@ export async function exportPersonReportToPdfDirect(
     }
 
     doc.save(`${cleanFileName}.pdf`);
+    return 'text';
   } finally {
     if (document.body.contains(tempDiv)) {
       document.body.removeChild(tempDiv);

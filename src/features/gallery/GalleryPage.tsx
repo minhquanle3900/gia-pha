@@ -41,6 +41,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [audioRecorderOpen, setAudioRecorderOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
+  const [deleteError, setDeleteError] = useState<string | null>(null);
 
   // New Media Form state
   const [newTitle, setNewTitle] = useState('');
@@ -121,17 +122,23 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
   };
 
   const handleDeleteMedia = async () => {
-    if (deleteId) {
+    if (!deleteId) return;
+    try {
       await deleteMedia(deleteId);
-      if (viewingMedia?.id === deleteId) {
-        setViewingMedia(null);
-      }
+      if (viewingMedia?.id === deleteId) setViewingMedia(null);
+    } catch (error) {
+      setDeleteError(error instanceof Error ? error.message : 'Không thể xóa kỷ vật.');
+      setViewingMedia(null);
+    } finally {
       setDeleteId(null);
     }
   };
 
   return (
     <div className="space-y-6 pb-12 animate-in fade-in">
+      {deleteError && (
+        <p role="alert" className="rounded-xl bg-red-50 p-3 text-xs text-red-800">{deleteError}</p>
+      )}
       {/* Header */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E7DFD4] pb-4">
         <div>
@@ -429,7 +436,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
               <div className="pt-3 border-t border-stone-200 flex items-center justify-between">
                 <button
                   type="button"
-                  onClick={() => setDeleteId(viewingMedia.id)}
+                  onClick={() => { setDeleteError(null); setDeleteId(viewingMedia.id); }}
                   className="flex items-center gap-1 text-xs text-red-600 hover:text-red-800"
                 >
                   <Trash2 className="w-3.5 h-3.5" />
@@ -626,7 +633,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onSelectPerson }) => {
       <ConfirmDialog
         open={Boolean(deleteId)}
         title="Xác nhận xóa kỷ vật"
-        description="Bạn có chắc chắn muốn xóa kỷ vật này khỏi kho tư liệu gia tộc? Thao tác này không thể hoàn tác."
+        description="Xóa kỷ vật khỏi kho tư liệu gia tộc? Nếu kỷ vật đang dùng trong hồ sơ hoặc nhật ký, ứng dụng sẽ giữ lại."
         confirmLabel="Xóa kỷ vật"
         cancelLabel="Hủy"
         danger={true}

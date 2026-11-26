@@ -6,7 +6,7 @@ import {
   Union,
 } from '../models/genealogy';
 import { normalizeVietnameseText } from '../utils/dateUtils';
-import { hasAncestryCycleThrough } from './validationService';
+import { findUnionCollision, hasAncestryCycleThrough } from './validationService';
 
 export interface DuplicatePair {
   personA: Person;
@@ -71,12 +71,13 @@ export function findPotentialDuplicates(
 
       const normA = normalizeVietnameseText(pA.fullName);
       const normB = normalizeVietnameseText(pB.fullName);
+      const sameName = normA.length > 0 && normA === normB;
 
       // 1. Name match
-      if (normA === normB) {
+      if (sameName) {
         score += 50;
-        reasons.push('Họ và tên hoàn toàn trùng khớp');
-      } else if (normA.includes(normB) || normB.includes(normA)) {
+        reasons.push('Họ và tên trùng sau chuẩn hóa');
+      } else if (normA && normB && (normA.includes(normB) || normB.includes(normA))) {
         score += 25;
         reasons.push('Họ và tên tương tự nhau');
       }
@@ -98,8 +99,9 @@ export function findPotentialDuplicates(
       // 3. Birth / Death year match
       const bA = pA.birthDate?.year;
       const bB = pB.birthDate?.year;
+      const sameBirthYear = Boolean(bA) && bA === bB;
       if (bA && bB) {
-        if (bA === bB) {
+        if (sameBirthYear) {
           score += 25;
           reasons.push(`Cùng năm sinh (${bA})`);
         } else if (Math.abs(bA - bB) <= 2) {
@@ -117,7 +119,8 @@ export function findPotentialDuplicates(
           score += 15;
           reasons.push(`Cùng đời thứ ${pA.generation}`);
         } else {
-          score -= 40; // Different generations rarely merge
+          score -= 40;
+          reasons.push(`Khác đời (${pA.generation} và ${pB.generation}): cần đối chiếu`);
         }
       }
 
@@ -139,7 +142,8 @@ export function findPotentialDuplicates(
         reasons.push('Có cùng bạn đời / vợ chồng');
       }
 
-      if (score >= 50) {
+      // A year and normalized name match still merits review if the generation differs.
+      if (score >= 50 || (sameName && sameBirthYear)) {
         duplicates.push({
           personA: pA,
           personB: pB,
@@ -303,6 +307,17 @@ export function executeMergeRecords(params: {
       partnerIds: [...new Set(union.partnerIds.map((id) => id === sourceId ? targetId : id))],
       updatedAt,
     });
+  }
+  if (updatedUnions.length > 0) {
+    const mergedUnions = [...unions.filter((union) => !union.partnerIds.includes(sourceId)), ...updatedUnions];
+    for (const union of updatedUnions) {
+      const collision = findUnionCollision(union, mergedUnions);
+      if (collision) {
+        throw new Error(
+          `Không thể sáp nhập vì hôn phối "${union.id}" và "${collision.id}" cùng cặp thành viên nhưng thiếu niên đại phân biệt.`
+        );
+      }
+    }
   }
 
   const updatedLifeEvents = lifeEvents

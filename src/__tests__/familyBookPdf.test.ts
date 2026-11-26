@@ -50,6 +50,27 @@ describe('Family Book Printable & PDF Export Service', () => {
     expect(html).toContain('fb-person-card');
   });
 
+  it('preserves multilingual family book text and escapes quoted portrait attributes', () => {
+    const html = generateFamilyBookPrintableHtml({
+      ...exportData,
+      people: [{
+        ...seed.people[0],
+        fullName: 'Mai "Đông" & Minh 家譜',
+        portraitUrl: 'https://example.invalid/portrait.jpg?mode=print&size=small',
+      }],
+      stories: [{
+        ...seed.stories[0],
+        title: 'Ghi chép Việt & 日本',
+        content: "Phả hệ 'xưa' (2 < 3 > 1)",
+      }],
+    });
+
+    expect(html).toContain('alt="Mai &quot;Đông&quot; &amp; Minh 家譜"');
+    expect(html).toContain('src="https://example.invalid/portrait.jpg?mode=print&amp;size=small"');
+    expect(html).toContain('Ghi chép Việt &amp; 日本');
+    expect(html).toContain('Phả hệ &#39;xưa&#39; (2 &lt; 3 &gt; 1)');
+  });
+
   it('respects section toggle options in FamilyBookPrintConfig', () => {
     const html = generateFamilyBookPrintableHtml(exportData, {
       paperSize: 'letter',

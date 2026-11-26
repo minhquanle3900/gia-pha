@@ -1,10 +1,11 @@
 import React, { useMemo, useState } from 'react';
 import { Heart, Plus, Search, Trash2, Users, X } from 'lucide-react';
+import { FlexibleDateInput } from '../../components/FlexibleDateInput';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
-import { LineageType, Person, UnionStatus } from '../../models/genealogy';
+import { FlexibleDate, LineageType, Person, UnionStatus } from '../../models/genealogy';
 import { validateParentChildRelationship } from '../../services/validationService';
-import { normalizeVietnameseText } from '../../utils/dateUtils';
+import { formatFlexibleDate, generateId, normalizeVietnameseText } from '../../utils/dateUtils';
 
 interface RelationshipEditorModalProps {
   person: Person;
@@ -34,20 +35,21 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
   const [memberSearch, setMemberSearch] = useState<string>('');
   const [selectedLineageType, setSelectedLineageType] = useState<LineageType>('biological');
   const [selectedSpouseStatus, setSelectedSpouseStatus] = useState<UnionStatus>('married');
+  const [marriageDate, setMarriageDate] = useState<FlexibleDate>();
+  const [isSavingUnion, setIsSavingUnion] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
 
   const parents = getParents(person.id);
   const children = getChildren(person.id);
   const spouses = getSpouses(person.id);
 
-  // Filter out self and already linked persons, plus optional search query
+  // Keep existing spouses selectable for recording a separate, dated remarriage.
   const availablePeople = useMemo(() => {
     const q = memberSearch.trim() ? normalizeVietnameseText(memberSearch.trim()) : '';
     return people.filter((p) => {
       if (p.id === person.id) return false;
       if (activeTab === 'parents' && parents.some((par) => par.parent.id === p.id)) return false;
       if (activeTab === 'children' && children.some((c) => c.child.id === p.id)) return false;
-      if (activeTab === 'spouses' && spouses.some((s) => s.spouse?.id === p.id)) return false;
       if (q) {
         const nameNorm = normalizeVietnameseText(p.fullName);
         const commonNorm = p.commonName ? normalizeVietnameseText(p.commonName) : '';
@@ -55,7 +57,7 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
       }
       return true;
     });
-  }, [people, person.id, activeTab, parents, children, spouses, memberSearch]);
+  }, [people, person.id, activeTab, parents, children, memberSearch]);
 
   if (!open) return null;
 
@@ -118,20 +120,28 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
   };
 
   const handleAddSpouse = async () => {
-    if (!selectedPersonId) return;
+    if (!selectedPersonId || isSavingUnion) return;
     setErrorMessage(null);
+    setIsSavingUnion(true);
 
-    // Create a new union record
-    await saveUnion({
-      id: `union_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
-      partnerIds: [person.id, selectedPersonId],
-      status: selectedSpouseStatus,
-      marriageOrder: spouses.length + 1,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-    });
-
-    setSelectedPersonId('');
+    const now = new Date().toISOString();
+    try {
+      await saveUnion({
+        id: generateId('union'),
+        partnerIds: [person.id, selectedPersonId],
+        status: selectedSpouseStatus,
+        marriageOrder: spouses.length + 1,
+        marriageDate,
+        createdAt: now,
+        updatedAt: now,
+      });
+      setSelectedPersonId('');
+      setMarriageDate(undefined);
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Không thể lưu hôn phối.');
+    } finally {
+      setIsSavingUnion(false);
+    }
   };
 
   return (
@@ -187,8 +197,10 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
                 onClick={() => {
                   setActiveTab(tab.key as 'parents' | 'children' | 'spouses');
                   setSelectedPersonId('');
+                  setMarriageDate(undefined);
                   setErrorMessage(null);
                 }}
+                disabled={isSavingUnion}
                 className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-all ${
                   isActive
                     ? 'border-[#1B3B2B] text-[#1B3B2B] bg-white rounded-t-xl'
@@ -205,7 +217,7 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
         {/* Body content */}
         <div className="p-4 sm:p-5 overflow-y-auto space-y-4 flex-1">
           {errorMessage && (
-            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800">
+            <div role="alert" className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800">
               {errorMessage}
             </div>
           )}
@@ -247,7 +259,12 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
               <div className="sm:col-span-2">
                 <select
                   value={selectedPersonId}
-                  onChange={(e) => setSelectedPersonId(e.target.value)}
+                  onChange={(e) => {
+                    setSelectedPersonId(e.target.value);
+                    setMarriageDate(undefined);
+                    setErrorMessage(null);
+                  }}
+                  disabled={isSavingUnion}
                   className="w-full text-xs rounded-lg border border-[#D5CABE] bg-white px-2.5 py-2 text-[#2C241C] outline-none focus:border-[#1B3B2B]"
                 >
                   <option value="">
@@ -291,9 +308,20 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
               )}
             </div>
 
+            {activeTab === 'spouses' && selectedPersonId && (
+              <FlexibleDateInput
+                label="Niên đại hôn phối"
+                value={marriageDate}
+                onChange={setMarriageDate}
+                helperText={spouses.some(({ spouse }) => spouse?.id === selectedPersonId)
+                  ? 'Ghi niên đại phân biệt được với lần hôn phối đã lưu nếu đây là một lần tái hôn.'
+                  : undefined}
+              />
+            )}
+
             <button
               type="button"
-              disabled={!selectedPersonId}
+              disabled={!selectedPersonId || isSavingUnion}
               onClick={
                 activeTab === 'parents'
                   ? handleAddParent
@@ -304,7 +332,7 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
               className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold disabled:opacity-50 transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>Thêm liên kết</span>
+              <span>{isSavingUnion ? 'Đang lưu hôn phối…' : 'Thêm liên kết'}</span>
             </button>
           </div>
 
@@ -427,6 +455,7 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
                               : union.marriageOrder === 2
                               ? 'Kế thất / Tục huyền (Lần 2)'
                               : `Hôn phối lần ${union.marriageOrder || 1}`}
+                            {union.marriageDate ? ` • ${formatFlexibleDate(union.marriageDate)}` : ''}
                           </p>
                         </div>
                       </div>
