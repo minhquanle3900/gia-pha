@@ -155,19 +155,21 @@ const BOOK_STYLES = `
     margin-bottom: 10px;
   }
   .fb-cover-title {
-    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-family: var(--heritage-font-display, Georgia, serif);
     font-size: 38px;
-    font-weight: 700;
+    font-weight: 400;
+    line-height: 1.25;
     color: #1B3B2B;
     margin: 0 0 14px 0;
   }
   .fb-motto {
-    font-family: 'Cormorant Garamond', Georgia, serif;
     font-size: 17px;
-    font-style: italic;
     color: #54483C;
     max-width: 500px;
     margin: 0 auto 28px auto;
+  }
+  .fb-motto-short {
+    font-family: var(--heritage-font-display, Georgia, serif);
   }
   .fb-cover-meta {
     border-top: 1px solid #D5CABE;
@@ -364,7 +366,7 @@ function renderCoverHtml(data: FamilyBookExportData, genCount: number): string {
       <div class="fb-seal">源</div>
       <div class="fb-subtitle">Gia Phả Dòng Tộc Việt Nam</div>
       <h1 class="fb-cover-title">${escapeHtml(settings.clanName || 'Gia Phả Dòng Họ')}</h1>
-      ${settings.clanMotto ? `<p class="fb-motto">"${escapeHtml(settings.clanMotto)}"</p>` : ''}
+      ${settings.clanMotto ? `<p class="fb-motto${settings.clanMotto.length <= 100 ? ' fb-motto-short' : ''}">"${escapeHtml(settings.clanMotto)}"</p>` : ''}
       <div class="fb-cover-meta">
         <div>Nhà thờ tổ: ${escapeHtml(settings.ancestralHallLocation || 'Việt Nam')}</div>
         <div>Quy mô phả lục: ${genCount} thế hệ · ${people.length} thành viên · ${branches.length} chi họ</div>
@@ -717,10 +719,6 @@ export async function exportFamilyBookToPdf(
   const rootEl = host.querySelector('.fb-root') as HTMLElement;
 
   try {
-    if (document.fonts) {
-      await document.fonts.ready;
-    }
-
     const pdf = new jsPDF('p', 'mm', config.paperSize);
     let cursorYMm = marginTopMm;
     let currentPageHasContent = false;
@@ -730,6 +728,12 @@ export async function exportFamilyBookToPdf(
       onProgress?.(Math.round(((idx + 0.2) / total) * 90));
       rootEl.innerHTML = `<div class="fb-block-capture" style="padding:4px 2px;background:#FFFFFF;">${blocks[idx]}</div>`;
       const target = rootEl.firstElementChild as HTMLElement;
+
+      if (document.fonts) {
+        // Include any font requests initiated by this newly mounted block.
+        target.getBoundingClientRect();
+        await document.fonts.ready;
+      }
 
       const canvas = await html2canvas(target, {
         scale: 2,

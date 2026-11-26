@@ -1,0 +1,92 @@
+Chromium 156.0.8078.79 built on Debian GNU/Linux 13 (trixie)
+Charm-Regular.woff2: 36288 B, 588 code points
+  samples-NFC: PASS
+  samples-NFD: PASS
+  VietnameseCore: PASS
+CormorantGaramond-Italic-Latin-Vietnamese.woff2: 96396 B, 683 code points
+  samples-NFC: PASS
+  samples-NFD: PASS
+  VietnameseCore: PASS
+CormorantGaramond-Latin-Vietnamese.woff2: 134184 B, 677 code points
+  samples-NFC: PASS
+  samples-NFD: PASS
+  VietnameseCore: PASS
+JetBrainsMono-Latin-Vietnamese.woff2: 53140 B, 577 code points
+  samples-NFC: PASS
+  samples-NFD: PASS
+  VietnameseCore: PASS
+PlusJakartaSans-Latin-Vietnamese.woff2: 55132 B, 678 code points
+  samples-NFC: PASS
+  samples-NFD: PASS
+  VietnameseCore: PASS
+ViaodaLibre-Regular.woff2: 46244 B, 504 code points
+  samples-NFC: PASS
+  samples-NFD: PASS
+  VietnameseCore: PASS
+320-light 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+320-dark 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+390-light 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+390-dark 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+430-light 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+430-dark 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+768-light 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+768-dark 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+1440-light 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+1440-dark 4 distinct treatments, actual Charm, no couplet overflow, fullscreen style and Escape/focus PASS
+Browser runtime exceptions: 0
+Local WOFF2 downloads blocked, platform fallback fonts render four original Vietnamese texts without overflow: ["Liberation Serif"]
+Browser runtime exceptions: 0
+390 light Charm 35,4 KiB local custom font and Vietnamese samples PASS
+390 light Viaoda Libre 45,2 KiB local custom font and Vietnamese samples PASS
+390 light Cormorant Garamond 131 KiB local custom font and Vietnamese samples PASS
+1440 light Charm 35,4 KiB local custom font and Vietnamese samples PASS
+1440 light Viaoda Libre 45,2 KiB local custom font and Vietnamese samples PASS
+1440 light Cormorant Garamond 131 KiB local custom font and Vietnamese samples PASS
+1440 dark Charm 35,4 KiB local custom font and Vietnamese samples PASS
+1440 dark Viaoda Libre 45,2 KiB local custom font and Vietnamese samples PASS
+1440 dark Cormorant Garamond 131 KiB local custom font and Vietnamese samples PASS
+Specimen requested only same-origin WOFF2: ["http://127.0.0.1:4244/src/styles/fonts/Charm-Regular.woff2","http://127.0.0.1:4244/src/styles/fonts/ViaodaLibre-Regular.woff2","http://127.0.0.1:4244/src/styles/fonts/CormorantGaramond-Latin-Vietnamese.woff2"]
+Browser runtime exceptions: 0
+200 application/manifest+json /manifest.webmanifest
+200 image/png /pwa-192x192.png
+200 image/png /pwa-512x512.png
+200 image/png /pwa-maskable-512x512.png
+200 text/html /
+200 image/png /apple-touch-icon.png
+200 image/svg+xml /icon.svg
+200 application/javascript /sw.js
+PASS manifest, PNG sizes, Apple touch icon and worker
+200 font/woff2 Charm-Regular-DLkA3AcE.woff2
+200 font/woff2 CormorantGaramond-Italic-Latin-Vietnamese-Bar8OQlu.woff2
+200 font/woff2 CormorantGaramond-Latin-Vietnamese-BG4t8PVT.woff2
+200 font/woff2 JetBrainsMono-Latin-Vietnamese-C4xEFJ8t.woff2
+200 font/woff2 PlusJakartaSans-Latin-Vietnamese-C09y-G-o.woff2
+200 font/woff2 ViaodaLibre-Regular-DZPpm2je.woff2
+PASS six same-origin WOFF2 files in merged worker precache and five OFL notices served
+First calligraphy visit offline; six WOFF2 files in precache, real custom Charm served from SW: {"fontKeys":["/assets/ViaodaLibre-Regular-DZPpm2je.woff2","/assets/PlusJakartaSans-Latin-Vietnamese-C09y-G-o.woff2","/assets/JetBrainsMono-Latin-Vietnamese-C4xEFJ8t.woff2","/assets/CormorantGaramond-Latin-Vietnamese-BG4t8PVT.woff2","/assets/CormorantGaramond-Italic-Latin-Vietnamese-Bar8OQlu.woff2","/assets/Charm-Regular-DLkA3AcE.woff2"],"hallKeys":["/assets/ExhibitionHall-DRz4NUoi.css","/assets/ExhibitionHall-B5M1dtwo.js"]}
+Browser runtime exceptions: 0
+{
+  "direct": "Sach_Pha_Ky_Dòng_họ_Trần__Đông_Ngạc.pdf",
+  "bytes": 2832411,
+  "snapshots": [
+    {
+      "content": "Dòng họ Trần – Đông Ngạc",
+      "family": "\"Viaoda Libre\", \"Cormorant Garamond\", Georgia, serif"
+    }
+  ],
+  "fontRequests": [
+    "http://127.0.0.1:4245/assets/CormorantGaramond-Latin-Vietnamese-BG4t8PVT.woff2",
+    "http://127.0.0.1:4245/assets/PlusJakartaSans-Latin-Vietnamese-C09y-G-o.woff2",
+    "http://127.0.0.1:4245/assets/JetBrainsMono-Latin-Vietnamese-C4xEFJ8t.woff2",
+    "http://127.0.0.1:4245/assets/ViaodaLibre-Regular-DZPpm2je.woff2"
+  ],
+  "warnings": []
+}
+{
+  "cover": {
+    "text": "Dòng họ Trần – Đông Ngạc",
+    "family": "Georgia, serif"
+  },
+  "fontRequests": [],
+  "warnings": []
+}

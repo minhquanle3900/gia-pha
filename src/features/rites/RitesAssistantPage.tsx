@@ -139,9 +139,12 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
         <span className="grid size-11 shrink-0 place-items-center rounded-2xl border border-ivory-200 bg-gold-100 text-gold-700 dark:border-[#374A3D] dark:bg-[#283426] dark:text-[#E5BE6C]">
           <Calendar aria-hidden="true" className="size-5" />
         </span>
-        <h2 className="min-w-0 font-serif text-3xl leading-none font-bold tracking-tight text-forest-800 dark:text-emerald-200 sm:text-4xl">
-          Lễ giỗ và nghi lễ
-        </h2>
+        <div className="min-w-0">
+          <h2 className="heritage-display text-3xl text-forest-800 dark:text-emerald-200 sm:text-4xl">
+            Lễ giỗ và nghi lễ
+          </h2>
+          <p className="heritage-intro mt-0.5 text-base text-gold-700 dark:text-[#E5BE6C]">Tưởng nhớ tiền nhân</p>
+        </div>
       </header>
 
       <div role="group" aria-label="Nội dung lễ giỗ" className="grid min-w-0 grid-cols-2 gap-1.5 rounded-2xl border border-ivory-200 bg-ivory-100 p-1.5 dark:border-[#374A3D] dark:bg-[#1F2E25] sm:grid-cols-4">
@@ -341,7 +344,7 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
           <section className="min-w-0 space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 shadow-xs dark:border-[#374A3D] sm:p-6">
             <div className="flex flex-col gap-3 border-b border-ivory-200 pb-4 dark:border-[#374A3D] sm:flex-row sm:items-start sm:justify-between">
               <div className="min-w-0 space-y-1">
-                <h3 className="font-serif text-2xl leading-tight font-bold text-bark-900 dark:text-stone-100">
+                <h3 className="heritage-heading text-2xl text-bark-900 dark:text-stone-100">
                   {selectedPrayer.title}
                 </h3>
                 <p className="text-sm text-gold-700 dark:text-[#E5BE6C]">{selectedPrayer.regionalNotes}</p>
@@ -363,7 +366,7 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
               {copyStatus === 'copied' && 'Đã sao chép bài văn khấn.'}
               {copyStatus === 'error' && 'Không sao chép được. Bạn có thể chọn và sao chép văn bản bên dưới.'}
             </div>
-            <p className="select-text rounded-xl bg-ivory-50 p-3 font-serif text-lg leading-relaxed wrap-anywhere whitespace-pre-line text-bark-900 dark:bg-[#1F2E25] dark:text-stone-100 sm:p-6">
+            <p className="heritage-body select-text rounded-xl bg-ivory-50 p-3 text-lg wrap-anywhere whitespace-pre-line text-bark-900 dark:bg-[#1F2E25] dark:text-stone-100 sm:p-6">
               {renderedPrayerText}
             </p>
           </section>
@@ -413,7 +416,7 @@ export const RitesAssistantPage: React.FC<RitesAssistantPageProps> = ({ onSelect
         <div className="mx-auto max-w-6xl space-y-4">
           <header className="flex min-w-0 flex-col gap-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 dark:border-[#374A3D] sm:p-6 lg:flex-row lg:items-center lg:justify-between">
             <div className="min-w-0 space-y-1">
-              <h3 className="font-serif text-2xl leading-tight font-bold text-bark-900 dark:text-stone-100">{currentGuide.regionName}</h3>
+              <h3 className="heritage-heading text-2xl text-bark-900 dark:text-stone-100">{currentGuide.regionName}</h3>
               <p className="text-sm text-gold-700 dark:text-[#E5BE6C]">{currentGuide.subTitle}</p>
             </div>
             <div role="group" aria-label="Vùng miền" className="grid min-w-0 grid-cols-3 gap-1 rounded-xl bg-ivory-100 p-1 dark:bg-[#1F2E25] lg:min-w-72">

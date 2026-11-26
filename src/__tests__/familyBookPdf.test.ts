@@ -48,6 +48,8 @@ describe('Family Book Printable & PDF Export Service', () => {
     expect(html).toContain('Họ Trần &lt;Đông Ngạc&gt;');
     expect(html).toContain('@page { size: A4 portrait;');
     expect(html).toContain('fb-person-card');
+    expect(html).toContain('font-family: var(--heritage-font-display, Georgia, serif);');
+    expect(html).not.toMatch(/@font-face|@import|<link\b/);
   });
 
   it('preserves multilingual family book text and escapes quoted portrait attributes', () => {
