@@ -48,6 +48,8 @@ Tệp sao lưu `.json` giữ nguyên các bản ghi. Ảnh và kỷ vật tải 
 
 GEDCOM là định dạng trao đổi phả hệ tiêu chuẩn được công nhận toàn cầu. Ứng dụng hỗ trợ xuất và nhập tệp GEDCOM với mã hóa ký tự **UTF-8** tiếng Việt trọn vẹn.
 
+Khôi phục từ GEDCOM thay thế dữ liệu hiện tại. Bộ chuyển đổi không chuyển mốc sự kiện, ảnh chân dung, kho tư liệu, nhật ký dòng họ hoặc liên kết đến những mục này. Một số trường hồ sơ, chi họ và thiết lập cũng không có ánh xạ. Xuất JSON trước khi thay thế để giữ bản sao đầy đủ.
+
 ### Bảng đối chiếu thẻ GEDCOM và trường Gia Phả Việt:
 
 | Thẻ GEDCOM chuẩn | Trường dữ liệu Gia Phả Việt | Ý nghĩa |
@@ -60,10 +62,10 @@ GEDCOM là định dạng trao đổi phả hệ tiêu chuẩn được công nh
 | `BURI` -> `PLAC` | `Person.burialPlace` | Nơi an táng / Mộ phần |
 | `OCCU` | `Person.occupation` | Nghề nghiệp / Học vị |
 | `RESI` | `Person.residence` | Nơi cư trú |
-| `NOTE` | `Person.notes` / `Person.biography` | Ghi chú & tiểu sử |
+| `INDI.NOTE` | `Person.biography` | Tiểu sử |
 | `FAM` | `Union` | Bản ghi hôn phối và gia đình |
 | `HUSB`, `WIFE` | `Union.partnerIds` | Chồng và Vợ |
-| `CHIL` -> `_FREL` | `Relationship.lineageType` | Con cái & Loại quan hệ (Ruột / Nuôi / Kế) |
+| `CHIL` / `FAMC.PEDI` | `Relationship` | Liên kết cha/mẹ – con và loại quan hệ |
 
 ### Các thẻ mở rộng đặc thù văn hóa Việt Nam (Custom Tags):
 - `_GEN`: Đời thứ / Thế hệ trong dòng họ (VD: `1 _GEN 3`).
@@ -75,3 +77,5 @@ GEDCOM là định dạng trao đổi phả hệ tiêu chuẩn được công nh
 - `_ALIAS`: Bí danh (VD: `1 _ALIAS Ba Lộc`).
 - `_LUNAR_GIO`: Ngày giỗ Âm lịch hàng năm (VD: `1 _LUNAR_GIO 15/01`).
 - `_MERIT`: Công đức đóng góp cho dòng họ (VD: `1 _MERIT Cung tiến đất nhà thờ tổ`).
+- `_GP_UNION`: Thẻ trên gia đình chỉ có một phụ huynh, lưu hôn phối liên quan hoặc giá trị `NONE`. Cho phép giữ đúng liên kết đã ghi khi hai người trong một hôn phối có quan hệ khác nhau với con.
+- `_GP_LINEAGE`: Giữ loại quan hệ chưa rõ trên `FAMC`. Phần mềm khác có thể bỏ qua thẻ mở rộng.

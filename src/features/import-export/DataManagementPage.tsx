@@ -18,7 +18,7 @@ import {
 import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { FamilyBranch, GenealogyDatabaseSnapshot } from '../../models/genealogy';
-import { exportGedcom551, parseAndPreviewGedcom } from '../../services/gedcomService';
+import { exportGedcom551, GEDCOM_REPLACEMENT_WARNING, parseAndPreviewGedcom } from '../../services/gedcomService';
 import {
   exportDatabaseSnapshotJson,
   validateAndPreviewJsonBackup,
@@ -277,7 +277,7 @@ export const DataManagementPage: React.FC = () => {
   };
 
   // 3. Export GEDCOM 5.5.1
-  const handleExportGedcom = async () => {
+  const handleExportGedcom = () => {
     if (!snapshot) return;
     const gedcomText = exportGedcom551(snapshot);
     const blob = new Blob([gedcomText], { type: 'text/plain;charset=utf-8' });
@@ -287,13 +287,6 @@ export const DataManagementPage: React.FC = () => {
     a.download = `GiaPhaViet-${settings.clanName.replace(/\s+/g, '_')}.ged`;
     a.click();
     URL.revokeObjectURL(url);
-
-    try {
-      const { recordBackupTimestamp } = await import('../../services/backupReminderService');
-      recordBackupTimestamp();
-    } catch {
-      // ignore
-    }
   };
 
   // 4. Import GEDCOM 5.5.1 (with Confirmation)
@@ -317,7 +310,7 @@ export const DataManagementPage: React.FC = () => {
       setPendingImport({
         snapshot: importedSnapshot,
         mode: 'replace',
-        warnings: [...parsed.warnings, ...validation.warnings],
+        warnings: [GEDCOM_REPLACEMENT_WARNING, ...parsed.warnings, ...validation.warnings],
         label: `GEDCOM (${importedSnapshot.people.length} thành viên, ${importedSnapshot.relationships.length} quan hệ)`,
       });
     } catch (err: unknown) {
@@ -870,7 +863,7 @@ export const DataManagementPage: React.FC = () => {
             <div>
               <h4 className="text-xs font-bold text-[#1F1913]">Xuất tệp GEDCOM (.ged)</h4>
               <p className="text-xs text-stone-500 mt-1">
-                Xuất cấu trúc cây gia phả cùng các thẻ bổ sung tiếng Việt (đời thứ, chi họ, tên húy...).
+                Trao đổi cấu trúc phả hệ và các trường tiếng Việt được hỗ trợ. Dùng JSON để sao lưu toàn bộ dữ liệu.
               </p>
             </div>
             <button
