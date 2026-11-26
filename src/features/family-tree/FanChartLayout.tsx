@@ -19,6 +19,7 @@ import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { Person } from '../../models/genealogy';
 import { formatLifespan } from '../../utils/dateUtils';
+import { pinchScale } from './viewportGesture';
 
 interface FanChartLayoutProps {
   initialCenterPersonId?: string;
@@ -56,6 +57,7 @@ export const FanChartLayout: React.FC<FanChartLayoutProps> = ({
   const [panOffset, setPanOffset] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
   const [isDragging, setIsDragging] = useState(false);
   const dragStartRef = useRef<{ x: number; y: number }>({ x: 0, y: 0 });
+  const pinchRef = useRef<{ distance: number; scale: number } | null>(null);
 
   const centerPerson = getPersonById(centerPersonId) || people[0];
 
@@ -216,6 +218,14 @@ export const FanChartLayout: React.FC<FanChartLayoutProps> = ({
   const handleMouseUp = () => setIsDragging(false);
 
   const handleTouchStart = (e: React.TouchEvent) => {
+    if (e.touches.length === 2) {
+      setIsDragging(false);
+      pinchRef.current = {
+        distance: Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY),
+        scale: zoomLevel,
+      };
+      return;
+    }
     if (e.touches.length === 1) {
       setIsDragging(true);
       dragStartRef.current = {
@@ -226,6 +236,11 @@ export const FanChartLayout: React.FC<FanChartLayoutProps> = ({
   };
 
   const handleTouchMove = (e: React.TouchEvent) => {
+    if (e.touches.length === 2 && pinchRef.current) {
+      const distance = Math.hypot(e.touches[1].clientX - e.touches[0].clientX, e.touches[1].clientY - e.touches[0].clientY);
+      setZoomLevel(pinchScale(pinchRef.current.scale, pinchRef.current.distance, distance));
+      return;
+    }
     if (!isDragging || e.touches.length !== 1) return;
     setPanOffset({
       x: e.touches[0].clientX - dragStartRef.current.x,
@@ -233,7 +248,10 @@ export const FanChartLayout: React.FC<FanChartLayoutProps> = ({
     });
   };
 
-  const handleTouchEnd = () => setIsDragging(false);
+  const handleTouchEnd = () => {
+    pinchRef.current = null;
+    setIsDragging(false);
+  };
 
 
   const handleExportSvg = () => {
@@ -254,9 +272,9 @@ export const FanChartLayout: React.FC<FanChartLayoutProps> = ({
   const originY = fanAngle === '180' ? 440 : svgDimension / 2;
 
   return (
-    <div className="space-y-4">
+    <div className="fan-workspace flex h-full min-h-0 flex-col gap-3">
       {/* Top Controls Toolbar */}
-      <div className="p-4 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs">
+      <div className="fan-toolbar p-3 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs flex flex-wrap items-center justify-between gap-3 text-xs">
         {/* Fan Direction & Angle */}
         <div className="flex flex-wrap items-center gap-2">
           <div className="flex items-center p-1 bg-[#FAF7F2] rounded-xl border border-[#D5CABE]">
@@ -380,13 +398,15 @@ export const FanChartLayout: React.FC<FanChartLayoutProps> = ({
       {/* SVG Canvas Container */}
       <div
         style={{ touchAction: 'none' }}
-        className="w-full h-[620px] bg-[#FAF7F2] rounded-3xl border border-[#D5CABE] shadow-inner relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
+        className="w-full flex-1 min-h-0 bg-[#FAF7F2] rounded-3xl border border-[#D5CABE] shadow-inner relative overflow-hidden cursor-grab active:cursor-grabbing select-none"
         onMouseDown={handleMouseDown}
         onMouseMove={handleMouseMove}
         onMouseUp={handleMouseUp}
+        onMouseLeave={handleMouseUp}
         onTouchStart={handleTouchStart}
         onTouchMove={handleTouchMove}
         onTouchEnd={handleTouchEnd}
+        onTouchCancel={handleTouchEnd}
       >
         <svg
           id="fan-chart-svg"

@@ -167,7 +167,7 @@ export const PersonProfileView: React.FC<PersonProfileViewProps> = ({
   };
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto pb-12 animate-in fade-in">
+    <div className="person-profile min-w-0 space-y-6 max-w-4xl mx-auto pb-12 animate-in fade-in">
       {/* Top Bar with Back and Actions */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3">
         <button
@@ -179,7 +179,7 @@ export const PersonProfileView: React.FC<PersonProfileViewProps> = ({
           <span>Quay lại</span>
         </button>
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {/* Quick Primary Actions */}
           <button
             type="button"

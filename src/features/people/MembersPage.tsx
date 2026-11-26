@@ -237,7 +237,7 @@ export const MembersPage: React.FC<MembersPageProps> = ({
   ]);
 
   return (
-    <div className="space-y-6 pb-12 animate-in fade-in">
+    <div className="genealogy-members min-w-0 space-y-6 pb-12 animate-in fade-in">
       {/* Top Banner & Stats */}
       <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E7DFD4] pb-4">
         <div>
@@ -250,7 +250,7 @@ export const MembersPage: React.FC<MembersPageProps> = ({
           </p>
         </div>
 
-        <div className="flex items-center gap-2 self-start sm:self-auto">
+        <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
           {onOpenDuplicateMerge && (
             <button
               type="button"
@@ -651,7 +651,7 @@ export const MembersPage: React.FC<MembersPageProps> = ({
                   </div>
 
                   <h3 className="text-sm font-serif font-bold text-[#1F1913] group-hover:text-[#1B3B2B] transition-colors truncate">
-                    {p.fullName}
+                    <button type="button" className="max-w-full truncate text-left" onClick={(event) => { event.stopPropagation(); onSelectPerson(p.id); }}>{p.fullName}</button>
                   </h3>
 
                   <p className="text-xs text-[#695E52] mt-0.5">
