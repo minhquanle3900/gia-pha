@@ -1,0 +1,227 @@
+{
+  "measurements": {
+    "mobile": {
+      "dashboard": {
+        "heading": "Dòng họ Trần – Đông Ngạc",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 34
+      },
+      "journal": {
+        "heading": "Nhật ký dòng họ",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 11
+      },
+      "gallery": {
+        "heading": "Kho kỷ vật",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 7
+      },
+      "rites": {
+        "heading": "Lễ giỗ và nghi lễ",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 17
+      },
+      "statistics": {
+        "heading": "Thống kê gia tộc",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 18
+      },
+      "map": {
+        "heading": "Bản đồ di cư",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 4
+      },
+      "book": {
+        "heading": "Sách phả ký",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 38
+      },
+      "data": {
+        "heading": "Quản lý dữ liệu",
+        "visualWidth": 400,
+        "viewport": 390,
+        "pageScrollWidth": 400,
+        "contentWidth": 390,
+        "contentScrollWidth": 390,
+        "mainButtons": 16
+      }
+    },
+    "desktop": {
+      "dashboard": {
+        "heading": "Dòng họ Trần – Đông Ngạc",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1910,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 34
+      },
+      "journal": {
+        "heading": "Nhật ký dòng họ",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1910,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 17
+      },
+      "gallery": {
+        "heading": "Kho kỷ vật",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1873,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 7
+      },
+      "rites": {
+        "heading": "Lễ giỗ và nghi lễ",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1910,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 17
+      },
+      "statistics": {
+        "heading": "Thống kê gia tộc",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1907,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 18
+      },
+      "map": {
+        "heading": "Bản đồ di cư",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1885,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 4
+      },
+      "book": {
+        "heading": "Sách phả ký",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1882,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 38
+      },
+      "data": {
+        "heading": "Quản lý dữ liệu",
+        "visualWidth": 1440,
+        "viewport": 1425,
+        "pageScrollWidth": 1899,
+        "contentWidth": 1280,
+        "contentScrollWidth": 1280,
+        "mainButtons": 16
+      }
+    },
+    "compact": {
+      "dashboard": {
+        "heading": "Dòng họ Trần – Đông Ngạc",
+        "visualWidth": 400,
+        "viewport": 320,
+        "pageScrollWidth": 400,
+        "contentWidth": 320,
+        "contentScrollWidth": 320,
+        "mainButtons": 34
+      },
+      "journal": {
+        "heading": "Nhật ký dòng họ",
+        "visualWidth": 400,
+        "viewport": 320,
+        "pageScrollWidth": 400,
+        "contentWidth": 320,
+        "contentScrollWidth": 320,
+        "mainButtons": 11
+      },
+      "gallery": {
+        "heading": "Kho kỷ vật",
+        "visualWidth": 400,
+        "viewport": 320,
+        "pageScrollWidth": 400,
+        "contentWidth": 320,
+        "contentScrollWidth": 320,
+        "mainButtons": 7
+      },
+      "rites": {
+        "heading": "Lễ giỗ và nghi lễ",
+        "visualWidth": 400,
+        "viewport": 320,
+        "pageScrollWidth": 400,
+        "contentWidth": 320,
+        "contentScrollWidth": 320,
+        "mainButtons": 17
+      },
+      "statistics": {
+        "heading": "Thống kê gia tộc",
+        "visualWidth": 400,
+        "viewport": 320,
+        "pageScrollWidth": 400,
+        "contentWidth": 320,
+        "contentScrollWidth": 320,
+        "mainButtons": 18
+      },
+      "map": {
+        "heading": "Bản đồ di cư",
+        "visualWidth": 400,
+        "viewport": 320,
+        "pageScrollWidth": 400,
+        "contentWidth": 320,
+        "contentScrollWidth": 320,
+        "mainButtons": 4
+      },
+      "book": {
+        "heading": "Sách phả ký",
+        "visualWidth": 400,
+        "viewport": 320,
+        "pageScrollWidth": 400,
+        "contentWidth": 320,
+        "contentScrollWidth": 320,
+        "mainButtons": 38
+      },
+      "data": {
+        "heading": "Quản lý dữ liệu",
+        "visualWidth": 400,
+        "viewport": 320,
+        "pageScrollWidth": 400,
+        "contentWidth": 320,
+        "contentScrollWidth": 320,
+        "mainButtons": 16
+      }
+    }
+  },
+  "errors": []
+}

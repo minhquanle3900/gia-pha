@@ -1,40 +1,14 @@
 import React, { useMemo, useState } from 'react';
-import {
-  AlertCircle,
-  Archive,
-  ArrowUpDown,
-  BookOpen,
-  Calendar,
-  Check,
-  ChevronDown,
-  ChevronUp,
-  Clock,
-  Compass,
-  Edit3,
-  ExternalLink,
-  FileText,
-  Filter,
-  Flame,
-  LayoutGrid,
-  List,
-  MapPin,
-  PenTool,
-  Pin,
-  Plus,
-  Printer,
-  Scroll,
-  Search,
-  Share2,
-  Sparkles,
-  Tag,
-  Trash2,
-  User,
-  Users,
-} from 'lucide-react';
-import { HeritageAvatar } from '../../components/HeritageAvatar';
+
+import { BookOpen, ChevronDown, ChevronUp, Compass, Edit3, LayoutGrid, List, MapPin, PenTool, Pin, Printer, Search, User, X } from 'lucide-react';
 import { useGenealogy } from '../../context/GenealogyContext';
-import { FamilyStory, NavigationTab, Person } from '../../models/genealogy';
+import { FamilyStory, NavigationTab } from '../../models/genealogy';
 import { ClanJournalModal, JOURNAL_CATEGORY_META, JournalCategory } from './ClanJournalModal';
+
+type JournalFilter = 'all' | JournalCategory;
+type SortOrder = 'newest' | 'oldest' | 'alphabetical';
+
+const selectClass = 'mt-1 min-h-11 min-w-0 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-2.5 text-base text-[#2C241C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm';
 
 interface ClanJournalPageProps {
   onNavigate?: (tab: NavigationTab) => void;
@@ -43,14 +17,13 @@ interface ClanJournalPageProps {
 
 export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
   onNavigate,
-  onSelectPerson,
 }) => {
   const { stories, branches, settings } = useGenealogy();
 
-  const [activeCategory, setActiveCategory] = useState<string>('all');
+  const [activeCategory, setActiveCategory] = useState<JournalFilter>('all');
   const [selectedBranchId, setSelectedBranchId] = useState<string>('all');
   const [searchQuery, setSearchQuery] = useState('');
-  const [sortOrder, setSortOrder] = useState<'newest' | 'oldest' | 'alphabetical'>('newest');
+  const [sortOrder, setSortOrder] = useState<SortOrder>('newest');
   const [viewMode, setViewMode] = useState<'card' | 'reader'>('card');
   const [expandedStories, setExpandedStories] = useState<Record<string, boolean>>({});
 
@@ -117,32 +90,31 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
     });
   }, [filteredStories, sortOrder]);
 
-  // Statistics counters
-  const stats = useMemo(() => {
-    let historicalCount = 0;
-    let memoryCount = 0;
-    let ruleCount = 0;
-    let renovationCount = 0;
-    let pinnedCount = 0;
-
-    for (const s of stories) {
-      if (s.isPinned) pinnedCount++;
-      const c = s.category || 'historical_event';
-      if (c === 'historical_event') historicalCount++;
-      else if (c === 'clan_memory') memoryCount++;
-      else if (c === 'communal_rule') ruleCount++;
-      else if (c === 'renovation_merit') renovationCount++;
+  const counts = useMemo(() => {
+    const categories = { historical_event: 0, clan_memory: 0, communal_rule: 0, renovation_merit: 0, general_note: 0 };
+    let pinned = 0;
+    for (const story of stories) {
+      categories[story.category || 'historical_event']++;
+      if (story.isPinned) pinned++;
     }
-
-    return {
-      total: stories.length,
-      historicalCount,
-      memoryCount,
-      ruleCount,
-      renovationCount,
-      pinnedCount,
-    };
+    return { categories, pinned };
   }, [stories]);
+
+  const categoryOptions: Array<{ value: JournalFilter; label: string; count: number }> = [
+    { value: 'all', label: 'Tất cả', count: stories.length },
+    ...Object.entries(JOURNAL_CATEGORY_META).map(([value, meta]) => ({
+      value: value as JournalCategory,
+      label: meta.label,
+      count: counts.categories[value as JournalCategory],
+    })),
+  ];
+  const hasFilters = Boolean(searchQuery.trim()) || activeCategory !== 'all' || selectedBranchId !== 'all';
+
+  const clearFilters = () => {
+    setSearchQuery('');
+    setActiveCategory('all');
+    setSelectedBranchId('all');
+  };
 
   const toggleExpand = (id: string) => {
     setExpandedStories((prev) => ({ ...prev, [id]: !prev[id] }));
@@ -159,316 +131,161 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
   };
 
   return (
-    <div className="space-y-6 sm:space-y-8 pb-16 animate-in fade-in">
-      {/* Hero Header Banner */}
-      <div className="relative rounded-3xl bg-linear-to-br from-[#1B3B2B] via-[#234A36] to-[#142D20] text-white p-6 sm:p-8 shadow-md overflow-hidden">
-        {/* Subtle decorative background watermarks */}
-        <div className="absolute right-0 top-0 translate-x-8 -translate-y-8 text-[#DBC599]/10 font-serif text-9xl select-none pointer-events-none">
-          誌
-        </div>
-
-        <div className="relative z-10 max-w-3xl space-y-3">
-          <div className="flex flex-wrap items-center gap-2 text-xs text-[#EBD9B2]">
-            <span className="font-semibold text-[#DBC599] tracking-wider uppercase flex items-center gap-1.5">
-              <Scroll className="w-3.5 h-3.5 text-[#DBC599]" />
-              <span>Biên Niên Ký Tộc Phả</span>
-            </span>
-            <span aria-hidden="true" className="text-[#DBC599]/40">·</span>
-            <span className="text-[#E6DFD5]">
-              Dòng họ {settings.clanName || 'Việt Nam'} · {stats.total} bài ghi chép
-            </span>
+    <div className="min-w-0 space-y-4 pb-14 sm:space-y-6">
+      <header className="rounded-2xl border border-forest-700 bg-forest-900 p-4 text-white sm:rounded-3xl sm:p-6 lg:p-8">
+        <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
+          <div className="min-w-0">
+            <p className="break-words text-xs font-medium text-[#DBC599] sm:text-sm">{settings.clanName || 'Gia phả Việt'}</p>
+            <h2 className="mt-1 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Nhật ký dòng họ</h2>
+            <p className="mt-2 text-sm text-[#E6DFD5]">
+              {stories.length} ghi chép{counts.pinned > 0 && (' · ' + counts.pinned + ' bài ghim')}
+            </p>
           </div>
-
-          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#FFFDF9] tracking-tight leading-snug">
-            Nhật Ký Dòng Họ & Kỷ Niệm Chung
-          </h2>
-
-          <p className="text-xs sm:text-sm text-[#E6DFD5] leading-relaxed max-w-2xl">
-            Nơi ghi chép các sự kiện lịch sử chung, hương ước gia quy, công đức trùng tu từ đường và những kỷ niệm đáng nhớ của đại gia đình không thuộc riêng về bất kỳ cá nhân nào.
-          </p>
-
-          {/* Action Buttons */}
-          <div className="flex flex-wrap items-center gap-2.5 pt-3">
+          <div className="flex flex-wrap gap-2 print:hidden lg:justify-end">
             <button
               type="button"
               onClick={handleOpenAdd}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#DBC599] hover:bg-[#CBB284] text-[#1B3B2B] font-semibold text-xs shadow-xs transition-colors"
+              className="inline-flex min-h-11 w-full items-center justify-center gap-2 rounded-xl bg-[#DBC599] px-4 text-sm font-bold text-forest-900 transition-colors hover:bg-[#E7D1A8] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599] sm:w-auto"
             >
-              <PenTool className="w-4 h-4" />
-              <span>Viết nhật ký mới</span>
+              <PenTool className="size-4" aria-hidden="true" />
+              Viết nhật ký mới
             </button>
-
             {onNavigate && (
               <button
                 type="button"
                 onClick={() => onNavigate('dashboard')}
-                className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#EBD9B2] font-medium text-xs border border-white/15 transition-colors"
+                className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-white/20 px-3 text-xs text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599] sm:flex-none sm:text-sm"
               >
-                <Compass className="w-4 h-4 text-[#DBC599]" />
-                <span>Về Tổng quan</span>
+                <Compass className="size-4 shrink-0" aria-hidden="true" />
+                Tổng quan
               </button>
             )}
-
             <button
               type="button"
               onClick={() => window.print()}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#EBD9B2] font-medium text-xs border border-white/15 transition-colors"
-              title="In bản nhật ký dòng họ"
+              className="inline-flex min-h-11 flex-1 items-center justify-center gap-2 rounded-xl border border-white/20 px-3 text-xs text-white transition-colors hover:bg-white/10 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#DBC599] sm:flex-none sm:text-sm"
             >
-              <Printer className="w-4 h-4 text-[#DBC599]" />
-              <span className="hidden sm:inline">In trang này</span>
+              <Printer className="size-4 shrink-0" aria-hidden="true" />
+              In nhật ký
             </button>
           </div>
         </div>
-      </div>
+      </header>
 
-      {/* KPI Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-1">
-          <div className="flex items-center justify-between text-stone-500">
-            <span className="text-[11px] font-semibold uppercase tracking-wider">Tổng số bài viết</span>
-            <BookOpen className="w-4 h-4 text-[#1B3B2B]" />
-          </div>
-          <div className="flex items-baseline gap-1.5 pt-1">
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-[#1F1913]">
-              {stats.total}
-            </span>
-            <span className="text-xs text-stone-500">mục nhật ký</span>
-          </div>
-          <p className="text-[10px] text-stone-400">
-            {stats.pinnedCount} bài viết được ghim ưu tiên
-          </p>
-        </div>
-
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-1">
-          <div className="flex items-center justify-between text-stone-500">
-            <span className="text-[11px] font-semibold uppercase tracking-wider">Sự kiện lịch sử</span>
-            <Calendar className="w-4 h-4 text-[#8C6D32]" />
-          </div>
-          <div className="flex items-baseline gap-1.5 pt-1">
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-[#8C6D32]">
-              {stats.historicalCount}
-            </span>
-            <span className="text-xs text-stone-500">sự kiện</span>
-          </div>
-          <p className="text-[10px] text-stone-400">
-            Dấu mốc biến cố & truyền thống gia tộc
-          </p>
-        </div>
-
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-1">
-          <div className="flex items-center justify-between text-stone-500">
-            <span className="text-[11px] font-semibold uppercase tracking-wider">Kỷ niệm đáng nhớ</span>
-            <Sparkles className="w-4 h-4 text-[#8C3A27]" />
-          </div>
-          <div className="flex items-baseline gap-1.5 pt-1">
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-[#8C3A27]">
-              {stats.memoryCount}
-            </span>
-            <span className="text-xs text-stone-500">kỷ niệm</span>
-          </div>
-          <p className="text-[10px] text-stone-400">
-            Đoàn tụ, ngày hội làng, lễ tạ ơn tổ tiên
-          </p>
-        </div>
-
-        <div className="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-1">
-          <div className="flex items-center justify-between text-stone-500">
-            <span className="text-[11px] font-semibold uppercase tracking-wider">Hương ước & Công đức</span>
-            <Flame className="w-4 h-4 text-[#2E6B4F]" />
-          </div>
-          <div className="flex items-baseline gap-1.5 pt-1">
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-[#2E6B4F]">
-              {stats.ruleCount + stats.renovationCount}
-            </span>
-            <span className="text-xs text-stone-500">điều lệ & trùng tu</span>
-          </div>
-          <p className="text-[10px] text-stone-400">
-            Gia quy dòng họ & tôn tạo nhà thờ
-          </p>
-        </div>
-      </div>
-
-      {/* Filter & Search Toolbar */}
-      <div className="p-4 rounded-3xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs space-y-3">
-        <div className="flex flex-col md:flex-row md:items-center justify-between gap-3">
-          {/* Search Bar */}
-          <div className="relative flex-1 max-w-md">
-            <Search className="w-4 h-4 absolute left-3.5 top-1/2 -translate-y-1/2 text-stone-400 pointer-events-none" />
-            <input
-              type="text"
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              placeholder="Tìm kiếm nhật ký theo tiêu đề, nội dung, người ghi, địa điểm..."
-              className="w-full pl-9 pr-8 py-2 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#1F1913] placeholder-stone-400 focus:outline-none focus:border-[#1B3B2B] focus:bg-white transition-all"
-            />
-            {searchQuery && (
-              <button
-                type="button"
-                onClick={() => setSearchQuery('')}
-                className="absolute right-2.5 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600"
-              >
-                ×
-              </button>
-            )}
-          </div>
-
-          {/* Right Controls: Branch, Sort, View mode */}
-          <div className="flex flex-wrap items-center gap-2">
-            {/* Branch Filter */}
-            <select
-              value={selectedBranchId}
-              onChange={(e) => setSelectedBranchId(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#2C231A] font-medium outline-none"
-            >
-              <option value="all">Tất cả chi họ</option>
-              {branches.map((b) => (
-                <option key={b.id} value={b.id}>
-                  {b.name}
-                </option>
-              ))}
-            </select>
-
-            {/* Sort Order */}
-            <select
-              value={sortOrder}
-              onChange={(e) => setSortOrder(e.target.value as any)}
-              className="px-2.5 py-1.5 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] text-xs text-[#2C231A] font-medium outline-none"
-            >
-              <option value="newest">Ghi chép mới nhất</option>
-              <option value="oldest">Ghi chép cũ nhất</option>
-              <option value="alphabetical">Tiêu đề (A-Z)</option>
-            </select>
-
-            {/* View Mode Toggle */}
-            <div className="inline-flex p-1 rounded-xl bg-[#EDE4D6] border border-[#DDD0BF]">
-              <button
-                type="button"
-                onClick={() => setViewMode('card')}
-                className={`p-1.5 rounded-lg transition-colors ${
-                  viewMode === 'card'
-                    ? 'bg-white text-[#1B3B2B] shadow-2xs'
-                    : 'text-[#6A5A4A] hover:text-[#1F1913]'
-                }`}
-                title="Chế độ xem Thẻ Niên Biểu"
-              >
-                <LayoutGrid className="w-3.5 h-3.5" />
-              </button>
-              <button
-                type="button"
-                onClick={() => setViewMode('reader')}
-                className={`p-1.5 rounded-lg transition-colors ${
-                  viewMode === 'reader'
-                    ? 'bg-white text-[#1B3B2B] shadow-2xs'
-                    : 'text-[#6A5A4A] hover:text-[#1F1913]'
-                }`}
-                title="Chế độ xem Sổ Ký Sự Phả Học"
-              >
-                <List className="w-3.5 h-3.5" />
-              </button>
+      <section aria-label="Tìm và lọc nhật ký" className="min-w-0 space-y-3 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-3 print:hidden sm:p-4">
+        <div className="grid grid-cols-2 items-end gap-2 sm:grid-cols-12 sm:gap-3">
+          <div className="col-span-2 sm:col-span-5">
+            <label htmlFor="journal-search" className="mb-1 block text-xs font-semibold text-stone-600">Tìm trong nhật ký</label>
+            <div className="relative">
+              <Search aria-hidden="true" className="pointer-events-none absolute left-3 top-1/2 size-4 -translate-y-1/2 text-stone-500" />
+              <input
+                id="journal-search"
+                type="text"
+                value={searchQuery}
+                onChange={(event) => setSearchQuery(event.target.value)}
+                placeholder="Tiêu đề, nội dung hoặc người ghi"
+                className="min-h-11 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] pl-9 pr-11 text-base text-[#1F1913] placeholder:text-stone-500 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm"
+              />
+              {searchQuery && (
+                <button
+                  type="button"
+                  aria-label="Xóa từ khóa nhật ký"
+                  onClick={() => setSearchQuery('')}
+                  className="absolute inset-y-0 right-0 grid w-11 place-items-center rounded-r-xl text-stone-600 hover:text-[#1B3B2B] focus-visible:outline-2 focus-visible:outline-forest-700"
+                >
+                  <X className="size-4" aria-hidden="true" />
+                </button>
+              )}
             </div>
           </div>
+          <label className="min-w-0 text-xs font-semibold text-stone-600 sm:hidden">
+            Thể loại
+            <select value={activeCategory} onChange={(event) => setActiveCategory(event.target.value as JournalFilter)} className={selectClass}>
+              {categoryOptions.map(({ value, label, count }) => (
+                <option key={value} value={value}>{label} ({count})</option>
+              ))}
+            </select>
+          </label>
+          <label className="min-w-0 text-xs font-semibold text-stone-600 sm:col-span-2">
+            Chi họ
+            <select value={selectedBranchId} onChange={(event) => setSelectedBranchId(event.target.value)} className={selectClass}>
+              <option value="all">Tất cả chi họ</option>
+              {branches.map((branch) => (
+                <option key={branch.id} value={branch.id}>{branch.name}</option>
+              ))}
+            </select>
+          </label>
+          <label className="min-w-0 text-xs font-semibold text-stone-600 sm:col-span-3">
+            Sắp xếp
+            <select value={sortOrder} onChange={(event) => setSortOrder(event.target.value as SortOrder)} className={selectClass}>
+              <option value="newest">Mới nhất</option>
+              <option value="oldest">Cũ nhất</option>
+              <option value="alphabetical">Tiêu đề A–Z</option>
+            </select>
+          </label>
+          <div role="group" aria-label="Cách hiển thị nhật ký" className="flex h-11 min-w-0 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] p-0.5 sm:col-span-2">
+            {([
+              { value: 'card', label: 'Xem dạng thẻ', icon: LayoutGrid },
+              { value: 'reader', label: 'Đọc dạng sổ', icon: List },
+            ] as const).map(({ value, label, icon: Icon }) => (
+              <button
+                key={value}
+                type="button"
+                title={label}
+                aria-label={label}
+                aria-pressed={viewMode === value}
+                onClick={() => setViewMode(value)}
+                className={'grid flex-1 place-items-center rounded-lg focus-visible:outline-2 focus-visible:outline-forest-700 ' + (viewMode === value ? 'bg-forest-800 text-white' : 'text-stone-600 hover:bg-stone-100')}
+              >
+                <Icon className="size-4" aria-hidden="true" />
+              </button>
+            ))}
+          </div>
         </div>
+        <div role="group" aria-label="Thể loại nhật ký" className="hidden flex-wrap gap-2 sm:flex">
+          {categoryOptions.map(({ value, label, count }) => (
+            <button
+              key={value}
+              type="button"
+              aria-pressed={activeCategory === value}
+              onClick={() => setActiveCategory(value)}
+              className={'inline-flex min-h-11 items-center gap-1.5 rounded-xl border px-3 text-xs font-semibold focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm ' + (activeCategory === value ? 'border-forest-700 bg-forest-800 text-white' : 'border-[#E7DFD4] bg-[#FAF8F5] text-stone-600 hover:bg-stone-100')}
+            >
+              {label} <span className="tabular-nums">({count})</span>
+            </button>
+          ))}
+        </div>
+      </section>
 
-        {/* Category Tabs */}
-        <div className="flex items-center gap-1.5 overflow-x-auto pt-1 no-scrollbar text-xs">
-          <button
-            type="button"
-            onClick={() => setActiveCategory('all')}
-            className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-              activeCategory === 'all'
-                ? 'bg-[#1B3B2B] text-white shadow-xs'
-                : 'bg-[#FAF8F5] text-stone-600 hover:bg-stone-100 border border-[#E7DFD4]'
-            }`}
-          >
-            Tất cả ({stories.length})
+      <div className="flex min-h-8 items-center justify-between gap-2">
+        <p role="status" className="text-sm text-stone-600">{sortedStories.length} ghi chép</p>
+        {hasFilters && (
+          <button type="button" onClick={clearFilters} className="min-h-11 shrink-0 rounded-lg px-2 text-sm font-semibold text-[#1B3B2B] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-forest-700">
+            Xóa bộ lọc
           </button>
-          <button
-            type="button"
-            onClick={() => setActiveCategory('historical_event')}
-            className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-              activeCategory === 'historical_event'
-                ? 'bg-[#1B3B2B] text-white shadow-xs'
-                : 'bg-[#FAF8F5] text-stone-600 hover:bg-stone-100 border border-[#E7DFD4]'
-            }`}
-          >
-            Sự kiện lịch sử ({stats.historicalCount})
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveCategory('clan_memory')}
-            className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-              activeCategory === 'clan_memory'
-                ? 'bg-[#1B3B2B] text-white shadow-xs'
-                : 'bg-[#FAF8F5] text-stone-600 hover:bg-stone-100 border border-[#E7DFD4]'
-            }`}
-          >
-            Kỷ niệm chung ({stats.memoryCount})
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveCategory('renovation_merit')}
-            className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-              activeCategory === 'renovation_merit'
-                ? 'bg-[#1B3B2B] text-white shadow-xs'
-                : 'bg-[#FAF8F5] text-stone-600 hover:bg-stone-100 border border-[#E7DFD4]'
-            }`}
-          >
-            Trùng tu & Công đức ({stats.renovationCount})
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveCategory('communal_rule')}
-            className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-              activeCategory === 'communal_rule'
-                ? 'bg-[#1B3B2B] text-white shadow-xs'
-                : 'bg-[#FAF8F5] text-stone-600 hover:bg-stone-100 border border-[#E7DFD4]'
-            }`}
-          >
-            Hương ước & Quy ước ({stats.ruleCount})
-          </button>
-          <button
-            type="button"
-            onClick={() => setActiveCategory('general_note')}
-            className={`px-3 py-1.5 rounded-xl font-semibold whitespace-nowrap transition-all ${
-              activeCategory === 'general_note'
-                ? 'bg-[#1B3B2B] text-white shadow-xs'
-                : 'bg-[#FAF8F5] text-stone-600 hover:bg-stone-100 border border-[#E7DFD4]'
-            }`}
-          >
-            Ghi chú chung
-          </button>
-        </div>
+        )}
       </div>
 
       {/* Stories / Journal Feed */}
       {sortedStories.length === 0 ? (
-        <div className="rounded-3xl bg-[#FFFDF9] border-2 border-dashed border-[#E7DFD4] p-12 text-center space-y-4">
-          <div className="w-16 h-16 mx-auto rounded-2xl bg-[#FAF5EB] border border-[#E3CCA0] flex items-center justify-center text-[#8C6D32]">
-            <BookOpen className="w-8 h-8" />
-          </div>
-          <div className="max-w-md mx-auto space-y-1">
-            <h3 className="font-serif font-bold text-lg text-[#1F1913]">
-              Chưa có ghi chép nhật ký nào
-            </h3>
-            <p className="text-xs text-[#6E5F50]">
-              {searchQuery || activeCategory !== 'all' || selectedBranchId !== 'all'
-                ? 'Không tìm thấy ghi chép phù hợp với bộ lọc hiện tại. Thử xóa từ khóa tìm kiếm.'
-                : 'Hãy bắt đầu ghi lại những sự kiện lịch sử chung, lễ khánh thành nhà thờ, các quy ước và kỷ niệm đáng nhớ của dòng họ.'}
-            </p>
-          </div>
-          <button
-            type="button"
-            onClick={handleOpenAdd}
-            className="inline-flex items-center gap-2 px-5 py-2.5 rounded-xl bg-[#1B3B2B] text-white font-semibold text-xs shadow-xs hover:bg-[#28503C] transition-colors"
-          >
-            <PenTool className="w-4 h-4 text-[#DBC599]" />
-            <span>Viết bài nhật ký đầu tiên</span>
-          </button>
+        <div className="rounded-2xl border border-dashed border-[#E7DFD4] bg-[#FFFDF9] p-6 text-center sm:p-10">
+          <BookOpen className="mx-auto size-7 text-[#8C6D32]" aria-hidden="true" />
+          <h3 className="mt-3 text-xl font-bold text-[#1F1913]">
+            {hasFilters ? 'Không có ghi chép phù hợp' : 'Nhật ký chưa có bài viết'}
+          </h3>
+          <p className="mx-auto mt-1 max-w-sm text-sm text-stone-600">
+            {hasFilters ? 'Thử đổi từ khóa hoặc bộ lọc để tìm ghi chép.' : 'Bắt đầu bằng một sự kiện hoặc kỷ niệm của dòng họ.'}
+          </p>
+          {!hasFilters && (
+            <button type="button" onClick={handleOpenAdd} className="mt-4 inline-flex min-h-11 items-center gap-2 rounded-xl bg-forest-800 px-4 text-sm font-semibold text-white hover:bg-forest-700 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700">
+              <PenTool className="size-4" aria-hidden="true" />
+              Viết nhật ký mới
+            </button>
+          )}
         </div>
       ) : viewMode === 'card' ? (
         /* CARD FEED VIEW */
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-5 sm:gap-6">
+        <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 md:gap-5">
           {sortedStories.map((story) => {
             const isExpanded = Boolean(expandedStories[story.id]);
             const cat = (story.category as JournalCategory) || 'historical_event';
@@ -476,12 +293,12 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
             const branchName = story.branchId ? branchesMap.get(story.branchId) : 'Toàn dòng tộc';
 
             return (
-              <div
+              <article
                 key={story.id}
-                className={`rounded-3xl bg-[#FFFDF9] border transition-all p-5 sm:p-6 shadow-xs flex flex-col justify-between relative ${
+                className={`flex min-w-0 flex-col justify-between rounded-2xl border bg-[#FFFDF9] p-4 shadow-xs sm:p-6 ${
                   story.isPinned
-                    ? 'border-[#C19B4C] ring-1 ring-[#C19B4C]/30 bg-linear-to-b from-[#FFFDF9] to-[#FAF6EE]'
-                    : 'border-[#E7DFD4] hover:border-[#1B3B2B]/40 hover:shadow-md'
+                    ? 'border-amber-200'
+                    : 'border-[#E7DFD4]'
                 }`}
               >
                 {/* Pinned Marker */}
@@ -511,13 +328,13 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                   </div>
 
                   {/* Title */}
-                  <h3 className="font-serif font-bold text-lg sm:text-xl text-[#1F1913] leading-snug">
+                  <h3 className="break-words font-serif text-xl font-bold leading-snug text-[#1F1913] sm:text-2xl">
                     {story.title}
                   </h3>
 
                   {/* Location & Recorder metadata */}
                   {(story.location || story.recordedBy) && (
-                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-[#7A6E60] border-t border-[#F0EAE1] pt-2">
+                    <div className="flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-stone-600 border-t border-[#F0EAE1] pt-2">
                       {story.location && (
                         <div className="flex items-center gap-1">
                           <MapPin className="w-3.5 h-3.5 text-[#2E6B4F]" />
@@ -535,13 +352,13 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
 
                   {/* Summary Callout (if any) */}
                   {story.summary && (
-                    <div className="p-3 rounded-2xl bg-[#FAF8F5] border border-[#E8DFD3] text-xs font-serif italic text-[#4A3F33]">
+                    <div className="break-words rounded-xl border-l-2 border-gold-500 bg-[#FAF8F5] p-3 font-serif text-base italic leading-snug text-[#1F1913]">
                       &ldquo;{story.summary}&rdquo;
                     </div>
                   )}
 
                   {/* Body Content */}
-                  <div className="text-xs sm:text-sm text-[#3E342B] leading-relaxed whitespace-pre-line font-serif">
+                  <div className="break-words whitespace-pre-line font-serif text-base leading-relaxed text-[#1F1913] sm:text-lg">
                     {isExpanded || story.content.length <= 250
                       ? story.content
                       : `${story.content.slice(0, 250)}...`}
@@ -552,7 +369,8 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                     <button
                       type="button"
                       onClick={() => toggleExpand(story.id)}
-                      className="inline-flex items-center gap-1 text-xs font-semibold text-[#1B3B2B] hover:text-[#28503C] transition-colors"
+                      aria-expanded={isExpanded}
+                      className="inline-flex min-h-11 items-center gap-1 rounded-lg text-sm font-semibold text-[#1B3B2B] underline-offset-4 hover:underline focus-visible:outline-2 focus-visible:outline-forest-700"
                     >
                       <span>{isExpanded ? 'Thu gọn bài viết' : 'Đọc toàn văn nhật ký'}</span>
                       {isExpanded ? (
@@ -569,7 +387,7 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                       {story.tags.map((tag) => (
                         <span
                           key={tag}
-                          className="px-2 py-0.5 rounded-md text-[10px] font-medium bg-stone-100 text-stone-600 border border-stone-200"
+                          className="max-w-full break-all rounded-md border border-stone-200 bg-stone-100 px-2 py-0.5 text-xs font-medium text-stone-600"
                         >
                           {tag}
                         </span>
@@ -579,33 +397,33 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                 </div>
 
                 {/* Card Footer Actions */}
-                <div className="flex items-center justify-between pt-4 mt-4 border-t border-[#F0EAE1] text-xs">
-                  <span className="text-[10px] text-stone-400">
+                <div className="mt-4 flex flex-wrap items-center justify-between gap-2 border-t border-[#E7DFD4] pt-2 text-xs">
+                  <span className="text-xs text-stone-600">
                     Cập nhật: {new Date(story.updatedAt).toLocaleDateString('vi-VN')}
                   </span>
 
                   <button
                     type="button"
                     onClick={() => handleOpenEdit(story)}
-                    className="flex items-center gap-1 px-3 py-1.5 rounded-xl border border-[#D5CABE] bg-white text-[#54483C] hover:bg-stone-50 font-semibold shadow-2xs transition-colors"
+                    className="inline-flex min-h-11 items-center gap-2 rounded-xl border border-[#D5CABE] bg-white px-3 font-semibold text-[#54483C] hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700"
                   >
                     <Edit3 className="w-3.5 h-3.5 text-[#1B3B2B]" />
                     <span>Sửa bài</span>
                   </button>
                 </div>
-              </div>
+              </article>
             );
           })}
         </div>
       ) : (
         /* READER NOTEBOOK VIEW */
-        <div className="rounded-3xl bg-[#FFFDF9] border border-[#E7DFD4] p-6 sm:p-8 shadow-xs space-y-8 divide-y divide-[#EADCC8]">
+        <div className="divide-y divide-[#E7DFD4] space-y-6 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] px-4 py-5 sm:px-8 sm:py-7">
           {sortedStories.map((story, index) => {
             const cat = (story.category as JournalCategory) || 'historical_event';
             const catMeta = JOURNAL_CATEGORY_META[cat] || JOURNAL_CATEGORY_META.historical_event;
 
             return (
-              <article key={story.id} className={index > 0 ? 'pt-8' : ''}>
+              <article key={story.id} className={'min-w-0 max-w-3xl break-words ' + (index > 0 ? 'pt-6' : '')}>
                 <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-4">
                   <div className="space-y-2 flex-1">
                     <div className="flex items-center gap-1.5 flex-wrap text-[11px] font-semibold">
@@ -633,7 +451,7 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                     </h3>
 
                     {(story.location || story.recordedBy) && (
-                      <div className="text-xs text-[#7A6E60] flex items-center gap-3">
+                      <div className="flex flex-wrap gap-x-3 gap-y-1 text-xs text-stone-600">
                         {story.location && <span>Địa điểm: {story.location}</span>}
                         {story.recordedBy && <span>Người ghi: {story.recordedBy}</span>}
                       </div>
@@ -643,7 +461,7 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                   <button
                     type="button"
                     onClick={() => handleOpenEdit(story)}
-                    className="self-start flex items-center gap-1 px-3 py-1.5 rounded-xl border border-[#D5CABE] bg-white text-[#54483C] hover:bg-stone-50 text-xs font-semibold"
+                    className="inline-flex min-h-11 shrink-0 self-start items-center gap-2 rounded-xl border border-[#D5CABE] bg-white px-3 text-xs font-semibold text-[#54483C] hover:bg-stone-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700"
                   >
                     <Edit3 className="w-3.5 h-3.5" />
                     <span>Sửa</span>
@@ -651,12 +469,12 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                 </div>
 
                 {story.summary && (
-                  <div className="my-3 p-3 rounded-xl bg-[#FAF8F5] border-l-4 border-[#1B3B2B] text-xs font-serif italic text-[#4A3F33]">
+                  <div className="my-3 rounded-xl border-l-2 border-gold-500 bg-[#FAF8F5] p-3 font-serif text-base italic text-[#1F1913]">
                     {story.summary}
                   </div>
                 )}
 
-                <div className="mt-3 text-sm text-[#2C231A] leading-relaxed font-serif whitespace-pre-line">
+                <div className="mt-3 whitespace-pre-line font-serif text-base leading-relaxed text-[#1F1913] sm:text-lg">
                   {story.content}
                 </div>
               </article>

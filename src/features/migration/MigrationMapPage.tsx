@@ -4,10 +4,7 @@ import {
   ExternalLink,
   MapPin,
   Navigation,
-  Sparkles,
-  Users,
 } from 'lucide-react';
-import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { Person } from '../../models/genealogy';
 
@@ -23,10 +20,25 @@ interface SacredSite {
   keyFigures: string[];
 }
 
+type SiteFilter = 'all' | SacredSite['type'];
+
+const filters: { key: SiteFilter; label: string }[] = [
+  { key: 'all', label: 'Tất cả' },
+  { key: 'hall', label: 'Từ đường' },
+  { key: 'tomb', label: 'Lăng mộ' },
+  { key: 'migration', label: 'Di cư lập chi' },
+];
+
+const siteLabels: Record<SacredSite['type'], string> = {
+  hall: 'Từ đường',
+  tomb: 'Lăng mộ gia tộc',
+  migration: 'Địa bàn di cư',
+};
+
 export const MigrationMapPage: React.FC = () => {
   const { people, branches, settings } = useGenealogy();
 
-  const [selectedFilter, setSelectedFilter] = useState<'all' | 'hall' | 'tomb' | 'migration'>('all');
+  const [selectedFilter, setSelectedFilter] = useState<SiteFilter>('all');
 
   // Build list of sacred sites & migration landmarks from settings, branches, and people's tombs
   const sites: SacredSite[] = useMemo(() => {
@@ -97,183 +109,161 @@ export const MigrationMapPage: React.FC = () => {
   }, [sites, selectedFilter]);
 
   return (
-    <div className="space-y-6 pb-16 animate-in fade-in">
-      {/* Header */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 border-b border-[#E7DFD4] pb-4">
-        <div>
-          <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1B3B2B] tracking-tight flex items-center gap-2">
-            <Compass className="w-6 h-6 text-[#C19B4C]" />
-            <span>Bản Đồ Di Cư & Địa Lý Dòng Họ</span>
+    <div className="min-w-0 space-y-5 pb-12 sm:space-y-7">
+      <header className="space-y-2 border-b border-[#E7DFD4] pb-4">
+        <div className="flex items-center gap-3">
+          <span className="flex size-10 shrink-0 items-center justify-center rounded-xl bg-[#1B3B2B] text-[#DBC599]">
+            <Compass aria-hidden="true" className="size-5" />
+          </span>
+          <h2 className="text-2xl font-bold leading-tight text-[#1B3B2B] sm:text-3xl">
+            Bản đồ di cư
           </h2>
-          <p className="text-xs text-stone-500 mt-0.5">
-            Dấu mốc phát tích từ nguyên quán, lịch sử di cư lập chi mới và tọa độ phần mộ tổ tiên.
-          </p>
+        </div>
+        <p className="max-w-2xl text-sm leading-relaxed text-[#655A4E]">
+          Từ đường, địa bàn lập chi và nơi an táng của các thế hệ.
+        </p>
+      </header>
+
+      <section
+        aria-labelledby="migration-journey"
+        className="rounded-2xl bg-linear-to-br from-[#1B3B2B] to-[#2D5A43] px-4 py-5 text-[#FFFDF9] sm:px-6"
+      >
+        <div className="flex items-center gap-2">
+          <Navigation aria-hidden="true" className="size-4 shrink-0 text-[#DBC599]" />
+          <h3 id="migration-journey" className="text-xl font-bold text-white sm:text-2xl">
+            Hành trình từ quê gốc
+          </h3>
         </div>
 
-        {/* Filter Pills */}
-        <div className="flex items-center gap-1.5 bg-[#F1EBE1] p-1 rounded-2xl border border-[#E3D9CC]">
-          {[
-            { key: 'all', label: 'Tất cả địa điểm' },
-            { key: 'hall', label: 'Từ đường' },
-            { key: 'tomb', label: 'Lăng mộ' },
-            { key: 'migration', label: 'Di cư lập chi' },
-          ].map((item) => (
-            <button
-              key={item.key}
-              type="button"
-              onClick={() => setSelectedFilter(item.key as typeof selectedFilter)}
-              className={`px-3 py-1.5 rounded-xl text-xs font-semibold transition-all ${
-                selectedFilter === item.key
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#5C4F42] hover:text-[#1B3B2B]'
-              }`}
-            >
-              {item.label}
-            </button>
-          ))}
-        </div>
-      </div>
-
-      {/* Visual Journey Overview Card */}
-      <div className="rounded-3xl bg-linear-to-br from-[#1B3B2B] to-[#2D5A43] text-white p-6 sm:p-8 shadow-md space-y-4">
-        <div className="flex items-center gap-2 text-xs font-semibold text-[#DBC599] uppercase tracking-wider">
-          <Navigation className="w-4 h-4" />
-          <span>Hành Trình Phát Tích & Thiên Di</span>
-        </div>
-
-        <h3 className="text-2xl font-serif font-bold text-[#FFFDF9]">
-          Từ Quê Gốc Phát Tích Đến {branches.length > 0 ? `${branches.length} Chi Nhánh` : 'Các Thế Hệ'}
-        </h3>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-2">
-          <div className="p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xs space-y-1">
-            <span className="text-[10px] text-[#DBC599] uppercase font-bold">1. Nguyên Quán Gốc</span>
-            <p className="font-serif font-bold text-sm text-white">
-              {settings.ancestralHallLocation || 'Chưa cập nhật địa chỉ Từ đường'}
-            </p>
-            <p className="text-[11px] text-stone-200">
-              Nơi khởi lập từ đường {settings.clanName || 'gia tộc'} và phụng thờ Đức Thủy Tổ.
-            </p>
+        <dl className="mt-4 grid grid-cols-2 gap-2 sm:grid-cols-3 sm:gap-3">
+          <div className="col-span-2 min-w-0 rounded-xl border border-white/15 bg-white/10 p-3 sm:col-span-1">
+            <dt className="text-xs font-semibold text-[#DBC599]">Nguyên quán</dt>
+            <dd className="mt-1 wrap-anywhere text-sm font-semibold text-white">
+              {settings.ancestralHallLocation || 'Chưa cập nhật địa chỉ từ đường'}
+            </dd>
           </div>
 
-          {branches.slice(0, 2).map((branch, idx) => (
-            <div
-              key={branch.id}
-              className="p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xs space-y-1"
-            >
-              <span className="text-[10px] text-[#DBC599] uppercase font-bold">
-                {idx + 2}. {branch.name}
-              </span>
-              <p className="font-serif font-bold text-sm text-white">
+          {branches.slice(0, 2).map((branch) => (
+            <div key={branch.id} className="min-w-0 rounded-xl border border-white/15 bg-white/10 p-3">
+              <dt className="wrap-anywhere text-xs font-semibold text-[#DBC599]">{branch.name}</dt>
+              <dd className="mt-1 wrap-anywhere text-sm font-semibold text-white">
                 {branch.originPlace || settings.ancestralHallLocation || 'Địa bàn phát triển'}
-              </p>
-              <p className="text-[11px] text-stone-200 line-clamp-2">
-                {branch.description || `Phân nhánh ${branch.name} (${branch.establishedPeriod || 'lịch sử gia tộc'}).`}
-              </p>
+              </dd>
+              {(branch.description || branch.establishedPeriod) && (
+                <dd className="mt-1 line-clamp-2 wrap-anywhere text-xs leading-relaxed text-stone-200">
+                  {branch.description || branch.establishedPeriod}
+                </dd>
+              )}
             </div>
           ))}
 
           {branches.length === 0 && (
-            <div className="md:col-span-2 p-4 rounded-2xl bg-white/10 border border-white/15 backdrop-blur-xs space-y-1">
-              <span className="text-[10px] text-[#DBC599] uppercase font-bold">2. Phân Chi & Mộ Phần</span>
-              <p className="font-serif font-bold text-sm text-white">
-                {sites.filter((s) => s.type === 'tomb').length} khu lăng mộ được ghi nhận
-              </p>
-              <p className="text-[11px] text-stone-200">
-                Thêm chi họ trong mục Quản lý dữ liệu hoặc điền nơi an táng trong hồ sơ để hiển thị hành trình đầy đủ.
-              </p>
+            <div className="col-span-2 min-w-0 rounded-xl border border-white/15 bg-white/10 p-3">
+              <dt className="text-xs font-semibold text-[#DBC599]">Mộ phần</dt>
+              <dd className="mt-1 text-sm font-semibold text-white">
+                {sites.filter((site) => site.type === 'tomb').length} khu lăng mộ được ghi nhận
+              </dd>
             </div>
           )}
-        </div>
-      </div>
+        </dl>
+      </section>
 
-      {/* Sites Grid */}
-      {filteredSites.length === 0 ? (
-        <div className="p-12 text-center bg-[#FFFDF9] rounded-2xl border border-[#E7DFD4] space-y-2">
-          <MapPin className="w-9 h-9 text-stone-300 mx-auto" />
-          <p className="text-sm font-serif font-bold text-[#1F1913]">
-            Chưa có địa điểm nào thuộc nhóm đã chọn
-          </p>
-          <p className="text-xs text-stone-500">
-            Hãy cập nhật địa bàn phân chi trong Quản lý dữ liệu hoặc nơi an táng trong hồ sơ thành viên.
+      <section aria-labelledby="migration-sites" className="min-w-0 space-y-3">
+        <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+          <h3 id="migration-sites" className="text-xl font-bold text-[#1F1913]">Địa danh dòng họ</h3>
+          <p role="status" className="text-sm tabular-nums text-[#655A4E]">
+            {filteredSites.length} địa điểm
           </p>
         </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {filteredSites.map((site) => {
-            const googleMapsUrl = site.coordinates
-              ? `https://www.google.com/maps/search/?api=1&query=${site.coordinates.lat},${site.coordinates.lng}`
-              : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;
 
-            return (
-              <div
-                key={site.id}
-                className="p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs hover:border-[#1B3B2B]/40 hover:shadow-md transition-all flex flex-col justify-between space-y-4"
-              >
-                <div className="space-y-2">
-                  <div className="flex items-center justify-between gap-2 text-[11px]">
-                    <span
-                      className={`font-bold uppercase tracking-wider ${
-                        site.type === 'hall'
-                          ? 'text-[#1B3B2B]'
-                          : site.type === 'tomb'
-                          ? 'text-[#8C6D32]'
-                          : 'text-[#2D5A43]'
-                      }`}
-                    >
-                      {site.type === 'hall'
-                        ? 'Nhà thờ tổ / Từ đường'
-                        : site.type === 'tomb'
-                        ? 'Lăng mộ gia tộc'
-                        : 'Địa bàn di cư'}
+        <div
+          role="group"
+          aria-label="Loại địa điểm"
+          className="grid grid-cols-2 gap-1 rounded-2xl border border-[#E3D9CC] bg-[#F1EBE1] p-1 sm:w-fit sm:grid-cols-4"
+        >
+          {filters.map((filter) => (
+            <button
+              key={filter.key}
+              type="button"
+              aria-pressed={selectedFilter === filter.key}
+              onClick={() => setSelectedFilter(filter.key)}
+              className={`min-h-11 min-w-0 rounded-xl px-3 py-2 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current ${
+                selectedFilter === filter.key
+                  ? 'bg-[#1B3B2B] text-white'
+                  : 'text-[#5C4F42] hover:bg-[#FFFDF9]'
+              }`}
+            >
+              {filter.label}
+            </button>
+          ))}
+        </div>
+
+        {filteredSites.length === 0 ? (
+          <div className="space-y-2 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] px-4 py-8 text-center">
+            <MapPin aria-hidden="true" className="mx-auto size-8 text-[#8C6D32]" />
+            <p className="font-serif text-lg font-bold text-[#1F1913]">Chưa có địa điểm trong nhóm này</p>
+            <p className="mx-auto max-w-md text-sm leading-relaxed text-[#655A4E]">
+              Địa bàn phân chi lấy từ mục Quản lý dữ liệu. Nơi an táng lấy từ hồ sơ thành viên.
+            </p>
+          </div>
+        ) : (
+          <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-2 md:gap-4">
+            {filteredSites.map((site) => {
+              const googleMapsUrl = site.coordinates
+                ? `https://www.google.com/maps/search/?api=1&query=${site.coordinates.lat},${site.coordinates.lng}`
+                : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(site.address)}`;
+
+              return (
+                <article
+                  key={site.id}
+                  className="flex min-w-0 flex-col rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-4 sm:p-5"
+                >
+                  <div className="flex flex-wrap items-baseline justify-between gap-x-3 gap-y-1">
+                    <span className="rounded-full bg-[#F1EBE1] px-2.5 py-1 text-xs font-semibold text-[#1B3B2B]">
+                      {siteLabels[site.type]}
                     </span>
-                    <span className="text-stone-400 font-medium">{site.era}</span>
+                    <span className="wrap-anywhere text-xs text-[#655A4E]">{site.era}</span>
                   </div>
 
-                  <h3 className="font-serif font-bold text-base text-[#1F1913] leading-snug">
+                  <h4 className="mt-3 wrap-anywhere font-serif text-xl font-bold leading-tight text-[#1F1913]">
                     {site.name}
-                  </h3>
-
-                  <p className="text-xs text-[#8C6D32] font-medium flex items-center gap-1.5">
-                    <MapPin className="w-3.5 h-3.5 shrink-0" />
-                    <span>{site.address}</span>
+                  </h4>
+                  <p className="mt-2 flex items-start gap-2 text-sm font-medium text-[#8C6D32]">
+                    <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0" />
+                    <span className="min-w-0 wrap-anywhere">{site.address}</span>
                   </p>
+                  <p className="mt-2 wrap-anywhere text-sm leading-relaxed text-[#655A4E]">{site.description}</p>
 
-                  <p className="text-xs text-[#4A3F35] leading-relaxed pt-1">{site.description}</p>
-
-                  {/* Key Figures */}
                   {site.keyFigures.length > 0 && (
-                    <div className="pt-2 border-t border-stone-100">
-                      <span className="text-[10px] font-bold text-stone-400 uppercase tracking-wider block mb-1">
-                        Tiền nhân liên quan:
-                      </span>
-                      <p className="text-xs text-stone-600 line-clamp-1">
-                        {site.keyFigures.join(' · ')}
-                      </p>
-                    </div>
+                    <p className="mt-3 wrap-anywhere text-sm leading-relaxed text-[#655A4E]">
+                      <span className="font-semibold text-[#1F1913]">Tiền nhân liên quan</span>
+                      <span className="line-clamp-2">{site.keyFigures.join(' · ')}</span>
+                    </p>
                   )}
-                </div>
 
-                {/* Direction Link */}
-                <div className="pt-3 border-t border-stone-100 flex items-center justify-between">
-                  <span className="text-[10px] text-stone-400">
-                    {site.branchName ? `Thuộc ${site.branchName}` : 'Gia tộc chung'}
-                  </span>
-                  <a
-                    href={googleMapsUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-[#FAF8F5] border border-[#D5CABE] text-xs font-semibold text-[#1B3B2B] hover:bg-stone-100 transition-colors"
-                  >
-                    <ExternalLink className="w-3.5 h-3.5" />
-                    <span>Mở Google Maps chỉ đường</span>
-                  </a>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-      )}
+                  <div className="mt-auto pt-4">
+                    <div className="flex flex-wrap items-center justify-between gap-2 border-t border-[#E7DFD4] pt-3">
+                      <span className="wrap-anywhere text-xs text-[#655A4E]">
+                        {site.branchName ? `Thuộc ${site.branchName}` : 'Gia tộc chung'}
+                      </span>
+                      <a
+                        href={googleMapsUrl}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Mở Google Maps cho ${site.name} (tab mới)`}
+                        className="inline-flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-3 py-2 text-sm font-semibold text-[#1B3B2B] hover:bg-stone-100 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-current"
+                      >
+                        <span>Mở Google Maps</span>
+                        <ExternalLink aria-hidden="true" className="size-4 shrink-0" />
+                      </a>
+                    </div>
+                  </div>
+                </article>
+              );
+            })}
+          </div>
+        )}
+      </section>
     </div>
   );
 };

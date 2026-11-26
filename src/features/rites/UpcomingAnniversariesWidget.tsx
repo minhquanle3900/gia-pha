@@ -1,6 +1,5 @@
-import React, { useMemo, useState } from 'react';
+import React, { useId, useMemo, useState } from 'react';
 import {
-  AlertCircle,
   Bell,
   BellRing,
   BookOpen,
@@ -8,29 +7,23 @@ import {
   CheckCircle2,
   ChevronRight,
   Clock,
-  ExternalLink,
   Flame,
   Info,
   MapPin,
-  Send,
-  Sparkles,
-  Users,
 } from 'lucide-react';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { useAnniversaryNotifications } from '../../hooks/useAnniversaryNotifications';
 import { NavigationTab, Person } from '../../models/genealogy';
-import {
-  calculateUpcomingAnniversaries,
-  UpcomingAnniversaryInfo,
-} from '../../services/lunarCalendarService';
-import { formatFlexibleDate, formatLunarAnniversary } from '../../utils/dateUtils';
+import { calculateUpcomingAnniversaries } from '../../services/lunarCalendarService';
 import { NotificationSettingsModal } from '../history/NotificationSettingsModal';
 
 interface UpcomingAnniversariesWidgetProps {
   onSelectPerson: (personId: string) => void;
   onNavigate: (tab: NavigationTab) => void;
 }
+
+const focusOutline = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-gold-600';
 
 export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetProps> = ({
   onSelectPerson,
@@ -42,6 +35,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
   const [selectedBranch, setSelectedBranch] = useState<string>('all');
   const [notifModalOpen, setNotifModalOpen] = useState(false);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
+  const titleId = useId();
 
   const { permission, requestPermission, sendImmediateReminderForPerson } =
     useAnniversaryNotifications();
@@ -51,26 +45,18 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
     return calculateUpcomingAnniversaries(people, new Date());
   }, [people]);
 
-  // Filter based on branch and 30-day window
+  const branchAnniversaries = useMemo(() => {
+    return selectedBranch === 'all'
+      ? allUpcoming
+      : allUpcoming.filter((item) => item.person.branchId === selectedBranch);
+  }, [allUpcoming, selectedBranch]);
+
   const filteredList = useMemo(() => {
-    let list = allUpcoming;
-
-    if (selectedBranch !== 'all') {
-      list = list.filter((item) => item.person.branchId === selectedBranch);
-    }
-
-    if (scope === '30days') {
-      // Days remaining between 0 (today) and 30
-      list = list.filter((item) => item.daysRemaining >= 0 && item.daysRemaining <= 30);
-    }
-
-    return list;
-  }, [allUpcoming, selectedBranch, scope]);
-
-  // The very next anniversary (even if beyond 30 days) for fallback display
-  const nextSingleAnniversary = useMemo(() => {
-    return allUpcoming.find((item) => item.daysRemaining >= 0) || allUpcoming[0] || null;
-  }, [allUpcoming]);
+    return scope === 'all'
+      ? branchAnniversaries
+      : branchAnniversaries.filter((item) => item.daysRemaining >= 0 && item.daysRemaining <= 30);
+  }, [branchAnniversaries, scope]);
+  const nextSingleAnniversary = branchAnniversaries.find((item) => item.daysRemaining >= 0);
 
   const handleSendReminder = async (person: Person) => {
     if (permission !== 'granted') {
@@ -91,62 +77,57 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
   };
 
   return (
-    <div className="rounded-3xl bg-linear-to-br from-[#FFFDF9] via-[#FAF7F2] to-[#FAF4EB] border-2 border-[#EADCC8] p-5 sm:p-6 shadow-sm space-y-5 relative overflow-hidden transition-all">
-      {/* Header Bar */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E8DDCD] pb-4">
-        <div className="space-y-1">
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-xl bg-[#FAF0DC] text-[#8C3A27] border border-[#E3CCA0]">
-              <Flame className="w-4 h-4 fill-[#8C3A27]" />
+    <section aria-labelledby={titleId} className="min-w-0 space-y-4 rounded-2xl border border-ivory-200 bg-[#FFFDF9] p-4 shadow-xs dark:border-[#374A3D] sm:p-5">
+      <div className="flex flex-col gap-3 border-b border-ivory-200 pb-4 dark:border-[#374A3D] lg:flex-row lg:items-start lg:justify-between">
+        <div className="flex min-w-0 flex-wrap items-center gap-2.5">
+          <span className="grid size-9 shrink-0 place-items-center rounded-xl bg-gold-100 text-gold-700 dark:bg-[#342D20] dark:text-amber-200">
+            <Flame aria-hidden="true" className="size-4" />
+          </span>
+          <h3 id={titleId} className="font-serif text-2xl leading-tight font-bold text-bark-900 dark:text-stone-100">
+            Nhắc ngày giỗ
+          </h3>
+          {filteredList.length > 0 && (
+            <span className="rounded-full bg-ivory-100 px-2.5 py-1 text-xs font-semibold text-bark-800 dark:bg-[#25372C] dark:text-stone-200">
+              {filteredList.length} lễ giỗ
             </span>
-            <h3 className="text-base sm:text-lg font-serif font-bold text-[#1F1913]">
-              Nhắc Nhở Ngày Giỗ & Tiết Kỵ Sắp Tới
-            </h3>
-            {filteredList.length > 0 && (
-              <span className="text-xs font-serif font-bold text-[#8C3A27] tabular-nums">
-                · {filteredList.length} lễ giỗ
-              </span>
-            )}
-          </div>
-          <p className="text-xs text-[#6E5F50]">
-            Tự động quy đổi âm dương lịch và nhắc nhở con cháu chuẩn bị lễ vật, cáo giỗ Tiên Thường và Chính Kỵ
-          </p>
+          )}
         </div>
 
-        {/* Action Controls */}
-        <div className="flex flex-wrap items-center gap-2 self-start sm:self-auto">
-          {/* 30 days vs All toggle */}
-          <div className="inline-flex p-1 rounded-xl bg-[#EDE4D6] border border-[#DDD0BF] text-xs">
+        <div className="flex min-w-0 flex-wrap items-center gap-2">
+          <div role="group" aria-label="Phạm vi ngày giỗ" className="grid w-full grid-cols-2 gap-1 rounded-xl bg-ivory-100 p-1 dark:bg-[#1F2E25] sm:w-auto">
             <button
               type="button"
+              aria-pressed={scope === '30days'}
               onClick={() => setScope('30days')}
-              className={`px-3 py-1 rounded-lg font-semibold transition-all ${
+              className={`min-h-11 rounded-lg px-2.5 py-2 text-xs font-semibold transition-colors ${focusOutline} ${
                 scope === '30days'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#6A5A4A] hover:text-[#1F1913]'
+                  ? 'bg-forest-800 text-white'
+                  : 'text-bark-600 hover:bg-ivory-200 dark:text-stone-200 dark:hover:bg-[#334538]'
               }`}
             >
-              Trong 30 ngày tới
+              30 ngày tới
             </button>
             <button
               type="button"
+              aria-pressed={scope === 'all'}
               onClick={() => setScope('all')}
-              className={`px-3 py-1 rounded-lg font-semibold transition-all ${
+              className={`min-h-11 rounded-lg px-2.5 py-2 text-xs font-semibold transition-colors ${focusOutline} ${
                 scope === 'all'
-                  ? 'bg-[#1B3B2B] text-white shadow-xs'
-                  : 'text-[#6A5A4A] hover:text-[#1F1913]'
+                  ? 'bg-forest-800 text-white'
+                  : 'text-bark-600 hover:bg-ivory-200 dark:text-stone-200 dark:hover:bg-[#334538]'
               }`}
             >
-              Tất cả trong năm
+              Tất cả
             </button>
           </div>
 
           {/* Branch filter if multiple branches */}
           {branches.length > 1 && (
             <select
+              aria-label="Chi họ"
               value={selectedBranch}
               onChange={(e) => setSelectedBranch(e.target.value)}
-              className="px-2.5 py-1.5 rounded-xl border border-[#D5CABE] bg-white text-xs font-semibold text-[#3D3126]"
+              className={`min-h-11 min-w-0 max-w-full flex-1 rounded-xl border border-ivory-300 bg-white px-3 text-base text-bark-800 sm:flex-none sm:text-sm ${focusOutline}`}
             >
               <option value="all">Tất cả chi họ</option>
               {branches.map((b) => (
@@ -160,27 +141,29 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
           {/* Notification settings modal trigger */}
           <button
             type="button"
+            aria-label="Cài đặt thông báo ngày giỗ"
             onClick={() => setNotifModalOpen(true)}
-            className="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-white border border-[#D5CABE] text-[#1B3B2B] hover:bg-stone-50 text-xs font-semibold shadow-2xs transition-colors"
+            className={`inline-flex min-h-11 min-w-11 items-center justify-center gap-2 rounded-xl border border-ivory-300 px-3 text-sm font-semibold text-forest-800 transition-colors hover:bg-ivory-100 dark:border-[#374A3D] dark:text-emerald-200 dark:hover:bg-[#26382D] ${focusOutline}`}
             title="Cài đặt thông báo trình duyệt nhắc ngày giỗ"
           >
-            <Bell className="w-3.5 h-3.5 text-[#C19B4C]" />
-            <span className="hidden xl:inline">Cài đặt chuông báo</span>
+            <Bell aria-hidden="true" className="size-4 text-gold-700 dark:text-gold-500" />
+            <span className="hidden xl:inline">Thông báo</span>
           </button>
         </div>
       </div>
 
       {/* Toast Feedback */}
       {toastMessage && (
-        <div className="p-3 rounded-xl bg-emerald-50 border border-emerald-200 text-emerald-900 text-xs font-medium flex items-center justify-between gap-2 animate-in fade-in">
-          <div className="flex items-center gap-2">
+        <div className="flex items-center justify-between gap-2 rounded-xl border border-forest-600/25 bg-forest-50 px-3 text-sm font-medium text-forest-800 dark:bg-[#25372C] dark:text-emerald-200">
+          <div role="status" className="flex items-center gap-2 py-2">
             <CheckCircle2 className="w-4 h-4 text-emerald-600 shrink-0" />
             <span>{toastMessage}</span>
           </div>
           <button
             type="button"
+            aria-label="Đóng thông báo"
             onClick={() => setToastMessage(null)}
-            className="text-stone-400 hover:text-stone-700"
+            className={`min-h-11 min-w-11 shrink-0 rounded-lg text-bark-600 hover:text-bark-900 dark:text-stone-300 ${focusOutline}`}
           >
             ✕
           </button>
@@ -189,25 +172,26 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
 
       {/* Main Anniversaries List or Empty State */}
       {filteredList.length === 0 ? (
-        <div className="p-6 rounded-2xl bg-white border border-[#E7DFD4] text-center space-y-3">
-          <div className="w-12 h-12 rounded-2xl bg-[#FAF7F2] text-[#8C6D32] border border-[#E8DDCD] flex items-center justify-center mx-auto">
-            <Calendar className="w-6 h-6 text-[#C19B4C]" />
+        <div className="space-y-3 rounded-xl bg-ivory-50 p-4 text-center dark:bg-[#1F2E25] sm:p-6">
+          <div className="mx-auto grid size-10 place-items-center rounded-xl bg-gold-100 text-gold-700 dark:bg-[#342D20] dark:text-amber-200">
+            <Calendar aria-hidden="true" className="size-5" />
           </div>
 
           <div className="space-y-1">
-            <h4 className="font-serif font-bold text-sm text-[#1F1913]">
-              Không có ngày giỗ nào trong 30 ngày tới
+            <h4 className="font-serif text-xl font-bold text-bark-900 dark:text-stone-100">
+              {scope === '30days' ? 'Không có ngày giỗ trong 30 ngày tới' : 'Chưa có ngày giỗ được ghi nhận'}
             </h4>
-            <p className="text-xs text-[#695A4B] max-w-md mx-auto leading-relaxed">
-              Trong 30 ngày tới không có tiết kỵ của các bậc tiền nhân. Con cháu có thể chuyển sang
-              chế độ xem toàn năm hoặc tra cứu sổ văn khấn gia tiên.
-            </p>
+            {scope === 'all' && (
+              <p className="mx-auto max-w-md text-sm text-bark-600 dark:text-stone-300">
+                {selectedBranch === 'all' ? 'Thêm ngày giỗ âm lịch trong hồ sơ người đã khuất.' : 'Chọn chi họ khác để xem ngày giỗ.'}
+              </p>
+            )}
           </div>
 
           {nextSingleAnniversary && (
             <div className="pt-2 max-w-md mx-auto">
-              <div className="p-3 rounded-xl bg-[#FAF5EB] border border-[#E8DDCD] flex items-center justify-between gap-3 text-left">
-                <div className="flex items-center gap-2.5">
+              <div className="flex flex-wrap items-center justify-between gap-3 rounded-xl border border-ivory-200 bg-[#FFFDF9] p-3 text-left dark:border-[#374A3D]">
+                <div className="flex min-w-0 items-center gap-2.5">
                   <HeritageAvatar
                     fullName={nextSingleAnniversary.person.fullName}
                     portraitUrl={nextSingleAnniversary.person.portraitUrl}
@@ -216,13 +200,13 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                     isLiving={false}
                   />
                   <div>
-                    <span className="text-[10px] font-bold text-[#8C6D32] uppercase">
-                      Lễ giỗ gần nhất tiếp theo:
+                    <span className="text-xs font-semibold text-gold-700 dark:text-[#E5BE6C]">
+                      Lễ giỗ tiếp theo
                     </span>
-                    <p className="text-xs font-serif font-bold text-[#1F1913]">
+                    <p className="font-serif text-lg leading-snug font-bold wrap-anywhere text-bark-900 dark:text-stone-100">
                       {nextSingleAnniversary.person.fullName}
                     </p>
-                    <p className="text-[11px] text-stone-500">
+                    <p className="text-sm text-bark-600 dark:text-stone-300">
                       Ngày {nextSingleAnniversary.lunarDay}/{nextSingleAnniversary.lunarMonth} Âm lịch
                       · Còn {nextSingleAnniversary.daysRemaining} ngày
                     </p>
@@ -232,7 +216,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                 <button
                   type="button"
                   onClick={() => onSelectPerson(nextSingleAnniversary.person.id)}
-                  className="px-2.5 py-1 rounded-lg bg-white border border-[#D5CABE] text-[#1B3B2B] text-xs font-semibold hover:bg-stone-50 shrink-0"
+                  className={`min-h-11 shrink-0 rounded-lg border border-ivory-300 px-3 text-sm font-semibold text-forest-800 hover:bg-ivory-100 dark:border-[#374A3D] dark:text-emerald-200 dark:hover:bg-[#26382D] ${focusOutline}`}
                 >
                   Xem hồ sơ
                 </button>
@@ -240,39 +224,39 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
             </div>
           )}
 
-          <div className="pt-1">
+          {scope === '30days' && branchAnniversaries.length > 0 && (
             <button
               type="button"
               onClick={() => setScope('all')}
-              className="inline-flex items-center gap-1.5 text-xs font-semibold text-[#1B3B2B] hover:underline"
+              className={`inline-flex min-h-11 items-center gap-1.5 rounded-lg px-2 text-sm font-semibold text-forest-800 hover:underline dark:text-emerald-200 ${focusOutline}`}
             >
-              <span>Xem danh sách ngày giỗ cả năm</span>
-              <ChevronRight className="w-3.5 h-3.5" />
+              <span>Xem tất cả ngày giỗ</span>
+              <ChevronRight aria-hidden="true" className="size-4" />
             </button>
-          </div>
+          )}
         </div>
       ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3.5">
+        <div className="grid gap-3 md:grid-cols-2 xl:grid-cols-3">
           {filteredList.map((item) => {
             const branch = item.person.branchId ? getBranchById(item.person.branchId) : undefined;
             const isToday = item.daysRemaining === 0;
             const isTomorrow = item.daysRemaining === 1;
-            const isVerySoon = item.daysRemaining <= 3;
+            const isVerySoon = item.daysRemaining > 1 && item.daysRemaining <= 3;
 
             return (
               <div
                 key={item.person.id}
-                className={`rounded-2xl border transition-all p-4 flex flex-col justify-between space-y-3 shadow-2xs hover:shadow-sm ${
+                className={`flex min-w-0 flex-col justify-between gap-3 rounded-xl border p-3 sm:p-4 ${
                   isToday
-                    ? 'bg-gradient-to-br from-[#FFF5F2] to-[#FFEDE8] border-rose-300 ring-2 ring-rose-300/40'
+                    ? 'border-rose-300 bg-rose-50 dark:border-rose-900'
                     : isTomorrow
-                    ? 'bg-gradient-to-br from-[#FFF8EE] to-[#FFF1DE] border-amber-300 ring-1 ring-amber-300/40'
-                    : 'bg-white border-[#E7DFD4] hover:border-[#C19B4C]'
+                    ? 'border-amber-200 bg-amber-50'
+                    : 'border-ivory-200 bg-white dark:border-[#374A3D]'
                 }`}
               >
                 {/* Card Top: Avatar, Names, and Countdown Badge */}
                 <div className="space-y-3">
-                  <div className="flex items-start justify-between gap-2.5">
+                  <div className="flex flex-wrap items-start justify-between gap-2.5">
                     <div className="flex items-center gap-2.5 min-w-0">
                       <HeritageAvatar
                         fullName={item.person.fullName}
@@ -294,15 +278,11 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                             </span>
                           )}
                         </div>
-                        <h4
-                          onClick={() => onSelectPerson(item.person.id)}
-                          className="text-sm font-serif font-bold text-[#1F1913] hover:text-[#1B3B2B] cursor-pointer truncate"
-                          title={item.person.fullName}
-                        >
+                        <h4 className="font-serif text-lg leading-snug font-bold wrap-anywhere text-bark-900 dark:text-stone-100">
                           {item.person.fullName}
                         </h4>
                         {item.person.clanRole && (
-                          <p className="text-[10px] text-[#8C6D32] font-semibold truncate">
+                          <p className="text-xs font-semibold wrap-anywhere text-gold-700 dark:text-gold-500">
                             {item.person.clanRole}
                           </p>
                         )}
@@ -312,96 +292,93 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
                     {/* Countdown Label */}
                     <div className="shrink-0 text-right tabular-nums">
                       {isToday ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-[#8C3A27] text-white shadow-xs">
-                          <Flame className="w-3 h-3 fill-white" />
-                          <span>HÔM NAY (Chính Kỵ)</span>
+                        <span className="inline-flex items-center gap-1 rounded-lg bg-[#8C3A27] px-2.5 py-1 text-xs font-bold text-white">
+                          <Flame aria-hidden="true" className="size-3" />
+                          <span>Hôm nay · Chính Kỵ</span>
                         </span>
                       ) : isTomorrow ? (
-                        <span className="inline-flex items-center gap-1 px-2.5 py-1 rounded-lg text-[11px] font-bold bg-[#C19B4C] text-white shadow-xs">
-                          <Clock className="w-3 h-3" />
-                          <span>NGÀY MAI (Tiên Thường)</span>
+                        <span className="inline-flex items-center gap-1 rounded-lg bg-gold-100 px-2.5 py-1 text-xs font-bold text-gold-700 dark:bg-[#342D20] dark:text-amber-200">
+                          <Clock aria-hidden="true" className="size-3" />
+                          <span>Ngày mai · Tiên Thường</span>
                         </span>
                       ) : (
                         <span
                           className={`inline-flex items-center gap-1 text-xs font-bold ${
-                            isVerySoon ? 'text-[#8C3A27]' : 'text-[#695843]'
+                            isVerySoon ? 'text-rose-800' : 'text-bark-600 dark:text-stone-300'
                           }`}
                         >
-                          <Clock className="w-3 h-3 text-[#C19B4C]" />
-                          <span>Còn {item.daysRemaining} ngày</span>
+                          <Clock aria-hidden="true" className="size-3 text-gold-700 dark:text-gold-500" />
+                          <span>{item.daysRemaining < 0 ? 'Đã qua' : `Còn ${item.daysRemaining} ngày`}</span>
                         </span>
                       )}
                     </div>
                   </div>
 
                   {/* Dates Box */}
-                  <div className="p-2.5 rounded-xl bg-[#FAF8F5] border border-[#ECE4D8] space-y-1 text-xs">
-                    <div className="flex items-center justify-between text-[#8C3A27] font-semibold">
-                      <span className="flex items-center gap-1">
-                        <Calendar className="w-3.5 h-3.5" />
-                        <span>Ngày Âm lịch:</span>
-                      </span>
-                      <span>
-                        {item.lunarDay} tháng {item.lunarMonth} Âm lịch
-                      </span>
-                    </div>
-
-                    <div className="flex items-center justify-between text-stone-600 text-[11px]">
-                      <span>Dương lịch năm nay:</span>
-                      <span className="font-medium text-stone-800">
-                        {item.solarDate.toLocaleDateString('vi-VN', {
-                          weekday: 'short',
-                          day: '2-digit',
-                          month: '2-digit',
-                          year: 'numeric',
-                        })}
-                      </span>
-                    </div>
-
+                  <div className="space-y-2 rounded-xl bg-ivory-50 p-3 text-xs dark:bg-[#1F2E25]">
+                    <dl className="grid grid-cols-2 gap-2">
+                      <div>
+                        <dt className="text-bark-600 dark:text-stone-300">Âm lịch</dt>
+                        <dd className="mt-0.5 text-sm font-semibold tabular-nums text-bark-900 dark:text-stone-100">
+                          {item.lunarDay}/{item.lunarMonth}
+                        </dd>
+                      </div>
+                      <div>
+                        <dt className="text-bark-600 dark:text-stone-300">Dương lịch (ước tính)</dt>
+                        <dd className="mt-0.5 text-sm font-semibold tabular-nums text-bark-900 dark:text-stone-100">
+                          {item.solarDate.toLocaleDateString('vi-VN', {
+                            day: '2-digit',
+                            month: '2-digit',
+                            year: 'numeric',
+                          })}
+                        </dd>
+                      </div>
+                    </dl>
                     {item.lunarNote && (
-                      <p className="text-[11px] text-[#6B5A47] italic pt-0.5 border-t border-stone-200 line-clamp-1">
-                        "{item.lunarNote}"
+                      <p className="wrap-anywhere text-bark-600 italic dark:text-stone-300">
+                        {item.lunarNote}
                       </p>
                     )}
                   </div>
 
                   {item.person.burialPlace && (
-                    <div className="flex items-center gap-1 text-[11px] text-stone-500 truncate">
-                      <MapPin className="w-3 h-3 text-[#C19B4C] shrink-0" />
-                      <span className="truncate">Phần mộ: {item.person.burialPlace}</span>
+                    <div className="flex items-start gap-1.5 text-xs text-bark-600 dark:text-stone-300">
+                      <MapPin aria-hidden="true" className="mt-0.5 size-3.5 shrink-0 text-gold-700 dark:text-gold-500" />
+                      <span className="min-w-0 wrap-anywhere">Phần mộ: {item.person.burialPlace}</span>
                     </div>
                   )}
                 </div>
 
                 {/* Card Actions */}
-                <div className="pt-2 border-t border-[#F0EAE1] flex items-center justify-between gap-2">
+                <div className="flex flex-wrap items-center justify-between gap-2 border-t border-ivory-200 pt-2 dark:border-[#374A3D]">
                   <button
                     type="button"
                     onClick={() => onSelectPerson(item.person.id)}
-                    className="text-xs font-semibold text-[#1B3B2B] hover:underline"
+                    className={`min-h-11 rounded-lg text-sm font-semibold text-forest-800 hover:underline dark:text-emerald-200 ${focusOutline}`}
                   >
                     Xem hồ sơ
                   </button>
 
-                  <div className="flex items-center gap-1.5">
+                  <div className="flex items-center gap-2">
                     {/* Send immediate reminder button */}
                     <button
                       type="button"
+                      aria-label={`Gửi nhắc ngày giỗ cho ${item.person.fullName}`}
                       onClick={() => handleSendReminder(item.person)}
-                      className="p-1.5 rounded-lg border border-[#D5CABE] bg-white text-stone-600 hover:text-[#1B3B2B] hover:bg-stone-50 text-xs transition-colors"
+                      className={`grid size-11 place-items-center rounded-lg border border-ivory-300 text-gold-700 transition-colors hover:bg-ivory-100 dark:border-[#374A3D] dark:text-gold-500 dark:hover:bg-[#26382D] ${focusOutline}`}
                       title="Phát thông báo nhắc nhở ngày giỗ tới trình duyệt"
                     >
-                      <BellRing className="w-3.5 h-3.5 text-[#C19B4C]" />
+                      <BellRing aria-hidden="true" className="size-4" />
                     </button>
 
                     {/* View prayers in Rites Assistant */}
                     <button
                       type="button"
                       onClick={() => onNavigate('rites')}
-                      className="flex items-center gap-1 px-2.5 py-1.5 rounded-lg bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold transition-colors"
+                      className={`flex min-h-11 items-center gap-1.5 rounded-lg bg-forest-800 px-3 text-xs font-semibold text-white transition-colors hover:bg-forest-700 ${focusOutline}`}
                       title="Mở Sổ văn khấn và hướng dẫn cúng tế"
                     >
-                      <BookOpen className="w-3.5 h-3.5" />
+                      <BookOpen aria-hidden="true" className="size-4" />
                       <span>Văn khấn</span>
                     </button>
                   </div>
@@ -413,10 +390,10 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
       )}
 
       {/* Cultural Ritual Tip Footer */}
-      <div className="p-3.5 rounded-2xl bg-[#FAF6EE] border border-[#E6DCB8] flex items-start gap-2.5 text-xs text-[#6B5B47] leading-relaxed">
-        <Info className="w-4 h-4 text-[#C19B4C] shrink-0 mt-0.5" />
+      <div className="flex items-start gap-2.5 rounded-xl bg-ivory-50 p-3 text-xs leading-relaxed text-bark-600 dark:bg-[#1F2E25] dark:text-stone-300">
+        <Info aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-gold-700 dark:text-gold-500" />
         <div className="space-y-0.5">
-          <strong className="text-[#3E3326]">Phong tục cúng giỗ gia tiên cổ truyền:</strong>
+          <strong className="text-bark-900 dark:text-stone-100">Phong tục cúng giỗ gia tiên</strong>
           <p>
             Chiều hôm trước ngày giỗ cử hành <strong>Lễ Tiên Thường</strong> (lễ cáo giỗ, thỉnh rước
             chư vị tiên tổ về ngự). Sáng ngày hôm sau là <strong>Lễ Chính Kỵ</strong> (dâng mâm cỗ cúng,
@@ -430,7 +407,7 @@ export const UpcomingAnniversariesWidget: React.FC<UpcomingAnniversariesWidgetPr
         open={notifModalOpen}
         onClose={() => setNotifModalOpen(false)}
       />
-    </div>
+    </section>
   );
 };
 

@@ -1,5 +1,6 @@
 import React, { useMemo } from 'react';
 import {
+  ArrowRight,
   BarChart3,
   BookOpen,
   Compass,
@@ -8,8 +9,6 @@ import {
   MapPin,
   Plus,
   Scroll,
-  Search,
-  Sparkles,
   Users,
 } from 'lucide-react';
 import { GlobalSearch } from '../components/GlobalSearch';
@@ -17,7 +16,7 @@ import { HeritageAvatar } from '../components/HeritageAvatar';
 import { useGenealogy } from '../context/GenealogyContext';
 import { BackupReminderBanner } from '../features/backup/BackupReminderBanner';
 import { UpcomingAnniversariesWidget } from '../features/rites/UpcomingAnniversariesWidget';
-import { NavigationTab, Person } from '../models/genealogy';
+import type { NavigationTab } from '../models/genealogy';
 import { formatLifespan } from '../utils/dateUtils';
 
 interface DashboardPageProps {
@@ -28,6 +27,9 @@ interface DashboardPageProps {
   onOpenTour?: () => void;
 }
 
+const surface = 'min-w-0 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9]';
+const focus = 'focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32] dark:focus-visible:outline-[#E5BE6C]';
+
 export const DashboardPage: React.FC<DashboardPageProps> = ({
   onNavigate,
   onSelectPerson,
@@ -37,126 +39,100 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
 }) => {
   const { people, branches, media, stories, settings } = useGenealogy();
 
-  // Statistics
-  const livingCount = useMemo(() => people.filter((p) => p.isLiving).length, [people]);
+  const livingCount = useMemo(() => people.filter((person) => person.isLiving).length, [people]);
   const deceasedCount = people.length - livingCount;
-
-  const maxGeneration = useMemo(() => {
-    let max = 1;
-    for (const p of people) {
-      if (p.generation && p.generation > max) max = p.generation;
-    }
-    return max;
-  }, [people]);
-
-  // Root person or recent elders
-  const elders = useMemo(() => {
-    return [...people]
-      .filter((p) => p.generation !== undefined)
+  const maxGeneration = useMemo(
+    () => people.reduce((maximum, person) => Math.max(maximum, person.generation ?? 0), 0),
+    [people],
+  );
+  const elders = useMemo(
+    () => people
+      .filter((person) => person.generation !== undefined)
       .sort((a, b) => (a.generation ?? 99) - (b.generation ?? 99))
-      .slice(0, 5);
-  }, [people]);
+      .slice(0, 5),
+    [people],
+  );
+
+  const statistics = [
+    { label: 'Thành viên', value: people.length, unit: 'người', note: `${livingCount} còn sống · ${deceasedCount} đã mất`, icon: Users, tab: 'members' },
+    { label: 'Thế hệ', value: maxGeneration || '—', unit: maxGeneration ? 'đời' : '', note: maxGeneration ? 'Xem thống kê phả hệ' : 'Chưa ghi số đời', icon: GitFork, tab: 'stats' },
+    { label: 'Chi họ', value: branches.length, unit: 'chi', note: 'Xem thành viên theo chi', icon: Scroll, tab: 'members' },
+    { label: 'Kho kỷ vật', value: media.length, unit: 'tư liệu', note: 'Ảnh và tư liệu dòng họ', icon: ImageIcon, tab: 'gallery' },
+  ] as const;
+
+  const secondaryActions = [
+    { label: 'Nhật ký', icon: Scroll, action: () => onNavigate('journal') },
+    { label: 'Thống kê', icon: BarChart3, action: () => onNavigate('stats') },
+    ...(onOpenTour ? [{ label: 'Hướng dẫn', icon: Compass, action: onOpenTour }] : []),
+  ];
 
   return (
-    <div className="space-y-6 sm:space-y-8 pb-12 animate-in fade-in">
-      {/* Hero Heritage Banner */}
-      <div className="relative rounded-3xl bg-linear-to-br from-[#1B3B2B] via-[#234A36] to-[#142D20] text-white p-6 sm:p-8 shadow-md overflow-hidden border border-[#2B4B3A]">
-        <div className="relative z-10 max-w-2xl space-y-3.5">
-          <div className="flex items-center gap-2 text-xs font-semibold text-[#DBC599] tracking-widest uppercase">
-            <span>Cội Nguồn Gia Tộc</span>
-            <span aria-hidden="true" className="text-[#DBC599]/40">·</span>
-            <span className="text-[#E6DFD5] font-normal normal-case">Lưu giữ qua {maxGeneration} thế hệ phả hệ</span>
-          </div>
-
-          <h2 className="text-2xl sm:text-4xl font-serif font-bold text-[#FFFDF9] tracking-tight leading-snug text-balance">
-            {settings.clanName || 'Dòng Họ Việt Nam'}
-          </h2>
-
-          <p className="text-xs sm:text-sm text-[#E6DFD5] italic font-serif leading-relaxed max-w-xl">
-            "{settings.clanMotto || 'Cây có cội mới trổ cành xanh lá, nước có nguồn mới bủa khắp rạch sông.'}"
+    <div className="min-w-0 space-y-5 pb-4 sm:space-y-7">
+      <section
+        aria-labelledby="dashboard-title"
+        className="relative isolate overflow-hidden rounded-3xl bg-[#19372A] px-5 py-5 text-[#FFFDF9] sm:px-8 sm:py-7 lg:flex lg:items-center lg:justify-between lg:gap-10"
+      >
+        <div aria-hidden="true" className="pointer-events-none absolute -right-14 -top-36 -z-10 size-80 rounded-full border border-[#D8BD82]/15 sm:-right-12 sm:size-[26rem]">
+          <div className="absolute inset-9 rounded-full border border-[#D8BD82]/12" />
+          <div className="absolute inset-[4.5rem] rounded-full border border-[#D8BD82]/10" />
+        </div>
+        <div className="min-w-0 max-w-2xl">
+          <h1 id="dashboard-title" className="text-3xl font-bold leading-[1.05] tracking-tight text-[#FFFDF9] [overflow-wrap:anywhere] sm:text-5xl">
+            {settings.clanName || 'Dòng họ Việt Nam'}
+          </h1>
+          <p className="mt-3 max-w-lg font-serif text-base italic leading-snug text-[#F1E8D6] [overflow-wrap:anywhere] sm:text-lg">
+            {settings.clanMotto || 'Cây có cội mới trổ cành xanh lá, nước có nguồn mới bủa khắp rạch sông.'}
           </p>
-
           {settings.ancestralHallLocation && (
-            <div className="flex items-center gap-1.5 text-xs text-[#D1C6B6] pt-0.5">
-              <MapPin className="w-3.5 h-3.5 text-[#DBC599] shrink-0" />
-              <span>Từ đường: {settings.ancestralHallLocation}</span>
-            </div>
+            <p className="mt-3 flex items-start gap-2 text-sm leading-snug text-[#E4DAC7]">
+              <MapPin aria-hidden="true" className="mt-0.5 size-4 shrink-0 text-[#E1C88F]" />
+              <span className="min-w-0 [overflow-wrap:anywhere]">Từ đường · {settings.ancestralHallLocation}</span>
+            </p>
           )}
+        </div>
 
-          {/* Quick Action Buttons - Refined Hierarchy */}
-          <div className="flex flex-wrap items-center gap-2.5 pt-2">
+        <div className="mt-5 min-w-0 lg:mt-0 lg:w-full lg:max-w-sm">
+          <div className="grid grid-cols-1 gap-2 min-[380px]:grid-cols-2">
             <button
               type="button"
               onClick={() => onNavigate('tree')}
-              className="flex items-center gap-2 px-4 py-2.5 rounded-xl bg-[#DBC599] hover:bg-[#CBB284] text-[#1B3B2B] font-bold text-xs shadow-sm transition-all hover:scale-[1.02] active:scale-[0.98]"
+              className={`flex min-h-11 items-center justify-center gap-2 rounded-xl bg-[#E3CA91] px-3 py-2 text-center text-sm font-bold text-[#19372A] hover:bg-[#EED9A9] ${focus}`}
             >
-              <GitFork className="w-4 h-4" />
-              <span>Khám phá Cây gia phả</span>
+              <GitFork aria-hidden="true" className="size-4 shrink-0" />
+              Cây gia phả
             </button>
             <button
               type="button"
               onClick={onAddPerson}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/15 hover:bg-white/25 text-white font-medium text-xs border border-white/20 transition-colors"
+              className={`flex min-h-11 items-center justify-center gap-2 rounded-xl border border-[#8CA797] px-3 py-2 text-center text-sm font-semibold text-[#FFFDF9] hover:bg-[#294737] ${focus}`}
             >
-              <Plus className="w-4 h-4" />
-              <span>Thêm thành viên</span>
+              <Plus aria-hidden="true" className="size-4 shrink-0" />
+              Thêm thành viên
             </button>
-            <button
-              type="button"
-              onClick={() => onNavigate('journal')}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#EBD9B2] font-medium text-xs border border-white/15 transition-colors"
-              title="Ghi chép sự kiện lịch sử chung và kỷ niệm dòng họ"
-            >
-              <Scroll className="w-4 h-4 text-[#DBC599]" />
-              <span>Nhật ký dòng họ</span>
-            </button>
-            <button
-              type="button"
-              onClick={() => onNavigate('stats')}
-              className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#EBD9B2] font-medium text-xs border border-white/15 transition-colors"
-              title="Xem biểu đồ thế hệ và tỷ lệ nam/nữ trong dòng họ"
-            >
-              <BarChart3 className="w-4 h-4 text-[#DBC599]" />
-              <span>Dashboard Thống kê</span>
-            </button>
-            {onOpenTour && (
+          </div>
+          <div className="mt-2 flex flex-wrap items-center justify-between gap-x-3">
+            {secondaryActions.map(({ label, icon: Icon, action }) => (
               <button
+                key={label}
                 type="button"
-                onClick={onOpenTour}
-                className="flex items-center gap-1.5 px-3.5 py-2.5 rounded-xl bg-white/10 hover:bg-white/20 text-[#EBD9B2] font-medium text-xs border border-white/15 transition-colors"
-                title="Khám phá các tính năng chính của ứng dụng"
+                onClick={action}
+                className={`inline-flex min-h-11 items-center gap-1.5 rounded-md text-sm font-medium text-[#F1E8D6] hover:underline ${focus}`}
               >
-                <Compass className="w-4 h-4 text-[#DBC599]" />
-                <span>Hướng dẫn</span>
+                <Icon aria-hidden="true" className="size-4 shrink-0 text-[#E1C88F]" />
+                {label}
               </button>
-            )}
+            ))}
           </div>
         </div>
-      </div>
+      </section>
 
-      {/* Prominent Quick Search Strip on Dashboard */}
-      <div className="rounded-3xl bg-[#FFFDF9] border border-[#E7DFD4] p-4 sm:p-5 shadow-xs space-y-3">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#F0EAE1] pb-2.5">
-          <div className="flex items-center gap-2">
-            <span className="p-1.5 rounded-xl bg-[#1B3B2B]/10 text-[#1B3B2B]">
-              <Search className="w-4 h-4" />
-            </span>
-            <div>
-              <h3 className="text-sm font-serif font-bold text-[#1F1913]">
-                Tra Cứu Nhanh Thành Viên Toàn Gia Phả
-              </h3>
-              <p className="text-[11px] text-[#6E5F50]">
-                Tìm kiếm trực tiếp theo họ tên, tên tự, tên húy, năm sinh hoặc đời thứ
-              </p>
-            </div>
-          </div>
-          <span className="text-xs font-medium text-[#6E5F50] self-start sm:self-auto tabular-nums">
-            {people.length} thành viên trong dữ liệu
-          </span>
-        </div>
-
+      <section aria-labelledby="dashboard-search" className={`${surface} p-3.5 sm:flex sm:items-center sm:gap-5 sm:p-4`}>
+        <h2 id="dashboard-search" className="mb-2 shrink-0 text-lg font-bold text-[#1F1913] sm:mb-0">
+          Tra cứu thành viên
+        </h2>
         <GlobalSearch
           variant="prominent"
+          className="min-w-0 flex-1 [&_.top-full]:min-w-0 [&_input]:min-h-11"
           onSelectPerson={onSelectPerson}
           onFocusInTree={(id) => {
             if (onFocusInTree) {
@@ -165,234 +141,141 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
               onNavigate('tree');
             }
           }}
-          placeholder="Nhập tên thành viên (ví dụ: Trần Văn, Khang, Bá Thông, 1954, đời 2)..."
+          placeholder="Tìm tên, năm sinh hoặc đời thứ"
         />
+      </section>
+
+      <section aria-label="Số liệu phả hệ" className="grid grid-cols-2 gap-2.5 sm:gap-3.5 lg:grid-cols-4">
+        {statistics.map(({ label, value, unit, note, icon: Icon, tab }) => (
+          <button
+            key={label}
+            type="button"
+            onClick={() => onNavigate(tab)}
+            className={`${surface} group flex flex-col gap-2.5 p-3 text-left hover:border-[#9FB5A7] sm:p-4 ${focus}`}
+          >
+            <span className="flex w-full items-center gap-2 text-sm font-semibold text-[#54483C]">
+              <Icon aria-hidden="true" className="size-4 shrink-0 text-[#1B3B2B]" />
+              {label}
+            </span>
+            <span className="flex flex-wrap items-baseline gap-x-1.5">
+              <span className="font-serif text-3xl font-bold leading-none text-[#1F1913] tabular-nums sm:text-4xl">{value}</span>
+              {unit && <span className="text-sm text-[#655A4E]">{unit}</span>}
+            </span>
+            <span className="mt-auto flex items-center justify-between gap-1 text-sm leading-snug text-[#655A4E]">
+              <span>{note}</span>
+              <ArrowRight aria-hidden="true" className="hidden size-4 shrink-0 text-[#1B3B2B] sm:block" />
+            </span>
+          </button>
+        ))}
+      </section>
+
+      <div className="min-w-0 space-y-4">
+        <UpcomingAnniversariesWidget onSelectPerson={onSelectPerson} onNavigate={onNavigate} />
+        <BackupReminderBanner onNavigate={onNavigate} />
       </div>
 
-      {/* Persistent Backup Reminder Banner (monitors >30 days export interval) */}
-      <BackupReminderBanner onNavigate={onNavigate} />
+      <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start">
+        <section aria-labelledby="dashboard-stories" className={`${surface} p-4 sm:p-5`}>
+          <div className="flex flex-wrap items-center justify-between gap-x-3 border-b border-[#E7DFD4] pb-2">
+            <h2 id="dashboard-stories" className="flex items-center gap-2 text-xl font-bold text-[#1F1913]">
+              <BookOpen aria-hidden="true" className="size-5 shrink-0 text-[#1B3B2B]" />
+              Nhật ký dòng họ
+            </h2>
+            <button
+              type="button"
+              onClick={() => onNavigate('journal')}
+              className={`inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold text-[#1B3B2B] hover:underline ${focus}`}
+            >
+              Xem tất cả ({stories.length})
+              <ArrowRight aria-hidden="true" className="size-4" />
+            </button>
+          </div>
 
-      {/* Upcoming Anniversaries Widget (Within 30 days death anniversary reminders) */}
-      <UpcomingAnniversariesWidget onSelectPerson={onSelectPerson} onNavigate={onNavigate} />
-
-      {/* 4 Stats Cards */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-        <div
-          onClick={() => onNavigate('members')}
-          className="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs hover:border-[#1B3B2B]/40 hover:shadow-md transition-all cursor-pointer group"
-        >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
-              Thành viên
-            </span>
-            <Users className="w-4 h-4 text-[#1B3B2B] group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-[#1F1913]">
-              {people.length}
-            </span>
-            <span className="text-[11px] text-stone-500">người</span>
-          </div>
-          <p className="text-[10px] text-stone-400 mt-1">
-            {livingCount} còn sống • {deceasedCount} đã mất
-          </p>
-        </div>
-
-        <div
-          onClick={() => onNavigate('stats')}
-          className="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs hover:border-[#1B3B2B]/40 hover:shadow-md transition-all cursor-pointer group"
-          title="Bấm để mở trang Thống kê phả hệ chi tiết"
-        >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
-              Thế hệ phả hệ
-            </span>
-            <BarChart3 className="w-4 h-4 text-[#C19B4C] group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-[#1F1913]">
-              {maxGeneration}
-            </span>
-            <span className="text-[11px] text-stone-500">đời</span>
-          </div>
-          <p className="text-[10px] text-stone-400 mt-1 flex items-center justify-between">
-            <span>Từ đời Thủy tổ đến nay</span>
-            <span className="text-[#1B3B2B] font-medium group-hover:underline">Xem biểu đồ →</span>
-          </p>
-        </div>
-
-        <div
-          onClick={() => onNavigate('members')}
-          className="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs hover:border-[#1B3B2B]/40 hover:shadow-md transition-all cursor-pointer group"
-        >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
-              Chi họ / Nhánh
-            </span>
-            <Sparkles className="w-4 h-4 text-[#8C3A27] group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-[#1F1913]">
-              {branches.length}
-            </span>
-            <span className="text-[11px] text-stone-500">chi họ</span>
-          </div>
-          <p className="text-[10px] text-stone-400 mt-1">Bao gồm Đại Tôn và các Chi</p>
-        </div>
-
-        <div
-          onClick={() => onNavigate('gallery')}
-          className="p-4 sm:p-5 rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-xs hover:border-[#1B3B2B]/40 hover:shadow-md transition-all cursor-pointer group"
-        >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-stone-500 uppercase tracking-wider">
-              Kho kỷ vật
-            </span>
-            <ImageIcon className="w-4 h-4 text-[#2D5A43] group-hover:scale-110 transition-transform" />
-          </div>
-          <div className="mt-2 flex items-baseline gap-2">
-            <span className="text-2xl sm:text-3xl font-serif font-bold text-[#1F1913]">
-              {media.length}
-            </span>
-            <span className="text-[11px] text-stone-500">tư liệu</span>
-          </div>
-          <p className="text-[10px] text-stone-400 mt-1">Ảnh lịch sử, sắc phong, gia phả</p>
-        </div>
-      </div>
-
-      {/* 2-Column Section: Ký ức gia tộc & Các bậc trưởng bối */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
-        {/* Left Column (2 spans): Family Stories & Memory Records */}
-        <div className="lg:col-span-2 space-y-6">
-
-          {/* Family Stories & Memory Records */}
-          <div className="rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 shadow-xs space-y-4">
-            <div className="flex items-center justify-between border-b border-[#E7DFD4] pb-3">
-              <div className="flex items-center gap-2">
-                <BookOpen className="w-4 h-4 text-[#1B3B2B]" />
-                <h3 className="text-sm font-serif font-bold text-[#1F1913]">
-                  Ký Ức & Nhật Ký Dòng Họ
-                </h3>
-              </div>
+          {stories.length === 0 ? (
+            <div className="py-5">
+              <p className="text-sm text-[#655A4E]">Chưa có ghi chép trong nhật ký.</p>
               <button
                 type="button"
                 onClick={() => onNavigate('journal')}
-                className="flex items-center gap-1 text-xs font-semibold text-[#1B3B2B] hover:text-[#254F3A] hover:underline"
+                className={`mt-2 inline-flex min-h-11 items-center gap-2 rounded-xl bg-[#1B3B2B] px-3 text-sm font-semibold text-white hover:bg-[#254F3A] ${focus}`}
               >
-                <span>Xem tất cả ({stories.length})</span>
-                <span aria-hidden="true">→</span>
+                <Plus aria-hidden="true" className="size-4" />
+                Viết ghi chép đầu tiên
               </button>
             </div>
-
-            {stories.length === 0 ? (
-              <div className="text-center py-6 px-4 rounded-xl border border-dashed border-[#E7DFD4] space-y-2">
-                <p className="text-xs text-stone-500 font-serif">Chưa có bài ghi chép nhật ký nào.</p>
-                <button
-                  type="button"
-                  onClick={() => onNavigate('journal')}
-                  className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1B3B2B] text-white text-xs font-medium hover:bg-[#254F3A] transition-colors"
-                >
-                  <Plus className="w-3.5 h-3.5" />
-                  <span>Viết bài nhật ký đầu tiên</span>
-                </button>
-              </div>
-            ) : (
-              <div className="space-y-3">
-                {stories.slice(0, 3).map((story) => (
-                  <div
-                    key={story.id}
+          ) : (
+            <ul className="divide-y divide-[#E7DFD4]">
+              {stories.slice(0, 3).map((story) => (
+                <li key={story.id}>
+                  <button
+                    type="button"
                     onClick={() => onNavigate('journal')}
-                    className="p-4 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5]/80 space-y-2 hover:border-[#1B3B2B]/40 hover:bg-[#FAF8F5] transition-all cursor-pointer group"
+                    className={`group block w-full rounded-lg px-1 py-3 text-left sm:px-2 ${focus}`}
                   >
-                    <div className="flex items-center justify-between gap-2">
-                      <h4 className="text-xs font-serif font-bold text-[#1F1913] group-hover:text-[#1B3B2B] transition-colors">
+                    <span className="flex min-w-0 flex-wrap items-baseline gap-x-3 gap-y-1">
+                      <span className="min-w-0 font-serif text-lg font-bold leading-snug text-[#1F1913] [overflow-wrap:anywhere] group-hover:underline">
                         {story.title}
-                      </h4>
+                      </span>
                       {story.periodLabel && (
-                        <span className="text-[11px] text-[#8C6D32] font-semibold shrink-0">
-                          {story.periodLabel}
-                        </span>
+                        <span className="min-w-0 text-xs font-semibold leading-snug text-[#8C6D32] [overflow-wrap:anywhere]">{story.periodLabel}</span>
                       )}
-                    </div>
-                    {story.summary && (
-                      <p className="text-xs text-[#54483C] leading-relaxed italic">
-                        "{story.summary}"
-                      </p>
-                    )}
-                    <p className="text-xs text-[#3C3228] leading-relaxed line-clamp-2">
-                      {story.content}
-                    </p>
-                    <div className="flex items-center justify-between text-[10px] text-stone-400 pt-1">
-                      <span>{story.location || ''}</span>
-                      <span className="text-[#1B3B2B] font-semibold group-hover:underline">
-                        Đọc tiếp trong nhật ký →
-                      </span>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            )}
-          </div>
-        </div>
-
-        {/* Right Column: Elders & Lineage Head */}
-        <div className="space-y-6">
-          <div className="rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 shadow-xs space-y-4">
-            <div className="border-b border-[#E7DFD4] pb-3">
-              <h3 className="text-sm font-serif font-bold text-[#1F1913]">
-                Các Bậc Trưởng Bối Tiền Nhân
-              </h3>
-              <p className="text-[11px] text-stone-500">Khởi thủy và các thế hệ rường cột</p>
-            </div>
-
-            <div className="space-y-2.5">
-              {elders.map((elder) => (
-                <div
-                  key={elder.id}
-                  onClick={() => onSelectPerson(elder.id)}
-                  className="flex items-center gap-3 p-2 rounded-xl hover:bg-stone-50 cursor-pointer transition-colors"
-                >
-                  <HeritageAvatar
-                    fullName={elder.fullName}
-                    portraitUrl={elder.portraitUrl}
-                    gender={elder.gender}
-                    size="sm"
-                    isLiving={elder.isLiving}
-                  />
-                  <div className="flex-1 min-w-0">
-                    <div className="flex items-center gap-1.5 text-xs">
-                      <span className="font-bold text-[#1B3B2B]">
-                        Đời {elder.generation}
-                      </span>
-                      {elder.clanRole && (
-                        <>
-                          <span aria-hidden="true" className="text-stone-300">·</span>
-                          <span className="text-[11px] text-[#8C6D32] font-semibold truncate">
-                            {elder.clanRole}
-                          </span>
-                        </>
-                      )}
-                    </div>
-                    <p className="text-xs font-serif font-bold text-[#1F1913] truncate hover:text-[#1B3B2B]">
-                      {elder.fullName}
-                    </p>
-                    <p className="text-[10px] text-stone-400 truncate tabular-nums">
-                      {formatLifespan(elder.birthDate, elder.deathDate, elder.isLiving)}
-                    </p>
-                  </div>
-                </div>
+                    </span>
+                    {story.summary && <span className="mt-1 block text-sm italic leading-snug text-[#54483C] [overflow-wrap:anywhere]">{story.summary}</span>}
+                    <span className="mt-1 line-clamp-2 text-sm leading-relaxed text-[#655A4E] [overflow-wrap:anywhere]">{story.content}</span>
+                    {story.location && <span className="mt-2 block text-xs text-[#655A4E] [overflow-wrap:anywhere]">{story.location}</span>}
+                  </button>
+                </li>
               ))}
-            </div>
+            </ul>
+          )}
+        </section>
 
-            <button
-              type="button"
-              onClick={() => onNavigate('members')}
-              className="w-full py-2 rounded-xl text-xs font-semibold text-[#1B3B2B] bg-[#EAF2ED] hover:bg-[#D7E6DD] transition-colors"
-            >
-              Xem toàn bộ tộc nhân →
-            </button>
-          </div>
-        </div>
+        <section aria-labelledby="dashboard-elders" className={`${surface} p-4 sm:p-5`}>
+          <h2 id="dashboard-elders" className="border-b border-[#E7DFD4] pb-3 text-xl font-bold text-[#1F1913]">
+            Các bậc tiền nhân
+          </h2>
+          {elders.length === 0 ? (
+            <p className="py-4 text-sm text-[#655A4E]">Chưa có hồ sơ được ghi số đời.</p>
+          ) : (
+            <ul className="divide-y divide-[#E7DFD4]">
+              {elders.map((elder) => (
+                <li key={elder.id}>
+                  <button
+                    type="button"
+                    onClick={() => onSelectPerson(elder.id)}
+                    className={`group flex w-full items-center gap-3 rounded-lg px-1 py-2.5 text-left sm:px-2 ${focus}`}
+                  >
+                    <HeritageAvatar
+                      fullName={elder.fullName}
+                      portraitUrl={elder.portraitUrl}
+                      gender={elder.gender}
+                      size="sm"
+                      isLiving={elder.isLiving}
+                    />
+                    <span className="min-w-0 flex-1">
+                      <span className="block text-sm font-semibold text-[#1F1913] [overflow-wrap:anywhere] group-hover:underline">{elder.fullName}</span>
+                      <span className="mt-0.5 block text-xs text-[#655A4E] [overflow-wrap:anywhere]">
+                        Đời {elder.generation}{elder.clanRole ? ` · ${elder.clanRole}` : ''}
+                      </span>
+                      <span className="mt-0.5 block text-xs text-[#655A4E] tabular-nums">
+                        {formatLifespan(elder.birthDate, elder.deathDate, elder.isLiving)}
+                      </span>
+                    </span>
+                    <ArrowRight aria-hidden="true" className="size-4 shrink-0 text-[#8C6D32]" />
+                  </button>
+                </li>
+              ))}
+            </ul>
+          )}
+          <button
+            type="button"
+            onClick={() => onNavigate('members')}
+            className={`mt-2 inline-flex min-h-11 items-center gap-2 rounded-md text-sm font-semibold text-[#1B3B2B] hover:underline ${focus}`}
+          >
+            Xem toàn bộ thành viên
+            <ArrowRight aria-hidden="true" className="size-4" />
+          </button>
+        </section>
       </div>
     </div>
   );

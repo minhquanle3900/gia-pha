@@ -32,6 +32,13 @@ import {
 import { validateImportSnapshot } from '../../services/importValidationService';
 import { planSnapshotMerge } from '../../services/snapshotMergeService';
 
+const dataPanel = 'min-w-0 space-y-4 rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-3 shadow-xs sm:p-5';
+const dataField = 'min-h-11 w-full rounded-xl border border-[#D5CABE] bg-white px-3 py-2 text-base text-[#1F1913] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32]';
+const dataAction = 'inline-flex min-h-11 min-w-0 items-center justify-center gap-2 rounded-xl px-3 text-sm font-semibold transition-colors focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32] disabled:opacity-60';
+const dataPrimary = 'bg-[#1B3B2B] text-white hover:bg-[#28503C]';
+const dataSecondary = 'border border-[#D5CABE] bg-white text-[#1B3B2B] hover:bg-stone-50';
+const dataFileAction = `${dataAction} ${dataSecondary} w-full cursor-pointer focus-within:outline-2 focus-within:outline-offset-2 focus-within:outline-[#8C6D32]`;
+
 function describeDiagnostics(messages: string[]): string {
   const visible = messages.slice(0, 6).join('\n');
   return messages.length > 6 ? `${visible}\nCòn ${messages.length - 6} mục khác.` : visible;
@@ -131,6 +138,14 @@ export const DataManagementPage: React.FC = () => {
   }) | null>(null);
   const [csvPreviewOpen, setCsvPreviewOpen] = useState(false);
   const [isProcessingCsv, setIsProcessingCsv] = useState(false);
+  const csvPreviewDialogRef = useRef<HTMLDialogElement>(null);
+
+  useEffect(() => {
+    const dialog = csvPreviewDialogRef.current;
+    if (!csvPreviewOpen || !dialog) return;
+    dialog.showModal();
+    return () => dialog.close();
+  }, [csvPreviewOpen]);
 
   const handleSaveSettings = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -417,15 +432,12 @@ export const DataManagementPage: React.FC = () => {
   };
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto pb-12 animate-in fade-in">
-      {/* Header */}
-      <div className="border-b border-[#E7DFD4] pb-4">
-        <h2 className="text-xl sm:text-2xl font-serif font-bold text-[#1B3B2B] tracking-tight">
-          Quản Lý Dữ Liệu & Sao Lưu
-        </h2>
-        <p className="text-xs text-stone-500 mt-0.5">
-          Dữ liệu gia phả được lưu trữ an toàn trong IndexedDB của trình duyệt. Hãy thường xuyên xuất
-          bản sao lưu về máy tính hoặc điện thoại.
+    <div className="mx-auto min-w-0 max-w-5xl space-y-4 pb-16 sm:space-y-6">
+      <div className="rounded-2xl border border-[#2B4B3A] bg-[#1B3B2B] px-4 py-5 text-white sm:px-6 sm:py-6">
+        <Database aria-hidden="true" className="mb-2 size-5 text-[#DBC599]" />
+        <h1 className="text-3xl font-bold leading-none text-[#FFFDF9] sm:text-4xl">Quản lý dữ liệu</h1>
+        <p className="mt-2 max-w-lg text-sm leading-relaxed text-[#E6DFD5]">
+          Dữ liệu nằm trong trình duyệt này. Hãy giữ một bản sao lưu khi đổi thiết bị hoặc trước khi thay thế dữ liệu.
         </p>
       </div>
 
@@ -433,66 +445,137 @@ export const DataManagementPage: React.FC = () => {
       {importNotice && (
         <div
           role={importNotice.type === 'error' ? 'alert' : 'status'}
-          className={`p-4 rounded-2xl border text-xs flex items-center justify-between gap-3 ${
+          className={`flex min-w-0 items-start justify-between gap-2 rounded-2xl border p-3 text-sm ${
             importNotice.type === 'success'
               ? 'bg-emerald-50 border-emerald-200 text-emerald-900'
               : 'bg-red-50 border-red-200 text-red-900'
           }`}
         >
-          <div className="flex items-center gap-2">
+          <div className="flex min-w-0 items-start gap-2 pt-1">
             {importNotice.type === 'success' ? (
               <CheckCircle className="w-4 h-4 text-emerald-600 shrink-0" />
             ) : (
               <AlertTriangle className="w-4 h-4 text-red-600 shrink-0" />
             )}
-            <span className="whitespace-pre-line break-words">{importNotice.message}</span>
+            <span className="min-w-0 break-words whitespace-pre-line">{importNotice.message}</span>
           </div>
           <button
             type="button"
             onClick={() => setImportNotice(null)}
-            className="text-xs font-semibold underline shrink-0"
+            className="min-h-11 shrink-0 rounded-lg px-2 font-semibold underline focus-visible:outline-2"
           >
             Đóng
           </button>
         </div>
       )}
 
+      <section aria-labelledby="json-backup-heading" className={`${dataPanel} border-t-4 border-t-[#1B3B2B]`}>
+        <div className="flex items-start gap-3">
+          <ShieldCheck aria-hidden="true" className="mt-0.5 size-5 shrink-0 text-[#1B3B2B]" />
+          <div className="min-w-0">
+            <h2 id="json-backup-heading" className="text-2xl font-bold leading-tight text-[#1F1913]">Sao lưu và khôi phục JSON</h2>
+            <p className="mt-1 text-sm leading-relaxed text-[#655A4E]">
+              Bản sao lưu giữ các bản ghi và tệp đã nhúng. Tệp từ đường dẫn ngoài có thể không mở trên thiết bị khác.
+            </p>
+          </div>
+        </div>
+
+        <div className="grid gap-3 sm:grid-cols-2">
+          <div className="flex min-w-0 flex-col justify-between gap-3 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] p-3 sm:p-4">
+            <div>
+              <h3 className="font-sans text-sm font-semibold text-[#1F1913]">Lưu bản sao</h3>
+              <p className="mt-1 text-sm text-[#655A4E]">Tải tệp JSON về để lưu giữ hoặc chuyển sang thiết bị khác.</p>
+            </div>
+            <button
+              type="button"
+              onClick={handleExportJson}
+              disabled={!snapshot}
+              className={`${dataAction} ${dataPrimary} w-full`}
+            >
+              <Download aria-hidden="true" className="size-4 shrink-0" />
+              Tải bản sao lưu JSON
+            </button>
+          </div>
+
+          <div className="min-w-0 space-y-3 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] p-3 sm:p-4">
+            <h3 id="json-mode-heading" className="font-sans text-sm font-semibold text-[#1F1913]">Nhập bản sao lưu</h3>
+            <div role="group" aria-labelledby="json-mode-heading" className="grid grid-cols-2 gap-1 rounded-xl border border-[#E3D9CC] bg-[#F1EBE1] p-1">
+              <button
+                type="button"
+                onClick={() => setJsonImportMode('replace')}
+                aria-pressed={jsonImportMode === 'replace'}
+                className={`${dataAction} px-2 text-xs ${jsonImportMode === 'replace' ? 'bg-[#1B3B2B] text-white' : 'text-[#54483C]'}`}
+              >
+                Thay thế toàn bộ
+              </button>
+              <button
+                type="button"
+                onClick={() => setJsonImportMode('merge')}
+                aria-pressed={jsonImportMode === 'merge'}
+                className={`${dataAction} px-2 text-xs ${jsonImportMode === 'merge' ? 'bg-[#1B3B2B] text-white' : 'text-[#54483C]'}`}
+              >
+                Gộp bổ sung
+              </button>
+            </div>
+            <p id="json-import-description" className="text-sm leading-snug text-[#655A4E]">
+              {jsonImportMode === 'merge'
+                ? 'Gộp bản ghi mới vào gia phả hiện có.'
+                : 'Khôi phục bản sao bằng cách thay thế dữ liệu hiện tại.'}
+            </p>
+            <label className={dataFileAction}>
+              <Upload aria-hidden="true" className="size-4 shrink-0" />
+              Chọn tệp JSON
+              <input
+                ref={jsonInputRef}
+                type="file"
+                accept=".json,application/json"
+                onChange={handleJsonFileSelected}
+                aria-describedby="json-import-description"
+                className="sr-only"
+              />
+            </label>
+          </div>
+        </div>
+      </section>
+
       {/* Clan Settings Section */}
-      <div className="rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 sm:p-6 shadow-xs space-y-4">
+      <section aria-labelledby="clan-settings" className={dataPanel}>
         <div className="flex items-center gap-2.5 border-b border-[#E7DFD4] pb-3">
           <Database className="w-5 h-5 text-[#1B3B2B]" />
           <div>
-            <h3 className="text-sm sm:text-base font-serif font-bold text-[#1F1913]">
-              Thông Tin Chung Về Dòng Tộc
-            </h3>
-            <p className="text-xs text-stone-500">
+            <h2 id="clan-settings" className="text-2xl font-bold leading-tight text-[#1F1913]">
+              Thông tin dòng họ
+            </h2>
+            <p className="text-sm text-[#655A4E]">
               Cập nhật tên họ, gia huấn, địa chỉ từ đường và nhân vật khởi thủy.
             </p>
           </div>
         </div>
 
         <form onSubmit={handleSaveSettings} className="space-y-4">
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+          <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
             <div>
-              <label className="block text-xs font-semibold text-[#54483C] mb-1">
+              <label htmlFor="clan-name" className="mb-1 block text-sm font-semibold text-[#54483C]">
                 Tên dòng họ / Gia tộc
               </label>
               <input
                 type="text"
+                id="clan-name"
                 value={clanName}
                 onChange={(e) => setClanName(e.target.value)}
-                className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                className={dataField}
               />
             </div>
 
             <div>
-              <label className="block text-xs font-semibold text-[#54483C] mb-1">
+              <label htmlFor="clan-root" className="mb-1 block text-sm font-semibold text-[#54483C]">
                 Nhân vật khởi thủy (Gốc cây gia phả)
               </label>
               <select
+                id="clan-root"
                 value={rootPersonId}
                 onChange={(e) => setRootPersonId(e.target.value)}
-                className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                className={dataField}
               >
                 <option value="">-- Tự động chọn đời 1 --</option>
                 {people.map((p) => (
@@ -505,56 +588,58 @@ export const DataManagementPage: React.FC = () => {
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#54483C] mb-1">
+            <label htmlFor="clan-motto" className="mb-1 block text-sm font-semibold text-[#54483C]">
               Gia huấn / Câu đối / Tôn chỉ dòng họ
             </label>
             <input
               type="text"
+              id="clan-motto"
               value={clanMotto}
               onChange={(e) => setClanMotto(e.target.value)}
-              className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+              className={dataField}
             />
           </div>
 
           <div>
-            <label className="block text-xs font-semibold text-[#54483C] mb-1">
+            <label htmlFor="clan-ancestral-hall" className="mb-1 block text-sm font-semibold text-[#54483C]">
               Địa chỉ Nhà thờ tổ / Từ đường dòng họ
             </label>
             <input
               type="text"
+              id="clan-ancestral-hall"
               value={ancestralHallLocation}
               onChange={(e) => setAncestralHallLocation(e.target.value)}
-              className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+              className={dataField}
             />
           </div>
 
-          <div className="flex items-center justify-between pt-2">
+          <div className="flex flex-col items-start gap-2 pt-2 sm:flex-row sm:items-center sm:justify-between">
             {settingsSuccess && (
-              <span className="text-xs font-medium text-emerald-700">
+              <span className="text-sm font-medium text-emerald-700" role="status">
                 ✓ Đã lưu cài đặt dòng họ thành công
               </span>
             )}
             <button
               type="submit"
-              className="ml-auto flex items-center gap-1.5 px-4 py-2 rounded-xl bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold shadow-xs transition-colors"
+              className={`${dataAction} ${dataPrimary} w-full sm:ml-auto sm:w-auto`}
             >
               <Save className="w-3.5 h-3.5" />
               <span>Lưu thông tin</span>
             </button>
           </div>
         </form>
-      </div>
+      </section>
 
       {/* Branch Management Section (Quản lý Chi họ / Phân nhánh) */}
-      <div className="rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 sm:p-6 shadow-xs space-y-4">
+      <section aria-labelledby="clan-branches" className={dataPanel}>
         <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 border-b border-[#E7DFD4] pb-3">
           <div className="flex items-center gap-2.5">
             <GitBranch className="w-5 h-5 text-[#8C6D32]" />
             <div>
-              <h3 className="text-sm sm:text-base font-serif font-bold text-[#1F1913]">
-                Quản Lý Chi Họ & Phân Nhánh ({branches.length})
-              </h3>
-              <p className="text-xs text-stone-500">
+              <h2 id="clan-branches" className="text-2xl font-bold leading-tight text-[#1F1913]">
+                Chi họ ({branches.length})
+              </h2>
+              <p className="text-sm text-[#655A4E]">
                 Tổ chức các chi trưởng, chi thứ hoặc chi di cư để lọc cây gia phả và bản đồ địa lý.
               </p>
             </div>
@@ -563,7 +648,7 @@ export const DataManagementPage: React.FC = () => {
           <button
             type="button"
             onClick={openAddBranch}
-            className="flex items-center gap-1.5 px-3.5 py-2 rounded-xl bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold shadow-xs transition-colors self-start sm:self-auto cursor-pointer"
+            className={`${dataAction} ${dataPrimary} w-full sm:w-auto`}
           >
             <Plus className="w-3.5 h-3.5" />
             <span>Thêm chi họ</span>
@@ -580,85 +665,93 @@ export const DataManagementPage: React.FC = () => {
             </h4>
 
             {branchError && (
-              <p className="text-xs text-red-700 font-medium">{branchError}</p>
+              <p id="branch-error" className="text-sm font-medium text-red-700 dark:text-[#F6C7BE]" role="alert">{branchError}</p>
             )}
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+            <div className="grid min-w-0 grid-cols-1 gap-3 md:grid-cols-3">
               <div>
-                <label className="block text-[11px] font-semibold text-[#54483C] mb-1">
+                <label htmlFor="branch-name" className="mb-1 block text-sm font-semibold text-[#54483C]">
                   Tên chi họ *
                 </label>
                 <input
                   type="text"
-                  value={branchName}
+                  id="branch-name"
+                value={branchName}
                   onChange={(e) => setBranchName(e.target.value)}
                   placeholder="Ví dụ: Chi Ất (Nhánh Hai)"
-                  className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                  aria-invalid={Boolean(branchError)}
+                  aria-describedby={branchError ? 'branch-error' : undefined}
+                  className={dataField}
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold text-[#54483C] mb-1">
+                <label htmlFor="branch-origin" className="mb-1 block text-sm font-semibold text-[#54483C]">
                   Quê gốc / Địa bàn lập chi
                 </label>
                 <input
                   type="text"
-                  value={branchOrigin}
+                  id="branch-origin"
+                value={branchOrigin}
                   onChange={(e) => setBranchOrigin(e.target.value)}
                   placeholder="Ví dụ: Nam Định hoặc TP.HCM"
-                  className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                  className={dataField}
                 />
               </div>
               <div>
-                <label className="block text-[11px] font-semibold text-[#54483C] mb-1">
+                <label htmlFor="branch-period" className="mb-1 block text-sm font-semibold text-[#54483C]">
                   Thời kỳ khởi lập
                 </label>
                 <input
                   type="text"
-                  value={branchPeriod}
+                  id="branch-period"
+                value={branchPeriod}
                   onChange={(e) => setBranchPeriod(e.target.value)}
                   placeholder="Ví dụ: Thế kỷ XIX (Khoảng 1880)"
-                  className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                  className={dataField}
                 />
               </div>
             </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 items-end">
+            <div className="grid min-w-0 grid-cols-1 items-end gap-3 md:grid-cols-3">
               <div>
-                <label className="block text-[11px] font-semibold text-[#54483C] mb-1">
+                <label htmlFor="branch-code" className="mb-1 block text-sm font-semibold text-[#54483C]">
                   Mã chi họ
                 </label>
                 <input
                   type="text"
-                  value={branchCode}
+                  id="branch-code"
+                value={branchCode}
                   onChange={(e) => setBranchCode(e.target.value)}
                   placeholder="Ví dụ: CHI_AT"
-                  className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                  className={dataField}
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-[#54483C] mb-1">
+                <label htmlFor="branch-sub-branches" className="mb-1 block text-sm font-semibold text-[#54483C]">
                   Các phái (ngăn cách dấu phẩy)
                 </label>
                 <input
                   type="text"
-                  value={branchSubBranches}
+                  id="branch-sub-branches"
+                value={branchSubBranches}
                   onChange={(e) => setBranchSubBranches(e.target.value)}
                   placeholder="Ví dụ: Phái Nhất, Phái Nhì"
-                  className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                  className={dataField}
                 />
               </div>
 
               <div>
-                <label className="block text-[11px] font-semibold text-[#54483C] mb-1">
+                <label htmlFor="branch-description" className="mb-1 block text-sm font-semibold text-[#54483C]">
                   Mô tả ngắn
                 </label>
                 <input
                   type="text"
-                  value={branchDesc}
+                  id="branch-description"
+                value={branchDesc}
                   onChange={(e) => setBranchDesc(e.target.value)}
                   placeholder="Ghi chú nguồn gốc phân chi..."
-                  className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white px-3 py-2 outline-none focus:border-[#1B3B2B]"
+                  className={dataField}
                 />
               </div>
             </div>
@@ -670,13 +763,13 @@ export const DataManagementPage: React.FC = () => {
                   setBranchFormOpen(false);
                   setEditingBranch(null);
                 }}
-                className="px-3 py-1.5 rounded-xl border border-[#D5CABE] bg-white text-xs font-medium text-stone-600 hover:bg-stone-50 cursor-pointer"
+                className={`${dataAction} ${dataSecondary}`}
               >
                 Hủy
               </button>
               <button
                 type="submit"
-                className="px-4 py-1.5 rounded-xl bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold cursor-pointer"
+                className={`${dataAction} ${dataPrimary}`}
               >
                 {editingBranch ? 'Cập nhật chi họ' : 'Lưu chi họ'}
               </button>
@@ -685,7 +778,7 @@ export const DataManagementPage: React.FC = () => {
         )}
 
         {branches.length === 0 ? (
-          <p className="text-xs text-stone-500 italic py-2">
+          <p className="text-sm text-[#655A4E] italic py-2">
             Chưa có chi họ nào được tạo. Nhấn "Thêm chi họ" để phân chia các nhánh gia tộc.
           </p>
         ) : (
@@ -695,15 +788,15 @@ export const DataManagementPage: React.FC = () => {
               return (
                 <div
                   key={branch.id}
-                  className="p-3.5 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] flex items-start justify-between gap-3"
+                  className="flex min-w-0 items-start justify-between gap-2 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] p-3"
                 >
                   <div className="min-w-0 space-y-1">
-                    <div className="flex items-center gap-2">
-                      <h4 className="text-xs font-serif font-bold text-[#1F1913] truncate">
+                    <div className="flex min-w-0 flex-wrap items-baseline gap-x-2">
+                      <h4 className="break-words text-base font-bold text-[#1F1913]">
                         {branch.name}
                       </h4>
                       {branch.code && (
-                        <span className="text-[10px] font-mono text-stone-400">
+                        <span className="min-w-0 break-all font-mono text-xs text-[#655A4E]">
                           {branch.code}
                         </span>
                       )}
@@ -713,7 +806,7 @@ export const DataManagementPage: React.FC = () => {
                       {branch.originPlace && (
                         <>
                           <span aria-hidden="true">·</span>
-                          <span className="truncate max-w-[180px]">{branch.originPlace}</span>
+                          <span className="min-w-0 break-words">{branch.originPlace}</span>
                         </>
                       )}
                       {branch.establishedPeriod && (
@@ -733,20 +826,20 @@ export const DataManagementPage: React.FC = () => {
                     )}
                   </div>
 
-                  <div className="flex items-center gap-1 shrink-0">
+                  <div className="flex shrink-0 items-center gap-0.5">
                     <button
                       type="button"
                       onClick={() => openEditBranch(branch)}
-                      className="p-1.5 rounded-lg text-stone-500 hover:text-[#1B3B2B] hover:bg-white transition-colors cursor-pointer"
-                      title="Sửa chi họ"
+                      className="inline-flex size-11 items-center justify-center rounded-lg text-[#655A4E] hover:bg-white focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32]"
+                      aria-label={`Sửa chi họ ${branch.name}`}
                     >
                       <Edit3 className="w-3.5 h-3.5" />
                     </button>
                     <button
                       type="button"
                       onClick={() => setDeletingBranch(branch)}
-                      className="p-1.5 rounded-lg text-stone-400 hover:text-red-700 hover:bg-red-50 transition-colors cursor-pointer"
-                      title="Xóa chi họ"
+                      className="inline-flex size-11 items-center justify-center rounded-lg text-red-700 hover:bg-red-50 focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[#8C6D32] dark:text-[#F6C7BE]"
+                      aria-label={`Xóa chi họ ${branch.name}`}
                     >
                       <Trash2 className="w-3.5 h-3.5" />
                     </button>
@@ -756,120 +849,34 @@ export const DataManagementPage: React.FC = () => {
             })}
           </div>
         )}
-      </div>
-
-      {/* Backup & Restore JSON Section */}
-      <div className="rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 sm:p-6 shadow-xs space-y-4">
-        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2 border-b border-[#E7DFD4] pb-3">
-          <div className="flex items-center gap-2.5">
-            <ShieldCheck className="w-5 h-5 text-emerald-700" />
-            <div>
-              <h3 className="text-sm sm:text-base font-serif font-bold text-[#1F1913]">
-                Sao Lưu Toàn Vẹn JSON (Định Dạng Chuẩn)
-              </h3>
-              <p className="text-xs text-stone-500">
-                Xuất hoặc nhập tệp sao lưu .json trọn vẹn (bao gồm mọi hồ sơ, quan hệ, chi họ và ảnh tư liệu Base64).
-              </p>
-            </div>
-          </div>
-
-          {/* Import mode switch */}
-          <div className="flex items-center gap-1 bg-[#F1EBE1] p-1 rounded-xl border border-[#E3D9CC] self-start sm:self-auto text-[11px] font-semibold">
-            <button
-              type="button"
-              onClick={() => setJsonImportMode('replace')}
-              className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
-                jsonImportMode === 'replace'
-                  ? 'bg-[#1B3B2B] text-white'
-                  : 'text-[#54483C] hover:text-[#1B3B2B]'
-              }`}
-            >
-              Thay thế toàn bộ
-            </button>
-            <button
-              type="button"
-              onClick={() => setJsonImportMode('merge')}
-              className={`px-2.5 py-1 rounded-lg transition-colors cursor-pointer ${
-                jsonImportMode === 'merge'
-                  ? 'bg-[#1B3B2B] text-white'
-                  : 'text-[#54483C] hover:text-[#1B3B2B]'
-              }`}
-            >
-              Gộp bổ sung
-            </button>
-          </div>
-        </div>
-
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          <div className="p-4 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] space-y-3 flex flex-col justify-between">
-            <div>
-              <h4 className="text-xs font-bold text-[#1F1913]">Xuất bản sao lưu .JSON</h4>
-              <p className="text-xs text-stone-500 mt-1">
-                Tải tệp sao lưu về máy. Bạn có thể chuyển tệp này sang máy khác hoặc gửi cho người thân trong dòng họ.
-              </p>
-            </div>
-            <button
-              type="button"
-              onClick={handleExportJson}
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold shadow-xs transition-colors cursor-pointer"
-            >
-              <Download className="w-4 h-4" />
-              <span>Tải bản sao lưu JSON</span>
-            </button>
-          </div>
-
-          <div className="p-4 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] space-y-3 flex flex-col justify-between">
-            <div>
-              <h4 className="text-xs font-bold text-[#1F1913]">
-                {jsonImportMode === 'merge' ? 'Gộp thêm dữ liệu từ .JSON' : 'Khôi phục từ tệp .JSON'}
-              </h4>
-              <p className="text-xs text-stone-500 mt-1">
-                {jsonImportMode === 'merge'
-                  ? 'Bổ sung thành viên và quan hệ mới từ tệp JSON vào gia phả hiện có mà không xóa dữ liệu cũ.'
-                  : 'Chọn tệp JSON đã lưu trước đó để phục hồi toàn bộ dữ liệu dòng họ vào trình duyệt.'}
-              </p>
-            </div>
-            <label className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white border border-[#D5CABE] hover:bg-stone-50 text-[#1F1913] text-xs font-semibold cursor-pointer shadow-xs transition-colors">
-              <Upload className="w-4 h-4 text-[#1B3B2B]" />
-              <span>Chọn tệp sao lưu JSON...</span>
-              <input
-                ref={jsonInputRef}
-                type="file"
-                accept=".json,application/json"
-                onChange={handleJsonFileSelected}
-                className="hidden"
-              />
-            </label>
-          </div>
-        </div>
-      </div>
+      </section>
 
       {/* GEDCOM 5.5.1 Section */}
-      <div className="rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 sm:p-6 shadow-xs space-y-4">
+      <section aria-labelledby="gedcom-heading" className={dataPanel}>
         <div className="flex items-center gap-2.5 border-b border-[#E7DFD4] pb-3">
           <FileCode className="w-5 h-5 text-[#8C6D32]" />
           <div>
-            <h3 className="text-sm sm:text-base font-serif font-bold text-[#1F1913]">
-              Trao Đổi Chuẩn GEDCOM 5.5.1 (Quốc Tế)
-            </h3>
-            <p className="text-xs text-stone-500">
-              Tương thích với các ứng dụng phả hệ thế giới (Gramps, MyHeritage, FamilySearch). Hỗ trợ mã hóa UTF-8 tiếng Việt.
+            <h2 id="gedcom-heading" className="text-2xl font-bold leading-tight text-[#1F1913]">
+              Trao đổi GEDCOM
+            </h2>
+            <p className="text-sm text-[#655A4E]">
+              Nhập hoặc xuất cây phả hệ GEDCOM 5.5.1 bằng tiếng Việt.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
           <div className="p-4 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] space-y-3 flex flex-col justify-between">
             <div>
-              <h4 className="text-xs font-bold text-[#1F1913]">Xuất tệp GEDCOM (.ged)</h4>
-              <p className="text-xs text-stone-500 mt-1">
+              <h4 className="font-sans text-sm font-semibold text-[#1F1913]">Xuất tệp GEDCOM (.ged)</h4>
+              <p className="mt-1 text-sm text-[#655A4E]">
                 Trao đổi cấu trúc phả hệ và các trường tiếng Việt được hỗ trợ. Dùng JSON để sao lưu toàn bộ dữ liệu.
               </p>
             </div>
             <button
               type="button"
               onClick={handleExportGedcom}
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-[#8C6D32] hover:bg-[#735724] text-white text-xs font-semibold shadow-xs transition-colors"
+              className={`${dataAction} ${dataSecondary} w-full`}
             >
               <Download className="w-4 h-4" />
               <span>Xuất tệp GEDCOM</span>
@@ -878,12 +885,12 @@ export const DataManagementPage: React.FC = () => {
 
           <div className="p-4 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] space-y-3 flex flex-col justify-between">
             <div>
-              <h4 className="text-xs font-bold text-[#1F1913]">Nhập tệp GEDCOM (.ged)</h4>
-              <p className="text-xs text-stone-500 mt-1">
+              <h4 className="font-sans text-sm font-semibold text-[#1F1913]">Nhập tệp GEDCOM (.ged)</h4>
+              <p className="mt-1 text-sm text-[#655A4E]">
                 Nhập phả hệ từ các phần mềm khác để tiếp tục quản lý và vẽ cây trong Gia Phả Việt.
               </p>
             </div>
-            <label className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white border border-[#D5CABE] hover:bg-stone-50 text-[#1F1913] text-xs font-semibold cursor-pointer shadow-xs transition-colors">
+            <label className={dataFileAction}>
               <Upload className="w-4 h-4 text-[#8C6D32]" />
               <span>Chọn tệp GEDCOM...</span>
               <input
@@ -891,83 +898,82 @@ export const DataManagementPage: React.FC = () => {
                 type="file"
                 accept=".ged"
                 onChange={handleGedcomFileSelected}
-                className="hidden"
+                className="sr-only"
               />
             </label>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Excel / CSV Bulk Import Section */}
-      <div className="rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] p-5 sm:p-6 shadow-xs space-y-4">
+      <section aria-labelledby="csv-heading" className={dataPanel}>
         <div className="flex items-center gap-2.5 border-b border-[#E7DFD4] pb-3">
           <FileSpreadsheet className="w-5 h-5 text-emerald-700" />
           <div>
-            <h3 className="text-sm sm:text-base font-serif font-bold text-[#1F1913]">
-              Nhập Dữ Liệu Hàng Loạt Từ Excel / CSV
-            </h3>
-            <p className="text-xs text-stone-500">
-              Nhập hàng chục hoặc hàng trăm thành viên cùng lúc. Tự động liên kết quan hệ cha mẹ, vợ chồng và chi họ.
+            <h2 id="csv-heading" className="text-2xl font-bold leading-tight text-[#1F1913]">
+              Nhập CSV
+            </h2>
+            <p className="text-sm text-[#655A4E]">
+              Thêm nhiều thành viên từ bảng tính lưu dưới dạng CSV.
             </p>
           </div>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div className="grid min-w-0 grid-cols-1 gap-3 sm:grid-cols-2">
           <div className="p-4 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] space-y-3 flex flex-col justify-between">
             <div>
-              <h4 className="text-xs font-bold text-[#1F1913]">Tải tệp mẫu Excel (.csv)</h4>
-              <p className="text-xs text-stone-500 mt-1">
-                Tệp mẫu tiếng Việt chuẩn UTF-8 có sẵn tiêu đề các cột và 3 dòng ví dụ mẫu mực để bạn dễ dàng điền tiếp.
+              <h4 className="font-sans text-sm font-semibold text-[#1F1913]">Tải tệp mẫu Excel (.csv)</h4>
+              <p className="mt-1 text-sm text-[#655A4E]">
+                Dùng tệp mẫu để điền đúng tên cột.
               </p>
             </div>
             <button
               type="button"
               onClick={handleDownloadCsvTemplate}
-              className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white text-xs font-semibold shadow-xs transition-colors"
+              className={`${dataAction} ${dataSecondary} w-full`}
             >
               <Download className="w-4 h-4" />
-              <span>Tải File Mẫu Excel / CSV</span>
+              <span>Tải mẫu CSV</span>
             </button>
           </div>
 
           <div className="p-4 rounded-xl border border-[#E7DFD4] bg-[#FAF8F5] space-y-3 flex flex-col justify-between">
             <div>
-              <h4 className="text-xs font-bold text-[#1F1913]">Tải lên danh sách thành viên</h4>
-              <p className="text-xs text-stone-500 mt-1">
-                Chọn file CSV đã điền thông tin để xem trước bảng đối chiếu và tự động dựng cây gia phả.
+              <h4 className="font-sans text-sm font-semibold text-[#1F1913]">Tải lên danh sách thành viên</h4>
+              <p className="mt-1 text-sm text-[#655A4E]">
+                Xem trước các hồ sơ và quan hệ trước khi nhập.
               </p>
             </div>
-            <label className="flex items-center justify-center gap-2 w-full py-2.5 rounded-xl bg-white border border-[#D5CABE] hover:bg-stone-50 text-[#1F1913] text-xs font-semibold cursor-pointer shadow-xs transition-colors">
+            <label className={dataFileAction}>
               <Upload className="w-4 h-4 text-emerald-700" />
-              <span>{isProcessingCsv ? 'Đang phân tích...' : 'Chọn tệp CSV / Excel...'}</span>
+              <span>{isProcessingCsv ? 'Đang phân tích...' : 'Chọn tệp CSV'}</span>
               <input
                 ref={csvInputRef}
                 type="file"
                 accept=".csv,.txt"
                 onChange={handleCsvFileSelected}
-                className="hidden"
+                className="sr-only"
               />
             </label>
           </div>
         </div>
-      </div>
+      </section>
 
       {/* Reset Demo Data Section */}
-      <div className="rounded-2xl bg-amber-50/70 border border-amber-200 p-5 space-y-3">
+      <div className="min-w-0 space-y-3 rounded-2xl border border-amber-200 bg-amber-50 p-3 sm:p-5">
         <div className="flex items-center gap-2.5">
           <RotateCcw className="w-5 h-5 text-amber-700" />
           <h3 className="text-sm font-serif font-bold text-[#1F1913]">
-            Khôi Phục Dữ Liệu Mẫu (Demo Reset)
+            Dữ liệu mẫu
           </h3>
         </div>
         <p className="text-xs text-amber-900 leading-relaxed">
-          Nạp lại bộ dữ liệu phả hệ mẫu mực 5 thế hệ (Dòng họ Trần – Đông Ngạc) với đầy đủ chân dung,
-          chi họ, đa hôn phối, ngày giỗ âm lịch và câu chuyện gia tộc.
+          Nạp dữ liệu mẫu họ Trần – Đông Ngạc sẽ thay thế dữ liệu đang có.
         </p>
         <button
           type="button"
           onClick={() => setResetConfirmOpen(true)}
-          className="flex items-center gap-1.5 px-4 py-2 rounded-xl bg-amber-700 hover:bg-amber-800 text-white text-xs font-semibold shadow-xs transition-colors"
+          className={`${dataAction} w-full bg-amber-800 text-white hover:bg-amber-900 sm:w-auto`}
         >
           <RotateCcw className="w-3.5 h-3.5" />
           <span>Nạp lại dữ liệu mẫu</span>
@@ -1034,118 +1040,126 @@ export const DataManagementPage: React.FC = () => {
 
       {/* CSV Import Preview Modal */}
       {csvPreviewOpen && csvResult && (
-        <div
-          className="fixed inset-0 z-50 bg-black/60 backdrop-blur-xs flex items-center justify-center p-3 sm:p-5 overflow-y-auto animate-in fade-in"
-          onClick={() => { if (!isApplyingImport) setCsvPreviewOpen(false); }}
+        <dialog
+          ref={csvPreviewDialogRef}
+          aria-labelledby="csv-preview-title"
+          aria-busy={isApplyingImport}
+          onCancel={(event) => {
+            event.preventDefault();
+            if (!isApplyingImport) setCsvPreviewOpen(false);
+          }}
+          onClick={(event) => {
+            if (event.target === event.currentTarget && !isApplyingImport) setCsvPreviewOpen(false);
+          }}
+          className="m-auto w-[calc(100%-1rem)] max-w-3xl rounded-2xl border border-[#E7DFD4] bg-[#FFFDF9] p-0 text-[#1F1913] shadow-2xl backdrop:bg-black/60"
         >
-          <div
-            className="w-full max-w-3xl bg-[#FFFDF9] rounded-3xl border border-[#E7DFD4] p-6 shadow-2xl space-y-4 max-h-[90vh] flex flex-col"
-            onClick={(e) => e.stopPropagation()}
-          >
-            <div className="flex items-center justify-between border-b border-[#E7DFD4] pb-3">
-              <div className="flex items-center gap-2">
-                <FileSpreadsheet className="w-5 h-5 text-emerald-700" />
-                <h3 className="font-serif font-bold text-base text-[#1F1913]">
-                  Xem Trước Dữ Liệu Nhập Từ CSV ({csvResult.totalRows} thành viên)
-                </h3>
+          <div className="flex max-h-[85dvh] min-w-0 flex-col gap-3 p-3 sm:p-5">
+            <div className="flex shrink-0 items-center justify-between gap-2 border-b border-[#E7DFD4] pb-2">
+              <div className="flex min-w-0 items-start gap-2">
+                <FileSpreadsheet aria-hidden="true" className="mt-1 size-5 shrink-0 text-[#1B3B2B]" />
+                <div>
+                  <h2 id="csv-preview-title" className="text-xl font-bold leading-tight">Xem trước tệp CSV</h2>
+                  <p className="mt-0.5 text-sm text-[#655A4E]">{csvResult.totalRows} dòng dữ liệu</p>
+                </div>
               </div>
               <button
                 type="button"
                 disabled={isApplyingImport}
                 onClick={() => setCsvPreviewOpen(false)}
-                className="p-1 rounded-xl text-stone-400 hover:text-stone-700"
+                aria-label="Đóng xem trước CSV"
+                className="inline-flex size-11 shrink-0 items-center justify-center rounded-xl text-[#655A4E] hover:bg-stone-50 focus-visible:outline-2"
               >
-                ✕
+                <span aria-hidden="true">✕</span>
               </button>
             </div>
 
-            {/* Stats Badge */}
-            <div className="grid grid-cols-3 gap-2.5 text-center text-xs">
-              <div className="p-2.5 rounded-xl bg-emerald-50 border border-emerald-200">
+            <div className="grid shrink-0 grid-cols-3 gap-1.5 text-center text-xs sm:gap-3">
+              <div className="min-w-0 rounded-lg border border-emerald-200 bg-emerald-50 p-1.5">
                 <p className="font-bold text-emerald-900 text-lg tabular-nums">
                   {csvResult.parsedPeople.length}
                 </p>
-                <p className="text-[10px] text-emerald-700">Thành viên nhận diện</p>
+                <p className="text-emerald-900">Hồ sơ</p>
               </div>
-              <div className="p-2.5 rounded-xl bg-amber-50 border border-amber-200">
+              <div className="min-w-0 rounded-lg border border-amber-200 bg-amber-50 p-1.5">
                 <p className="font-bold text-amber-900 text-lg tabular-nums">
                   {csvResult.parsedRelationships.length}
                 </p>
-                <p className="text-[10px] text-amber-700">Mối quan hệ Cha/Mẹ - Con</p>
+                <p className="text-amber-900">Quan hệ cha mẹ</p>
               </div>
-              <div className="p-2.5 rounded-xl bg-rose-50 border border-rose-200">
+              <div className="min-w-0 rounded-lg border border-rose-200 bg-rose-50 p-1.5">
                 <p className="font-bold text-rose-900 text-lg tabular-nums">
                   {csvResult.parsedUnions.length}
                 </p>
-                <p className="text-[10px] text-rose-700">Cặp hôn phối (Vợ chồng)</p>
+                <p className="text-rose-900">Hôn phối</p>
               </div>
             </div>
 
-            {csvResult.errors.length > 0 && (
-              <p role="alert" className="max-h-32 overflow-auto whitespace-pre-line text-xs text-red-800">
-                {describeDiagnostics(csvResult.errors)}
-              </p>
-            )}
-            {csvResult.warnings.length > 0 && (
-              <p className="max-h-24 overflow-auto whitespace-pre-line text-xs text-amber-800">
-                {describeDiagnostics(csvResult.warnings)}
-              </p>
-            )}
-
-            {/* Table preview */}
-            <div className="flex-1 overflow-y-auto border border-[#E7DFD4] rounded-xl">
-              <table className="w-full text-left text-xs">
-                <thead className="bg-[#FAF7F2] text-stone-600 font-semibold border-b border-[#E7DFD4] sticky top-0">
-                  <tr>
-                    <th className="p-2">Dòng</th>
-                    <th className="p-2">Họ và tên</th>
-                    <th className="p-2">Giới tính</th>
-                    <th className="p-2">Đời</th>
-                    <th className="p-2">Cha / Mẹ</th>
-                    <th className="p-2">Bạn đời</th>
-                    <th className="p-2">Năm sinh - mất</th>
-                  </tr>
-                </thead>
-                <tbody className="divide-y divide-stone-100 bg-white">
-                  {csvResult.rows.map((row) => (
-                    <tr key={row.rowNumber} className="hover:bg-stone-50">
-                      <td className="p-2 font-mono text-[11px] text-stone-400">
-                        {row.rowNumber}
-                      </td>
-                      <td className="p-2 font-semibold text-[#1F1913]">{row.fullName}</td>
-                      <td className="p-2">
-                        {row.gender === 'male' ? 'Nam' : row.gender === 'female' ? 'Nữ' : '—'}
-                      </td>
-                      <td className="p-2 font-semibold text-[#1B3B2B]">
-                        {row.generation ? `Đời ${row.generation}` : '—'}
-                      </td>
-                      <td className="p-2 text-stone-600 text-[11px]">
-                        {[row.fatherName, row.motherName].filter(Boolean).join(' · ') || '—'}
-                      </td>
-                      <td className="p-2 text-stone-600 text-[11px]">
-                        {row.spouseName || '—'}
-                      </td>
-                      <td className="p-2 text-stone-500 text-[11px]">
-                        {row.birthYear || '?'} - {row.deathYear || (row.isLiving ? 'Còn sống' : '?')}
-                      </td>
+            <div className="min-h-0 min-w-0 space-y-2 overflow-y-auto p-0.5">
+              {csvResult.errors.length > 0 && (
+                <p role="alert" className="rounded-lg bg-red-50 p-2 text-sm break-words whitespace-pre-line text-red-800 dark:text-[#F6C7BE]">
+                  {describeDiagnostics(csvResult.errors)}
+                </p>
+              )}
+              {csvResult.warnings.length > 0 && (
+                <p className="rounded-lg bg-amber-50 p-2 text-sm break-words whitespace-pre-line text-amber-900">
+                  {describeDiagnostics(csvResult.warnings)}
+                </p>
+              )}
+              <div
+                role="region"
+                aria-label="Bảng dữ liệu CSV có thể cuộn ngang"
+                tabIndex={0}
+                className="max-w-full overflow-x-auto rounded-xl border border-[#E7DFD4] focus-visible:outline-2 focus-visible:outline-[#8C6D32]"
+              >
+                <table className="w-full min-w-[38rem] text-left text-xs">
+                  <thead className="border-b border-[#E7DFD4] bg-[#FAF7F2] font-semibold text-[#655A4E]">
+                    <tr>
+                      <th scope="col" className="p-2">Dòng</th>
+                      <th scope="col" className="p-2">Họ và tên</th>
+                      <th scope="col" className="p-2">Giới tính</th>
+                      <th scope="col" className="p-2">Đời</th>
+                      <th scope="col" className="p-2">Cha / Mẹ</th>
+                      <th scope="col" className="p-2">Bạn đời</th>
+                      <th scope="col" className="p-2">Năm sinh - mất</th>
                     </tr>
-                  ))}
-                </tbody>
-              </table>
+                  </thead>
+                  <tbody className="divide-y divide-stone-100 bg-white">
+                    {csvResult.rows.map((row) => (
+                      <tr key={row.rowNumber} className="hover:bg-stone-50">
+                        <td className="p-2 font-mono text-[#655A4E]">{row.rowNumber}</td>
+                        <td className="p-2 font-semibold">{row.fullName}</td>
+                        <td className="p-2">
+                          {row.gender === 'male' ? 'Nam' : row.gender === 'female' ? 'Nữ' : '—'}
+                        </td>
+                        <td className="p-2 font-semibold text-[#1B3B2B]">
+                          {row.generation ? `Đời ${row.generation}` : '—'}
+                        </td>
+                        <td className="p-2 text-[#655A4E]">
+                          {[row.fatherName, row.motherName].filter(Boolean).join(' · ') || '—'}
+                        </td>
+                        <td className="p-2 text-[#655A4E]">{row.spouseName || '—'}</td>
+                        <td className="p-2 text-[#655A4E]">
+                          {row.birthYear || '?'} - {row.deathYear || (row.isLiving ? 'Còn sống' : '?')}
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
             </div>
 
-            <div className="pt-2 border-t border-stone-200 flex items-center justify-between text-xs">
-              <span className="text-stone-500">
+            <div className="flex shrink-0 flex-col gap-2 border-t border-[#E7DFD4] pt-2 sm:flex-row sm:items-center sm:justify-between">
+              <p className="text-sm text-[#655A4E]">
                 {csvResult.errors.length > 0
                   ? 'Sửa các lỗi trong tệp CSV rồi chọn lại tệp.'
                   : 'Dữ liệu sẽ được bổ sung vào gia phả hiện tại.'}
-              </span>
-              <div className="flex items-center gap-2">
+              </p>
+              <div className="flex shrink-0 items-center justify-end gap-2">
                 <button
                   type="button"
                   disabled={isApplyingImport}
                 onClick={() => setCsvPreviewOpen(false)}
-                  className="px-4 py-2 rounded-xl bg-stone-100 hover:bg-stone-200 text-stone-700 font-medium"
+                  className={`${dataAction} ${dataSecondary}`}
                 >
                   Hủy
                 </button>
@@ -1153,14 +1167,14 @@ export const DataManagementPage: React.FC = () => {
                   type="button"
                   onClick={handleApplyCsvImport}
                   disabled={isApplyingImport || csvResult.errors.length > 0}
-                  className="px-5 py-2 rounded-xl bg-emerald-800 hover:bg-emerald-900 text-white font-semibold shadow-xs disabled:opacity-50"
+                  className={`${dataAction} ${dataPrimary}`}
                 >
-                  {isApplyingImport ? 'Đang nhập…' : 'Xác nhận Nhập vào Gia Phả'}
+                  {isApplyingImport ? 'Đang nhập…' : 'Xác nhận nhập'}
                 </button>
               </div>
             </div>
           </div>
-        </div>
+        </dialog>
       )}
     </div>
   );
