@@ -4,12 +4,13 @@ import {
   deleteMediaRecord,
   loadFullSnapshot,
   mergeDatabaseSnapshot,
+  mergePersonRecords,
   replaceEntireDatabase,
   restoreDatabaseSnapshot,
   savePersonRecord,
 } from '../database/db';
 import type { GenealogyDatabaseSnapshot, Media, Person } from '../models/genealogy';
-import { serializeDatabaseBackup, validateAndPreviewJsonBackup } from '../services/jsonBackupService';
+import { parseAndValidateJsonBackup, serializeDatabaseBackup, validateAndPreviewJsonBackup } from '../services/jsonBackupService';
 
 const timestamp = '2026-01-01T00:00:00.000Z';
 const timestamps = { createdAt: timestamp, updatedAt: timestamp };
@@ -191,4 +192,32 @@ it('rolls back an image inserted earlier in the save when writing the person fai
   const saved = await savePersonRecord(original, nextImage);
   expect((await storedData()).people[0].portraitMediaId).toBe(saved.portraitMediaId);
   expect((await storedData()).media).toHaveLength(2);
+});
+
+it('round-trips the backup after merging a profile with a portrait, story and event', async () => {
+  await replaceEntireDatabase(snapshot({
+    people: [person('a'), person('b')],
+    lifeEvents: [{ id: 'event', personId: 'a', title: 'Mốc tổng hợp', type: 'other', ...timestamps }],
+    stories: [{ id: 'story', title: 'Nhật ký tổng hợp', content: '', personIds: ['a'], mediaIds: [], ...timestamps }],
+  }));
+  const source = await savePersonRecord(person('a'), { dataUrl: image, mimeType: 'image/png' });
+  await mergePersonRecords('b', 'a');
+  const persisted = await loadFullSnapshot();
+  const backup = await serializeDatabaseBackup(persisted);
+  const preview = validateAndPreviewJsonBackup(backup, persisted, 'merge');
+  expect(preview.errors).toEqual([]);
+  await expect(mergeDatabaseSnapshot(preview.snapshot!)).resolves.toEqual({
+    addedPeople: 0, addedRelationships: 0, addedMedia: 0,
+  });
+
+  const restored = parseAndValidateJsonBackup(backup);
+  expect(restored.errors).toEqual([]);
+  await restoreDatabaseSnapshot(restored.snapshot!);
+  const stored = await storedData();
+  expect(stored.people).toEqual(persisted.people);
+  expect(stored.people[0]).toMatchObject({ id: 'b', portraitMediaId: source.portraitMediaId });
+  expect(stored.media).toEqual(persisted.media);
+  expect(stored.media[0].personIds).toEqual(['b']);
+  expect(stored.lifeEvents[0].personId).toBe('b');
+  expect(stored.stories[0].personIds).toEqual(['b']);
 });
