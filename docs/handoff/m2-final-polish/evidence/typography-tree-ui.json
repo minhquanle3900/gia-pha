@@ -1,0 +1,57 @@
+{
+  "controls": [
+    {
+      "font": "\"Plus Jakarta Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "text": "Thêm người"
+    },
+    {
+      "font": "\"Plus Jakarta Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "text": "Cây gia phả"
+    },
+    {
+      "font": "\"Plus Jakarta Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "text": "Thành viên"
+    },
+    {
+      "font": "\"Plus Jakarta Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "text": "Trang chủ"
+    },
+    {
+      "font": "\"Plus Jakarta Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "text": "Gia phả"
+    },
+    {
+      "font": "\"Plus Jakarta Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "text": "Di sản"
+    },
+    {
+      "font": "\"Plus Jakarta Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "text": "Lễ giỗ"
+    },
+    {
+      "font": "\"Plus Jakarta Sans\", -apple-system, BlinkMacSystemFont, \"Segoe UI\", sans-serif",
+      "text": "Thêm"
+    }
+  ],
+  "slots": [
+    {
+      "font": "\"Viaoda Libre\", \"Cormorant Garamond\", Georgia, serif",
+      "slot": "brand",
+      "text": "Cội Nguồn",
+      "weight": "400"
+    },
+    {
+      "font": "\"Cormorant Garamond\", Georgia, Cambria, \"Times New Roman\", serif",
+      "slot": "clan-name",
+      "text": "Dòng họ Trần – Đông Ngạc",
+      "weight": "400"
+    },
+    {
+      "font": "\"Cormorant Garamond\", Georgia, Cambria, \"Times New Roman\", serif",
+      "slot": "tree-title",
+      "text": "Cây gia phả",
+      "weight": "700"
+    }
+  ],
+  "viewport": 390
+}

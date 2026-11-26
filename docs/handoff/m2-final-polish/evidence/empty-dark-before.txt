@@ -1,0 +1,1 @@
+heritage-ui text-sm font-bold text-stone-700

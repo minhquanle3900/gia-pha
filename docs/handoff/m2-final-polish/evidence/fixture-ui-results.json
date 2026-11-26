@@ -1,0 +1,30 @@
+{
+  "scope": "Controlled component props, not real quota exhaustion or native API denial",
+  "testedSHA": "71274ee1358adaa89da6df343f4f2b66c7d20dbc",
+  "results": [
+    {
+      "mode": "near-full",
+      "percent": 80,
+      "callbacks": "backup=1; details=1"
+    },
+    {
+      "mode": "critical",
+      "visible": true,
+      "progress": "95"
+    },
+    {
+      "mode": "unsupported",
+      "message": true,
+      "progressCount": 0
+    },
+    {
+      "mode": "error",
+      "alert": "Không đọc được ước tính dung lượng từ trình duyệt. Bạn vẫn có thể sao lưu JSON."
+    },
+    {
+      "mode": "retry",
+      "progress": "10",
+      "alertCount": 0
+    }
+  ]
+}

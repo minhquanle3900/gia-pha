@@ -1,0 +1,13 @@
+{
+  "bottomPadding": "6px",
+  "button": {
+    "bg": "rgb(255, 255, 255)",
+    "fg": "rgb(27, 59, 43)"
+  },
+  "paragraph": {
+    "bg": "rgb(250, 247, 242)",
+    "fg": "rgb(84, 72, 60)"
+  },
+  "theme": "light",
+  "viewport": "width=device-width, initial-scale=1.0, viewport-fit=cover"
+}

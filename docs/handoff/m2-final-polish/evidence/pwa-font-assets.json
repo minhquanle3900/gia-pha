@@ -1,0 +1,54 @@
+{
+  "testedSHA": "0f7594bea23cada24754d94aec2b9b7b8191027d",
+  "pwaExit": 0,
+  "fonts": [
+    {
+      "path": "/assets/Charm-Regular-DLkA3AcE.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 36288,
+      "woff2": true,
+      "precache": true
+    },
+    {
+      "path": "/assets/CormorantGaramond-Italic-Latin-Vietnamese-Bar8OQlu.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 96396,
+      "woff2": true,
+      "precache": true
+    },
+    {
+      "path": "/assets/CormorantGaramond-Latin-Vietnamese-BG4t8PVT.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 134184,
+      "woff2": true,
+      "precache": true
+    },
+    {
+      "path": "/assets/JetBrainsMono-Latin-Vietnamese-C4xEFJ8t.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 53140,
+      "woff2": true,
+      "precache": true
+    },
+    {
+      "path": "/assets/PlusJakartaSans-Latin-Vietnamese-C09y-G-o.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 55132,
+      "woff2": true,
+      "precache": true
+    },
+    {
+      "path": "/assets/ViaodaLibre-Regular-DZPpm2je.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 46244,
+      "woff2": true,
+      "precache": true
+    }
+  ]
+}

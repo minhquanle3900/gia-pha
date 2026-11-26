@@ -1,0 +1,7 @@
+Sao lưu JSON
+
+Lần sao lưu được ghi nhận gần nhất: 15:06 26/11/26.
+
+Thời điểm này không xác nhận tệp vẫn còn trên thiết bị. Hãy kiểm tra tệp trong thư mục Tải xuống và giữ thêm một bản ở nơi riêng tư.
+
+Mở sao lưu và khôi phục JSON

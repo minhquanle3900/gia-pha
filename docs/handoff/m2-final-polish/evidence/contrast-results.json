@@ -1,0 +1,19 @@
+{
+  "scope": "Observed light-mode local data-safety paragraph and button only; not whole-app WCAG certification",
+  "ratios": [
+    {
+      "sample": "paragraph",
+      "bg": "rgb(250, 247, 242)",
+      "fg": "rgb(84, 72, 60)",
+      "ratio": 8.294618772732326,
+      "normalTextAA": true
+    },
+    {
+      "sample": "button",
+      "bg": "rgb(255, 255, 255)",
+      "fg": "rgb(27, 59, 43)",
+      "ratio": 12.301767275756255,
+      "normalTextAA": true
+    }
+  ]
+}

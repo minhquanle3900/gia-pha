@@ -1,0 +1,17 @@
+{
+  "testedSHA": "71274ee1358adaa89da6df343f4f2b66c7d20dbc",
+  "scope": "Origin unavailable only; OS connectivity unchanged. IAB Chromium, not a real mobile device.",
+  "httpProbeExit": 7,
+  "panelRead": true,
+  "createThenReloadPeople": 32,
+  "editRead": true,
+  "deleteThenReloadPeople": 31,
+  "offlineTypography": {
+    "font": "\"Viaoda Libre\", \"Cormorant Garamond\", Georgia, serif",
+    "height": 844,
+    "slot": "Chân dung tiền nhân",
+    "theme": "dark",
+    "width": 390
+  },
+  "newTabShell": true
+}

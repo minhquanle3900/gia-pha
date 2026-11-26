@@ -1,0 +1,8 @@
+{
+  "background": "rgb(23, 36, 28)",
+  "classes": "heritage-ui text-sm font-bold text-stone-700 dark:text-stone-100",
+  "client": 375,
+  "color": "oklch(0.97 0.001 106.424)",
+  "scroll": 375,
+  "width": 390
+}

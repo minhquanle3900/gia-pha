@@ -135,8 +135,8 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
       <header className="rounded-2xl border border-forest-700 bg-forest-900 p-4 text-white sm:rounded-3xl sm:p-6 lg:p-8">
         <div className="flex flex-col gap-4 lg:flex-row lg:items-end lg:justify-between">
           <div className="min-w-0">
-            <p className="break-words text-xs font-medium text-[#DBC599] sm:text-sm">{settings.clanName || 'Gia phả Việt'}</p>
-            <h2 className="mt-1 text-3xl font-bold leading-tight sm:text-4xl lg:text-5xl">Nhật ký dòng họ</h2>
+            <p className="heritage-intro break-words text-base text-[#DBC599]">{settings.clanName || 'Gia phả Việt'}</p>
+            <h2 className="heritage-display mt-1 text-3xl sm:text-4xl lg:text-5xl">Nhật ký dòng họ</h2>
             <p className="mt-2 text-sm text-[#E6DFD5]">
               {stories.length} ghi chép{counts.pinned > 0 && (' · ' + counts.pinned + ' bài ghim')}
             </p>
@@ -328,7 +328,7 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                   </div>
 
                   {/* Title */}
-                  <h3 className="break-words font-serif text-xl font-bold leading-snug text-[#1F1913] sm:text-2xl">
+                  <h3 className="heritage-heading break-words text-xl text-[#1F1913] sm:text-2xl">
                     {story.title}
                   </h3>
 
@@ -358,7 +358,7 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                   )}
 
                   {/* Body Content */}
-                  <div className="break-words whitespace-pre-line font-serif text-base leading-relaxed text-[#1F1913] sm:text-lg">
+                  <div className="heritage-body break-words whitespace-pre-line text-base text-[#1F1913] sm:text-lg">
                     {isExpanded || story.content.length <= 250
                       ? story.content
                       : `${story.content.slice(0, 250)}...`}
@@ -446,7 +446,7 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                       )}
                     </div>
 
-                    <h3 className="font-serif font-bold text-xl sm:text-2xl text-[#1F1913]">
+                    <h3 className="heritage-heading text-xl text-[#1F1913] sm:text-2xl">
                       {story.title}
                     </h3>
 
@@ -474,7 +474,7 @@ export const ClanJournalPage: React.FC<ClanJournalPageProps> = ({
                   </div>
                 )}
 
-                <div className="mt-3 whitespace-pre-line font-serif text-base leading-relaxed text-[#1F1913] sm:text-lg">
+                <div className="heritage-body mt-3 whitespace-pre-line text-base text-[#1F1913] sm:text-lg">
                   {story.content}
                 </div>
               </article>

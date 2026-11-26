@@ -1,0 +1,46 @@
+- banner:
+  - button "Cội Nguồn Dòng họ Trần – Đông Ngạc":
+    - generic: 源
+    - generic: Cội Nguồn
+    - generic: Dòng họ Trần – Đông Ngạc
+  - button "Mở tìm kiếm thành viên":
+  - button "Thêm thành viên mới":
+- main:
+  - navigation "Chức năng Di sản":
+    - button "Phòng trưng bày" [active]
+    - button "Kho kỷ vật"
+    - button "Nhật ký dòng họ"
+    - button "Sách phả ký"
+  - button "Về Chân dung Cụ Tổ Trần Văn Lộc (1926)":
+    - text: Về Chân dung Cụ Tổ Trần Văn Lộc (1926)
+  - generic: Phòng trưng bày
+  - heading "Đại Tôn Họ Trần Đông Ngạc" [level=2]
+  - paragraph: Gốc đại tôn quy tụ các thế hệ khai cơ lập nghiệp tại làng khoa bảng Đông Ngạc bên bờ sông Hồng, gìn giữ từ đường và gia phả gốc.
+  - list:
+    - button "Xem Chân dung Cụ Tổ Trần Văn Lộc (1926)":
+      - generic: Năm 1926
+      - generic: Chân dung Cụ Tổ Trần Văn Lộc (1926)
+      - generic: Bức ảnh chân dung lưu trữ chụp tại hiệu ảnh Lê Văn – Hà Nội khi cụ tròn 54 tuổi.
+    - button "Xem Chân dung Tổ mẫu Nguyễn Thị Kim (1935)":
+      - generic: Khoảng năm 1935
+      - generic: Chân dung Tổ mẫu Nguyễn Thị Kim (1935)
+      - generic: Ảnh chụp lưu niệm của cụ bà Nguyễn Thị Kim trong trang phục áo dài lụa nâu truyền thống.
+    - button "Xem Từ đường họ Trần tại làng cổ Đông Ngạc":
+      - generic: Năm 2024
+      - generic: Từ đường họ Trần tại làng cổ Đông Ngạc
+      - generic: Không gian sân gạch, phương đình và bức hoành phi Thế Đức Truyền Gia vào buổi sớm mùa thu.
+    - button "Xem Bản Gia phả cổ chép tay trên giấy dó":
+      - generic: Cuối thế kỷ XIX – 1930
+      - generic: Bản Gia phả cổ chép tay trên giấy dó
+      - generic: Cuốn phả ký gốc chữ Hán Nôm do tiền nhân truyền lại và được cụ Đồ Lộc chú giải năm 1930.
+- navigation "Điều hướng chính":
+  - button "Trang chủ":
+    - generic: Trang chủ
+  - button "Gia phả":
+    - generic: Gia phả
+  - button "Di sản":
+    - generic: Di sản
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm":
+    - generic: Thêm

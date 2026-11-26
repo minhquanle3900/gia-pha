@@ -1,0 +1,88 @@
+- banner:
+  - button "Cội Nguồn Dòng họ Trần – Đông Ngạc":
+    - generic: 源
+    - generic: Cội Nguồn
+    - generic: Dòng họ Trần – Đông Ngạc
+  - button "Mở tìm kiếm thành viên":
+  - button "Thêm thành viên mới":
+- main:
+  - navigation "Chức năng Di sản":
+    - button "Phòng trưng bày"
+    - button "Kho kỷ vật"
+    - button "Nhật ký dòng họ"
+    - button "Sách phả ký"
+  - generic: Ảnh minh họa
+  - generic: Di sản gia tộc
+  - heading "Phòng trưng bày" [active] [level=2]
+  - paragraph: Thư pháp, ảnh xưa và lời dạy được gìn giữ qua các thế hệ.
+  - button "Khám phá các khu":
+    - text: Khám phá các khu
+  - button "Mở kho kỷ vật":
+    - text: Mở kho kỷ vật
+  - region "Tác phẩm nổi bật":
+    - heading "Tác phẩm nổi bật" [level=3]
+    - list:
+      - button "Xem Công đức tổ tông":
+        - generic: Tổ tông công đức thiên niên thịnh
+        - generic: Con cháu thảo hiền vạn đại vinh
+        - generic: Câu đối tham khảo
+        - generic: Công đức tổ tông
+      - button "Xem Chân dung Cụ Tổ Trần Văn Lộc (1926)":
+        - generic: Năm 1926
+        - generic: Chân dung Cụ Tổ Trần Văn Lộc (1926)
+        - generic: Bức ảnh chân dung lưu trữ chụp tại hiệu ảnh Lê Văn – Hà Nội khi cụ tròn 54 tuổi.
+      - button "Xem Đại gia đình sum họp đầu xuân Ất Tỵ tại Đông Ngạc (1965)":
+        - generic: Xuân Ất Tỵ 1965
+        - generic: Đại gia đình sum họp đầu xuân Ất Tỵ tại Đông Ngạc (1965)
+        - generic: Bức ảnh quý chụp ba thế hệ quây quần trước hiên nhà cổ 5 gian dịp Tết Nguyên đán.
+  - region "Các khu trưng bày":
+    - heading "Các khu trưng bày" [level=3]
+    - list:
+      - button "Thư pháp và câu đối Câu chữ treo nơi trang trọng trong nếp nhà Việt. 2 mục":
+        - generic: Thư pháp và câu đối
+        - generic: Câu chữ treo nơi trang trọng trong nếp nhà Việt.
+        - generic: 2 mục
+      - button "Chân dung tiền nhân Chân dung trong kho tư liệu và hồ sơ người được ghi lại. 2 mục":
+        - generic: Chân dung tiền nhân
+        - generic: Chân dung trong kho tư liệu và hồ sơ người được ghi lại.
+        - generic: 2 mục
+      - button "Ảnh gia tộc Ảnh xưa và những khoảnh khắc sum họp. 2 mục":
+        - generic: Ảnh gia tộc
+        - generic: Ảnh xưa và những khoảnh khắc sum họp.
+        - generic: 2 mục
+      - button "Kỷ vật gia truyền Giấy tờ, thư từ và bút tích còn được lưu giữ. 1 mục":
+        - generic: Kỷ vật gia truyền
+        - generic: Giấy tờ, thư từ và bút tích còn được lưu giữ.
+        - generic: 1 mục
+      - button "Gia phong và gia huấn Lời dạy và nếp sống được truyền qua các thế hệ. Chưa có tư liệu":
+        - generic: Gia phong và gia huấn
+        - generic: Lời dạy và nếp sống được truyền qua các thế hệ.
+        - generic: Chưa có tư liệu
+      - button "Nghi lễ và phong tục Ghi chép, lời kể và bản ghi âm của người trong họ. 3 mục":
+        - generic: Nghi lễ và phong tục
+        - generic: Ghi chép, lời kể và bản ghi âm của người trong họ.
+        - generic: 3 mục
+      - button "Triển lãm theo chủ đề Tư liệu được quy tụ theo chi họ và thẻ chủ đề. 3 mục":
+        - generic: Triển lãm theo chủ đề
+        - generic: Tư liệu được quy tụ theo chi họ và thẻ chủ đề.
+        - generic: 3 mục
+  - region "Tìm hiểu thêm về dòng họ":
+    - heading "Tìm hiểu thêm về dòng họ" [level=3]
+    - list:
+      - button "Nhật ký dòng họ":
+        - text: Nhật ký dòng họ
+      - button "Lễ giỗ và nghi lễ":
+        - text: Lễ giỗ và nghi lễ
+      - button "Sách phả ký":
+        - text: Sách phả ký
+- navigation "Điều hướng chính":
+  - button "Trang chủ":
+    - generic: Trang chủ
+  - button "Gia phả":
+    - generic: Gia phả
+  - button "Di sản":
+    - generic: Di sản
+  - button "Lễ giỗ":
+    - generic: Lễ giỗ
+  - button "Thêm":
+    - generic: Thêm
