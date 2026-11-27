@@ -1,5 +1,6 @@
 import { spawn } from 'node:child_process';
 import { once } from 'node:events';
+import { createServer, type AddressInfo } from 'node:net';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { createSeedSnapshot } from '../database/seedData';
 import { isGeminiEnabled } from '../services/aiBiographyAvailability';
@@ -39,11 +40,16 @@ describe('Gift Edition privacy', () => {
   });
 
   it('rejects direct biography POSTs while locked, before reading JSON and even with an API key', async () => {
+    const reservation = createServer();
+    reservation.listen(0, '127.0.0.1');
+    await once(reservation, 'listening');
+    const testPort = (reservation.address() as AddressInfo).port;
+    await new Promise<void>((resolve, reject) => reservation.close(error => error ? reject(error) : resolve()));
     const denyOutboundFetch = 'data:text/javascript,' + encodeURIComponent(
       'globalThis.fetch = () => { throw new Error("Unexpected server fetch"); };',
     );
     const child = spawn(process.execPath, ['--import', 'tsx', '--import', denyOutboundFetch, 'server.ts'], {
-      env: { ...process.env, NODE_ENV: 'production', PORT: '0', GEMINI_BIOGRAPHY_ENABLED: '', GEMINI_API_KEY: 'synthetic-test-key' },
+      env: { ...process.env, NODE_ENV: 'production', PORT: String(testPort), GEMINI_BIOGRAPHY_ENABLED: '', GEMINI_API_KEY: 'synthetic-test-key' },
       stdio: ['ignore', 'pipe', 'ignore'],
     });
     try {
