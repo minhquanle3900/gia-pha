@@ -40,6 +40,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
   const operationInFlight = useRef(false);
   const baselineDraft = useRef('');
   const dialogRef = useRef<HTMLDivElement>(null);
+  const formBodyRef = useRef<HTMLDivElement>(null);
   const fullNameRef = useRef<HTMLInputElement>(null);
   const formId = useId();
 
@@ -242,6 +243,35 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [editingPerson?.id, open]);
 
+  useEffect(() => {
+    if (!open) return;
+    let frame = 0;
+    const revealFocusedName = () => {
+      cancelAnimationFrame(frame);
+      frame = requestAnimationFrame(() => {
+        const body = formBodyRef.current;
+        const name = fullNameRef.current;
+        if (!body || !name || document.activeElement !== name) return;
+        const bodyRect = body.getBoundingClientRect();
+        const nameRect = name.getBoundingClientRect();
+        const viewport = window.visualViewport;
+        const top = Math.max(bodyRect.top, viewport?.offsetTop ?? 0) + 8;
+        const bottom = Math.min(bodyRect.bottom, (viewport?.offsetTop ?? 0) + (viewport?.height ?? window.innerHeight)) - 8;
+        if (bottom <= top) return;
+        if (nameRect.bottom > bottom) body.scrollTop += nameRect.bottom - bottom;
+        else if (nameRect.top < top) body.scrollTop -= top - nameRect.top;
+      });
+    };
+    revealFocusedName();
+    window.addEventListener('resize', revealFocusedName);
+    window.visualViewport?.addEventListener('resize', revealFocusedName);
+    return () => {
+      cancelAnimationFrame(frame);
+      window.removeEventListener('resize', revealFocusedName);
+      window.visualViewport?.removeEventListener('resize', revealFocusedName);
+    };
+  }, [open, editingPerson?.id]);
+
   if (!open) return null;
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -410,7 +440,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
         </div>
 
         {/* Form Body */}
-        <div className="p-4 sm:p-6 overflow-y-auto space-y-4 flex-1">
+        <div ref={formBodyRef} className="p-4 sm:p-6 overflow-y-auto space-y-4 flex-1">
           {errors.length > 0 && (
             <div role="alert" className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 space-y-1">
               {errors.map((e, idx) => (
