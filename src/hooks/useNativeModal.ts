@@ -1,6 +1,7 @@
 import { useLayoutEffect, useRef, type RefObject } from 'react';
 import {
   focusIsEnteringNativeDialog,
+  guardNativeModalCancel,
   isAvailableForFocus,
   modalFocusableElements,
   modalScopeManager,
@@ -37,10 +38,7 @@ export function useNativeModal(open: boolean, initialFocusRef?: RefObject<HTMLEl
       }
     };
     const handleCancel = (event: Event) => {
-      if (!manager.isTop(scope) || dialog.getAttribute('aria-busy') === 'true') {
-        event.preventDefault();
-        event.stopPropagation();
-      }
+      guardNativeModalCancel(event, dialog, !manager.isTop(scope) || dialog.getAttribute('aria-busy') === 'true');
     };
     const handleFocusIn = (event: FocusEvent) => {
       if (!manager.isTop(scope) || dialog.contains(event.target as Node) ||

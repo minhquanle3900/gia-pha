@@ -54,6 +54,14 @@ export function focusIsEnteringNativeDialog(scope: HTMLElement, target: EventTar
     target.closest('dialog[open]') !== scope.closest('dialog[open]');
 }
 
+export function guardNativeModalCancel(event: Event, dialog: HTMLElement, blocked: boolean) {
+  // Non-bubbling cancel events still pass through ancestor dialogs during capture.
+  if (event.target === dialog && blocked) {
+    event.preventDefault();
+    event.stopPropagation();
+  }
+}
+
 export function createModalScopeManager(ownerDocument: Document) {
   const scopes: ModalScope[] = [];
   const ancestors = new Map<ModalScope, Set<ModalScope>>();

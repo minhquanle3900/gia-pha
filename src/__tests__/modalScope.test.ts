@@ -2,6 +2,7 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import {
   createModalScopeManager,
   focusIsEnteringNativeDialog,
+  guardNativeModalCancel,
   modalFocusableElements,
   trapModalTab,
   type ModalKind,
@@ -302,6 +303,46 @@ describe('shared custom/native modal scope', () => {
     const target = native.append(make());
     expect(focusIsEnteringNativeDialog(element(customRoot), element(target))).toBe(true);
     expect(focusIsEnteringNativeDialog(element(native), element(target))).toBe(false);
+  });
+});
+
+describe('native cancel event ownership', () => {
+  it.each(['native/native', 'native/custom/native'])(
+    'does not let ancestor capture block the top child cancel (%s)', arrangement => {
+      const { manager, make, register } = setup();
+      const outerRoot = make('dialog');
+      const outer = register(outerRoot, 'native');
+      let childParent = outerRoot;
+      if (arrangement === 'native/custom/native') {
+        childParent = outerRoot.append(make('section'));
+        register(childParent);
+      }
+      const childRoot = childParent.append(make('dialog'));
+      const child = register(childRoot, 'native');
+      const cancel = new Event('cancel', { cancelable: true });
+      Object.defineProperty(cancel, 'target', { value: element(childRoot) });
+      const stopPropagation = vi.spyOn(cancel, 'stopPropagation');
+      guardNativeModalCancel(cancel, element(outerRoot), !manager.isTop(outer));
+      guardNativeModalCancel(cancel, element(childRoot), !manager.isTop(child));
+      expect(cancel.defaultPrevented).toBe(false);
+      expect(stopPropagation).not.toHaveBeenCalled();
+    },
+  );
+
+  it.each([
+    { topmost: true, busy: false, blocked: false },
+    { topmost: true, busy: true, blocked: true },
+    { topmost: false, busy: false, blocked: true },
+    { topmost: false, busy: true, blocked: true },
+  ])('preserves own dialog cancel guard: %o', ({ topmost, busy, blocked }) => {
+    const { make } = setup();
+    const root = make('dialog');
+    const cancel = new Event('cancel', { cancelable: true });
+    Object.defineProperty(cancel, 'target', { value: element(root) });
+    const stopPropagation = vi.spyOn(cancel, 'stopPropagation');
+    guardNativeModalCancel(cancel, element(root), !topmost || busy);
+    expect(cancel.defaultPrevented).toBe(blocked);
+    expect(stopPropagation).toHaveBeenCalledTimes(blocked ? 1 : 0);
   });
 });
 
