@@ -66,11 +66,12 @@ export const BiographySpeechPlayer: React.FC<BiographySpeechPlayerProps> = ({
   }, [person, mode, branchName]);
 
   // If autoPlay requested and supported, start when mounted
+  const hasLocalVoice = Boolean(selectedVoice);
   useEffect(() => {
-    if (autoPlay && isSupported && narrationScript.sentences.length > 0) {
+    if (autoPlay && hasLocalVoice && narrationScript.sentences.length > 0) {
       play(narrationScript.sentences, 0);
     }
-  }, [autoPlay, isSupported, mode, narrationScript.sentences, play]);
+  }, [autoPlay, hasLocalVoice, narrationScript.sentences, play]);
 
   // When mode changes while playing, stop or restart
   const handleModeChange = (newMode: 'biography' | 'full_chronicle') => {
@@ -104,13 +105,13 @@ export const BiographySpeechPlayer: React.FC<BiographySpeechPlayerProps> = ({
       ? Math.round(((currentSentenceIndex + 1) / totalSentences) * 100)
       : 0;
 
-  if (!isSupported) {
+  if (!isSupported || voices.length === 0) {
     return (
       <div className="rounded-2xl bg-[#FFF9F5] border border-[#EACBB8] p-5 shadow-sm space-y-3">
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2 text-[#8C3A27] font-semibold text-sm">
             <AlertCircle className="w-5 h-5 flex-shrink-0" />
-            <span>Trình duyệt chưa hỗ trợ Web Speech API</span>
+            <span>Chưa có giọng đọc trên thiết bị</span>
           </div>
           <button
             type="button"
@@ -121,8 +122,8 @@ export const BiographySpeechPlayer: React.FC<BiographySpeechPlayerProps> = ({
           </button>
         </div>
         <p className="text-xs text-[#5C4F42] leading-relaxed">
-          Thiết bị hoặc trình duyệt hiện tại không hỗ trợ bộ phát âm Web Speech API. Quý vị vẫn có
-          thể đọc trực tiếp toàn bộ phả ký và tiểu sử của <strong>{person.fullName}</strong> trên
+          Bản Quà Tặng dùng giọng đọc có sẵn trên thiết bị. Quý vị vẫn có thể đọc trực tiếp toàn bộ
+          phả ký và tiểu sử của <strong>{person.fullName}</strong> trên
           trang hồ sơ này.
         </p>
       </div>

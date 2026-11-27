@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
-import { getVietnameseVoices, isSpeechSynthesisSupported } from '../services/speechSynthesisService';
+import { getLocalSpeechVoices, getVietnameseVoices, isSpeechSynthesisSupported } from '../services/speechSynthesisService';
 
 export type SpeechPlaybackStatus = 'idle' | 'playing' | 'paused' | 'ended';
 
@@ -58,7 +58,7 @@ export function useSpeechReader(): UseSpeechReaderReturn {
     if (!isSupported) return;
 
     const updateVoices = () => {
-      const all = window.speechSynthesis.getVoices();
+      const all = getLocalSpeechVoices(window.speechSynthesis.getVoices());
       setVoices(all);
 
       const vi = getVietnameseVoices(all);
@@ -96,7 +96,8 @@ export function useSpeechReader(): UseSpeechReaderReturn {
 
   // Core utterance speaker
   const speakSentenceAtIndex = useCallback((index: number) => {
-    if (!isSupported) return;
+    const voice = voiceRef.current;
+    if (!isSupported || !voice?.localService) return;
 
     const list = sentencesRef.current;
     if (index < 0 || index >= list.length) {
@@ -118,9 +119,7 @@ export function useSpeechReader(): UseSpeechReaderReturn {
     utterance.pitch = 1.0;
     utterance.lang = 'vi-VN';
 
-    if (voiceRef.current) {
-      utterance.voice = voiceRef.current;
-    }
+    utterance.voice = voice;
 
     utterance.onend = () => {
       if (isCancelledRef.current || isPausedRef.current) return;
@@ -214,6 +213,7 @@ export function useSpeechReader(): UseSpeechReaderReturn {
   }, [status, speakSentenceAtIndex]);
 
   const setVoice = useCallback((voice: SpeechSynthesisVoice | null) => {
+    if (voice && !voice.localService) return;
     setSelectedVoice(voice);
     voiceRef.current = voice;
     if (status === 'playing') {

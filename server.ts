@@ -4,6 +4,7 @@ import dotenv from 'dotenv';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import { GoogleGenAI } from '@google/genai';
+import { GEMINI_DISABLED_MESSAGE, isGeminiEnabled } from './src/services/aiBiographyAvailability';
 
 dotenv.config();
 
@@ -15,20 +16,21 @@ async function startServer() {
   const httpServer = http.createServer(app);
   const PORT = Number(process.env.PORT) || 3000;
 
-  app.use(express.json({ limit: '10mb' }));
-
   const apiKey = process.env.GEMINI_API_KEY;
-  const ai = new GoogleGenAI({
-    apiKey: apiKey || '',
-    httpOptions: {
-      headers: {
-        'User-Agent': 'aistudio-build',
-      },
-    },
-  });
+  const geminiEnabled = isGeminiEnabled(process.env.GEMINI_BIOGRAPHY_ENABLED);
+  const ai = geminiEnabled && apiKey
+    ? new GoogleGenAI({ apiKey, httpOptions: { headers: { 'User-Agent': 'aistudio-build' } } })
+    : undefined;
 
   // AI Biography Generation API endpoint
-  app.post('/api/biography/generate', async (req, res) => {
+  app.post('/api/biography/generate', (_req, res, next) => {
+    res.setHeader('Cache-Control', 'no-store');
+    if (!geminiEnabled) {
+      res.status(403).json({ error: GEMINI_DISABLED_MESSAGE });
+      return;
+    }
+    next();
+  }, express.json({ limit: '10mb' }), async (req, res) => {
     try {
       const {
         fullName,
@@ -52,13 +54,13 @@ async function startServer() {
         notes,
         events,
         existingBiography,
-      } = req.body;
+      } = req.body ?? {};
 
       if (!fullName || typeof fullName !== 'string') {
         return res.status(400).json({ error: 'Tên nhân vật không được để trống.' });
       }
 
-      if (!apiKey) {
+      if (!ai) {
         return res.status(500).json({
           error:
             'Chưa phát hiện GEMINI_API_KEY trên môi trường máy chủ. Vui lòng kiểm tra khóa trong bảng điều khiển Cài đặt > Secrets.',
@@ -152,7 +154,10 @@ Yêu cầu định dạng và văn phong:
   }
 
   httpServer.listen(PORT, '0.0.0.0', () => {
-    console.log(`Server running on http://0.0.0.0:${PORT}`);
+    const address = httpServer.address();
+    if (address && typeof address === 'object') {
+      console.log(`Server running on http://0.0.0.0:${address.port}`);
+    }
   });
 }
 

@@ -17,6 +17,8 @@ import { useGenealogy } from '../context/GenealogyContext';
 import { BackupReminderBanner } from '../features/backup/BackupReminderBanner';
 import { UpcomingAnniversariesWidget } from '../features/rites/UpcomingAnniversariesWidget';
 import type { NavigationTab } from '../models/genealogy';
+import { GEMINI_DISABLED_MESSAGE } from '../services/aiBiographyAvailability';
+import { canGenerateBiographyInBrowser } from '../services/aiBiographyService';
 import { formatLifespan } from '../utils/dateUtils';
 
 interface DashboardPageProps {
@@ -174,6 +176,9 @@ export const DashboardPage: React.FC<DashboardPageProps> = ({
       <div className="min-w-0 space-y-4">
         <UpcomingAnniversariesWidget onSelectPerson={onSelectPerson} onNavigate={onNavigate} />
         <BackupReminderBanner onNavigate={onNavigate} />
+        {!canGenerateBiographyInBrowser() && (
+          <p className="text-sm text-[#655A4E]">{GEMINI_DISABLED_MESSAGE}</p>
+        )}
       </div>
 
       <div className="grid min-w-0 gap-4 lg:grid-cols-[minmax(0,3fr)_minmax(0,2fr)] lg:items-start">

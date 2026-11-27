@@ -58,7 +58,7 @@ describe('Family Book Printable & PDF Export Service', () => {
       people: [{
         ...seed.people[0],
         fullName: 'Mai "Đông" & Minh 家譜',
-        portraitUrl: 'https://example.invalid/portrait.jpg?mode=print&size=small',
+        portraitUrl: 'data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg"><desc>A&amp;B</desc></svg>',
       }],
       stories: [{
         ...seed.stories[0],
@@ -68,7 +68,7 @@ describe('Family Book Printable & PDF Export Service', () => {
     });
 
     expect(html).toContain('alt="Mai &quot;Đông&quot; &amp; Minh 家譜"');
-    expect(html).toContain('src="https://example.invalid/portrait.jpg?mode=print&amp;size=small"');
+    expect(html).toContain('src="data:image/svg+xml,&lt;svg xmlns=&quot;http://www.w3.org/2000/svg&quot;&gt;&lt;desc&gt;A&amp;amp;B&lt;/desc&gt;&lt;/svg&gt;"');
     expect(html).toContain('Ghi chép Việt &amp; 日本');
     expect(html).toContain('Phả hệ &#39;xưa&#39; (2 &lt; 3 &gt; 1)');
   });

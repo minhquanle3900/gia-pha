@@ -21,6 +21,10 @@ export function isSpeechSynthesisSupported(): boolean {
   return 'speechSynthesis' in window && typeof window.SpeechSynthesisUtterance !== 'undefined';
 }
 
+export function getLocalSpeechVoices(voices: SpeechSynthesisVoice[]): SpeechSynthesisVoice[] {
+  return voices.filter((voice) => voice.localService === true);
+}
+
 /**
  * Split narrative text into natural Vietnamese sentence chunks
  * for clear, continuous speech synthesis without timeouts.

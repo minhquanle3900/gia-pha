@@ -1,5 +1,10 @@
 import { FlexibleDate, LifeEvent } from '../models/genealogy';
 import { formatFlexibleDate } from '../utils/dateUtils';
+import { GEMINI_DISABLED_MESSAGE, isGeminiEnabled } from './aiBiographyAvailability';
+
+export function canGenerateBiographyInBrowser(): boolean {
+  return isGeminiEnabled(import.meta.env.VITE_GEMINI_BIOGRAPHY_ENABLED);
+}
 
 export interface GenerateBiographyParams {
   fullName: string;
@@ -33,6 +38,8 @@ export interface GenerateBiographyResult {
 export async function generateBiographyWithAI(
   params: GenerateBiographyParams
 ): Promise<GenerateBiographyResult> {
+  if (!canGenerateBiographyInBrowser()) return { error: GEMINI_DISABLED_MESSAGE };
+
   try {
     const formattedEvents = (params.events || []).map((e) => ({
       title: e.title,

@@ -1,0 +1,25 @@
+RED · Integrated d7ec679
+FAIL exhibition-native-fullscreen AssertionError [ERR_ASSERTION]: Ctrl+K must not mount desktop search underneath fullscreen
+FAIL reset-confirmation-busy AssertionError [ERR_ASSERTION]: visible reset busy guard, write attempts under locked transaction: 2
+FAIL reset-abort-rollback Error: Timed out: () => [...document.querySelectorAll('[role="alert"]')].some((entry) => /nạp|dữ liệu mẫu/i.test(entry.textContent)) []
+FAIL journal-dirty-nested-escape AssertionError [ERR_ASSERTION]: first Escape preserves dirty journal pending explicit discard
+FAIL csv-native-idle-escape AssertionError [ERR_ASSERTION]: Ctrl+K must not mount desktop search underneath csv
+RED · Intermediate c405057, native duplicate dialog
+after busy exit {"open":false,"modal":false,"active":"Thêm...","events":[{"type":"keydown","key":"Escape","tag":"BODY","open":true,"trusted":true,"cancelable":true,"defaultPrevented":false,"activated":true,"openAfter":false,"defaultAfter":false},{"type":"cancel","tag":"DIALOG","open":true,"trusted":true,"cancelable":false,"defaultPrevented":false,"activated":true,"openAfter":false,"defaultAfter":false},{"type":"close","tag":"DIALOG","open":false,"trusted":true,"cancelable":false,"defaultPrevented":false,"activated":true,"openAfter":false,"defaultAfter":false}]}
+GREEN · Integrated cf23138, native duplicate dialog
+after busy exit {"open":true,"modal":true,"active":"源Dòng họ Trần – Đông NgạcCội N","events":[{"type":"keydown","key":"Escape","tag":"BODY","open":true,"trusted":true,"cancelable":true,"defaultPrevented":false,"activated":true,"openAfter":true,"defaultAfter":false}]}
+GREEN · Integrated cf23138, runtime matrix
+gate Chromium 156 on synthetic local IndexedDB fixtures
+PASS mobile-menu-focus
+PASS menu-to-kinship "Tra Cứu Xưng Hô Dòng Tộc Tự ĐộngTìm tổ tiên chung (LCA), so sánh đời thứ và ngôi thứ chi trên / chi dưới.Người thứ nhất (A)M24 Hồ sơ thử hợp nhất 7821 (Đời 8) - NamTrần Văn Lộc (Đời 1) - NamNguyễn Thị Kim (Đời 1) - NữTrần Văn Khải (Đời 2) - NamNguyễn"
+PASS reset-confirmation-focus
+PASS reset-confirmation-busy
+PASS reset-abort-rollback
+PASS csv-native-idle-escape
+PASS csv-native-busy-escape
+PASS exhibition-native-fullscreen [390,390,2]
+PASS journal-dirty-nested-escape
+PASS duplicate-merge-focus-and-busy
+PASS gallery-nested-focus-escape
+Runtime exceptions: []
+Failures: []

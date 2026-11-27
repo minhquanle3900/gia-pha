@@ -1,4 +1,4 @@
-import { describe, expect, it } from 'vitest';
+import { describe, expect, it, vi } from 'vitest';
 import { createSeedSnapshot } from '../database/seedData';
 import { Person } from '../models/genealogy';
 import {
@@ -308,22 +308,25 @@ describe('Duplicate Detection & Record Merging', () => {
   describe('AI Biography Generation Service (Gemini API)', () => {
     it('safely handles network failure or missing server endpoint without throwing', async () => {
       const { generateBiographyWithAI } = await import('../services/aiBiographyService');
-
-      const result = await generateBiographyWithAI({
-        fullName: 'Trần Văn Lộc',
-        gender: 'male',
-        generation: 1,
-        birthDate: { precision: 'exact', day: 14, month: 3, year: 1872 },
-        deathDate: { precision: 'exact', day: 22, month: 11, year: 1948 },
-        birthPlace: 'Đông Ngạc, Hà Nội',
-        occupation: 'Thầy đồ',
-        isLiving: false,
-        merits: 'Trùng tu nhà thờ họ năm 1924',
-      });
-
-      // In unit test environment without running server, it returns structured error object rather than crashing
-      expect(result).toBeDefined();
-      expect(result.error || result.biography).toBeDefined();
+      vi.stubEnv('VITE_GEMINI_BIOGRAPHY_ENABLED', 'true');
+      vi.stubGlobal('fetch', vi.fn().mockRejectedValue(new Error('Network unavailable')));
+      try {
+        const result = await generateBiographyWithAI({
+          fullName: 'Trần Văn Lộc',
+          gender: 'male',
+          generation: 1,
+          birthDate: { precision: 'exact', day: 14, month: 3, year: 1872 },
+          deathDate: { precision: 'exact', day: 22, month: 11, year: 1948 },
+          birthPlace: 'Đông Ngạc, Hà Nội',
+          occupation: 'Thầy đồ',
+          isLiving: false,
+          merits: 'Trùng tu nhà thờ họ năm 1924',
+        });
+        expect(result).toEqual({ error: 'Network unavailable' });
+      } finally {
+        vi.unstubAllGlobals();
+        vi.unstubAllEnvs();
+      }
     });
   });
 
