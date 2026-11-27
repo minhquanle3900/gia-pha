@@ -3,8 +3,9 @@ set -euo pipefail
 
 repo="$(git -C "$(dirname "$0")" rev-parse --show-toplevel)"
 cd "$repo"
-if [[ $# -ne 1 || "$1" != /*.zip ]]; then
-  printf 'Usage: %s /absolute/path/Coi-Nguon-Gift-Edition-RC1.zip\n' "$0" >&2
+version="${2:-RC1}"
+if [[ $# -lt 1 || $# -gt 2 || "${1:-}" != /*.zip || ! "$version" =~ ^RC[1-9][0-9]*$ ]]; then
+  printf 'Usage: %s /absolute/path/Coi-Nguon-Gift-Edition-RCn.zip [RCn]\n' "$0" >&2
   exit 1
 fi
 archive="$1"
@@ -27,15 +28,15 @@ go_root="$("$go_bin" env GOROOT)"
 sha="$(git rev-parse HEAD)"
 stage="$(mktemp -d)"
 trap 'rm -rf "$stage"' EXIT
-name=Coi-Nguon-Gift-Edition-RC1
+name="Coi-Nguon-Gift-Edition-$version"
 out="$stage/$name"
 mkdir -p "$out"
 VITE_GEMINI_BIOGRAPHY_ENABLED=false npm run build
 cp -R dist "$out/dist"
-cp scripts/gift-edition/BAT-DAU.html "$out/"
+sed "s/RC1/$version/g" scripts/gift-edition/BAT-DAU.html > "$out/BAT-DAU.html"
 sed 's/$/\r/' scripts/gift-edition/Mo-Coi-Nguon.cmd > "$out/Mo-Coi-Nguon.cmd"
 cp "$go_root/LICENSE" "$out/GO-LICENSE.txt"
-printf 'Coi Nguon Gift Edition RC1\nApplication commit: %s\nLauncher toolchain: %s\nURL: http://127.0.0.1:4315/\n' "$sha" "$go_version" > "$out/BUILD.txt"
+printf 'Coi Nguon Gift Edition %s\nApplication commit: %s\nLauncher toolchain: %s\nURL: http://127.0.0.1:4315/\n' "$version" "$sha" "$go_version" > "$out/BUILD.txt"
 
 node --import tsx --input-type=module - "$out/Gia-Pha-Mau-Tong-Hop.json" <<'NODE'
 import { writeFileSync } from 'node:fs';

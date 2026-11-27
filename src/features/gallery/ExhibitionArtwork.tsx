@@ -11,10 +11,11 @@ const treatments = [
 type CoupletTreatment = (typeof treatments)[number]['key'];
 type Verse = readonly [string, string];
 
-export function Couplet({ lines, vertical = false, treatment = 'lacquer' }: {
+export function Couplet({ lines, vertical = false, treatment = 'lacquer', rightFirst = false }: {
   lines: Verse;
   vertical?: boolean;
   treatment?: CoupletTreatment;
+  rightFirst?: boolean;
 }) {
   if (!vertical) {
     return (
@@ -25,7 +26,8 @@ export function Couplet({ lines, vertical = false, treatment = 'lacquer' }: {
   }
 
   return (
-    <span className="exhibition-couplet exhibition-couplet-vertical heritage-brush" data-treatment={treatment}>
+    <span className="exhibition-couplet exhibition-couplet-vertical heritage-brush" data-treatment={treatment}
+      data-right-first={rightFirst || undefined}>
       {lines.map((line) => (
         <span key={line} className="exhibition-couplet-panel">
           <span className="sr-only">{line}</span>
@@ -75,7 +77,11 @@ export function CoupletDetail({ title, lines, isAncestral }: { title: string; li
   );
 }
 
-export function ArtworkFullscreen({ title, children }: { title: string; children: ReactNode }) {
+export function ArtworkFullscreen({ title, children, artworkTrigger }: {
+  title: string;
+  children: ReactNode;
+  artworkTrigger?: { className: string; label: string; content: ReactNode };
+}) {
   const dialog = useRef<HTMLDialogElement>(null);
   const trigger = useRef<HTMLButtonElement>(null);
   const titleId = useId();
@@ -89,9 +95,10 @@ export function ArtworkFullscreen({ title, children }: { title: string; children
 
   return (
     <>
-      <button ref={trigger} type="button" className="exhibition-action exhibition-fullscreen-action"
+      <button ref={trigger} type="button" className={artworkTrigger?.className ?? 'exhibition-action exhibition-fullscreen-action'}
+        aria-label={artworkTrigger?.label}
         aria-haspopup="dialog" onClick={openFullscreen}>
-        <Maximize size={17} aria-hidden="true" /> Xem toàn màn hình
+        {artworkTrigger?.content ?? <><Maximize size={17} aria-hidden="true" /> Xem toàn màn hình</>}
       </button>
       <dialog ref={dialog} className="exhibition-fullscreen" aria-labelledby={titleId}
         onClose={(event) => {
