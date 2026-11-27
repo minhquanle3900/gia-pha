@@ -29,6 +29,7 @@ import { PrivacyPinModal } from '../../components/PrivacyPinModal';
 import { useGenealogy } from '../../context/GenealogyContext';
 import { usePrivacyShield } from '../../hooks/usePrivacyShield';
 import { Person } from '../../models/genealogy';
+import { embeddedMediaSource, EXTERNAL_MEDIA_MESSAGE } from '../../utils/embeddedMedia';
 import {
   exportPersonReportToPdfDirect,
   PersonReportData,
@@ -652,25 +653,32 @@ export const PersonProfileView: React.FC<PersonProfileViewProps> = ({
                 </div>
               ) : (
                 <div className="space-y-2">
-                  {personAudios.map((aud) => (
-                    <div
-                      key={aud.id}
-                      className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4] space-y-1.5"
-                    >
-                      <div className="flex items-center justify-between">
-                        <span className="text-xs font-serif font-bold text-[#1F1913] truncate">
-                          {aud.title}
-                        </span>
-                        {aud.dateLabel && (
-                          <span className="text-[10px] text-stone-400">{aud.dateLabel}</span>
+                  {personAudios.map((aud) => {
+                    const source = embeddedMediaSource(aud.dataUrl, 'audio');
+                    return (
+                      <div
+                        key={aud.id}
+                        className="p-2.5 rounded-xl bg-[#FAF7F2] border border-[#E7DFD4] space-y-1.5"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="text-xs font-serif font-bold text-[#1F1913] truncate">
+                            {aud.title}
+                          </span>
+                          {aud.dateLabel && (
+                            <span className="text-[10px] text-stone-400">{aud.dateLabel}</span>
+                          )}
+                        </div>
+                        {aud.description && (
+                          <p className="text-[11px] text-stone-600 italic">{aud.description}</p>
+                        )}
+                        {source ? (
+                          <audio controls src={source} className="w-full h-8 mt-1" />
+                        ) : (
+                          <p className="text-xs text-[#655A4E]">{EXTERNAL_MEDIA_MESSAGE}</p>
                         )}
                       </div>
-                      {aud.description && (
-                        <p className="text-[11px] text-stone-600 italic">{aud.description}</p>
-                      )}
-                      <audio controls src={aud.dataUrl} className="w-full h-8 mt-1" />
-                    </div>
-                  ))}
+                    );
+                  })}
                 </div>
               )}
             </div>

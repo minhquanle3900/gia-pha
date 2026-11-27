@@ -10,6 +10,7 @@ import {
 } from '../models/genealogy';
 import { formatFlexibleDate, formatLifespan, formatLunarAnniversary } from '../utils/dateUtils';
 import { escapeHtml } from '../utils/htmlUtils';
+import { embeddedMediaSource } from '../utils/embeddedMedia';
 
 export interface FamilyBookExportData {
   settings: AppSettings;
@@ -456,8 +457,9 @@ function renderPersonCardHtml(
     }
   }
 
-  const avatarContent = p.portraitUrl
-    ? `<img src="${escapeHtml(p.portraitUrl)}" alt="${escapeHtml(p.fullName)}" crossorigin="anonymous" />`
+  const portrait = embeddedMediaSource(p.portraitUrl, 'image');
+  const avatarContent = portrait
+    ? `<img src="${escapeHtml(portrait)}" alt="${escapeHtml(p.fullName)}" />`
     : escapeHtml(getInitials(p.fullName));
 
   const deathAnniv =

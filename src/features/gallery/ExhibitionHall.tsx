@@ -5,6 +5,7 @@ import {
 } from 'lucide-react';
 import { useGenealogy } from '../../context/GenealogyContext';
 import type { Media } from '../../models/genealogy';
+import { embeddedMediaSource } from '../../utils/embeddedMedia';
 import { buildExhibitionCatalog, buildExhibitionCollections, type Exhibit, type RoomId } from './exhibitionCatalog';
 import { ArtworkFullscreen, Couplet, CoupletDetail } from './ExhibitionArtwork';
 import hallImage from './exhibition-hall.webp?inline';
@@ -80,7 +81,7 @@ const heritageLinks = [
 
 function embeddedSource(item: Media | undefined, type: 'image' | 'audio') {
   if (!item?.mimeType.toLowerCase().startsWith(type + '/')) return undefined;
-  return item.dataUrl.toLowerCase().startsWith('data:' + type + '/') ? item.dataUrl : undefined;
+  return embeddedMediaSource(item.dataUrl, type);
 }
 
 function attachedMedia(exhibit: Exhibit, media: ReadonlyMap<string, Media>) {

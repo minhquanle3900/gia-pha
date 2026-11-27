@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Gender } from '../models/genealogy';
 import { getInitials } from '../utils/dateUtils';
+import { embeddedMediaSource } from '../utils/embeddedMedia';
 
 interface HeritageAvatarProps {
   fullName: string;
@@ -27,7 +28,7 @@ export const HeritageAvatar: React.FC<HeritageAvatarProps> = ({
   className = '',
   isLiving,
 }) => {
-  const [imageError, setImageError] = useState(false);
+  const [failedSource, setFailedSource] = useState<string>();
   const initials = getInitials(fullName);
 
   // Vietnamese heritage palette:
@@ -40,7 +41,7 @@ export const HeritageAvatar: React.FC<HeritageAvatarProps> = ({
     unknown: 'bg-[#F4EFE6] text-[#655A4E] border-[#A89F91]/40',
   };
 
-  const hasValidImage = Boolean(portraitUrl && !imageError);
+  const source = embeddedMediaSource(portraitUrl, 'image');
 
   return (
     <div
@@ -49,11 +50,11 @@ export const HeritageAvatar: React.FC<HeritageAvatarProps> = ({
       } ${genderColors[gender]} ${className}`}
       title={fullName}
     >
-      {hasValidImage ? (
+      {source && source !== failedSource ? (
         <img
-          src={portraitUrl}
+          src={source}
           alt={fullName}
-          onError={() => setImageError(true)}
+          onError={() => setFailedSource(source)}
           className="w-full h-full object-cover"
           loading="lazy"
         />

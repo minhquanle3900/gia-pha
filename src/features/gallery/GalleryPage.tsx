@@ -15,6 +15,7 @@ import { useGenealogy } from '../../context/GenealogyContext';
 import { useNativeModal } from '../../hooks/useNativeModal';
 import { Media, MediaCategory, NavigationTab } from '../../models/genealogy';
 import { compressImageFile } from '../../utils/imageUtils';
+import { embeddedMediaSource, EXTERNAL_MEDIA_MESSAGE } from '../../utils/embeddedMedia';
 import { AudioRecorderModal } from './AudioRecorderModal';
 
 const ExhibitionHall = lazy(() => import('./ExhibitionHall'));
@@ -38,6 +39,13 @@ const CATEGORY_LABELS: Record<MediaCategory, string> = {
 
 const filterClass = 'mt-1 min-h-11 min-w-0 w-full rounded-xl border border-[#D5CABE] bg-[#FAF8F5] px-2.5 text-base text-[#2C241C] focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-forest-700 sm:text-sm';
 
+function GalleryImage({ item, className, loading }: { item: Media; className: string; loading?: 'lazy' }) {
+  const source = embeddedMediaSource(item.dataUrl, 'image');
+  return source
+    ? <img src={source} alt={item.title} loading={loading} className={className} />
+    : <p className="m-3 rounded-lg bg-[#FAF7F2] p-3 text-sm text-[#655A4E]">{EXTERNAL_MEDIA_MESSAGE}</p>;
+}
+
 export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPerson, entryRequest, onViewChange }) => {
   const { media, people, saveMedia, deleteMedia } = useGenealogy();
 
@@ -52,6 +60,7 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
   const [selectedCategory, setSelectedCategory] = useState<string>('all');
   const [selectedPersonFilter, setSelectedPersonFilter] = useState<string>('all');
   const [viewingMedia, setViewingMedia] = useState<Media | null>(null);
+  const viewingAudio = embeddedMediaSource(viewingMedia?.dataUrl, 'audio');
   const [addModalOpen, setAddModalOpen] = useState(false);
   const [audioRecorderOpen, setAudioRecorderOpen] = useState(false);
   const [deleteId, setDeleteId] = useState<string | null>(null);
@@ -357,9 +366,8 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
                     <span className="text-[9px] text-[#DBC599] mt-0.5">Bản ghi âm ký ức</span>
                   </div>
                 ) : (
-                  <img
-                    src={item.dataUrl}
-                    alt={item.title}
+                  <GalleryImage
+                    item={item}
                     loading="lazy"
                     className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.02] motion-reduce:transition-none"
                   />
@@ -444,12 +452,15 @@ export const GalleryPage: React.FC<GalleryPageProps> = ({ onNavigate, onSelectPe
                     <h3 className="text-white font-serif text-lg font-bold">{viewingMedia.title}</h3>
                     <p className="text-[#DBC599] text-xs mt-1">Bản ghi âm giọng nói & Lời dặn tiền nhân</p>
                   </div>
-                  <audio controls tabIndex={0} src={viewingMedia.dataUrl} className="w-full mt-2" autoPlay />
+                  {viewingAudio ? (
+                    <audio controls tabIndex={0} src={viewingAudio} className="w-full mt-2" autoPlay />
+                  ) : (
+                    <p className="text-xs text-[#F1E8D6]">{EXTERNAL_MEDIA_MESSAGE}</p>
+                  )}
                 </div>
               ) : (
-                <img
-                  src={viewingMedia.dataUrl}
-                  alt={viewingMedia.title}
+                <GalleryImage
+                  item={viewingMedia}
                   className="max-h-[40dvh] max-w-full rounded-lg object-contain md:max-h-[75dvh]"
                 />
               )}
