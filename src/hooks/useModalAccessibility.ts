@@ -1,4 +1,13 @@
 import { RefObject, useCallback, useEffect, useRef } from 'react';
+import {
+  focusIsEnteringNativeDialog,
+  isAvailableForFocus,
+  modalFocusableElements,
+  modalScopeManager,
+  trapModalTab,
+  type ModalScope,
+  type ModalScopeManager,
+} from './modalScope';
 
 export type ModalCloseReason = 'escape' | 'backdrop' | 'button';
 
@@ -11,28 +20,6 @@ interface ModalAccessibilityOptions {
   onRequestClose: (reason: ModalCloseReason) => void;
 }
 
-const modalStack: symbol[] = [];
-let previousBodyOverflow = '';
-
-const focusableSelector = [
-  'a[href]',
-  'button',
-  'input:not([type="hidden"])',
-  'select',
-  'textarea',
-  '[tabindex]:not([tabindex="-1"])',
-].join(',');
-
-function focusableElements(dialog: HTMLElement): HTMLElement[] {
-  return Array.from(dialog.querySelectorAll<HTMLElement>(focusableSelector)).filter(
-    (element) =>
-      !element.matches(':disabled') &&
-      !element.closest('[inert], [aria-hidden="true"]') &&
-      element.getClientRects().length > 0 &&
-      getComputedStyle(element).visibility !== 'hidden'
-  );
-}
-
 export function useModalAccessibility({
   open,
   dialogRef,
@@ -41,12 +28,13 @@ export function useModalAccessibility({
   busy = false,
   onRequestClose,
 }: ModalAccessibilityOptions) {
-  const identity = useRef(Symbol('modal'));
+  const current = useRef<{ manager: ModalScopeManager; scope: ModalScope } | null>(null);
   const latest = useRef({ busy, onRequestClose });
   latest.current = { busy, onRequestClose };
 
   const requestClose = useCallback((reason: ModalCloseReason) => {
-    if (latest.current.busy || modalStack.at(-1) !== identity.current) return;
+    const active = current.current;
+    if (!active || latest.current.busy || !active.manager.isTop(active.scope)) return;
     latest.current.onRequestClose(reason);
   }, []);
 
@@ -54,79 +42,44 @@ export function useModalAccessibility({
     if (!open) return;
     const dialog = dialogRef.current;
     if (!dialog) return;
-
+    const ownerDocument = dialog.ownerDocument;
     const trigger = returnFocusRef?.current ??
-      (document.activeElement instanceof HTMLElement ? document.activeElement : null);
-    const id = identity.current;
-    if (modalStack.length === 0) {
-      previousBodyOverflow = document.body.style.overflow;
-      document.body.style.overflow = 'hidden';
-    }
-    modalStack.push(id);
-
+      (ownerDocument.activeElement instanceof HTMLElement ? ownerDocument.activeElement : null);
+    const manager = modalScopeManager(dialog);
     const focusInitial = () => {
       const preferred = initialFocusRef?.current;
-      const target = preferred && dialog.contains(preferred) && !preferred.matches(':disabled')
+      const target = preferred && dialog.contains(preferred) && isAvailableForFocus(preferred)
         ? preferred
-        : focusableElements(dialog)[0] ?? dialog;
+        : modalFocusableElements(dialog, manager.nestedElements(scope))[0] ?? dialog;
       target.focus({ preventScroll: true });
     };
-    focusInitial();
+    const scope = manager.register({ element: dialog, kind: 'custom', opener: trigger, focusInitial });
+    current.current = { manager, scope };
+    if (manager.isTop(scope)) focusInitial();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (modalStack.at(-1) !== id) return;
-      const nativeDialog = document.querySelector<HTMLDialogElement>('dialog[open]');
-      if (nativeDialog && !dialog.contains(nativeDialog) && nativeDialog.getClientRects().length > 0) return;
+      if (!manager.isTop(scope)) return;
       if (event.key === 'Escape') {
         event.preventDefault();
         event.stopPropagation();
         requestClose('escape');
-        return;
-      }
-      if (event.key !== 'Tab') return;
-      const elements = focusableElements(dialog);
-      const first = elements[0];
-      const last = elements.at(-1);
-      const active = document.activeElement;
-      if (!first || !last) {
-        event.preventDefault();
-        dialog.focus({ preventScroll: true });
-      } else if (!dialog.contains(active) || active === dialog) {
-        event.preventDefault();
-        (event.shiftKey ? last : first).focus();
-      } else if (event.shiftKey && active === first) {
-        event.preventDefault();
-        last.focus();
-      } else if (!event.shiftKey && active === last) {
-        event.preventDefault();
-        first.focus();
+      } else if (event.key === 'Tab') {
+        trapModalTab(event, dialog, modalFocusableElements(dialog, manager.nestedElements(scope)));
       }
     };
-
     const handleFocusIn = (event: FocusEvent) => {
-      if (modalStack.at(-1) !== id || dialog.contains(event.target as Node)) return;
-      if ((event.target as Element)?.closest('dialog[open]')) return;
+      if (!manager.isTop(scope) || dialog.contains(event.target as Node) ||
+        focusIsEnteringNativeDialog(dialog, event.target)) return;
       focusInitial();
     };
 
-    document.addEventListener('keydown', handleKeyDown, true);
-    document.addEventListener('focusin', handleFocusIn);
+    ownerDocument.addEventListener('keydown', handleKeyDown, true);
+    ownerDocument.addEventListener('focusin', handleFocusIn);
     return () => {
-      const wasTopmost = modalStack.at(-1) === id;
-      const index = modalStack.indexOf(id);
-      if (index >= 0) modalStack.splice(index, 1);
-      document.removeEventListener('keydown', handleKeyDown, true);
-      document.removeEventListener('focusin', handleFocusIn);
-      if (modalStack.length === 0) document.body.style.overflow = previousBodyOverflow;
-      if (wasTopmost && trigger?.isConnected) {
-        const nextTopmost = modalStack.at(-1);
-        queueMicrotask(() => {
-          if (!trigger.isConnected || modalStack.at(-1) !== nextTopmost) return;
-          const otherDialog = Array.from(document.querySelectorAll<HTMLElement>('[aria-modal="true"], dialog[open]'))
-            .some((element) => element !== dialog && element.getClientRects().length > 0 && !element.contains(trigger));
-          if (!otherDialog) trigger.focus({ preventScroll: true });
-        });
-      }
+      ownerDocument.removeEventListener('keydown', handleKeyDown, true);
+      ownerDocument.removeEventListener('focusin', handleFocusIn);
+      manager.unregister(scope);
+      if (current.current?.scope === scope) current.current = null;
     };
   }, [open, dialogRef, initialFocusRef, returnFocusRef, requestClose]);
 
