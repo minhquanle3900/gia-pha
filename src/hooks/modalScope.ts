@@ -56,29 +56,49 @@ export function focusIsEnteringNativeDialog(scope: HTMLElement, target: EventTar
 
 export function createModalScopeManager(ownerDocument: Document) {
   const scopes: ModalScope[] = [];
+  const ancestors = new Map<ModalScope, Set<ModalScope>>();
   let previousBodyOverflow = '';
+
+  const rememberAncestry = () => {
+    for (const inner of scopes) {
+      if (!inner.element.isConnected) continue;
+      const remembered = ancestors.get(inner) ?? new Set<ModalScope>();
+      for (const outer of scopes) {
+        if (outer === inner || !outer.element.isConnected) continue;
+        if (outer.element.contains(inner.element)) remembered.add(outer);
+        else remembered.delete(outer);
+      }
+      ancestors.set(inner, remembered);
+    }
+  };
+
+  const containsScope = (outer: ModalScope, inner: ModalScope) =>
+    outer.element.isConnected && inner.element.isConnected
+      ? outer.element.contains(inner.element)
+      : ancestors.get(inner)?.has(outer) ?? false;
 
   const activeScopes = (closing?: ModalScope) => scopes.filter(scope => scope === closing ||
     (scope.element.isConnected && (scope.kind !== 'native' || (scope.element as HTMLDialogElement).open)));
 
   const top = (closing?: ModalScope): ModalScope | null => {
+    rememberAncestry();
     const active = activeScopes(closing);
     // Registration follows showModal(), so the last native entry is the physical top layer.
     const native = [...active].reverse().find(scope => scope.kind === 'native');
     const eligible = active.filter(scope => {
       if (scope.kind === 'native') return scope === native;
       if (!native) return true;
-      if (!native.element.contains(scope.element)) return false;
+      if (!containsScope(native, scope)) return false;
       const containingNative = active.filter(candidate => candidate.kind === 'native' &&
-        candidate.element.contains(scope.element))
+        containsScope(candidate, scope))
         .find(candidate => !active.some(other => other.kind === 'native' && other !== candidate &&
-          candidate.element.contains(other.element) && other.element.contains(scope.element)));
+          containsScope(candidate, other) && containsScope(other, scope)));
       return containingNative === native;
     });
     return eligible.reduce<ModalScope | null>((current, candidate) => {
       if (!current) return candidate;
       if (candidate === native) return current.kind === 'custom' ? current : candidate;
-      if (candidate.element.contains(current.element)) return current;
+      if (containsScope(candidate, current)) return current;
       return candidate;
     }, null);
   };
@@ -90,6 +110,7 @@ export function createModalScopeManager(ownerDocument: Document) {
     }
     const scope = { ...options, identity: Symbol('modal-scope') };
     scopes.push(scope);
+    rememberAncestry();
     return scope;
   };
 
@@ -99,6 +120,8 @@ export function createModalScopeManager(ownerDocument: Document) {
     const index = scopes.indexOf(scope);
     if (index < 0) return;
     scopes.splice(index, 1);
+    ancestors.delete(scope);
+    for (const remembered of ancestors.values()) remembered.delete(scope);
     // If a parent closes with its child, the child must return to the parent's opener.
     for (const remaining of scopes) {
       if (remaining.opener && scope.element.contains(remaining.opener)) remaining.opener = scope.opener;

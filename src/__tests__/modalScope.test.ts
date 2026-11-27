@@ -34,6 +34,12 @@ class FocusElement {
     return child;
   }
 
+  detach() {
+    if (this.parent) this.parent.children = this.parent.children.filter(child => child !== this);
+    this.parent = null;
+    this.isConnected = false;
+  }
+
   contains(element: FocusElement | null): boolean {
     return element === this || this.children.some(child => child.contains(element));
   }
@@ -181,6 +187,43 @@ describe('shared custom/native modal scope', () => {
     manager.unregister(child);
     await Promise.resolve();
     expect(doc.activeElement).toBe(opener);
+  });
+
+  it('restores the native opener after the custom child is removed from its DOM parent', async () => {
+    const { doc, manager, make, register } = setup();
+    const nativeRoot = make('dialog');
+    register(nativeRoot, 'native');
+    const opener = nativeRoot.append(make());
+    const customRoot = nativeRoot.append(make('section'));
+    const child = register(customRoot, 'custom', opener);
+    customRoot.detach();
+    expect(nativeRoot.contains(customRoot)).toBe(false);
+    manager.unregister(child);
+    await Promise.resolve();
+    expect(doc.activeElement).toBe(opener);
+  });
+
+  it('restores each opener through native/custom/native nesting after DOM removal', async () => {
+    const { doc, manager, make, register } = setup();
+    const nativeRoot = make('dialog');
+    const native = register(nativeRoot, 'native');
+    const nativeOpener = nativeRoot.append(make());
+    const customRoot = nativeRoot.append(make('section'));
+    const custom = register(customRoot, 'custom', nativeOpener);
+    const customOpener = customRoot.append(make());
+    const grandchildRoot = customRoot.append(make('dialog'));
+    const grandchild = register(grandchildRoot, 'native', customOpener);
+    grandchildRoot.detach();
+    manager.unregister(grandchild);
+    grandchildRoot.open = false;
+    await Promise.resolve();
+    expect(doc.activeElement).toBe(customOpener);
+    expect(manager.top()).toBe(custom);
+    customRoot.detach();
+    manager.unregister(custom);
+    await Promise.resolve();
+    expect(doc.activeElement).toBe(nativeOpener);
+    expect(manager.top()).toBe(native);
   });
 
   it('rebases a child opener when the parent and child close together', async () => {
