@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>M3 QA · Guarded transaction controls</title>
+  <style>
+    body{font:16px/1.5 system-ui;margin:1rem auto;padding:0 1rem;max-width:60rem;color:#2E241E;background:#FAF7F2}
+    button{min-height:44px;margin:.4rem;padding:.5rem .8rem;border:1px solid #85786A;border-radius:.6rem;background:white;color:#1B3B2B;cursor:pointer}
+    button:disabled{opacity:.5;cursor:not-allowed}button:focus-visible{outline:3px solid #856428;outline-offset:3px}
+    pre{white-space:pre-wrap;overflow-wrap:anywhere;padding:1rem;border:1px solid #85786A}
+    fieldset{margin-block:1rem}a{color:#1B3B2B}
+  </style>
+</head>
+<body>
+  <h1>M3 QA · Chỉ fixture tổng hợp tại localhost:3250</h1>
+  <p>Trang này chỉ hoạt động ở <code>http://localhost:3250</code>, schema v1 và dòng họ demo được phép. Không dùng dữ liệu gia đình thật. Không thay đổi schema hoặc bảo vệ trình duyệt.</p>
+  <fieldset><legend>Fixture dùng lại từ M1/M2</legend>
+    <button data-fixture="original">Nạp lại fixture demo M2</button>
+    <button data-fixture="empty">Nạp fixture rỗng M1</button>
+    <button id="read">Đọc số bản ghi</button>
+  </fieldset>
+  <fieldset><legend>Khóa transaction thật trong tab QA riêng</legend>
+    <p>Giữ transaction <code>readwrite</code> trên people/media/relationships/unions bằng các yêu cầu đọc liên tục. Không ghi hoặc xóa bản ghi. Mở form trong tab ứng dụng trước, sau đó bắt đầu khóa; Save sẽ chờ đến khi thả khóa. Tự thả sau 60 giây.</p>
+    <button id="hold">Giữ khóa tối đa 60 giây</button>
+    <button id="release" disabled>Thả khóa, cho Save tiếp tục</button>
+    <button id="abort" disabled>Hủy transaction khóa QA</button>
+  </fieldset>
+  <p id="status" role="status">Sẵn sàng</p>
+  <pre id="result">Chưa đọc snapshot.</pre>
+  <p><a href="/">Mở ứng dụng trên origin QA</a> · <a href="./index.html">Kiểm thử nesting custom/native</a></p>
+  <script type="module">
+    import { DB_NAME, DB_VERSION, SCHEMA_VERSION, getDatabase, replaceEntireDatabase, loadFullSnapshot } from '/src/database/db.ts';
+
+    const allowedOrigin = 'http://localhost:3250';
+    const allowedClans = ['M0 DEMO Desktop', 'Dòng họ Trần – Đông Ngạc'];
+    const stores = ['people', 'branches', 'unions', 'relationships', 'lifeEvents', 'media', 'stories'];
+    const output = document.querySelector('#result');
+    const status = document.querySelector('#status');
+    const holdButton = document.querySelector('#hold');
+    const releaseButton = document.querySelector('#release');
+    const abortButton = document.querySelector('#abort');
+    let holding = false;
+    let activeTx = null;
+    let activeDb = null;
+    let timeoutId;
+    let starting = false;
+    let reads = 0;
+    let startedAt = 0;
+
+    function assertOrigin() {
+      if (location.origin !== allowedOrigin || DB_VERSION !== 1 || SCHEMA_VERSION !== 1) {
+        throw Error('BLOCKED: origin hoặc schema không thuộc QA v1 được phép.');
+      }
+    }
+    function canonical(value) {
+      if (Array.isArray(value)) return value.map(canonical);
+      if (value && typeof value === 'object') return Object.fromEntries(Object.keys(value).sort().filter(key => value[key] !== undefined).map(key => [key, canonical(value[key])]));
+      return value;
+    }
+    function business(value) {
+      const copy = structuredClone(value);
+      delete copy.exportedAt;
+      delete copy.settings.lastBackupAt;
+      for (const key of stores) copy[key].sort((a, b) => a.id.localeCompare(b.id));
+      return JSON.stringify(canonical(copy));
+    }
+    async function fixture(kind = 'original') {
+      const url = kind === 'empty' ? '/docs/qa/m1-desktop/evidence/pr3-product/empty-v1-from-native-fixture.json' : '/docs/handoff/m2-final-polish/evidence/before-navigation.json';
+      const response = await fetch(url);
+      if (!response.ok) throw Error('Fixture không có sẵn.');
+      const snapshot = await response.json();
+      if (snapshot.schemaVersion !== 1 || !allowedClans.includes(snapshot.settings?.clanName)) throw Error('Fixture không đúng hợp đồng QA.');
+      return snapshot;
+    }
+    async function guardCurrentData() {
+      assertOrigin();
+      const db = await getDatabase();
+      const snapshot = await loadFullSnapshot();
+      const settings = await db.get('settings', 'default');
+      const isEmptyUninitialized = !settings && stores.every(key => snapshot[key].length === 0);
+      if (snapshot.schemaVersion !== 1 || (!isEmptyUninitialized && !allowedClans.includes(snapshot.settings?.clanName))) {
+        throw Error('BLOCKED: dữ liệu hiện tại không phải fixture tổng hợp được phép.');
+      }
+      return snapshot;
+    }
+    function updateButtons() {
+      for (const button of document.querySelectorAll('[data-fixture], #read, #hold')) button.disabled = holding || starting;
+      releaseButton.disabled = !activeTx;
+      abortButton.disabled = !activeTx;
+    }
+    async function read() {
+      const snapshot = await guardCurrentData();
+      const original = await fixture();
+      output.textContent = JSON.stringify({
+        schemaVersion: snapshot.schemaVersion,
+        settings: 1,
+        ...Object.fromEntries(stores.map(key => [key, snapshot[key].length])),
+        matchesOriginal: business(snapshot) === business(original),
+        comparisonExceptions: ['exportedAt', 'settings.lastBackupAt'],
+      }, null, 2);
+    }
+    async function run(action) {
+      if (holding || starting) return;
+      starting = true;
+      updateButtons();
+      try { await action(); }
+      catch (error) { status.textContent = error instanceof Error ? error.message : String(error); }
+      finally { starting = false; updateButtons(); }
+    }
+    for (const button of document.querySelectorAll('[data-fixture]')) button.addEventListener('click', () => run(async () => {
+      await guardCurrentData();
+      await replaceEntireDatabase(await fixture(button.dataset.fixture));
+      await read();
+      status.textContent = 'Đã nạp fixture tổng hợp. Tải lại tab ứng dụng để đọc dữ liệu mới.';
+    }));
+    document.querySelector('#read').addEventListener('click', () => run(read));
+
+    holdButton.addEventListener('click', () => run(async () => {
+      await guardCurrentData();
+      activeDb = await new Promise((resolve, reject) => {
+        const request = indexedDB.open(DB_NAME, DB_VERSION);
+        request.onsuccess = () => resolve(request.result);
+        request.onerror = () => reject(request.error);
+        request.onupgradeneeded = () => { request.transaction.abort(); reject(Error('BLOCKED: khóa QA không nâng cấp database.')); };
+      });
+      holding = true;
+      reads = 0;
+      startedAt = Date.now();
+      activeTx = activeDb.transaction(['people', 'media', 'relationships', 'unions'], 'readwrite');
+      const tx = activeTx;
+      status.textContent = 'Đang chờ lấy khóa transaction QA…';
+      const finish = state => {
+        holding = false;
+        activeTx = null;
+        clearTimeout(timeoutId);
+        activeDb?.close();
+        activeDb = null;
+        status.textContent = `${state}; ${reads} yêu cầu đọc; ${((Date.now() - startedAt) / 1000).toFixed(1)} giây. Không ghi dữ liệu trong transaction khóa.`;
+        updateButtons();
+      };
+      tx.oncomplete = () => finish('Đã thả khóa QA');
+      tx.onabort = () => finish('Đã hủy khóa QA');
+      tx.onerror = () => { status.textContent = 'Lỗi transaction khóa QA: ' + tx.error?.message; };
+      const keepAlive = () => {
+        if (!holding || Date.now() - startedAt >= 60000) return;
+        const request = tx.objectStore('people').get('__m3_qa_read_only_lock__');
+        request.onsuccess = () => {
+          reads += 1;
+          if (reads === 1 || reads % 1000 === 0) status.textContent = `KHÓA QA ACTIVE · ${reads} yêu cầu đọc · tự thả sau 60 giây`;
+          keepAlive();
+        };
+      };
+      keepAlive();
+      timeoutId = setTimeout(() => { holding = false; }, 60000);
+      updateButtons();
+    }));
+    releaseButton.addEventListener('click', () => { holding = false; status.textContent = 'Đang thả khóa QA…'; });
+    abortButton.addEventListener('click', () => { holding = false; activeTx?.abort(); });
+    addEventListener('pagehide', () => { holding = false; activeTx?.abort(); activeDb?.close(); });
+    if (location.origin !== allowedOrigin) {
+      status.textContent = 'BLOCKED: chỉ dùng trang này ở ' + allowedOrigin;
+      for (const button of document.querySelectorAll('button')) button.disabled = true;
+    }
+  </script>
+</body>
+</html>

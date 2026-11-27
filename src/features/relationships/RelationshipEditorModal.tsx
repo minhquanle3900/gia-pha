@@ -1,8 +1,9 @@
-import React, { useMemo, useState } from 'react';
+import React, { useEffect, useId, useMemo, useRef, useState } from 'react';
 import { Heart, Plus, Search, Trash2, Users, X } from 'lucide-react';
 import { FlexibleDateInput } from '../../components/FlexibleDateInput';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
 import { useGenealogy } from '../../context/GenealogyContext';
+import { useModalAccessibility } from '../../hooks/useModalAccessibility';
 import { FlexibleDate, LineageType, Person, UnionStatus } from '../../models/genealogy';
 import { validateParentChildRelationship } from '../../services/validationService';
 import { formatFlexibleDate, generateId, normalizeVietnameseText } from '../../utils/dateUtils';
@@ -36,8 +37,30 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
   const [selectedLineageType, setSelectedLineageType] = useState<LineageType>('biological');
   const [selectedSpouseStatus, setSelectedSpouseStatus] = useState<UnionStatus>('married');
   const [marriageDate, setMarriageDate] = useState<FlexibleDate>();
-  const [isSavingUnion, setIsSavingUnion] = useState(false);
+  const [isSaving, setIsSaving] = useState(false);
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
+  const savingRef = useRef(false);
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const searchRef = useRef<HTMLInputElement>(null);
+  const formId = useId();
+  const { requestClose } = useModalAccessibility({
+    open,
+    dialogRef,
+    initialFocusRef: searchRef,
+    busy: isSaving,
+    onRequestClose: () => { if (!savingRef.current) onClose(); },
+  });
+
+  useEffect(() => {
+    if (!open) return;
+    setActiveTab('parents');
+    setSelectedPersonId('');
+    setMemberSearch('');
+    setSelectedLineageType('biological');
+    setSelectedSpouseStatus('married');
+    setMarriageDate(undefined);
+    setErrorMessage(null);
+  }, [open, person.id]);
 
   const parents = getParents(person.id);
   const children = getChildren(person.id);
@@ -61,8 +84,24 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
 
   if (!open) return null;
 
+  const runMutation = async (mutation: () => Promise<unknown>, onSuccess?: () => void) => {
+    if (savingRef.current) return;
+    savingRef.current = true;
+    setIsSaving(true);
+    setErrorMessage(null);
+    try {
+      await mutation();
+      onSuccess?.();
+    } catch (error) {
+      setErrorMessage(error instanceof Error ? error.message : 'Không thể lưu thay đổi quan hệ. Hãy thử lại.');
+    } finally {
+      savingRef.current = false;
+      setIsSaving(false);
+    }
+  };
+
   const handleAddParent = async () => {
-    if (!selectedPersonId) return;
+    if (!selectedPersonId || savingRef.current) return;
     setErrorMessage(null);
 
     const validation = validateParentChildRelationship({
@@ -78,20 +117,18 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
       return;
     }
 
-    await saveRelationship({
+    await runMutation(() => saveRelationship({
       id: `rel_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
       parentId: selectedPersonId,
       childId: person.id,
       lineageType: selectedLineageType,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-    });
-
-    setSelectedPersonId('');
+    }), () => setSelectedPersonId(''));
   };
 
   const handleAddChild = async () => {
-    if (!selectedPersonId) return;
+    if (!selectedPersonId || savingRef.current) return;
     setErrorMessage(null);
 
     const validation = validateParentChildRelationship({
@@ -107,26 +144,21 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
       return;
     }
 
-    await saveRelationship({
+    await runMutation(() => saveRelationship({
       id: `rel_${Date.now()}_${Math.random().toString(36).substring(2, 7)}`,
       parentId: person.id,
       childId: selectedPersonId,
       lineageType: selectedLineageType,
       createdAt: new Date().toISOString(),
       updatedAt: new Date().toISOString(),
-    });
-
-    setSelectedPersonId('');
+    }), () => setSelectedPersonId(''));
   };
 
   const handleAddSpouse = async () => {
-    if (!selectedPersonId || isSavingUnion) return;
-    setErrorMessage(null);
-    setIsSavingUnion(true);
+    if (!selectedPersonId || savingRef.current) return;
 
     const now = new Date().toISOString();
-    try {
-      await saveUnion({
+    await runMutation(() => saveUnion({
         id: generateId('union'),
         partnerIds: [person.id, selectedPersonId],
         status: selectedSpouseStatus,
@@ -134,24 +166,26 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
         marriageDate,
         createdAt: now,
         updatedAt: now,
-      });
+      }), () => {
       setSelectedPersonId('');
       setMarriageDate(undefined);
-    } catch (error) {
-      setErrorMessage(error instanceof Error ? error.message : 'Không thể lưu hôn phối.');
-    } finally {
-      setIsSavingUnion(false);
-    }
+    });
   };
 
   return (
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/60 backdrop-blur-xs animate-in fade-in"
       role="dialog"
       aria-modal="true"
+      aria-labelledby={`${formId}-title`}
+      aria-busy={isSaving}
+      tabIndex={-1}
+      onClick={(event) => { if (event.target === event.currentTarget) requestClose('backdrop'); }}
     >
-      <div
-        className="w-full max-w-xl rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-2xl overflow-hidden flex flex-col max-h-[88vh]"
+      <fieldset
+        disabled={isSaving}
+        className="min-w-0 w-full max-w-xl rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-2xl overflow-hidden flex flex-col max-h-[88dvh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
@@ -164,7 +198,7 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
               size="sm"
             />
             <div>
-              <h3 className="text-base font-serif font-bold text-[#1F1913]">
+              <h3 id={`${formId}-title`} className="text-base font-serif font-bold text-[#1F1913]">
                 Quan hệ gia đình: {person.fullName}
               </h3>
               <p className="text-xs text-stone-500">
@@ -174,15 +208,17 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
           </div>
           <button
             type="button"
-            onClick={onClose}
-            className="p-1 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100"
+            onClick={() => requestClose('button')}
+            disabled={isSaving}
+            aria-label="Đóng quan hệ gia đình"
+            className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-lg text-stone-500 hover:text-stone-700 hover:bg-stone-100"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
 
         {/* Tabs */}
-        <div className="flex border-b border-[#E7DFD4] bg-[#F7F2EA]/70 px-4 pt-2">
+        <div className="flex flex-wrap border-b border-[#E7DFD4] bg-[#F7F2EA]/70 px-4 pt-2">
           {[
             { key: 'parents', label: `Cha & Mẹ (${parents.length})`, icon: Users },
             { key: 'spouses', label: `Vợ / Chồng (${spouses.length})`, icon: Heart },
@@ -200,8 +236,8 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
                   setMarriageDate(undefined);
                   setErrorMessage(null);
                 }}
-                disabled={isSavingUnion}
-                className={`flex items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-all ${
+                disabled={isSaving}
+                className={`flex min-h-11 items-center gap-2 px-4 py-2.5 text-xs font-semibold border-b-2 transition-all ${
                   isActive
                     ? 'border-[#1B3B2B] text-[#1B3B2B] bg-white rounded-t-xl'
                     : 'border-transparent text-stone-600 hover:text-stone-900'
@@ -216,6 +252,7 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
 
         {/* Body content */}
         <div className="p-4 sm:p-5 overflow-y-auto space-y-4 flex-1">
+          {isSaving && <p role="status" className="text-xs text-[#54483C]">Đang lưu thay đổi quan hệ. Vui lòng chờ hoàn tất trước khi đóng.</p>}
           {errorMessage && (
             <div role="alert" className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800">
               {errorMessage}
@@ -232,9 +269,13 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
                 : 'Thêm Vợ hoặc Chồng'}
             </h4>
 
-            <div className="relative">
+            <div>
+              <label htmlFor={`${formId}-member-search`} className="mb-1 block text-xs font-medium text-[#54483C]">Tìm thành viên</label>
+              <div className="relative">
               <Search className="w-3.5 h-3.5 text-stone-400 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
               <input
+                ref={searchRef}
+                id={`${formId}-member-search`}
                 type="text"
                 value={memberSearch}
                 onChange={(e) => {
@@ -242,29 +283,33 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
                   setSelectedPersonId('');
                 }}
                 placeholder="Lọc nhanh theo họ tên hoặc tên thường gọi..."
-                className="w-full text-xs rounded-lg border border-[#D5CABE] bg-white pl-8 pr-8 py-1.5 text-[#2C241C] outline-none focus:border-[#1B3B2B]"
+                className="min-h-11 w-full text-xs rounded-lg border border-[#D5CABE] bg-white pl-8 pr-11 py-1.5 text-[#2C241C] outline-none focus:border-[#1B3B2B]"
               />
               {memberSearch && (
                 <button
                   type="button"
                   onClick={() => setMemberSearch('')}
-                  className="absolute right-2 top-1/2 -translate-y-1/2 text-stone-400 hover:text-stone-600"
+                  aria-label="Xóa từ khóa tìm thành viên"
+                  className="absolute right-0 top-1/2 grid size-11 -translate-y-1/2 place-items-center text-stone-500 hover:text-stone-700"
                 >
                   <X className="w-3.5 h-3.5" />
                 </button>
               )}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
               <div className="sm:col-span-2">
+                <label htmlFor={`${formId}-member`} className="mb-1 block text-xs font-medium text-[#54483C]">Thành viên liên kết</label>
                 <select
+                  id={`${formId}-member`}
                   value={selectedPersonId}
                   onChange={(e) => {
                     setSelectedPersonId(e.target.value);
                     setMarriageDate(undefined);
                     setErrorMessage(null);
                   }}
-                  disabled={isSavingUnion}
+                  disabled={isSaving}
                   className="w-full text-xs rounded-lg border border-[#D5CABE] bg-white px-2.5 py-2 text-[#2C241C] outline-none focus:border-[#1B3B2B]"
                 >
                   <option value="">
@@ -281,7 +326,9 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
 
               {activeTab !== 'spouses' ? (
                 <div>
+                  <label htmlFor={`${formId}-lineage`} className="mb-1 block text-xs font-medium text-[#54483C]">Loại quan hệ</label>
                   <select
+                    id={`${formId}-lineage`}
                     value={selectedLineageType}
                     onChange={(e) => setSelectedLineageType(e.target.value as LineageType)}
                     className="w-full text-xs rounded-lg border border-[#D5CABE] bg-white px-2 py-2 text-[#2C241C] outline-none focus:border-[#1B3B2B]"
@@ -294,7 +341,9 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
                 </div>
               ) : (
                 <div>
+                  <label htmlFor={`${formId}-spouse-status`} className="mb-1 block text-xs font-medium text-[#54483C]">Tình trạng hôn phối</label>
                   <select
+                    id={`${formId}-spouse-status`}
                     value={selectedSpouseStatus}
                     onChange={(e) => setSelectedSpouseStatus(e.target.value as UnionStatus)}
                     className="w-full text-xs rounded-lg border border-[#D5CABE] bg-white px-2 py-2 text-[#2C241C] outline-none focus:border-[#1B3B2B]"
@@ -321,7 +370,7 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
 
             <button
               type="button"
-              disabled={!selectedPersonId || isSavingUnion}
+              disabled={!selectedPersonId || isSaving}
               onClick={
                 activeTab === 'parents'
                   ? handleAddParent
@@ -329,10 +378,10 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
                   ? handleAddChild
                   : handleAddSpouse
               }
-              className="flex items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold disabled:opacity-50 transition-colors"
+              className="flex min-h-11 items-center gap-1.5 px-3 py-1.5 rounded-lg bg-[#1B3B2B] hover:bg-[#28503C] text-white text-xs font-semibold disabled:opacity-50 transition-colors"
             >
               <Plus className="w-3.5 h-3.5" />
-              <span>{isSavingUnion ? 'Đang lưu hôn phối…' : 'Thêm liên kết'}</span>
+              <span>{isSaving ? 'Đang lưu…' : 'Thêm liên kết'}</span>
             </button>
           </div>
 
@@ -372,8 +421,10 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
 
                       <button
                         type="button"
-                        onClick={() => deleteRelationship(relationship.id)}
-                        className="p-1 text-stone-400 hover:text-red-600 rounded-lg"
+                        onClick={() => { void runMutation(() => deleteRelationship(relationship.id)); }}
+                        disabled={isSaving}
+                        aria-label={`Xóa liên kết với ${parent.fullName}`}
+                        className="grid min-h-11 min-w-11 shrink-0 place-items-center text-stone-500 hover:text-red-600 rounded-lg"
                         title="Xóa liên kết này (không xóa hồ sơ thành viên)"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -416,8 +467,10 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
 
                       <button
                         type="button"
-                        onClick={() => deleteRelationship(relationship.id)}
-                        className="p-1 text-stone-400 hover:text-red-600 rounded-lg"
+                        onClick={() => { void runMutation(() => deleteRelationship(relationship.id)); }}
+                        disabled={isSaving}
+                        aria-label={`Xóa liên kết với ${child.fullName}`}
+                        className="grid min-h-11 min-w-11 shrink-0 place-items-center text-stone-500 hover:text-red-600 rounded-lg"
                         title="Xóa liên kết này (không xóa hồ sơ thành viên)"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -462,8 +515,10 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
 
                       <button
                         type="button"
-                        onClick={() => deleteUnion(union.id)}
-                        className="p-1 text-stone-400 hover:text-red-600 rounded-lg"
+                        onClick={() => { void runMutation(() => deleteUnion(union.id)); }}
+                        disabled={isSaving}
+                        aria-label={`Xóa hôn phối với ${spouse?.fullName || 'bạn đời chưa rõ tên'}`}
+                        className="grid min-h-11 min-w-11 shrink-0 place-items-center text-stone-500 hover:text-red-600 rounded-lg"
                         title="Xóa cuộc hôn phối này"
                       >
                         <Trash2 className="w-4 h-4" />
@@ -480,13 +535,14 @@ export const RelationshipEditorModal: React.FC<RelationshipEditorModalProps> = (
         <div className="p-4 border-t border-[#E7DFD4] bg-[#FAF7F2] flex justify-end">
           <button
             type="button"
-            onClick={onClose}
-            className="px-4 py-2 text-xs font-medium bg-[#1B3B2B] text-white rounded-xl"
+            onClick={() => requestClose('button')}
+            disabled={isSaving}
+            className="min-h-11 px-4 py-2 text-xs font-medium bg-[#1B3B2B] text-white rounded-xl"
           >
             Đóng
           </button>
         </div>
-      </div>
+      </fieldset>
     </div>
   );
 };

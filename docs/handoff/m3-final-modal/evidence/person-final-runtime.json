@@ -1,0 +1,28 @@
+{
+  "sha": "fb7e41eea7a14f822bc674e89314ef88f93b2858",
+  "initial": {
+    "focused": true,
+    "height": 844,
+    "width": 390
+  },
+  "cancel": {
+    "focus": "Tiếp tục chỉnh sửa",
+    "native": "DIALOG",
+    "open": true
+  },
+  "confirmEscape": {
+    "focus": "Hủy",
+    "nativeOpen": 0,
+    "value": "M3 QA Nháp Mobile"
+  },
+  "formEscape": "",
+  "continue": {
+    "focused": true,
+    "value": "M3 QA Nháp Mobile"
+  },
+  "discard": {
+    "dialogs": 0,
+    "focus": "Thêm thành viên mới",
+    "overflow": ""
+  }
+}

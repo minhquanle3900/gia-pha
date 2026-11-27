@@ -1,0 +1,17 @@
+{
+  "sha": "db607214d31971434a19dd52e7916085125b8300",
+  "reproduction": [
+    "Open native outer",
+    "Open custom child",
+    "Open native grandchild",
+    "Press Escape once",
+    "Read in separate call"
+  ],
+  "observed": {
+    "busy": "false",
+    "focus": "ngoài/custom/native: nội dung nháp QA",
+    "nativeCount": 2,
+    "stillOpen": true
+  },
+  "expected": "Only native grandchild closes; custom child remains"
+}

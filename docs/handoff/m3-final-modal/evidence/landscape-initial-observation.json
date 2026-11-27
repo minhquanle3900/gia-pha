@@ -1,0 +1,24 @@
+{
+  "field": {
+    "bottom": 451.99999618530273,
+    "top": 414.3999938964844
+  },
+  "focused": true,
+  "page": {
+    "client": 1280,
+    "scroll": 1280
+  },
+  "panels": [
+    {
+      "bottom": 541.5750122070312,
+      "height": 313,
+      "scroll": 313,
+      "scrollTop": 0,
+      "top": 228.8125
+    }
+  ],
+  "viewport": {
+    "height": 720,
+    "width": 1280
+  }
+}

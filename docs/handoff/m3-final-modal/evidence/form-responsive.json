@@ -1,0 +1,358 @@
+{
+  "sha": "fb7e41eea7a14f822bc674e89314ef88f93b2858",
+  "scope": "CSS viewport emulation, all three PersonForm sections, no real keyboard",
+  "samples": [
+    {
+      "theme": "light",
+      "requestedWidth": 320,
+      "identity": {
+        "background": "rgb(16, 23, 19)",
+        "client": 320,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 320,
+        "width": 320
+      },
+      "life": {
+        "dialogWidth": 320,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 320,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 360,
+      "identity": {
+        "background": "rgb(16, 23, 19)",
+        "client": 360,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 360,
+        "width": 360
+      },
+      "life": {
+        "dialogWidth": 360,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 360,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 390,
+      "identity": {
+        "background": "rgb(16, 23, 19)",
+        "client": 390,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 390,
+        "width": 390
+      },
+      "life": {
+        "dialogWidth": 390.3999938964844,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 390.3999938964844,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 430,
+      "identity": {
+        "background": "rgb(16, 23, 19)",
+        "client": 430,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 430,
+        "width": 430
+      },
+      "life": {
+        "dialogWidth": 430.3999938964844,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 430.3999938964844,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 768,
+      "identity": {
+        "background": "rgb(16, 23, 19)",
+        "client": 768,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 768,
+        "width": 768
+      },
+      "life": {
+        "dialogWidth": 768,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 768,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 1024,
+      "identity": {
+        "background": "rgb(16, 23, 19)",
+        "client": 1024,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 1024,
+        "width": 1024
+      },
+      "life": {
+        "dialogWidth": 1024,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 1024,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 1366,
+      "identity": {
+        "background": "rgb(16, 23, 19)",
+        "client": 1366,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 1366,
+        "width": 1366
+      },
+      "life": {
+        "dialogWidth": 1366.4000244140625,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 1366.4000244140625,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 1920,
+      "identity": {
+        "background": "rgb(16, 23, 19)",
+        "client": 1920,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 1920,
+        "width": 1920
+      },
+      "life": {
+        "dialogWidth": 1920,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 1920,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 320,
+      "identity": {
+        "background": "rgb(250, 247, 242)",
+        "client": 320,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 320,
+        "width": 320
+      },
+      "life": {
+        "dialogWidth": 320,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 320,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 360,
+      "identity": {
+        "background": "rgb(250, 247, 242)",
+        "client": 360,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 360,
+        "width": 360
+      },
+      "life": {
+        "dialogWidth": 360,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 360,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 390,
+      "identity": {
+        "background": "rgb(250, 247, 242)",
+        "client": 390,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 390,
+        "width": 390
+      },
+      "life": {
+        "dialogWidth": 390.3999938964844,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 390.3999938964844,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 430,
+      "identity": {
+        "background": "rgb(250, 247, 242)",
+        "client": 430,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 430,
+        "width": 430
+      },
+      "life": {
+        "dialogWidth": 430.3999938964844,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 430.3999938964844,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 768,
+      "identity": {
+        "background": "rgb(250, 247, 242)",
+        "client": 768,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 768,
+        "width": 768
+      },
+      "life": {
+        "dialogWidth": 768,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 768,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 1024,
+      "identity": {
+        "background": "rgb(250, 247, 242)",
+        "client": 1024,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 1024,
+        "width": 1024
+      },
+      "life": {
+        "dialogWidth": 1024,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 1024,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 1366,
+      "identity": {
+        "background": "rgb(250, 247, 242)",
+        "client": 1366,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 1366,
+        "width": 1366
+      },
+      "life": {
+        "dialogWidth": 1366.4000244140625,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 1366.4000244140625,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 1920,
+      "identity": {
+        "background": "rgb(250, 247, 242)",
+        "client": 1920,
+        "focus": true,
+        "height": 900,
+        "nameVisible": true,
+        "scroll": 1920,
+        "width": 1920
+      },
+      "life": {
+        "dialogWidth": 1920,
+        "pageOverflow": false
+      },
+      "genealogy": {
+        "dialogWidth": 1920,
+        "pageOverflow": false
+      },
+      "cleanAfterTabs": true
+    }
+  ]
+}
