@@ -1,0 +1,17 @@
+{
+  "testedCodeSHA": "6cc3365d623d456ae28ddbacbd38ff884d5847eb",
+  "lintExit": 0,
+  "regressionExit": 0,
+  "regressionPassed": 336,
+  "baselineCount": 327,
+  "addedPagesTests": 9,
+  "buildCommand": "npm run build:pages",
+  "buildExit": 0,
+  "bunLockUnchanged": true,
+  "applicationBusinessSourceUnchanged": true,
+  "notes": [
+    "Existing giftPrivacy test isolated from occupied Windows port3000; assertions unchanged.",
+    "Only static artifact uploaded; no Express/Gemini backend deployed.",
+    "Computer Use ended by Windows URL safety; no further UI automation attempted."
+  ]
+}

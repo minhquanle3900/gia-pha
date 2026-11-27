@@ -1,0 +1,35 @@
+{
+  "url": "https://coi-nguon-gift.pages.dev/",
+  "deploymentId": "8d9cfe63-a72a-40ea-b4d4-217c6b27454a",
+  "immutableDeploymentURL": "https://8d9cfe63.coi-nguon-gift.pages.dev",
+  "environment": "Production (demo/UAT only)",
+  "branch": "codex/cloudflare-pages-demo",
+  "deployedSHA": "6cc3365d623d456ae28ddbacbd38ff884d5847eb",
+  "baseline": "7b745ebe553e6db6813ae2095d6f3bd11bc0ed97",
+  "tests": {
+    "lint": "PASS",
+    "buildPages": "PASS",
+    "regression": {
+      "status": "PASS",
+      "passed": 336,
+      "baseline": 327,
+      "newDeploymentTests": 9
+    },
+    "note": "Windows port isolation correction in existing privacy test; backend application unchanged."
+  },
+  "browser": {
+    "httpsRender": "PASS in IAB Chromium on Windows",
+    "geminiOffMessage": "PASS",
+    "offline": "BLOCKED: IAB has no network emulation capability; native Chrome stopped by Windows URL safety verification",
+    "backupRestoreHTTPS": "BLOCKED: Computer Use stopped before runtime test",
+    "iphoneReal": "SKIP: no device",
+    "updateCycle": "Not run; HTTP cache headers and deployed SW/artifact hashes verified"
+  },
+  "security": {
+    "expressBackendDeployed": false,
+    "geminiBackendDeployed": false,
+    "api": "Unconditional 403 for /api namespace; no request body parsing or forwarding",
+    "windowsProtectionChanged": false,
+    "cloudflareProtectionChanged": false
+  }
+}

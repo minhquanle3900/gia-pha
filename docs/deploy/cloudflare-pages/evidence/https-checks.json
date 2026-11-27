@@ -1,0 +1,169 @@
+{
+  "url": "https://coi-nguon-gift.pages.dev",
+  "deployedSHA": "6cc3365d623d456ae28ddbacbd38ff884d5847eb",
+  "checks": [
+    {
+      "path": "/",
+      "status": 200,
+      "type": "text/html; charset=utf-8",
+      "cacheControl": "no-cache",
+      "csp": "img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'",
+      "swAllowed": null,
+      "bytes": 1913,
+      "sha256": "fa388a00b86d98b03b7b61e630f1aa0f38883914c015f728ff16b1e450deb8df",
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/build-info.json",
+      "status": 200,
+      "type": "application/json",
+      "cacheControl": "no-store",
+      "csp": "img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'",
+      "swAllowed": null,
+      "bytes": 183,
+      "sha256": "62664a638799c93e75bcc17a9196a43eaca26343f893ca00c7e60e0e92a5142d",
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/manifest.webmanifest",
+      "status": 200,
+      "type": "application/manifest+json",
+      "cacheControl": "no-cache",
+      "csp": "img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'",
+      "swAllowed": null,
+      "bytes": 630,
+      "sha256": "386ca45e713bcfee6ce7a01840b77689ab3cb8662b9c49ca4dad0453c30493cf",
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/pwa-192x192.png",
+      "status": 200,
+      "type": "image/png",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "csp": "img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'",
+      "swAllowed": null,
+      "bytes": 13536,
+      "sha256": "0c10454b18814addb0b06b26f73197f5df41889fc268a7910c097f3fe45fe625",
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/pwa-512x512.png",
+      "status": 200,
+      "type": "image/png",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "csp": "img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'",
+      "swAllowed": null,
+      "bytes": 42488,
+      "sha256": "07946a3ea7ac25a26b16fe185b1ed974faf1cf4dcf0c70a4e4b341c424ae604b",
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/pwa-maskable-512x512.png",
+      "status": 200,
+      "type": "image/png",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "csp": "img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'",
+      "swAllowed": null,
+      "bytes": 180864,
+      "sha256": "ea816d615438aa5a3dd64ae8c03bf848b63d930e2f7827b5a6c5d0330c0dd4bd",
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/apple-touch-icon.png",
+      "status": 200,
+      "type": "image/png",
+      "cacheControl": "public, max-age=0, must-revalidate",
+      "csp": "img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'",
+      "swAllowed": null,
+      "bytes": 29403,
+      "sha256": "6163b48c3c93f3317f89f204c58d31dc8a8498e752cd87c06d0731b3d13256da",
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/sw.js",
+      "status": 200,
+      "type": "application/javascript",
+      "cacheControl": "no-store, no-cache, must-revalidate",
+      "csp": "img-src 'self' data: blob:; media-src 'self' data: blob:; font-src 'self' data:; connect-src 'self'",
+      "swAllowed": "/",
+      "bytes": 2184,
+      "sha256": "975735db8a470da53d5f8a7c00059e0dbb523f9bd78584dc477b8fb93982a828",
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/api/biography/generate",
+      "method": "GET",
+      "status": 403,
+      "cacheControl": "no-store",
+      "body": {
+        "error": "AI ch\u01b0a \u0111\u01b0\u1ee3c k\u00edch ho\u1ea1t trong B\u1ea3n Qu\u00e0 T\u1eb7ng."
+      }
+    },
+    {
+      "path": "/api/biography/generate",
+      "method": "POST",
+      "status": 403,
+      "cacheControl": "no-store",
+      "body": {
+        "error": "AI ch\u01b0a \u0111\u01b0\u1ee3c k\u00edch ho\u1ea1t trong B\u1ea3n Qu\u00e0 T\u1eb7ng."
+      }
+    },
+    {
+      "path": "/api/biography/generate",
+      "method": "OPTIONS",
+      "status": 403,
+      "cacheControl": "no-store",
+      "body": {
+        "error": "AI ch\u01b0a \u0111\u01b0\u1ee3c k\u00edch ho\u1ea1t trong B\u1ea3n Qu\u00e0 T\u1eb7ng."
+      }
+    },
+    {
+      "path": "/assets/Charm-Regular-DLkA3AcE.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 36288,
+      "woff2": true,
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/assets/CormorantGaramond-Italic-Latin-Vietnamese-Bar8OQlu.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 96396,
+      "woff2": true,
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/assets/CormorantGaramond-Latin-Vietnamese-BG4t8PVT.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 134184,
+      "woff2": true,
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/assets/JetBrainsMono-Latin-Vietnamese-C4xEFJ8t.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 53140,
+      "woff2": true,
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/assets/PlusJakartaSans-Latin-Vietnamese-C09y-G-o.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 55132,
+      "woff2": true,
+      "matchesBuiltArtifact": true
+    },
+    {
+      "path": "/assets/ViaodaLibre-Regular-DZPpm2je.woff2",
+      "status": 200,
+      "type": "font/woff2",
+      "bytes": 46244,
+      "woff2": true,
+      "matchesBuiltArtifact": true
+    }
+  ]
+}
