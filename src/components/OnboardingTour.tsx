@@ -18,6 +18,8 @@ import {
 } from 'lucide-react';
 import { NavigationTab } from '../models/genealogy';
 import { useModalAccessibility } from '../hooks/useModalAccessibility';
+import { GEMINI_DISABLED_MESSAGE } from '../services/aiBiographyAvailability';
+import { canGenerateBiographyInBrowser } from '../services/aiBiographyService';
 
 export const ONBOARDING_STORAGE_KEY = 'gia_pha_onboarding_completed_v1';
 
@@ -340,15 +342,17 @@ export const TOUR_STEPS: TourStepDefinition[] = [
     tabTarget: 'members',
     watermark: '人',
     icon: Plus,
-    graphicTitle: 'Quản Lý Nhân Thân & Trợ Lý AI',
+    graphicTitle: 'Quản Lý Nhân Thân & Tiểu Sử',
     graphicCaption:
-      'Ghi chép danh xưng truyền thống, ngày sinh âm dương, và tự động soạn thảo tiểu sử cùng giọng đọc AI.',
-    title: '3. Thêm Thành Viên & Soạn Tiểu Sử Thông Minh',
+      'Ghi chép danh xưng truyền thống, ngày sinh âm dương và tiểu sử. Nghe đọc bằng giọng có sẵn trên thiết bị.',
+    title: '3. Thêm Thành Viên & Ghi Chép Tiểu Sử',
     description:
       'Hồ sơ mỗi thành viên được thiết kế theo đúng phong tục Việt Nam: ghi nhận tên thường gọi, tên húy, tên tự, vai vế trong họ tộc, nơi an táng và công đức đóng góp.',
     highlights: [
-      'Soạn tiểu sử tự động bằng AI (Google Gemini) dựa trên mốc ngày tháng đã nhập',
-      'Chế độ đọc truyền thanh tiểu sử (Web Speech API) phát âm chuẩn tiếng Việt',
+      canGenerateBiographyInBrowser()
+        ? 'Soạn tiểu sử tự động bằng AI (Google Gemini) dựa trên mốc ngày tháng đã nhập'
+        : GEMINI_DISABLED_MESSAGE,
+      'Nghe đọc tiểu sử nếu thiết bị có giọng đọc cục bộ',
       'Tra cứu cách xưng hô chuẩn mực giữa hai người bất kỳ theo vai vế dòng họ',
       'Bộ lọc tìm kiếm toàn diện theo họ tên, năm sinh, nơi sinh sống và chi tộc',
     ],

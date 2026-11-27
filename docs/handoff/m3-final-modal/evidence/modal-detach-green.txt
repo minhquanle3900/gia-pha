@@ -1,0 +1,15 @@
+
+> react-example@0.0.0 test
+> vitest run src/__tests__/modalScope.test.ts
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:60:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.1.0 D:/LMQ_My mine/Gia-pha/.worktrees/m3-desktop-final-modal
+
+
+ Test Files  1 passed (1)
+      Tests  34 passed (34)
+   Start at  07:48:59
+   Duration  235ms (transform 43%, tests 28%, import 22%, worker 7%)

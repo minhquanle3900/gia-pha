@@ -1,0 +1,212 @@
+
+> react-example@0.0.0 test
+> vitest run src/__tests__/modalScope.test.ts
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:60:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.1.0 D:/LMQ_My mine/Gia-pha/.worktrees/m3-desktop-final-modal
+
+ ❯ src/__tests__/modalScope.test.ts (34 tests | 2 failed) 51ms
+   ❯ shared custom/native modal scope (20)
+     × restores the native opener after the custom child is removed from its DOM parent 14ms
+     × restores each opener through native/custom/native nesting after DOM removal 10ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/modalScope.test.ts > shared custom/native modal scope > restores the native opener after the custom child is removed from its DOM parent
+AssertionError: expected null to be FocusElement{ …(14) } // Object.is equality
+
+- Expected:
+FocusElement {
+  "ariaHidden": false,
+  "children": [],
+  "disabled": false,
+  "focus": [Function Mock],
+  "hasRect": true,
+  "hidden": false,
+  "inert": false,
+  "isConnected": true,
+  "open": false,
+  "ownerDocument": FocusDocument {
+    "activeElement": null,
+    "body": {
+      "style": {
+        "overflow": "hidden",
+      },
+    },
+  },
+  "parent": FocusElement {
+    "ariaHidden": false,
+    "children": [
+      [Circular],
+    ],
+    "disabled": false,
+    "focus": [Function Mock],
+    "hasRect": true,
+    "hidden": false,
+    "inert": false,
+    "isConnected": true,
+    "open": true,
+    "ownerDocument": FocusDocument {
+      "activeElement": null,
+      "body": {
+        "style": {
+          "overflow": "hidden",
+        },
+      },
+    },
+    "parent": null,
+    "tabIndex": 0,
+    "tag": "dialog",
+    "visible": true,
+  },
+  "tabIndex": 0,
+  "tag": "button",
+  "visible": true,
+}
+
++ Received:
+null
+
+ ❯ src/__tests__/modalScope.test.ts:203:31
+    201|     manager.unregister(child);
+    202|     await Promise.resolve();
+    203|     expect(doc.activeElement).toBe(opener);
+       |                               ^
+    204|   });
+    205|
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+ FAIL  src/__tests__/modalScope.test.ts > shared custom/native modal scope > restores each opener through native/custom/native nesting after DOM removal
+AssertionError: expected FocusElement{ …(14) } to be FocusElement{ …(14) } // Object.is equality
+
+- Expected
++ Received
+
+@@ -7,73 +7,17 @@
+    "hidden": false,
+    "inert": false,
+    "isConnected": true,
+    "open": false,
+    "ownerDocument": FocusDocument {
+-     "activeElement": FocusElement {
+-       "ariaHidden": false,
+-       "children": [],
+-       "disabled": false,
+-       "focus": [Function Mock],
+-       "hasRect": true,
+-       "hidden": false,
+-       "inert": false,
+-       "isConnected": true,
+-       "open": false,
+-       "ownerDocument": [Circular],
+-       "parent": FocusElement {
+-         "ariaHidden": false,
+-         "children": [
+-           [Circular],
+-         ],
+-         "disabled": false,
+-         "focus": [Function Mock],
+-         "hasRect": true,
+-         "hidden": false,
+-         "inert": false,
+-         "isConnected": false,
+-         "open": false,
+-         "ownerDocument": [Circular],
+-         "parent": null,
+-         "tabIndex": 0,
+-         "tag": "section",
+-         "visible": true,
+-       },
+-       "tabIndex": 0,
+-       "tag": "button",
+-       "visible": true,
+-     },
++     "activeElement": [Circular],
+      "body": {
+        "style": {
+          "overflow": "hidden",
+        },
+      },
+    },
+-   "parent": FocusElement {
+-     "ariaHidden": false,
+-     "children": [
+-       [Circular],
+-     ],
+-     "disabled": false,
+-     "focus": [Function Mock],
+-     "hasRect": true,
+-     "hidden": false,
+-     "inert": false,
+-     "isConnected": true,
+-     "open": true,
+-     "ownerDocument": FocusDocument {
+-       "activeElement": FocusElement {
+-         "ariaHidden": false,
+-         "children": [],
+-         "disabled": false,
+-         "focus": [Function Mock],
+-         "hasRect": true,
+-         "hidden": false,
+-         "inert": false,
+-         "isConnected": true,
+-         "open": false,
+-         "ownerDocument": [Circular],
+    "parent": FocusElement {
+      "ariaHidden": false,
+      "children": [
+        [Circular],
+      ],
+@@ -82,29 +26,21 @@
+      "hasRect": true,
+      "hidden": false,
+      "inert": false,
+      "isConnected": false,
+      "open": false,
+-           "ownerDocument": [Circular],
+-           "parent": null,
+-           "tabIndex": 0,
+-           "tag": "section",
+-           "visible": true,
+-         },
+-         "tabIndex": 0,
+-         "tag": "button",
+-         "visible": true,
+-       },
++     "ownerDocument": FocusDocument {
++       "activeElement": [Circular],
+        "body": {
+          "style": {
+            "overflow": "hidden",
+          },
+        },
+      },
+      "parent": null,
+      "tabIndex": 0,
+-     "tag": "dialog",
++     "tag": "section",
+      "visible": true,
+    },
+    "tabIndex": 0,
+    "tag": "button",
+    "visible": true,
+
+ ❯ src/__tests__/modalScope.test.ts:225:31
+    223|     manager.unregister(custom);
+    224|     await Promise.resolve();
+    225|     expect(doc.activeElement).toBe(nativeOpener);
+       |                               ^
+    226|     expect(manager.top()).toBe(native);
+    227|   });
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[2/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 32 passed (34)
+   Start at  07:48:53
+   Duration  259ms (tests 54%, import 26%, transform 12%, worker 8%)

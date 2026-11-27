@@ -1,0 +1,12 @@
+
+> react-example@0.0.0 test
+> vitest run src/__tests__/modalScope.test.ts src/__tests__/personFormDraft.test.ts
+
+
+ RUN  v5.1.0 D:/LMQ_My mine/Gia-pha/.worktrees/m3-desktop-final-modal
+
+
+ Test Files  2 passed (2)
+      Tests  72 passed (72)
+   Start at  08:06:00
+   Duration  312ms (tests 43%, import 31%, transform 13%, worker 12%)

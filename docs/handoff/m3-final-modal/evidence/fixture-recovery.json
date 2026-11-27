@@ -1,0 +1,16 @@
+{
+  "schemaVersion": 1,
+  "settings": 1,
+  "people": 31,
+  "branches": 4,
+  "unions": 12,
+  "relationships": 40,
+  "lifeEvents": 7,
+  "media": 5,
+  "stories": 3,
+  "matchesOriginal": true,
+  "comparisonExceptions": [
+    "exportedAt",
+    "settings.lastBackupAt"
+  ]
+}

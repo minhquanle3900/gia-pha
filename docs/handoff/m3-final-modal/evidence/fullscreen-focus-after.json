@@ -1,0 +1,22 @@
+{
+  "sha": "db607214d31971434a19dd52e7916085125b8300",
+  "scope": "App reports native fullscreen then inline; DOM-only adapter does not expose fullscreenElement/fullscreenEnabled. Native OS/device fullscreen not certified.",
+  "selection": "Selected accessible tree node with Enter after initial pointer action did not open inspector during transition; no pointer success claimed for that attempt.",
+  "fRelOpen": {
+    "focused": true,
+    "treeMode": "inline"
+  },
+  "fRelClose": {
+    "dialogs": 0,
+    "focus": "Quan hệ"
+  },
+  "fEditOpen": {
+    "focused": true,
+    "treeMode": "inline",
+    "value": "Trần Văn Lộc"
+  },
+  "fEditClose": {
+    "dialogs": 0,
+    "focus": "Sửa hồ sơ"
+  }
+}

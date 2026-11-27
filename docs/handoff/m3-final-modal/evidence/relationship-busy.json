@@ -1,0 +1,13 @@
+{
+  "sha": "fb7e41eea7a14f822bc674e89314ef88f93b2858",
+  "kind": "Actual parent relationship write queued behind native IndexedDB transaction lock",
+  "observed": {
+    "allControlsDisabled": true,
+    "busy": "true",
+    "height": 844,
+    "pageOverflow": false,
+    "status": "Đang lưu thay đổi quan hệ. Vui lòng chờ hoàn tất trước khi đóng.",
+    "width": 390
+  },
+  "release": "Đã thả khóa QA; 7240 yêu cầu đọc; 0.7 giây. Không ghi dữ liệu trong transaction khóa."
+}

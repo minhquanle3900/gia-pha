@@ -1,0 +1,71 @@
+Coi Nguon Gift Edition RC1 · synthetic-only verification
+Convergence merge f65bae9c2da685c2d3ab18596e3fe3c76610536c
+Packaged source c682b9652ca00505aeb1b19a5329aec8d68e83d5
+
+ ✓ src/__tests__/modalScope.test.ts (40 tests) 23ms
+ ✓ src/__tests__/personFormDraft.test.ts (32 tests) 25ms
+ Test Files  24 passed (24)
+      Tests  327 passed (327)
+✓ built in 1.48s
+precache  20 entries (2862.85 KiB)
+PASS lint (tsc --noEmit)
+
+person Chromium 156 on synthetic local IndexedDB fixtures
+PASS person-clean-escape
+PASS person-dirty-escape {"guard":["Bỏ bản nháp thành viên?Các thay đổi chưa lưu sẽ bị bỏ. Hồ sơ đã lưu trong gia phả không thay đổi.Tiếp tục chỉnh sửaBỏ bản nháp"],"unchangedDraft":true,"explicitDiscard":true}
+PASS person-saving-blocks-close [{"label":"Đóng form thành viên","disabled":true}]
+Runtime exceptions: []
+Failures: []
+relationship Chromium 156 on synthetic local IndexedDB fixtures
+PASS relationship-focus-and-real-write-lock {"initial":"search","before":3,"after":2}
+Runtime exceptions: []
+Failures: []
+mixed Chromium 156 on synthetic local IndexedDB fixtures
+PASS mixed-three-layer-escape-and-focus "focus restores in order with one Escape per layer"
+Runtime exceptions: []
+Failures: []
+nested Chromium 156 on synthetic local IndexedDB fixtures
+PASS gallery-nested-focus-escape
+Runtime exceptions: []
+Failures: []
+PASS desktop-light-direct {"width":1366,"height":900,"nonlocal":[],"browserMessages":[]}
+PASS desktop-light-modal {"width":1366,"height":900,"nonlocal":[],"browserMessages":[]}
+PASS desktop-dark-direct {"width":1366,"height":900,"nonlocal":[],"browserMessages":[]}
+PASS desktop-dark-modal {"width":1366,"height":900,"nonlocal":[],"browserMessages":[]}
+PASS mobile-light-direct {"width":390,"height":844,"nonlocal":[],"browserMessages":[]}
+PASS mobile-light-modal {"width":390,"height":844,"nonlocal":[],"browserMessages":[]}
+PASS mobile-dark-direct {"width":390,"height":844,"nonlocal":[],"browserMessages":[]}
+PASS mobile-dark-modal {"width":390,"height":844,"nonlocal":[],"browserMessages":[]}
+PASS mobile-dark-letter {"width":390,"height":844,"nonlocal":[],"browserMessages":[]}
+PASS precache 20 same-origin static responses, including Charm
+PASS mobile-dark-offline {"width":390,"height":844,"nonlocal":[],"browserMessages":[]}
+Page exceptions []
+PASS mobile-dark-native iframe print invoked; template rendered by Chromium print engine
+Page exceptions []
+PASS reload with legacy portrait: 0 external requests, 0 API requests
+PASS profile audio held locally and remote-only voice cannot speak
+PASS PersonForm shows disabled status and sends no POST
+PASS remote Gallery image and audio details: 0 external requests; metadata visible
+PASS direct PDF download with a legacy external portrait: 0 external requests
+PASS browser CSP blocked a cross-origin image probe before it reached the server
+PASS first-run onboarding and visible Gemini OFF
+PASS app JSON export matches all eight native stores {"settings":1,"branches":4,"people":31,"unions":12,"relationships":40,"lifeEvents":7,"media":5,"stories":3}
+PASS offline cold reload, create/reopen/edit/delete in final UI
+PASS empty dataset UI and 7 empty stores with settings retained
+PASS offline JSON replacement restored all eight stores (excluding lastBackupAt)
+PASS zero third-party and API network requests throughout the demo flow
+PASS offline library → Hall → artwork, local Charm font loaded { font: 'Charm, "Cormorant Garamond", Georgia, serif', loaded: true }
+200 application/manifest+json /manifest.webmanifest
+200 image/png /pwa-192x192.png
+200 image/png /pwa-512x512.png
+200 image/png /pwa-maskable-512x512.png
+200 text/html /
+200 image/png /apple-touch-icon.png
+200 image/svg+xml /icon.svg
+200 text/javascript /sw.js
+PASS manifest, PNG sizes, Apple touch icon and worker
+
+PASS Express and loopback launcher POST /api/biography/generate => 403, no-store
+PASS ZIP checksum and archive integrity, x64 and ARM64 PE headers, CRLF launcher, extracted frontend byte equivalence
+PASS Linux build of same Go launcher serving extracted frontend at 127.0.0.1:4315, duplicate launch, missing dist and busy port
+SKIP Windows executable/SmartScreen, OS browser handler, real iPhone and Android

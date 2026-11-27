@@ -1,4 +1,12 @@
 import { useLayoutEffect, useRef, type RefObject } from 'react';
+import {
+  focusIsEnteringNativeDialog,
+  guardNativeModalCancel,
+  isAvailableForFocus,
+  modalFocusableElements,
+  modalScopeManager,
+  trapModalTab,
+} from './modalScope';
 
 export function useNativeModal(open: boolean, initialFocusRef?: RefObject<HTMLElement | null>) {
   const dialogRef = useRef<HTMLDialogElement>(null);
@@ -6,43 +14,47 @@ export function useNativeModal(open: boolean, initialFocusRef?: RefObject<HTMLEl
   useLayoutEffect(() => {
     const dialog = dialogRef.current;
     if (!open || !dialog) return;
-    const opener = document.activeElement;
+    const ownerDocument = dialog.ownerDocument;
+    const opener = ownerDocument.activeElement instanceof HTMLElement ? ownerDocument.activeElement : null;
     dialog.showModal();
-    initialFocusRef?.current?.focus({ preventScroll: true });
+    const manager = modalScopeManager(dialog);
+    const focusInitial = () => {
+      const preferred = initialFocusRef?.current;
+      const target = preferred && dialog.contains(preferred) && isAvailableForFocus(preferred)
+        ? preferred
+        : modalFocusableElements(dialog, manager.nestedElements(scope))[0] ?? dialog;
+      target.focus({ preventScroll: true });
+    };
+    const scope = manager.register({ element: dialog, kind: 'native', opener, focusInitial });
+    if (manager.isTop(scope)) focusInitial();
 
     const handleKeyDown = (event: KeyboardEvent) => {
-      if (!(event.target instanceof Element) || event.target.closest('dialog') !== dialog) return;
+      if (!manager.isTop(scope)) return;
       if (event.key === 'Escape' && dialog.getAttribute('aria-busy') === 'true') {
         event.preventDefault();
         event.stopPropagation();
-        return;
-      }
-      if (event.key !== 'Tab') return;
-      const controls = Array.from(dialog.querySelectorAll<HTMLElement>(
-        'button, input, select, textarea, a[href], [tabindex]',
-      )).filter((element) => element.tabIndex >= 0 && !element.matches(':disabled') &&
-        !element.closest('[hidden], [inert]') && element.getClientRects().length > 0 &&
-        getComputedStyle(element).visibility === 'visible');
-      const first = controls[0];
-      const last = controls.at(-1);
-      const active = document.activeElement;
-      if (!first || !last || (event.shiftKey ? active === first : active === last)) {
-        event.preventDefault();
-        (event.shiftKey ? last : first)?.focus();
+      } else if (event.key === 'Tab') {
+        trapModalTab(event, dialog, modalFocusableElements(dialog, manager.nestedElements(scope)));
       }
     };
-    dialog.addEventListener('keydown', handleKeyDown);
+    const handleCancel = (event: Event) => {
+      guardNativeModalCancel(event, dialog, !manager.isTop(scope) || dialog.getAttribute('aria-busy') === 'true');
+    };
+    const handleFocusIn = (event: FocusEvent) => {
+      if (!manager.isTop(scope) || dialog.contains(event.target as Node) ||
+        focusIsEnteringNativeDialog(dialog, event.target)) return;
+      focusInitial();
+    };
+    ownerDocument.addEventListener('keydown', handleKeyDown, true);
+    ownerDocument.addEventListener('focusin', handleFocusIn);
+    dialog.addEventListener('cancel', handleCancel, true);
 
     return () => {
-      dialog.removeEventListener('keydown', handleKeyDown);
+      ownerDocument.removeEventListener('keydown', handleKeyDown, true);
+      ownerDocument.removeEventListener('focusin', handleFocusIn);
+      dialog.removeEventListener('cancel', handleCancel, true);
+      manager.unregister(scope);
       dialog.close();
-      if (!(opener instanceof HTMLElement)) return;
-      queueMicrotask(() => {
-        // React may have detached the dialog before the browser restores focus.
-        if ((!dialog.isConnected || !dialog.open) && document.activeElement === document.body && opener.isConnected) {
-          opener.focus({ preventScroll: true });
-        }
-      });
     };
   }, [open, initialFocusRef]);
 
