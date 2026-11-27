@@ -12,7 +12,8 @@ import {
   Person,
   PortraitDraft,
 } from '../../models/genealogy';
-import { generateBiographyWithAI } from '../../services/aiBiographyService';
+import { GEMINI_DISABLED_MESSAGE } from '../../services/aiBiographyAvailability';
+import { canGenerateBiographyInBrowser, generateBiographyWithAI } from '../../services/aiBiographyService';
 import { validatePersonInput } from '../../services/validationService';
 import { compressImageFile } from '../../utils/imageUtils';
 import { createPersonFormDraft, personFormDraftFingerprint } from './personFormDraft';
@@ -84,6 +85,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
   const [merits, setMerits] = useState('');
 
   const busy = isSubmitting || isPreparingPortrait || isGeneratingBio;
+  const aiEnabled = canGenerateBiographyInBrowser();
   const draftFingerprint = personFormDraftFingerprint({
     fullName, gender, commonName, tabooName, courtesyName, alias,
     isLiving, birthDate, birthPlace, deathDate, deathPlace, ancestralHome,
@@ -707,25 +709,29 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
                   <label className="block text-xs font-semibold text-[#54483C]">
                     Tiểu sử & Hành trạng
                   </label>
-                  <button
-                    type="button"
-                    onClick={handleGenerateBiography}
-                    disabled={isGeneratingBio}
-                    className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-linear-to-r from-[#1B3B2B] to-[#254F3A] hover:from-[#254F3A] hover:to-[#31664B] text-white text-[11px] font-semibold shadow-xs disabled:opacity-60 transition-all cursor-pointer"
-                    title="Dùng Gemini AI tổng hợp ngày sinh, ngày mất, quê quán, học vị và công đức thành đoạn tiểu sử trang trọng"
-                  >
-                    {isGeneratingBio ? (
-                      <>
-                        <Loader2 className="w-3.5 h-3.5 animate-spin text-[#DBC599]" />
-                        <span>AI đang soạn tiểu sử...</span>
-                      </>
-                    ) : (
-                      <>
-                        <Sparkles className="w-3.5 h-3.5 text-[#DBC599]" />
-                        <span>Soạn tiểu sử bằng AI</span>
-                      </>
-                    )}
-                  </button>
+                  {aiEnabled ? (
+                    <button
+                      type="button"
+                      onClick={handleGenerateBiography}
+                      disabled={isGeneratingBio}
+                      className="flex items-center gap-1.5 px-3 py-1 rounded-xl bg-linear-to-r from-[#1B3B2B] to-[#254F3A] hover:from-[#254F3A] hover:to-[#31664B] text-white text-[11px] font-semibold shadow-xs disabled:opacity-60 transition-all cursor-pointer"
+                      title="Dùng Gemini AI tổng hợp ngày sinh, ngày mất, quê quán, học vị và công đức thành đoạn tiểu sử trang trọng"
+                    >
+                      {isGeneratingBio ? (
+                        <>
+                          <Loader2 className="w-3.5 h-3.5 animate-spin text-[#DBC599]" />
+                          <span>AI đang soạn tiểu sử...</span>
+                        </>
+                      ) : (
+                        <>
+                          <Sparkles className="w-3.5 h-3.5 text-[#DBC599]" />
+                          <span>Soạn tiểu sử bằng AI</span>
+                        </>
+                      )}
+                    </button>
+                  ) : (
+                    <span className="ml-2 text-right text-[11px] text-[#655A4E]">{GEMINI_DISABLED_MESSAGE}</span>
+                  )}
                 </div>
 
                 {aiBioSuccess && (
@@ -813,7 +819,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
 
                 <textarea
                   rows={4}
-                  placeholder="Ghi lại các mốc lịch sử, sự nghiệp, cống hiến hoặc bấm 'Soạn tiểu sử bằng AI' để tự động tạo..."
+                  placeholder="Ghi lại các mốc lịch sử, sự nghiệp và cống hiến..."
                   value={biography}
                   onChange={(e) => setBiography(e.target.value)}
                   className="w-full text-xs rounded-xl border border-[#D5CABE] bg-white p-2.5 outline-none focus:border-[#1B3B2B] leading-relaxed"
