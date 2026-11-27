@@ -1,10 +1,11 @@
 import { useEffect, useRef, useState } from 'react';
 import { useModalAccessibility } from './useModalAccessibility';
+import { isAvailableForFocus } from './modalScope';
 
 export function useWorkspaceFullscreen() {
   const panelRef = useRef<HTMLDivElement>(null);
   const returnRef = useRef<HTMLElement | null>(null);
-  const pendingAction = useRef<(() => void) | null>(null);
+  const pendingAction = useRef<{ run: () => void; opener: HTMLElement | null } | null>(null);
   const [native, setNative] = useState(false);
   const [expanded, setExpanded] = useState(false);
   const [error, setError] = useState('');
@@ -37,7 +38,8 @@ export function useWorkspaceFullscreen() {
     if (active || !pendingAction.current) return;
     const action = pendingAction.current;
     pendingAction.current = null;
-    action();
+    if (action.opener && isAvailableForFocus(action.opener)) action.opener.focus({ preventScroll: true });
+    action.run();
   }, [active]);
 
   const toggle = async () => {
@@ -53,8 +55,17 @@ export function useWorkspaceFullscreen() {
 
   const runOutside = (action: () => void) => {
     if (!active) { action(); return; }
-    pendingAction.current = action;
-    void leave().then(left => { if (!left) pendingAction.current = null; });
+    const previousOpener = returnRef.current;
+    const opener = document.activeElement instanceof HTMLElement ? document.activeElement : previousOpener;
+    const request = { run: action, opener };
+    returnRef.current = opener;
+    pendingAction.current = request;
+    void leave().then(left => {
+      if (!left && pendingAction.current === request) {
+        pendingAction.current = null;
+        returnRef.current = previousOpener;
+      }
+    });
   };
 
   return { panelRef, active, mode: native ? 'native' : expanded ? 'viewport' : 'inline', error, toggle, runOutside, requestClose };

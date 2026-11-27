@@ -78,6 +78,8 @@ export function useModalAccessibility({
     return () => {
       ownerDocument.removeEventListener('keydown', handleKeyDown, true);
       ownerDocument.removeEventListener('focusin', handleFocusIn);
+      // A fullscreen handoff can replace the opener before this scope closes.
+      if (returnFocusRef?.current) scope.opener = returnFocusRef.current;
       manager.unregister(scope);
       if (current.current?.scope === scope) current.current = null;
     };
