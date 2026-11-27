@@ -392,26 +392,45 @@ export default function ExhibitionHall({ onOpenArchive, onNavigate, onSelectPers
     );
   }
 
+  const ancestralCouplet = catalog.rooms.calligraphy.find((exhibit) => exhibit.key === 'reference:ancestral-merit');
+
   return (
     <div className="exhibition" ref={root}>
       <header className="exhibition-hero">
-        <img src={hallImage} alt="" aria-hidden="true" className="exhibition-hero-image" />
-        <span className="exhibition-hero-caption">Ảnh minh họa</span>
         <div className="exhibition-hero-content">
-          <span className="exhibition-plaque heritage-display">Di sản gia tộc</span>
           <h2 ref={heading} tabIndex={-1} className="heritage-display">Phòng trưng bày</h2>
           <p>Thư pháp, ảnh xưa và lời dạy được gìn giữ qua các thế hệ.</p>
-          <div className="exhibition-hero-actions">
-            <button type="button" className="exhibition-hero-primary" onClick={() => {
-              roomsHeading.current?.focus({ preventScroll: true });
-              roomsHeading.current?.scrollIntoView({ block: 'start' });
-            }}>
-              Khám phá các khu <ArrowDown size={16} aria-hidden="true" />
-            </button>
-            <button type="button" className="exhibition-hero-secondary" onClick={() => onOpenArchive()}>
-              Mở kho kỷ vật <ArrowRight size={16} aria-hidden="true" />
-            </button>
+        </div>
+        <div className="exhibition-hall-scene">
+          <div className="exhibition-hall-beam">
+            <span className="exhibition-hall-plaque heritage-display">Cội Nguồn</span>
           </div>
+          <div className="exhibition-hall-opening">
+            <figure className="exhibition-hall-center">
+              <img src={hallImage} alt="" className="exhibition-hero-image" />
+              <figcaption className="exhibition-hero-caption">Ảnh minh họa</figcaption>
+            </figure>
+            {ancestralCouplet?.kind === 'reference' && (
+              <ArtworkFullscreen title={ancestralCouplet.title} artworkTrigger={{
+                className: 'exhibition-hall-couplet-trigger',
+                label: `Xem toàn màn hình câu đối. ${ancestralCouplet.lines.join('. ')}`,
+                content: <Couplet lines={ancestralCouplet.lines} vertical rightFirst />,
+              }}>
+                <Couplet lines={ancestralCouplet.lines} vertical rightFirst />
+              </ArtworkFullscreen>
+            )}
+          </div>
+        </div>
+        <div className="exhibition-hero-actions">
+          <button type="button" className="exhibition-hero-primary" onClick={() => {
+            roomsHeading.current?.focus({ preventScroll: true });
+            roomsHeading.current?.scrollIntoView({ block: 'start' });
+          }}>
+            Khám phá các khu <ArrowDown size={16} aria-hidden="true" />
+          </button>
+          <button type="button" className="exhibition-hero-secondary" onClick={() => onOpenArchive()}>
+            Mở kho kỷ vật <ArrowRight size={16} aria-hidden="true" />
+          </button>
         </div>
       </header>
 
