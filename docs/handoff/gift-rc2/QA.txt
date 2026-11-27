@@ -1,0 +1,32 @@
+Gift Edition RC2 - Chromium production-build QA
+ Test Files  24 passed (24)
+      Tests  327 passed (327)
+✓ built in 1.95s
+precache  20 entries (2866.51 KiB)
+PASS lint (tsc --noEmit)
+PASS 320 light visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 320 dark visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 390 light visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 390 dark visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 430 light visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 430 dark visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 768 light visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 768 dark visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 1440 light visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS 1440 dark visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS touch on each pillar, keyboard fullscreen, Escape and focus, room/back/archive navigation
+PASS 390 light visible pillars, right-first, text fit, no overflow, Charm loaded
+PASS service-worker cold offline reload, photo, local fonts, both pillars and fullscreen
+200 application/manifest+json /manifest.webmanifest
+200 image/png /pwa-192x192.png
+200 image/png /pwa-512x512.png
+200 image/png /pwa-maskable-512x512.png
+200 text/html /
+200 image/png /apple-touch-icon.png
+200 image/svg+xml /icon.svg
+200 application/javascript /sw.js
+PASS manifest, PNG sizes, Apple touch icon and worker
+PASS ZIP integrity, SHA-256, extracted dist equivalence, Windows x64 and ARM64 PE headers
+PASS same-port RC1 is left running when RC2 launcher detects port 4315 in use (Linux build)
+PASS RC1 → RC2 on one origin: waiting worker activates after closing old client; synthetic IndexedDB record preserved
+SKIP Windows launcher execution and physical device validation
