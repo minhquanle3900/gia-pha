@@ -1,4 +1,4 @@
-import React, { useId, useMemo, useRef, useState } from 'react';
+import React, { useId, useMemo, useState } from 'react';
 import {
   BookOpen,
   Calendar,
@@ -26,11 +26,12 @@ import { useGenealogy } from '../../context/GenealogyContext';
 import { Person } from '../../models/genealogy';
 import {
   DEFAULT_REPORT_CONFIG,
-  exportElementToPdf,
+  exportPersonReportPdf,
   generateStandalonePrintableHtml,
   PersonReportData,
   ReportConfig,
   buildTextDossierSummary,
+  printPersonReport,
 } from '../../services/personPdfReportService';
 import { formatFlexibleDate, formatLifespan, formatLunarAnniversary } from '../../utils/dateUtils';
 
@@ -58,7 +59,6 @@ export const PersonReportModal: React.FC<PersonReportModalProps> = ({
     settings,
   } = useGenealogy();
 
-  const printAreaRef = useRef<HTMLDivElement>(null);
   const [config, setConfig] = useState<ReportConfig>(DEFAULT_REPORT_CONFIG);
   const [showConfigPanel, setShowConfigPanel] = useState(false);
   const [isExportingPdf, setIsExportingPdf] = useState(false);
@@ -136,23 +136,21 @@ export const PersonReportModal: React.FC<PersonReportModalProps> = ({
     },
   }[config.theme];
 
-  const handleNativePrint = () => {
-    // Adds a temporary printable body class for clean scoping
-    document.body.classList.add('printing-person-report');
-    window.print();
-    // Clean up
-    setTimeout(() => {
-      document.body.classList.remove('printing-person-report');
-    }, 1000);
+  const handleNativePrint = async () => {
+    try {
+      await printPersonReport(reportData, config);
+    } catch (err) {
+      console.error('Lỗi mở bản in:', err);
+      setExportMessage('Không thể mở hộp thoại in. Dùng nút "Tải HTML" để mở bản in độc lập.');
+      setTimeout(() => setExportMessage(null), 4000);
+    }
   };
 
   const handleDownloadPdf = async () => {
-    if (!printAreaRef.current) return;
     try {
       setIsExportingPdf(true);
       setExportMessage('Đang kết xuất tệp PDF độ phân giải cao...');
-      const cleanFileName = `Ho_So_Gia_Pha_${person.fullName.replace(/\s+/g, '_')}`;
-      await exportElementToPdf(printAreaRef.current, cleanFileName, config.paperSize);
+      await exportPersonReportPdf(reportData, config);
       setExportMessage('Đã tải xuống tệp PDF thành công!');
       setTimeout(() => setExportMessage(null), 3000);
     } catch (err) {
@@ -525,7 +523,6 @@ export const PersonReportModal: React.FC<PersonReportModalProps> = ({
           {/* ========================================================================= */}
           <div
             id="printable-person-report"
-            ref={printAreaRef}
             className={`max-w-[780px] mx-auto bg-[#FFFDF9] border-4 ${themeStyles.border} p-6 sm:p-10 shadow-lg relative print:p-6 print:border-4 print:shadow-none print:max-w-none print:w-full print:bg-white`}
           >
             {/* Inner Traditional Double Border */}

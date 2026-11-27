@@ -7,6 +7,7 @@ import {
   exportPersonReportToPdfDirect,
   generateStandalonePrintableHtml,
   PersonReportData,
+  planPersonReportPages,
 } from '../services/personPdfReportService';
 
 describe('Individual Formatted PDF Report Service', () => {
@@ -306,6 +307,43 @@ describe('Individual Formatted PDF Report Service', () => {
     expect(html).not.toContain('TRƯỞNG TỘC CHỨNG NHẬN');
   });
 
+  it('builds a light print document and retains the selected portrait, events and siblings', () => {
+    const html = generateStandalonePrintableHtml({
+      ...mockReportData,
+      person: { ...mockReportData.person, portraitUrl: 'data:image/png;base64,AA==' },
+    }, { ...DEFAULT_REPORT_CONFIG, paperSize: 'letter' });
+
+    expect(html).toContain('color-scheme: light');
+    expect(html).toContain('size: letter portrait');
+    expect(html).toContain('src="data:image/png;base64,AA=="');
+    expect(html).toContain('Tham gia kháng chiến');
+    expect(html).toContain('Việt Bắc');
+    expect(html).toContain('Trần Văn Dũng');
+  });
+
+  it('preserves report options and requests no legacy remote portrait in printed HTML', () => {
+    const data = {
+      ...mockReportData,
+      person: { ...mockReportData.person, portraitUrl: 'https://legacy.example/portrait.jpg' },
+    };
+    const html = generateStandalonePrintableHtml(data, {
+      ...DEFAULT_REPORT_CONFIG,
+      showAncestral: false,
+      showTraditionalNames: false,
+      showSiblings: false,
+      showLifeEvents: false,
+      density: 'compact',
+    });
+
+    expect(html).toContain('class="sheet compact"');
+    expect(html).not.toContain('legacy.example');
+    expect(html).not.toContain('Đức Thành');
+    expect(html).not.toContain('Nghĩa trang Dòng họ Trần');
+    expect(html).not.toContain('Tham gia kháng chiến');
+    expect(html).not.toContain('Trần Văn Dũng');
+    expect(generateStandalonePrintableHtml(data, DEFAULT_REPORT_CONFIG)).not.toContain('legacy.example');
+  });
+
   it('produces individual report PDF bytes without writing a file', async () => {
     const write = vi.spyOn(fs, 'writeFileSync').mockImplementation(() => {});
     try {
@@ -318,5 +356,24 @@ describe('Individual Formatted PDF Report Service', () => {
     } finally {
       write.mockRestore();
     }
+  });
+
+  it('moves the cut before a protected block and avoids a trailing empty page', () => {
+    expect(planPersonReportPages(1920, 1000, [{ top: 920.8, bottom: 1050 }])).toEqual([
+      { top: 0, bottom: 920 },
+      { top: 920, bottom: 1920 },
+    ]);
+  });
+
+  it('fits long prose to page-sized slices without dropping content', () => {
+    expect(planPersonReportPages(2250.5, 1000, [
+      { top: 80, bottom: 2200 },
+      { top: 995.8, bottom: 1008 },
+      { top: 1987.1, bottom: 2003 },
+    ])).toEqual([
+      { top: 0, bottom: 995 },
+      { top: 995, bottom: 1987 },
+      { top: 1987, bottom: 2251 },
+    ]);
   });
 });
