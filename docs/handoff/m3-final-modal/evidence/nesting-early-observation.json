@@ -1,0 +1,11 @@
+{
+  "scope": "Development working tree with new hook module already loaded; not a pre-fix failure or final SHA certification",
+  "expected": "Escape closes only native child; custom parent remains",
+  "observed": {
+    "dialogs": [
+      "_r_0_"
+    ],
+    "focus": "ngoài: mở native con",
+    "log": "ngoài/native: đóng bằng escape/cancel"
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "mergeSHA": "7103055eb748f797c3ec9a1297c4dd6af065af48",
+  "scope": "Pre-fix form observed before agent changes",
+  "initialFocus": {
+    "activeLabel": "Thêm thành viên mới",
+    "activeTag": "BUTTON",
+    "inside": false
+  },
+  "cancelAfterDraft": {
+    "dialogs": 0,
+    "discardConfirm": false
+  }
+}

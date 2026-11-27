@@ -80,14 +80,25 @@ export function ArtworkFullscreen({ title, children }: { title: string; children
   const trigger = useRef<HTMLButtonElement>(null);
   const titleId = useId();
 
+  const openFullscreen = () => {
+    const element = dialog.current;
+    if (!element || element.open) return;
+    element.showModal();
+    element.setAttribute('aria-modal', 'true');
+  };
+
   return (
     <>
       <button ref={trigger} type="button" className="exhibition-action exhibition-fullscreen-action"
-        aria-haspopup="dialog" onClick={() => dialog.current?.showModal()}>
+        aria-haspopup="dialog" onClick={openFullscreen}>
         <Maximize size={17} aria-hidden="true" /> Xem toàn màn hình
       </button>
       <dialog ref={dialog} className="exhibition-fullscreen" aria-labelledby={titleId}
-        onClose={() => trigger.current?.focus({ preventScroll: true })}>
+        onClose={(event) => {
+          if (event.currentTarget.open) return;
+          event.currentTarget.removeAttribute('aria-modal');
+          trigger.current?.focus({ preventScroll: true });
+        }}>
         <header className="exhibition-fullscreen-header">
           <h3 id={titleId} className="heritage-heading">{title}</h3>
           <button type="button" autoFocus aria-label="Đóng toàn màn hình" onClick={() => dialog.current?.close()}>

@@ -1,0 +1,374 @@
+{
+  "sha": "2036fbe9fa7cada034f565121d25fe7d872b42aa",
+  "scope": "CSS emulation, all three RelationshipEditor tabs; no real device keyboard",
+  "samples": [
+    {
+      "theme": "dark",
+      "requestedWidth": 320,
+      "parents": {
+        "background": "rgb(250, 247, 242)",
+        "client": 320,
+        "focused": true,
+        "height": 900,
+        "scroll": 320,
+        "searchVisible": true,
+        "width": 320
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 360,
+      "parents": {
+        "background": "rgb(250, 247, 242)",
+        "client": 360,
+        "focused": true,
+        "height": 900,
+        "scroll": 360,
+        "searchVisible": true,
+        "width": 360
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 390,
+      "parents": {
+        "background": "rgb(250, 247, 242)",
+        "client": 390,
+        "focused": true,
+        "height": 900,
+        "scroll": 390,
+        "searchVisible": true,
+        "width": 390
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 430,
+      "parents": {
+        "background": "rgb(250, 247, 242)",
+        "client": 430,
+        "focused": true,
+        "height": 900,
+        "scroll": 430,
+        "searchVisible": true,
+        "width": 430
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 768,
+      "parents": {
+        "background": "rgb(250, 247, 242)",
+        "client": 768,
+        "focused": true,
+        "height": 900,
+        "scroll": 768,
+        "searchVisible": true,
+        "width": 768
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 1024,
+      "parents": {
+        "background": "rgb(250, 247, 242)",
+        "client": 1024,
+        "focused": true,
+        "height": 900,
+        "scroll": 1024,
+        "searchVisible": true,
+        "width": 1024
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 1366,
+      "parents": {
+        "background": "rgb(250, 247, 242)",
+        "client": 1366,
+        "focused": true,
+        "height": 900,
+        "scroll": 1366,
+        "searchVisible": true,
+        "width": 1366
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "dark",
+      "requestedWidth": 1920,
+      "parents": {
+        "background": "rgb(250, 247, 242)",
+        "client": 1920,
+        "focused": true,
+        "height": 900,
+        "scroll": 1920,
+        "searchVisible": true,
+        "width": 1920
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 320,
+      "parents": {
+        "background": "rgb(16, 23, 19)",
+        "client": 320,
+        "focused": true,
+        "height": 900,
+        "scroll": 320,
+        "searchVisible": true,
+        "width": 320
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 360,
+      "parents": {
+        "background": "rgb(16, 23, 19)",
+        "client": 360,
+        "focused": true,
+        "height": 900,
+        "scroll": 360,
+        "searchVisible": true,
+        "width": 360
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 390,
+      "parents": {
+        "background": "rgb(16, 23, 19)",
+        "client": 390,
+        "focused": true,
+        "height": 900,
+        "scroll": 390,
+        "searchVisible": true,
+        "width": 390
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 430,
+      "parents": {
+        "background": "rgb(16, 23, 19)",
+        "client": 430,
+        "focused": true,
+        "height": 900,
+        "scroll": 430,
+        "searchVisible": true,
+        "width": 430
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 768,
+      "parents": {
+        "background": "rgb(16, 23, 19)",
+        "client": 768,
+        "focused": true,
+        "height": 900,
+        "scroll": 768,
+        "searchVisible": true,
+        "width": 768
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 1024,
+      "parents": {
+        "background": "rgb(16, 23, 19)",
+        "client": 1024,
+        "focused": true,
+        "height": 900,
+        "scroll": 1024,
+        "searchVisible": true,
+        "width": 1024
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 1366,
+      "parents": {
+        "background": "rgb(16, 23, 19)",
+        "client": 1366,
+        "focused": true,
+        "height": 900,
+        "scroll": 1366,
+        "searchVisible": true,
+        "width": 1366
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    },
+    {
+      "theme": "light",
+      "requestedWidth": 1920,
+      "parents": {
+        "background": "rgb(16, 23, 19)",
+        "client": 1920,
+        "focused": true,
+        "height": 900,
+        "scroll": 1920,
+        "searchVisible": true,
+        "width": 1920
+      },
+      "spouses": {
+        "pageOverflow": false
+      },
+      "children": {
+        "pageOverflow": false
+      },
+      "restore": {
+        "dialogs": 0,
+        "focus": "+ Thêm / Sửa"
+      }
+    }
+  ]
+}

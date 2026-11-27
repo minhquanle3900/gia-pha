@@ -1,0 +1,42 @@
+
+> react-example@0.0.0 test
+> vitest run src/__tests__/modalScope.test.ts
+
+(!) Your Vite config uses features that are unsupported by `configLoader: 'native'`, which is planned to become the default in a future major version of Vite:
+  - `__dirname` (vite.config.ts:60:27). Use `import.meta.dirname` instead
+Set `VITE_CONFIG_NATIVE_IGNORE_WARNING=true` to suppress this warning.
+
+ RUN  v5.1.0 D:/LMQ_My mine/Gia-pha/.worktrees/m3-desktop-final-modal
+
+ ❯ src/__tests__/modalScope.test.ts (40 tests | 2 failed) 35ms
+   ❯ native cancel event ownership (6)
+     × does not let ancestor capture block the top child cancel (native/native) 9ms
+     × does not let ancestor capture block the top child cancel (native/custom/native) 1ms
+
+⎯⎯⎯⎯⎯⎯⎯ Failed Tests 2 ⎯⎯⎯⎯⎯⎯⎯
+
+ FAIL  src/__tests__/modalScope.test.ts > native cancel event ownership > does not let ancestor capture block the top child cancel (native/native)
+ FAIL  src/__tests__/modalScope.test.ts > native cancel event ownership > does not let ancestor capture block the top child cancel (native/custom/native)
+AssertionError: expected true to be false // Object.is equality
+
+- Expected
++ Received
+
+- false
++ true
+
+ ❯ src/__tests__/modalScope.test.ts:327:39
+    325|       guardNativeModalCancel(cancel, element(outerRoot), !manager.isTo…
+    326|       guardNativeModalCancel(cancel, element(childRoot), !manager.isTo…
+    327|       expect(cancel.defaultPrevented).toBe(false);
+       |                                       ^
+    328|       expect(stopPropagation).not.toHaveBeenCalled();
+    329|     },
+
+⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯⎯[1/2]⎯
+
+
+ Test Files  1 failed (1)
+      Tests  2 failed | 38 passed (40)
+   Start at  08:00:05
+   Duration  394ms (transform 56%, tests 23%, import 16%, worker 5%)

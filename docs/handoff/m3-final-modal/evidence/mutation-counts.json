@@ -1,0 +1,56 @@
+{
+  "sha": "fb7e41eea7a14f822bc674e89314ef88f93b2858",
+  "personAfterSingleSave": {
+    "schemaVersion": 1,
+    "settings": 1,
+    "people": 32,
+    "branches": 4,
+    "unions": 12,
+    "relationships": 40,
+    "lifeEvents": 7,
+    "media": 5,
+    "stories": 3,
+    "matchesOriginal": false,
+    "comparisonExceptions": [
+      "exportedAt",
+      "settings.lastBackupAt"
+    ]
+  },
+  "relationWritten": {
+    "schemaVersion": 1,
+    "settings": 1,
+    "people": 32,
+    "branches": 4,
+    "unions": 12,
+    "relationships": 41,
+    "lifeEvents": 7,
+    "media": 5,
+    "stories": 3,
+    "matchesOriginal": false,
+    "comparisonExceptions": [
+      "exportedAt",
+      "settings.lastBackupAt"
+    ]
+  },
+  "deleteBusy": "true",
+  "relationRemoved": {
+    "schemaVersion": 1,
+    "settings": 1,
+    "people": 32,
+    "branches": 4,
+    "unions": 12,
+    "relationships": 40,
+    "lifeEvents": 7,
+    "media": 5,
+    "stories": 3,
+    "matchesOriginal": false,
+    "comparisonExceptions": [
+      "exportedAt",
+      "settings.lastBackupAt"
+    ]
+  },
+  "relationRestore": {
+    "dialogs": 0,
+    "focus": "+ Thêm / Sửa"
+  }
+}

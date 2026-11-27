@@ -1,0 +1,28 @@
+{
+  "testedSHA": "2036fbe9fa7cada034f565121d25fe7d872b42aa",
+  "platform": "Windows-10-10.0.19044-SP0",
+  "node": "v24.22.1",
+  "lockSHA256": "1aae372dac021d58b958f441316679ec3d21056e74c85ae655059db4bb48f35e",
+  "commands": [
+    {
+      "command": "npm run lint",
+      "exit": 0,
+      "seconds": 2.078,
+      "log": "lint.txt"
+    },
+    {
+      "command": "npm run build",
+      "exit": 0,
+      "seconds": 5.515,
+      "log": "build.txt"
+    },
+    {
+      "command": "npm test",
+      "exit": 0,
+      "seconds": 4.266,
+      "log": "regression.txt"
+    }
+  ],
+  "logNormalization": "Trailing whitespace and terminal blank lines trimmed.",
+  "sourceDiff": ""
+}

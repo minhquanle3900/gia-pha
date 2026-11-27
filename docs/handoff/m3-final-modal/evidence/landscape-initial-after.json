@@ -1,0 +1,18 @@
+{
+  "sha": "e06ab8d416304937d541b79a4fb8c1b6551d8158",
+  "observed": {
+    "container": {
+      "bottom": 293.2749938964844,
+      "scrollTop": 85.5999984741211,
+      "top": 147.5124969482422
+    },
+    "field": {
+      "bottom": 285.10000228881836,
+      "top": 247.5
+    },
+    "focused": true,
+    "height": 390,
+    "pageOverflow": false,
+    "width": 844
+  }
+}

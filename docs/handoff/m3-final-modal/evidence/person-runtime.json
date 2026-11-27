@@ -1,0 +1,60 @@
+[
+  {
+    "id": "M3-D01",
+    "sha": "ecfdd6b82ea28a6bbd304f605f202ca8eef735c8",
+    "case": "PersonForm initial focus",
+    "observed": {
+      "activeId": "_r_3_-full-name",
+      "activeTag": "INPUT",
+      "fullNameFocused": true,
+      "inside": true
+    }
+  },
+  {
+    "id": "M3-D02",
+    "case": "Draft then Cancel; Escape only dismisses nested discard confirm",
+    "observed": {
+      "cancelDraft": {
+        "allDialogs": 2,
+        "focus": "Tiếp tục chỉnh sửa",
+        "inside": true,
+        "nativeOpen": true,
+        "tag": "DIALOG"
+      },
+      "keepAfterConfirmEscape": {
+        "focus": "Hủy",
+        "inside": true,
+        "nativeDialogs": 0,
+        "value": "M3 QA Bản Nháp"
+      }
+    }
+  },
+  {
+    "id": "M3-D03",
+    "case": "Draft Escape then Continue; X then Discard closes both and restores opener",
+    "observed": {
+      "draftEscape": {
+        "focus": "Tiếp tục chỉnh sửa",
+        "open": true
+      },
+      "continued": {
+        "focused": true,
+        "value": "M3 QA Bản Nháp"
+      },
+      "discarded": {
+        "bodyOverflow": "",
+        "dialogs": 0,
+        "focusLabel": "Thêm thành viên mới",
+        "focusTag": "BUTTON"
+      }
+    }
+  },
+  {
+    "id": "M3-D04",
+    "case": "Revert new name to original empty then Escape, no false dirty",
+    "observed": {
+      "dialogs": 0,
+      "focusLabel": "Thêm thành viên mới"
+    }
+  }
+]
