@@ -1,0 +1,16 @@
+{
+  "sha": "fb7e41eea7a14f822bc674e89314ef88f93b2858",
+  "kind": "Actual app save queued behind native IndexedDB readwrite lock; no service mocks",
+  "observed": {
+    "allInputsDisabled": true,
+    "busy": "true",
+    "disabledFieldset": true,
+    "height": 844,
+    "nativeConfirms": 0,
+    "open": true,
+    "pageOverflow": false,
+    "status": "Đang lưu hồ sơ. Vui lòng chờ hoàn tất trước khi đóng.",
+    "width": 390
+  },
+  "release": "Đã thả khóa QA; 88038 yêu cầu đọc; 16.2 giây. Không ghi dữ liệu trong transaction khóa."
+}

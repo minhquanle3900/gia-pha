@@ -1,0 +1,96 @@
+{
+  "sha": "ecfdd6b82ea28a6bbd304f605f202ca8eef735c8",
+  "cases": [
+    {
+      "id": "M3-N-custom",
+      "sha": "ecfdd6b82ea28a6bbd304f605f202ca8eef735c8",
+      "case": "custom boundaries skip tabindex -1, title focus enters Tab order",
+      "observed": {
+        "initial": {
+          "focus": "ngoài · Custom dialog",
+          "tabIndex": -1,
+          "tag": "H2"
+        },
+        "fromTitle": {
+          "focus": "ngoài: nội dung nháp QA",
+          "inside": true
+        },
+        "forwardWrap": {
+          "focus": "ngoài: nội dung nháp QA",
+          "inside": true
+        },
+        "reverseWrap": {
+          "focus": "ngoài: đóng lớp này",
+          "inside": true
+        },
+        "restore": {
+          "dialogCount": 0,
+          "focus": "Mở custom ngoài"
+        }
+      }
+    },
+    {
+      "id": "M3-N-native",
+      "sha": "ecfdd6b82ea28a6bbd304f605f202ca8eef735c8",
+      "case": "native boundaries skip tabindex -1, title focus enters Tab order",
+      "observed": {
+        "initial": {
+          "focus": "ngoài · Native dialog",
+          "tabIndex": -1,
+          "tag": "H2"
+        },
+        "fromTitle": {
+          "focus": "ngoài: nội dung nháp QA",
+          "inside": true
+        },
+        "forwardWrap": {
+          "focus": "ngoài: nội dung nháp QA",
+          "inside": true
+        },
+        "reverseWrap": {
+          "focus": "ngoài: đóng lớp này",
+          "inside": true
+        },
+        "restore": {
+          "dialogCount": 0,
+          "focus": "Mở native ngoài"
+        }
+      }
+    },
+    {
+      "id": "M3-N-custom-native-custom",
+      "case": "Escape closes top layer only in custom→native→custom",
+      "observed": [
+        {
+          "dialogs": [
+            "ngoài · Custom dialog",
+            "ngoài/native · Native dialog"
+          ],
+          "focus": "\n    M3 QA fixture · Custom/native modal nestingTrang kiểm thử hook thật. Không ghi IndexedDB, không gửi dữ liệu. Busy ở trang này là state mô phỏng; transaction thật được kiểm riêng bằng trang controls.Mở custom ngoàiMở native ngoàiĐổi theme QAXóa log QA trên trangTiêu đề là focus lập trình, hai nút tabindex=-1 phải bị bỏ qua khi Tab. Escape chỉ đóng lớp trên cùng, lớp bận phải giữ nguyên.Ca sibling: từ native ngoài, mở custom sibling ở ngoài DOM của native. Custom phải chờ dưới native top layer. Đóng native rồi kiểm tra custom còn mở và nhận focus. Khi custom đóng, returnFocusRef trỏ đến nút Mở native ngoài còn kết nối.Mở controls transaction và fixturengoài/custom: đóng bằng escape\nngoài/native: đóng bằng escape/cancel\nngoài/native/custom: đóng bằng escapengoài · Custom dialogInitial focus ở tiêu đề tabindex=-1. Biên Tab chỉ gồm các control có thứ tự Tab hợp lệ.ngoài: control -1 đầungoài: nội dung nháp QAngoài: mở custom conngoài: mở native conngoài: bắt đầu busy mô phỏngngoài: Không bậnngoài: đóng lớp nàyngoài: control -1 cuốingoài/native · Native dialogInitial focus ở tiêu đề tabindex=-1. Biên Tab chỉ gồm các control có thứ tự Tab hợp lệ.ngoài/native: control -1 đầungoài/native: nội dung nháp QAngoài/native: mở custom conngoài/native: mở native conngoài/native: bắt đầu busy mô phỏngngoài/native: Không bậnngoài/native: đóng lớp nàyngoài/native: control -1 cuối\n    \n  \n\n"
+        },
+        {
+          "dialogs": [
+            "ngoài · Custom dialog"
+          ],
+          "focus": "ngoài: mở native con"
+        },
+        {
+          "dialogs": [],
+          "focus": "Mở custom ngoài"
+        }
+      ]
+    }
+  ],
+  "confirmedFocusGap": {
+    "reproduction": [
+      "Open native outer",
+      "Open custom child",
+      "Escape custom child",
+      "Read focus in next separate tool observation"
+    ],
+    "dialogsRemaining": 1,
+    "activeElement": "BODY",
+    "expected": "native parent child-opener button"
+  },
+  "note": "Tight-loop native grandchild Escape timing also required an isolated rerun; not certified as a product failure."
+}

@@ -1,0 +1,30 @@
+{
+  "sha": "fb7e41eea7a14f822bc674e89314ef88f93b2858",
+  "fullscreenBefore": {
+    "activeLabel": "Xem Trần Văn Lộc trong cây",
+    "fullscreenEnabled": null,
+    "fullscreenTag": null,
+    "height": 900,
+    "mode": "native",
+    "ownerFullscreenTag": null,
+    "width": 1366
+  },
+  "relationshipFromTree": {
+    "focusId": "_r_1c_-member-search",
+    "roleDialogs": 1,
+    "searchFocused": true,
+    "treeMode": "inline"
+  },
+  "relationshipRestoredFocus": "Toàn màn hình",
+  "expectedRelationshipFocus": "Quan hệ",
+  "treeEditInitial": {
+    "focusedName": true,
+    "treeMode": "inline"
+  },
+  "treeEditRestore": {
+    "dialogs": 0,
+    "focus": "Toàn màn hình"
+  },
+  "expectedEditFocus": "Sửa hồ sơ",
+  "note": "IAB read-only DOM scope did not expose fullscreenElement/fullscreenEnabled. The app reported native mode then inline; no OS fullscreen certification."
+}

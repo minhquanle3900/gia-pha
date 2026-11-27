@@ -1,0 +1,123 @@
+{
+  "sha": "2036fbe9fa7cada034f565121d25fe7d872b42aa",
+  "cases": [
+    {
+      "id": "M3-N-custom-native-custom",
+      "case": "Single Escape per layer, child-to-parent focus restoration",
+      "steps": [
+        {
+          "dialogCount": 2,
+          "focus": "ngoài/native: mở custom con",
+          "focusTag": "BUTTON"
+        },
+        {
+          "dialogCount": 1,
+          "focus": "ngoài: mở native con",
+          "focusTag": "BUTTON"
+        },
+        {
+          "dialogCount": 0,
+          "focus": "Mở custom ngoài",
+          "focusTag": "BUTTON"
+        }
+      ]
+    },
+    {
+      "id": "M3-N-native-custom-native",
+      "case": "Single Escape per layer, child-to-parent focus restoration",
+      "steps": [
+        {
+          "dialogCount": 2,
+          "focus": "ngoài/custom: mở native con",
+          "focusTag": "BUTTON"
+        },
+        {
+          "dialogCount": 1,
+          "focus": "ngoài: mở custom con",
+          "focusTag": "BUTTON"
+        },
+        {
+          "dialogCount": 0,
+          "focus": "Mở native ngoài",
+          "focusTag": "BUTTON"
+        }
+      ]
+    },
+    {
+      "id": "M3-N-native-native",
+      "case": "Single Escape per layer, child-to-parent focus restoration",
+      "steps": [
+        {
+          "dialogCount": 1,
+          "focus": "ngoài: mở native con",
+          "focusTag": "BUTTON"
+        },
+        {
+          "dialogCount": 0,
+          "focus": "Mở native ngoài",
+          "focusTag": "BUTTON"
+        }
+      ]
+    },
+    {
+      "id": "M3-N-custom-custom",
+      "case": "Single Escape per layer, child-to-parent focus restoration",
+      "steps": [
+        {
+          "dialogCount": 1,
+          "focus": "ngoài: mở custom con",
+          "focusTag": "BUTTON"
+        },
+        {
+          "dialogCount": 0,
+          "focus": "Mở custom ngoài",
+          "focusTag": "BUTTON"
+        }
+      ]
+    },
+    {
+      "id": "M3-N-boundaries-busy-custom",
+      "titleTab": "ngoài: nội dung nháp QA",
+      "lastTab": "ngoài: nội dung nháp QA",
+      "firstReverse": "ngoài: đóng lớp này",
+      "busyKeeps": {
+        "busy": "true",
+        "closedby": null,
+        "retained": true
+      },
+      "busyKind": "Explicit simulated component state; actual app transaction tested separately"
+    },
+    {
+      "id": "M3-N-boundaries-busy-native",
+      "titleTab": "ngoài: nội dung nháp QA",
+      "lastTab": "ngoài: nội dung nháp QA",
+      "firstReverse": "ngoài: đóng lớp này",
+      "busyKeeps": {
+        "busy": "true",
+        "closedby": "none",
+        "retained": true
+      },
+      "busyKind": "Explicit simulated component state; actual app transaction tested separately"
+    },
+    {
+      "id": "M3-N-sibling",
+      "siblingSuspended": {
+        "customCount": 1,
+        "focus": "ngoài: mở custom sibling bị treo",
+        "focusInsideNative": true,
+        "nativeCount": 1
+      },
+      "siblingTab": "ngoài: nội dung nháp QA",
+      "siblingActive": {
+        "focus": "sibling · Custom dialog",
+        "focusInside": true,
+        "nativeCount": 0
+      },
+      "siblingFirst": "sibling: nội dung nháp QA",
+      "siblingRestored": {
+        "dialogs": 0,
+        "focus": "Mở native ngoài"
+      }
+    }
+  ]
+}
