@@ -1,8 +1,10 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useId, useRef, useState } from 'react';
 import { Camera, Loader2, Sparkles, Trash2, X } from 'lucide-react';
 import { FlexibleDateInput } from '../../components/FlexibleDateInput';
 import { HeritageAvatar } from '../../components/HeritageAvatar';
+import { ConfirmDialog } from '../../components/ConfirmDialog';
 import { useGenealogy } from '../../context/GenealogyContext';
+import { useModalAccessibility } from '../../hooks/useModalAccessibility';
 import {
   FlexibleDate,
   Gender,
@@ -13,6 +15,7 @@ import {
 import { generateBiographyWithAI } from '../../services/aiBiographyService';
 import { validatePersonInput } from '../../services/validationService';
 import { compressImageFile } from '../../utils/imageUtils';
+import { createPersonFormDraft, personFormDraftFingerprint } from './personFormDraft';
 
 interface PersonFormModalProps {
   open: boolean;
@@ -33,6 +36,12 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
   const [errors, setErrors] = useState<string[]>([]);
   const [warnings, setWarnings] = useState<string[]>([]);
   const [isSubmitting, setIsSubmitting] = useState(false);
+  const [discardOpen, setDiscardOpen] = useState(false);
+  const operationInFlight = useRef(false);
+  const baselineDraft = useRef('');
+  const dialogRef = useRef<HTMLDivElement>(null);
+  const fullNameRef = useRef<HTMLInputElement>(null);
+  const formId = useId();
 
   // AI Biography Generation state
   const [isGeneratingBio, setIsGeneratingBio] = useState(false);
@@ -73,13 +82,34 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
   const [burialPlace, setBurialPlace] = useState('');
   const [merits, setMerits] = useState('');
 
+  const busy = isSubmitting || isPreparingPortrait || isGeneratingBio;
+  const draftFingerprint = personFormDraftFingerprint({
+    fullName, gender, commonName, tabooName, courtesyName, alias,
+    isLiving, birthDate, birthPlace, deathDate, deathPlace, ancestralHome,
+    residence, occupation, biography, notes, generation, branchId, subBranch,
+    clanRole, lunarDay, lunarMonth, lunarNote, burialPlace, merits,
+  }, portraitDraft, aiGeneratedBio, Boolean(editingPerson?.portraitUrl || editingPerson?.portraitMediaId));
+  const { requestClose } = useModalAccessibility({
+    open,
+    dialogRef,
+    initialFocusRef: fullNameRef,
+    busy,
+    onRequestClose: () => {
+      if (operationInFlight.current) return;
+      if (draftFingerprint !== baselineDraft.current) setDiscardOpen(true);
+      else onClose();
+    },
+  });
+
   const handleGenerateBiography = async () => {
+    if (operationInFlight.current) return;
     if (!fullName.trim()) {
       setActiveSection('identity');
       setAiBioError('Vui lòng nhập họ và tên của thành viên trước khi yêu cầu AI viết tiểu sử.');
       return;
     }
 
+    operationInFlight.current = true;
     try {
       setIsGeneratingBio(true);
       setAiBioError(null);
@@ -132,11 +162,19 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
       const msg = err instanceof Error ? err.message : String(err);
       setAiBioError(`Lỗi khi tạo tiểu sử: ${msg}`);
     } finally {
+      operationInFlight.current = false;
       setIsGeneratingBio(false);
     }
   };
 
   useEffect(() => {
+    baselineDraft.current = personFormDraftFingerprint(createPersonFormDraft(editingPerson, branches[0]?.id));
+    operationInFlight.current = false;
+    setDiscardOpen(false);
+    setAiGeneratedBio(null);
+    setAiBioError(null);
+    setAiBioSuccess(null);
+    setIsGeneratingBio(false);
     if (editingPerson) {
       setFullName(editingPerson.fullName || '');
       setGender(editingPerson.gender || 'male');
@@ -207,10 +245,12 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
   if (!open) return null;
 
   const handleImageUpload = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (operationInFlight.current) return;
     const file = e.currentTarget.files?.[0];
     if (!file) return;
     e.currentTarget.value = '';
     const request = ++portraitRequest.current;
+    operationInFlight.current = true;
     setIsPreparingPortrait(true);
     try {
       if (file.type && !file.type.startsWith('image/')) throw new Error('Invalid image type');
@@ -224,12 +264,15 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
         setErrors(['Không thể xử lý ảnh trên thiết bị này. Hãy chọn ảnh JPG hoặc PNG nhỏ hơn.']);
       }
     } finally {
-      if (request === portraitRequest.current) setIsPreparingPortrait(false);
+      if (request === portraitRequest.current) {
+        operationInFlight.current = false;
+        setIsPreparingPortrait(false);
+      }
     }
   };
 
   const handleSave = async () => {
-    if (isSubmitting || isPreparingPortrait) return;
+    if (operationInFlight.current || busy) return;
     const lunarAnniversary: LunarAnniversary | undefined =
       lunarDay !== '' || lunarMonth !== '' || lunarNote
         ? {
@@ -281,6 +324,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
       return;
     }
 
+    operationInFlight.current = true;
     try {
       setIsSubmitting(true);
       const saved = await savePerson(personData, portraitDraft);
@@ -290,24 +334,31 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
       const msg = err instanceof Error ? err.message : String(err);
       setErrors([`Lỗi khi lưu vào cơ sở dữ liệu: ${msg}`]);
     } finally {
+      operationInFlight.current = false;
       setIsSubmitting(false);
     }
   };
 
   return (
     <div
+      ref={dialogRef}
       className="fixed inset-0 z-50 flex items-center justify-center p-3 sm:p-4 bg-black/60 backdrop-blur-xs animate-in fade-in"
       role="dialog"
       aria-modal="true"
+      aria-labelledby={`${formId}-title`}
+      aria-busy={busy}
+      tabIndex={-1}
+      onClick={(event) => { if (event.target === event.currentTarget) requestClose('backdrop'); }}
     >
-      <div
-        className="w-full max-w-2xl rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-2xl overflow-hidden flex flex-col max-h-[90vh]"
+      <fieldset
+        disabled={busy}
+        className="min-w-0 w-full max-w-2xl rounded-2xl bg-[#FFFDF9] border border-[#E7DFD4] shadow-2xl overflow-hidden flex flex-col max-h-[90dvh]"
         onClick={(e) => e.stopPropagation()}
       >
         {/* Header */}
         <div className="p-4 sm:p-5 border-b border-[#E7DFD4] bg-[#FAF7F2] flex items-center justify-between">
           <div>
-            <h3 className="text-base sm:text-lg font-serif font-bold text-[#1F1913]">
+            <h3 id={`${formId}-title`} className="text-base sm:text-lg font-serif font-bold text-[#1F1913]">
               {editingPerson ? 'Hiệu chỉnh thông tin thành viên' : 'Thêm thành viên mới vào gia phả'}
             </h3>
             <p className="text-xs text-stone-500">
@@ -316,13 +367,22 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
           </div>
           <button
             type="button"
-            onClick={onClose}
-            disabled={isSubmitting}
-            className="p-1.5 rounded-lg text-stone-400 hover:text-stone-700 hover:bg-stone-100"
+            onClick={() => requestClose('button')}
+            disabled={busy}
+            aria-label="Đóng form thành viên"
+            className="grid min-h-11 min-w-11 shrink-0 place-items-center rounded-lg text-stone-500 hover:text-stone-700 hover:bg-stone-100"
           >
             <X className="w-5 h-5" />
           </button>
         </div>
+
+        {busy && <p role="status" className="px-4 py-2 text-xs text-[#54483C]">
+          {isSubmitting
+            ? 'Đang lưu hồ sơ. Vui lòng chờ hoàn tất trước khi đóng.'
+            : isPreparingPortrait
+            ? 'Đang xử lý ảnh chân dung. Vui lòng chờ hoàn tất trước khi đóng.'
+            : 'Đang tạo tiểu sử. Vui lòng chờ hoàn tất trước khi đóng.'}
+        </p>}
 
         {/* Navigation Tabs */}
         <div className="flex border-b border-[#E7DFD4] bg-[#F7F2EA]/70 px-4 pt-2 gap-1 overflow-x-auto">
@@ -352,7 +412,7 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
         {/* Form Body */}
         <div className="p-4 sm:p-6 overflow-y-auto space-y-4 flex-1">
           {errors.length > 0 && (
-            <div className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 space-y-1">
+            <div role="alert" className="p-3 rounded-xl bg-red-50 border border-red-200 text-xs text-red-800 space-y-1">
               {errors.map((e, idx) => (
                 <p key={idx}>• {e}</p>
               ))}
@@ -437,10 +497,12 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
 
               {/* Full Name */}
               <div>
-                <label className="block text-xs font-semibold text-[#3C3228] mb-1">
+                <label htmlFor={`${formId}-full-name`} className="block text-xs font-semibold text-[#3C3228] mb-1">
                   Họ và tên <span className="text-red-500">*</span>
                 </label>
                 <input
+                  ref={fullNameRef}
+                  id={`${formId}-full-name`}
                   type="text"
                   placeholder="VD: Trần Văn Khải"
                   value={fullName}
@@ -452,10 +514,11 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
               {/* Traditional Vietnamese Names */}
               <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-[#54483C] mb-1">
+                  <label htmlFor={`${formId}-common-name`} className="block text-xs font-medium text-[#54483C] mb-1">
                     Tên thường gọi
                   </label>
                   <input
+                    id={`${formId}-common-name`}
                     type="text"
                     placeholder="VD: Cụ Ba Lộc"
                     value={commonName}
@@ -465,10 +528,11 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#54483C] mb-1">
+                  <label htmlFor={`${formId}-taboo-name`} className="block text-xs font-medium text-[#54483C] mb-1">
                     Tên húy (Tên tế tự)
                   </label>
                   <input
+                    id={`${formId}-taboo-name`}
                     type="text"
                     placeholder="VD: Thuần Lộc"
                     value={tabooName}
@@ -478,10 +542,11 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-[#54483C] mb-1">
+                  <label htmlFor={`${formId}-courtesy-name`} className="block text-xs font-medium text-[#54483C] mb-1">
                     Tên tự / Bí danh
                   </label>
                   <input
+                    id={`${formId}-courtesy-name`}
                     type="text"
                     placeholder="VD: Tự Trọng Viễn"
                     value={courtesyName || alias}
@@ -906,23 +971,38 @@ export const PersonFormModal: React.FC<PersonFormModalProps> = ({
           <div className="flex items-center gap-2">
             <button
               type="button"
-              onClick={onClose}
-              disabled={isSubmitting}
-              className="px-4 py-2 text-xs font-medium text-stone-600 hover:bg-stone-200 rounded-xl"
+              onClick={() => requestClose('button')}
+              disabled={busy}
+              className="min-h-11 px-4 py-2 text-xs font-medium text-stone-600 hover:bg-stone-200 rounded-xl"
             >
               Hủy
             </button>
             <button
               type="button"
-              disabled={isSubmitting || isPreparingPortrait}
+              disabled={busy}
               onClick={handleSave}
-              className="px-5 py-2 text-xs font-semibold bg-[#1B3B2B] hover:bg-[#254F3A] text-white rounded-xl shadow-xs disabled:opacity-50 transition-colors"
+              className="min-h-11 px-5 py-2 text-xs font-semibold bg-[#1B3B2B] hover:bg-[#254F3A] text-white rounded-xl shadow-xs disabled:opacity-50 transition-colors"
             >
               {isSubmitting ? 'Đang lưu...' : isPreparingPortrait ? 'Đang xử lý ảnh...' : 'Lưu hồ sơ'}
             </button>
           </div>
         </div>
-      </div>
+      </fieldset>
+      <ConfirmDialog
+        open={discardOpen}
+        title="Bỏ bản nháp thành viên?"
+        description="Các thay đổi chưa lưu sẽ bị bỏ. Hồ sơ đã lưu trong gia phả không thay đổi."
+        confirmLabel="Bỏ bản nháp"
+        cancelLabel="Tiếp tục chỉnh sửa"
+        danger
+        busy={busy}
+        onCancel={() => setDiscardOpen(false)}
+        onConfirm={() => {
+          if (operationInFlight.current) return;
+          setDiscardOpen(false);
+          onClose();
+        }}
+      />
     </div>
   );
 };
